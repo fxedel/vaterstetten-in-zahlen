@@ -1,0 +1,7 @@
+packrat/*
+!packrat/init.R
+!packrat/packrat.lock
+!packrat/packrat.opts
+
+.Rhistory
+packrat/lib*/
