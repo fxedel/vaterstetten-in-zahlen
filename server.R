@@ -12,7 +12,7 @@ theme_set(theme_light())
 ui <- function(request) {
   dashboardPage(skin = "purple",
     dashboardHeader(
-      title = "Impressum",
+      title = "Vaterstetten in Zahlen",
       titleWidth = 250
     ),
     dashboardSidebar(
