@@ -1,5 +1,7 @@
 # Vaterstetten in Zahlen
 
+vaterstetten-in-zahlen.de is an open source project whose goal is to visualize (and gather, if needed) publically available data about the municipality of Vaterstetten.
+
 ## Development
 
 ### Initial setup
