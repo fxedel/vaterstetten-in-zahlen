@@ -1,6 +1,6 @@
 ## SARS-CoV-2-Fallzahlen des Gesundheitsamtes Ebersberg
 
-Das Gesundheitsamt veröffentlicht an jedem Werktag aktuelle Zahlen zu SARS-CoV-2-Infektionen, jeweils zum Stand des jeweils vorherigen Tages um 16 Uhr. Diese Daten umfassen:
+Das Gesundheitsamt veröffentlicht an jedem Werktag aktuelle Zahlen zu SARS-CoV-2-Infektionen, jeweils zum Stand des vorherigen Tages um 16 Uhr. Diese Daten umfassen:
 
 * Für den gesamten Landkreis:
   * Infektionen insgesamt (kumuliert), davon:

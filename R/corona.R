@@ -18,8 +18,10 @@ fallzahlenRaw <- read_delim(
 
 fallzahlen <- fallzahlenRaw %>%
   mutate(neuinfektionen = kumulativ - lag(kumulativ, 1)) %>%
-  complete(datum = seq(min(datum), max(datum), "days"), fill = list(neuinfektionen = 0)) %>%
-  mutate(inzidenz7 = lag(cumsum(neuinfektionen) - lag(cumsum(neuinfektionen), 7)) / einwohnerZahl * 100000)
+  complete(datum = seq(min(datum), max(datum) + 1, "days"), fill = list(neuinfektionen = 0)) %>%
+  mutate(neuinfektionen = c(neuinfektionen[-n()], NA)) %>%
+  mutate(inzidenz7 = lag(cumsum(neuinfektionen) - lag(cumsum(neuinfektionen), 7)) / einwohnerZahl * 100000) %>%
+  mutate(neuinfektionen = c(NA, neuinfektionen[-1]))
 
 ui <- function(request, id) {
   ns <- NS(id)
@@ -84,7 +86,8 @@ ui <- function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Datengrundlage sind die SARS-CoV-2-Fallzahlen des <a href = \"https://lra-ebe.de/\">Landratsamts Ebersberg</a> (<a href=\"https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/\">2020</a>, <a href=\"https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/\">2021</a>). Das Gesundheitsamt veröffentlicht an jedem Werktag die kumulativen Fallzahlen und aktuellen Fälle, aufgeschlüsselt nach Kommune. Da die Zahlen nur in Form einer Grafik und nicht in einem maschinenlesbaren Format vorliegen, müssen diese händisch für dieses Projekt eingetragen werden. Auch wenn auf eine größtmögliche Sorgfalt geachtet wird, besteht daher beim Übertragen natürlich die Gefahr von Tippfehlern."))
+          p(HTML("Datengrundlage sind die SARS-CoV-2-Fallzahlen des <a href = \"https://lra-ebe.de/\">Landratsamts Ebersberg</a> (<a href=\"https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/\">2020</a>, <a href=\"https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/\">2021</a>). Das Gesundheitsamt veröffentlicht an jedem Werktag die kumulativen Fallzahlen und aktuellen Fälle , aufgeschlüsselt nach Kommune, jeweils zum Stand des vorherigen Tages um 16 Uhr. Da die Zahlen nur in Form einer Grafik und nicht in einem maschinenlesbaren Format vorliegen, müssen diese händisch für dieses Projekt eingetragen werden. Auch wenn auf eine größtmögliche Sorgfalt geachtet wird, besteht daher beim Übertragen natürlich die Gefahr von Tippfehlern.")),
+          p("Für die Berechnung der 7-Tage-Inzidenz für einen Tag X werden die Neuinfektionen der 7 vorangegangen Tage, nicht aber des Tages X summiert. Das entspricht der Berechnungsweise des RKI. So ist es möglich, für den heutigen Tag eine 7-Tage-Inzidenz anzugeben, obwohl der Datenstand des Gesundheitsamtes bei gestern liegt.")
         ),
       ),
     ),
@@ -126,8 +129,9 @@ server <- function(id) {
       })
 
       output$valueBoxAktuell <- renderValueBox({
+        lastRowWithAktuell <- fallzahlen %>% filter(!is.na(aktuell)) %>% slice_tail()
         valueBox(
-          tail(fallzahlen$aktuell, n = 1),
+          lastRowWithAktuell$aktuell,
           "Aktuelle Fälle",
           color = "purple",
           icon = icon("user-check")
@@ -135,8 +139,9 @@ server <- function(id) {
       })
 
       output$valueBoxInzidenz <- renderValueBox({
+        lastRow <- fallzahlen %>% slice_tail()
         valueBox(
-          format(round(tail(fallzahlen$inzidenz7, n = 1), 1), nsmall = 1),
+          format(round(lastRow$inzidenz7, 1), nsmall = 1),
           "7-Tages-Inzidenz",
           color = "purple",
           icon = icon("chart-line")
@@ -144,9 +149,10 @@ server <- function(id) {
       })
 
       output$valueBoxStand <- renderValueBox({
+        lastRowWithAktuell <- fallzahlen %>% filter(!is.na(aktuell)) %>% slice_tail()
         valueBox(
-          format(tail(fallzahlen$datum, n = 1), "%d. %b %Y"),
-          "Stand",
+          format(lastRowWithAktuell$datum, "%d. %b %Y"),
+          "Datenstand des Gesundheitsamtes",
           color = "purple",
           icon = icon("calendar-day")
         )
