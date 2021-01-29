@@ -19,7 +19,7 @@ ui <- function(request) {
     ),
     dashboardSidebar(
       width = 250,
-      sidebarMenu(id = "sidebar",
+      sidebarMenu(id = "tab",
         menuItem("Start", tabName = "main", icon = icon("home")),
         menuItem("Corona", tabName = "corona", icon = icon("virus")),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"))
@@ -45,7 +45,7 @@ server <- function(input, output, session) {
     updateQueryString(url)
   })
 
-  mainPage$server("mainPage")
+  mainPage$server("mainPage", session)
   corona$server("corona")
   impressum$server("impressum")
 }

@@ -38,10 +38,12 @@ ui <- function(request, id) {
   )
 }
 
-server <- function(id) {
+server <- function(id, parentSession) {
   moduleServer(
     id,
     function(input, output, session) {
+      setBookmarkExclude(c("buttonCorona"))
+
       output$valueBoxInzidenz <- renderValueBox({
         lastRow <- corona$fallzahlen %>% slice_tail()
         valueBox(
@@ -50,6 +52,10 @@ server <- function(id) {
           color = "purple",
           icon = icon("virus")
         )
+      })
+
+      observeEvent(input$buttonCorona, {
+        updateTabsetPanel(parentSession, "tab", selected = "corona")
       })
     }
   )
