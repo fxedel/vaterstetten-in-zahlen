@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd DEPLOYMENT_PATH
+            cd ${{ secrets.DEPLOYMENT_PATH }}
             git pull
             Rscript -e "renv::restore()"
             systemctl --user restart vaterstetten-in-zahlen.service
