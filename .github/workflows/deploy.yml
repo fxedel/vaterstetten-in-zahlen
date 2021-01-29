@@ -9,6 +9,7 @@ on:
 
 jobs:
   deploy:
+    environment: vaterstetten-in-zahlen.de
     runs-on: ubuntu-latest
 
     steps:
