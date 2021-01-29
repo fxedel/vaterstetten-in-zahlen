@@ -22,6 +22,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          script_stop: true
           script: |
             cd ${{ secrets.DEPLOYMENT_PATH }}
             git pull
