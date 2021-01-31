@@ -170,7 +170,7 @@ server <- function(id) {
       output$inzidenz7 <- renderPlot({
         ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = inzidenz7)) + list(
           geom_line(na.rm = TRUE, alpha = 0.5),
-          geom_point(na.rm = TRUE),
+          geom_point(na.rm = TRUE, alpha = 0.5, size = 1),
           expand_limits(y = 0),
           getDateScale(),
           getYScale()
@@ -180,7 +180,7 @@ server <- function(id) {
       output$aktuell <- renderPlot({
         ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = aktuell, label = aktuell)) + list(
           geom_line(data = filter(fallzahlenInTimeRange(), !is.na(aktuell)), alpha = 0.5),
-          geom_point(na.rm = TRUE),
+          geom_point(na.rm = TRUE, alpha = 0.5, size = 1),
           if (input$showNumbers) geom_text(vjust = "bottom", hjust = "middle", nudge_y = 2.5, check_overlap = TRUE, size = 3.4, na.rm = TRUE) else list(),
           expand_limits(y = 0),
           getDateScale(),
