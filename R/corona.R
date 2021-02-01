@@ -159,9 +159,11 @@ server <- function(id) {
       })
 
       output$neuinfektionen <- renderPlot({
-        ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = neuinfektionen, label = neuinfektionen)) + list(
-          geom_col(alpha = 0.5),
-          if (input$showNumbers) geom_text(vjust = "bottom", hjust = "middle", nudge_y = 0.5, check_overlap = TRUE, size = 3.4) else list(),
+        ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = neuinfektionen)) + list(
+          geom_col(na.rm = TRUE, alpha = 0.5),
+          if (input$showNumbers)
+            geom_text(aes(label = neuinfektionen), vjust = "bottom", hjust = "middle", nudge_y = 0.5, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+          else list(),
           getDateScale(),
           getYScale()
         )
@@ -171,6 +173,9 @@ server <- function(id) {
         ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = inzidenz7)) + list(
           geom_line(na.rm = TRUE, alpha = 0.5),
           geom_point(na.rm = TRUE, alpha = 0.5, size = 1),
+          if (input$showNumbers)
+            geom_text(aes(label = round(inzidenz7)), vjust = "bottom", hjust = "middle", nudge_y = 8, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+          else list(),
           expand_limits(y = 0),
           getDateScale(),
           getYScale()
@@ -178,10 +183,12 @@ server <- function(id) {
       }, res = 96)
 
       output$aktuell <- renderPlot({
-        ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = aktuell, label = aktuell)) + list(
+        ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = aktuell)) + list(
           geom_line(data = filter(fallzahlenInTimeRange(), !is.na(aktuell)), alpha = 0.5),
           geom_point(na.rm = TRUE, alpha = 0.5, size = 1),
-          if (input$showNumbers) geom_text(vjust = "bottom", hjust = "middle", nudge_y = 2.5, check_overlap = TRUE, size = 3.4, na.rm = TRUE) else list(),
+          if (input$showNumbers)
+            geom_text(aes(label = aktuell), vjust = "bottom", hjust = "middle", nudge_y = 2.5, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+          else list(),
           expand_limits(y = 0),
           getDateScale(),
           getYScale()
