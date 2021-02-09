@@ -1,5 +1,7 @@
 corona <- new.env()
 sys.source("corona.R", envir = corona, chdir = TRUE)
+coronaImpfungen <- new.env()
+sys.source("coronaImpfungen.R", envir = coronaImpfungen, chdir = TRUE)
 
 ui <- function(request, id) {
   ns <- NS(id)
@@ -12,7 +14,16 @@ ui <- function(request, id) {
         width = 6,
         tagList(
           valueBoxOutput(ns("valueBoxInzidenz"), width = 12),
-          actionButton(ns("buttonCorona"), "Zu den Corona-Daten", icon = icon("virus"), width = "100%")
+          actionButton(ns("buttonCorona"), "Zu den Corona-Fallzahlen", icon = icon("virus"), width = "100%")
+        )
+      ),
+
+      box(
+        title = "Impfungen im Landkreis",
+        width = 6,
+        tagList(
+          valueBoxOutput(ns("valueBoxImpfungen"), width = 12),
+          actionButton(ns("buttonCoronaImpfungen"), "Zu den Corona-Impfungen", icon = icon("syringe"), width = "100%")
         )
       ),
 
@@ -43,6 +54,7 @@ server <- function(id, parentSession) {
     id,
     function(input, output, session) {
       setBookmarkExclude(c("buttonCorona"))
+      setBookmarkExclude(c("buttonCoronaImpfungen"))
 
       output$valueBoxInzidenz <- renderValueBox({
         lastRow <- corona$fallzahlen %>% slice_tail()
@@ -54,8 +66,21 @@ server <- function(id, parentSession) {
         )
       })
 
+      output$valueBoxImpfungen <- renderValueBox({
+        lastRow <- coronaImpfungen$impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
+        valueBox(
+          lastRow$erstimpfungen,
+          paste("Geimpfte (mind. Erstimpfung, Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
+          color = "purple",
+          icon = icon("syringe")
+        )
+      })
+
       observeEvent(input$buttonCorona, {
         updateTabsetPanel(parentSession, "tab", selected = "corona")
+      })
+      observeEvent(input$buttonCoronaImpfungen, {
+        updateTabsetPanel(parentSession, "tab", selected = "coronaImpfungen")
       })
     }
   )
