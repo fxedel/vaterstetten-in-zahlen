@@ -101,7 +101,7 @@ getDateScale <- function() {
       breaks = breaks_pretty(8),
       date_minor_breaks = "1 days",
       date_labels = "%-d.%-m.",
-      expand = expansion(add = 0.5)
+      expand = expansion(add = c(0.5, 1))
     )
   )
 }
@@ -110,7 +110,7 @@ getYScale <- function() {
   scale_y_continuous(
     name = NULL,
     breaks = breaks_pretty(5),
-    expand = expansion(mult = c(0, 0.1))
+    expand = expansion(mult = c(0.02, 0.1))
   )
 }
 
