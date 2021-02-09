@@ -6,6 +6,8 @@ mainPage <- new.env()
 sys.source("R/mainPage.R", envir = mainPage, chdir = TRUE)
 corona <- new.env()
 sys.source("R/corona.R", envir = corona, chdir = TRUE)
+coronaImpfungen <- new.env()
+sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = TRUE)
 impressum <- new.env()
 sys.source("R/impressum.R", envir = impressum, chdir = TRUE)
 
@@ -21,7 +23,8 @@ ui <- function(request) {
       width = 250,
       sidebarMenu(id = "tab",
         menuItem("Start", tabName = "main", icon = icon("home")),
-        menuItem("Corona", tabName = "corona", icon = icon("virus")),
+        menuItem("Corona-Fallzahlen in Vat", tabName = "corona", icon = icon("virus")),
+        menuItem("Corona-Impfungen in EBE", tabName = "coronaImpfungen", icon = icon("syringe")),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"))
       )
     ),
@@ -29,6 +32,7 @@ ui <- function(request) {
       tabItems(
         tabItem(tabName = "main", mainPage$ui(request, "mainPage")),
         tabItem(tabName = "corona", corona$ui(request, "corona")),
+        tabItem(tabName = "coronaImpfungen", coronaImpfungen$ui(request, "coronaImpfungen")),
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       )
     )
@@ -47,6 +51,7 @@ server <- function(input, output, session) {
 
   mainPage$server("mainPage", session)
   corona$server("corona")
+  coronaImpfungen$server("coronaImpfungen")
   impressum$server("impressum")
 }
 

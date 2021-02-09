@@ -1,30 +1,64 @@
-## SARS-CoV-2-Fallzahlen des Gesundheitsamtes Ebersberg
+# Zahlen zur Corona-Pandemie im Landkreis Ebersberg
 
-Das Gesundheitsamt veröffentlicht an jedem Werktag aktuelle Zahlen zu SARS-CoV-2-Infektionen, jeweils zum Stand des vorherigen Tages um 16 Uhr. Diese Daten umfassen:
+## Datensätze
 
-* Für den gesamten Landkreis:
-  * Infektionen insgesamt (kumuliert), davon:
-    * Aktuell Infizierte
-    * Geheilte
-    * Todesfälle
-  * 7-Tage-Inzidenz
-  * In Quarantäne befindliche Kontaktpersonen der Kategorie 1
-  * *(unregelmäßig)* Anzahl Erst- und Zeitimpfungen
-* Aufgeschlüsselt nach Kommune (nur als Grafik):
-  * Infektionen insgesamt (kumuliert), davon:
-    * Aktuell Infizierte
-    * Geheilte und Todesfälle
+### [`fallzahlenVat.csv`](./fallzahlenVat.csv)
 
 Der Datensatz [fallzahlenVat.csv](./fallzahlenVat.csv) umfasst die händisch übertragenen kumulierten und aktuellen Infektionen in Vaterstetten.
 
-### Datenquellen
+|Spalte|Format|Beschreibung
+|-|-|-
+|`datum`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Tag, auf den sich die Fallzahlen beziehen
+|`kumulativ`|integer|Gesamtzahl aller SARS-CoV-2-Infektionen seit Pandemiebeginn
+|`aktuell`|integer|Aktuell aktive Fälle
 
-* *Ab 2021*: [Corona-Virus: Aktuelle Pressemeldungen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/)
-* *2. März 2020 bis 31. Dezember 2020*: [Corona-Pressearchiv](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/)
+* `kumulativ` = `aktuell` + Genesene + Verstorbene
 
-### Fehlerkorrekturen
 
-#### 3./6. April 2020
+### [`impfungenLkEbe.csv`](./impfungenLkEbe.csv)
+ 
+Der Datensatz [impfungenLkEbe.csv](./impfungenLkEbe.csv) umfasst die Zahl an verabreichten Impfdosen im gesamten Landkreis Ebersberg.
+
+|Spalte|Format|Beschreibung
+|-|-|-
+|`datum`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Tag, auf den sich die Fallzahlen beziehen
+|`erstimpfungen`|integer|Kumulative Zahl verabreichter Erstimpfungen
+|`zweitimpfungen`|integer|Kumulative Zahl verabreichter Zweitimpfungen
+|`onlineanmeldungen`|integer|Aktuelle Zahl an Online-Registrierungen über das [Bayerische Impfportal](https://impfzentren.bayern/) (im LK Ebersberg)
+
+* `erstimpfungen` + `zweitimpfungen` = Kumulative Zahl verabreichter Impfdosen
+
+
+## Originalquelle
+
+Das Gesundheitsamt veröffentlicht an (fast) jedem Werktag aktuelle Zahlen zur Corona-Pandemie im Landkreis Ebersberg:
+
+* *Aktueller Monat*: [Corona-Virus: Aktuelle Pressemeldungen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/)
+* *Ältere Pressemeldungen, seit dem 2. März 2020*: [Corona-Pressearchiv](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/)
+
+Diese Daten umfassen:
+
+* SARS-CoV-2-Infektionen (jeweils zum Stand des vorherigen Tages um 16 Uhr):
+  * Für den gesamten Landkreis:
+    * Infektionen insgesamt (kumuliert), davon:
+      * Aktuell Infizierte
+      * Geheilte
+      * Todesfälle
+    * 7-Tage-Inzidenz
+    * In Quarantäne befindliche Kontaktpersonen der Kategorie 1
+  * Aufgeschlüsselt nach Kommune (nur als Grafik):
+    * Infektionen insgesamt (kumuliert), davon:
+      * Aktuell Infizierte
+      * Geheilte und Todesfälle
+* Impfungen *(unregelmäßig)*:
+  * Kumulative Zahl verabreichter Impfdosen, in der Regel aufgeschlüsselt nach Erst- oder Zweitimpfung, Alter, Indikation (z.B. Pflegeheim)
+  * Aktuelle Zahl an Online-Registrierungen über das [Bayerische Impfportal](https://impfzentren.bayern/)
+  * Impfstoff-Lieferungen
+  * Anrufe bei der Hotline des Impfzentrums
+
+## Fehlerkorrekturen
+
+### 3./6. April 2020
 
 Die kumulative Fallzahl für Vaterstetten lag laut Grafiken des Gesundheitsamtes am 6.&nbsp;April 2020 bei 42, am darauf folgenden Tag jedoch bei nur noch 39. Dies ist eigentlich nicht möglich, da eine kumulative Zahl per Definition nicht sinken kann. Zudem steht in der Grafik für den 6.&nbsp;Aprils eine Gesamtzahl aktueller Fälle von 152, während die Summe der aktuellen Fälle in allen Kommunen nur 150 ergibt. Am 8.&nbsp;April wurde gemeldet, dass in der Grafik des vorherigen Tages ein Fehler passiert sei; bspw. seien die Zahlen für Vaterstetten zu hoch. Die Grafik des 7.&nbsp;Aprils liegt wohl inzwischen nur noch in einer korrigierten Form vor.
 
@@ -41,7 +75,7 @@ Da es offensichtlich Probleme bei der Zählung und/oder Zuordnung der Infektione
  2020-04-11,43,15
 ```
 
-#### 7. September 2020
+### 7. September 2020
 
 Die kumulative Fallzahl sowie die Zahl aktueller Fälle sinkt zum 7.&nbsp;September jeweils um 1, um dann am folgenden Tag wieder um 1 zu steigen. Vermutlich handelt es sich hier um ein Versehen, deswegen wurde für dieses Projekt die entsprechende Zeile gelöscht.
 

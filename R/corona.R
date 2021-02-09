@@ -86,31 +86,11 @@ ui <- function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Datengrundlage sind die SARS-CoV-2-Fallzahlen des <a href = \"https://lra-ebe.de/\">Landratsamts Ebersberg</a> (<a href=\"https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/\">2020</a>, <a href=\"https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/\">2021</a>). Das Gesundheitsamt veröffentlicht an jedem Werktag die kumulativen Fallzahlen und aktuellen Fälle, aufgeschlüsselt nach Kommunen, jeweils zum Stand des vorherigen Tages um 16 Uhr. Da die Zahlen nur in Form einer Grafik und nicht in einem maschinenlesbaren Format vorliegen, müssen diese händisch für dieses Projekt eingetragen werden. Auch wenn auf eine größtmögliche Sorgfalt geachtet wird, besteht daher beim Übertragen natürlich die Gefahr von Tippfehlern.")),
+          p(HTML("Datengrundlage sind die SARS-CoV-2-Fallzahlen des <a href = \"https://lra-ebe.de/\">Landratsamts Ebersberg</a> (<a href=\"https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/\">Aktuelle Informationen</a>, <a href=\"https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/\">Corona-Pressearchiv</a>). Das Gesundheitsamt veröffentlicht an jedem Werktag die kumulativen Fallzahlen und aktuellen Fälle, aufgeschlüsselt nach Kommunen, jeweils zum Stand des vorherigen Tages um 16 Uhr. Da die Zahlen nur in Form einer Grafik und nicht in einem maschinenlesbaren Format vorliegen, müssen diese händisch für dieses Projekt eingetragen werden. Auch wenn auf eine größtmögliche Sorgfalt geachtet wird, besteht daher beim Übertragen natürlich die Gefahr von Tippfehlern.")),
           p("Für die Berechnung der 7-Tage-Inzidenz für einen Tag X werden die Neuinfektionen der 7 vorangegangenen Tage, nicht aber des Tages X summiert. Das entspricht der Berechnungsweise des RKI. So ist es möglich, für den heutigen Tag eine 7-Tage-Inzidenz anzugeben, obwohl der Datenstand des Gesundheitsamtes bei gestern liegt.")
         ),
       ),
     ),
-  )
-}
-
-getDateScale <- function() {
-  list(
-    scale_x_date(
-      name = NULL,
-      breaks = breaks_pretty(8),
-      date_minor_breaks = "1 days",
-      date_labels = "%-d.%-m.",
-      expand = expansion(add = c(0.5, 1))
-    )
-  )
-}
-
-getYScale <- function() {
-  scale_y_continuous(
-    name = NULL,
-    breaks = breaks_pretty(5),
-    expand = expansion(mult = c(0.02, 0.1))
   )
 }
 
@@ -122,10 +102,33 @@ server <- function(id) {
     function(input, output, session) {
       setBookmarkExclude(c("dateRange"))
 
+      getDateScale <- function() {
+        list(
+          scale_x_date(
+            name = NULL,
+            breaks = breaks_pretty(8),
+            date_minor_breaks = "1 days",
+            date_labels = "%-d.%-m.",
+            expand = expansion(add = c(0.5, 1))
+          ),
+          coord_cartesian(xlim = c(input$dateRange[1], input$dateRange[2]))
+        )
+      }
+
+      getYScale <- function() {
+        scale_y_continuous(
+          name = NULL,
+          breaks = breaks_pretty(5),
+          expand = expansion(mult = c(0.02, 0.1))
+        )
+      }
+
       fallzahlenInTimeRange <- reactive({
         fallzahlen %>%
-          filter(input$dateRange[1] <= datum) %>%  # the logical and (&&) doesn't allow element-wise operations, so we split them
-          filter(datum <= input$dateRange[2])
+          # we increase the range by 2 on both sides to have an ongoing curve
+          # we could also just plot the whole data but this reduces the computational effort
+          filter(input$dateRange[1] - 2 <= datum) %>%  # the logical and (&&) doesn't allow element-wise operations, so we split them
+          filter(datum <= input$dateRange[2] + 2)
       })
 
       output$valueBoxAktuell <- renderValueBox({
@@ -151,7 +154,7 @@ server <- function(id) {
       output$valueBoxStand <- renderValueBox({
         lastRowWithAktuell <- fallzahlen %>% filter(!is.na(aktuell)) %>% slice_tail()
         valueBox(
-          format(lastRowWithAktuell$datum, "%d. %b %Y"),
+          format(lastRowWithAktuell$datum, "%-d. %b %Y"),
           "Datenstand des Gesundheitsamtes",
           color = "purple",
           icon = icon("calendar-day")
