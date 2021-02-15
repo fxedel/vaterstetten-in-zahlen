@@ -6,7 +6,7 @@ library(scales)
 einwohnerZahl <- 24404
 
 fallzahlenRaw <- read_delim(
-  file = "../data/lra-ebe-corona/fallzahlenVat.csv",
+  file = "data/lra-ebe-corona/fallzahlenVat.csv",
   delim = ",",
   col_names = TRUE,
   col_types = cols(
@@ -108,7 +108,7 @@ server <- function(id) {
             name = NULL,
             breaks = breaks_pretty(8),
             date_minor_breaks = "1 days",
-            date_labels = "%-d.%-m.",
+            date_labels = "%d.%m.",
             expand = expansion(add = c(0.5, 1))
           ),
           coord_cartesian(xlim = c(input$dateRange[1], input$dateRange[2]))
@@ -154,7 +154,7 @@ server <- function(id) {
       output$valueBoxStand <- renderValueBox({
         lastRowWithAktuell <- fallzahlen %>% filter(!is.na(aktuell)) %>% slice_tail()
         valueBox(
-          format(lastRowWithAktuell$datum, "%-d. %b %Y"),
+          format(lastRowWithAktuell$datum, "%d. %b %Y"),
           "Datenstand des Gesundheitsamtes",
           color = "purple",
           icon = icon("calendar-day")

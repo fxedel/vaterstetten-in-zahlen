@@ -3,13 +3,13 @@ library(shinydashboard)
 library(ggplot2)
 
 mainPage <- new.env()
-sys.source("R/mainPage.R", envir = mainPage, chdir = TRUE)
+sys.source("R/mainPage.R", envir = mainPage, chdir = FALSE)
 corona <- new.env()
-sys.source("R/corona.R", envir = corona, chdir = TRUE)
+sys.source("R/corona.R", envir = corona, chdir = FALSE)
 coronaImpfungen <- new.env()
-sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = TRUE)
+sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
 impressum <- new.env()
-sys.source("R/impressum.R", envir = impressum, chdir = TRUE)
+sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
 
 theme_set(theme_light())
 

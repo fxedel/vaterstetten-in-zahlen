@@ -1,7 +1,7 @@
 corona <- new.env()
-sys.source("corona.R", envir = corona, chdir = TRUE)
+sys.source("R/corona.R", envir = corona, chdir = FALSE)
 coronaImpfungen <- new.env()
-sys.source("coronaImpfungen.R", envir = coronaImpfungen, chdir = TRUE)
+sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
 
 ui <- function(request, id) {
   ns <- NS(id)
