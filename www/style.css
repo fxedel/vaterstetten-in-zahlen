@@ -1,0 +1,25 @@
+.btn-header-dropdown {
+	color: #fff;
+}
+
+.navbar-custom-menu {
+	padding: 8px 0px;
+}
+
+.navbar-custom-menu:hover {
+	background-color: rgb(84, 80, 150)
+}
+
+.btn-header-dropdown:focus,
+.btn-header-dropdown:hover {
+	color: #fff;
+}
+
+.btn-header-dropdown {
+	background-color: #605ca8;
+}
+
+.btn-header-dropdown:hover,
+.btn-header-dropdown:focus {
+	background-color: rgb(84, 80, 150);
+}

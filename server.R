@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(ggplot2)
+library(shinyWidgets)
 
 mainPage <- new.env()
 sys.source("R/mainPage.R", envir = mainPage, chdir = FALSE)
@@ -11,13 +12,17 @@ sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
 impressum <- new.env()
 sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
 
-theme_set(theme_light())
-
 ui <- function(request) {
   dashboardPage(skin = "purple",
     dashboardHeader(
       title = "Vaterstetten in Zahlen",
-      titleWidth = 250
+      titleWidth = 250,
+      tags$li(class="dropdown", 
+        dropdownButton(label ="Download", circle = FALSE, right=TRUE, status = "header-dropdown", 
+           downloadLink("downloadFallzahlen", "Fallzahlen"),
+           downloadLink("downloadImpfungen", "Impfungen")
+        )
+      )
     ),
     dashboardSidebar(
       width = 250,
@@ -29,6 +34,7 @@ ui <- function(request) {
       )
     ),
     dashboardBody(
+      includeCSS("www/style.css"),
       tabItems(
         tabItem(tabName = "main", mainPage$ui(request, "mainPage")),
         tabItem(tabName = "corona", corona$ui(request, "corona")),
@@ -53,6 +59,14 @@ server <- function(input, output, session) {
   corona$server("corona")
   coronaImpfungen$server("coronaImpfungen")
   impressum$server("impressum")
+  
+  output$downloadFallzahlen <- downloadHandler("fallzahlenVat.csv", content = function(dlFile) {
+    file.copy("data/lra-ebe-corona/fallzahlenVat.csv", dlFile)
+    }, contentType = "text/csv")
+  
+  output$downloadImpfungen <- downloadHandler("impfungenLkEbe.csv", content = function(dlFile) {
+    file.copy("data/lra-ebe-corona/impfungenLkEbe.csv", dlFile)
+  }, contentType = "text/csv")
 }
 
 shinyApp(ui, server, options = list(host = "0.0.0.0", port = 4373), enableBookmarking = "url")
