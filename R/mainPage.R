@@ -30,7 +30,7 @@ ui <- function(request, id) {
       box(
         width = 6,
         tagList(
-          "coming soon …"
+          "Weitere Visualisierungen sind in Arbeit …"
         )
       )
     ),
