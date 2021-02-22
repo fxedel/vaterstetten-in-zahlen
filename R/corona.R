@@ -70,7 +70,7 @@ ui <- function(request, id) {
         plotOutput(ns("neuinfektionen"), height = 300)
       ),
       box(
-        title = "7-Tages-Inzidenz pro 100.000 Einwohner",
+        title = "7-Tage-Inzidenz pro 100.000 Einwohner",
         plotOutput(ns("inzidenz7"), height = 300)
       ),
       box(
@@ -145,7 +145,7 @@ server <- function(id) {
         lastRow <- fallzahlen %>% slice_tail()
         valueBox(
           format(round(lastRow$inzidenz7, 1), nsmall = 1),
-          "7-Tages-Inzidenz",
+          "7-Tage-Inzidenz",
           color = "purple",
           icon = icon("chart-line")
         )
