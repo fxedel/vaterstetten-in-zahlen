@@ -138,14 +138,16 @@ server <- function(id) {
       })
   
       output$geimpfte <- renderPlot({
-        ggplot(filter(impfungenRaw, !is.na(erstimpfungen)), mapping = aes(x = datum)) + list(
-          geom_ribbon(aes(ymin = zweitimpfungen, ymax = erstimpfungen), alpha = 0.2, fill = "#0088dd", color = "#0088dd"),
-          geom_point(aes(y = erstimpfungen), alpha = 0.5, size = 1, color = "#0088dd"),
-          geom_area(aes(y = zweitimpfungen), alpha = 0.5, fill = "#0088dd", color = "#0088dd"),
-          geom_point(aes(y = zweitimpfungen), alpha = 0.5, size = 1, color = "#0088dd"),
+        dataErst <- filter(impfungenRaw, !is.na(erstimpfungen))
+        dataZweit <- filter(impfungenRaw, !is.na(zweitimpfungen))
+        ggplot(mapping = aes(x = datum)) + list(
+          geom_area(aes(y = erstimpfungen), dataErst, alpha = 0.2, fill = "#0088dd", color = "#0088dd"),
+          geom_point(aes(y = erstimpfungen), dataErst, alpha = 0.5, size = 1, color = "#0088dd"),
+          geom_area(aes(y = zweitimpfungen), dataZweit, alpha = 0.4, fill = "#0088dd", color = "#0088dd"),
+          geom_point(aes(y = zweitimpfungen), dataZweit, alpha = 0.5, size = 1, color = "#0088dd"),
           if (input$showNumbers) list(
-            geom_text(aes(y = erstimpfungen, label = erstimpfungen), vjust = "bottom", hjust = "middle", nudge_y = 120, check_overlap = TRUE, size = 3.4, color = "#004b7a"),
-            geom_text(aes(y = zweitimpfungen, label = zweitimpfungen), vjust = "bottom", hjust = "middle", nudge_y = 120, check_overlap = TRUE, size = 3.4, color = "#004b7a")
+            geom_text(aes(y = erstimpfungen, label = erstimpfungen), dataErst, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a"),
+            geom_text(aes(y = zweitimpfungen, label = zweitimpfungen), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a")
           ) else list(),
           expand_limits(y = 0),
           getDateScale(),
