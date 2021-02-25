@@ -14,7 +14,7 @@ ui <- function(request, id) {
             strong("Felix Edelmann"), br(),
             "Dachsweg 13", br(),
             "85598 Baldham", br(),
-            "0152 56302925", br(),
+            a("0152 56302925", "tel:+4915256302925"), br(),
             a("felix@vaterstetten-in-zahlen.de", href = "mailto:felix@vaterstetten-in-zahlen.de"),
           )
         )
