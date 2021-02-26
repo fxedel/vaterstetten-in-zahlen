@@ -175,7 +175,7 @@ server <- function(id) {
             geom_text(aes(y = zweitimpfungenAb80, label = zweitimpfungenAb80), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#963c00")
           ) else list(),
           geom_hline(yintercept = buergerAb80LkEbe, linetype = "dashed", color = "#ff3300", size = 0.6),
-          annotate("label", x = input$dateRange[1] + 1, y = buergerAb80LkEbe, label = paste("Ü80-Landkreisbürger*innen:", buergerAb80LkEbe), vjust = "middle", hjust = "left", size = 3.4, fill = "#ff3300", color = "#ffffff", fontface = "bold"),
+          annotate("label", x = input$dateRange[1] + 1, y = buergerAb80LkEbe, label = paste(buergerAb80LkEbe, "Ü80-Landkreisbürger*innen"), vjust = "middle", hjust = "left", size = 3.4, fill = "#ff3300", color = "#ffffff", fontface = "bold"),
           expand_limits(y = 0),
           getDateScale(),
           getYScale()
