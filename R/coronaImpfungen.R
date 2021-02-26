@@ -4,6 +4,7 @@ library(tidyr)
 library(scales)
 
 einwohnerZahlLkEbe <- 143649
+buergerAb80LkEbe <- 9430 # as of 2021-01-08
 
 impfungenRaw <- read_delim(
   file = "../data/lra-ebe-corona/impfungenLkEbe.csv",
@@ -13,6 +14,8 @@ impfungenRaw <- read_delim(
     datum = col_date(format = "%Y-%m-%d"),
     erstimpfungen = col_integer(),
     zweitimpfungen = col_integer(),
+    erstimpfungenAb80 = col_integer(),
+    zweitimpfungenAb80 = col_integer(),
     onlineanmeldungen = col_integer()
   )
 )
@@ -50,6 +53,10 @@ ui <- function(request, id) {
       box(
         title = "Geimpfte Personen (Erst-/Zweitgeimpfte)",
         plotOutput(ns("geimpfte"), height = 300)
+      ),
+      box(
+        title = "Geimpfte Über-80-Jährige (Erst-/Zweitgeimpfte)",
+        plotOutput(ns("geimpfte80"), height = 300)
       ),
       box(
         title = "Verabreichte Impfdosen",
@@ -149,6 +156,26 @@ server <- function(id) {
             geom_text(aes(y = erstimpfungen, label = erstimpfungen), dataErst, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a"),
             geom_text(aes(y = zweitimpfungen, label = zweitimpfungen), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a")
           ) else list(),
+          expand_limits(y = c(0, buergerAb80LkEbe)),
+          getDateScale(),
+          getYScale()
+        )
+      }, res = 96)
+
+      output$geimpfte80 <- renderPlot({
+        dataErst <- filter(impfungenRaw, !is.na(erstimpfungenAb80))
+        dataZweit <- filter(impfungenRaw, !is.na(zweitimpfungenAb80))
+        ggplot(mapping = aes(x = datum)) + list(
+          geom_area(aes(y = erstimpfungenAb80), dataErst, alpha = 0.2, fill = "#ff6600", color = "#ff6600"),
+          geom_point(aes(y = erstimpfungenAb80), dataErst, alpha = 0.5, size = 1, color = "#ff6600"),
+          geom_area(aes(y = zweitimpfungenAb80), dataZweit, alpha = 0.4, fill = "#ff6600", color = "#ff6600"),
+          geom_point(aes(y = zweitimpfungenAb80), dataZweit, alpha = 0.5, size = 1, color = "#ff6600"),
+          if (input$showNumbers) list(
+            geom_text(aes(y = erstimpfungenAb80, label = erstimpfungenAb80), dataErst, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#963c00"),
+            geom_text(aes(y = zweitimpfungenAb80, label = zweitimpfungenAb80), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#963c00")
+          ) else list(),
+          geom_hline(yintercept = buergerAb80LkEbe, linetype = "dashed", color = "#ff3300", size = 0.6),
+          annotate("label", x = input$dateRange[1] + 1, y = buergerAb80LkEbe, label = paste("Ü80-Landkreisbürger*innen:", buergerAb80LkEbe), vjust = "middle", hjust = "left", size = 3.4, fill = "#ff3300", color = "#ffffff", fontface = "bold"),
           expand_limits(y = 0),
           getDateScale(),
           getYScale()
