@@ -21,8 +21,8 @@ ui <- function(request) {
       titleWidth = 250,
       tags$li(class="dropdown", 
         dropdownButton(label ="Download", circle = FALSE, right=TRUE, status = "header-dropdown", 
-           downloadLink("downloadFallzahlen", "Fallzahlen"),
-           downloadLink("downloadImpfungen", "Impfungen")
+           downloadLink("downloadFallzahlen", "Corona-Fallzahlen in Vaterstetten"),
+           downloadLink("downloadImpfungen", "Corona-Impfungen im Landkreis Ebersberg")
         )
       )
     ),
