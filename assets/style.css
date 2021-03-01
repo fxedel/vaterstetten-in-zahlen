@@ -9,3 +9,8 @@
   color: #fff;
   background-color: #555299;
 }
+
+.dropdown-menu > li > a {
+  padding: 6px 8px;
+  color: #333;
+}
