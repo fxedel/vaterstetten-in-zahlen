@@ -1,0 +1,16 @@
+.btn-header-dropdown {
+  padding: 14px 16px;
+  color: #fff;
+  background-color: inherit;
+}
+
+.btn-header-dropdown:focus,
+.btn-header-dropdown:hover {
+  color: #fff;
+  background-color: #555299;
+}
+
+.dropdown-menu > li > a {
+  padding: 6px 8px;
+  color: #333;
+}

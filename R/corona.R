@@ -6,7 +6,7 @@ library(scales)
 einwohnerZahl <- 24404
 
 fallzahlenRaw <- read_delim(
-  file = "../data/lra-ebe-corona/fallzahlenVat.csv",
+  file = "data/lra-ebe-corona/fallzahlenVat.csv",
   delim = ",",
   col_names = TRUE,
   col_types = cols(
