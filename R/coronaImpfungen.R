@@ -4,6 +4,7 @@ library(tidyr)
 library(scales)
 
 einwohnerZahlLkEbe <- 143649
+buergerAb80LkEbe <- 9430 # as of 2021-01-08
 
 impfungenRaw <- read_delim(
   file = "data/lra-ebe-corona/impfungenLkEbe.csv",
@@ -13,6 +14,8 @@ impfungenRaw <- read_delim(
     datum = col_date(format = "%Y-%m-%d"),
     erstimpfungen = col_integer(),
     zweitimpfungen = col_integer(),
+    erstimpfungenAb80 = col_integer(),
+    zweitimpfungenAb80 = col_integer(),
     onlineanmeldungen = col_integer()
   )
 )
@@ -52,6 +55,10 @@ ui <- function(request, id) {
         plotOutput(ns("geimpfte"), height = 300)
       ),
       box(
+        title = "Geimpfte Über-80-Jährige (Erst-/Zweitgeimpfte)",
+        plotOutput(ns("geimpfte80"), height = 300)
+      ),
+      box(
         title = "Verabreichte Impfdosen",
         plotOutput(ns("impfdosen"), height = 300)
       ),
@@ -71,7 +78,7 @@ ui <- function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Datengrundlage sind die Corona-Pressemeldungen des <a href = \"https://lra-ebe.de/\">Landratsamts Ebersberg</a> (<a href=\"https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/\">Aktuelle Informationen</a>, <a href=\"https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/\">Corona-Pressearchiv</a>). Dort wird in unregelmäßigen Abständen die Zahl der verabreichten Erst- und Zweitimpfungen sowie die Anzahl der über das <a href=\"https://impfzentren.bayern/citizen\">Online-Portal</a> registrierten Landkreisbürger*innen veröffentlicht.")),
+          p(HTML("Datengrundlage sind die Corona-Pressemeldungen des <a href=\"https://lra-ebe.de/\">Landratsamts Ebersberg</a> (<a href=\"https://lra-ebe.de/aktuelles/aktuelle-meldungen/\">Aktuelle Pressemeldungen</a>, <a href=\"https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/\">Corona-Pressearchiv</a>). Dort wird (teils in unregelmäßigen Abständen) die Zahl der verabreichten Erst- und Zweitimpfungen sowie die Anzahl der über das <a href=\"https://impfzentren.bayern/citizen\">Online-Portal</a> registrierten Landkreisbürger*innen veröffentlicht. Außerdem wird auf der Seite des <a href=\"https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/\">Impfzentrums Ebersberg</a> die tagesaktuelle Zahl an Erst- und Zweitimpfungen dargestellt.")),
         ),
       ),
     ),
@@ -138,15 +145,37 @@ server <- function(id) {
       })
   
       output$geimpfte <- renderPlot({
-        ggplot(filter(impfungenRaw, !is.na(erstimpfungen)), mapping = aes(x = datum)) + list(
-          geom_ribbon(aes(ymin = zweitimpfungen, ymax = erstimpfungen), alpha = 0.2, fill = "#0088dd", color = "#0088dd"),
-          geom_point(aes(y = erstimpfungen), alpha = 0.5, size = 1, color = "#0088dd"),
-          geom_area(aes(y = zweitimpfungen), alpha = 0.5, fill = "#0088dd", color = "#0088dd"),
-          geom_point(aes(y = zweitimpfungen), alpha = 0.5, size = 1, color = "#0088dd"),
+        dataErst <- filter(impfungenRaw, !is.na(erstimpfungen))
+        dataZweit <- filter(impfungenRaw, !is.na(zweitimpfungen))
+        ggplot(mapping = aes(x = datum)) + list(
+          geom_area(aes(y = erstimpfungen), dataErst, alpha = 0.2, fill = "#0088dd", color = "#0088dd"),
+          geom_point(aes(y = erstimpfungen), dataErst, alpha = 0.5, size = 1, color = "#0088dd"),
+          geom_area(aes(y = zweitimpfungen), dataZweit, alpha = 0.4, fill = "#0088dd", color = "#0088dd"),
+          geom_point(aes(y = zweitimpfungen), dataZweit, alpha = 0.5, size = 1, color = "#0088dd"),
           if (input$showNumbers) list(
-            geom_text(aes(y = erstimpfungen, label = erstimpfungen), vjust = "bottom", hjust = "middle", nudge_y = 120, check_overlap = TRUE, size = 3.4, color = "#004b7a"),
-            geom_text(aes(y = zweitimpfungen, label = zweitimpfungen), vjust = "bottom", hjust = "middle", nudge_y = 120, check_overlap = TRUE, size = 3.4, color = "#004b7a")
+            geom_text(aes(y = erstimpfungen, label = erstimpfungen), dataErst, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a"),
+            geom_text(aes(y = zweitimpfungen, label = zweitimpfungen), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a")
           ) else list(),
+          expand_limits(y = c(0, buergerAb80LkEbe)),
+          getDateScale(),
+          getYScale()
+        )
+      }, res = 96)
+
+      output$geimpfte80 <- renderPlot({
+        dataErst <- filter(impfungenRaw, !is.na(erstimpfungenAb80))
+        dataZweit <- filter(impfungenRaw, !is.na(zweitimpfungenAb80))
+        ggplot(mapping = aes(x = datum)) + list(
+          geom_area(aes(y = erstimpfungenAb80), dataErst, alpha = 0.2, fill = "#ff6600", color = "#ff6600"),
+          geom_point(aes(y = erstimpfungenAb80), dataErst, alpha = 0.5, size = 1, color = "#ff6600"),
+          geom_area(aes(y = zweitimpfungenAb80), dataZweit, alpha = 0.4, fill = "#ff6600", color = "#ff6600"),
+          geom_point(aes(y = zweitimpfungenAb80), dataZweit, alpha = 0.5, size = 1, color = "#ff6600"),
+          if (input$showNumbers) list(
+            geom_text(aes(y = erstimpfungenAb80, label = erstimpfungenAb80), dataErst, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#963c00"),
+            geom_text(aes(y = zweitimpfungenAb80, label = zweitimpfungenAb80), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#963c00")
+          ) else list(),
+          geom_hline(yintercept = buergerAb80LkEbe, linetype = "dashed", color = "#ff3300", size = 0.6),
+          annotate("label", x = input$dateRange[1] + 1, y = buergerAb80LkEbe, label = paste(buergerAb80LkEbe, "Ü80-Landkreisbürger*innen"), vjust = "middle", hjust = "left", size = 3.4, fill = "#ff3300", color = "#ffffff", fontface = "bold"),
           expand_limits(y = 0),
           getDateScale(),
           getYScale()

@@ -24,17 +24,26 @@ Der Datensatz [impfungenLkEbe.csv](./impfungenLkEbe.csv) umfasst die Zahl an ver
 |`datum`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Tag, auf den sich die Fallzahlen beziehen
 |`erstimpfungen`|integer|Kumulative Zahl verabreichter Erstimpfungen
 |`zweitimpfungen`|integer|Kumulative Zahl verabreichter Zweitimpfungen
-|`onlineanmeldungen`|integer|Aktuelle Zahl an Online-Registrierungen über das [Bayerische Impfportal](https://impfzentren.bayern/) (im LK Ebersberg)
+|`erstimpfungenAb80`|integer|Kumulative Zahl verabreichter Erstimpfungen an Über-80-Jährige
+|`zweitimpfungenAb80`|integer|Kumulative Zahl verabreichter Zweitimpfungen an Über-80-Jährige
+|`onlineanmeldungen`|integer|Aktuelle Zahl an Online-Registrierungen über das [Bayerische Impfportal](https://impfzentren.bayern/) (im Landkreis Ebersberg)
 
 * `erstimpfungen` + `zweitimpfungen` = Kumulative Zahl verabreichter Impfdosen
+* `erstimpfungenAb80` ≤ `erstimpfungen`
+* `zweitimpfungenAb80` ≤ `zweitimpfungen`
 
 
 ## Originalquelle
 
 Das Gesundheitsamt veröffentlicht an (fast) jedem Werktag aktuelle Zahlen zur Corona-Pandemie im Landkreis Ebersberg:
 
-* *Aktueller Monat*: [Corona-Virus: Aktuelle Pressemeldungen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/)
-* *Ältere Pressemeldungen, seit dem 2. März 2020*: [Corona-Pressearchiv](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/)
+* *Februar 2021*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0221/)
+* *Januar 2021*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0121/)
+* *Dezember 2020*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-1220/)
+* *November 2020*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-1120/)
+* *Oktober 2020*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-1020/)
+* *September 2020*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0920/)
+* *Alle Pressemeldungen seit dem 2. März 2020*: [Corona-Pressearchiv](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/corona-pressearchiv/)
 
 Diese Daten umfassen:
 
@@ -50,11 +59,22 @@ Diese Daten umfassen:
     * Infektionen insgesamt (kumuliert), davon:
       * Aktuell Infizierte
       * Geheilte und Todesfälle
-* Impfungen *(unregelmäßig)*:
+* Impfungen *(teils unregelmäßig)*:
   * Kumulative Zahl verabreichter Impfdosen, in der Regel aufgeschlüsselt nach Erst- oder Zweitimpfung, Alter, Indikation (z.B. Pflegeheim)
   * Aktuelle Zahl an Online-Registrierungen über das [Bayerische Impfportal](https://impfzentren.bayern/)
   * Impfstoff-Lieferungen
   * Anrufe bei der Hotline des Impfzentrums
+
+Außerdem werden auf der Seite des Impfzentrums Ebersberg tagesaktuelle Zahlen zu SARS-CoV-2-Impfungen veröffentlicht, jedoch im Gegensatz zu den Pressemitteilungen ohne Archiv:
+
+* [Impfzentrum Ebersberg](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/)
+
+Diese Daten umfassen:
+
+* Kumulative Zahl verabreichter Impfdosen, aufgeschlüsselt nach Erst- oder Zweitimpfung und Anteil Über-80-Jähriger
+* Verfügbarkeit an Impfdosen (nur für die Erstimpfung; Dosen für die Zweitimpfung werden vom Freistaat Bayern vorgehalten):
+  * Voraussichtliche nächste Lieferungen
+  * Bisher gelieferte Impfdosen, nach Monat aufgeschlüsselt
 
 ## Fehlerkorrekturen
 

@@ -30,7 +30,7 @@ ui <- function(request, id) {
       box(
         width = 6,
         tagList(
-          "coming soon …"
+          "Weitere Visualisierungen sind in Arbeit …"
         )
       )
     ),
@@ -60,7 +60,7 @@ server <- function(id, parentSession) {
         lastRow <- corona$fallzahlen %>% slice_tail()
         valueBox(
           format(round(lastRow$inzidenz7, 1), nsmall = 1),
-          paste("7-Tages-Inzidenz (", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
+          paste("7-Tage-Inzidenz (", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
           color = "purple",
           icon = icon("virus")
         )
