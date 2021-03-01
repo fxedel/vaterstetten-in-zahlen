@@ -19,8 +19,8 @@ ui <- function(request) {
     dashboardHeader(
       title = "Vaterstetten in Zahlen",
       titleWidth = 250,
-      tags$li(class="dropdown", 
-        dropdownButton(label ="Download", circle = FALSE, right=TRUE, status = "header-dropdown", 
+      tags$li(class = "dropdown", 
+        dropdownButton(label = "Download", circle = FALSE, right = TRUE, status = "header-dropdown", 
            downloadLink("downloadFallzahlen", "Corona-Fallzahlen in Vaterstetten"),
            downloadLink("downloadImpfungen", "Corona-Impfungen im Landkreis Ebersberg")
         )
@@ -64,7 +64,7 @@ server <- function(input, output, session) {
   
   output$downloadFallzahlen <- downloadHandler("fallzahlenVat.csv", content = function(dlFile) {
     file.copy("data/lra-ebe-corona/fallzahlenVat.csv", dlFile)
-    }, contentType = "text/csv")
+  }, contentType = "text/csv")
   
   output$downloadImpfungen <- downloadHandler("impfungenLkEbe.csv", content = function(dlFile) {
     file.copy("data/lra-ebe-corona/impfungenLkEbe.csv", dlFile)
