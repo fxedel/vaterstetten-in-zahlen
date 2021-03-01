@@ -14,6 +14,8 @@ sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
 
 theme_set(theme_light())
 
+addResourcePath(prefix = '/assets', directoryPath = 'assets')
+
 ui <- function(request) {
   dashboardPage(skin = "purple",
     dashboardHeader(
@@ -36,7 +38,9 @@ ui <- function(request) {
       )
     ),
     dashboardBody(
-      includeCSS("www/style.css"),
+      tags$head(
+        tags$link(rel = "stylesheet", type = "text/css", href = "assets/style.css")
+      ),
       tabItems(
         tabItem(tabName = "main", mainPage$ui(request, "mainPage")),
         tabItem(tabName = "corona", corona$ui(request, "corona")),
