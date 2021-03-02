@@ -39,7 +39,21 @@ ui <- function(request) {
     ),
     dashboardBody(
       tags$head(
-        tags$link(rel = "stylesheet", type = "text/css", href = "assets/style.css")
+        tags$link(rel = "stylesheet", type = "text/css", href = "assets/style.css"),
+
+        # colored status bar in mobile Chrome browser
+        tags$meta(name = "theme-color", content = "#555299"),
+
+        # used by Google Search
+        tags$meta(property = "description", content = "vaterstetten-in-zahlen.de ist ein Open-Source-Projekt, um öffentlich verfügbare Daten und Zahlen über die Gemeinde Vaterstetten zu visualisieren."),
+
+        # og:xyz meta tags are Facebook's Open Graph Markup
+        tags$meta(property = "og:title", content = "Vaterstetten in Zahlen"),
+        tags$meta(property = "og:description", content = "vaterstetten-in-zahlen.de ist ein Open-Source-Projekt, um öffentlich verfügbare Daten und Zahlen über die Gemeinde Vaterstetten zu visualisieren."),
+        tags$meta(property = "og:url", content = "https://vaterstetten-in-zahlen.de"),
+
+        # activate Twitter previews
+        tags$meta(name = "twitter:card", content = "summary"),
       ),
       tabItems(
         tabItem(tabName = "main", mainPage$ui(request, "mainPage")),
