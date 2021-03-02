@@ -59,7 +59,7 @@ ui <- function(request) {
         tags$meta(property = "og:title", content = "Vaterstetten in Zahlen"),
         tags$meta(property = "og:description", content = "vaterstetten-in-zahlen.de ist ein Open-Source-Projekt, um öffentlich verfügbare Daten und Zahlen über die Gemeinde Vaterstetten zu visualisieren."),
         tags$meta(property = "og:url", content = "https://vaterstetten-in-zahlen.de"),
-        tags$meta(property = "og:image", content = "https://vaterstetten-in-zahlen.de/assets/512x512.png"),
+        tags$meta(property = "og:image", content = "https://vaterstetten-in-zahlen.de/assets/logo_512x512.png"),
         tags$meta(property = "og:image:width", content = "512"),
         tags$meta(property = "og:image:height", content = "512"),
 
