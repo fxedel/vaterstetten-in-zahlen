@@ -8,7 +8,8 @@
   width: 32px;
   height: 32px;
   margin-right: 8px;
-  background: url("/assets/logo_32x32.png");
+  background-image: url("/assets/logo.svg");
+  background-size: contain;
   vertical-align: middle;
 }
 
