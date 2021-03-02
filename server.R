@@ -20,7 +20,7 @@ ui <- function(request) {
   dashboardPage(skin = "purple",
     dashboardHeader(
       title = "Vaterstetten in Zahlen",
-      titleWidth = 250,
+      titleWidth = 300,
       tags$li(class = "dropdown", 
         dropdownButton(label = "Download", circle = FALSE, right = TRUE, status = "header-dropdown", 
            downloadLink("downloadFallzahlen", "Corona-Fallzahlen in Vaterstetten"),
@@ -29,7 +29,7 @@ ui <- function(request) {
       )
     ),
     dashboardSidebar(
-      width = 250,
+      width = 300,
       sidebarMenu(id = "tab",
         menuItem("Start", tabName = "main", icon = icon("home")),
         menuItem("Corona-Fallzahlen in Vat", tabName = "corona", icon = icon("virus")),
@@ -41,6 +41,14 @@ ui <- function(request) {
       tags$head(
         tags$link(rel = "stylesheet", type = "text/css", href = "assets/style.css"),
 
+        tags$link(rel = "icon", type = "image/png", href = "/assets/logo_32x32.png", sizes = "32x32"),
+        tags$link(rel = "icon", type = "image/png", href = "/assets/logo_128x128.png", sizes = "128x128"),
+        tags$link(rel = "icon", type = "image/png", href = "/assets/logo_152x152.png", sizes = "152x152"),
+        tags$link(rel = "icon", type = "image/png", href = "/assets/logo_167x167.png", sizes = "167x167"),
+        tags$link(rel = "icon", type = "image/png", href = "/assets/logo_180x180.png", sizes = "180x180"),
+        tags$link(rel = "apple-touch-icon", type = "image/png", href = "/assets/logo_180x180.png", sizes = "180x180"),
+        tags$link(rel = "icon", type = "image/png", href = "/assets/logo_196x196.png", sizes = "196x196"),
+
         # colored status bar in mobile Chrome browser
         tags$meta(name = "theme-color", content = "#555299"),
 
@@ -51,6 +59,9 @@ ui <- function(request) {
         tags$meta(property = "og:title", content = "Vaterstetten in Zahlen"),
         tags$meta(property = "og:description", content = "vaterstetten-in-zahlen.de ist ein Open-Source-Projekt, um öffentlich verfügbare Daten und Zahlen über die Gemeinde Vaterstetten zu visualisieren."),
         tags$meta(property = "og:url", content = "https://vaterstetten-in-zahlen.de"),
+        tags$meta(property = "og:image", content = "https://vaterstetten-in-zahlen.de/assets/512x512.png"),
+        tags$meta(property = "og:image:width", content = "512"),
+        tags$meta(property = "og:image:height", content = "512"),
 
         # activate Twitter previews
         tags$meta(name = "twitter:card", content = "summary"),
