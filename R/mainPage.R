@@ -34,18 +34,6 @@ ui <- function(request, id) {
         )
       )
     ),
-
-    fluidRow(
-      box(
-        title = "Über das Projekt",
-        status = "primary",
-        solidHeader = TRUE,
-        width = 12,
-        tagList(
-          p(HTML("<strong>vaterstetten-in-zahlen.de</strong> ist ein Open-Source-Projekt, um öffentliche verfügbare Daten und Zahlen über die Gemeinde Vaterstetten zu visualisieren (und dafür gegebenenfalls zu sammeln). Der Quellcode ist <a href=\"https://github.com/fxedel/vaterstetten-in-zahlen\">frei verfügbar auf GitHub</a>."))
-        ),
-      ),
-    ),
   )
 }
 

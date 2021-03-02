@@ -46,7 +46,18 @@ ui <- function(request) {
         tabItem(tabName = "corona", corona$ui(request, "corona")),
         tabItem(tabName = "coronaImpfungen", coronaImpfungen$ui(request, "coronaImpfungen")),
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
-      )
+      ),
+      fluidRow(
+        box(
+          title = "Über das Projekt",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          tagList(
+            p(HTML("<strong>vaterstetten-in-zahlen.de</strong> ist ein Open-Source-Projekt, um öffentlich verfügbare Daten und Zahlen über die Gemeinde Vaterstetten zu visualisieren (und dafür gegebenenfalls zu sammeln). Der Quellcode ist <a href=\"https://github.com/fxedel/vaterstetten-in-zahlen\">frei verfügbar auf GitHub</a>."))
+          ),
+        ),
+      ),
     )
   )
 }
