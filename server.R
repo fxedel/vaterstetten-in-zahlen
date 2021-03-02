@@ -20,7 +20,7 @@ ui <- function(request) {
   dashboardPage(skin = "purple",
     dashboardHeader(
       title = "Vaterstetten in Zahlen",
-      titleWidth = 300,
+      titleWidth = 280,
       tags$li(class = "dropdown", 
         dropdownButton(label = "Download", circle = FALSE, right = TRUE, status = "header-dropdown", 
            downloadLink("downloadFallzahlen", "Corona-Fallzahlen in Vaterstetten"),
@@ -29,11 +29,11 @@ ui <- function(request) {
       )
     ),
     dashboardSidebar(
-      width = 300,
+      width = 280,
       sidebarMenu(id = "tab",
         menuItem("Start", tabName = "main", icon = icon("home")),
-        menuItem("Corona-Fallzahlen in Vat", tabName = "corona", icon = icon("virus")),
-        menuItem("Corona-Impfungen in EBE", tabName = "coronaImpfungen", icon = icon("syringe")),
+        menuItem("Corona-Fallzahlen in Vaterstetten", tabName = "corona", icon = icon("virus")),
+        menuItem("Corona-Impfungen im LK Ebersberg", tabName = "coronaImpfungen", icon = icon("syringe")),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"))
       )
     ),
