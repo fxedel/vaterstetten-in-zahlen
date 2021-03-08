@@ -25,6 +25,21 @@ renv::restore()
 Rscript server.R
 ```
 
+### Tools
+
+If you also want to be able to use the python tools, make sure to have Python 3.8+ installed. Then, install pipenv and install the local dependencies:
+
+```sh
+python3 -m pip install --user pipenv
+pipenv install
+```
+
+To run the `urlPoller` python script:
+
+```sh
+pipenv run python tools/urlPoller.py <telegram-token> <telegram-chatid>
+```
+
 ## License
 
 This project is published under the MIT license, see [LICENSE.md](./LICENSE.md). However, there are some exceptions:
