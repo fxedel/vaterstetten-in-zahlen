@@ -19,10 +19,8 @@ elif len(sys.argv) != 1:
   exit(1)
 
 
-try:
+def parse_website() -> dict:
   req = requests.get('https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
-
-  vacc_storage: LastValueStorage[dict] = LastValueStorage('vaccinations')
 
   if req.status_code != 200:
     raise Exception('Can\'t access webpage: Status code ' + str(req.status_code))
@@ -32,14 +30,27 @@ try:
   h3_impfstatistik = soup.find(name = 'h3', text = 'Impfstatistik')
   text_elems = h3_impfstatistik.find_all_next(string = re.compile('.+'), limit = 5)
 
-  values = {
+  return {
     'erstimpfungen': re.compile('Erstimpfung:\s+(\d+)').findall(text_elems[1])[0],
     'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[3])[0],
     'erstimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[2])[0],
     'zweitimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[4])[0],
   }
 
-  if (vacc_storage.is_different_to_last_values(values)):
+def get_new_values(previous_values: dict) -> dict:
+  new_values = parse_website()
+  
+  if (new_values != previous_values):
+    return new_values
+  
+  return None
+
+
+try:
+  vacc_storage: LastValueStorage[dict] = LastValueStorage('vaccinations')
+  values = get_new_values(vacc_storage.get_last_values())
+
+  if (values != None):
     csv_dict = values.copy()
     csv_dict['date'] = date.today().isoformat()
     csv_string = '%(date)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,NA' % csv_dict
