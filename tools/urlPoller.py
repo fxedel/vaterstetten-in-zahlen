@@ -6,18 +6,6 @@ import sys
 
 from lib.lastvaluestorage import LastValueStorage
 
-telegram_bot = None
-telegram_chatid = None
-
-if len(sys.argv) == 3:
-  import telebot
-
-  telegram_bot = telebot.TeleBot(sys.argv[1])
-  telegram_chatid = sys.argv[2]
-elif len(sys.argv) != 1:
-  print('Usage: [python] urlPoller.py [<telegram-token> <telegram-chatid>]')
-  exit(1)
-
 
 def parse_website() -> dict:
   req = requests.get('https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
@@ -31,11 +19,14 @@ def parse_website() -> dict:
   text_elems = h3_impfstatistik.find_all_next(string = re.compile('.+'), limit = 5)
 
   return {
+    'datum': date.today().isoformat(),
     'erstimpfungen': re.compile('Erstimpfung:\s+(\d+)').findall(text_elems[1])[0],
     'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[3])[0],
     'erstimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[2])[0],
     'zweitimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[4])[0],
+    'onlineanmeldungen': 'NA',
   }
+
 
 def get_new_values(previous_values: dict) -> dict:
   new_values = parse_website()
@@ -46,28 +37,47 @@ def get_new_values(previous_values: dict) -> dict:
   return None
 
 
-try:
+def get_csv_string(values: dict) -> str:
+  return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(onlineanmeldungen)s' % values
+
+
+def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
+  import telebot
+
+  telegram_bot = telebot.TeleBot()
+
   vacc_storage: LastValueStorage[dict] = LastValueStorage('vaccinations')
-  values = get_new_values(vacc_storage.get_last_values())
+  previous_values = vacc_storage.get_last_values()
 
-  if (values != None):
-    csv_dict = values.copy()
-    csv_dict['date'] = date.today().isoformat()
-    csv_string = '%(date)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,NA' % csv_dict
+  try:
+    values = get_new_values(previous_values)
+    if (values != None):
+      csv_string = get_csv_string(values)
 
-    if (telegram_bot):
       telegram_bot.send_message(telegram_chatid, '`%s`' % csv_string, parse_mode = "MarkdownV2")
       telegram_bot.send_message(telegram_chatid, 'https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
-    else:
-      print(csv_string)
 
+      vacc_storage.write_last_values(values)
+
+  except Exception as e:
+    telegram_bot.send_message(telegram_chatid, "Error: {0}".format(e))
+
+
+def write_updates_to_file():
+  vacc_storage: LastValueStorage[dict] = LastValueStorage('vaccinations')
+  previous_values = vacc_storage.get_last_values()
+
+  values = get_new_values(previous_values)
+  if (values != None):
+    csv_string = get_csv_string(values)
+    print(csv_string)
     vacc_storage.write_last_values(values)
 
-except Exception as e:
-  error = "Error: {0}".format(e)
 
-  if (telegram_bot):
-    telegram_bot.send_message(telegram_chatid, error)
-  else:
-    print(error)
-    exit(1)
+if len(sys.argv) == 3:
+  send_updates_to_telegram(telegram_token=sys.argv[1], telegram_chatid=sys.argv[2])
+elif len(sys.argv) == 1:
+  write_updates_to_file()
+else:
+  print('Usage: [python] urlPoller.py [<telegram-token> <telegram-chatid>]')
+  exit(1)
