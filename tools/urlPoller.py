@@ -87,7 +87,7 @@ def write_updates_to_file():
     print(csv_string)
 
     with open(file_name, mode='a') as csv_file:
-      csv_file.write(csv_string)
+      csv_file.write(csv_string + '\n')
 
 
 if len(sys.argv) == 3:
