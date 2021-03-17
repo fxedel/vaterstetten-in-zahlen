@@ -3,6 +3,8 @@ from datetime import date
 import re
 import requests
 import sys
+import csv
+import os
 
 from lib.lastvaluestorage import LastValueStorage
 
@@ -63,15 +65,29 @@ def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
     telegram_bot.send_message(telegram_chatid, "Error: {0}".format(e))
 
 
-def write_updates_to_file():
-  vacc_storage: LastValueStorage[dict] = LastValueStorage('vaccinations')
-  previous_values = vacc_storage.get_last_values()
+def get_last_csv_row(file_name: str) -> dict:
+  with open(file_name, mode='r') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
 
+    for row in csv_reader:
+      continue
+    
+    return row # last processed row
+
+
+def write_updates_to_file():
+  dirname = os.path.dirname(__file__)
+  file_name = os.path.join(dirname, '..', 'data', 'lra-ebe-corona', 'impfungenLkEbe.csv')
+
+  previous_values = get_last_csv_row(file_name)
   values = get_new_values(previous_values)
+
   if (values != None):
     csv_string = get_csv_string(values)
     print(csv_string)
-    vacc_storage.write_last_values(values)
+
+    with open(file_name, mode='a') as csv_file:
+      csv_file.write(csv_string)
 
 
 if len(sys.argv) == 3:
