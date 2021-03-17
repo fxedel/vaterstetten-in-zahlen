@@ -3,17 +3,21 @@ from datetime import date
 import re
 import requests
 import sys
-import telebot
 
 from lib.lastvaluestorage import LastValueStorage
 
-if len(sys.argv) != 3:
-  print('Usage: [python] urlPoller.py <telegram-token> <telegram-chatid>')
+telegram_bot = None
+telegram_chatid = None
 
-telegram_token = sys.argv[1]
-telegram_chatid = sys.argv[2]
+if len(sys.argv) == 3:
+  import telebot
 
-telegram_bot = telebot.TeleBot(telegram_token)
+  telegram_bot = telebot.TeleBot(sys.argv[1])
+  telegram_chatid = sys.argv[2]
+elif len(sys.argv) != 1:
+  print('Usage: [python] urlPoller.py [<telegram-token> <telegram-chatid>]')
+  exit(1)
+
 
 try:
   req = requests.get('https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
@@ -38,10 +42,21 @@ try:
   if (vacc_storage.is_different_to_last_values(values)):
     csv_dict = values.copy()
     csv_dict['date'] = date.today().isoformat()
-    csv_string = '`%(date)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,NA`' % csv_dict
-    telegram_bot.send_message(telegram_chatid, csv_string, parse_mode = "MarkdownV2")
-    telegram_bot.send_message(telegram_chatid, 'https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
+    csv_string = '%(date)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,NA' % csv_dict
+
+    if (telegram_bot):
+      telegram_bot.send_message(telegram_chatid, '`%s`' % csv_string, parse_mode = "MarkdownV2")
+      telegram_bot.send_message(telegram_chatid, 'https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
+    else:
+      print(csv_string)
+
     vacc_storage.write_last_values(values)
 
 except Exception as e:
-  telegram_bot.send_message(telegram_chatid, "Error: {0}".format(e))
+  error = "Error: {0}".format(e)
+
+  if (telegram_bot):
+    telegram_bot.send_message(telegram_chatid, error)
+  else:
+    print(error)
+    exit(1)
