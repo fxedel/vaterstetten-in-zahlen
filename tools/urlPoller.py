@@ -33,9 +33,14 @@ def parse_website() -> dict:
 def get_new_values(previous_values: dict) -> dict:
   new_values = parse_website()
   
-  if (new_values != previous_values):
+  if (
+    new_values['erstimpfungen'] != previous_values['erstimpfungen'] or
+    new_values['zweitimpfungen'] != previous_values['zweitimpfungen'] or
+    new_values['erstimpfungenAb80'] != previous_values['erstimpfungenAb80'] or
+    new_values['zweitimpfungenAb80'] != previous_values['zweitimpfungenAb80']
+  ):
     return new_values
-  
+
   return None
 
 
@@ -71,7 +76,7 @@ def get_last_csv_row(file_name: str) -> dict:
 
     for row in csv_reader:
       continue
-    
+
     return row # last processed row
 
 
