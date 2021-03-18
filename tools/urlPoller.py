@@ -6,8 +6,6 @@ import sys
 import csv
 import os
 
-from lib.lastvaluestorage import LastValueStorage
-
 
 def parse_website() -> dict:
   req = requests.get('https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
@@ -32,7 +30,7 @@ def parse_website() -> dict:
 
 def get_new_values(previous_values: dict) -> dict:
   new_values = parse_website()
-  
+
   if (
     new_values['erstimpfungen'] != previous_values['erstimpfungen'] or
     new_values['zweitimpfungen'] != previous_values['zweitimpfungen'] or
@@ -48,28 +46,6 @@ def get_csv_string(values: dict) -> str:
   return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(onlineanmeldungen)s' % values
 
 
-def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
-  import telebot
-
-  telegram_bot = telebot.TeleBot()
-
-  vacc_storage: LastValueStorage[dict] = LastValueStorage('vaccinations')
-  previous_values = vacc_storage.get_last_values()
-
-  try:
-    values = get_new_values(previous_values)
-    if (values != None):
-      csv_string = get_csv_string(values)
-
-      telegram_bot.send_message(telegram_chatid, '`%s`' % csv_string, parse_mode = "MarkdownV2")
-      telegram_bot.send_message(telegram_chatid, 'https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
-
-      vacc_storage.write_last_values(values)
-
-  except Exception as e:
-    telegram_bot.send_message(telegram_chatid, "Error: {0}".format(e))
-
-
 def get_last_csv_row(file_name: str) -> dict:
   with open(file_name, mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
@@ -80,7 +56,7 @@ def get_last_csv_row(file_name: str) -> dict:
     return row # last processed row
 
 
-def write_updates_to_file():
+def write_updates_to_file() -> str:
   dirname = os.path.dirname(__file__)
   file_name = os.path.join(dirname, '..', 'data', 'lra-ebe-corona', 'impfungenLkEbe.csv')
 
@@ -94,11 +70,35 @@ def write_updates_to_file():
     with open(file_name, mode='a') as csv_file:
       csv_file.write(csv_string + '\n')
 
+    return csv_string
 
-if len(sys.argv) == 3:
-  send_updates_to_telegram(telegram_token=sys.argv[1], telegram_chatid=sys.argv[2])
-elif len(sys.argv) == 1:
+  print('No changes in vaccination data compared to last CSV row.')
+  return None
+
+
+def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
+  import telebot
+
+  telegram_bot = telebot.TeleBot(telegram_token)
+
+  try:
+    csv_string = write_updates_to_file()
+
+    if (csv_string != None):
+      telegram_bot.send_message(telegram_chatid, '`%s`' % csv_string, parse_mode = "MarkdownV2")
+      telegram_bot.send_message(telegram_chatid, 'https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
+
+  except Exception as e:
+    telegram_bot.send_message(telegram_chatid, "Error: {0}".format(e))
+    exit(1)
+
+
+if len(sys.argv) == 1:
   write_updates_to_file()
+
+elif len(sys.argv) == 3:
+  send_updates_to_telegram(telegram_token=sys.argv[1], telegram_chatid=sys.argv[2])
+
 else:
   print('Usage: [python] urlPoller.py [<telegram-token> <telegram-chatid>]')
   exit(1)
