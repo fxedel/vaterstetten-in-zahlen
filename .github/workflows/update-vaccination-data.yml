@@ -1,5 +1,10 @@
 name: Update Vaccination Data
 
+# Requires these repository secrets:
+# TELEGRAM_TOKEN - a token for the Telegram bot API
+# TELEGRAM_CHAT_ID - the ID of the Telegram channel
+# GITHUB_PAT - a personal access token with the repo scope
+
 on:
   schedule:
     - cron: '*/15 15-19 * * *' # Every quarter hour from 15:00 - 19:00 UTC
@@ -26,9 +31,16 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       - name: Commit
+        id: auto-commit-action
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: automatic vaccination update
           commit_user_name: GitHub Actions
           commit_user_email: actions@github.com
           commit_author: GitHub Actions <actions@github.com>
+      - if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        name: Trigger Deploy workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Deploy
+          token: ${{ secrets.GITHUB_PAT }}
