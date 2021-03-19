@@ -12,13 +12,13 @@ class LastValueStorage(Generic[T]):
   def __init__(self, name):
     self.storage_file = os.path.join(storage_dir, name + '.json')
 
-  def get_last_values(self) -> T:
+  def is_different_to_last_values(self, values: T) -> bool:
     try:
       with open(self.storage_file, 'r') as f:
         last_values: T = json.load(f)
-        return last_values
+        return last_values != values
     except FileNotFoundError:
-      return None
+      return True
 
   def write_last_values(self, values: T):
     with open(self.storage_file, 'w') as f:
