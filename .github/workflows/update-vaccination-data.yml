@@ -10,17 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - run: python -m pip install --user pipenv
-      - run: pipenv install
-      - run: pipenv run python tools/urlPoller.py $TELEGRAM_TOKEN $TELEGRAM_CHAT_ID
+      - name: Install pipenv
+        run: python -m pip install --user pipenv
+      - name: Install pipenv dependencies
+        run: pipenv install
+      - name: Update vaccination data
+        run: pipenv run python tools/urlPoller.py $TELEGRAM_TOKEN $TELEGRAM_CHAT_ID
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: automatic vaccination update
           commit_user_name: GitHub Actions
