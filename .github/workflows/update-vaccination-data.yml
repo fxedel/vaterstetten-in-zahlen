@@ -16,7 +16,10 @@ jobs:
           python-version: '3.8'
       - run: python -m pip install --user pipenv
       - run: pipenv install
-      - run: pipenv run python tools/urlPoller.py
+      - run: pipenv run python tools/urlPoller.py $TELEGRAM_TOKEN $TELEGRAM_CHAT_ID
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: automatic vaccination update
