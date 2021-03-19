@@ -88,7 +88,13 @@ def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
 
     if (csv_string != None):
       telegram_bot.send_message(telegram_chatid, '`%s`' % csv_string, parse_mode = "MarkdownV2")
-      telegram_bot.send_message(telegram_chatid, 'https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
+
+      links = ' '.join((
+        '[LRA Impfzentrum](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/)',
+        '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master)',
+        '[Production](https://vaterstetten-in-zahlen.de/)',
+      ))
+      telegram_bot.send_message(telegram_chatid, links, parse_mode = "MarkdownV2")
 
   except Exception as e:
     telegram_bot.send_message(telegram_chatid, "Error: {0}".format(e))
