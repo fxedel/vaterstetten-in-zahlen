@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
 from bs4 import BeautifulSoup
+import csv
 from datetime import date
+import os
 import re
 import requests
 import sys
-import csv
-import os
+import traceback
 
 
 def parse_website() -> dict:
@@ -89,15 +90,15 @@ def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
     if (csv_string != None):
       telegram_bot.send_message(telegram_chatid, '`%s`' % csv_string, parse_mode = "MarkdownV2")
 
-      links = ' '.join((
+      links = ' \| '.join([
         '[LRA Impfzentrum](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/)',
         '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master)',
         '[Production](https://vaterstetten-in-zahlen.de/)',
-      ))
-      telegram_bot.send_message(telegram_chatid, links, parse_mode = "MarkdownV2")
+      ])
+      telegram_bot.send_message(telegram_chatid, links, parse_mode = "MarkdownV2", disable_web_page_preview = True)
 
   except Exception as e:
-    telegram_bot.send_message(telegram_chatid, "Error: {0}".format(e))
+    telegram_bot.send_message(telegram_chatid, "Error: %s" % traceback.format_exc())
     exit(1)
 
 
