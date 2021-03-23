@@ -1,0 +1,47 @@
+name: Update Vaccination Data
+
+# Requires these repository secrets:
+# TELEGRAM_TOKEN - a token for the Telegram bot API
+# TELEGRAM_CHAT_ID - the ID of the Telegram channel
+# GITHUB_PAT - a personal access token with the repo scope
+
+on:
+  schedule:
+    - cron: '*/15 10-18 * * *' # Every quarter hour from 10:00 - 18:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-vaccination-data:
+    environment: vaterstetten-in-zahlen.de
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install pipenv
+        run: python -m pip install --user pipenv
+      - name: Install pipenv dependencies
+        run: pipenv install
+      - name: Update vaccination data
+        run: pipenv run python tools/urlPoller.py $TELEGRAM_TOKEN $TELEGRAM_CHAT_ID
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      - name: Commit
+        id: auto-commit-action
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: automatic vaccination update
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com
+          commit_author: GitHub Actions <actions@github.com>
+      - if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        name: Trigger Deploy workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Deploy
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
