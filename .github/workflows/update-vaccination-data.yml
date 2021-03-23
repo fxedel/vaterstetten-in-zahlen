@@ -12,6 +12,7 @@ on:
 
 jobs:
   update-vaccination-data:
+    environment: vaterstetten-in-zahlen.de
     runs-on: ubuntu-latest
 
     steps:
@@ -43,4 +44,4 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Deploy
-          token: ${{ secrets.GITHUB_PAT }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
