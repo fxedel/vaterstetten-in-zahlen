@@ -22,10 +22,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Install pipenv
-        run: python -m pip install --user pipenv
-      - name: Install pipenv dependencies
-        run: pipenv install
+      - name: Install dependencies
+        run: |
+          pip install pipenv
+          pipenv install
       - name: Update vaccination data
         run: pipenv run python tools/urlPoller.py $TELEGRAM_TOKEN $TELEGRAM_CHAT_ID
         env:
