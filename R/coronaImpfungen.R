@@ -48,26 +48,30 @@ ui <- function(request, id) {
         value = FALSE
       )
     ),
-  
+
     fluidRow(
       box(
         title = "Geimpfte Personen (Erst-/Zweitgeimpfte)",
-        plotOutput(ns("geimpfte"), height = 300)
+        plotOutput(ns("geimpfte"), height = 300),
+        textOutput(ns("geimpfteText"))
       ),
       box(
         title = "Geimpfte Über-80-Jährige (Erst-/Zweitgeimpfte)",
-        plotOutput(ns("geimpfte80"), height = 300)
+        plotOutput(ns("geimpfte80"), height = 300),
+        textOutput(ns("geimpfte80Text"))
       ),
+    ),
+
+    fluidRow(
       box(
         title = "Verabreichte Impfdosen",
-        plotOutput(ns("impfdosen"), height = 300)
+        plotOutput(ns("impfdosen"), height = 300),
+        textOutput(ns("impfdosenText"))
       ),
       box(
         title = "Online-Registrierungen",
-        tagList(
-          plotOutput(ns("onlineanmeldungen"), height = 300),
-          HTML("Noch nicht angemeldet? Hier geht's zur bayerischen Impfregistrierung: <a href=\"https://impfzentren.bayern/citizen\">https://impfzentren.bayern/citizen</a>")
-        )
+        plotOutput(ns("onlineanmeldungen"), height = 300),
+        htmlOutput(ns("onlineanmeldungenText"))
       ),
     ),
 
@@ -143,7 +147,7 @@ server <- function(id) {
           icon = icon("laptop")
         )
       })
-  
+
       output$geimpfte <- renderPlot({
         dataErst <- filter(impfungenRaw, !is.na(erstimpfungen))
         dataZweit <- filter(impfungenRaw, !is.na(zweitimpfungen))
@@ -161,6 +165,10 @@ server <- function(id) {
           getYScale()
         )
       }, res = 96)
+      output$geimpfteText <- renderText({
+        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungenAb80)) %>% slice_tail()
+        paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", lastRow$erstimpfungen, " Menschen mindestens eine Erstimpfung erhalten, davon ", lastRow$zweitimpfungen, " auch schon eine Zweitimpfung.", sep = "")
+      })
 
       output$geimpfte80 <- renderPlot({
         dataErst <- filter(impfungenRaw, !is.na(erstimpfungenAb80))
@@ -181,7 +189,11 @@ server <- function(id) {
           getYScale()
         )
       }, res = 96)
-  
+      output$geimpfte80Text <- renderText({
+        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
+        paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", lastRow$erstimpfungenAb80, " der ca. ", buergerAb80LkEbe ," Landkreisbürger*innen ab 80 Jahren mindestens eine Erstimpfung erhalten, davon ", lastRow$zweitimpfungenAb80, " auch schon eine Zweitimpfung.", sep = "")
+      })
+
       output$impfdosen <- renderPlot({
         ggplot(filter(impfungenRaw, !is.na(zweitimpfungen)), mapping = aes(x = datum, y = erstimpfungen + zweitimpfungen)) + list(
           geom_line(alpha = 0.5),
@@ -194,6 +206,10 @@ server <- function(id) {
           getYScale()
         )
       }, res = 96)
+      output$impfdosenText <- renderText({
+        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
+        paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$erstimpfungen + lastRow$zweitimpfungen, " Impfdosen verabreicht.", sep = "")
+      })
 
       output$onlineanmeldungen <- renderPlot({
         ggplot(filter(impfungenRaw, !is.na(onlineanmeldungen)), mapping = aes(x = datum, y = onlineanmeldungen)) + list(
@@ -207,6 +223,10 @@ server <- function(id) {
           getYScale()
         )
       }, res = 96)
+      output$onlineanmeldungenText <- renderUI({
+        lastRow <- impfungenRaw %>% filter(!is.na(onlineanmeldungen)) %>% slice_tail()
+        HTML(paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") sind ", lastRow$onlineanmeldungen, " Menschen online für eine Impfung registriert. Noch nicht angemeldet? Hier geht's zur bayerischen Impfregistrierung: <a href=\"https://impfzentren.bayern/citizen\">https://impfzentren.bayern/citizen</a>", sep = ""))
+      })
     }
   )
 }
