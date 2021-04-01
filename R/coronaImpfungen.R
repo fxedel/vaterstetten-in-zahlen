@@ -16,9 +16,39 @@ impfungenRaw <- read_delim(
     zweitimpfungen = col_integer(),
     erstimpfungenAb80 = col_integer(),
     zweitimpfungenAb80 = col_integer(),
-    onlineanmeldungen = col_integer()
+    registriert = col_integer()
   )
 )
+
+impfungen <- impfungenRaw %>%
+  mutate(
+    impfdosen = erstimpfungen + zweitimpfungen,
+    registriertOderGeimpft = registriert + erstimpfungen
+  ) %>%
+  mutate (
+    impfdosenLast = impfdosen,
+    impfdosenUpdated = ifelse(!is.na(impfdosen), datum, NA)
+  ) %>%
+  fill(impfdosenLast, impfdosenUpdated) %>%
+  mutate(
+    impfdosenNeuProTag = (impfdosen - lag(impfdosenLast, default = 0)) / (as.integer(datum) - lag(impfdosenUpdated))
+  ) %>%
+  select(-impfdosenLast, -impfdosenUpdated)
+
+personenNachStatus <- impfungenRaw %>%
+  transmute(
+    datum = datum,
+    erst = erstimpfungen,
+    zweit = zweitimpfungen,
+    registriertOderGeimpft = registriert + erstimpfungen
+  ) %>%
+  pivot_longer(
+    cols = c(erst, zweit, registriertOderGeimpft),
+    names_to = "status",
+    names_ptypes = list(status = factor(levels = c("registriertOderGeimpft", "erst", "zweit")))
+  ) %>%
+  filter(!is.na(value))
+
 
 ui <- function(request, id) {
   ns <- NS(id)
@@ -64,14 +94,22 @@ ui <- function(request, id) {
 
     fluidRow(
       box(
+        title = "Registrierte / Geimpfte",
+        plotOutput(ns("registrierteGeimpftePlot"), height = 300),
+        htmlOutput(ns("registrierteGeimpfteText"))
+      ),
+      box(
         title = "Verabreichte Impfdosen",
         plotOutput(ns("impfdosen"), height = 300),
         textOutput(ns("impfdosenText"))
       ),
+    ),
+
+    fluidRow(
       box(
-        title = "Online-Registrierungen",
-        plotOutput(ns("onlineanmeldungen"), height = 300),
-        htmlOutput(ns("onlineanmeldungenText"))
+        title = "Verabreichte Impfdosen pro Tag",
+        plotOutput(ns("impfdosenProTagPlot"), height = 300),
+        textOutput(ns("impfdosenProTagText"))
       ),
     ),
 
@@ -139,9 +177,9 @@ server <- function(id) {
       })
 
       output$valueBoxStand <- renderValueBox({
-        lastRow <- impfungenRaw %>% filter(!is.na(onlineanmeldungen)) %>% slice_tail()
+        lastRow <- impfungenRaw %>% filter(!is.na(registriert)) %>% slice_tail()
         valueBox(
-          paste(format(round(lastRow$onlineanmeldungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%", sep = ""),
+          paste(format(round(lastRow$registriert / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%", sep = ""),
           paste("der Bevölkerung ist online registriert (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
           color = "purple",
           icon = icon("laptop")
@@ -149,24 +187,22 @@ server <- function(id) {
       })
 
       output$geimpfte <- renderPlot({
-        dataErst <- filter(impfungenRaw, !is.na(erstimpfungen))
-        dataZweit <- filter(impfungenRaw, !is.na(zweitimpfungen))
-        ggplot(mapping = aes(x = datum)) + list(
-          geom_area(aes(y = erstimpfungen), dataErst, alpha = 0.2, fill = "#0088dd", color = "#0088dd"),
-          geom_point(aes(y = erstimpfungen), dataErst, alpha = 0.5, size = 1, color = "#0088dd"),
-          geom_area(aes(y = zweitimpfungen), dataZweit, alpha = 0.4, fill = "#0088dd", color = "#0088dd"),
-          geom_point(aes(y = zweitimpfungen), dataZweit, alpha = 0.5, size = 1, color = "#0088dd"),
+        ggplot(personenNachStatus %>% filter(status != "registriertOderGeimpft"), mapping = aes(x = datum, y = value, group = status)) + list(
+          geom_area(aes(alpha = status), position = "identity", size = 0, fill = "#0088dd"),
+          geom_line(color = "#0088dd", alpha = 0.5),
+          geom_point(color = "#0088dd", alpha = 0.6, size = 1),
           if (input$showNumbers) list(
-            geom_text(aes(y = erstimpfungen, label = erstimpfungen), dataErst, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a"),
-            geom_text(aes(y = zweitimpfungen, label = zweitimpfungen), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#004b7a")
+            geom_text(aes(label = value), vjust = "bottom", hjust = "middle", nudge_y = 400, check_overlap = TRUE, size = 3.4, color = "#004b7a")
           ) else list(),
-          expand_limits(y = c(0, buergerAb80LkEbe)),
+          expand_limits(y = 0),
           getDateScale(),
-          getYScale()
+          getYScale(),
+          scale_alpha_manual(values = c(0.2, 0.5), labels = c("Erstimpfung", "Zweitimpfung")),
+          theme(legend.justification = c(0, 1), legend.position = c(0, 1), legend.title = element_blank(), legend.background = element_rect(fill = alpha("#ffffff", 0.5)), legend.key.size = unit(16, "pt"))
         )
       }, res = 96)
       output$geimpfteText <- renderText({
-        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungenAb80)) %>% slice_tail()
+        lastRow <- impfungen %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", lastRow$erstimpfungen, " Menschen mindestens eine Erstimpfung erhalten, davon ", lastRow$zweitimpfungen, " auch schon eine Zweitimpfung.", sep = "")
       })
 
@@ -199,7 +235,7 @@ server <- function(id) {
           geom_line(alpha = 0.5),
           geom_point(alpha = 0.5, size = 1),
           if (input$showNumbers)
-            geom_text(aes(label = erstimpfungen + zweitimpfungen), vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+            geom_text(aes(label = erstimpfungen + zweitimpfungen), vjust = "bottom", hjust = "middle", nudge_y = 500, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
           else list(),
           expand_limits(y = 0),
           getDateScale(),
@@ -211,21 +247,40 @@ server <- function(id) {
         paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$erstimpfungen + lastRow$zweitimpfungen, " Impfdosen verabreicht.", sep = "")
       })
 
-      output$onlineanmeldungen <- renderPlot({
-        ggplot(filter(impfungenRaw, !is.na(onlineanmeldungen)), mapping = aes(x = datum, y = onlineanmeldungen)) + list(
-          geom_line(alpha = 0.5),
-          geom_point(alpha = 0.5, size = 1),
+      output$registrierteGeimpftePlot <- renderPlot({
+        ggplot(personenNachStatus, mapping = aes(x = datum, y = value, group = status)) + list(
+          geom_area(aes(alpha = status), position = "identity", size = 0, fill = "#0088dd"),
+          geom_line(color = "#0088dd", alpha = 0.5),
+          geom_point(color = "#0088dd", alpha = 0.6, size = 1),
+          if (input$showNumbers) list(
+            geom_text(aes(label = value), vjust = "bottom", hjust = "middle", nudge_y = 1000, check_overlap = TRUE, size = 3.4, color = "#004b7a")
+          ) else list(),
+          expand_limits(y = 0),
+          getDateScale(),
+          getYScale(),
+          scale_alpha_manual(values = c(0.1, 0.3, 0.5), labels = c("Registriert", "Erstimpfung", "Zweitimpfung")),
+          theme(legend.justification = c(0, 1), legend.position = c(0, 1), legend.title = element_blank(), legend.background = element_rect(fill = alpha("#ffffff", 0.5)), legend.key.size = unit(16, "pt"))
+        )
+      }, res = 96)
+      output$registrierteGeimpfteText <- renderUI({
+        lastRow <- impfungen %>% filter(!is.na(registriert)) %>% slice_tail()
+        HTML(paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") sind ", lastRow$registriert, " Menschen für eine Impfung registriert, ", lastRow$registriertOderGeimpft," sind registriert oder bereits geimpft. Der Landkreis Ebersberg hat ", einwohnerZahlLkEbe, " Einwohner. Noch nicht angemeldet? Hier geht's zur bayerischen Impfregistrierung: <a href=\"https://impfzentren.bayern/citizen\">https://impfzentren.bayern/citizen</a>", sep = ""))
+      })
+
+      output$impfdosenProTagPlot <- renderPlot({
+        ggplot(filter(impfungen, !is.na(impfdosenNeuProTag)), mapping = aes(x = datum, y = impfdosenNeuProTag)) + list(
+          geom_step(alpha = 0.5, direction = "vh"),
           if (input$showNumbers)
-            geom_text(aes(label = onlineanmeldungen), vjust = "bottom", hjust = "middle", nudge_y = 800, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+            geom_text(aes(x = as.Date((as.integer(datum) + as.integer(lag(datum))) / 2, origin = "1970-01-01"), label = round(impfdosenNeuProTag)), vjust = "bottom", hjust = "middle", nudge_y = 15, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
           else list(),
           expand_limits(y = 0),
           getDateScale(),
           getYScale()
         )
       }, res = 96)
-      output$onlineanmeldungenText <- renderUI({
-        lastRow <- impfungenRaw %>% filter(!is.na(onlineanmeldungen)) %>% slice_tail()
-        HTML(paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") sind ", lastRow$onlineanmeldungen, " Menschen online für eine Impfung registriert. Noch nicht angemeldet? Hier geht's zur bayerischen Impfregistrierung: <a href=\"https://impfzentren.bayern/citizen\">https://impfzentren.bayern/citizen</a>", sep = ""))
+      output$impfdosenProTagText <- renderText({
+        lastRow <- impfungen %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
+        paste("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht.", sep = "")
       })
     }
   )

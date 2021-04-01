@@ -27,7 +27,7 @@ def parse_website() -> dict:
     'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[3])[0],
     'erstimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[2])[0],
     'zweitimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[4])[0],
-    'onlineanmeldungen': 'NA',
+    'registriert': 'NA',
   }
 
 
@@ -46,7 +46,7 @@ def get_new_values(previous_values: dict) -> dict:
 
 
 def get_csv_string(values: dict) -> str:
-  return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(onlineanmeldungen)s' % values
+  return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(registriert)s' % values
 
 
 def get_last_csv_row(file_name: str) -> dict:
