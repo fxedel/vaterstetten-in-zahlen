@@ -25,8 +25,8 @@ def parse_website() -> dict:
     'datum': date.today().isoformat(),
     'erstimpfungen': re.compile('Erstimpfung:\s+(\d+)').findall(text_elems[1])[0],
     'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[3])[0],
-    'erstimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[2])[0],
-    'zweitimpfungenAb80': re.compile('davon über 80 Jahre:\s+(\d+)').findall(text_elems[4])[0],
+    'erstimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[2])[0],
+    'zweitimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[4])[0],
     'registriert': 'NA',
   }
 
