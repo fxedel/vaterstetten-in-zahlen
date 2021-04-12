@@ -19,7 +19,7 @@ def parse_website() -> dict:
   soup = BeautifulSoup(req.text, 'html.parser')
 
   h3_impfstatistik = soup.find(name = 'h3', text = 'Impfstatistik')
-  text_elems = h3_impfstatistik.find_all_next(string = re.compile('.+'), limit = 5)
+  text_elems = h3_impfstatistik.find_all_next(string = re.compile('.+'), limit = 6)
 
   return {
     'datum': date.today().isoformat(),
@@ -27,57 +27,68 @@ def parse_website() -> dict:
     'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[3])[0],
     'erstimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[2])[0],
     'zweitimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[4])[0],
+    'impfdosenHausaerzte': re.compile('Impfungen durch Hausärzte:\s+(\d+)').findall(text_elems[5])[0],
     'registriert': 'NA',
   }
 
-
-def get_new_values(previous_values: dict) -> dict:
-  new_values = parse_website()
-
-  if (
-    new_values['erstimpfungen'] != previous_values['erstimpfungen'] or
-    new_values['zweitimpfungen'] != previous_values['zweitimpfungen'] or
-    new_values['erstimpfungenAb80'] != previous_values['erstimpfungenAb80'] or
-    new_values['zweitimpfungenAb80'] != previous_values['zweitimpfungenAb80']
-  ):
-    return new_values
-
-  return None
-
+def has_new_values(current_values: dict, last_values: dict) -> bool:
+  return (
+    current_values['erstimpfungen'] != last_values['erstimpfungen'] or
+    current_values['zweitimpfungen'] != last_values['zweitimpfungen'] or
+    current_values['erstimpfungenAb80'] != last_values['erstimpfungenAb80'] or
+    current_values['zweitimpfungenAb80'] != last_values['zweitimpfungenAb80'] or
+    current_values['impfdosenHausaerzte'] != last_values['impfdosenHausaerzte']
+  )
 
 def get_csv_string(values: dict) -> str:
-  return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(registriert)s' % values
+  return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(impfdosenHausaerzte)s,%(registriert)s' % values
 
 
-def get_last_csv_row(file_name: str) -> dict:
+def read_csv_rows(file_name: str) -> list:
   with open(file_name, mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
 
+    rows = []
+
     for row in csv_reader:
-      continue
+      rows.append(row)
 
-    return row # last processed row
+    return rows
 
+def write_csv_rows(file_name: str, csv_rows: list):
+  with open(file_name, mode='w') as csv_file:
+    writer = csv.DictWriter(csv_file, fieldnames = csv_rows[0].keys())
+
+    writer.writeheader()
+    writer.writerows(csv_rows)
 
 def write_updates_to_file() -> str:
   dirname = os.path.dirname(__file__)
   file_name = os.path.join(dirname, '..', 'data', 'lra-ebe-corona', 'impfungenLkEbe.csv')
 
-  previous_values = get_last_csv_row(file_name)
-  values = get_new_values(previous_values)
+  csv_rows = read_csv_rows(file_name)
 
-  if (values != None):
-    csv_string = get_csv_string(values)
-    print(csv_string)
+  last_csv_row = csv_rows[-1]
+  current_values = parse_website()
 
-    with open(file_name, mode='a') as csv_file:
-      csv_file.write(csv_string + '\n')
+  print(current_values)
 
-    return csv_string
+  if (not has_new_values(current_values, last_csv_row)):
+    print('No changes in vaccination data compared to last CSV row.')
+    return None
 
-  print('No changes in vaccination data compared to last CSV row.')
-  return None
+  # either update last row (on same day) or add new row
+  if last_csv_row['datum'] == current_values['datum']:
+    current_values['registriert'] = last_csv_row['registriert']
+    csv_rows[-1] = current_values
+  else:
+    csv_rows.append(current_values)
 
+  write_csv_rows(file_name, csv_rows)
+
+  updated_csv_string = get_csv_string(csv_rows[-1])
+
+  return updated_csv_string
 
 def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
   import telebot
