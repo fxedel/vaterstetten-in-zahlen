@@ -57,7 +57,7 @@ def read_csv_rows(file_name: str) -> list:
 
 def write_csv_rows(file_name: str, csv_rows: list):
   with open(file_name, mode='w') as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames = csv_rows[0].keys())
+    writer = csv.DictWriter(csv_file, fieldnames = csv_rows[0].keys(), dialect = 'unix', quoting = csv.QUOTE_MINIMAL)
 
     writer.writeheader()
     writer.writerows(csv_rows)
