@@ -19,15 +19,16 @@ def parse_website() -> dict:
   soup = BeautifulSoup(req.text, 'html.parser')
 
   h3_impfstatistik = soup.find(name = 'h3', text = 'Impfstatistik')
-  text_elems = h3_impfstatistik.find_all_next(string = re.compile('.+'), limit = 6)
+  text_elems = h3_impfstatistik.find_all_next(string = re.compile('.+'), limit = 7)
 
   return {
     'datum': date.today().isoformat(),
     'erstimpfungen': re.compile('Erstimpfung:\s+(\d+)').findall(text_elems[1])[0],
-    'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[3])[0],
+    'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[4])[0],
     'erstimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[2])[0],
-    'zweitimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[4])[0],
-    'impfdosenHausaerzte': re.compile('Impfungen durch Hausärzte:\s+(\d+)').findall(text_elems[5])[0],
+    'zweitimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[5])[0],
+    'erstimpfungenHausaerzte': re.compile('davon Impfungen bei Haus- und Fachärzten:\s+(\d+)').findall(text_elems[3])[0],
+    'zweitimpfungenHausaerzte': re.compile('davon Impfungen bei Haus- und Fachärzten:\s+(\d+)').findall(text_elems[6])[0],
     'registriert': 'NA',
   }
 
@@ -37,11 +38,12 @@ def has_new_values(current_values: dict, last_values: dict) -> bool:
     current_values['zweitimpfungen'] != last_values['zweitimpfungen'] or
     current_values['erstimpfungenAb80'] != last_values['erstimpfungenAb80'] or
     current_values['zweitimpfungenAb80'] != last_values['zweitimpfungenAb80'] or
-    current_values['impfdosenHausaerzte'] != last_values['impfdosenHausaerzte']
+    current_values['erstimpfungenHausaerzte'] != last_values['erstimpfungenHausaerzte'] or
+    current_values['zweitimpfungenHausaerzte'] != last_values['zweitimpfungenHausaerzte']
   )
 
 def get_csv_string(values: dict) -> str:
-  return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(impfdosenHausaerzte)s,%(registriert)s' % values
+  return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(erstimpfungenHausaerzte)s,%(zweitimpfungenHausaerzte)s,%(registriert)s' % values
 
 
 def read_csv_rows(file_name: str) -> list:
