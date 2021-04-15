@@ -26,13 +26,15 @@ Der Datensatz [impfungenLkEbe.csv](./impfungenLkEbe.csv) umfasst die Zahl an ver
 |`zweitimpfungen`|integer|Kumulative Zahl verabreichter Zweitimpfungen
 |`erstimpfungenAb80`|integer|Kumulative Zahl verabreichter Erstimpfungen an Über-80-Jährige
 |`zweitimpfungenAb80`|integer|Kumulative Zahl verabreichter Zweitimpfungen an Über-80-Jährige
-|`impfdosenHausaerzte`|integer|Kumulative Zahl verabreichter Impfdosen durch Hausärzt*innen
+|`erstimpfungenHausaerzte`|integer|Kumulative Zahl verabreichter Erstimpfungen durch Hausärzt*innen
+|`zweitimpfungenHausaerzte`|integer|Kumulative Zahl verabreichter Zweitimpfungen durch Hausärzt*innen
 |`registriert`|integer|Aktuelle Zahl an Online-Registrierungen über das [Bayerische Impfportal](https://impfzentren.bayern/) (im Landkreis Ebersberg)
 
 * `erstimpfungen` + `zweitimpfungen` = Kumulative Zahl verabreichter Impfdosen
 * `erstimpfungenAb80` ≤ `erstimpfungen`
 * `zweitimpfungenAb80` ≤ `zweitimpfungen`
-* `impfdosenHausaerzte` ≤ `erstimpfungen` + `zweitimpfungen`
+* `erstimpfungenHausaerzte` ≤ `erstimpfungen`
+* `zweitimpfungenHausaerzte` ≤ `zweitimpfungen`
 
 
 ## Originalquelle
