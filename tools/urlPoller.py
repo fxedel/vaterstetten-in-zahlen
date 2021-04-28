@@ -16,31 +16,44 @@ def parse_website() -> dict:
   if req.status_code != 200:
     raise Exception('Can\'t access webpage: Status code ' + str(req.status_code))
 
-  soup = BeautifulSoup(req.text, 'html.parser')
-
-  h3_impfstatistik = soup.find(name = 'h3', text = 'Impfstatistik')
-  text_elems = h3_impfstatistik.find_all_next(string = re.compile('.+'), limit = 7)
-
-  return {
+  data = {
     'datum': date.today().isoformat(),
-    'erstimpfungen': re.compile('Erstimpfung:\s+(\d+)').findall(text_elems[1])[0],
-    'zweitimpfungen': re.compile('Zweitimpfung:\s+(\d+)').findall(text_elems[4])[0],
-    'erstimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[2])[0],
-    'zweitimpfungenAb80': re.compile('davon über 80 Jahre\*?:\s+(\d+)').findall(text_elems[5])[0],
-    'erstimpfungenHausaerzte': re.compile('davon Impfungen bei Haus- und Fachärzten:\s+(\d+)').findall(text_elems[3])[0],
-    'zweitimpfungenHausaerzte': re.compile('davon Impfungen bei Haus- und Fachärzten:\s+(\d+)').findall(text_elems[6])[0],
+    'erstimpfungen': 'NA',
+    'zweitimpfungen': 'NA',
+    'erstimpfungenAb80': 'NA',
+    'zweitimpfungenAb80': 'NA',
+    'erstimpfungenHausaerzte': 'NA',
+    'zweitimpfungenHausaerzte': 'NA',
     'registriert': 'NA',
   }
 
-def has_new_values(current_values: dict, last_values: dict) -> bool:
-  return (
-    current_values['erstimpfungen'] != last_values['erstimpfungen'] or
-    current_values['zweitimpfungen'] != last_values['zweitimpfungen'] or
-    current_values['erstimpfungenAb80'] != last_values['erstimpfungenAb80'] or
-    current_values['zweitimpfungenAb80'] != last_values['zweitimpfungenAb80'] or
-    current_values['erstimpfungenHausaerzte'] != last_values['erstimpfungenHausaerzte'] or
-    current_values['zweitimpfungenHausaerzte'] != last_values['zweitimpfungenHausaerzte']
+  soup = BeautifulSoup(req.text, 'html.parser')
+
+  h3_impfstatistik = soup.find(name = 'h3', text = 'Impfstatistik')
+  regex = re.compile(
+    r'Erstimpfung(en)?:\s+(?P<erstimpfungen>\d+)\s*'
+    r'(davon über 80 Jahre\*?:\s+(?P<erstimpfungenAb80>\d+))?\s*'
+    r'(davon Impfungen bei Haus- und Fachärzten:\s+(?P<erstimpfungenHausaerzte>\d+))?\s*'
+    r'Zweitimpfung(en)?:\s+(?P<zweitimpfungen>\d+)\s*'
+    r'(davon über 80 Jahre\*?:\s+(?P<zweitimpfungenAb80>\d+))?\s*'
+    r'(davon Impfungen bei Haus- und Fachärzten:\s+(?P<zweitimpfungenHausaerzte>\d+))?\s*'
   )
+  match = regex.search(h3_impfstatistik.parent.text)
+
+  if match == None:
+    raise Exception('Regex could not find data in web page')
+
+  for key, value in match.groupdict().items():
+    if value != None:
+      data[key] = value
+
+  return data
+
+def has_new_values(current_values: dict, last_values: dict) -> bool:
+  for key, value in current_values.items():
+    if key != 'datum' and value != 'NA' and value != last_values[key]:
+      return True
+  return False
 
 def get_csv_string(values: dict) -> str:
   return '%(datum)s,%(erstimpfungen)s,%(zweitimpfungen)s,%(erstimpfungenAb80)s,%(zweitimpfungenAb80)s,%(erstimpfungenHausaerzte)s,%(zweitimpfungenHausaerzte)s,%(registriert)s' % values
@@ -81,8 +94,9 @@ def write_updates_to_file() -> str:
 
   # either update last row (on same day) or add new row
   if last_csv_row['datum'] == current_values['datum']:
-    current_values['registriert'] = last_csv_row['registriert']
-    csv_rows[-1] = current_values
+    for key, value in current_values.items():
+      if value != "NA":
+        last_csv_row[key] = value
   else:
     csv_rows.append(current_values)
 
