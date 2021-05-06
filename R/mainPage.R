@@ -41,9 +41,6 @@ server <- function(id, parentSession) {
   moduleServer(
     id,
     function(input, output, session) {
-      setBookmarkExclude(c("buttonCorona"))
-      setBookmarkExclude(c("buttonCoronaImpfungen"))
-
       output$valueBoxInzidenz <- renderValueBox({
         lastRow <- corona$fallzahlen %>% slice_tail()
         valueBox(

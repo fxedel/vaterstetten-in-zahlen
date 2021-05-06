@@ -133,8 +133,6 @@ server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
-      setBookmarkExclude(c("dateRange"))
-
       getDateScale <- function() {
         list(
           scale_x_date(

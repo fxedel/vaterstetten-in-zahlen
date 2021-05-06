@@ -17,12 +17,14 @@ theme_set(theme_light())
 addResourcePath(prefix = '/assets', directoryPath = 'assets')
 
 ui <- function(request) {
+  query = parseQueryString(request$QUERY_STRING)
+
   dashboardPage(skin = "purple",
     dashboardHeader(
       title = "Vaterstetten in Zahlen",
       titleWidth = 280,
-      tags$li(class = "dropdown", 
-        dropdownButton(label = "Download", circle = FALSE, right = TRUE, status = "header-dropdown", 
+      tags$li(class = "dropdown",
+        dropdownButton(label = "Download", circle = FALSE, right = TRUE, status = "header-dropdown",
            downloadLink("downloadFallzahlen", "Corona-Fallzahlen in Vaterstetten"),
            downloadLink("downloadImpfungen", "Corona-Impfungen im Landkreis Ebersberg")
         )
@@ -30,11 +32,11 @@ ui <- function(request) {
     ),
     dashboardSidebar(
       width = 280,
-      sidebarMenu(id = "tab",
-        menuItem("Start", tabName = "main", icon = icon("home")),
-        menuItem("Corona-Fallzahlen in Vaterstetten", tabName = "corona", icon = icon("virus")),
-        menuItem("Corona-Impfungen im LK Ebersberg", tabName = "coronaImpfungen", icon = icon("syringe")),
-        menuItem("Impressum", tabName = "impressum", icon = icon("id-card"))
+      sidebarMenu(id = "tab", selected = query$tab,
+        menuItem("Start", tabName = "main", icon = icon("home"), selected = query$tab == "main"),
+        menuItem("Corona-Fallzahlen in Vaterstetten", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
+        menuItem("Corona-Impfungen im LK Ebersberg", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen"),
+        menuItem("Impressum", tabName = "impressum", icon = icon("id-card"), selected = query$tab == "impressum")
       )
     ),
     dashboardBody(
@@ -89,26 +91,21 @@ ui <- function(request) {
 
 server <- function(input, output, session) {
   observe({
-    # Trigger this observer every time an input changes
-    reactiveValuesToList(input)
-    session$doBookmark()
-  })
-  onBookmarked(function(url) {
-    updateQueryString(url)
+    updateQueryString(paste0("?tab=", session$input$tab), mode = "push")
   })
 
   mainPage$server("mainPage", session)
   corona$server("corona")
   coronaImpfungen$server("coronaImpfungen")
   impressum$server("impressum")
-  
+
   output$downloadFallzahlen <- downloadHandler("fallzahlenVat.csv", content = function(dlFile) {
     file.copy("data/lra-ebe-corona/fallzahlenVat.csv", dlFile)
   }, contentType = "text/csv")
-  
+
   output$downloadImpfungen <- downloadHandler("impfungenLkEbe.csv", content = function(dlFile) {
     file.copy("data/lra-ebe-corona/impfungenLkEbe.csv", dlFile)
   }, contentType = "text/csv")
 }
 
-shinyApp(ui, server, options = list(host = "0.0.0.0", port = 4373), enableBookmarking = "url")
+shinyApp(ui, server, options = list(host = "0.0.0.0", port = 4373))
