@@ -10,14 +10,25 @@ ui <- function(request, id) {
 
     fluidRow(
       box(
+        title = "Bürgerentscheid Windkraft im Ebersberger Forst",
+        width = 6,
+        tagList(
+          tags$iframe(src = "https://okvote.osrz-akdb.de/OK.VOTE_OB/16052021/09175000/html5/Windkraft_im_Ebersberger_ForstErgebnisGrafik.html", height = 300, width = "100%"),
+          HTML("Das ist nur eine Einbettung des <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/16052021/09175000/html5/KreisBuergerentscheid_Bayern_148_Kreis_Landkreis_Ebersberg.html\">OK.VOTE-Portals</a>. Dort können auch Details zu den Wahlergebnissen abgerufen werden.")
+        )
+      ),
+
+      box(
         title = "Corona in Vaterstetten",
         width = 6,
         tagList(
           valueBoxOutput(ns("valueBoxInzidenz"), width = 12),
           actionButton(ns("buttonCorona"), "Zu den Corona-Fallzahlen", icon = icon("virus"), width = "100%")
         )
-      ),
+      )
+    ),
 
+    fluidRow(
       box(
         title = "Impfungen im Landkreis",
         width = 6,
