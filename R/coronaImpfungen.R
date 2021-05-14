@@ -292,7 +292,7 @@ server <- function(id) {
       }, res = 96)
       output$impfdosenProTagText <- renderText({
         lastRow <- impfungen %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
-        hausaerzte <- if (!is.na(lastRow$impfdosenHausaerzteNeuProTag)) paste0(", davon ", round(lastRow$impfdosenHausaerzteNeuProTag), " bei Haus- und Fachärzten") else ""
+        hausaerzte <- if (!is.na(lastRow$impfdosenHausaerzteNeuProTag)) paste0(", davon ", round(lastRow$impfdosenHausaerzteNeuProTag), " bei Haus- und Fachärzten (rote Linie)") else ""
         paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht", hausaerzte, ".")
       })
     }
