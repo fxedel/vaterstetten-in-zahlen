@@ -29,3 +29,8 @@
   padding: 6px 8px;
   color: #333;
 }
+
+/* make select dropdown appear above Leaflet's zoom controls */
+.selectize-dropdown {
+  z-index: 1001;
+}

@@ -9,6 +9,8 @@ corona <- new.env()
 sys.source("R/corona.R", envir = corona, chdir = FALSE)
 coronaImpfungen <- new.env()
 sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
+kommunalwahl2020 <- new.env()
+sys.source("R/kommunalwahl2020.R", envir = kommunalwahl2020, chdir = FALSE)
 impressum <- new.env()
 sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
 
@@ -36,6 +38,7 @@ ui <- function(request) {
         menuItem("Start", tabName = "main", icon = icon("home"), selected = query$tab == "main"),
         menuItem("Corona-Fallzahlen in Vaterstetten", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
         menuItem("Corona-Impfungen im LK Ebersberg", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen"),
+        menuItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", icon = icon("vote-yea"), selected = query$tab == "kommunalwahl2020"),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"), selected = query$tab == "impressum")
       )
     ),
@@ -72,6 +75,7 @@ ui <- function(request) {
         tabItem(tabName = "main", mainPage$ui(request, "mainPage")),
         tabItem(tabName = "corona", corona$ui(request, "corona")),
         tabItem(tabName = "coronaImpfungen", coronaImpfungen$ui(request, "coronaImpfungen")),
+        tabItem(tabName = "kommunalwahl2020", kommunalwahl2020$ui(request, "kommunalwahl2020")),
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
       fluidRow(
@@ -97,6 +101,7 @@ server <- function(input, output, session) {
   mainPage$server("mainPage", session)
   corona$server("corona")
   coronaImpfungen$server("coronaImpfungen")
+  kommunalwahl2020$server("kommunalwahl2020")
   impressum$server("impressum")
 
   output$downloadFallzahlen <- downloadHandler("fallzahlenVat.csv", content = function(dlFile) {

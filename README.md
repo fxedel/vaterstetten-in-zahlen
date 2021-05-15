@@ -9,7 +9,7 @@ vaterstetten-in-zahlen.de is an open source project whose goal is to visualize (
 Make sure the following packages are installed:
 
 ```sh
-apt install r-recommended libcurl4-openssl-dev libssl-dev libxml2-dev
+apt install r-recommended libcurl4-openssl-dev libgdal-dev libssl-dev libudunits2-dev libxml2-dev gfortran
 ```
 
 Then, start an R session and install the needed R packages:

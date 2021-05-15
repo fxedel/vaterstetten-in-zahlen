@@ -1,4 +1,8 @@
 .vscode/settings.json
 tools/lastvaluestorage
+tmp/
 .Rhistory
 __pycache__
+.Rproj.user
+.RData
+*.Rproj
