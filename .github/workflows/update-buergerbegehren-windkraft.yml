@@ -8,7 +8,7 @@ name: Update Buergerbegehren Windkraft
 
 on:
   schedule:
-    - cron: '*/5 * 15-18 5 2021' # Every five minutes from 2021-05-15 to 2021-05-18
+    - cron: '*/5 * 15-18 5 *' # Every five minutes from 2021-05-15 to 2021-05-18
   workflow_dispatch:
 
 jobs:
