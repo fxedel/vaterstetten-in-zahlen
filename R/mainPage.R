@@ -14,7 +14,8 @@ ui <- function(request, id) {
         width = 6,
         tagList(
           tags$iframe(src = "https://okvote.osrz-akdb.de/OK.VOTE_OB/16052021/09175000/html5/Windkraft_im_Ebersberger_ForstErgebnisGrafik.html", height = 300, width = "100%"),
-          HTML("Das ist nur eine Einbettung des <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/16052021/09175000/html5/KreisBuergerentscheid_Bayern_148_Kreis_Landkreis_Ebersberg.html\">OK.VOTE-Portals</a>. Dort können auch Details zu den Wahlergebnissen abgerufen werden.")
+          p(HTML("Das ist nur eine Einbettung des <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/16052021/09175000/html5/KreisBuergerentscheid_Bayern_148_Kreis_Landkreis_Ebersberg.html\">OK.VOTE-Portals</a>. Dort können Details zu den Wahlergebnissen abgerufen werden.")),
+          p(HTML("Live-Ergebnisse können auch über den Telegram-Kanal <a href=\"https://t.me/vaterstetteninzahlen\">@vaterstetteninzahlen</a> (BETA) abonniert werden!"))
         )
       ),
 
