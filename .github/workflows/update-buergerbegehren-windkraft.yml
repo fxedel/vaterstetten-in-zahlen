@@ -1,13 +1,14 @@
-name: Update Vaccination Data
+name: Update Buergerbegehren Windkraft
 
 # Requires these repository secrets:
 # TELEGRAM_TOKEN - a token for the Telegram bot API
-# TELEGRAM_CHAT_ID - the ID of the Telegram channel
+# TELEGRAM_DEBUG_CHAT_ID - the ID of the Telegram channel
+# TELEGRAM_PUBLIC_CHAT_ID - the ID of the Telegram channel
 # GITHUB_PAT - a personal access token with the repo scope
 
 on:
   schedule:
-    - cron: '*/15 10-18 * * *' # Every quarter hour from 10:00 - 18:00 UTC
+    - cron: '*/5 * 15-18 5 2021' # Every five minutes from 2021-05-15 to 2021-05-18
   workflow_dispatch:
 
 jobs:
@@ -27,15 +28,16 @@ jobs:
           pip install pipenv
           pipenv install
       - name: Update vaccination data
-        run: pipenv run python tools/coronaVaccinationPoller.py $TELEGRAM_TOKEN $TELEGRAM_CHAT_ID
+        run: pipenv run python tools/buergerentscheidPoller.py $TELEGRAM_TOKEN $TELEGRAM_DEBUG_CHAT_ID $TELEGRAM_PUBLIC_CHAT_ID
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_DEBUG_CHAT_ID: ${{ secrets.TELEGRAM_DEBUG_CHAT_ID }}
+          TELEGRAM_PUBLIC_CHAT_ID: ${{ secrets.TELEGRAM_PUBLIC_CHAT_ID }}
       - name: Commit
         id: auto-commit-action
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: automatic vaccination update
+          commit_message: automatic buergerbegehren windkraft update
           commit_user_name: GitHub Actions
           commit_user_email: actions@github.com
           commit_author: GitHub Actions <actions@github.com>
