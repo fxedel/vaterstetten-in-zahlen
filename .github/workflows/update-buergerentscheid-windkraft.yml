@@ -1,4 +1,4 @@
-name: Update Buergerbegehren Windkraft
+name: Update Buergerentscheid Windkraft
 
 # Requires these repository secrets:
 # TELEGRAM_TOKEN - a token for the Telegram bot API
@@ -27,7 +27,7 @@ jobs:
         run: |
           pip install pipenv
           pipenv install
-      - name: Update vaccination data
+      - name: Update buergerentscheid data
         run: pipenv run python tools/buergerentscheidPoller.py $TELEGRAM_TOKEN $TELEGRAM_DEBUG_CHAT_ID $TELEGRAM_PUBLIC_CHAT_ID
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
