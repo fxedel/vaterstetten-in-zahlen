@@ -113,3 +113,13 @@ Die kumulative Fallzahl sowie die Zahl aktueller Fälle sinkt zum 7.&nbsp;Septem
 ```
 
 Denkbar wäre auch, dass am 6.&nbsp;September eine Person fälschlicherweise zu Vaterstetten gezählt und dann am Folgetag Poing, Aßling oder einem anderen Landkreis zugeordnet wurde; zudem wäre dann am 8.&nbsp;September wieder ein neuer Fall in Vaterstetten gemeldet worden. In diesem Fall bewirkt die vorgenommene Fehlerkorrektur lediglich eine Verschiebung der Neuinfektion vom 8. auf den 6.&nbsp; September.
+
+### 12. Mai 2021
+
+Die [Grafik vom 12.&nbsp;Mai 2021](https://lra-ebe.de/media/5018/2021-05-12-corona-balkendiagramm.png) weißt gegenüber [der vom Vortag](https://lra-ebe.de/media/5015/2021-05-11-corona-balkendiagramm.png) und der darauffolgenden vom [16.&nbsp;Mai 2021](https://lra-ebe.de/media/5029/2021-05-16-corona-balkendiagramm.png) einige Unstimmigkeiten auf. So ist die kumulierte Zahl zum 12.&nbsp;Mai sprunghaft gestiegen und gleichzeitig die Zahl aktueller Fälle deutlich gesunken, außerdem ist in Ebersberg und Steinhöring die kumulierte Zahl gesunken, was per Definition nicht passieren darf. Zum 16.&nbsp;Mai ist die kumulierte Zahl für Vaterstetten wieder auf ein niedrigeres Niveau gesunken, es kann also angenommen werden, dass es sich bei den Zahlen vom 12.&nbsp;Mai um einen Fehler gehandelt hat.
+
+```diff
+ 2021-05-11,961,43
+-2021-05-12,980,34
+ 2021-05-16,969,30
+```
