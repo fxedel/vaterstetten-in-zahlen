@@ -3,6 +3,8 @@ library(shinydashboard)
 library(ggplot2)
 library(shinyWidgets)
 
+Sys.setlocale("LC_TIME", "de_DE.utf8")
+
 mainPage <- new.env()
 sys.source("R/mainPage.R", envir = mainPage, chdir = FALSE)
 corona <- new.env()
