@@ -43,7 +43,12 @@ impfungen <- impfungenRaw %>%
       lag(impfdosenHausaerzteLast, default = 0)) / (as.integer(datum) - lag(impfdosenHausaerzteUpdated)
     )
   ) %>%
-  select(-impfdosenLast, -impfdosenUpdated, -impfdosenHausaerzteLast, -impfdosenHausaerzteUpdated)
+  select(-impfdosenLast, -impfdosenUpdated, -impfdosenHausaerzteLast, -impfdosenHausaerzteUpdated) %>%
+  complete(datum = seq(min(datum), max(datum), "days"), fill = list()) %>%
+  fill(impfdosenNeuProTag, impfdosenHausaerzteNeuProTag, .direction = "up") %>%
+  mutate(
+    impfdosen7tageMittel = (impfdosen - lag(impfdosen, 7)) / 7
+  )
 
 personenNachStatus <- impfungenRaw %>%
   transmute(
@@ -200,7 +205,7 @@ server <- function(id) {
           geom_line(color = "#0088dd", alpha = 0.5),
           geom_point(color = "#0088dd", alpha = 0.6, size = 1),
           if (input$showNumbers) list(
-            geom_text(aes(label = value), vjust = "bottom", hjust = "middle", nudge_y = 400, check_overlap = TRUE, size = 3.4, color = "#004b7a")
+            geom_text(aes(label = value), vjust = "bottom", hjust = "middle", nudge_y = 1500, check_overlap = TRUE, size = 3.4, color = "#004b7a")
           ) else list(),
           expand_limits(y = 0),
           getDateScale(),
@@ -239,11 +244,11 @@ server <- function(id) {
       })
 
       output$impfdosen <- renderPlot({
-        ggplot(filter(impfungenRaw, !is.na(zweitimpfungen)), mapping = aes(x = datum, y = erstimpfungen + zweitimpfungen)) + list(
+        ggplot(filter(impfungen, !is.na(impfdosen)), mapping = aes(x = datum, y = impfdosen)) + list(
           geom_line(alpha = 0.5),
           geom_point(alpha = 0.5, size = 1),
           if (input$showNumbers)
-            geom_text(aes(label = erstimpfungen + zweitimpfungen), vjust = "bottom", hjust = "middle", nudge_y = 500, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+            geom_text(aes(label = impfdosen), vjust = "bottom", hjust = "middle", nudge_y = 1500, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
           else list(),
           expand_limits(y = 0),
           getDateScale(),
@@ -251,8 +256,8 @@ server <- function(id) {
         )
       }, res = 96)
       output$impfdosenText <- renderText({
-        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-        paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$erstimpfungen + lastRow$zweitimpfungen, " Impfdosen verabreicht.", sep = "")
+        lastRow <- impfungen %>% filter(!is.na(impfdosen)) %>% slice_tail()
+        paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$impfdosen, " Impfdosen verabreicht.", sep = "")
       })
 
       output$registrierteGeimpftePlot <- renderPlot({
@@ -277,11 +282,12 @@ server <- function(id) {
 
       output$impfdosenProTagPlot <- renderPlot({
         ggplot(filter(impfungen, !is.na(impfdosenNeuProTag)), mapping = aes(x = datum)) + list(
-          geom_step(aes(y = impfdosenNeuProTag), alpha = 0.5, direction = "vh"),
-          geom_step(aes(y = impfdosenHausaerzteNeuProTag), alpha = 0.5, direction = "vh", color = "#ff0000"),
+          geom_col(aes(y = impfdosenNeuProTag), alpha = 0.5, width = 1),
+          geom_col(aes(y = impfdosenHausaerzteNeuProTag), alpha = 0.6, fill = "#ff0000", width = 1),
+          geom_line(data = filter(impfungen, !is.na(impfdosen7tageMittel)), aes(y = impfdosen7tageMittel), alpha = 0.6, color = "#000000", size = 1.2),
           if (input$showNumbers)
             geom_text(
-              aes(x = as.Date((as.integer(datum) + as.integer(lag(datum))) / 2, origin = "1970-01-01"), y = impfdosenNeuProTag, label = round(impfdosenNeuProTag)),
+              aes(y = impfdosenNeuProTag, label = round(impfdosenNeuProTag)),
               vjust = "bottom", hjust = "middle", nudge_y = 100, check_overlap = TRUE, size = 3.4, na.rm = TRUE
             )
           else list(),
@@ -292,8 +298,8 @@ server <- function(id) {
       }, res = 96)
       output$impfdosenProTagText <- renderText({
         lastRow <- impfungen %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
-        hausaerzte <- if (!is.na(lastRow$impfdosenHausaerzteNeuProTag)) paste0(", davon ", round(lastRow$impfdosenHausaerzteNeuProTag), " bei Haus- und Fachärzten (rote Linie)") else ""
-        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht", hausaerzte, ".")
+        hausaerzte <- if (!is.na(lastRow$impfdosenHausaerzteNeuProTag)) paste0(", davon ", round(lastRow$impfdosenHausaerzteNeuProTag), " bei Haus- und Fachärzten (rote Fläche)") else ""
+        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht", hausaerzte, ". Die schwarze Linie gibt das 7-Tage-Mittel an.")
       })
     }
   )
