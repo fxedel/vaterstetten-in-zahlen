@@ -34,20 +34,19 @@ impfungen <- impfungenRaw %>%
   ) %>%
   fill(impfdosenLast, impfdosenUpdated, impfdosenHausaerzteLast, impfdosenHausaerzteUpdated) %>%
   mutate(
-    impfdosenNeuProTag = (
-      impfdosen -
-      lag(impfdosenLast, default = 0)) / (as.integer(datum) - lag(impfdosenUpdated)
-    ),
-    impfdosenHausaerzteNeuProTag = (
-      impfdosenHausaerzte -
-      lag(impfdosenHausaerzteLast, default = 0)) / (as.integer(datum) - lag(impfdosenHausaerzteUpdated)
-    )
+    impfdosenNeuProTag =
+      (impfdosen - lag(impfdosenLast, default = 0))
+      / (as.integer(datum) - lag(impfdosenUpdated)),
+    impfdosenHausaerzteNeuProTag =
+      (impfdosenHausaerzte - lag(impfdosenHausaerzteLast, default = 0))
+      / (as.integer(datum) - lag(impfdosenHausaerzteUpdated))
   ) %>%
   select(-impfdosenLast, -impfdosenUpdated, -impfdosenHausaerzteLast, -impfdosenHausaerzteUpdated) %>%
   complete(datum = seq(min(datum), max(datum), "days"), fill = list()) %>%
   fill(impfdosenNeuProTag, impfdosenHausaerzteNeuProTag, .direction = "up") %>%
   mutate(
-    impfdosen7tageMittel = (impfdosen - lag(impfdosen, 7)) / 7
+    impfdosen7tageMittel = (impfdosen - lag(impfdosen, 7)) / 7,
+    impfidenz = (impfdosen - lag(impfdosen, 7)) / einwohnerZahlLkEbe * 100000,
   )
 
 personenNachStatus <- impfungenRaw %>%
@@ -71,9 +70,9 @@ ui <- function(request, id) {
     h2("Corona-Impfungen im Landkreis Ebersberg"),
 
     fluidRow(
-      valueBoxOutput(ns("valueBoxErstimpfungen")),
-      valueBoxOutput(ns("valueBoxImpfquote")),
-      valueBoxOutput(ns("valueBoxStand"))
+      valueBoxOutput(ns("valueBox1")),
+      valueBoxOutput(ns("valueBox2")),
+      valueBoxOutput(ns("valueBox3"))
     ),
 
     flowLayout(
@@ -114,9 +113,9 @@ ui <- function(request, id) {
         textOutput(ns("impfdosenProTagText"))
       ),
       box(
-        title = "Verabreichte Impfdosen",
-        plotOutput(ns("impfdosen"), height = 300),
-        textOutput(ns("impfdosenText"))
+        title = "7-Tage-Impfidenz",
+        plotOutput(ns("impfidenzPlot"), height = 300),
+        textOutput(ns("impfidenzText"))
       ),
     ),
 
@@ -125,6 +124,11 @@ ui <- function(request, id) {
         title = "Registrierte / Geimpfte",
         plotOutput(ns("registrierteGeimpftePlot"), height = 300),
         htmlOutput(ns("registrierteGeimpfteText"))
+      ),
+      box(
+        title = "Verabreichte Impfdosen",
+        plotOutput(ns("impfdosen"), height = 300),
+        textOutput(ns("impfdosenText"))
       ),
     ),
 
@@ -169,7 +173,7 @@ server <- function(id) {
         )
       }
 
-      output$valueBoxErstimpfungen <- renderValueBox({
+      output$valueBox1 <- renderValueBox({
         lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
           lastRow$erstimpfungen,
@@ -179,7 +183,7 @@ server <- function(id) {
         )
       })
 
-      output$valueBoxImpfquote <- renderValueBox({
+      output$valueBox2 <- renderValueBox({
         lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
           paste(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%", sep = ""),
@@ -189,13 +193,13 @@ server <- function(id) {
         )
       })
 
-      output$valueBoxStand <- renderValueBox({
-        lastRow <- impfungenRaw %>% filter(!is.na(registriert)) %>% slice_tail()
+      output$valueBox3 <- renderValueBox({
+        lastRow <- impfungen %>% filter(!is.na(impfidenz)) %>% slice_tail()
         valueBox(
-          paste(format(round(lastRow$registriert / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%", sep = ""),
-          paste("der Bevölkerung ist online registriert (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
+          format(round(lastRow$impfidenz, 1), nsmall = 1),
+          paste("7-Tage-Impfidenz (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
           color = "purple",
-          icon = icon("laptop")
+          icon = icon("calendar-week")
         )
       })
 
@@ -245,8 +249,8 @@ server <- function(id) {
 
       output$impfdosen <- renderPlot({
         ggplot(filter(impfungen, !is.na(impfdosen)), mapping = aes(x = datum, y = impfdosen)) + list(
-          geom_line(alpha = 0.5),
-          geom_point(alpha = 0.5, size = 1),
+          geom_line(alpha = 0.5, size = 1.2),
+          geom_point(alpha = 1, size = 1),
           if (input$showNumbers)
             geom_text(aes(label = impfdosen), vjust = "bottom", hjust = "middle", nudge_y = 1500, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
           else list(),
@@ -258,6 +262,23 @@ server <- function(id) {
       output$impfdosenText <- renderText({
         lastRow <- impfungen %>% filter(!is.na(impfdosen)) %>% slice_tail()
         paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$impfdosen, " Impfdosen verabreicht.", sep = "")
+      })
+
+      output$impfidenzPlot <- renderPlot({
+        ggplot(filter(impfungen, !is.na(impfidenz)), mapping = aes(x = datum, y = impfidenz)) + list(
+          geom_line(alpha = 0.5, size = 1.2),
+          geom_point(alpha = 1, size = 1),
+          if (input$showNumbers)
+            geom_text(aes(label = impfidenz), vjust = "bottom", hjust = "middle", nudge_y = 1500, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+          else list(),
+          expand_limits(y = 0),
+          getDateScale(),
+          getYScale()
+        )
+      }, res = 96)
+      output$impfidenzText <- renderText({
+        lastRow <- impfungen %>% filter(!is.na(impfidenz)) %>% slice_tail()
+        paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", round(lastRow$impfidenz, 1), ".")
       })
 
       output$registrierteGeimpftePlot <- renderPlot({
