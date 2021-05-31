@@ -17,7 +17,7 @@ fallzahlenRaw <- read_delim(
 )
 
 fallzahlen <- fallzahlenRaw %>%
-  mutate(neuinfektionen = kumulativ - lag(kumulativ, 1)) %>%
+  mutate(neuinfektionen = pmax(0, kumulativ - lag(kumulativ, 1))) %>%
   complete(datum = seq(min(datum), max(datum) + 1, "days"), fill = list(neuinfektionen = 0)) %>%
   mutate(neuinfektionen = c(neuinfektionen[-n()], NA)) %>%
   mutate(inzidenz7 = lag(cumsum(neuinfektionen) - lag(cumsum(neuinfektionen), 7)) / einwohnerZahl * 100000) %>%
