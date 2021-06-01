@@ -41,6 +41,7 @@ Der Datensatz [impfungenLkEbe.csv](./impfungenLkEbe.csv) umfasst die Zahl an ver
 
 Das Gesundheitsamt veröffentlicht an (fast) jedem Werktag aktuelle Zahlen zur Corona-Pandemie im Landkreis Ebersberg:
 
+* *Mai 2021*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0521-neu/)
 * *April 2021*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0421/)
 * *März 2021*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0321/)
 * *Februar 2021*: [Corona-Virus: Aktuelle Informationen](https://lra-ebe.de/aktuelles/aktuelle-meldungen/corona-virus-aktuelle-pressemeldungen-0221/)
