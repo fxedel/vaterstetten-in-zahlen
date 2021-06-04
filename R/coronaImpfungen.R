@@ -169,7 +169,8 @@ server <- function(id) {
         scale_y_continuous(
           name = NULL,
           breaks = breaks_pretty(5),
-          expand = expansion(mult = c(0.02, 0.1))
+          expand = expansion(mult = c(0.02, 0.1)),
+          labels = number_format()
         )
       }
 
