@@ -72,6 +72,9 @@ ui <- function(request) {
 
         # activate Twitter previews
         tags$meta(name = "twitter:card", content = "summary"),
+
+        # Google Search Console
+        tags$meta(name = "google-site-verification", content = "LV313urokNhRgEiwriQi33VkY1MboB9-til_qMZpGPI")
       ),
       tabItems(
         tabItem(tabName = "main", mainPage$ui(request, "mainPage")),
