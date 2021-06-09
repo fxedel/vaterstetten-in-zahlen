@@ -78,7 +78,7 @@ ui <- function(request, id) {
     flowLayout(
       dateRangeInput(ns("dateRange"),
         label = NULL,
-        start = min(impfungenRaw$datum),
+        start = max(impfungenRaw$datum) - 90,
         end = max(impfungenRaw$datum),
         min = min(impfungenRaw$datum),
         max = max(impfungenRaw$datum),
@@ -304,8 +304,8 @@ server <- function(id) {
 
       output$impfdosenProTagPlot <- renderPlot({
         ggplot(filter(impfungen, !is.na(impfdosenNeuProTag)), mapping = aes(x = datum)) + list(
-          geom_col(aes(y = impfdosenNeuProTag), alpha = 0.5, width = 1),
-          geom_col(aes(y = impfdosenHausaerzteNeuProTag), alpha = 0.6, fill = "#ff0000", width = 1),
+          geom_col(aes(y = impfdosenNeuProTag), alpha = 0.5, width = 1, position = position_nudge(x = -0.5)),
+          geom_col(aes(y = impfdosenHausaerzteNeuProTag), alpha = 0.6, fill = "#ff0000", width = 1, position = position_nudge(x = -0.5)),
           geom_line(data = filter(impfungen, !is.na(impfdosen7tageMittel)), aes(y = impfdosen7tageMittel), alpha = 0.6, color = "#000000", size = 1.2),
           if (input$showNumbers)
             geom_text(
