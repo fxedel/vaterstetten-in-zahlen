@@ -4,6 +4,7 @@ library(purrr)
 library(stringr)
 library(ggplot2)
 library(leaflet)
+library(plotly)
 
 stimmbezirke <- st_read("data/kommunalwahl2020/stimmbezirke.geojson") %>%
   transmute(
@@ -13,20 +14,29 @@ stimmbezirke <- st_read("data/kommunalwahl2020/stimmbezirke.geojson") %>%
 
 parteien <- read_csv("data/kommunalwahl2020/parteien.csv")
 
+gemeinderatPersonen <- read_csv("data/kommunalwahl2020/gemeinderatPersonen.csv")
+
 gemeinderatErgebnisAllgemein <- read_csv("data/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv")
 
 gemeinderatErgebnisNachPartei <- read_csv("data/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv") %>%
+  # add farbe, parteiNr
+  inner_join(parteien, by = "partei") %>%
+
+  # add stimmenAnteil
   inner_join(gemeinderatErgebnisAllgemein %>% select(stimmbezirk, gueltigeStimmen), by = "stimmbezirk") %>%
   mutate(stimmenAnteil = stimmen/gueltigeStimmen, gueltigeStimmen = NULL)
 
 gemeinderatErgebnisNachPerson <- read_csv("data/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv") %>%
-  left_join(gemeinderatErgebnisNachPartei %>% select(stimmbezirk, partei, parteiStimmen = stimmen), by = c("partei", "stimmbezirk")) %>%
+  # add name
+  left_join(gemeinderatPersonen, by = c("partei", "listenNr")) %>%
+
+  # add stimmenAnteilPartei, farbe, parteiNr
+  left_join(gemeinderatErgebnisNachPartei %>% select(stimmbezirk, partei, parteiStimmen = stimmen, farbe, parteiNr), by = c("partei", "stimmbezirk")) %>%
   mutate(stimmenAnteilPartei = stimmen/parteiStimmen, parteiStimmen = NULL)
 
 gemeinderatParteien <- parteien %>%
   inner_join(gemeinderatErgebnisNachPartei %>% select(partei) %>% distinct(), by = "partei")
 
-gemeinderatPersonen <- read_csv("data/kommunalwahl2020/gemeinderatPersonen.csv")
 
 
 ui <- function(request, id) {
@@ -75,6 +85,16 @@ ui <- function(request, id) {
         p(),
         p("Der eingezeichnete Stimmenanteil entspricht immer der Stimmenanzahl der einzelnen Person im Verhältnis zu ihrer Partei-Liste. Das insgesamte Abschneiden der Partei im Vergleich zu den anderen Parteien ist irrelevant. Vielmehr wird dargestellt, wo eine Person unter den Anhängern ihrer Partei besonders beliebt ist.")
       ),
+    ),
+
+    fluidRow(
+      box(
+        title = "Häufelungen auf einzelne Kandidat*innen",
+        width = 12,
+        tagList(
+          plotlyOutput(ns("plot"))
+        )
+      )
     ),
 
     fluidRow(
@@ -173,6 +193,20 @@ server <- function(id) {
 
       observe({
         printPersonenstimmenMap()
+      })
+
+      output$plot <- renderPlotly({
+        gemeinderatErgebnisNachPerson %>%
+          filter(stimmbezirk == "Gesamt") %>%
+          group_by(partei) %>%
+          # filter(partei == "FDP") %>%
+          plot_ly(type = "bar") %>%
+          config(displayModeBar = FALSE) %>%
+          add_trace(x = ~listenNr, y = ~stimmen, text = ~paste0(name, ", ", partei, ": ", stimmen, " Stimmen"), color = ~ I(farbe), name = ~parteiNr, yaxis = ~paste0("y", parteiNr), width = 1, hoverinfo = "text") %>%
+          layout(dragmode = FALSE, showlegend = FALSE) %>%
+          layout(yaxis = list(title = list(standoff = 0, font = list(size = 1))),
+              margin = list(r = 0, l = 0, t = 0, b = 0, pad = 0)) %>%
+          subplot(shareY = TRUE, margin = 0.01)
       })
     }
   )
