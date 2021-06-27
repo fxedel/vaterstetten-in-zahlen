@@ -43,9 +43,9 @@ server <- function(id, parentSession) {
     id,
     function(input, output, session) {
       output$valueBoxInzidenz <- renderValueBox({
-        lastRow <- corona$fallzahlen %>% slice_tail()
+        lastRow <- corona$fallzahlenArcGIS %>% slice_tail()
         valueBox(
-          format(round(lastRow$inzidenz7, 1), nsmall = 1),
+          format(round(lastRow$inzidenz7tage, 1), nsmall = 1),
           paste("7-Tage-Inzidenz (", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
           color = "purple",
           icon = icon("virus")
