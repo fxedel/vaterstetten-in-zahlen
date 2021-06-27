@@ -43,7 +43,7 @@ elif len(sys.argv) == 3 or len(sys.argv) == 4:
   else:
     telegram_public_chatid = telegram_debug_chatid
 else:
-  print('Usage: [python] poll.py [<telegram-token> <telegram-chatid>]')
+  print('Usage: [python] poll.py [<telegram-token> <telegram-debug-chatid> [<telegram-public-chatid>]]')
   exit(1)
 
 

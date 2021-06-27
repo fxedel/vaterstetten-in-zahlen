@@ -34,10 +34,10 @@ python3 -m pip install --user pipenv
 pipenv install
 ```
 
-To run the `urlPoller` python script:
+To run the data poller:
 
 ```sh
-pipenv run python tools/urlPoller.py <telegram-token> <telegram-chatid>
+pipenv run python poll.py [<telegram-token> <telegram-debug-chatid> [<telegram-public-chatid>]]
 ```
 
 ## License

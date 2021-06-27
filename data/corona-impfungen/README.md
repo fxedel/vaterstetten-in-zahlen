@@ -1,8 +1,8 @@
 # Corona-Impfungen im Landkreis Ebersberg
 
-## [`impfungenLkEbe.csv`](./impfungenLkEbe.csv)
+## [`impfungenLandkreis.csv`](./impfungenLandkreis.csv)
  
-Der Datensatz [impfungenLkEbe.csv](./impfungenLkEbe.csv) umfasst die Zahl an verabreichten Impfdosen im gesamten Landkreis Ebersberg.
+Der Datensatz [impfungenLandkreis.csv](./impfungenLandkreis.csv) umfasst die Zahl an verabreichten Impfdosen im gesamten Landkreis Ebersberg.
 
 |Spalte|Format|Beschreibung
 |-|-|-

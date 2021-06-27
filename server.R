@@ -29,7 +29,9 @@ ui <- function(request) {
       titleWidth = 280,
       tags$li(class = "dropdown",
         dropdownButton(label = "Download", circle = FALSE, right = TRUE, status = "header-dropdown",
-           downloadLink("downloadFallzahlen", "Corona-Fallzahlen in Vaterstetten"),
+           downloadLink("downloadFallzahlenLandkreis", "Corona-Fallzahlen im Landkreis, gesamt"),
+           downloadLink("downloadFallzahlenGemeinde", "Corona-Fallzahlen im Landkreis, nach Gemeinden"),
+           downloadLink("downloadFallzahlenVat", "Corona-Fallzahlen in Vaterstetten (veraltet)"),
            downloadLink("downloadImpfungen", "Corona-Impfungen im Landkreis Ebersberg")
         )
       )
@@ -109,12 +111,18 @@ server <- function(input, output, session) {
   kommunalwahl2020$server("kommunalwahl2020")
   impressum$server("impressum")
 
-  output$downloadFallzahlen <- downloadHandler("fallzahlenVat.csv", content = function(dlFile) {
-    file.copy("data/lra-ebe-corona/fallzahlenVat.csv", dlFile)
+  output$downloadFallzahlenLandkreis <- downloadHandler("arcgisInzidenzLandkreis.csv", content = function(dlFile) {
+    file.copy("data/corona-fallzahlen/arcgisInzidenzLandkreis.csv", dlFile)
+  }, contentType = "text/csv")
+  output$downloadFallzahlenGemeinde <- downloadHandler("arcgisInzidenzGemeinden.csv", content = function(dlFile) {
+    file.copy("data/corona-fallzahlen/arcgisInzidenzGemeinden.csv", dlFile)
+  }, contentType = "text/csv")
+  output$downloadFallzahlenVat <- downloadHandler("fallzahlenVat.csv", content = function(dlFile) {
+    file.copy("data/corona-fallzahlen/fallzahlenVat.csv", dlFile)
   }, contentType = "text/csv")
 
   output$downloadImpfungen <- downloadHandler("impfungenLkEbe.csv", content = function(dlFile) {
-    file.copy("data/lra-ebe-corona/impfungenLkEbe.csv", dlFile)
+    file.copy("data/corona-impfungen/impfungenLandkreis.csv", dlFile)
   }, contentType = "text/csv")
 }
 
