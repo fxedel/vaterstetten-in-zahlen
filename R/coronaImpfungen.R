@@ -7,7 +7,7 @@ einwohnerZahlLkEbe <- 143649
 buergerAb80LkEbe <- 9430 # as of 2021-01-08
 
 impfungenRaw <- read_delim(
-  file = "data/lra-ebe-corona/impfungenLkEbe.csv",
+  file = "data/corona-impfungen/impfungenLandkreis.csv",
   delim = ",",
   col_names = TRUE,
   col_types = cols(

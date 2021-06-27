@@ -125,7 +125,7 @@ def send_updates_to_telegram(telegram_token: str, telegram_chatid: str):
       telegram_bot.send_message(telegram_chatid, links, parse_mode = "MarkdownV2", disable_web_page_preview = True)
 
   except Exception as e:
-    telegram_bot.send_message(telegram_chatid, "Error: %s" % traceback.format_exc())
+    telegram_bot.send_message(telegram_chatid, ("Error: %s" % traceback.format_exc())[0:4096])
     exit(1)
 
 

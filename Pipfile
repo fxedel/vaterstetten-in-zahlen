@@ -7,6 +7,8 @@ name = "pypi"
 requests = "~=2.25"
 beautifulsoup4 = "~=4.9"
 pytelegrambotapi = "~=3.7"
+arcgis = "*"
+python-interface = "*"
 
 [dev-packages]
 
