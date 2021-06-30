@@ -177,20 +177,20 @@ server <- function(id) {
       output$valueBox1 <- renderValueBox({
         lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
-          lastRow$erstimpfungen,
-          paste("Geimpfte (mind. Erstimpfung, Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
+          paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
+          paste0("Erstimpfquote (absolut: ", lastRow$erstimpfungen, ")"),
           color = "purple",
-          icon = icon("user-check")
+          icon = icon("star-half-alt")
         )
       })
 
       output$valueBox2 <- renderValueBox({
-        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
+        lastRow <- impfungenRaw %>% filter(!is.na(zweitimpfungen)) %>% slice_tail()
         valueBox(
-          paste(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%", sep = ""),
-          paste("der Bevölkerung ist geimpft (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
+          paste0(format(round(lastRow$zweitimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
+          paste0("Zweitimpfquote (absolut: ", lastRow$zweitimpfungen, ")"),
           color = "purple",
-          icon = icon("percent")
+          icon = icon("star")
         )
       })
 
@@ -200,7 +200,7 @@ server <- function(id) {
           format(round(lastRow$impfidenz, 1), nsmall = 1),
           paste("7-Tage-Impfidenz (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
           color = "purple",
-          icon = icon("calendar-week")
+          icon = icon("tachometer-alt")
         )
       })
 
