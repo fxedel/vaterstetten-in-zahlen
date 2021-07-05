@@ -3,7 +3,7 @@ library(dplyr)
 library(tidyr)
 library(scales)
 
-einwohnerZahlLkEbe <- 143649
+einwohnerZahlLkEbe <- 144091 # as of 2020-12-31, Bayerisches Landesamt für Statistik
 buergerAb80LkEbe <- 9430 # as of 2021-01-08
 
 impfungenRaw <- read_delim(
