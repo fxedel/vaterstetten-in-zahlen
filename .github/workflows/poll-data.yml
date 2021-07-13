@@ -33,6 +33,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_DEBUG_CHAT_ID: ${{ secrets.TELEGRAM_DEBUG_CHAT_ID }}
           TELEGRAM_PUBLIC_CHAT_ID: ${{ secrets.TELEGRAM_PUBLIC_CHAT_ID }}
+        continue-on-error: true
       - name: Commit
         id: auto-commit-action
         uses: stefanzweifel/git-auto-commit-action@v4

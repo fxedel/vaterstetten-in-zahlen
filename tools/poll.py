@@ -61,9 +61,11 @@ for key, poller in pollers.all.items():
     )
 
     if current_data == new_data:
+      print('> No changes to data.')
       continue
 
     write_csv_rows(poller.get_csv_filename(), new_data)
+    print('> Updated file.')
 
   except Exception as e:
     print(traceback.format_exc())
