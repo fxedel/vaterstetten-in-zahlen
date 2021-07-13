@@ -21,6 +21,12 @@ class InzidenzPoller(implements(pollers.poller.Poller)):
 
     data = layer.query(order_by_fields='Datum_Meldung')
 
+    if len(data) == 0:
+      raise Exception('Queried data is empty')
+
+    if len(data) < len(current_data):
+      raise Exception('Queried data has less items (%d) than current data (%d)' % (len(data), len(current_data)))
+
     rows = list(map(lambda x: {
       'datum': datetime.utcfromtimestamp(x.attributes['Datum_Meldung'] / 1000).strftime('%Y-%m-%d'),
       'neuPositiv': str(x.attributes['positiv_neu']),
@@ -56,7 +62,13 @@ class InzidenzGemeindenPoller(implements(pollers.poller.Poller)):
   ) -> List[dict]:
     layer = FeatureLayer("https://services-eu1.arcgis.com/CZ1GXX3MIjSRSHoC/ArcGIS/rest/services/EBE_Gemeinden_Inzidenztabelle/FeatureServer/0")
 
-    data = layer.query(order_by_fields='Ort, Datum_Meldung')
+    data = layer.query(where='ObjectID >= 31375', order_by_fields='Ort, Datum_Meldung')
+
+    if len(data) == 0:
+      raise Exception('Queried data is empty')
+
+    if len(data) < len(current_data):
+      raise Exception('Queried data has less items (%d) than current data (%d)' % (len(data), len(current_data)))
 
     rows = list(map(lambda x: {
       'datum': datetime.utcfromtimestamp(x.attributes['Datum_Meldung'] / 1000).strftime('%Y-%m-%d'),
