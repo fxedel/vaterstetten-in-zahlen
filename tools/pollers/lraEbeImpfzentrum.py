@@ -1,24 +1,16 @@
 from bs4 import BeautifulSoup
 from datetime import date
-from interface import implements
 import os
 import re
 import requests
-import telebot
-from typing import List, Optional
 
 import pollers.poller
 
-class Poller(implements(pollers.poller.Poller)):
-  def get_csv_filename(self) -> str:
-    return os.path.join(pollers.poller.data_dir, 'corona-impfungen', 'impfungenLandkreis.csv')
+class Poller(pollers.poller.Poller):
+  def run(self):
+    csv_filename = os.path.join('corona-impfungen', 'impfungenLandkreis.csv');
+    current_rows = self.read_csv_rows(csv_filename)
 
-  def get_new_data(
-    self,
-    current_data: List[dict],
-    telegram_bot: Optional[telebot.TeleBot],
-    telegram_chat_id: Optional[str]
-  ) -> List[dict]:
     req = requests.get('https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/')
 
     if req.status_code != 200:
@@ -51,7 +43,7 @@ class Poller(implements(pollers.poller.Poller)):
       'zweitimpfungenHausaerzte': 'NA',
       'registriert': 'NA',
     }
-    last_row = current_data[-1]
+    last_row = current_rows[-1]
 
     is_new_data = False
 
@@ -63,11 +55,11 @@ class Poller(implements(pollers.poller.Poller)):
           is_new_data = True
 
     if not is_new_data:
-      return current_data
+      return
 
 
     if new_row['datum'] != last_row['datum']:
-      current_data.append(new_row)
+      current_rows.append(new_row)
     else:
       # update last row rather than appending a new row
       for key, value in new_row.items():
@@ -75,7 +67,7 @@ class Poller(implements(pollers.poller.Poller)):
           last_row[key] = value
 
 
-    if telegram_bot != None and telegram_chat_id != None:
+    if self.telegram_bot != None and self.telegram_chat_id != None:
       lines = [
         '*Impf-Update für den Landkreis Ebersberg*',
       ]
@@ -98,13 +90,13 @@ class Poller(implements(pollers.poller.Poller)):
         '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=coronaImpfungen)',
       ]))
 
-      telegram_bot.send_message(
-        telegram_chat_id,
+      self.telegram_bot.send_message(
+        self.telegram_chat_id,
         '\n'.join(lines),
         parse_mode = "Markdown",
         disable_web_page_preview = True
       )
 
 
-    return current_data
+    self.write_csv_rows(csv_filename, current_rows)
 

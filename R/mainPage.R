@@ -54,7 +54,7 @@ server <- function(id, parentSession) {
       })
 
       output$valueBoxImpfungen <- renderValueBox({
-        lastRow <- coronaImpfungen$impfungen %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
+        lastRow <- coronaImpfungen$impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
           paste0(format(round(lastRow$erstimpfungen / coronaImpfungen$einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
           paste0("Erstimpfquote (", format(lastRow$datum, "%d.%m.%Y"), ")"),

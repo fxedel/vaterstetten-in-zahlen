@@ -20,6 +20,39 @@ impfungenRaw <- read_delim(
   )
 )
 
+arcgisImpfungenRaw <- read_delim(
+  file = "data/corona-impfungen/arcgisImpfungen.csv",
+  delim = ",",
+  col_names = TRUE,
+  col_types = cols(
+    datum = col_date(format = "%Y-%m-%d"),
+    erstimpfungen = col_integer(),
+    zweitimpfungen = col_integer(),
+    impfdosen = col_integer(),
+    impfdosenNeu = col_integer()
+  )
+)
+
+impfungenMerged <- bind_rows(
+  impfungenRaw %>%
+    filter(datum < min(arcgisImpfungenRaw$datum)) %>%
+    transmute(
+      datum,
+      erstimpfungen,
+      zweitimpfungen,
+      impfdosen = erstimpfungen + zweitimpfungen,
+      registriert
+    ),
+  arcgisImpfungenRaw %>%
+    transmute(
+      datum,
+      erstimpfungen,
+      zweitimpfungen,
+      impfdosen,
+      registriert = NA
+    )
+)
+
 impfungen <- impfungenRaw %>%
   mutate(
     impfdosen = erstimpfungen + zweitimpfungen,
@@ -49,7 +82,7 @@ impfungen <- impfungenRaw %>%
     impfidenz = (impfdosen - lag(impfdosen, 7)) / einwohnerZahlLkEbe * 100000,
   )
 
-personenNachStatus <- impfungenRaw %>%
+personenNachStatus <- impfungenMerged %>%
   transmute(
     datum = datum,
     erst = erstimpfungen,
@@ -78,10 +111,10 @@ ui <- function(request, id) {
     flowLayout(
       dateRangeInput(ns("dateRange"),
         label = NULL,
-        start = max(impfungenRaw$datum) - 90,
-        end = max(impfungenRaw$datum),
-        min = min(impfungenRaw$datum),
-        max = max(impfungenRaw$datum),
+        start = max(impfungenMerged$datum) - 90,
+        end = max(impfungenMerged$datum),
+        min = min(impfungenMerged$datum),
+        max = max(impfungenMerged$datum),
         format = "d. M yyyy",
         weekstart = 1,
         language = "de",
@@ -175,7 +208,7 @@ server <- function(id) {
       }
 
       output$valueBox1 <- renderValueBox({
-        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
+        lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
           paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
           paste0("Erstimpfquote (absolut: ", lastRow$erstimpfungen, ")"),
@@ -185,7 +218,7 @@ server <- function(id) {
       })
 
       output$valueBox2 <- renderValueBox({
-        lastRow <- impfungenRaw %>% filter(!is.na(zweitimpfungen)) %>% slice_tail()
+        lastRow <- impfungenMerged %>% filter(!is.na(zweitimpfungen)) %>% slice_tail()
         valueBox(
           paste0(format(round(lastRow$zweitimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
           paste0("Zweitimpfquote (absolut: ", lastRow$zweitimpfungen, ")"),
@@ -249,7 +282,7 @@ server <- function(id) {
       })
 
       output$impfdosen <- renderPlot({
-        ggplot(filter(impfungen, !is.na(impfdosen)), mapping = aes(x = datum, y = impfdosen)) + list(
+        ggplot(filter(impfungenMerged, !is.na(impfdosen)), mapping = aes(x = datum, y = impfdosen)) + list(
           geom_line(alpha = 0.5, size = 1.2),
           geom_point(alpha = 1, size = 1),
           if (input$showNumbers)
@@ -261,7 +294,7 @@ server <- function(id) {
         )
       }, res = 96)
       output$impfdosenText <- renderText({
-        lastRow <- impfungen %>% filter(!is.na(impfdosen)) %>% slice_tail()
+        lastRow <- impfungenMerged %>% filter(!is.na(impfdosen)) %>% slice_tail()
         paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$impfdosen, " Impfdosen verabreicht.", sep = "")
       })
 

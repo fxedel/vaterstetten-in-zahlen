@@ -1,30 +1,8 @@
-from copy import deepcopy
-import csv
 import sys
 import telebot
 import traceback
-from typing import List
 
 import pollers
-
-def read_csv_rows(file_name: str) -> List[dict]:
-  with open(file_name, mode='r') as csv_file:
-    csv_reader = csv.DictReader(csv_file)
-
-    rows = []
-
-    for row in csv_reader:
-      rows.append(row)
-
-    return rows
-
-def write_csv_rows(file_name: str, csv_rows: List[dict]):
-  with open(file_name, mode='w') as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames = csv_rows[0].keys(), dialect = 'unix', quoting = csv.QUOTE_MINIMAL)
-
-    writer.writeheader()
-    writer.writerows(csv_rows)
-
 
 telegram_bot = None
 telegram_debug_chatid = None
@@ -49,23 +27,14 @@ else:
 
 failed = False
 
-for key, poller in pollers.all.items():
+for key, pollerClass in pollers.all.items():
   try:
-    print('Executing poller ' + key)
+    print('Executing poller %s:' % key)
 
-    current_data = read_csv_rows(poller.get_csv_filename())
-    new_data = poller.get_new_data(
-      deepcopy(current_data),
-      telegram_bot,
-      telegram_public_chatid
-    )
+    poller = pollerClass(telegram_bot, telegram_public_chatid)
+    poller.run()
 
-    if current_data == new_data:
-      print('> No changes to data.')
-      continue
-
-    write_csv_rows(poller.get_csv_filename(), new_data)
-    print('> Updated file.')
+    print ('> Done.')
 
   except Exception as e:
     print(traceback.format_exc())
