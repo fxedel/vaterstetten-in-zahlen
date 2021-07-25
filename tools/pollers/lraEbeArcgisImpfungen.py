@@ -1,4 +1,5 @@
 from arcgis.features import FeatureLayer
+from arcgis.features.feature import Feature
 from datetime import datetime
 import os
 
@@ -19,13 +20,7 @@ class Poller(pollers.poller.Poller):
     if len(data) < len(current_rows):
       raise Exception('Queried data has less items (%d) than current data (%d)' % (len(data), len(current_rows)))
 
-    rows = list(map(lambda x: {
-      'datum': datetime.utcfromtimestamp(x.attributes['Meldedatum'] / 1000).strftime('%Y-%m-%d'),
-      'erstimpfungen': str(x.attributes['Erstimpfungen_SUM']),
-      'zweitimpfungen': str(x.attributes['Zweitimpfungen_SUM']),
-      'impfdosen': str(x.attributes['Impfungen_SUM']),
-      'impfdosenNeu': str(x.attributes['Impfungen_Tag']) if x.attributes['Impfungen_Tag'] != x.attributes['Impfungen_SUM'] else 'NA',
-    }, data.features))
+    rows = list(map(feature_to_row, data.features))
 
     if current_rows == rows:
       return
@@ -53,3 +48,21 @@ class Poller(pollers.poller.Poller):
       )
 
     self.write_csv_rows(csv_filename, rows)
+
+def feature_to_row(feature: Feature):
+  attrs = feature.attributes.copy()
+
+  if attrs['Impfungen_Tag'] == attrs['Impfungen_SUM']:
+    attrs['Impfungen_Tag'] = 'NA'
+  elif attrs['Impfungen_Tag'] < 0:
+    raise Exception('Implausible data: %s', feature)
+  elif attrs['Impfungen_Tag'] >= 10000:
+    raise Exception('Implausible data: %s', feature)
+
+  return {
+    'datum': datetime.utcfromtimestamp(attrs['Meldedatum'] / 1000).strftime('%Y-%m-%d'),
+    'erstimpfungen': str(attrs['Erstimpfungen_SUM']),
+    'zweitimpfungen': str(attrs['Zweitimpfungen_SUM']),
+    'impfdosen': str(attrs['Impfungen_SUM']),
+    'impfdosenNeu': str(attrs['Impfungen_Tag']),
+  }
