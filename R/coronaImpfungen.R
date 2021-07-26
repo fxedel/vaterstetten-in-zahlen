@@ -61,12 +61,12 @@ impfungenMerged <- bind_rows(
   ) %>%
   fill(impfdosenFilled, .direction = "up") %>%
   fill(impfdosenLast, .direction = "down") %>%
-  add_count(impfdosenFilled, name = "impfdosenDays") %>%
+  add_count(impfdosenFilled, impfdosenLast, name = "impfdosenDays") %>%
   mutate(
     impfdosenNeuProTag = (impfdosenFilled - impfdosenLast) / impfdosenDays,
-    impfdosenFilled = NULL,
-    impfdosenLast = NULL,
-    impfdosenDays = NULL
+   impfdosenFilled = NULL,
+   impfdosenLast = NULL,
+   impfdosenDays = NULL
   )
 
 
@@ -190,16 +190,13 @@ server <- function(id) {
       }
 
       output$valueBox1 <- renderValueBox({
-        print("print")
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-        v<-valueBox(
+        valueBox(
           paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
           paste0("Erstimpfquote (absolut: ", lastRow$erstimpfungen, ")"),
           color = "purple",
           icon = icon("star-half-alt")
         )
-        print("printed")
-        v
       })
 
       output$valueBox2 <- renderValueBox({
