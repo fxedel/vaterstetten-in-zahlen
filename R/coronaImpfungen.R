@@ -40,59 +40,46 @@ impfungenMerged <- bind_rows(
       datum,
       erstimpfungen,
       zweitimpfungen,
-      impfdosen = erstimpfungen + zweitimpfungen,
-      registriert
+      impfdosen = erstimpfungen + zweitimpfungen
     ),
   arcgisImpfungenRaw %>%
     transmute(
       datum,
       erstimpfungen,
       zweitimpfungen,
-      impfdosen,
-      registriert = NA
+      impfdosen
     )
-)
-
-impfungen <- impfungenRaw %>%
-  mutate(
-    impfdosen = erstimpfungen + zweitimpfungen,
-    impfdosenHausaerzte = erstimpfungenHausaerzte + zweitimpfungenHausaerzte,
-    registriertOderGeimpft = registriert + erstimpfungen
-  ) %>%
-  mutate (
-    impfdosenLast = impfdosen,
-    impfdosenUpdated = ifelse(!is.na(impfdosen), datum, NA),
-    impfdosenHausaerzteLast = impfdosenHausaerzte,
-    impfdosenHausaerzteUpdated = ifelse(!is.na(impfdosenHausaerzte), datum, NA)
-  ) %>%
-  fill(impfdosenLast, impfdosenUpdated, impfdosenHausaerzteLast, impfdosenHausaerzteUpdated) %>%
-  mutate(
-    impfdosenNeuProTag =
-      (impfdosen - lag(impfdosenLast, default = 0))
-      / (as.integer(datum) - lag(impfdosenUpdated)),
-    impfdosenHausaerzteNeuProTag =
-      (impfdosenHausaerzte - lag(impfdosenHausaerzteLast, default = 0))
-      / (as.integer(datum) - lag(impfdosenHausaerzteUpdated))
-  ) %>%
-  select(-impfdosenLast, -impfdosenUpdated, -impfdosenHausaerzteLast, -impfdosenHausaerzteUpdated) %>%
+) %>%
   complete(datum = seq(min(datum), max(datum), "days"), fill = list()) %>%
-  fill(impfdosenNeuProTag, impfdosenHausaerzteNeuProTag, .direction = "up") %>%
   mutate(
     impfdosen7tageMittel = (impfdosen - lag(impfdosen, 7)) / 7,
-    impfidenz = (impfdosen - lag(impfdosen, 7)) / einwohnerZahlLkEbe * 100000,
+    impfidenz = (impfdosen - lag(impfdosen, 7)) / einwohnerZahlLkEbe * 100000
+  ) %>%
+  mutate(
+    impfdosenFilled = impfdosen,
+    impfdosenLast = lag(impfdosen)
+  ) %>%
+  fill(impfdosenFilled, .direction = "up") %>%
+  fill(impfdosenLast, .direction = "down") %>%
+  add_count(impfdosenFilled, name = "impfdosenDays") %>%
+  mutate(
+    impfdosenNeuProTag = (impfdosenFilled - impfdosenLast) / impfdosenDays,
+    impfdosenFilled = NULL,
+    impfdosenLast = NULL,
+    impfdosenDays = NULL
   )
+
 
 personenNachStatus <- impfungenMerged %>%
   transmute(
     datum = datum,
     erst = erstimpfungen,
-    zweit = zweitimpfungen,
-    registriertOderGeimpft = registriert + erstimpfungen
+    zweit = zweitimpfungen
   ) %>%
   pivot_longer(
-    cols = c(erst, zweit, registriertOderGeimpft),
+    cols = c(erst, zweit),
     names_to = "status",
-    names_ptypes = list(status = factor(levels = c("registriertOderGeimpft", "erst", "zweit")))
+    names_ptypes = list(status = factor(levels = c("erst", "zweit")))
   ) %>%
   filter(!is.na(value))
 
@@ -133,19 +120,6 @@ ui <- function(request, id) {
         textOutput(ns("geimpfteText"))
       ),
       box(
-        title = "Geimpfte Über-80-Jährige (Erst-/Zweitgeimpfte)",
-        plotOutput(ns("geimpfte80"), height = 300),
-        textOutput(ns("geimpfte80Text"))
-      ),
-    ),
-
-    fluidRow(
-      box(
-        title = "Verabreichte Impfdosen pro Tag (rot: davon Hausärzte)",
-        plotOutput(ns("impfdosenProTagPlot"), height = 300),
-        textOutput(ns("impfdosenProTagText"))
-      ),
-      box(
         title = "7-Tage-Impfidenz",
         plotOutput(ns("impfidenzPlot"), height = 300),
         textOutput(ns("impfidenzText"))
@@ -154,14 +128,22 @@ ui <- function(request, id) {
 
     fluidRow(
       box(
-        title = "Registrierte / Geimpfte",
-        plotOutput(ns("registrierteGeimpftePlot"), height = 300),
-        htmlOutput(ns("registrierteGeimpfteText"))
+        title = "Verabreichte Impfdosen pro Tag",
+        plotOutput(ns("impfdosenProTagPlot"), height = 300),
+        textOutput(ns("impfdosenProTagText"))
       ),
       box(
-        title = "Verabreichte Impfdosen",
+        title = "Verabreichte Impfdosen insgesamt",
         plotOutput(ns("impfdosen"), height = 300),
         textOutput(ns("impfdosenText"))
+      ),
+    ),
+
+    fluidRow(
+      box(
+        title = "Geimpfte Über-80-Jährige (Erst-/Zweitgeimpfte)",
+        plotOutput(ns("geimpfte80"), height = 300),
+        textOutput(ns("geimpfte80Text"))
       ),
     ),
 
@@ -208,13 +190,16 @@ server <- function(id) {
       }
 
       output$valueBox1 <- renderValueBox({
+        print("print")
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-        valueBox(
+        v<-valueBox(
           paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
           paste0("Erstimpfquote (absolut: ", lastRow$erstimpfungen, ")"),
           color = "purple",
           icon = icon("star-half-alt")
         )
+        print("printed")
+        v
       })
 
       output$valueBox2 <- renderValueBox({
@@ -228,7 +213,7 @@ server <- function(id) {
       })
 
       output$valueBox3 <- renderValueBox({
-        lastRow <- impfungen %>% filter(!is.na(impfidenz)) %>% slice_tail()
+        lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
         valueBox(
           format(round(lastRow$impfidenz, 1), nsmall = 1),
           paste("7-Tage-Impfidenz (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
@@ -238,7 +223,7 @@ server <- function(id) {
       })
 
       output$geimpfte <- renderPlot({
-        ggplot(personenNachStatus %>% filter(status != "registriertOderGeimpft"), mapping = aes(x = datum, y = value, group = status)) + list(
+        ggplot(personenNachStatus, mapping = aes(x = datum, y = value, group = status)) + list(
           geom_area(aes(alpha = status), position = "identity", size = 0, fill = "#0088dd"),
           geom_line(color = "#0088dd", alpha = 0.5),
           geom_point(color = "#0088dd", alpha = 0.6, size = 1),
@@ -253,7 +238,7 @@ server <- function(id) {
         )
       }, res = 96)
       output$geimpfteText <- renderText({
-        lastRow <- impfungen %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
+        lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", lastRow$erstimpfungen, " Menschen mindestens eine Erstimpfung erhalten, davon ", lastRow$zweitimpfungen, " auch schon eine Zweitimpfung.", sep = "")
       })
 
@@ -299,7 +284,7 @@ server <- function(id) {
       })
 
       output$impfidenzPlot <- renderPlot({
-        ggplot(filter(impfungen, !is.na(impfidenz)), mapping = aes(x = datum, y = impfidenz)) + list(
+        ggplot(filter(impfungenMerged, !is.na(impfidenz)), mapping = aes(x = datum, y = impfidenz)) + list(
           geom_line(alpha = 0.5, size = 1.2),
           geom_point(alpha = 1, size = 1),
           if (input$showNumbers)
@@ -311,35 +296,14 @@ server <- function(id) {
         )
       }, res = 96)
       output$impfidenzText <- renderText({
-        lastRow <- impfungen %>% filter(!is.na(impfidenz)) %>% slice_tail()
+        lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
         paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", round(lastRow$impfidenz, 1), ".")
       })
 
-      output$registrierteGeimpftePlot <- renderPlot({
-        ggplot(personenNachStatus, mapping = aes(x = datum, y = value, group = status)) + list(
-          geom_area(aes(alpha = status), position = "identity", size = 0, fill = "#0088dd"),
-          geom_line(color = "#0088dd", alpha = 0.5),
-          geom_point(color = "#0088dd", alpha = 0.6, size = 1),
-          if (input$showNumbers) list(
-            geom_text(aes(label = value), vjust = "bottom", hjust = "middle", nudge_y = 1000, check_overlap = TRUE, size = 3.4, color = "#004b7a")
-          ) else list(),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale(),
-          scale_alpha_manual(values = c(0.1, 0.3, 0.5), labels = c("Registriert", "Erstimpfung", "Zweitimpfung")),
-          theme(legend.justification = c(0, 1), legend.position = c(0, 1), legend.title = element_blank(), legend.background = element_rect(fill = alpha("#ffffff", 0.5)), legend.key.size = unit(16, "pt"))
-        )
-      }, res = 96)
-      output$registrierteGeimpfteText <- renderUI({
-        lastRow <- impfungen %>% filter(!is.na(registriert)) %>% slice_tail()
-        HTML(paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") sind ", lastRow$registriert, " Menschen für eine Impfung registriert, zusammen mit den bereits Geimpften sind das ", lastRow$registriertOderGeimpft, " Menschen. Der Landkreis Ebersberg hat ", einwohnerZahlLkEbe, " Einwohner. Noch nicht angemeldet? Hier geht's zur bayerischen Impfregistrierung: <a href=\"https://impfzentren.bayern/citizen\">https://impfzentren.bayern/citizen</a>", sep = ""))
-      })
-
       output$impfdosenProTagPlot <- renderPlot({
-        ggplot(filter(impfungen, !is.na(impfdosenNeuProTag)), mapping = aes(x = datum)) + list(
+        ggplot(filter(impfungenMerged, !is.na(impfdosenNeuProTag)), mapping = aes(x = datum)) + list(
           geom_col(aes(y = impfdosenNeuProTag), alpha = 0.5, width = 1, position = position_nudge(x = -0.5)),
-          geom_col(aes(y = impfdosenHausaerzteNeuProTag), alpha = 0.6, fill = "#ff0000", width = 1, position = position_nudge(x = -0.5)),
-          geom_line(data = filter(impfungen, !is.na(impfdosen7tageMittel)), aes(y = impfdosen7tageMittel), alpha = 0.6, color = "#000000", size = 1.2),
+          geom_line(data = filter(impfungenMerged, !is.na(impfdosen7tageMittel)), aes(y = impfdosen7tageMittel), alpha = 0.6, color = "#000000", size = 1.2),
           if (input$showNumbers)
             geom_text(
               aes(y = impfdosenNeuProTag, label = round(impfdosenNeuProTag)),
@@ -352,9 +316,8 @@ server <- function(id) {
         )
       }, res = 96)
       output$impfdosenProTagText <- renderText({
-        lastRow <- impfungen %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
-        hausaerzte <- if (!is.na(lastRow$impfdosenHausaerzteNeuProTag)) paste0(", davon ", round(lastRow$impfdosenHausaerzteNeuProTag), " bei Haus- und Fachärzten (rote Fläche)") else ""
-        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht", hausaerzte, ". Die schwarze Linie gibt das 7-Tage-Mittel an.")
+        lastRow <- impfungenMerged %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
+        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht. Die schwarze Linie gibt das 7-Tage-Mittel an.")
       })
     }
   )
