@@ -34,6 +34,7 @@ class Poller(pollers.poller.Poller):
         '_Zweitimpfungen_: *%s*' % last_row['zweitimpfungen'],
         '_Verabreichte Impfdosen_: *%s*' % last_row['impfdosen'],
         '_Neu verabreichte Impfdosen zum Vortag_: *%s*' % last_row['impfdosenNeu'],
+        '_Stand:_ *%s*' % last_row['datum'],
         ' | '.join([
           '[LRA Impfzentrum](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/)',
           '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=coronaImpfungen)',
