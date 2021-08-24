@@ -538,6 +538,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Anzing,0,45.16
 2021-08-21,Anzing,0,45.16
 2021-08-22,Anzing,0,45.16
+2021-08-23,Anzing,1,67.74
 2020-03-02,Aßling,0,0
 2020-03-03,Aßling,0,0
 2020-03-04,Aßling,0,0
@@ -1077,6 +1078,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Aßling,0,22.12
 2021-08-21,Aßling,0,0
 2021-08-22,Aßling,0,0
+2021-08-23,Aßling,0,0
 2020-03-02,Baiern,0,0
 2020-03-03,Baiern,0,0
 2020-03-04,Baiern,0,0
@@ -1616,6 +1618,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Baiern,0,0
 2021-08-21,Baiern,0,0
 2021-08-22,Baiern,0,0
+2021-08-23,Baiern,0,0
 2020-03-02,Bruck,0,0
 2020-03-03,Bruck,0,0
 2020-03-04,Bruck,0,0
@@ -2155,6 +2158,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Bruck,0,154.68
 2021-08-21,Bruck,0,154.68
 2021-08-22,Bruck,0,154.68
+2021-08-23,Bruck,0,77.34
 2020-03-02,Ebersberg,0,0
 2020-03-03,Ebersberg,0,0
 2020-03-04,Ebersberg,0,0
@@ -2694,6 +2698,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Ebersberg,0,32.68
 2021-08-21,Ebersberg,0,24.51
 2021-08-22,Ebersberg,0,24.51
+2021-08-23,Ebersberg,0,24.51
 2020-03-02,Egmating,0,0
 2020-03-03,Egmating,0,0
 2020-03-04,Egmating,0,0
@@ -3233,6 +3238,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Egmating,0,0
 2021-08-21,Egmating,0,0
 2021-08-22,Egmating,0,0
+2021-08-23,Egmating,0,0
 2020-03-02,Emmering,0,0
 2020-03-03,Emmering,0,0
 2020-03-04,Emmering,0,0
@@ -3772,6 +3778,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Emmering,0,66.49
 2021-08-21,Emmering,0,0
 2021-08-22,Emmering,0,0
+2021-08-23,Emmering,0,0
 2020-03-02,Forstinning,0,0
 2020-03-03,Forstinning,0,0
 2020-03-04,Forstinning,0,0
@@ -4311,6 +4318,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Forstinning,0,26.13
 2021-08-21,Forstinning,0,0
 2021-08-22,Forstinning,0,0
+2021-08-23,Forstinning,1,26.13
 2020-03-02,Frauenneuharting,0,0
 2020-03-03,Frauenneuharting,0,0
 2020-03-04,Frauenneuharting,0,0
@@ -4850,6 +4858,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Frauenneuharting,0,254.61
 2021-08-21,Frauenneuharting,0,254.61
 2021-08-22,Frauenneuharting,0,254.61
+2021-08-23,Frauenneuharting,0,254.61
 2020-03-02,Glonn,0,0
 2020-03-03,Glonn,0,0
 2020-03-04,Glonn,0,0
@@ -5383,12 +5392,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-14,Glonn,0,0
 2021-08-15,Glonn,0,0
 2021-08-16,Glonn,0,0
-2021-08-19,Glonn,0,113.72
-2021-08-20,Glonn,0,113.72
-2021-08-21,Glonn,0,113.72
-2021-08-22,Glonn,0,113.72
-2021-08-17,Grafing,1,18.95
-2021-08-18,Grafing,5,113.72
+2021-08-17,Glonn,0,0
+2021-08-18,Glonn,0,0
+2021-08-19,Glonn,0,0
+2021-08-20,Glonn,0,0
+2021-08-21,Glonn,0,0
+2021-08-22,Glonn,0,0
+2021-08-23,Glonn,0,0
 2020-03-02,Grafing bei München,1,7.32
 2020-03-03,Grafing bei München,1,14.64
 2020-03-04,Grafing bei München,0,14.64
@@ -5922,12 +5932,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-14,Grafing bei München,0,14.64
 2021-08-15,Grafing bei München,0,7.32
 2021-08-16,Grafing bei München,0,7.32
-2021-08-17,Grafing bei München,0,7.32
-2021-08-18,Grafing bei München,0,0
-2021-08-19,Grafing bei München,1,7.32
-2021-08-20,Grafing bei München,2,21.96
-2021-08-21,Grafing bei München,0,21.96
-2021-08-22,Grafing bei München,0,21.96
+2021-08-17,Grafing bei München,1,14.64
+2021-08-18,Grafing bei München,5,43.92
+2021-08-19,Grafing bei München,1,51.24
+2021-08-20,Grafing bei München,2,65.89
+2021-08-21,Grafing bei München,0,65.89
+2021-08-22,Grafing bei München,0,65.89
+2021-08-23,Grafing bei München,0,65.89
 2020-03-02,Hohenlinden,0,0
 2020-03-03,Hohenlinden,0,0
 2020-03-04,Hohenlinden,0,0
@@ -6467,6 +6478,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Hohenlinden,0,0
 2021-08-21,Hohenlinden,0,0
 2021-08-22,Hohenlinden,0,0
+2021-08-23,Hohenlinden,0,0
 2020-03-02,Kirchseeon,0,0
 2020-03-03,Kirchseeon,0,0
 2020-03-04,Kirchseeon,0,0
@@ -7005,7 +7017,8 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-19,Kirchseeon,0,84.85
 2021-08-20,Kirchseeon,3,75.42
 2021-08-21,Kirchseeon,1,84.85
-2021-08-22,Kirchseeon,0,84.85
+2021-08-22,Kirchseeon,1,94.28
+2021-08-23,Kirchseeon,1,103.71
 2020-03-02,Markt Schwaben,0,0
 2020-03-03,Markt Schwaben,0,0
 2020-03-04,Markt Schwaben,0,0
@@ -7541,10 +7554,11 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-16,Markt Schwaben,0,44.1
 2021-08-17,Markt Schwaben,1,51.45
 2021-08-18,Markt Schwaben,1,51.45
-2021-08-19,Markt Schwaben,6,80.85
-2021-08-20,Markt Schwaben,2,95.55
-2021-08-21,Markt Schwaben,2,88.2
-2021-08-22,Markt Schwaben,1,95.55
+2021-08-19,Markt Schwaben,7,88.2
+2021-08-20,Markt Schwaben,2,102.9
+2021-08-21,Markt Schwaben,3,102.9
+2021-08-22,Markt Schwaben,0,102.9
+2021-08-23,Markt Schwaben,0,102.9
 2020-03-02,Moosach,0,0
 2020-03-03,Moosach,0,0
 2020-03-04,Moosach,0,0
@@ -8084,6 +8098,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Moosach,0,0
 2021-08-21,Moosach,0,0
 2021-08-22,Moosach,0,0
+2021-08-23,Moosach,0,0
 2020-03-02,Oberpframmern,0,0
 2020-03-03,Oberpframmern,0,0
 2020-03-04,Oberpframmern,0,0
@@ -8623,6 +8638,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Oberpframmern,1,163.27
 2021-08-21,Oberpframmern,0,163.27
 2021-08-22,Oberpframmern,0,163.27
+2021-08-23,Oberpframmern,0,163.27
 2020-03-02,Pliening,0,0
 2020-03-03,Pliening,0,0
 2020-03-04,Pliening,0,0
@@ -9162,6 +9178,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Pliening,1,88.81
 2021-08-21,Pliening,0,53.29
 2021-08-22,Pliening,0,53.29
+2021-08-23,Pliening,0,35.52
 2020-03-02,Poing,0,0
 2020-03-03,Poing,0,0
 2020-03-04,Poing,0,0
@@ -9701,6 +9718,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Poing,1,6.27
 2021-08-21,Poing,3,25.07
 2021-08-22,Poing,0,25.07
+2021-08-23,Poing,0,25.07
 2020-03-02,Steinhöring,0,0
 2020-03-03,Steinhöring,0,0
 2020-03-04,Steinhöring,0,0
@@ -10240,6 +10258,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Steinhöring,1,24.1
 2021-08-21,Steinhöring,0,24.1
 2021-08-22,Steinhöring,0,24.1
+2021-08-23,Steinhöring,0,24.1
 2020-03-02,Vaterstetten,0,0
 2020-03-03,Vaterstetten,0,0
 2020-03-04,Vaterstetten,0,0
@@ -10779,6 +10798,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Vaterstetten,0,12.81
 2021-08-21,Vaterstetten,3,25.62
 2021-08-22,Vaterstetten,0,21.35
+2021-08-23,Vaterstetten,3,34.16
 2020-03-02,Zorneding,0,0
 2020-03-03,Zorneding,0,0
 2020-03-04,Zorneding,0,0
@@ -11318,3 +11338,4 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-08-20,Zorneding,0,21.2
 2021-08-21,Zorneding,1,31.79
 2021-08-22,Zorneding,2,52.99
+2021-08-23,Zorneding,0,52.99
