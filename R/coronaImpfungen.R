@@ -28,6 +28,7 @@ arcgisImpfungenRaw <- read_delim(
     datum = col_date(format = "%Y-%m-%d"),
     erstimpfungen = col_integer(),
     zweitimpfungen = col_integer(),
+    drittimpfungen = col_integer(),
     impfdosen = col_integer(),
     impfdosenNeu = col_integer()
   )
@@ -40,6 +41,7 @@ impfungenMerged <- bind_rows(
       datum,
       erstimpfungen,
       zweitimpfungen,
+      drittimpfungen = 0,
       impfdosen = erstimpfungen + zweitimpfungen
     ),
   arcgisImpfungenRaw %>%
@@ -47,6 +49,7 @@ impfungenMerged <- bind_rows(
       datum,
       erstimpfungen,
       zweitimpfungen,
+      drittimpfungen,
       impfdosen
     )
 ) %>%
@@ -64,9 +67,9 @@ impfungenMerged <- bind_rows(
   add_count(impfdosenFilled, impfdosenLast, name = "impfdosenDays") %>%
   mutate(
     impfdosenNeuProTag = (impfdosenFilled - impfdosenLast) / impfdosenDays,
-   impfdosenFilled = NULL,
-   impfdosenLast = NULL,
-   impfdosenDays = NULL
+    impfdosenFilled = NULL,
+    impfdosenLast = NULL,
+    impfdosenDays = NULL
   )
 
 
@@ -74,15 +77,39 @@ personenNachStatus <- impfungenMerged %>%
   transmute(
     datum = datum,
     erst = erstimpfungen,
-    zweit = zweitimpfungen
+    zweit = zweitimpfungen,
+    dritt = drittimpfungen
   ) %>%
   pivot_longer(
-    cols = c(erst, zweit),
+    cols = c(erst, zweit, dritt),
     names_to = "status",
-    names_ptypes = list(status = factor(levels = c("erst", "zweit")))
+    names_ptypes = list(status = factor(levels = c("erst", "zweit", "dritt")))
   ) %>%
   filter(!is.na(value))
 
+arcgisImpfungenNachEinrichtungRaw <- read_delim(
+  file = "data/corona-impfungen/arcgisImpfungenNachEinrichtung.csv",
+  delim = ",",
+  col_names = TRUE,
+  col_types = cols(
+    datum = col_date(format = "%Y-%m-%d"),
+    einrichtung = readr::col_factor(levels = c("Impfzentrum", "Praxis", "Kreisklinik")),
+    erstimpfungen = col_integer(),
+    zweitimpfungen = col_integer(),
+    drittimpfungen = col_integer(),
+    impfdosen = col_integer()
+  )
+)
+arcgisImpfungenNachEinrichtung <- arcgisImpfungenNachEinrichtungRaw %>%
+  group_by(einrichtung) %>%
+  complete(datum = seq(min(arcgisImpfungenNachEinrichtungRaw$datum), max(arcgisImpfungenNachEinrichtungRaw$datum), "days"), fill = list()) %>%
+  fill(erstimpfungen, zweitimpfungen, drittimpfungen, impfdosen, .direction = "down") %>%
+  mutate(
+    impfdosenNeu = impfdosen - lag(impfdosen)
+  )
+
+maxDatum = max(impfungenMerged$datum, arcgisImpfungenNachEinrichtung$datum)
+minDatum = min(impfungenMerged$datum, arcgisImpfungenNachEinrichtung$datum)
 
 ui <- function(request, id) {
   ns <- NS(id)
@@ -98,10 +125,10 @@ ui <- function(request, id) {
     flowLayout(
       dateRangeInput(ns("dateRange"),
         label = NULL,
-        start = max(impfungenMerged$datum) - 90,
-        end = max(impfungenMerged$datum),
-        min = min(impfungenMerged$datum),
-        max = max(impfungenMerged$datum),
+        start = maxDatum - 90,
+        end = maxDatum,
+        min = minDatum,
+        max = maxDatum,
         format = "d. M yyyy",
         weekstart = 1,
         language = "de",
@@ -115,7 +142,7 @@ ui <- function(request, id) {
 
     fluidRow(
       box(
-        title = "Geimpfte Personen (Erst-/Zweitgeimpfte)",
+        title = "Geimpfte Personen",
         plotOutput(ns("geimpfte"), height = 300),
         textOutput(ns("geimpfteText"))
       ),
@@ -133,9 +160,9 @@ ui <- function(request, id) {
         textOutput(ns("impfdosenProTagText"))
       ),
       box(
-        title = "Verabreichte Impfdosen insgesamt",
-        plotOutput(ns("impfdosen"), height = 300),
-        textOutput(ns("impfdosenText"))
+        title = "Verabreichte Impfdosen pro Tag nach Einrichtung",
+        plotOutput(ns("impfdosenProTagNachEinrichtungPlot"), height = 300),
+        textOutput(ns("impfdosenProTagNachEinrichtungText"))
       ),
     ),
 
@@ -144,6 +171,11 @@ ui <- function(request, id) {
         title = "Geimpfte Über-80-Jährige (Erst-/Zweitgeimpfte)",
         plotOutput(ns("geimpfte80"), height = 300),
         textOutput(ns("geimpfte80Text"))
+      ),
+      box(
+        title = "Verabreichte Impfdosen insgesamt",
+        plotOutput(ns("impfdosen"), height = 300),
+        textOutput(ns("impfdosenText"))
       ),
     ),
 
@@ -230,7 +262,7 @@ server <- function(id) {
           expand_limits(y = 0),
           getDateScale(),
           getYScale(),
-          scale_alpha_manual(values = c(0.2, 0.5), labels = c("Erstimpfung", "Zweitimpfung")),
+          scale_alpha_manual(values = c(0.2, 0.5, 1), labels = c("Erstimpfung", "Zweitimpfung", "Drittimpfung")),
           theme(legend.justification = c(0, 1), legend.position = c(0, 1), legend.title = element_blank(), legend.background = element_rect(fill = alpha("#ffffff", 0.5)), legend.key.size = unit(16, "pt"))
         )
       }, res = 96)
@@ -285,7 +317,7 @@ server <- function(id) {
           geom_line(alpha = 0.5, size = 1.2),
           geom_point(alpha = 1, size = 1),
           if (input$showNumbers)
-            geom_text(aes(label = impfidenz), vjust = "bottom", hjust = "middle", nudge_y = 1500, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
+            geom_text(aes(label = round(impfidenz)), vjust = "bottom", hjust = "middle", nudge_y = 300, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
           else list(),
           expand_limits(y = 0),
           getDateScale(),
@@ -315,6 +347,25 @@ server <- function(id) {
       output$impfdosenProTagText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
         paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht. Die schwarze Linie gibt das 7-Tage-Mittel an.")
+      })
+
+      output$impfdosenProTagNachEinrichtungPlot <- renderPlot({
+        ggplot(filter(arcgisImpfungenNachEinrichtung, !is.na(impfdosenNeu)), mapping = aes(x = datum)) + list(
+          geom_col(aes(y = impfdosenNeu, fill = einrichtung), width = 1, position = "stack"),
+          expand_limits(y = 0),
+          getDateScale(),
+          getYScale(),
+          theme(legend.justification = c(0, 1), legend.position = c(0, 1), legend.title = element_blank(), legend.background = element_rect(fill = alpha("#ffffff", 0.5)), legend.key.size = unit(16, "pt"))
+        )
+      }, res = 96)
+      output$impfdosenProTagNachEinrichtungText <- renderText({
+        impfdosen7Tage <- arcgisImpfungenNachEinrichtung %>%
+          filter(!is.na(impfdosenNeu)) %>%
+          slice_tail(n = 7) %>%
+          summarise(impfdosen7Tage = sum(impfdosenNeu), datum = max(datum)) %>%
+          pivot_wider(names_from = einrichtung, values_from = impfdosen7Tage)
+
+        paste0("In den letzen 7 Tagen (Stand:\u00A0", format(impfdosen7Tage$datum, "%d.%m.%Y"), ") wurden ", round(impfdosen7Tage$Impfzentrum), " Impfdosen im Impfzentrum, ", round(impfdosen7Tage$Praxis), " Impfdosen in Arztpraxen und ", round(impfdosen7Tage$Kreisklinik), " Impfdosen in der Kreisklinik verabreicht.")
       })
     }
   )

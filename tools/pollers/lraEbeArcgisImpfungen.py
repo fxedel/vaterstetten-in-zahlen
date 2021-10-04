@@ -55,7 +55,7 @@ def feature_to_row(feature: Feature):
 
   if attrs['Impfungen_Tag'] == attrs['Impfungen_SUM']:
     attrs['Impfungen_Tag'] = 'NA'
-  elif attrs['Impfungen_Tag'] < 0:
+  elif attrs['Impfungen_Tag'] <= -10000:
     raise Exception('Implausible data: %s' % feature)
   elif attrs['Impfungen_Tag'] >= 10000:
     raise Exception('Implausible data: %s' % feature)
@@ -64,6 +64,7 @@ def feature_to_row(feature: Feature):
     'datum': datetime.utcfromtimestamp(attrs['Meldedatum'] / 1000).strftime('%Y-%m-%d'),
     'erstimpfungen': str(attrs['Erstimpfungen_SUM']),
     'zweitimpfungen': str(attrs['Zweitimpfungen_SUM']),
+    'drittimpfungen': str(attrs['Drittimpfungen_SUM']),
     'impfdosen': str(attrs['Impfungen_SUM']),
     'impfdosenNeu': str(attrs['Impfungen_Tag']),
   }
