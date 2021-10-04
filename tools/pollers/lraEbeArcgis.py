@@ -52,7 +52,7 @@ class InzidenzGemeindenPoller(pollers.poller.Poller):
     csv_filename = os.path.join('corona-fallzahlen', 'arcgisInzidenzGemeinden.csv');
     current_rows = self.read_csv_rows(csv_filename)
 
-    layer = FeatureLayer("https://services-eu1.arcgis.com/CZ1GXX3MIjSRSHoC/ArcGIS/rest/services/EBE_Gemeinden_Inzidenztabelle/FeatureServer/0")
+    layer = FeatureLayer("https://services-eu1.arcgis.com/CZ1GXX3MIjSRSHoC/ArcGIS/rest/services/EBE_Gemeinden_Inzidenztabelle_3/FeatureServer/0")
 
     data = layer.query(order_by_fields='Ort, Datum_Meldung')
 

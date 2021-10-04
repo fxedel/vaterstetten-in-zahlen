@@ -31,7 +31,7 @@ If you also want to be able to use the python tools, make sure to have Python 3.
 
 ```sh
 python3 -m pip install --user pipenv
-pipenv install
+python3 -m pip pipenv install
 ```
 
 To run the data poller:
