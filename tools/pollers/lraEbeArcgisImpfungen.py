@@ -55,7 +55,7 @@ def feature_to_row(feature: Feature):
 
   if attrs['Impfungen_Tag'] == attrs['Impfungen_SUM']:
     attrs['Impfungen_Tag'] = 'NA'
-  elif attrs['Impfungen_Tag'] < 0:
+  elif attrs['Impfungen_Tag'] <= -10000:
     raise Exception('Implausible data: %s' % feature)
   elif attrs['Impfungen_Tag'] >= 10000:
     raise Exception('Implausible data: %s' % feature)
