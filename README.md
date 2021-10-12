@@ -37,7 +37,7 @@ python3 -m pip pipenv install
 To run the data poller:
 
 ```sh
-pipenv run python poll.py [<telegram-token> <telegram-debug-chatid> [<telegram-public-chatid>]]
+pipenv run python tools/poll.py [<telegram-token> <telegram-debug-chatid> [<telegram-public-chatid>]]
 ```
 
 ## License

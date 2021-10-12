@@ -41,7 +41,7 @@ def filter_duplicate_days(features: List[Feature]):
 def map_nach_einrichtung(feature: Feature):
   attrs = feature.attributes.copy()
 
-  return {
+  row = {
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
     'einrichtung': str(attrs['Einrichtung']),
     'erstimpfungen': str(attrs['Erstimpfungen_proTyp']),
@@ -49,6 +49,12 @@ def map_nach_einrichtung(feature: Feature):
     'drittimpfungen': str(none_to_zero(attrs['Drittimpfungen_proTyp'])),
     'impfdosen': str(attrs['Impfungen_proTyp']),
   }
+
+  if row['datum'] == '2021-10-04':
+    # manual data fix, as impfdosen of this day is wrong
+    row['impfdosen'] = str(attrs['Erstimpfungen_proTyp']+attrs['Zweitimpfungen_proTyp']+none_to_zero(attrs['Drittimpfungen_proTyp']))
+
+  return row
 
 def map_nach_geschlecht(feature: Feature):
   attrs = feature.attributes.copy()
