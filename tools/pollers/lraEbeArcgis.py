@@ -1,8 +1,7 @@
 from arcgis.features import FeatureLayer
 from datetime import datetime
 import os
-import telebot
-from typing import List, Optional
+import time
 
 import pollers.poller
 
@@ -13,7 +12,9 @@ class InzidenzPoller(pollers.poller.Poller):
 
     layer = FeatureLayer("https://services-eu1.arcgis.com/CZ1GXX3MIjSRSHoC/ArcGIS/rest/services/EBE_Landkreis_Inzidenztabelle/FeatureServer/0")
 
+    start = time.time()
     data = layer.query(order_by_fields='Datum_Meldung')
+    print('> Queried data in %.1fs' % (time.time() - start))
 
     if len(data) == 0:
       raise Exception('Queried data is empty')

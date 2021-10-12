@@ -1,5 +1,6 @@
 import sys
 import telebot
+import time
 import traceback
 
 import pollers
@@ -31,17 +32,20 @@ for key, pollerClass in pollers.all.items():
   try:
     print('Executing poller %s:' % key)
 
+    start = time.time()
     poller = pollerClass(telegram_bot, telegram_public_chatid)
     poller.run()
 
     print ('> Done.')
 
   except Exception as e:
+    end = time.time()
+    print('> Exception after %.1fs:' % (end - start))
     print(traceback.format_exc())
     failed = True
 
     if telegram_bot != None:
-      telegram_bot.send_message(telegram_debug_chatid, "Error: %s" % traceback.format_exc())
+      telegram_bot.send_message(telegram_debug_chatid, "Exception after %.1fs: %s" % (end - start), traceback.format_exc())
 
 if failed:
   exit(1)

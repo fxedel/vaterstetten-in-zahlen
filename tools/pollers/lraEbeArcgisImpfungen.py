@@ -2,6 +2,7 @@ from arcgis.features import FeatureLayer
 from arcgis.features.feature import Feature
 from datetime import datetime
 import os
+import time
 
 import pollers.poller
 
@@ -12,7 +13,9 @@ class Poller(pollers.poller.Poller):
 
     layer = FeatureLayer("https://services-eu1.arcgis.com/CZ1GXX3MIjSRSHoC/ArcGIS/rest/services/EBE_Gesamtsummen_Impfmeldungen_Öffentlich/FeatureServer/0")
 
+    start = time.time()
     data = layer.query(order_by_fields='Meldedatum')
+    print('> Queried data in %.1fs' % (time.time() - start))
 
     if len(data) == 0:
       raise Exception('Queried data is empty')
