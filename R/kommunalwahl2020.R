@@ -199,7 +199,6 @@ server <- function(id) {
         gemeinderatErgebnisNachPerson %>%
           filter(stimmbezirk == "Gesamt") %>%
           group_by(partei) %>%
-          # filter(partei == "FDP") %>%
           plot_ly(type = "bar") %>%
           config(displayModeBar = FALSE) %>%
           add_trace(x = ~listenNr, y = ~stimmen, text = ~paste0(name, ", ", partei, ": ", stimmen, " Stimmen"), color = ~ I(farbe), name = ~parteiNr, yaxis = ~paste0("y", parteiNr), width = 1, hoverinfo = "text") %>%

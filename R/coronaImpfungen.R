@@ -143,7 +143,7 @@ ui <- function(request, id) {
     fluidRow(
       box(
         title = "Geimpfte Personen",
-        plotOutput(ns("geimpfte"), height = 300),
+        plotlyOutput(ns("geimpftePlotly"), height = 350),
         textOutput(ns("geimpfteText"))
       ),
       box(
@@ -252,21 +252,32 @@ server <- function(id) {
         )
       })
 
-      output$geimpfte <- renderPlot({
-        ggplot(personenNachStatus, mapping = aes(x = datum, y = value, group = status)) + list(
-          geom_area(aes(alpha = status), position = "identity", size = 0, fill = "#0088dd"),
-          geom_line(color = "#0088dd", alpha = 0.5),
-          geom_point(color = "#0088dd", alpha = 0.6, size = 1),
-          if (input$showNumbers) list(
-            geom_text(aes(label = value), vjust = "bottom", hjust = "middle", nudge_y = 1500, check_overlap = TRUE, size = 3.4, color = "#004b7a")
-          ) else list(),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale(),
-          scale_alpha_manual(values = c(0.2, 0.5, 1), labels = c("Erstimpfung", "Zweitimpfung", "Drittimpfung")),
-          theme(legend.justification = c(0, 1), legend.position = c(0, 1), legend.title = element_blank(), legend.background = element_rect(fill = alpha("#ffffff", 0.5)), legend.key.size = unit(16, "pt"))
-        )
-      }, res = 96)
+      output$geimpftePlotly = renderPlotly({
+        plot_ly(impfungenMerged, x = ~datum) %>%
+          add_trace(y = ~erstimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd33", name = "Erstimpfungen", size = I(8)) %>%
+          add_trace(y = ~zweitimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd80", name = "Zweitimpfungen", size = I(8)) %>%
+          add_trace(y = ~drittimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088ddff", name = "Drittimpfungen", size = I(8)) %>%
+          config(displayModeBar = FALSE) %>%
+          config(locale = "de") %>%
+          layout(dragmode = FALSE) %>%
+          layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h', y = 1.2, yanchor = "bottom")) %>%
+          layout(xaxis = list(range = list(input$dateRange[1], input$dateRange[2]))) %>%
+          layout(xaxis = list(
+            rangeselector = list(
+              buttons = list(
+                list(count = 1, label = "1 Monat", step = "month", stepmode = "backward"),
+                list(count = 3, label = "3 Monate", step = "month", stepmode = "backward"),
+                list(count = 6, label = "6 Monate", step = "month", stepmode = "backward"),
+                list(step = "all", label = "Gesamt")
+              )
+            ),
+            rangeslider = list(type = "date")
+          )) %>%
+          layout(xaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+          layout(yaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+          layout(margin = list(r = 0, l = 0, t = 0, b = 4, pad = 0))
+      })
+
       output$geimpfteText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", lastRow$erstimpfungen, " Menschen mindestens eine Erstimpfung erhalten, davon ", lastRow$zweitimpfungen, " auch schon eine Zweitimpfung.", sep = "")
