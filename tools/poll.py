@@ -45,7 +45,7 @@ for key, pollerClass in pollers.all.items():
     failed = True
 
     if telegram_bot != None:
-      telegram_bot.send_message(telegram_debug_chatid, "Exception after %.1fs: %s" % (end - start), traceback.format_exc())
+      telegram_bot.send_message(telegram_debug_chatid, "Exception in poller %s after %.1fs: %s" % (key, (end - start), traceback.format_exc()))
 
 if failed:
   exit(1)

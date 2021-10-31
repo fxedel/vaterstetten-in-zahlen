@@ -3,7 +3,6 @@ name: Poll data
 # Requires these repository secrets:
 # TELEGRAM_TOKEN - a token for the Telegram bot API
 # TELEGRAM_DEBUG_CHAT_ID - the ID of the private Telegram channel
-# TELEGRAM_PUBLIC_CHAT_ID - the ID of the public Telegram channel
 # GITHUB_PAT - a personal access token with the repo scope
 
 on:
@@ -28,11 +27,10 @@ jobs:
           pip install pipenv
           pipenv install
       - name: Poll data
-        run: pipenv run python tools/poll.py $TELEGRAM_TOKEN $TELEGRAM_DEBUG_CHAT_ID $TELEGRAM_PUBLIC_CHAT_ID
+        run: pipenv run python tools/poll.py $TELEGRAM_TOKEN $TELEGRAM_DEBUG_CHAT_ID
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_DEBUG_CHAT_ID: ${{ secrets.TELEGRAM_DEBUG_CHAT_ID }}
-          TELEGRAM_PUBLIC_CHAT_ID: ${{ secrets.TELEGRAM_PUBLIC_CHAT_ID }}
         continue-on-error: true
       - name: Commit
         id: auto-commit-action

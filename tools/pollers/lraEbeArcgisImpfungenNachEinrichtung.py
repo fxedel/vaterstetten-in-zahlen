@@ -22,13 +22,43 @@ class Poller(pollers.poller.Poller):
     features_filtered = list(filter_duplicate_days(data.features))
 
     rows_nach_einrichtung = list(map(map_nach_einrichtung, features_filtered))
-    self.write_csv_rows(os.path.join('corona-impfungen', 'arcgisImpfungenNachEinrichtung.csv'), rows_nach_einrichtung)
+    rows_nach_einrichtung_file = os.path.join('corona-impfungen', 'arcgisImpfungenNachEinrichtung.csv')
+    rows_nach_einrichtung_diff = self.get_csv_diff(rows_nach_einrichtung_file, rows_nach_einrichtung)
+    if len(rows_nach_einrichtung_diff) > 0:
+      self.write_csv_rows(rows_nach_einrichtung_file, rows_nach_einrichtung)
+
+      if self.telegram_bot != None and self.telegram_chat_id != None:
+        self.telegram_bot.send_message(
+          self.telegram_chat_id,
+          '```\n' + ''.join(rows_nach_einrichtung_diff) + '\n```',
+          parse_mode = "Markdown"
+        )
 
     rows_nach_geschlecht = list(itertools.chain.from_iterable(map(map_nach_geschlecht, features_filtered)))
-    self.write_csv_rows(os.path.join('corona-impfungen', 'arcgisImpfungenNachGeschlecht.csv'), rows_nach_geschlecht)
+    rows_nach_geschlecht_file = os.path.join('corona-impfungen', 'arcgisImpfungenNachGeschlecht.csv')
+    rows_nach_geschlecht_diff = self.get_csv_diff(rows_nach_geschlecht_file, rows_nach_geschlecht)
+    if len(rows_nach_geschlecht_diff) > 0:
+      self.write_csv_rows(rows_nach_geschlecht_file, rows_nach_geschlecht)
+
+      if self.telegram_bot != None and self.telegram_chat_id != None:
+        self.telegram_bot.send_message(
+          self.telegram_chat_id,
+          '```\n' + ''.join(rows_nach_geschlecht_diff) + '\n```',
+          parse_mode = "Markdown"
+        )
 
     rows_nach_alter = list(itertools.chain.from_iterable(map(map_nach_alter, features_filtered)))
-    self.write_csv_rows(os.path.join('corona-impfungen', 'arcgisImpfungenNachAlter.csv'), rows_nach_alter)
+    rows_nach_alter_file = os.path.join('corona-impfungen', 'arcgisImpfungenNachAlter.csv')
+    rows_nach_alter_diff = self.get_csv_diff(rows_nach_alter_file, rows_nach_alter)
+    if len(rows_nach_alter_diff) > 0:
+      self.write_csv_rows(rows_nach_alter_file, rows_nach_alter)
+
+      if self.telegram_bot != None and self.telegram_chat_id != None:
+        self.telegram_bot.send_message(
+          self.telegram_chat_id,
+          '```\n' + ''.join(rows_nach_alter_diff) + '\n```',
+          parse_mode = "Markdown"
+        )
 
 def filter_duplicate_days(features: List[Feature]):
   filtered = []

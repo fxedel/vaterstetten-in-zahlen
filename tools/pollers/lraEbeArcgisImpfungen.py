@@ -25,30 +25,16 @@ class Poller(pollers.poller.Poller):
 
     rows = list(map(feature_to_row, data.features))
 
-    if current_rows == rows:
+    csv_diff = self.get_csv_diff(csv_filename, rows)
+
+    if len(csv_diff) == 0:
       return
 
     if self.telegram_bot != None and self.telegram_chat_id != None:
-      last_row = rows[-1]
-
-      lines = [
-        '*Impf-Update für den Landkreis Ebersberg*',
-        '_Erstimpfungen_: *%s*' % last_row['erstimpfungen'],
-        '_Zweitimpfungen_: *%s*' % last_row['zweitimpfungen'],
-        '_Verabreichte Impfdosen_: *%s*' % last_row['impfdosen'],
-        '_Neu verabreichte Impfdosen zum Vortag_: *%s*' % last_row['impfdosenNeu'],
-        '_Stand:_ *%s*' % last_row['datum'],
-        ' | '.join([
-          '[LRA Impfzentrum](https://lra-ebe.de/aktuelles/informationen-zum-corona-virus/impfzentrum/)',
-          '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=coronaImpfungen)',
-        ])
-      ]
-
       self.telegram_bot.send_message(
         self.telegram_chat_id,
-        '\n'.join(lines),
-        parse_mode = "Markdown",
-        disable_web_page_preview = True
+        '```\n' + ''.join(csv_diff) + '\n```',
+        parse_mode = "Markdown"
       )
 
     self.write_csv_rows(csv_filename, rows)
