@@ -1,4 +1,6 @@
 import csv
+import difflib
+import io
 import os
 import telebot
 from typing import List, Optional
@@ -35,3 +37,15 @@ class Poller:
       writer.writeheader()
       writer.writerows(csv_rows)
       print('> Updated file \'%s\'' % file_name)
+
+  def get_csv_diff(self, file_name: str, new_data: List[dict]) -> List[str]:
+    with open(os.path.join(data_dir, file_name),mode='r') as file:
+      current_csv_content = file.read()
+
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames = new_data[0].keys(), dialect = 'unix', quoting = csv.QUOTE_MINIMAL)
+    writer.writeheader()
+    writer.writerows(new_data)
+    new_csv_content = output.getvalue()
+
+    return list(difflib.unified_diff(current_csv_content.splitlines(True), new_csv_content.splitlines(True), file_name, n = 1))

@@ -28,22 +28,16 @@ class InzidenzPoller(pollers.poller.Poller):
       'inzidenz7tage': str(round(x.attributes['inzidenz_letzte7Tage'], 2)),
     }, data.features))
 
-    if current_rows == rows:
+    csv_diff = self.get_csv_diff(csv_filename, rows)
+
+    if len(csv_diff) == 0:
       return
 
     if self.telegram_bot != None and self.telegram_chat_id != None:
-      last_row = rows[-1]
-      lines = [
-        '*Corona-Update für den Landkreis Ebersberg*',
-        '_7-Tage-Inzidenz:_ *' + last_row['inzidenz7tage'] + '*',
-        '_Neue Fälle zum Vortag:_ *' + last_row['neuPositiv'] + '*',
-        '_Stand:_ *' + last_row['datum'] + '*',
-      ]
       self.telegram_bot.send_message(
         self.telegram_chat_id,
-        '\n'.join(lines),
-        parse_mode = "Markdown",
-        disable_web_page_preview = True
+        '```\n' + ''.join(csv_diff) + '\n```',
+        parse_mode = "Markdown"
       )
 
     self.write_csv_rows(csv_filename, rows)
@@ -70,23 +64,17 @@ class InzidenzGemeindenPoller(pollers.poller.Poller):
       'inzidenz7tage': str(round(x.attributes['inzidenz_letzte7Tage'], 2)),
     }, data.features))
 
-    if current_rows == rows:
+    csv_diff = self.get_csv_diff(csv_filename, rows)
+
+    if len(csv_diff) == 0:
       return
 
     if self.telegram_bot != None and self.telegram_chat_id != None:
-      rows_vaterstetten = list(filter(lambda x: x['ort'] == 'Vaterstetten', rows))
-      last_row = rows_vaterstetten[-1]
-      lines = [
-        '*Corona-Update für Vaterstetten*',
-        '_7-Tage-Inzidenz:_ *' + last_row['inzidenz7tage'] + '*',
-        '_Neue Fälle zum Vortag:_ *' + last_row['neuPositiv'] + '*',
-        '_Stand:_ *' + last_row['datum'] + '*',
-      ]
+      data = ''.join(csv_diff)
       self.telegram_bot.send_message(
         self.telegram_chat_id,
-        '\n'.join(lines),
-        parse_mode = "Markdown",
-        disable_web_page_preview = True
+        '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
+        parse_mode = "Markdown"
       )
 
     self.write_csv_rows(csv_filename, rows)

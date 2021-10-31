@@ -1,0 +1,34 @@
+name: Daily summary
+
+# Requires these repository secrets:
+# TELEGRAM_TOKEN - a token for the Telegram bot API
+# TELEGRAM_DEBUG_CHAT_ID - the ID of the private Telegram channel
+# TELEGRAM_PUBLIC_CHAT_ID - the ID of the public Telegram channel
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # Every day at 07:00
+  workflow_dispatch:
+
+jobs:
+  poll-data:
+    environment: vaterstetten-in-zahlen.de
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          pip install pipenv
+          pipenv install
+      - name: Poll data
+        run: pipenv run python tools/dailySummary.py $TELEGRAM_TOKEN $TELEGRAM_DEBUG_CHAT_ID $TELEGRAM_PUBLIC_CHAT_ID
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_DEBUG_CHAT_ID: ${{ secrets.TELEGRAM_DEBUG_CHAT_ID }}
+          TELEGRAM_PUBLIC_CHAT_ID: ${{ secrets.TELEGRAM_PUBLIC_CHAT_ID }}

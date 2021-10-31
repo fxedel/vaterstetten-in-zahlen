@@ -2,7 +2,6 @@ import pollers.poller
 import pollers.lraEbeArcgis
 import pollers.lraEbeArcgisImpfungen
 import pollers.lraEbeArcgisImpfungenNachEinrichtung
-import pollers.lraEbeImpfzentrum
 
 from typing import Dict, Type
 
