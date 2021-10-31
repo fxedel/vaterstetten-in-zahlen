@@ -148,7 +148,7 @@ ui <- function(request, id) {
       ),
       box(
         title = "7-Tage-Impfidenz",
-        plotOutput(ns("impfidenzPlot"), height = 300),
+        plotlyOutput(ns("impfidenzPlotly"), height = 350),
         textOutput(ns("impfidenzText"))
       ),
     ),
@@ -257,25 +257,9 @@ server <- function(id) {
           add_trace(y = ~erstimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd33", name = "Erstimpfungen", size = I(8)) %>%
           add_trace(y = ~zweitimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd80", name = "Zweitimpfungen", size = I(8)) %>%
           add_trace(y = ~drittimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088ddff", name = "Drittimpfungen", size = I(8)) %>%
-          config(displayModeBar = FALSE) %>%
-          config(locale = "de") %>%
-          layout(dragmode = FALSE) %>%
-          layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h', y = 1.2, yanchor = "bottom")) %>%
-          layout(xaxis = list(range = list(input$dateRange[1], input$dateRange[2]))) %>%
-          layout(xaxis = list(
-            rangeselector = list(
-              buttons = list(
-                list(count = 1, label = "1 Monat", step = "month", stepmode = "backward"),
-                list(count = 3, label = "3 Monate", step = "month", stepmode = "backward"),
-                list(count = 6, label = "6 Monate", step = "month", stepmode = "backward"),
-                list(step = "all", label = "Gesamt")
-              )
-            ),
-            rangeslider = list(type = "date")
-          )) %>%
-          layout(xaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
-          layout(yaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
-          layout(margin = list(r = 0, l = 0, t = 0, b = 4, pad = 0))
+          plotly_default_config() %>%
+          plotly_time_range(input) %>%
+          plotly_hide_axis_titles()
       })
 
       output$geimpfteText <- renderText({
@@ -324,18 +308,13 @@ server <- function(id) {
         paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$impfdosen, " Impfdosen verabreicht.", sep = "")
       })
 
-      output$impfidenzPlot <- renderPlot({
-        ggplot(filter(impfungenMerged, !is.na(impfidenz)), mapping = aes(x = datum, y = impfidenz)) + list(
-          geom_line(alpha = 0.5, size = 1.2),
-          geom_point(alpha = 1, size = 1),
-          if (input$showNumbers)
-            geom_text(aes(label = round(impfidenz)), vjust = "bottom", hjust = "middle", nudge_y = 300, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
-          else list(),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale()
-        )
-      }, res = 96)
+      output$impfidenzPlotly <- renderPlotly({
+        plot_ly(filter(impfungenMerged, !is.na(impfidenz)), x = ~datum) %>%
+          add_trace(y = ~ round(impfidenz), type = "scatter", mode = "lines", name = "Impfidenz", size = I(2)) %>%
+          plotly_default_config() %>%
+          plotly_time_range(input) %>%
+          plotly_hide_axis_titles()
+      })
       output$impfidenzText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
         paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", round(lastRow$impfidenz, 1), ".")
@@ -380,5 +359,44 @@ server <- function(id) {
         paste0("In den letzen 7 Tagen (Stand:\u00A0", format(impfdosen7Tage$datum, "%d.%m.%Y"), ") wurden ", round(impfdosen7Tage$Impfzentrum), " Impfdosen im Impfzentrum, ", round(impfdosen7Tage$Praxis), " Impfdosen in Arztpraxen und ", round(impfdosen7Tage$Kreisklinik), " Impfdosen in der Kreisklinik verabreicht.")
       })
     }
+  )
+}
+
+plotly_default_config <- function(p) {
+  return(
+    p %>%
+      config(displayModeBar = FALSE) %>%
+      config(locale = "de") %>%
+      layout(dragmode = FALSE)
+  )
+}
+
+plotly_time_range <- function(p, input) {
+  return(
+    p %>%
+      # legend above plot
+      layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h', y = 1.2, yanchor = "bottom")) %>%
+      # default time selection
+      layout(xaxis = list(range = list(input$dateRange[1], input$dateRange[2]))) %>%
+      layout(xaxis = list(
+        rangeselector = list(
+          buttons = list(
+            list(count = 1, label = "1 Monat", step = "month", stepmode = "backward"),
+            list(count = 3, label = "3 Monate", step = "month", stepmode = "backward"),
+            list(count = 6, label = "6 Monate", step = "month", stepmode = "backward"),
+            list(step = "all", label = "Gesamt")
+          )
+        ),
+        rangeslider = list(type = "date")
+      ))
+  )
+}
+
+plotly_hide_axis_titles <- function(p) {
+  return(
+    p %>%
+      layout(xaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+      layout(yaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+      layout(margin = list(r = 0, l = 0, t = 0, b = 4, pad = 0))
   )
 }
