@@ -611,6 +611,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Anzing,2,546.08
 2021-11-02,Anzing,2,546.08
 2021-11-03,Anzing,7,568.83
+2021-11-04,Anzing,2,455.06
 2020-03-02,Aßling,0,0
 2020-03-03,Aßling,0,0
 2020-03-04,Aßling,0,0
@@ -1223,6 +1224,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Aßling,2,658.76
 2021-11-02,Aßling,0,614.84
 2021-11-03,Aßling,2,570.93
+2021-11-04,Aßling,6,592.89
 2020-03-02,Baiern,0,0
 2020-03-03,Baiern,0,0
 2020-03-04,Baiern,0,0
@@ -1835,6 +1837,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Baiern,1,928.38
 2021-11-02,Baiern,0,795.76
 2021-11-03,Baiern,1,729.44
+2021-11-04,Baiern,1,596.82
 2020-03-02,Bruck,0,0
 2020-03-03,Bruck,0,0
 2020-03-04,Bruck,0,0
@@ -2447,6 +2450,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Bruck,4,456.27
 2021-11-02,Bruck,1,532.32
 2021-11-03,Bruck,4,836.5
+2021-11-04,Bruck,2,836.5
 2020-03-02,Ebersberg,0,0
 2020-03-03,Ebersberg,0,0
 2020-03-04,Ebersberg,0,0
@@ -3059,6 +3063,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Ebersberg,7,278.39
 2021-11-02,Ebersberg,3,294.77
 2021-11-03,Ebersberg,11,352.08
+2021-11-04,Ebersberg,8,343.9
 2020-03-02,Egmating,0,0
 2020-03-03,Egmating,0,0
 2020-03-04,Egmating,0,0
@@ -3671,6 +3676,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Egmating,0,466.5
 2021-11-02,Egmating,1,339.27
 2021-11-03,Egmating,1,381.68
+2021-11-04,Egmating,4,551.31
 2020-03-02,Emmering,0,0
 2020-03-03,Emmering,0,0
 2020-03-04,Emmering,0,0
@@ -4283,6 +4289,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Emmering,2,672.95
 2021-11-02,Emmering,0,538.36
 2021-11-03,Emmering,4,740.24
+2021-11-04,Emmering,1,740.24
 2020-03-02,Forstinning,0,0
 2020-03-03,Forstinning,0,0
 2020-03-04,Forstinning,0,0
@@ -4895,6 +4902,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Forstinning,0,230.12
 2021-11-02,Forstinning,1,255.69
 2021-11-03,Forstinning,0,204.55
+2021-11-04,Forstinning,1,153.41
 2020-03-02,Frauenneuharting,0,0
 2020-03-03,Frauenneuharting,0,0
 2020-03-04,Frauenneuharting,0,0
@@ -5507,6 +5515,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Frauenneuharting,2,1773.27
 2021-11-02,Frauenneuharting,7,1899.94
 2021-11-03,Frauenneuharting,4,2026.6
+2021-11-04,Frauenneuharting,7,2216.59
 2020-03-02,Glonn,0,0
 2020-03-03,Glonn,0,0
 2020-03-04,Glonn,0,0
@@ -6118,6 +6127,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Glonn,3,496.47
 2021-11-02,Glonn,4,553.75
 2021-11-03,Glonn,7,611.04
+2021-11-04,Glonn,10,687.42
 2021-03-23,Grafing bei MÃ¼nchen,1,133.66
 2020-03-02,Grafing bei München,1,7.24
 2020-03-03,Grafing bei München,1,14.49
@@ -6731,6 +6741,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Grafing bei München,8,362.19
 2021-11-02,Grafing bei München,1,333.21
 2021-11-03,Grafing bei München,8,347.7
+2021-11-04,Grafing bei München,17,420.14
 2020-03-02,Hohenlinden,0,0
 2020-03-03,Hohenlinden,0,0
 2020-03-04,Hohenlinden,0,0
@@ -7342,6 +7353,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Hohenlinden,0,307.6
 2021-11-02,Hohenlinden,1,215.32
 2021-11-03,Hohenlinden,1,153.8
+2021-11-04,Hohenlinden,1,153.8
 2021-10-30,keine Angabe,1,307.6
 2020-03-02,Kirchseeon,0,0
 2020-03-03,Kirchseeon,0,0
@@ -7955,6 +7967,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Kirchseeon,0,150.11
 2021-11-02,Kirchseeon,1,140.73
 2021-11-03,Kirchseeon,10,215.78
+2021-11-04,Kirchseeon,8,253.31
 2020-03-02,Markt Schwaben,0,0
 2020-03-03,Markt Schwaben,0,0
 2020-03-04,Markt Schwaben,0,0
@@ -8567,6 +8580,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Markt Schwaben,6,253.26
 2021-11-02,Markt Schwaben,2,217.08
 2021-11-03,Markt Schwaben,5,224.31
+2021-11-04,Markt Schwaben,8,253.26
 2020-03-02,Moosach,0,0
 2020-03-03,Moosach,0,0
 2020-03-04,Moosach,0,0
@@ -9179,6 +9193,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Moosach,0,398.14
 2021-11-02,Moosach,0,331.79
 2021-11-03,Moosach,0,331.79
+2021-11-04,Moosach,2,331.79
 2020-03-02,Oberpframmern,0,0
 2020-03-03,Oberpframmern,0,0
 2020-03-04,Oberpframmern,0,0
@@ -9791,6 +9806,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Oberpframmern,0,286.89
 2021-11-02,Oberpframmern,3,327.87
 2021-11-03,Oberpframmern,0,286.89
+2021-11-04,Oberpframmern,2,327.87
 2020-03-02,Pliening,0,0
 2020-03-03,Pliening,0,0
 2020-03-04,Pliening,0,0
@@ -10403,6 +10419,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Pliening,0,261.32
 2021-11-02,Pliening,5,278.75
 2021-11-03,Pliening,1,209.06
+2021-11-04,Pliening,7,278.75
 2020-03-02,Poing,0,0
 2020-03-03,Poing,0,0
 2020-03-04,Poing,0,0
@@ -11015,6 +11032,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Poing,2,360.34
 2021-11-02,Poing,3,285.79
 2021-11-03,Poing,10,310.64
+2021-11-04,Poing,8,260.93
 2020-03-02,Steinhöring,0,0
 2020-03-03,Steinhöring,0,0
 2020-03-04,Steinhöring,0,0
@@ -11627,6 +11645,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Steinhöring,3,540.28
 2021-11-02,Steinhöring,1,564.83
 2021-11-03,Steinhöring,2,515.72
+2021-11-04,Steinhöring,11,687.62
 2020-03-02,Vaterstetten,0,0
 2020-03-03,Vaterstetten,0,0
 2020-03-04,Vaterstetten,0,0
@@ -12238,7 +12257,8 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-10-31,Vaterstetten,2,112.95
 2021-11-01,Vaterstetten,6,137.16
 2021-11-02,Vaterstetten,4,141.19
-2021-11-03,Vaterstetten,11,161.36
+2021-11-03,Vaterstetten,10,157.33
+2021-11-04,Vaterstetten,13,193.63
 2020-03-02,Zorneding,0,0
 2020-03-03,Zorneding,0,0
 2020-03-04,Zorneding,0,0
@@ -12851,3 +12871,4 @@ datum,ort,neuPositiv,inzidenz7tage
 2021-11-01,Zorneding,2,171.01
 2021-11-02,Zorneding,1,160.32
 2021-11-03,Zorneding,4,171.01
+2021-11-04,Zorneding,6,203.08
