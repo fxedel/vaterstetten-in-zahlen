@@ -367,7 +367,8 @@ plotly_default_config <- function(p) {
     p %>%
       config(displayModeBar = FALSE) %>%
       config(locale = "de") %>%
-      layout(dragmode = FALSE)
+      layout(dragmode = FALSE) %>%
+      layout(hovermode = "x unified")
   )
 }
 
