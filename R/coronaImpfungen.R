@@ -174,7 +174,7 @@ ui <- function(request, id) {
       ),
       box(
         title = "Verabreichte Impfdosen insgesamt",
-        plotOutput(ns("impfdosen"), height = 300),
+        plotlyOutput(ns("impfdosenPlotly"), height = 350),
         textOutput(ns("impfdosenText"))
       ),
     ),
@@ -225,7 +225,7 @@ server <- function(id) {
       output$valueBox1 <- renderValueBox({
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
-          paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
+          paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1, decimal.mark = ",", big.mark = "."), "%"),
           paste0("Erstimpfquote (absolut: ", lastRow$erstimpfungen, ")"),
           color = "purple",
           icon = icon("star-half-alt")
@@ -235,7 +235,7 @@ server <- function(id) {
       output$valueBox2 <- renderValueBox({
         lastRow <- impfungenMerged %>% filter(!is.na(zweitimpfungen)) %>% slice_tail()
         valueBox(
-          paste0(format(round(lastRow$zweitimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
+          paste0(format(round(lastRow$zweitimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1, decimal.mark = ",", big.mark = "."), "%"),
           paste0("Zweitimpfquote (absolut: ", lastRow$zweitimpfungen, ")"),
           color = "purple",
           icon = icon("star")
@@ -245,18 +245,18 @@ server <- function(id) {
       output$valueBox3 <- renderValueBox({
         lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
         valueBox(
-          format(round(lastRow$impfidenz, 1), nsmall = 1),
-          paste("7-Tage-Impfidenz (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")", sep = ""),
+          format(round(lastRow$impfidenz, 1), nsmall = 1, decimal.mark = ",", big.mark = "."),
+          paste0("7-Tage-Impfidenz (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")"),
           color = "purple",
           icon = icon("tachometer-alt")
         )
       })
 
       output$geimpftePlotly = renderPlotly({
-        plot_ly(impfungenMerged, x = ~datum) %>%
-          add_trace(y = ~erstimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd33", name = "Erstimpfungen", size = I(8)) %>%
-          add_trace(y = ~zweitimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd80", name = "Zweitimpfungen", size = I(8)) %>%
-          add_trace(y = ~drittimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088ddff", name = "Drittimpfungen", size = I(8)) %>%
+        plot_ly(impfungenMerged, x = ~datum, size = I(8), yhoverformat = ",d") %>%
+          add_trace(y = ~erstimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd33", name = "Erstimpfungen") %>%
+          add_trace(y = ~zweitimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd80", name = "Zweitimpfungen") %>%
+          add_trace(y = ~drittimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088ddff", name = "Drittimpfungen") %>%
           plotly_default_config() %>%
           plotly_time_range(input) %>%
           plotly_hide_axis_titles()
@@ -264,7 +264,7 @@ server <- function(id) {
 
       output$geimpfteText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-        paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", lastRow$erstimpfungen, " Menschen mindestens eine Erstimpfung erhalten, davon ", lastRow$zweitimpfungen, " auch schon eine Zweitimpfung.", sep = "")
+        paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", format(lastRow$erstimpfungen, decimal.mark = ",", big.mark = "."), " Menschen mindestens eine Erstimpfung erhalten, davon ", format(lastRow$zweitimpfungen, decimal.mark = ",", big.mark = "."), " auch schon eine Zweitimpfung.")
       })
 
       output$geimpfte80 <- renderPlot({
@@ -288,36 +288,31 @@ server <- function(id) {
       }, res = 96)
       output$geimpfte80Text <- renderText({
         lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungenAb80)) %>% slice_tail()
-        paste("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", lastRow$erstimpfungenAb80, " der ca. ", buergerAb80LkEbe ," Landkreisbürger*innen ab 80 Jahren mindestens eine Erstimpfung erhalten, davon ", lastRow$zweitimpfungenAb80, " auch schon eine Zweitimpfung.", sep = "")
+        paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", format(lastRow$erstimpfungenAb80, decimal.mark = ",", big.mark = "."), " der ca. ", format(buergerAb80LkEbe, decimal.mark = ",", big.mark = ".") ," Landkreisbürger*innen ab 80 Jahren mindestens eine Erstimpfung erhalten, davon ", format(lastRow$zweitimpfungenAb80, decimal.mark = ",", big.mark = "."), " auch schon eine Zweitimpfung.")
       })
 
-      output$impfdosen <- renderPlot({
-        ggplot(filter(impfungenMerged, !is.na(impfdosen)), mapping = aes(x = datum, y = impfdosen)) + list(
-          geom_line(alpha = 0.5, size = 1.2),
-          geom_point(alpha = 1, size = 1),
-          if (input$showNumbers)
-            geom_text(aes(label = impfdosen), vjust = "bottom", hjust = "middle", nudge_y = 1500, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
-          else list(),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale()
-        )
-      }, res = 96)
+      output$impfdosenPlotly <- renderPlotly({
+        plot_ly(filter(impfungenMerged, !is.na(impfdosen)), x = ~datum) %>%
+          add_trace(y = ~impfdosen, type = "scatter", mode = "lines", name = "Impfdosen", size = I(2), yhoverformat = ",d") %>%
+          plotly_default_config() %>%
+          plotly_time_range(input) %>%
+          plotly_hide_axis_titles()
+      })
       output$impfdosenText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfdosen)) %>% slice_tail()
-        paste("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", lastRow$impfdosen, " Impfdosen verabreicht.", sep = "")
+        paste0("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", format(lastRow$impfdosen, decimal.mark = ",", big.mark = "."), " Impfdosen verabreicht.")
       })
 
       output$impfidenzPlotly <- renderPlotly({
         plot_ly(filter(impfungenMerged, !is.na(impfidenz)), x = ~datum) %>%
-          add_trace(y = ~ round(impfidenz), type = "scatter", mode = "lines", name = "Impfidenz", size = I(2)) %>%
+          add_trace(y = ~ impfidenz, type = "scatter", mode = "lines", name = "Impfidenz", size = I(2), yhoverformat = ",.1f") %>%
           plotly_default_config() %>%
           plotly_time_range(input) %>%
           plotly_hide_axis_titles()
       })
       output$impfidenzText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
-        paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", round(lastRow$impfidenz, 1), ".")
+        paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", format(lastRow$impfidenz, nsmall = 1, decimal.mark = ",", big.mark = "."), ".")
       })
 
       output$impfdosenProTagPlot <- renderPlot({
@@ -337,7 +332,7 @@ server <- function(id) {
       }, res = 96)
       output$impfdosenProTagText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
-        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", round(lastRow$impfdosenNeuProTag), " Impfdosen pro Tag verabreicht. Die schwarze Linie gibt das 7-Tage-Mittel an.")
+        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", format(round(lastRow$impfdosenNeuProTag), decimal.mark = ",", big.mark = "."), " Impfdosen pro Tag verabreicht. Die schwarze Linie gibt das 7-Tage-Mittel an.")
       })
 
       output$impfdosenProTagNachEinrichtungPlot <- renderPlot({
@@ -356,7 +351,7 @@ server <- function(id) {
           summarise(impfdosen7Tage = sum(impfdosenNeu), datum = max(datum)) %>%
           pivot_wider(names_from = einrichtung, values_from = impfdosen7Tage)
 
-        paste0("In den letzen 7 Tagen (Stand:\u00A0", format(impfdosen7Tage$datum, "%d.%m.%Y"), ") wurden ", round(impfdosen7Tage$Impfzentrum), " Impfdosen im Impfzentrum, ", round(impfdosen7Tage$Praxis), " Impfdosen in Arztpraxen und ", round(impfdosen7Tage$Kreisklinik), " Impfdosen in der Kreisklinik verabreicht.")
+        paste0("In den letzen 7 Tagen (Stand:\u00A0", format(impfdosen7Tage$datum, "%d.%m.%Y"), ") wurden ", format(round(impfdosen7Tage$Impfzentrum), decimal.mark = ",", big.mark = "."), " Impfdosen im Impfzentrum, ", format(round(impfdosen7Tage$Praxis), decimal.mark = ",", big.mark = "."), " Impfdosen in Arztpraxen und ", format(round(impfdosen7Tage$Kreisklinik), decimal.mark = ",", big.mark = "."), " Impfdosen in der Kreisklinik verabreicht.")
       })
     }
   )
@@ -368,7 +363,7 @@ plotly_default_config <- function(p) {
       config(displayModeBar = FALSE) %>%
       config(locale = "de") %>%
       layout(dragmode = FALSE) %>%
-      layout(hovermode = "x unified")
+      layout(hovermode = "x")
   )
 }
 

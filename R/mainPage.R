@@ -45,7 +45,7 @@ server <- function(id, parentSession) {
       output$valueBoxInzidenz <- renderValueBox({
         lastRow <- corona$fallzahlenArcGIS %>% slice_tail()
         valueBox(
-          format(round(lastRow$inzidenz7tage, 1), nsmall = 1),
+          format(round(lastRow$inzidenz7tage, 1), nsmall = 1, decimal.mark = ",", big.mark = "."),
           paste0("7-Tage-Inzidenz (", format(lastRow$datum, "%d.%m.%Y"), ")"),
           color = "purple",
           icon = icon("virus"),
@@ -56,7 +56,7 @@ server <- function(id, parentSession) {
       output$valueBoxImpfungen <- renderValueBox({
         lastRow <- coronaImpfungen$impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
-          paste0(format(round(lastRow$erstimpfungen / coronaImpfungen$einwohnerZahlLkEbe * 100, 1), nsmall = 1), "%"),
+          paste0(format(round(lastRow$erstimpfungen / coronaImpfungen$einwohnerZahlLkEbe * 100, 1), nsmall = 1, decimal.mark = ",", big.mark = "."), "%"),
           paste0("Erstimpfquote (", format(lastRow$datum, "%d.%m.%Y"), ")"),
           color = "purple",
           icon = icon("syringe"),
