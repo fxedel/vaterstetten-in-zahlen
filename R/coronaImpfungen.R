@@ -388,7 +388,8 @@ plotly_time_range <- function(p, input) {
           )
         ),
         rangeslider = list(type = "date")
-      ))
+      )) %>%
+      config(doubleClick = FALSE)
   )
 }
 
