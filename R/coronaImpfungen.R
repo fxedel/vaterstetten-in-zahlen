@@ -34,6 +34,52 @@ arcgisImpfungenRaw <- read_delim(
   )
 )
 
+enrichImpfungenData <- function(x) {
+  return (
+    x %>%
+      complete(datum = seq(min(datum), max(datum), "days"), fill = list()) %>%
+      mutate(
+        impfdosen7tageMittel = (impfdosen - lag(impfdosen, 7)) / 7,
+        impfidenz = (impfdosen - lag(impfdosen, 7)) / einwohnerZahlLkEbe * 100000,
+        erstImpfidenz = (erstimpfungen - lag(erstimpfungen, 7)) / einwohnerZahlLkEbe * 100000
+      ) %>%
+      mutate(
+        impfdosenFilled = impfdosen,
+        impfdosenLast = lag(impfdosen),
+        erstimpfungenFilled = erstimpfungen,
+        erstimpfungenLast = lag(erstimpfungen),
+        zweitimpfungenFilled = zweitimpfungen,
+        zweitimpfungenLast = lag(zweitimpfungen),
+        drittimpfungenFilled = drittimpfungen,
+        drittimpfungenLast = lag(drittimpfungen)
+      ) %>%
+      fill(impfdosenFilled, erstimpfungenFilled, zweitimpfungenFilled, drittimpfungenFilled, .direction = "up") %>%
+      fill(impfdosenLast, erstimpfungenLast, zweitimpfungenLast, drittimpfungenLast, .direction = "down") %>%
+      add_count(impfdosenFilled, impfdosenLast, name = "impfdosenDays") %>%
+      add_count(erstimpfungenFilled, erstimpfungenLast, name = "erstimpfungenDays") %>%
+      add_count(zweitimpfungenFilled, zweitimpfungenLast, name = "zweitimpfungenDays") %>%
+      add_count(drittimpfungenFilled, drittimpfungenLast, name = "drittimpfungenDays") %>%
+      mutate(
+        impfdosenNeuProTag = (impfdosenFilled - impfdosenLast) / impfdosenDays,
+        impfdosenFilled = NULL,
+        impfdosenLast = NULL,
+        impfdosenDays = NULL,
+        erstimpfungenNeuProTag = (erstimpfungenFilled - erstimpfungenLast) / erstimpfungenDays,
+        erstimpfungenFilled = NULL,
+        erstimpfungenLast = NULL,
+        erstimpfungenDays = NULL,
+        zweitimpfungenNeuProTag = (zweitimpfungenFilled - zweitimpfungenLast) / zweitimpfungenDays,
+        zweitimpfungenFilled = NULL,
+        zweitimpfungenLast = NULL,
+        zweitimpfungenDays = NULL,
+        drittimpfungenNeuProTag = (drittimpfungenFilled - drittimpfungenLast) / drittimpfungenDays,
+        drittimpfungenFilled = NULL,
+        drittimpfungenLast = NULL,
+        drittimpfungenDays = NULL
+      )
+  )
+}
+
 impfungenMerged <- bind_rows(
   impfungenRaw %>%
     filter(datum < min(arcgisImpfungenRaw$datum)) %>%
@@ -42,50 +88,20 @@ impfungenMerged <- bind_rows(
       erstimpfungen,
       zweitimpfungen,
       drittimpfungen = 0,
-      impfdosen = erstimpfungen + zweitimpfungen
-    ),
+      impfdosen = erstimpfungen + zweitimpfungen,
+      impfdosenNeu = impfdosen - lag(impfdosen)
+    ) %>% enrichImpfungenData(),
   arcgisImpfungenRaw %>%
     transmute(
       datum,
       erstimpfungen,
       zweitimpfungen,
       drittimpfungen,
-      impfdosen
-    )
-) %>%
-  complete(datum = seq(min(datum), max(datum), "days"), fill = list()) %>%
-  mutate(
-    impfdosen7tageMittel = (impfdosen - lag(impfdosen, 7)) / 7,
-    impfidenz = (impfdosen - lag(impfdosen, 7)) / einwohnerZahlLkEbe * 100000
-  ) %>%
-  mutate(
-    impfdosenFilled = impfdosen,
-    impfdosenLast = lag(impfdosen)
-  ) %>%
-  fill(impfdosenFilled, .direction = "up") %>%
-  fill(impfdosenLast, .direction = "down") %>%
-  add_count(impfdosenFilled, impfdosenLast, name = "impfdosenDays") %>%
-  mutate(
-    impfdosenNeuProTag = (impfdosenFilled - impfdosenLast) / impfdosenDays,
-    impfdosenFilled = NULL,
-    impfdosenLast = NULL,
-    impfdosenDays = NULL
-  )
+      impfdosen,
+      impfdosenNeu
+    ) %>% enrichImpfungenData()
+)
 
-
-personenNachStatus <- impfungenMerged %>%
-  transmute(
-    datum = datum,
-    erst = erstimpfungen,
-    zweit = zweitimpfungen,
-    dritt = drittimpfungen
-  ) %>%
-  pivot_longer(
-    cols = c(erst, zweit, dritt),
-    names_to = "status",
-    names_ptypes = list(status = factor(levels = c("erst", "zweit", "dritt")))
-  ) %>%
-  filter(!is.na(value))
 
 arcgisImpfungenNachEinrichtungRaw <- read_delim(
   file = "data/corona-impfungen/arcgisImpfungenNachEinrichtung.csv",
@@ -108,6 +124,55 @@ arcgisImpfungenNachEinrichtung <- arcgisImpfungenNachEinrichtungRaw %>%
     impfdosenNeu = impfdosen - lag(impfdosen)
   )
 
+arcgisImpfungenNachAlter <- read_delim(
+  file = "data/corona-impfungen/arcgisImpfungenNachAlter.csv",
+  delim = ",",
+  col_names = TRUE,
+  col_types = cols(
+    datum = col_date(format = "%Y-%m-%d"),
+    einrichtung = readr::col_factor(levels = c("Impfzentrum", "Praxis", "Kreisklinik")),
+    altersgruppe = readr::col_factor(levels = c("0-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+")),
+    erstimpfungen = col_integer(),
+    zweitimpfungen = col_integer(),
+    drittimpfungen = col_integer()
+  )
+)
+
+impfungenAlterMerged <- bind_rows(
+  impfungenRaw %>%
+    filter(datum < min(arcgisImpfungenNachAlter$datum)) %>%
+    filter(!is.na(erstimpfungenAb80)) %>%
+    transmute(
+      datum,
+      altersgruppe = "Unbekannt",
+      erstimpfungen = erstimpfungen - erstimpfungenAb80 - erstimpfungenHausaerzte,
+      zweitimpfungen = zweitimpfungen - zweitimpfungenAb80 - zweitimpfungenHausaerzte,
+      drittimpfungen = 0
+    ),
+  impfungenRaw %>%
+    filter(datum < min(arcgisImpfungenNachAlter$datum)) %>%
+    filter(!is.na(erstimpfungenAb80)) %>%
+    transmute(
+      datum,
+      altersgruppe = "80+",
+      erstimpfungen = erstimpfungenAb80,
+      zweitimpfungen = zweitimpfungenAb80,
+      drittimpfungen = 0
+    ),
+  arcgisImpfungenNachAlter %>%
+    filter(einrichtung == "Impfzentrum") %>%
+    transmute(
+      datum,
+      altersgruppe,
+      erstimpfungen,
+      zweitimpfungen,
+      drittimpfungen
+    )
+) %>%
+  mutate(
+    altersgruppe = factor(altersgruppe, levels = c("Unbekannt", "0-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+"))
+  )
+
 maxDatum = max(impfungenMerged$datum, arcgisImpfungenNachEinrichtung$datum)
 minDatum = min(impfungenMerged$datum, arcgisImpfungenNachEinrichtung$datum)
 
@@ -120,24 +185,6 @@ ui <- function(request, id) {
       valueBoxOutput(ns("valueBox1")),
       valueBoxOutput(ns("valueBox2")),
       valueBoxOutput(ns("valueBox3"))
-    ),
-
-    flowLayout(
-      dateRangeInput(ns("dateRange"),
-        label = NULL,
-        start = maxDatum - 90,
-        end = maxDatum,
-        min = minDatum,
-        max = maxDatum,
-        format = "d. M yyyy",
-        weekstart = 1,
-        language = "de",
-        separator = "bis"
-      ),
-      checkboxInput(ns("showNumbers"),
-        label = "Zahlenwerte anzeigen",
-        value = FALSE
-      )
     ),
 
     fluidRow(
@@ -156,21 +203,21 @@ ui <- function(request, id) {
     fluidRow(
       box(
         title = "Verabreichte Impfdosen pro Tag",
-        plotOutput(ns("impfdosenProTagPlot"), height = 300),
+        plotlyOutput(ns("impfdosenProTagPlotly"), height = 350),
         textOutput(ns("impfdosenProTagText"))
       ),
       box(
         title = "Verabreichte Impfdosen pro Tag nach Einrichtung",
-        plotOutput(ns("impfdosenProTagNachEinrichtungPlot"), height = 300),
+        plotlyOutput(ns("impfdosenProTagNachEinrichtungPlotly"), height = 350),
         textOutput(ns("impfdosenProTagNachEinrichtungText"))
       ),
     ),
 
     fluidRow(
       box(
-        title = "Geimpfte Über-80-Jährige (Erst-/Zweitgeimpfte)",
-        plotOutput(ns("geimpfte80"), height = 300),
-        textOutput(ns("geimpfte80Text"))
+        title = "Erstgeimpfte nach Altersgruppe",
+        plotlyOutput(ns("erstgeimpfteAlterPlotly"), height = 350),
+        textOutput(ns("erstgeimpfteAlterText"))
       ),
       box(
         title = "Verabreichte Impfdosen insgesamt",
@@ -200,33 +247,11 @@ server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
-      getDateScale <- function() {
-        list(
-          scale_x_date(
-            name = NULL,
-            breaks = breaks_pretty(8),
-            date_minor_breaks = "1 days",
-            date_labels = "%-d.%-m.",
-            expand = expansion(add = c(0.5, 1))
-          ),
-          coord_cartesian(xlim = c(input$dateRange[1], input$dateRange[2]))
-        )
-      }
-
-      getYScale <- function() {
-        scale_y_continuous(
-          name = NULL,
-          breaks = breaks_pretty(5),
-          expand = expansion(mult = c(0.02, 0.1)),
-          labels = number_format()
-        )
-      }
-
       output$valueBox1 <- renderValueBox({
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
           paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1, decimal.mark = ",", big.mark = "."), "%"),
-          paste0("Erstimpfquote (absolut: ", lastRow$erstimpfungen, ")"),
+          paste0("Erstimpfquote (absolut: ", format(lastRow$erstimpfungen, decimal.mark = ",", big.mark = "."), ")"),
           color = "purple",
           icon = icon("star-half-alt")
         )
@@ -236,7 +261,7 @@ server <- function(id) {
         lastRow <- impfungenMerged %>% filter(!is.na(zweitimpfungen)) %>% slice_tail()
         valueBox(
           paste0(format(round(lastRow$zweitimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1, decimal.mark = ",", big.mark = "."), "%"),
-          paste0("Zweitimpfquote (absolut: ", lastRow$zweitimpfungen, ")"),
+          paste0("Zweitimpfquote (absolut: ", format(lastRow$zweitimpfungen, decimal.mark = ",", big.mark = "."), ")"),
           color = "purple",
           icon = icon("star")
         )
@@ -253,49 +278,24 @@ server <- function(id) {
       })
 
       output$geimpftePlotly = renderPlotly({
-        plot_ly(impfungenMerged, x = ~datum, size = I(8), yhoverformat = ",d") %>%
-          add_trace(y = ~erstimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd33", name = "Erstimpfungen") %>%
-          add_trace(y = ~zweitimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088dd80", name = "Zweitimpfungen") %>%
-          add_trace(y = ~drittimpfungen, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#0088dd"), fillcolor = "#0088ddff", name = "Drittimpfungen") %>%
+        plot_ly(impfungenMerged %>% filter(!is.na(erstimpfungen)), x = ~datum, yhoverformat = ",d") %>%
+          add_trace(y = ~erstimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#74a9cf", name = "Erstimpfungen") %>%
+          add_trace(y = ~zweitimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#0570b0", name = "Zweitimpfungen") %>%
+          add_trace(y = ~drittimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#023858", name = "Drittimpfungen") %>%
           plotly_default_config() %>%
-          plotly_time_range(input) %>%
+          plotly_time_range() %>%
           plotly_hide_axis_titles()
       })
-
       output$geimpfteText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", format(lastRow$erstimpfungen, decimal.mark = ",", big.mark = "."), " Menschen mindestens eine Erstimpfung erhalten, davon ", format(lastRow$zweitimpfungen, decimal.mark = ",", big.mark = "."), " auch schon eine Zweitimpfung.")
-      })
-
-      output$geimpfte80 <- renderPlot({
-        dataErst <- filter(impfungenRaw, !is.na(erstimpfungenAb80))
-        dataZweit <- filter(impfungenRaw, !is.na(zweitimpfungenAb80))
-        ggplot(mapping = aes(x = datum)) + list(
-          geom_area(aes(y = erstimpfungenAb80), dataErst, alpha = 0.2, fill = "#ff6600", color = "#ff6600"),
-          geom_point(aes(y = erstimpfungenAb80), dataErst, alpha = 0.5, size = 1, color = "#ff6600"),
-          geom_area(aes(y = zweitimpfungenAb80), dataZweit, alpha = 0.4, fill = "#ff6600", color = "#ff6600"),
-          geom_point(aes(y = zweitimpfungenAb80), dataZweit, alpha = 0.5, size = 1, color = "#ff6600"),
-          if (input$showNumbers) list(
-            geom_text(aes(y = erstimpfungenAb80, label = erstimpfungenAb80), dataErst, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#963c00"),
-            geom_text(aes(y = zweitimpfungenAb80, label = zweitimpfungenAb80), dataZweit, vjust = "bottom", hjust = "middle", nudge_y = 150, check_overlap = TRUE, size = 3.4, color = "#963c00")
-          ) else list(),
-          geom_hline(yintercept = buergerAb80LkEbe, linetype = "dashed", color = "#ff3300", size = 0.6),
-          annotate("label", x = input$dateRange[1] + 1, y = buergerAb80LkEbe, label = paste(buergerAb80LkEbe, "Ü80-Landkreisbürger*innen"), vjust = "middle", hjust = "left", size = 3, fill = "#ff3300", color = "#ffffff", fontface = "bold"),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale()
-        )
-      }, res = 96)
-      output$geimpfte80Text <- renderText({
-        lastRow <- impfungenRaw %>% filter(!is.na(erstimpfungenAb80)) %>% slice_tail()
-        paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", format(lastRow$erstimpfungenAb80, decimal.mark = ",", big.mark = "."), " der ca. ", format(buergerAb80LkEbe, decimal.mark = ",", big.mark = ".") ," Landkreisbürger*innen ab 80 Jahren mindestens eine Erstimpfung erhalten, davon ", format(lastRow$zweitimpfungenAb80, decimal.mark = ",", big.mark = "."), " auch schon eine Zweitimpfung.")
       })
 
       output$impfdosenPlotly <- renderPlotly({
         plot_ly(filter(impfungenMerged, !is.na(impfdosen)), x = ~datum) %>%
           add_trace(y = ~impfdosen, type = "scatter", mode = "lines", name = "Impfdosen", size = I(2), yhoverformat = ",d") %>%
           plotly_default_config() %>%
-          plotly_time_range(input) %>%
+          plotly_time_range() %>%
           plotly_hide_axis_titles()
       })
       output$impfdosenText <- renderText({
@@ -304,10 +304,11 @@ server <- function(id) {
       })
 
       output$impfidenzPlotly <- renderPlotly({
-        plot_ly(filter(impfungenMerged, !is.na(impfidenz)), x = ~datum) %>%
-          add_trace(y = ~ impfidenz, type = "scatter", mode = "lines", name = "Impfidenz", size = I(2), yhoverformat = ",.1f") %>%
+        plot_ly(filter(impfungenMerged, !is.na(impfidenz)), x = ~datum, yhoverformat = ",.1f") %>%
+          add_trace(y = ~ impfidenz, type = "scatter", mode = "lines", name = "Gesamt-Impfidenz", size = I(2), color = I("#000000")) %>%
+          add_trace(y = ~ erstImpfidenz, type = "scatter", mode = "lines", name = "Erst-Impfidenz", size = I(2), color = I("#74a9cf")) %>%
           plotly_default_config() %>%
-          plotly_time_range(input) %>%
+          plotly_time_range() %>%
           plotly_hide_axis_titles()
       })
       output$impfidenzText <- renderText({
@@ -315,35 +316,29 @@ server <- function(id) {
         paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", format(lastRow$impfidenz, nsmall = 1, decimal.mark = ",", big.mark = "."), ".")
       })
 
-      output$impfdosenProTagPlot <- renderPlot({
-        ggplot(filter(impfungenMerged, !is.na(impfdosenNeuProTag)), mapping = aes(x = datum)) + list(
-          geom_col(aes(y = impfdosenNeuProTag), alpha = 0.5, width = 1, position = position_nudge(x = -0.5)),
-          geom_line(data = filter(impfungenMerged, !is.na(impfdosen7tageMittel)), aes(y = impfdosen7tageMittel), alpha = 0.6, color = "#000000", size = 1.2),
-          if (input$showNumbers)
-            geom_text(
-              aes(y = impfdosenNeuProTag, label = round(impfdosenNeuProTag)),
-              vjust = "bottom", hjust = "middle", nudge_y = 100, check_overlap = TRUE, size = 3.4, na.rm = TRUE
-            )
-          else list(),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale()
-        )
-      }, res = 96)
+      output$impfdosenProTagPlotly <- renderPlotly({
+        plot_ly(filter(impfungenMerged, !is.na(erstimpfungenNeuProTag)), x = ~datum, yhoverformat = ",") %>%
+          add_trace(y = ~drittimpfungenNeuProTag, type = "bar", name = "Drittimpfungen", color = I("#023858"), width = 24*60*60*1000) %>%
+          add_trace(y = ~zweitimpfungenNeuProTag, type = "bar", name = "Zweitimpfungen", color = I("#0570b0"), width = 24*60*60*1000) %>%
+          add_trace(y = ~erstimpfungenNeuProTag, type = "bar", name = "Erstimpfungen", color = I("#74a9cf"), width = 24*60*60*1000) %>%
+          layout(barmode = 'stack') %>%
+          plotly_default_config() %>%
+          plotly_time_range() %>%
+          plotly_hide_axis_titles()
+      })
       output$impfdosenProTagText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
         paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", format(round(lastRow$impfdosenNeuProTag), decimal.mark = ",", big.mark = "."), " Impfdosen pro Tag verabreicht. Die schwarze Linie gibt das 7-Tage-Mittel an.")
       })
 
-      output$impfdosenProTagNachEinrichtungPlot <- renderPlot({
-        ggplot(filter(arcgisImpfungenNachEinrichtung, !is.na(impfdosenNeu)), mapping = aes(x = datum)) + list(
-          geom_col(aes(y = impfdosenNeu, fill = einrichtung), width = 1, position = "stack"),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale(),
-          theme(legend.justification = c(0, 1), legend.position = c(0, 1), legend.title = element_blank(), legend.background = element_rect(fill = alpha("#ffffff", 0.5)), legend.key.size = unit(16, "pt"))
-        )
-      }, res = 96)
+      output$impfdosenProTagNachEinrichtungPlotly <- renderPlotly({
+        plot_ly(filter(arcgisImpfungenNachEinrichtung, !is.na(impfdosenNeu)), x = ~datum, yhoverformat = ",") %>%
+          add_trace(y = ~impfdosenNeu, type = "bar", name = ~einrichtung, width = 24*60*60*1000) %>%
+          layout(barmode = 'stack') %>%
+          plotly_default_config() %>%
+          plotly_time_range() %>%
+          plotly_hide_axis_titles()
+      })
       output$impfdosenProTagNachEinrichtungText <- renderText({
         impfdosen7Tage <- arcgisImpfungenNachEinrichtung %>%
           filter(!is.na(impfdosenNeu)) %>%
@@ -352,6 +347,14 @@ server <- function(id) {
           pivot_wider(names_from = einrichtung, values_from = impfdosen7Tage)
 
         paste0("In den letzen 7 Tagen (Stand:\u00A0", format(impfdosen7Tage$datum, "%d.%m.%Y"), ") wurden ", format(round(impfdosen7Tage$Impfzentrum), decimal.mark = ",", big.mark = "."), " Impfdosen im Impfzentrum, ", format(round(impfdosen7Tage$Praxis), decimal.mark = ",", big.mark = "."), " Impfdosen in Arztpraxen und ", format(round(impfdosen7Tage$Kreisklinik), decimal.mark = ",", big.mark = "."), " Impfdosen in der Kreisklinik verabreicht.")
+      })
+
+      output$erstgeimpfteAlterPlotly <- renderPlotly({
+        plot_ly(impfungenAlterMerged, x = ~datum, yhoverformat = ",") %>%
+          add_trace(y = ~erstimpfungen, type = "scatter", mode = "none", fill = 'tonexty', color = ~altersgruppe, stackgroup = 'one', alpha = 1, alpha_stroke = 1, opacity=1, colors = c('#eeeeee','#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#005a32')) %>%
+          plotly_default_config() %>%
+          plotly_time_range() %>%
+          plotly_hide_axis_titles()
       })
     }
   )
@@ -362,18 +365,18 @@ plotly_default_config <- function(p) {
     p %>%
       config(displayModeBar = FALSE) %>%
       config(locale = "de") %>%
-      layout(dragmode = FALSE) %>%
-      layout(hovermode = "x")
+      layout(hovermode = "x") %>%
+      identity()
   )
 }
 
-plotly_time_range <- function(p, input) {
+plotly_time_range <- function(p) {
   return(
     p %>%
       # legend above plot
       layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h', y = 1.2, yanchor = "bottom")) %>%
       # default time selection
-      layout(xaxis = list(range = list(input$dateRange[1], input$dateRange[2]))) %>%
+      layout(xaxis = list(range = list(maxDatum-91, maxDatum+1))) %>%
       layout(xaxis = list(
         rangeselector = list(
           buttons = list(
@@ -385,7 +388,8 @@ plotly_time_range <- function(p, input) {
         ),
         rangeslider = list(type = "date")
       )) %>%
-      config(doubleClick = FALSE)
+      config(doubleClick = FALSE) %>%
+      identity()
   )
 }
 
