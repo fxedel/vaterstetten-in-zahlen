@@ -1,3 +1,12 @@
+.action-button > i,
+a > i {
+  margin-right: 4px;
+}
+
+.action-button > a {
+  color: inherit;
+}
+
 .main-header > .logo {
   text-align: start;
 }
@@ -13,14 +22,16 @@
   vertical-align: middle;
 }
 
-.btn-header-dropdown {
+.navbar-nav .action-button {
   padding: 14px 16px;
   color: #fff;
   background-color: inherit;
+  border: none;
+  border-radius: 0;
 }
 
-.btn-header-dropdown:focus,
-.btn-header-dropdown:hover {
+.navbar-nav .action-button:focus,
+.navbar-nav .action-button:hover {
   color: #fff;
   background-color: #555299;
 }
