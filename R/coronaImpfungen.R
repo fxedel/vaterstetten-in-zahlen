@@ -6,6 +6,18 @@ library(scales)
 einwohnerZahlLkEbe <- 144091 # as of 2020-12-31, Bayerisches Landesamt für Statistik
 buergerAb80LkEbe <- 9430 # as of 2021-01-08
 
+germanNumberFormat <- function(x, accuracy = 1, scale = 1, prefix = "", suffix = "") {
+  number(
+    x,
+    accuracy = accuracy,
+    scale = scale,
+    prefix = prefix,
+    suffix = suffix,
+    decimal.mark = ",",
+    big.mark = "."
+  )
+}
+
 impfungenRaw <- read_delim(
   file = "data/corona-impfungen/impfungenLandkreis.csv",
   delim = ",",
@@ -250,8 +262,8 @@ server <- function(id) {
       output$valueBox1 <- renderValueBox({
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
         valueBox(
-          paste0(format(round(lastRow$erstimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1, decimal.mark = ",", big.mark = "."), "%"),
-          paste0("Erstimpfquote (absolut: ", format(lastRow$erstimpfungen, decimal.mark = ",", big.mark = "."), ")"),
+          germanNumberFormat(lastRow$erstimpfungen / einwohnerZahlLkEbe, accuracy = 0.1, scale = 100, suffix = "%"),
+          paste0("Erstimpfquote (absolut: ", germanNumberFormat(lastRow$erstimpfungen), ")"),
           color = "purple",
           icon = icon("star-half-alt")
         )
@@ -260,8 +272,8 @@ server <- function(id) {
       output$valueBox2 <- renderValueBox({
         lastRow <- impfungenMerged %>% filter(!is.na(zweitimpfungen)) %>% slice_tail()
         valueBox(
-          paste0(format(round(lastRow$zweitimpfungen / einwohnerZahlLkEbe * 100, 1), nsmall = 1, decimal.mark = ",", big.mark = "."), "%"),
-          paste0("Zweitimpfquote (absolut: ", format(lastRow$zweitimpfungen, decimal.mark = ",", big.mark = "."), ")"),
+          germanNumberFormat(lastRow$zweitimpfungen / einwohnerZahlLkEbe, accuracy = 0.1, scale = 100, suffix = "%"),
+          paste0("Zweitimpfquote (absolut: ", germanNumberFormat(lastRow$zweitimpfungen), ")"),
           color = "purple",
           icon = icon("star")
         )
@@ -270,7 +282,7 @@ server <- function(id) {
       output$valueBox3 <- renderValueBox({
         lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
         valueBox(
-          format(round(lastRow$impfidenz, 1), nsmall = 1, decimal.mark = ",", big.mark = "."),
+          germanNumberFormat(lastRow$impfidenz, accuracy = 0.1),
           paste0("7-Tage-Impfidenz (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")"),
           color = "purple",
           icon = icon("tachometer-alt")
@@ -288,7 +300,7 @@ server <- function(id) {
       })
       output$geimpfteText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-        paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", format(lastRow$erstimpfungen, decimal.mark = ",", big.mark = "."), " Menschen mindestens eine Erstimpfung erhalten, davon ", format(lastRow$zweitimpfungen, decimal.mark = ",", big.mark = "."), " auch schon eine Zweitimpfung.")
+        paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", germanNumberFormat(lastRow$erstimpfungen), " Menschen mindestens eine Erstimpfung erhalten, davon ", germanNumberFormat(lastRow$zweitimpfungen), " eine Zweitimpfung und ", germanNumberFormat(lastRow$drittimpfungen), " eine Drittimpfung.")
       })
 
       output$impfdosenPlotly <- renderPlotly({
@@ -300,7 +312,7 @@ server <- function(id) {
       })
       output$impfdosenText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfdosen)) %>% slice_tail()
-        paste0("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", format(lastRow$impfdosen, decimal.mark = ",", big.mark = "."), " Impfdosen verabreicht.")
+        paste0("Bislang (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden im Landkreis Ebersberg ", germanNumberFormat(lastRow$impfdosen), " Impfdosen verabreicht.")
       })
 
       output$impfidenzPlotly <- renderPlotly({
@@ -313,7 +325,7 @@ server <- function(id) {
       })
       output$impfidenzText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
-        paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", format(lastRow$impfidenz, nsmall = 1, decimal.mark = ",", big.mark = "."), ".")
+        paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", germanNumberFormat(lastRow$impfidenz, accuracy = 0.1), ".")
       })
 
       output$impfdosenProTagPlotly <- renderPlotly({
@@ -328,7 +340,7 @@ server <- function(id) {
       })
       output$impfdosenProTagText <- renderText({
         lastRow <- impfungenMerged %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
-        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", format(round(lastRow$impfdosenNeuProTag), decimal.mark = ",", big.mark = "."), " Impfdosen pro Tag verabreicht. Die schwarze Linie gibt das 7-Tage-Mittel an.")
+        paste0("Zuletzt (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") wurden ", germanNumberFormat(lastRow$impfdosenNeuProTag, accuracy = 1), " Impfdosen pro Tag verabreicht.")
       })
 
       output$impfdosenProTagNachEinrichtungPlotly <- renderPlotly({
@@ -346,7 +358,7 @@ server <- function(id) {
           summarise(impfdosen7Tage = sum(impfdosenNeu), datum = max(datum)) %>%
           pivot_wider(names_from = einrichtung, values_from = impfdosen7Tage)
 
-        paste0("In den letzen 7 Tagen (Stand:\u00A0", format(impfdosen7Tage$datum, "%d.%m.%Y"), ") wurden ", format(round(impfdosen7Tage$Impfzentrum), decimal.mark = ",", big.mark = "."), " Impfdosen im Impfzentrum, ", format(round(impfdosen7Tage$Praxis), decimal.mark = ",", big.mark = "."), " Impfdosen in Arztpraxen und ", format(round(impfdosen7Tage$Kreisklinik), decimal.mark = ",", big.mark = "."), " Impfdosen in der Kreisklinik verabreicht.")
+        paste0("In den letzen 7 Tagen (Stand:\u00A0", format(impfdosen7Tage$datum, "%d.%m.%Y"), ") wurden ", germanNumberFormat(impfdosen7Tage$Impfzentrum), " Impfdosen im Impfzentrum, ", germanNumberFormat(impfdosen7Tage$Praxis, accuracy = 1), " Impfdosen in Arztpraxen und ", germanNumberFormat(impfdosen7Tage$Kreisklinik, accuracy = 1), " Impfdosen in der Kreisklinik verabreicht.")
       })
 
       output$erstgeimpfteAlterPlotly <- renderPlotly({
