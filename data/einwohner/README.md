@@ -67,7 +67,7 @@ Der Datensatz [lfstatVolkszaehlungen.csv](./lfstatVolkszaehlungen.csv) umfasst d
 
 Der Datensatz [lfstatVorausberechnung2019.csv](./lfstatVorausberechnung2019.csv) umfasst vorausberechnete Bevölkerungszahlen bis 2033 auf Basis des Jahres 2019.
 
-Siehe [../quellen/LfStat.md#Vorausberechnung] für Details.
+Siehe [../quellen/LfStat.md#Vorausberechnung](../quellen/LfStat.md#Vorausberechnung) für Details.
 
 |Spalte|Format|Beschreibung
 |-|-|-

@@ -2,7 +2,7 @@
 
 Die Veröffentlichungen und Daten des Bayerischen Landesamtes für Statistik stehen unter einer Creative Commons Namensnennung 3.0 Deutschland Lizenz (CC BY 3.0 DE) (siehe [Impressum](https://www.statistikdaten.bayern.de/genesis/online?Menu=Impressum)).
 
-Die Namensnennung des Bayerischen Landesamtes für Statistik als Rechteinhaber hat in folgender Weise zu erfolgen: „Datenquelle: Bayerisches Landesamt für Statistik - www.statistik.bayern.de“
+Die Namensnennung des Bayerischen Landesamtes für Statistik als Rechteinhaber hat in folgender Weise zu erfolgen: „Datenquelle: Bayerisches Landesamt für Statistik - [www.statistik.bayern.de](www.statistik.bayern.de)“
 
 ## Veröffentlichtung „Statistik kommunal“ für Vaterstetten
 
