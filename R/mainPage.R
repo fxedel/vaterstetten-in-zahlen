@@ -2,6 +2,8 @@ corona <- new.env()
 sys.source("R/corona.R", envir = corona, chdir = FALSE)
 coronaImpfungen <- new.env()
 sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
+einwohner <- new.env()
+sys.source("R/einwohner.R", envir = einwohner, chdir = FALSE)
 
 ui <- function(request, id) {
   ns <- NS(id)
@@ -28,6 +30,14 @@ ui <- function(request, id) {
     ),
 
     fluidRow(
+      box(
+        title = "Einwohner in Vaterstetten",
+        width = 6,
+        tagList(
+          valueBoxOutput(ns("valueBoxEinwohner"), width = 12),
+          actionButton(ns("buttonEinwohner"), "Zu den Einwohnerstatistiken", icon = icon("users"), width = "100%")
+        )
+      ),
       box(
         width = 6,
         tagList(
@@ -64,11 +74,25 @@ server <- function(id, parentSession) {
         )
       })
 
+      output$valueBoxEinwohner <- renderValueBox({
+        lastRow <- einwohner$lfstatBevoelkerungCombined %>% filter(!is.na(bevoelkerung)) %>% slice_tail()
+        valueBox(
+          format(lastRow$bevoelkerung, decimal.mark = ",", big.mark = "."),
+          paste0("Einwohner (", format(lastRow$stichtag, "%d.%m.%Y"), ")"),
+          color = "purple",
+          icon = icon("users"),
+          href = "/?tab=einwohner"
+        )
+      })
+
       observeEvent(input$buttonCorona, {
         updateTabsetPanel(parentSession, "tab", selected = "corona")
       })
       observeEvent(input$buttonCoronaImpfungen, {
         updateTabsetPanel(parentSession, "tab", selected = "coronaImpfungen")
+      })
+      observeEvent(input$buttonEinwohner, {
+        updateTabsetPanel(parentSession, "tab", selected = "einwohner")
       })
     }
   )
