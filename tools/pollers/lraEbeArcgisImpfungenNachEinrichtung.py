@@ -74,6 +74,15 @@ def filter_duplicate_days(features: List[Feature]):
 def map_nach_einrichtung(feature: Feature):
   attrs = feature.attributes.copy()
 
+  if abs(none_to_zero(attrs['I1_SummeGeschlecht']) - none_to_zero(attrs['I1_SummeAlter'])):
+    raise Exception('Implausible data (I1_SummeGeschlecht and I1_SummeAlter too different): %s' % feature)
+
+  if abs(none_to_zero(attrs['I2_SummeGeschlecht']) - none_to_zero(attrs['I2_SummeAlter'])):
+    raise Exception('Implausible data (I2_SummeGeschlecht and I2_SummeAlter too different): %s' % feature)
+
+  if abs(none_to_zero(attrs['I3_SummeGeschlecht']) - none_to_zero(attrs['I3_SummeAlter'])):
+    raise Exception('Implausible data (I3_SummeGeschlecht and I3_SummeAlter too different): %s' % feature)
+
   row = {
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
     'einrichtung': str(attrs['Einrichtung']),
@@ -95,6 +104,17 @@ def map_nach_geschlecht(feature: Feature):
   if attrs['I1_SummeGeschlecht'] is None or attrs['I1_SummeGeschlecht'] == 0:
     return []
 
+  geschlechter = ['Weiblich', 'Maennlich', 'Divers']
+
+  if attrs['I1_SummeGeschlecht'] != sum([attrs['I1_' + column] for column in geschlechter]):
+    raise Exception('Implausible data (I1_SummeGeschlecht wrong): %s' % feature)
+
+  if attrs['I2_SummeGeschlecht'] != sum([attrs['I2_' + column] for column in geschlechter]):
+    raise Exception('Implausible data (I2_SummeGeschlecht wrong): %s' % feature)
+
+  if attrs['I3_SummeGeschlecht'] != sum([attrs['I3_' + column] for column in geschlechter]):
+    raise Exception('Implausible data (I3_SummeGeschlecht wrong): %s' % feature)
+
   return [{
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
     'einrichtung': str(attrs['Einrichtung']),
@@ -102,7 +122,7 @@ def map_nach_geschlecht(feature: Feature):
     'erstimpfungen': str(attrs['I1_' + geschlecht]),
     'zweitimpfungen': str(attrs['I2_' + geschlecht]),
     'drittimpfungen': str(none_to_zero(attrs['I3_' + geschlecht])),
-  } for geschlecht in ['Weiblich', 'Maennlich', 'Divers']]
+  } for geschlecht in geschlechter]
 
 def map_nach_alter(feature: Feature):
   attrs = feature.attributes.copy()
@@ -120,6 +140,15 @@ def map_nach_alter(feature: Feature):
     'Alter70_80': '70-79',
     'Alter80': '80+',
   }
+
+  if attrs['I1_SummeAlter'] != sum([attrs['I1_' + column] for column in altersgruppen.items()]):
+    raise Exception('Implausible data (I1_SummeAlter wrong): %s' % feature)
+
+  if attrs['I2_SummeAlter'] != sum([attrs['I2_' + column] for column in altersgruppen.items()]):
+    raise Exception('Implausible data (I2_SummeAlter wrong): %s' % feature)
+
+  if attrs['I3_SummeAlter'] != sum([attrs['I3_' + column] for column in altersgruppen.items()]):
+    raise Exception('Implausible data (I3_SummeAlter wrong): %s' % feature)
 
   return [{
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
