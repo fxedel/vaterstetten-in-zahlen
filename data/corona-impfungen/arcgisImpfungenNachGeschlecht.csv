@@ -449,9 +449,9 @@ datum,einrichtung,geschlecht,erstimpfungen,zweitimpfungen,drittimpfungen
 2021-10-03,Impfzentrum,Weiblich,28045,25765,223
 2021-10-03,Impfzentrum,Maennlich,24630,22622,220
 2021-10-03,Impfzentrum,Divers,25,20,0
-2021-10-04,Impfzentrum,Weiblich,28078,28078,271
-2021-10-04,Impfzentrum,Maennlich,24636,24636,240
-2021-10-04,Impfzentrum,Divers,25,25,0
+2021-10-04,Impfzentrum,Weiblich,28078,NA,271
+2021-10-04,Impfzentrum,Maennlich,24636,NA,240
+2021-10-04,Impfzentrum,Divers,25,NA,0
 2021-10-05,Impfzentrum,Weiblich,28101,25876,286
 2021-10-05,Impfzentrum,Maennlich,24651,22737,262
 2021-10-05,Impfzentrum,Divers,25,20,0
@@ -632,6 +632,3 @@ datum,einrichtung,geschlecht,erstimpfungen,zweitimpfungen,drittimpfungen
 2021-12-04,Impfzentrum,Weiblich,30300,27774,9927
 2021-12-04,Impfzentrum,Maennlich,26951,24954,8881
 2021-12-04,Impfzentrum,Divers,27,20,7
-2021-12-05,Impfzentrum,Weiblich,30363,27821,10339
-2021-12-05,Impfzentrum,Maennlich,26999,24994,0
-2021-12-05,Impfzentrum,Divers,27,20,7
