@@ -132,6 +132,10 @@ def apply_manual_fixes(features: List[Feature]):
         attrs['I2_Alter70_80'] = None
         attrs['I2_Alter80'] = None
         attrs['I2_SummeAlter'] = None
+      elif datum == '2021-12-05':
+        # I3_Maennlich is zero, but I3_Weiblich and I3_Divers are not
+        attrs['I3_Maennlich'] = 9296 # = Drittimpfungen_proTyp - I3_Weiblich - I3_Divers = 19642 - 10339 - 7
+        attrs['I3_SummeGeschlecht'] = 19642 # = Drittimpfungen_proTyp = I3_SummeAlter
     elif einrichtung == 'Praxis':
       if datum == '2021-04-21':
         # I1_*, I2_* are all zero, but should be None/NA.
