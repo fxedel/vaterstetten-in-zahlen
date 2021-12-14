@@ -230,19 +230,19 @@ def check_cumulative_plausability(features: List[Feature]):
 def map_nach_einrichtung(feature: Feature):
   attrs = feature.attributes.copy()
 
-  # SummeGeschlecht and SummeAlter may be off by one or two days, which should be less than 2000 vaccinations.
+  # SummeGeschlecht and SummeAlter may be off by one or two days, which should be less than 4000 vaccinations.
   # Furthermore, they might me a little bit (up to 20 vaccinations) ahead (probably because of slightly different times of survey).
-  if attrs['I1_SummeGeschlecht'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeGeschlecht'] >= attrs['Erstimpfungen_proTyp'] - 2000:
+  if attrs['I1_SummeGeschlecht'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeGeschlecht'] >= attrs['Erstimpfungen_proTyp'] - 4000:
     raise Exception('Implausible data (I1_SummeGeschlecht and Erstimpfungen_proTyp): %s' % feature)
-  if attrs['I2_SummeGeschlecht'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeGeschlecht'] >= attrs['Zweitimpfungen_proTyp'] - 2000:
+  if attrs['I2_SummeGeschlecht'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeGeschlecht'] >= attrs['Zweitimpfungen_proTyp'] - 4000:
     raise Exception('Implausible data (I2_SummeGeschlecht and Zweitimpfungen_proTyp): %s' % feature)
-  if attrs['I3_SummeGeschlecht'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeGeschlecht'] >= attrs['Drittimpfungen_proTyp'] - 2000:
+  if attrs['I3_SummeGeschlecht'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeGeschlecht'] >= attrs['Drittimpfungen_proTyp'] - 4000:
     raise Exception('Implausible data (I3_SummeGeschlecht and Drittimpfungen_proTyp): %s' % feature)
-  if attrs['I1_SummeAlter'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeAlter'] >= attrs['Erstimpfungen_proTyp'] - 2000:
+  if attrs['I1_SummeAlter'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeAlter'] >= attrs['Erstimpfungen_proTyp'] - 4000:
     raise Exception('Implausible data (I1_SummeAlter and Erstimpfungen_proTyp): %s' % feature)
-  if attrs['I2_SummeAlter'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeAlter'] >= attrs['Zweitimpfungen_proTyp'] - 2000:
+  if attrs['I2_SummeAlter'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeAlter'] >= attrs['Zweitimpfungen_proTyp'] - 4000:
     raise Exception('Implausible data (I2_SummeAlter and Zweitimpfungen_proTyp): %s' % feature)
-  if attrs['I3_SummeAlter'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeAlter'] >= attrs['Drittimpfungen_proTyp'] - 2000:
+  if attrs['I3_SummeAlter'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeAlter'] >= attrs['Drittimpfungen_proTyp'] - 4000:
     raise Exception('Implausible data (I3_SummeAlter and Drittimpfungen_proTyp): %s' % feature)
 
   row = {
