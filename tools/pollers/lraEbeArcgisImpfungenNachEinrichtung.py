@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import Any, List, Optional
 from arcgis.features import FeatureLayer
 from arcgis.features.feature import Feature
 from datetime import datetime
@@ -82,89 +82,116 @@ def apply_manual_fixes(features: List[Feature]):
     if einrichtung == 'Impfzentrum':
       if datum == '2021-07-24':
         # Summing I2_Alter* attributes up actually gives 37181.
-        attrs['I2_SummeAlter'] = 37181 # used to be 37180
+        replace_attr_value(feature, 'I2_SummeAlter', 37180, 37181) 
       elif datum == '2021-08-24':
         # I2_Alter50_60 has an extra 0
-        attrs['I2_Alter50_60'] = 8057 # used to be 80570
-        attrs['I2_SummeAlter'] = 44151
+        replace_attr_value(feature, 'I2_Alter50_60', 80570, 8057)
+        replace_attr_value(feature, 'I2_SummeAlter', 116664, attrs['I2_SummeAlter']-80570+8057)
       elif datum == '2021-09-13':
         # I1_Alter80 has the same value as I1_Alter70_80, so this is probably a copy-and-paste error since I1_Alter80 must be between 7693 and 7695, looking at previous and following day.
-        attrs['I1_Alter80'] = 7693
-        attrs['I1_SummeAlter'] = 51569
+        ensure_attr_value(feature, 'I1_Alter70_80', 7335)
+        replace_attr_value(feature, 'I1_Alter80', 7335, attrs['I1_SummeGeschlecht']-(attrs['I1_SummeAlter']-attrs['I1_Alter80']))
+        replace_attr_value(feature, 'I1_SummeAlter', 51211, attrs['I1_SummeGeschlecht'])
+        ensure_attr_value(feature, 'I1_SummeGeschlecht', 51569)
         # Furthermore, I2_Alter* are all zero, but should be None/NA.
-        attrs['I2_Alter20'] = None
-        attrs['I2_Alter20_30'] = None
-        attrs['I2_Alter30_40'] = None
-        attrs['I2_Alter40_50'] = None
-        attrs['I2_Alter50_60'] = None
-        attrs['I2_Alter60_70'] = None
-        attrs['I2_Alter70_80'] = None
-        attrs['I2_Alter80'] = None
-        attrs['I2_SummeAlter'] = None
+        replace_attr_value(feature, 'I2_Alter20', 0, None)
+        replace_attr_value(feature, 'I2_Alter20_30', 0, None)
+        replace_attr_value(feature, 'I2_Alter30_40', 0, None)
+        replace_attr_value(feature, 'I2_Alter40_50', 0, None)
+        replace_attr_value(feature, 'I2_Alter50_60', 0, None)
+        replace_attr_value(feature, 'I2_Alter60_70', 0, None)
+        replace_attr_value(feature, 'I2_Alter70_80', 0, None)
+        replace_attr_value(feature, 'I2_Alter80', 0, None)
+        replace_attr_value(feature, 'I2_SummeAlter', 0, None)
       elif datum == '2021-09-14':
         # Summing I2_Alter* attributes up actually gives 46627.
-        attrs['I2_SummeAlter'] = 46627 # used to be 46622
+        replace_attr_value(feature, 'I2_SummeAlter', 46622, 46627)
       elif datum == '2021-10-04':
         # Impfungen_proTyp is simply wrong
-        attrs['Impfungen_proTyp'] = attrs['Erstimpfungen_proTyp']+attrs['Zweitimpfungen_proTyp']+none_to_zero(attrs['Drittimpfungen_proTyp'])
+        ensure_attr_value(feature, 'Erstimpfungen_proTyp', 52739)
+        ensure_attr_value(feature, 'Zweitimpfungen_proTyp', 48486)
+        ensure_attr_value(feature, 'Drittimpfungen_proTyp', 511)
+        replace_attr_value(feature, 'Impfungen_proTyp', 105989, attrs['Erstimpfungen_proTyp']+attrs['Zweitimpfungen_proTyp']+none_to_zero(attrs['Drittimpfungen_proTyp']))
         # I2_* attributes have just the same values as I1_* attributes.
-        attrs['I2_Weiblich'] = None
-        attrs['I2_Maennlich'] = None
-        attrs['I2_Divers'] = None
-        attrs['I2_SummeGeschlecht'] = None
-        attrs['I2_Alter20'] = None
-        attrs['I2_Alter20_30'] = None
-        attrs['I2_Alter30_40'] = None
-        attrs['I2_Alter40_50'] = None
-        attrs['I2_Alter50_60'] = None
-        attrs['I2_Alter60_70'] = None
-        attrs['I2_Alter70_80'] = None
-        attrs['I2_Alter80'] = None
-        attrs['I2_SummeAlter'] = None
+        replace_attr_value(feature, 'I2_Weiblich', attrs['I1_Weiblich'], None)
+        replace_attr_value(feature, 'I2_Maennlich', attrs['I1_Maennlich'], None)
+        replace_attr_value(feature, 'I2_Divers', attrs['I1_Divers'], None)
+        replace_attr_value(feature, 'I2_SummeGeschlecht', attrs['I1_SummeGeschlecht'], None)
+        replace_attr_value(feature, 'I2_Alter20', attrs['I1_Alter20'], None)
+        replace_attr_value(feature, 'I2_Alter20_30', attrs['I1_Alter20_30'], None)
+        replace_attr_value(feature, 'I2_Alter30_40', attrs['I1_Alter30_40'], None)
+        replace_attr_value(feature, 'I2_Alter40_50', attrs['I1_Alter40_50'], None)
+        replace_attr_value(feature, 'I2_Alter50_60', attrs['I1_Alter50_60'], None)
+        replace_attr_value(feature, 'I2_Alter60_70', attrs['I1_Alter60_70'], None)
+        replace_attr_value(feature, 'I2_Alter70_80', attrs['I1_Alter70_80'], None)
+        replace_attr_value(feature, 'I2_Alter80', attrs['I1_Alter80'], None)
+        replace_attr_value(feature, 'I2_SummeAlter', attrs['I1_SummeAlter'], None)
       elif datum == '2021-10-12':
         # I2_Alter* are all zero, but should be None/NA.
-        attrs['I2_Alter20'] = None
-        attrs['I2_Alter20_30'] = None
-        attrs['I2_Alter30_40'] = None
-        attrs['I2_Alter40_50'] = None
-        attrs['I2_Alter50_60'] = None
-        attrs['I2_Alter60_70'] = None
-        attrs['I2_Alter70_80'] = None
-        attrs['I2_Alter80'] = None
-        attrs['I2_SummeAlter'] = None
+        replace_attr_value(feature, 'I2_Alter20', 0, None)
+        replace_attr_value(feature, 'I2_Alter20_30', 0, None)
+        replace_attr_value(feature, 'I2_Alter30_40', 0, None)
+        replace_attr_value(feature, 'I2_Alter40_50', 0, None)
+        replace_attr_value(feature, 'I2_Alter50_60', 0, None)
+        replace_attr_value(feature, 'I2_Alter60_70', 0, None)
+        replace_attr_value(feature, 'I2_Alter70_80', 0, None)
+        replace_attr_value(feature, 'I2_Alter80', 0, None)
+        replace_attr_value(feature, 'I2_SummeAlter', 0, None)
       elif datum == '2021-12-05':
         # I3_Maennlich is zero, but I3_Weiblich and I3_Divers are not
-        attrs['I3_Maennlich'] = 9296 # = Drittimpfungen_proTyp - I3_Weiblich - I3_Divers = 19642 - 10339 - 7
-        attrs['I3_SummeGeschlecht'] = 19642 # = Drittimpfungen_proTyp = I3_SummeAlter
+        ensure_attr_value(feature, 'I3_Weiblich', 10339)
+        replace_attr_value(feature, 'I3_Maennlich', 0, attrs['I3_SummeAlter']-attrs['I3_Weiblich']-attrs['I3_Divers'])
+        ensure_attr_value(feature, 'I3_Divers', 7)
+        replace_attr_value(feature, 'I3_SummeGeschlecht', 10346, attrs['I3_SummeAlter'])
+        ensure_attr_value(feature, 'I3_SummeAlter', 19642)
+      elif datum == '2021-12-13':
+        ensure_attr_value(feature, 'Erstimpfungen_proTyp', 58185)
+        ensure_attr_value(feature, 'Zweitimpfungen_proTyp', 54102)
+        ensure_attr_value(feature, 'Drittimpfungen_proTyp', 27028)
+        replace_attr_value(feature, 'Impfungen_proTyp', 142629, attrs['Erstimpfungen_proTyp']+attrs['Zweitimpfungen_proTyp']+attrs['Drittimpfungen_proTyp'])
+        ensure_attr_value(feature, 'I1_Weiblich', 30736)
+        replace_attr_value(feature, 'I1_Maennlich', 30736, attrs['I1_SummeAlter'] - attrs['I1_Weiblich'] - attrs['I1_Divers'])
+        ensure_attr_value(feature, 'I1_Divers', 27)
+        replace_attr_value(feature, 'I1_SummeGeschlecht', 61499, attrs['I1_SummeAlter'])
+        ensure_attr_value(feature, 'I1_SummeAlter', 58169)
+
     elif einrichtung == 'Praxis':
       if datum == '2021-04-21':
         # I1_*, I2_* are all zero, but should be None/NA.
-        attrs['I1_Weiblich'] = None
-        attrs['I1_Maennlich'] = None
-        attrs['I1_Divers'] = None
-        attrs['I1_SummeGeschlecht'] = None
-        attrs['I1_Alter20'] = None
-        attrs['I1_Alter20_30'] = None
-        attrs['I1_Alter30_40'] = None
-        attrs['I1_Alter40_50'] = None
-        attrs['I1_Alter50_60'] = None
-        attrs['I1_Alter60_70'] = None
-        attrs['I1_Alter70_80'] = None
-        attrs['I1_Alter80'] = None
-        attrs['I1_SummeAlter'] = None
-        attrs['I2_Weiblich'] = None
-        attrs['I2_Maennlich'] = None
-        attrs['I2_Divers'] = None
-        attrs['I2_SummeGeschlecht'] = None
-        attrs['I2_Alter20'] = None
-        attrs['I2_Alter20_30'] = None
-        attrs['I2_Alter30_40'] = None
-        attrs['I2_Alter40_50'] = None
-        attrs['I2_Alter50_60'] = None
-        attrs['I2_Alter60_70'] = None
-        attrs['I2_Alter70_80'] = None
-        attrs['I2_Alter80'] = None
-        attrs['I2_SummeAlter'] = None
+        replace_attr_value(feature, 'I1_Weiblich', 0, None)
+        replace_attr_value(feature, 'I1_Maennlich', 0, None)
+        replace_attr_value(feature, 'I1_Divers', 0, None)
+        replace_attr_value(feature, 'I1_SummeGeschlecht', 0, None)
+        replace_attr_value(feature, 'I1_Alter20', 0, None)
+        replace_attr_value(feature, 'I1_Alter20_30', 0, None)
+        replace_attr_value(feature, 'I1_Alter30_40', 0, None)
+        replace_attr_value(feature, 'I1_Alter40_50', 0, None)
+        replace_attr_value(feature, 'I1_Alter50_60', 0, None)
+        replace_attr_value(feature, 'I1_Alter60_70', 0, None)
+        replace_attr_value(feature, 'I1_Alter70_80', 0, None)
+        replace_attr_value(feature, 'I1_Alter80', 0, None)
+        replace_attr_value(feature, 'I1_SummeAlter', 0, None)
+        replace_attr_value(feature, 'I2_Weiblich', 0, None)
+        replace_attr_value(feature, 'I2_Maennlich', 0, None)
+        replace_attr_value(feature, 'I2_Divers', 0, None)
+        replace_attr_value(feature, 'I2_SummeGeschlecht', 0, None)
+        replace_attr_value(feature, 'I2_Alter20', 0, None)
+        replace_attr_value(feature, 'I2_Alter20_30', 0, None)
+        replace_attr_value(feature, 'I2_Alter30_40', 0, None)
+        replace_attr_value(feature, 'I2_Alter40_50', 0, None)
+        replace_attr_value(feature, 'I2_Alter50_60', 0, None)
+        replace_attr_value(feature, 'I2_Alter60_70', 0, None)
+        replace_attr_value(feature, 'I2_Alter70_80', 0, None)
+        replace_attr_value(feature, 'I2_Alter80', 0, None)
+        replace_attr_value(feature, 'I2_SummeAlter', 0, None)
+
+def ensure_attr_value(feature: Feature, attr_key: str, value: Any):
+  if feature.attributes[attr_key] != value:
+    raise Exception('Expected %s to be %s, but is %s:\n%s' % (attr_key, value, feature.attributes[attr_key], feature))
+
+def replace_attr_value(feature: Feature, attr_key: str, old_val: Any, new_val: Any):
+  ensure_attr_value(feature, attr_key, old_val)
+  feature.attributes[attr_key] = new_val
 
 def check_cumulative_plausability(features: List[Feature]):
   cumulative_attributes = [
