@@ -36,7 +36,8 @@ for key, pollerClass in pollers.all.items():
     poller = pollerClass(telegram_bot, telegram_public_chatid)
     poller.run()
 
-    print ('> Done.')
+    end = time.time()
+    print ('> Done after %.1fs.' % (end - start))
 
   except Exception as e:
     end = time.time()
