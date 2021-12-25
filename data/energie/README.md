@@ -14,6 +14,8 @@ Der Datensatz [mastrPhotovoltaik.csv](./mastrPhotovoltaik.csv) umfasst sämtlich
 |`inbetriebnahme`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Tatsächliche Inbetriebnahme der Anlage. Ist bei `status`=`In Planung` meist leer, da ist allerdings `inbetriebnahmeGeplant` gesetzt.
 |`inbetriebnahmeGeplant`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Geplante Inbetriebnahme der Anlage falls `status`=`In Planung`.
 |`stilllegung`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Endgültige Stilllegung der Anlage falls `status`=`Endgültig stillgelegt`.
+|`name`|text|Angegebener Name der PV-Anlage (nur bei Organisationen oder größeren Anlagen)
+|`betreiber`|text|Betreiber der PV-Anlage (nur bei Organisationen oder größeren Anlagen)
 |`plz`|`[0-9]{5}`|Standort: Postleitzahl
 |`ort`|text|Standort: Ortsname (`Baldham`, `Vaterstetten`, `Weißenfeld`, `Hergolding`, `Parsdorf`, `Purfing` oder `Neufarn`)
 |`strasse`|text|Standort: Straßenname (nur bei größeren Anlagen)
