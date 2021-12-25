@@ -61,6 +61,8 @@ def map_row(x: dict) -> dict:
     'inbetriebnahme': parse_date(x['InbetriebnahmeDatum']),
     'inbetriebnahmeGeplant': parse_date(x['GeplantesInbetriebsnahmeDatum']),
     'stilllegung': parse_date(x['EndgueltigeStilllegungDatum']),
+    'name': None,
+    'betreiber': None,
     'plz': x['Plz'],
     'ort': x['Ort'],
     'strasse': x['Strasse'],
