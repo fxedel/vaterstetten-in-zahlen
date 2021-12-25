@@ -61,8 +61,8 @@ def map_row(x: dict) -> dict:
     'inbetriebnahme': parse_date(x['InbetriebnahmeDatum']),
     'inbetriebnahmeGeplant': parse_date(x['GeplantesInbetriebsnahmeDatum']),
     'stilllegung': parse_date(x['EndgueltigeStilllegungDatum']),
-    'name': None,
-    'betreiber': None,
+    'name': x['EinheitName'] if is_public(x) else None,
+    'betreiber': x['AnlagenbetreiberName'] if is_public(x) else None,
     'plz': x['Plz'],
     'ort': x['Ort'],
     'strasse': x['Strasse'],
@@ -79,6 +79,51 @@ def map_row(x: dict) -> dict:
     'einspeisung': x['VollTeilEinspeisungBezeichnung'],
     'mieterstrom': str(x['MieterstromAngemeldet'] == True).lower(),
   }
+
+def is_public(x: dict) -> bool:
+  whitelist = [
+    "ABR985464955328", # Gemeinde Vaterstetten
+    "ABR920681169288", # 3E-eG Eigene Erneuerbare Energie Genossenschaft
+    "ABR982596453098", # 3E-eG Eigene Erneuerbare Energie Genossenschaft
+    "ABR935107317006", # Kath. Kirchenstiftung Maria Königin Baldham
+    "ABR923417495323", # Kath. Kirchenstiftung Vaterstetten
+    "ABR925649324174", # Kath. Siedlungswerk München
+    "ABR964895737925", # Großmann Erden GmbH
+    "ABR930947414953", # Energiehof Stefan Großmann-Neuhäusler
+    "ABR932247507397", # ENTEGA NATURpur AG / Gymnasium Vaterstetten
+    "ABR998244537751", # Bernhard Eschbaumer Forst- & Gartentechnik
+    "ABR978161481993", # Brenner Selbstklebetechnik
+    "ABR936688381776", # Raiffeisenbank Zorneding eG
+    "ABR981935485455", # Auer Baustoffe GmbH ＆ Co. KG
+    "ABR991822525591", # Landkreis Ebersberg
+    "ABR939016877651", # Eurytos Energie GmbH ＆ Co. KG
+    "ABR951481578482", # ibeko-solar GmbH
+  ]
+
+  if x['AnlagenbetreiberMaStRNummer'] in whitelist:
+    return True
+
+  blacklist = [
+    "ABR934178889290",
+  ]
+
+  if x['AnlagenbetreiberMaStRNummer'] in blacklist:
+    return False
+
+  if x['AnlagenbetreiberName'].startswith('natürliche Person'):
+    return False
+
+  if not x['IsAnonymisiert']: # IsAnonymisiert refers to whether Strasse and Ort are visible; this is true if Bruttoleistung >= 30 kWp
+    return True
+
+  if 'GbR' in x['AnlagenbetreiberName']: # GbR firms are mostly used personally, since German law sometimes requires house owners to found a business for their photovoltaic system
+    return False
+
+  if 'e.V.' in x['AnlagenbetreiberName'] or 'e. V.' in x['AnlagenbetreiberName'] or 'eG' in x['AnlagenbetreiberName']: # Vereine and Genossenschaften are public in general
+    return True
+
+  return False
+
 
 regex_date = r'^\/Date\(([0-9]+)\)\/$'
 
