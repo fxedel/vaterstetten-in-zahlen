@@ -1,11 +1,3 @@
-library(sf)
-library(readr)
-library(purrr)
-library(stringr)
-library(ggplot2)
-library(leaflet)
-library(plotly)
-
 stimmbezirke <- st_read("data/kommunalwahl2020/stimmbezirke.geojson") %>%
   transmute(
     stimmbezirk = name,
