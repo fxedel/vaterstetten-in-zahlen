@@ -12,7 +12,7 @@ class Poller(pollers.poller.Poller):
     csv_filename = os.path.join('energie', 'mastrPhotovoltaik.csv');
     current_rows = self.read_csv_rows(csv_filename)
 
-    req = requests.get('https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize=1000&group=&filter=Gemeinde~eq~\'Vaterstetten\'~and~Energieträger~eq~\'2495\'')
+    req = requests.get("https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize=1000&group=&filter=Gemeinde~eq~'Vaterstetten'~and~Energieträger~eq~'2495'")
 
     if req.status_code != 200:
       raise Exception('Can\'t access webpage: Status code ' + str(req.status_code))

@@ -1,8 +1,3 @@
-library(readr)
-library(dplyr)
-library(tidyr)
-library(scales)
-
 einwohnerZahlLkEbe <- 144091 # as of 2020-12-31, Bayerisches Landesamt für Statistik
 buergerAb80LkEbe <- 9430 # as of 2021-01-08
 
@@ -264,7 +259,7 @@ server <- function(id) {
         valueBox(
           germanNumberFormat(lastRow$erstimpfungen / einwohnerZahlLkEbe, accuracy = 0.1, scale = 100, suffix = "%"),
           paste0("Erstimpfquote (absolut: ", germanNumberFormat(lastRow$erstimpfungen), ")"),
-          color = "purple",
+          color = "blue",
           icon = icon("star-half-alt")
         )
       })
@@ -274,7 +269,7 @@ server <- function(id) {
         valueBox(
           germanNumberFormat(lastRow$zweitimpfungen / einwohnerZahlLkEbe, accuracy = 0.1, scale = 100, suffix = "%"),
           paste0("Zweitimpfquote (absolut: ", germanNumberFormat(lastRow$zweitimpfungen), ")"),
-          color = "purple",
+          color = "blue",
           icon = icon("star")
         )
       })
@@ -284,7 +279,7 @@ server <- function(id) {
         valueBox(
           germanNumberFormat(lastRow$impfidenz, accuracy = 0.1),
           paste0("7-Tage-Impfidenz (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")"),
-          color = "purple",
+          color = "blue",
           icon = icon("tachometer-alt")
         )
       })

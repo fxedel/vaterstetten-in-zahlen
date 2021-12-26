@@ -1,8 +1,3 @@
-library(readr)
-library(dplyr)
-library(tidyr)
-library(scales)
-
 einwohnerZahl <- 24404
 
 fallzahlen <- read_delim(
@@ -142,7 +137,7 @@ server <- function(id) {
         valueBox(
           sum(last7rows$neuPositiv),
           "Neue Fälle in den letzten 7 Tagen",
-          color = "purple",
+          color = "red",
           icon = icon("user-check")
         )
       })
@@ -152,7 +147,7 @@ server <- function(id) {
         valueBox(
           format(round(lastRow$inzidenz7tage, 1), nsmall = 1),
           "7-Tage-Inzidenz",
-          color = "purple",
+          color = "red",
           icon = icon("chart-line")
         )
       })
@@ -162,7 +157,7 @@ server <- function(id) {
         valueBox(
           format(lastRow$datum, "%-d. %b %Y"),
           "Datenstand des Gesundheitsamtes",
-          color = "purple",
+          color = "red",
           icon = icon("calendar-day")
         )
       })
