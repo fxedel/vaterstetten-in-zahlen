@@ -15,7 +15,7 @@ mastr <- read_delim(
     stilllegung = col_date(format = "%Y-%m-%d"),
     name = col_character(),
     betreiber = col_character(),
-    plz = col_character(), # this is actually an integer, but is treated like a string
+    plz = readr::col_factor(),
     ort = readr::col_factor(c("Baldham", "Vaterstetten", "Weißenfeld", "Hergolding", "Parsdorf", "Purfing", "Neufarn")),
     strasse = col_character(),
     hausnummer = col_character(),
@@ -36,6 +36,7 @@ mastr <- read_delim(
 anlagenKumulativ <- merge(
   mastr %>%
     filter(!is.na(inbetriebnahme)) %>%
+    filter(status != "In Planung") %>%
     group_by(inbetriebnahme) %>%
     summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n()) %>% # summarize installations of same day
     transmute(
