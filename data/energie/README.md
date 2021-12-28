@@ -2,7 +2,7 @@
 
 ## [`mastrPhotovoltaik.csv`](./mastrPhotovoltaik.csv)
 
-Der Datensatz [mastrPhotovoltaik.csv](./mastrPhotovoltaik.csv) umfasst sämtliche Photovoltaik-Anlagen in der Gemeinde Vaterstetten, die im [Markstammdatenregister](https://www.marktstammdatenregister.de) erfasst sind.
+Der Datensatz [mastrPhotovoltaik.csv](./mastrPhotovoltaik.csv) umfasst sämtliche Photovoltaik-Anlagen in der Gemeinde Vaterstetten, die im [Marktstammdatenregister](https://www.marktstammdatenregister.de) erfasst sind.
 
 |Spalte|Format|Beschreibung
 |-|-|-
