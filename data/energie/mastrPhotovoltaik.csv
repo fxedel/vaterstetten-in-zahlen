@@ -101,7 +101,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 1914813,SEE989282037709,,In Betrieb,2019-03-07,2008-12-03,,,Hausdach Pfarrzentrum,Kath. Kirchenstiftung Vaterstetten,85591,Vaterstetten,Dreitorspitzstraße,1,48.104,11.77,true,gebaeude,210,Süd,39.9,39.0,false,Volleinspeisung,false
 4454128,SEE923312821319,E21875011000000000000376051700000,In Betrieb,2021-04-26,2008-12-03,,,,,85598,Baldham,,,,,true,gebaeude,16,Süd,4.2,3.8,false,Volleinspeisung,false
 2779736,SEE926819271595,E21875011000000000000376264900000,In Betrieb,2020-02-10,2008-12-16,,,,,85591,Vaterstetten,,,,,true,gebaeude,480,Süd,31.2,27.6,false,Volleinspeisung,false
-4732894,SEE902788442631,E21875011000000000000376439500000,In Betrieb,2021-10-28,2008-12-19,,,,,85622,Weißenfeld,,,,,false,gebaeude,,Süd-Ost,19.44,19.44,false,Volleinspeisung,false
+4732894,SEE902788442631,E21875011000000000000376439500000,In Betrieb,2021-10-28,2008-12-19,,,,,85622,Weißenfeld,,,,,true,gebaeude,,Süd-Ost,19.44,19.44,false,Volleinspeisung,false
 4045907,SEE959664888083,,In Betrieb,2021-01-04,2008-12-30,,,,,85598,Baldham,,,,,true,gebaeude,21,Süd,4.62,4.0,false,Volleinspeisung,false
 3077066,SEE927020668716,E21041011000000000000377760700000,In Betrieb,2020-05-23,2009-04-17,,,,,85646,Neufarn,,,,,true,gebaeude,59,Süd,12.98,12.1,false,Volleinspeisung,false
 2639383,SEE906800930601,E21041011000000000000377677500000,In Betrieb,2019-12-29,2009-04-21,,,,,85599,Parsdorf,,,,,true,gebaeude,136,Süd,29.7,24.75,false,Volleinspeisung,false
@@ -837,7 +837,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4654167,SEE940569702109,,In Betrieb,2021-10-29,2021-09-03,,,,,85598,Baldham,,,,,false,gebaeude,13,West,4.94,4.94,false,Teileinspeisung,false
 4633835,SEE987431578967,,In Betrieb,2021-09-05,2021-09-05,,,,,85598,Baldham,,,,,false,gebaeude,15,Süd,4.95,4.95,false,Teileinspeisung,false
 4650849,SEE991238293732,,In Betrieb,2021-09-16,2021-09-08,,,,,85591,Vaterstetten,,,,,false,gebaeude,15,Ost,5.475,5.475,false,Teileinspeisung,false
-4719593,SEE926283433864,,In Betrieb,2021-10-22,2021-09-09,,,,,85591,Vaterstetten,,,,,false,gebaeude,19,Süd-West,6.08,6.0,false,Teileinspeisung,false
+4719593,SEE926283433864,,In Betrieb,2021-10-22,2021-09-09,,,,,85591,Vaterstetten,,,,,true,gebaeude,19,Süd-West,6.08,6.0,false,Teileinspeisung,false
 4692633,SEE937600631962,,In Betrieb,2021-10-11,2021-09-22,,,,,85591,Vaterstetten,,,,,false,gebaeude,24,Süd-Ost,9.0,9.0,false,Teileinspeisung,false
 4670369,SEE989400405656,,In Betrieb,2021-09-28,2021-09-23,,,,,85646,Neufarn,,,,,false,gebaeude,34,Ost,13.6,10.0,false,Teileinspeisung,false
 4680396,SEE976885731325,,In Betrieb,2021-10-04,2021-09-24,,,,,85591,Vaterstetten,,,,,false,gebaeude,25,Nord-Ost,9.375,8.2,false,Teileinspeisung,false
