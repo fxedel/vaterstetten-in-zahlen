@@ -48,7 +48,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 3589803,SEE948967068766,E21875011000000000000353118900000,In Betrieb,2020-12-09,2005-04-27,,,,,85599,Parsdorf,,,,,true,gebaeude,200,Süd,32.0,23.0,false,Volleinspeisung,false
 4435058,SEE903717301364,E21875011000000000000353823700000,In Betrieb,2021-04-13,2005-05-03,,,,,85591,Vaterstetten,,,,,true,gebaeude,8,Süd,1.0,0.85,false,Volleinspeisung,false
 2635469,SEE937955784399,E21875011000000000000353660100000,In Betrieb,2019-12-28,2005-05-04,,,Anlage 4,Energiehof Stefan Großmann-Neuhäusler,85599,Hergolding,,,,,true,gebaeude,90,West,30.0,23.0,false,Volleinspeisung,false
-3568890,SEE991637067583,E21875011000000000000354098200000,In Betrieb,2020-10-27,2005-06-22,,,,,85591,Vaterstetten,,,,,true,gebaeude,21,Süd,4.62,4.62,false,Volleinspeisung,false
+3568890,SEE991637067583,E21875011000000000000354098200000,In Betrieb,2020-10-27,2005-06-22,,,,,85591,Vaterstetten,,,,,false,gebaeude,21,Süd,4.62,4.62,false,Volleinspeisung,false
 2936962,SEE911972809631,,In Betrieb,2020-03-30,2005-07-04,,,,,85646,Purfing,,,,,true,gebaeude,168,Süd,30.24,30.0,false,Volleinspeisung,false
 3123552,SEE959147275812,E21875011000000000000355396000000,In Betrieb,2020-06-07,2005-09-22,,,,,85622,Weißenfeld,Gut Ammerthal,7,48.145588,11.763699,false,gebaeude,81,Süd-Ost,49.88,39.8,false,Volleinspeisung,false
 3762938,SEE949532771333,E21875011000000000000355760300000,In Betrieb,2020-11-30,2005-09-27,,,,,85646,Neufarn,,,,,true,gebaeude,182,Süd,22.75,20.7,false,Volleinspeisung,false
@@ -870,6 +870,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4789535,SEE900693865798,,In Betrieb,2021-12-20,2021-12-16,,,,,85598,Baldham,,,,,false,gebaeude,12,Süd-Ost,4.56,4.56,false,Teileinspeisung,false
 4825988,SEE908101916803,,In Betrieb,2021-12-18,2021-12-18,,,,,85598,Baldham,,,,,false,gebaeude,24,Süd,9.8,9.8,false,Teileinspeisung,false
 4834887,SEE998855954633,,In Betrieb,2021-12-25,2021-12-21,,,,,85598,Baldham,,,,,false,gebaeude,15,Süd-West,5.625,5.625,false,Teileinspeisung,false
+4843282,SEE942887805128,,In Betrieb,2022-01-04,2022-01-03,,,,,85591,Vaterstetten,,,,,false,gebaeude,39,Süd-West,14.625,14.625,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,false,Teileinspeisung,false
 4479221,SEE991149831160,,In Planung,2021-05-11,,2021-08-10,,,,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,false,Teileinspeisung,false
