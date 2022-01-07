@@ -48,7 +48,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 3589803,SEE948967068766,E21875011000000000000353118900000,In Betrieb,2020-12-09,2005-04-27,,,,,85599,Parsdorf,,,,,true,gebaeude,200,Süd,32.0,23.0,false,Volleinspeisung,false
 4435058,SEE903717301364,E21875011000000000000353823700000,In Betrieb,2021-04-13,2005-05-03,,,,,85591,Vaterstetten,,,,,true,gebaeude,8,Süd,1.0,0.85,false,Volleinspeisung,false
 2635469,SEE937955784399,E21875011000000000000353660100000,In Betrieb,2019-12-28,2005-05-04,,,Anlage 4,Energiehof Stefan Großmann-Neuhäusler,85599,Hergolding,,,,,true,gebaeude,90,West,30.0,23.0,false,Volleinspeisung,false
-3568890,SEE991637067583,E21875011000000000000354098200000,In Betrieb,2020-10-27,2005-06-22,,,,,85591,Vaterstetten,,,,,false,gebaeude,21,Süd,4.62,4.62,false,Volleinspeisung,false
+3568890,SEE991637067583,E21875011000000000000354098200000,In Betrieb,2020-10-27,2005-06-22,,,,,85591,Vaterstetten,,,,,true,gebaeude,21,Süd,4.62,4.62,false,Volleinspeisung,false
 2936962,SEE911972809631,,In Betrieb,2020-03-30,2005-07-04,,,,,85646,Purfing,,,,,true,gebaeude,168,Süd,30.24,30.0,false,Volleinspeisung,false
 3123552,SEE959147275812,E21875011000000000000355396000000,In Betrieb,2020-06-07,2005-09-22,,,,,85622,Weißenfeld,Gut Ammerthal,7,48.145588,11.763699,false,gebaeude,81,Süd-Ost,49.88,39.8,false,Volleinspeisung,false
 3762938,SEE949532771333,E21875011000000000000355760300000,In Betrieb,2020-11-30,2005-09-27,,,,,85646,Neufarn,,,,,true,gebaeude,182,Süd,22.75,20.7,false,Volleinspeisung,false
@@ -511,7 +511,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 3869193,SEE983963051831,E2104101S000000000000048641200001,In Betrieb,2020-12-13,2018-06-15,,,,,85591,Vaterstetten,,,,,true,gebaeude,32,Süd-Ost,9.76,9.76,false,Teileinspeisung,false
 2718311,SEE910154188571,E21041011000000000000248898700001,In Betrieb,2020-01-25,2018-07-03,,,,,85598,Baldham,,,,,true,gebaeude,14,Süd,4.2,4.0,false,Teileinspeisung,false
 3555165,SEE951913302753,E21041011000000000000247253600001,In Betrieb,2020-10-24,2018-07-18,,,,,85622,Weißenfeld,,,,,true,gebaeude,22,West,7.2,7.0,false,Volleinspeisung,false
-4430858,SEE923910832748,,In Betrieb,2021-04-11,2018-07-20,,,,,85598,Baldham,,,,,false,gebaeude,32,Ost-West,9.92,3.0,false,Teileinspeisung,false
+4430858,SEE923910832748,,In Betrieb,2021-04-11,2018-07-20,,,,,85598,Baldham,,,,,true,gebaeude,32,Ost-West,9.92,3.0,false,Teileinspeisung,false
 1798604,SEE905978054591,,In Betrieb,2019-01-31,2018-07-27,,,,,85591,Vaterstetten,,,,,true,gebaeude,27,Süd,7.425,7.425,false,Teileinspeisung,false
 4066808,SEE960545986910,E21041011000000000000259510200001,In Betrieb,2021-01-06,2018-07-27,,,,,85599,Parsdorf,,,,,true,gebaeude,15,Süd,4.8,4.0,false,Teileinspeisung,false
 1907914,SEE941784673557,E2104101S000000000000097924700001,In Betrieb,2019-03-05,2018-07-31,,,,,85646,Neufarn,,,,,true,gebaeude,16,West,5.365,4.0,false,Teileinspeisung,false
