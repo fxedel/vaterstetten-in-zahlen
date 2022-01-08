@@ -3,3 +3,7 @@ $(document).on('shiny:inputchanged', function(event) {
         window.dispatchEvent(new CustomEvent("resize"));
     }
 });
+
+$(document).on('shiny:disconnected', function(event) {
+    location.reload();
+});
