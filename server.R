@@ -1,6 +1,7 @@
 library(dplyr)
 library(ggplot2)
 library(leaflet)
+library(lubridate)
 library(plotly)
 library(purrr)
 library(readr)
@@ -62,6 +63,8 @@ ui <- function(request) {
       tags$head(
         tags$link(rel = "stylesheet", type = "text/css", href = "assets/style.css"),
 
+        tags$script(type = "text/javascript", src = "assets/script.js"),
+        
         tags$link(rel = "icon", type = "image/png", href = "/assets/logo_32x32.png", sizes = "32x32"),
         tags$link(rel = "icon", type = "image/png", href = "/assets/logo_128x128.png", sizes = "128x128"),
         tags$link(rel = "icon", type = "image/png", href = "/assets/logo_152x152.png", sizes = "152x152"),

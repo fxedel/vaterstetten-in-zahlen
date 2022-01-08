@@ -31,7 +31,22 @@ mastr <- read_delim(
     einspeisung = readr::col_factor(c("Teileinspeisung", "Volleinspeisung")),
     mieterstrom = col_logical()
   )
-)
+) %>%
+  mutate(
+    anlagenGroesse = cut(
+      bruttoleistung_kW,
+      breaks = c(0, 10, 100, Inf),
+      labels = c("Kleine Anlagen (<10kW)", "Mittlere Anlagen (10-100kW)", "Große Anlagen (>=100kW)"), 
+      include.lowest = TRUE
+    )
+  ) %>%
+  identity()
+
+installationenNachJahrGroesse <- mastr %>%
+  filter(!is.na(inbetriebnahme)) %>%
+  group_by(year = year(inbetriebnahme), anlagenGroesse) %>%
+  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+  identity()
 
 anlagenKumulativ <- merge(
   mastr %>%
@@ -139,14 +154,37 @@ plotlyLeistung <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"
   layout(yaxis = list(exponentformat = "none", ticksuffix = " MWp")) %>%
   plotly_axis_spacing(anlagenKumulativ$datum, left = 0, right = 0.02) %>%
   plotly_default_config() %>%
-  plotly_hide_axis_titles()
+  plotly_hide_axis_titles() %>%
+  plotly_build() %>%
+  identity()
 
 plotlyAnlagen <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"), yhoverformat = ",d", height = 350) %>%
   add_trace(y = ~anlagenStillgelegt, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#ff0000"), name = "Stillgelegt") %>%
   add_trace(y = ~anlagenInBetrieb, type = "scatter", mode = "lines", fill = 'tonexty', color = I("#0570b0"), name = "In Betrieb") %>%
   plotly_axis_spacing(anlagenKumulativ$datum, left = 0, right = 0.02) %>%
   plotly_default_config() %>%
-  plotly_hide_axis_titles()
+  plotly_hide_axis_titles() %>%
+  plotly_build() %>%
+  identity()
+
+plotlyLeistungNachJahrGroesse <- plot_ly(installationenNachJahrGroesse, x = ~year, yhoverformat = ",.0f", height = 350) %>%
+  add_trace(y = ~bruttoleistung_kW, type = "bar", color = ~anlagenGroesse) %>%
+  layout(yaxis = list(exponentformat = "none", ticksuffix = " kWp")) %>%
+  layout(barmode = 'stack') %>%
+  plotly_axis_spacing(installationenNachJahrGroesse$year, left = 0, right = 0.02) %>%
+  plotly_default_config() %>%
+  plotly_hide_axis_titles() %>%
+  plotly_build() %>%
+  identity()
+
+plotlyAnlagenNachJahrGroesse <- plot_ly(installationenNachJahrGroesse, x = ~year, yhoverformat = ",d", height = 350) %>%
+  add_trace(y = ~anlagen, type = "bar", color = ~anlagenGroesse) %>%
+  layout(barmode = 'stack') %>%
+  plotly_axis_spacing(installationenNachJahrGroesse$year, left = 0, right = 0.02) %>%
+  plotly_default_config() %>%
+  plotly_hide_axis_titles() %>%
+  plotly_build() %>%
+  identity()
 
 ui <- function(request, id) {
   ns <- NS(id)
@@ -167,6 +205,17 @@ ui <- function(request, id) {
       box(
         title = "Installierte Photovoltaik-Anlagen",
         plotlyAnlagen
+      ),
+    ),
+
+    fluidRow(
+      box(
+        title = "Neu installierte Leistung nach Jahr",
+        plotlyLeistungNachJahrGroesse
+      ),
+      box(
+        title = "Neu installierte Anlagen nach Jahr",
+        plotlyAnlagenNachJahrGroesse
       ),
     ),
 
