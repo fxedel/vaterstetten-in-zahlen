@@ -5,5 +5,8 @@ $(document).on('shiny:inputchanged', function(event) {
 });
 
 $(document).on('shiny:disconnected', function(event) {
-    location.reload();
+    // reload page after 10s
+    setTimeout(() => {
+        location.reload();
+    }, 10*1000);
 });
