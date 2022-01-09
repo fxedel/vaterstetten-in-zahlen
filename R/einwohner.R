@@ -81,10 +81,11 @@ ui <- function(request, id) {
     fluidRow(
       box(
         title = "Datengrundlage",
+        width = 12,
         status = "primary",
         solidHeader = TRUE,
         tagList(
-          p(HTML('Datenquelle: Bayerisches Landesamt für Statistik – <a href="https://www.statistik.bayern.de">www.statistik.bayern.de</a>. '))
+          p(HTML('Datenquelle: Bayerisches Landesamt für Statistik – <a href="https://www.statistik.bayern.de">www.statistik.bayern.de</a>.'))
         ),
       ),
     ),
