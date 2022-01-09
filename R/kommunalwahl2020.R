@@ -34,7 +34,7 @@ gemeinderatParteien <- parteien %>%
 ui <- function(request, id) {
   ns <- NS(id)
   tagList(
-    h2("Kommunalwahl März 2020 in Vaterstetten"),
+    h2("Kommunalwahl März 2020 in der Gemeinde Vaterstetten"),
 
     fluidRow(
       box(

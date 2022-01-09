@@ -16,7 +16,7 @@ fallzahlenArcGIS <- read_csv("data/corona-fallzahlen/arcgisInzidenzGemeinden.csv
 ui <- function(request, id) {
   ns <- NS(id)
   tagList(
-    h2("Corona-Fallzahlen in Vaterstetten"),
+    h2("Corona-Fallzahlen in der Gemeinde Vaterstetten"),
 
     fluidRow(
       box(

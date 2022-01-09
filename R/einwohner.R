@@ -59,7 +59,7 @@ lfstatBevoelkerungCombined <- bind_rows(
 ui <- function(request, id) {
   ns <- NS(id)
   tagList(
-    h2("Bevölkerung in Vaterstetten"),
+    h2("Bevölkerung in der Gemeinde Vaterstetten"),
 
     fluidRow(
       box(

@@ -189,7 +189,7 @@ plotlyAnlagenNachJahrGroesse <- plot_ly(installationenNachJahrGroesse, x = ~year
 ui <- function(request, id) {
   ns <- NS(id)
   tagList(
-    h2("Photovoltaik-Anlagen in Vaterstetten"),
+    h2("Photovoltaik-Anlagen in der Gemeinde Vaterstetten"),
 
     fluidRow(
       valueBoxLeistungInBetrieb,
