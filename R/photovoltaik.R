@@ -36,7 +36,7 @@ mastr <- read_delim(
     anlagenGroesse = cut(
       bruttoleistung_kW,
       breaks = c(0, 10, 100, Inf),
-      labels = c("Kleine Anlagen (<10kW)", "Mittlere Anlagen (10-100kW)", "Große Anlagen (>=100kW)"), 
+      labels = c("Kleine Anlagen (<10kW)", "Mittlere Anlagen (10-100kW)", "Große Anlagen (≥100kW)"), 
       include.lowest = TRUE
     )
   ) %>%
