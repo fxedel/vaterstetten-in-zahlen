@@ -110,16 +110,18 @@ def is_public(x: dict) -> bool:
   if x['AnlagenbetreiberMaStRNummer'] in blacklist:
     return False
 
-  if x['AnlagenbetreiberName'].startswith('natürliche Person'):
+  has_betreiber_name = x['AnlagenbetreiberName'] is not None
+
+  if has_betreiber_name and x['AnlagenbetreiberName'].startswith('natürliche Person'):
     return False
 
   if not x['IsAnonymisiert']: # IsAnonymisiert refers to whether Strasse and Ort are visible; this is true if Bruttoleistung >= 30 kWp
     return True
 
-  if 'GbR' in x['AnlagenbetreiberName']: # GbR firms are mostly used personally, since German law sometimes requires house owners to found a business for their photovoltaic system
+  if has_betreiber_name and 'GbR' in x['AnlagenbetreiberName']: # GbR firms are mostly used personally, since German law sometimes requires house owners to found a business for their photovoltaic system
     return False
 
-  if 'e.V.' in x['AnlagenbetreiberName'] or 'e. V.' in x['AnlagenbetreiberName'] or 'eG' in x['AnlagenbetreiberName']: # Vereine and Genossenschaften are public in general
+  if has_betreiber_name and ('e.V.' in x['AnlagenbetreiberName'] or 'e. V.' in x['AnlagenbetreiberName'] or 'eG' in x['AnlagenbetreiberName']): # Vereine and Genossenschaften are public in general
     return True
 
   return False
