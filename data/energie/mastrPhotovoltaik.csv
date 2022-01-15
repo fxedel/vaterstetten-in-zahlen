@@ -530,7 +530,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 1831565,SEE949205873883,,In Betrieb,2019-02-08,2018-10-31,,,,,85591,Vaterstetten,,,,,true,gebaeude,9,Süd-Ost,2.79,2.79,false,Teileinspeisung,false
 1962468,SEE971285788467,,In Betrieb,2019-03-28,2018-10-31,,,Spatzenweg 6/8/10/12 - Kita - 2 Dächer,Eurytos Energie GmbH ＆ Co. KG,85591,Vaterstetten,,,,,true,gebaeude,99,Süd,29.205,25.0,false,Teileinspeisung,false
 1962488,SEE961024995867,,In Betrieb,2019-03-28,2018-10-31,,,Spatzenweg 14/16,Eurytos Energie GmbH ＆ Co. KG,85591,Vaterstetten,,,,,true,gebaeude,68,Süd,20.06,20.0,false,Teileinspeisung,false
-1962493,SEE902725638394,,In Betrieb,2019-03-28,2018-10-31,,,Spatzenweg 18/20,Eurytos Energie GmbH ＆ Co. KG,85591,Vaterstetten,,,,,false,gebaeude,60,Süd,17.7,15.0,false,Teileinspeisung,false
+1962493,SEE902725638394,,In Betrieb,2019-03-28,2018-10-31,,,Spatzenweg 18/20,Eurytos Energie GmbH ＆ Co. KG,85591,Vaterstetten,,,,,true,gebaeude,60,Süd,17.7,15.0,false,Teileinspeisung,false
 1962500,SEE909485550737,,In Betrieb,2019-03-28,2018-10-31,,,Spatzenweg 2/4,Eurytos Energie GmbH ＆ Co. KG,85591,Vaterstetten,,,,,true,gebaeude,76,Süd,22.42,20.0,false,Teileinspeisung,false
 3465804,SEE964390314560,E21041011000000000000248871300001,In Betrieb,2020-09-28,2018-11-08,,,,,85646,Neufarn,,,,,true,gebaeude,32,West,9.76,9.0,false,Teileinspeisung,false
 1954768,SEE943971188158,,In Betrieb,2019-03-25,2018-11-15,,,3E-PV-Mieterstrom Dorfstraße,3E-eG Eigene Erneuerbare Energie Genossenschaft,85591,Vaterstetten,Dorfstr.,57,48.114088,11.770224,false,gebaeude,285,Süd,99.75,99.75,false,Teileinspeisung,true
@@ -821,7 +821,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4484264,SEE935976494846,,In Betrieb,2021-05-17,2021-06-30,,,,,85591,Vaterstetten,,,,,false,gebaeude,26,Süd,9.88,9.88,false,Teileinspeisung,false
 4620688,SEE908675023785,,In Betrieb,2021-08-25,2021-06-30,,,,,85591,Vaterstetten,,,,,false,gebaeude,9,Süd-Ost,3.7,3.0,false,Volleinspeisung,false
 4616225,SEE927329475725,,In Betrieb,2021-08-23,2021-07-01,,,,,85591,Vaterstetten,,,,,false,gebaeude,48,Süd-West,14.1,12.1,false,Teileinspeisung,false
-4567743,SEE938549273862,,In Betrieb,2021-07-16,2021-07-08,,,,,85591,Vaterstetten,,,,,false,gebaeude,13,Süd-West,5.2,4.6,false,Teileinspeisung,false
+4567743,SEE938549273862,,In Betrieb,2021-07-16,2021-07-08,,,,,85591,Vaterstetten,,,,,true,gebaeude,13,Süd-West,5.2,4.6,false,Teileinspeisung,false
 4567314,SEE910791201701,,In Betrieb,2021-07-15,2021-07-09,,,,,85591,Vaterstetten,,,,,true,gebaeude,16,Süd,5.73,5.0,false,Teileinspeisung,false
 4653864,SEE925733834886,,In Betrieb,2021-09-18,2021-07-12,,,,,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-Ost,7.2,7.2,false,Teileinspeisung,false
 4567686,SEE922464756142,,In Planung,2021-07-15,2021-07-12,2021-07-20,,,,85598,Baldham,,,,,false,gebaeude,12,Ost-West,3.96,3.96,false,Teileinspeisung,false
