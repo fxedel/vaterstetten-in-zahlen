@@ -110,12 +110,14 @@ server <- function(id) {
       })
 
       output$frauenanteilPlotly = renderPlotly({
-        plot_ly(lfstatBevoelkerungCombined %>% filter(!is.na(frauenanteil)), x = ~stichtag, yhoverformat = ",.2%", xhoverformat = "%-d. %b %Y") %>%
+        data <- lfstatBevoelkerungCombined %>% filter(!is.na(frauenanteil))
+        plot_ly(data, x = ~stichtag, yhoverformat = ",.2%", xhoverformat = "%-d. %b %Y") %>%
           add_trace(y = ~frauenanteil, type = "scatter", mode = "lines", name = "Frauenanteil", color = I("#8da0cb")) %>%
+          layout(shapes = list(type='line', x0 = min(data$stichtag), x1 = max(data$stichtag), y0 = 0.5, y1 = 0.5, line = list(dash = 'dot', width = 1))) %>%
           layout(yaxis = list(range = list(0.3, 0.7), tickformat = ',.0%')) %>%
           layout(hovermode = "x") %>%
           plotly_default_config() %>%
-          plotly_time_range(lfstatBevoelkerungCombined$stichtag) %>%
+          plotly_time_range(data$stichtag) %>%
           plotly_hide_axis_titles()
       })
     }
