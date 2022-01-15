@@ -7,8 +7,11 @@ name = "pypi"
 requests = "~=2.25"
 beautifulsoup4 = "~=4.9"
 pytelegrambotapi = "~=3.7"
-arcgis = "*"
-python-interface = "*"
+arcgis = "~=1.9.1"
+python-interface = "~=1.6.1"
+ipywidgets = "~=7.6.5"
+ipython = "~=7.28.0"
+pillow = "~=9.0.0"
 
 [dev-packages]
 
