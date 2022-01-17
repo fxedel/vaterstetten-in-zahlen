@@ -56,7 +56,9 @@ lfstatBevoelkerungCombined <- bind_rows(
 
 
 
-ui <- function(request, id) {
+ui <- memoise(omit_args = "request", function(request, id) {
+  request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
+
   ns <- NS(id)
   tagList(
     h2("Bevölkerung in der Gemeinde Vaterstetten"),
@@ -65,7 +67,17 @@ ui <- function(request, id) {
       box(
         title = "Bevölkerungsstatistik",
         width = 12,
-        plotlyOutput(ns("bevoelkerungPlotly"), height = 350),
+        {
+          plot_ly(x = ~stichtag, yhoverformat = ",d", xhoverformat = "%-d. %b %Y", height = 350) %>%
+            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(maennlich)), y = ~maennlich, name = "Männer", type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#66c2a5", stackgroup = "geschlecht") %>%
+            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(weiblich)), y = ~weiblich, name = "Frauen",type = "scatter", mode = "none", fill = 'tonexty', fillcolor = "#8da0cb",  stackgroup = "geschlecht") %>%
+            add_trace(data = lfstatBevoelkerungCombined, y = ~bevoelkerung, name = "Bevölkerung", type = "scatter", mode = "lines", color = I("#000000")) %>%
+            add_trace(data = lfstatBevoelkerungCombined %>% filter(erhebungsart == "Volkszählung"), y = ~bevoelkerung, name = "Volkszählungen", type = "scatter", mode = "markers", hovertemplate = "Volkszählung<extra></extra>", color = I("#000000")) %>%
+            plotly_default_config() %>%
+            plotly_time_range(lfstatBevoelkerungCombined$stichtag) %>%
+            plotly_hide_axis_titles() %>%
+            identity()
+        },
         p("Dargestellt sind sowohl Volkszählungsergebnisse, als auch die jährliche und seit 1971 sogar quartalsweise Bevölkerungsfortschreibung auf Basis der Melderegister. Bei den Volkszählungen 1987 und 2011 sind deutliche „Knicks“ zu erkennen: Hier wurde durch die Volkszählung die Ungenauigkeit der Melderegister korrigiert."),
         p("Mit „Bevölkerung“ sind hier lediglich Personen mit Hauptwohnsitz in der Gemeinde Vaterstetten gemeint, wie es in der Bevölkerungsstatistik üblich ist. Nebenwohnsitze werden zum Teil in anderen Statistiken erfasst. Die Staatsangehörigkeit spielt keine Rolle.")
       )
@@ -74,7 +86,16 @@ ui <- function(request, id) {
     fluidRow(
       box(
         title = "Frauenanteil",
-        plotlyOutput(ns("frauenanteilPlotly"), height = 350)
+        {
+          data <- lfstatBevoelkerungCombined %>% filter(!is.na(frauenanteil))
+          plot_ly(data, x = ~stichtag, yhoverformat = ",.2%", xhoverformat = "%-d. %b %Y", height = 350) %>%
+            add_trace(y = ~frauenanteil, type = "scatter", mode = "lines", name = "Frauenanteil", color = I("#8da0cb")) %>%
+            layout(shapes = list(type='line', x0 = min(data$stichtag), x1 = max(data$stichtag), y0 = 0.5, y1 = 0.5, line = list(dash = 'dot', width = 1))) %>%
+            layout(yaxis = list(range = list(0.3, 0.7), tickformat = ',.0%')) %>%
+            plotly_default_config() %>%
+            plotly_time_range(data$stichtag) %>%
+            plotly_hide_axis_titles()
+        }
       )
     ),
 
@@ -89,35 +110,13 @@ ui <- function(request, id) {
         ),
       ),
     ),
-  )
-}
+ )
+})
 
 server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
-      output$bevoelkerungPlotly = renderPlotly({
-        plot_ly(x = ~stichtag, yhoverformat = ",d", xhoverformat = "%-d. %b %Y") %>%
-          add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(maennlich)), y = ~maennlich, name = "Männer", type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#66c2a5", stackgroup = "geschlecht") %>%
-          add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(weiblich)), y = ~weiblich, name = "Frauen",type = "scatter", mode = "none", fill = 'tonexty', fillcolor = "#8da0cb",  stackgroup = "geschlecht") %>%
-          add_trace(data = lfstatBevoelkerungCombined, y = ~bevoelkerung, name = "Bevölkerung", type = "scatter", mode = "lines", color = I("#000000")) %>%
-          add_trace(data = lfstatBevoelkerungCombined %>% filter(erhebungsart == "Volkszählung"), y = ~bevoelkerung, name = "Volkszählungen", type = "scatter", mode = "markers", hovertemplate = "Volkszählung<extra></extra>", color = I("#000000")) %>%
-          plotly_default_config() %>%
-          plotly_time_range(lfstatBevoelkerungCombined$stichtag) %>%
-          plotly_hide_axis_titles() %>%
-          identity()
-      })
-
-      output$frauenanteilPlotly = renderPlotly({
-        data <- lfstatBevoelkerungCombined %>% filter(!is.na(frauenanteil))
-        plot_ly(data, x = ~stichtag, yhoverformat = ",.2%", xhoverformat = "%-d. %b %Y") %>%
-          add_trace(y = ~frauenanteil, type = "scatter", mode = "lines", name = "Frauenanteil", color = I("#8da0cb")) %>%
-          layout(shapes = list(type='line', x0 = min(data$stichtag), x1 = max(data$stichtag), y0 = 0.5, y1 = 0.5, line = list(dash = 'dot', width = 1))) %>%
-          layout(yaxis = list(range = list(0.3, 0.7), tickformat = ',.0%')) %>%
-          plotly_default_config() %>%
-          plotly_time_range(data$stichtag) %>%
-          plotly_hide_axis_titles()
-      })
     }
   )
 }

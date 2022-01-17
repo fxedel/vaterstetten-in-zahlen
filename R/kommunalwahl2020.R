@@ -31,7 +31,9 @@ gemeinderatParteien <- parteien %>%
 
 
 
-ui <- function(request, id) {
+ui <- memoise(omit_args = "request", function(request, id) {
+  request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
+
   ns <- NS(id)
   tagList(
     h2("Kommunalwahl März 2020 in der Gemeinde Vaterstetten"),
@@ -83,9 +85,18 @@ ui <- function(request, id) {
       box(
         title = "Häufelungen auf einzelne Kandidat*innen",
         width = 12,
-        tagList(
-          plotlyOutput(ns("plot"))
-        )
+        {
+          gemeinderatErgebnisNachPerson %>%
+            filter(stimmbezirk == "Gesamt") %>%
+            group_by(partei) %>%
+            plot_ly(type = "bar") %>%
+            config(displayModeBar = FALSE) %>%
+            add_trace(x = ~listenNr, y = ~stimmen, text = ~paste0(name, ", ", partei, ": ", stimmen, " Stimmen"), color = ~ I(farbe), name = ~parteiNr, yaxis = ~paste0("y", parteiNr), width = 1, hoverinfo = "text") %>%
+            layout(dragmode = FALSE, showlegend = FALSE) %>%
+            layout(yaxis = list(title = list(standoff = 0, font = list(size = 1))),
+                margin = list(r = 0, l = 0, t = 0, b = 0, pad = 0)) %>%
+            subplot(shareY = TRUE, margin = 0.01)
+        }
       )
     ),
 
@@ -101,7 +112,7 @@ ui <- function(request, id) {
       ),
     ),
   )
-}
+})
 
 # Define the server logic for a module
 server <- function(id) {
@@ -185,19 +196,6 @@ server <- function(id) {
 
       observe({
         printPersonenstimmenMap()
-      })
-
-      output$plot <- renderPlotly({
-        gemeinderatErgebnisNachPerson %>%
-          filter(stimmbezirk == "Gesamt") %>%
-          group_by(partei) %>%
-          plot_ly(type = "bar") %>%
-          config(displayModeBar = FALSE) %>%
-          add_trace(x = ~listenNr, y = ~stimmen, text = ~paste0(name, ", ", partei, ": ", stimmen, " Stimmen"), color = ~ I(farbe), name = ~parteiNr, yaxis = ~paste0("y", parteiNr), width = 1, hoverinfo = "text") %>%
-          layout(dragmode = FALSE, showlegend = FALSE) %>%
-          layout(yaxis = list(title = list(standoff = 0, font = list(size = 1))),
-              margin = list(r = 0, l = 0, t = 0, b = 0, pad = 0)) %>%
-          subplot(shareY = TRUE, margin = 0.01)
       })
     }
   )

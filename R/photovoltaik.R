@@ -186,7 +186,9 @@ plotlyAnlagenNachJahrGroesse <- plot_ly(installationenNachJahrGroesse, x = ~year
   plotly_build() %>%
   identity()
 
-ui <- function(request, id) {
+ui <- memoise(omit_args = "request", function(request, id) {
+  request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
+
   ns <- NS(id)
   tagList(
     h2("Photovoltaik-Anlagen in der Gemeinde Vaterstetten"),
@@ -229,7 +231,7 @@ ui <- function(request, id) {
       ),
     ),
   )
-}
+})
 
 
 server <- function(id) {

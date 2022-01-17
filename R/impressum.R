@@ -1,4 +1,6 @@
-ui <- function(request, id) {
+ui <- memoise(omit_args = "request", function(request, id) {
+  request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
+
   ns <- NS(id)
   tagList(
     h2("Impressum"),
@@ -21,7 +23,7 @@ ui <- function(request, id) {
       )
     ),
   )
-}
+})
 
 server <- function(id) {
   moduleServer(

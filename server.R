@@ -1,6 +1,7 @@
 library(dplyr)
 library(leaflet)
 library(lubridate)
+library(memoise)
 library(plotly)
 library(purrr)
 library(readr)
