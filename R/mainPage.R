@@ -9,7 +9,7 @@ sys.source("R/photovoltaik.R", envir = photovoltaik, chdir = FALSE)
 einwohner <- new.env()
 sys.source("R/einwohner.R", envir = einwohner, chdir = FALSE)
 
-lastRowCorona <- corona$fallzahlenArcGIS %>% slice_tail()
+lastRowCorona <- corona$fallzahlenArcGISGemeinden %>% filter(ort == "Vaterstetten") %>% slice_tail()
 valueBoxCorona <- valueBox(
   utils$germanNumberFormat(lastRowCorona$inzidenz7tage, accuracy = .1),
   paste0("7-Tage-Inzidenz (", format(lastRowCorona$datum, "%d.%m.%Y"), ")"),

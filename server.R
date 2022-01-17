@@ -1,5 +1,4 @@
 library(dplyr)
-library(ggplot2)
 library(leaflet)
 library(lubridate)
 library(plotly)
