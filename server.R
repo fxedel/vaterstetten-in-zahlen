@@ -12,6 +12,7 @@ library(shinydashboard)
 library(shinyWidgets)
 library(stringr)
 library(tidyr)
+library(htmltools)
 
 # print(.packages())
 
