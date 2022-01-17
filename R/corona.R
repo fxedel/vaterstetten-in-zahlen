@@ -11,9 +11,32 @@ fallzahlen <- read_delim(
   )
 )
 
-fallzahlenArcGIS <- read_csv("data/corona-fallzahlen/arcgisInzidenzGemeinden.csv") %>% filter(ort == "Vaterstetten")
+fallzahlenArcGISGemeinden <- read_delim(
+  file = "data/corona-fallzahlen/arcgisInzidenzGemeinden.csv",
+  delim = ",",
+  col_names = TRUE,
+  col_types = cols(
+    datum = col_date(format = "%Y-%m-%d"),
+    ort = readr::col_factor(),
+    neuPositiv = col_integer(),
+    inzidenz7tage = col_double()
+  )
+)
 
-ui <- function(request, id) {
+fallzahlenArcGISLandkreis <- read_delim(
+  file = "data/corona-fallzahlen/arcgisInzidenzLandkreis.csv",
+  delim = ",",
+  col_names = TRUE,
+  col_types = cols(
+    datum = col_date(format = "%Y-%m-%d"),
+    neuPositiv = col_integer(),
+    inzidenz7tage = col_double()
+  )
+)
+
+ui <- memoise(omit_args = "request", function(request, id) {
+  request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
+
   ns <- NS(id)
   tagList(
     h2("Corona-Fallzahlen in der Gemeinde Vaterstetten"),
@@ -25,53 +48,70 @@ ui <- function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("<strong>Alle Angaben ohne Gewähr.</strong> Bitte halten Sie sich an die Vorgaben des zuständigen Gesundheitsamts. Die hier veröffentliche 7-Tage-Inzidenz ist <strong>nicht</strong> relevant für lokale Corona-Beschränkungen. Geringe Zahlen in Vaterstetten sind nicht automatisch ein Beweis für eine geringe Infektionsgefahr in Vaterstetten."))
+          p(HTML("Die hier veröffentliche 7-Tage-Inzidenz ist <strong>nicht</strong> relevant für lokale Corona-Beschränkungen. Geringe Zahlen in Vaterstetten sind nicht automatisch ein Beweis für eine geringe Infektionsgefahr in Vaterstetten."))
         )
       )
     ),
 
     fluidRow(
-      valueBoxOutput(ns("valueBoxNeuinfektionen")),
-      valueBoxOutput(ns("valueBoxInzidenz")),
-      valueBoxOutput(ns("valueBoxStand"))
-    ),
-
-    flowLayout(
-      dateRangeInput(ns("dateRange"),
-        label = NULL,
-        start = max(fallzahlenArcGIS$datum) - 42,
-        end = max(fallzahlenArcGIS$datum),
-        min = min(fallzahlenArcGIS$datum),
-        max = max(fallzahlenArcGIS$datum),
-        format = "d. M yyyy",
-        weekstart = 1,
-        language = "de",
-        separator = "bis"
-      ),
-      checkboxInput(ns("showNumbers"),
-        label = "Zahlenwerte anzeigen",
-        value = FALSE
-      )
+      {
+        last7rows <- fallzahlenArcGISGemeinden %>% filter(ort == "Vaterstetten") %>% slice_tail(n = 7)
+        valueBox(
+          sum(last7rows$neuPositiv),
+          "Neue Fälle in den letzten 7 Tagen",
+          color = "red",
+          icon = icon("user-check")
+        )
+      },
+      {
+        lastRow <- fallzahlenArcGISGemeinden %>% filter(ort == "Vaterstetten") %>% slice_tail()
+        valueBox(
+          format(round(lastRow$inzidenz7tage, 1), nsmall = 1),
+          "7-Tage-Inzidenz",
+          color = "red",
+          icon = icon("chart-line")
+        )
+      },
+      {
+        lastRow <- fallzahlenArcGISGemeinden %>% filter(ort == "Vaterstetten") %>% slice_tail()
+        valueBox(
+          format(lastRow$datum, "%-d. %b %Y"),
+          "Datenstand des Gesundheitsamtes",
+          color = "red",
+          icon = icon("calendar-day")
+        )
+      }
     ),
 
     fluidRow(
       box(
-        title = "Neuinfektionen (absolut)",
-        plotOutput(ns("neuinfektionen"), height = 300),
+        title = "Neuinfektionen (Gemeinde Vaterstetten)",
+        {
+          data <- fallzahlenArcGISGemeinden %>% filter(ort == "Vaterstetten")
+          plot_ly(data, x = ~datum, yhoverformat = ",.0d", height = 400) %>%
+            add_trace(y = ~neuPositiv, type = "bar") %>%
+            plotly_default_config() %>%
+            plotly_time_range(data$datum, defaultOffset = 42) %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        },
         p("Mit „Neuinfektionen“ ist an dieser Stelle die Anzahl positiver Testungen gemeint.")
       ),
       box(
         title = "7-Tage-Inzidenz pro 100.000 Einwohner",
-        plotOutput(ns("inzidenz7"), height = 300)
+        {
+          dataVat <- fallzahlenArcGISGemeinden %>% filter(ort == "Vaterstetten")
+          plot_ly(yhoverformat = ",.1f", height = 400) %>%
+            add_trace(data = dataVat, x = ~datum, y = ~inzidenz7tage, type = "scatter", mode = "lines", name = "Vaterstetten") %>%
+            add_trace(data = fallzahlenArcGISLandkreis, x = ~datum, y = ~inzidenz7tage, type = "scatter", mode = "lines", name = "Landkreis Ebersberg") %>%
+            plotly_default_config() %>%
+            plotly_time_range(fallzahlenArcGISGemeinden$datum, defaultOffset = 42) %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        }
       )
-    ),
-
-    fluidRow(
-      box(
-        title = "Aktuelle Fälle (absolut)",
-        plotOutput(ns("aktuell"), height = 300),
-        p("Seit dem 18. Juni 2021 veröffentlicht das Landratsamt Ebersberg nicht mehr die Anzahl aktuell aktiver Fälle.")
-      ),
     ),
 
     fluidRow(
@@ -87,7 +127,7 @@ ui <- function(request, id) {
       ),
     ),
   )
-}
+})
 
 
 # Define the server logic for a module
@@ -95,109 +135,54 @@ server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
-      getDateScale <- function() {
-        list(
-          scale_x_date(
-            name = NULL,
-            breaks = breaks_pretty(8),
-            date_minor_breaks = "1 days",
-            date_labels = "%-d.%-m.",
-            expand = expansion(add = c(0.5, 1))
-          ),
-          coord_cartesian(xlim = c(input$dateRange[1], input$dateRange[2]))
-        )
-      }
-
-      getYScale <- function() {
-        scale_y_continuous(
-          name = NULL,
-          breaks = breaks_pretty(5),
-          expand = expansion(mult = c(0.02, 0.1))
-        )
-      }
-
-      fallzahlenInTimeRange <- reactive({
-        fallzahlen %>%
-          # we increase the range by 2 on both sides to have an ongoing curve
-          # we could also just plot the whole data but this reduces the computational effort
-          filter(input$dateRange[1] - 2 <= datum) %>%  # the logical and (&&) doesn't allow element-wise operations, so we split them
-          filter(datum <= input$dateRange[2] + 2)
-      })
-
-      fallzahlenArcGISInTimeRange <- reactive({
-        fallzahlenArcGIS %>%
-          # we increase the range by 2 on both sides to have an ongoing curve
-          # we could also just plot the whole data but this reduces the computational effort
-          filter(input$dateRange[1] - 2 <= datum) %>%  # the logical and (&&) doesn't allow element-wise operations, so we split them
-          filter(datum <= input$dateRange[2] + 2)
-      })
-
-      output$valueBoxNeuinfektionen <- renderValueBox({
-        last7rows <- fallzahlenArcGIS %>% slice_tail(n = 7)
-        valueBox(
-          sum(last7rows$neuPositiv),
-          "Neue Fälle in den letzten 7 Tagen",
-          color = "red",
-          icon = icon("user-check")
-        )
-      })
-
-      output$valueBoxInzidenz <- renderValueBox({
-        lastRow <- fallzahlenArcGIS %>% slice_tail()
-        valueBox(
-          format(round(lastRow$inzidenz7tage, 1), nsmall = 1),
-          "7-Tage-Inzidenz",
-          color = "red",
-          icon = icon("chart-line")
-        )
-      })
-
-      output$valueBoxStand <- renderValueBox({
-        lastRow <- fallzahlenArcGIS %>% slice_tail()
-        valueBox(
-          format(lastRow$datum, "%-d. %b %Y"),
-          "Datenstand des Gesundheitsamtes",
-          color = "red",
-          icon = icon("calendar-day")
-        )
-      })
-
-      output$neuinfektionen <- renderPlot({
-        ggplot(fallzahlenArcGISInTimeRange(), mapping = aes(x = datum, y = neuPositiv)) + list(
-          geom_col(na.rm = TRUE, alpha = 0.5, width = 1),
-          if (input$showNumbers)
-            geom_text(aes(label = neuPositiv), vjust = "bottom", hjust = "middle", nudge_y = 0.5, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
-          else list(),
-          getDateScale(),
-          getYScale()
-        )
-      }, res = 96)
-
-      output$inzidenz7 <- renderPlot({
-        ggplot(fallzahlenArcGISInTimeRange(), mapping = aes(x = datum, y = inzidenz7tage)) + list(
-          geom_line(na.rm = TRUE, alpha = 0.5),
-          geom_point(na.rm = TRUE, alpha = 0.5, size = 1),
-          if (input$showNumbers)
-            geom_text(aes(label = round(inzidenz7tage)), vjust = "bottom", hjust = "middle", nudge_y = 8, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
-          else list(),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale()
-        )
-      }, res = 96)
-
-      output$aktuell <- renderPlot({
-        ggplot(fallzahlenInTimeRange(), mapping = aes(x = datum, y = aktuell)) + list(
-          geom_line(data = filter(fallzahlenInTimeRange(), !is.na(aktuell)), alpha = 0.5),
-          geom_point(na.rm = TRUE, alpha = 0.5, size = 1),
-          if (input$showNumbers)
-            geom_text(aes(label = aktuell), vjust = "bottom", hjust = "middle", nudge_y = 2.5, check_overlap = TRUE, size = 3.4, na.rm = TRUE)
-          else list(),
-          expand_limits(y = 0),
-          getDateScale(),
-          getYScale()
-        )
-      }, res = 96)
     }
   )
+}
+
+
+plotly_default_config <- function(p) {
+  p %>%
+    config(displayModeBar = FALSE) %>%
+    config(locale = "de") %>%
+    layout(xaxis = list(fixedrange = TRUE, rangemode = 'tozero')) %>%
+    layout(yaxis = list(fixedrange = TRUE)) %>%
+    layout(hovermode = "x") %>%
+    layout(dragmode = FALSE) %>%
+    identity()
+}
+
+plotly_axis_spacing <- function(p, col, left = 0, right = 0) {
+  width <- max(col) - min(col)
+  p %>%
+    layout(xaxis = list(range = c(min(col)-left*width, max(col)+right*width)))
+}
+
+plotly_time_range <- function(p, timeCol, defaultOffset = 91) {
+  maxDatum <- max(timeCol)
+  p %>%
+    # legend above plot
+    layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h', y = 1.2, yanchor = "bottom")) %>%
+    # default time selection
+    layout(xaxis = list(range = list(maxDatum-defaultOffset, maxDatum+1))) %>%
+    layout(xaxis = list(
+      rangeselector = list(
+        buttons = list(
+          list(count = 1, label = "1 Monat", step = "month", stepmode = "backward"),
+          list(count = 3, label = "3 Monate", step = "month", stepmode = "backward"),
+          list(count = 6, label = "6 Monate", step = "month", stepmode = "backward"),
+          list(step = "all", label = "Gesamt")
+        )
+      ),
+      rangeslider = list(type = "date")
+    )) %>%
+    config(doubleClick = FALSE) %>%
+    identity()
+}
+
+plotly_hide_axis_titles <- function(p) {
+  p %>%
+    layout(xaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+    layout(yaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+    layout(margin = list(l = 0, pad = 0, b = 30)) %>%
+    identity()
 }
