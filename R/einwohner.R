@@ -76,7 +76,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_default_config() %>%
             plotly_time_range(lfstatBevoelkerungCombined$stichtag) %>%
             plotly_hide_axis_titles() %>%
-            identity()
+            plotly_build()
         },
         p("Dargestellt sind sowohl Volkszählungsergebnisse, als auch die jährliche und seit 1971 sogar quartalsweise Bevölkerungsfortschreibung auf Basis der Melderegister. Bei den Volkszählungen 1987 und 2011 sind deutliche „Knicks“ zu erkennen: Hier wurde durch die Volkszählung die Ungenauigkeit der Melderegister korrigiert."),
         p("Mit „Bevölkerung“ sind hier lediglich Personen mit Hauptwohnsitz in der Gemeinde Vaterstetten gemeint, wie es in der Bevölkerungsstatistik üblich ist. Nebenwohnsitze werden zum Teil in anderen Statistiken erfasst. Die Staatsangehörigkeit spielt keine Rolle.")
@@ -94,7 +94,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             layout(yaxis = list(range = list(0.3, 0.7), tickformat = ',.0%')) %>%
             plotly_default_config() %>%
             plotly_time_range(data$stichtag) %>%
-            plotly_hide_axis_titles()
+            plotly_hide_axis_titles() %>%
+            plotly_build()
         }
       )
     ),

@@ -95,7 +95,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             layout(dragmode = FALSE, showlegend = FALSE) %>%
             layout(yaxis = list(title = list(standoff = 0, font = list(size = 1))),
                 margin = list(r = 0, l = 0, t = 0, b = 0, pad = 0)) %>%
-            subplot(shareY = TRUE, margin = 0.01)
+            subplot(shareY = TRUE, margin = 0.01) %>%
+            plotly_build()
         }
       )
     ),

@@ -231,7 +231,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(y = ~drittimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#023858", name = "Drittimpfungen") %>%
             plotly_default_config() %>%
             plotly_time_range() %>%
-            plotly_hide_axis_titles()
+            plotly_hide_axis_titles() %>%
+            plotly_build()
         },
         {
           lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
@@ -246,7 +247,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(y = ~ erstImpfidenz, type = "scatter", mode = "lines", name = "Erst-Impfidenz", size = I(2), color = I("#74a9cf")) %>%
             plotly_default_config() %>%
             plotly_time_range() %>%
-            plotly_hide_axis_titles()
+            plotly_hide_axis_titles() %>%
+            plotly_build()
         },
         {
           lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
@@ -266,7 +268,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             layout(barmode = 'stack') %>%
             plotly_default_config() %>%
             plotly_time_range() %>%
-            plotly_hide_axis_titles()
+            plotly_hide_axis_titles() %>%
+            plotly_build()
         },
         {
           lastRow <- impfungenMerged %>% filter(!is.na(impfdosenNeuProTag)) %>% slice_tail()
@@ -281,7 +284,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             layout(barmode = 'stack') %>%
             plotly_default_config() %>%
             plotly_time_range() %>%
-            plotly_hide_axis_titles()
+            plotly_hide_axis_titles() %>%
+            plotly_build()
         },
         {
           impfdosen7Tage <- arcgisImpfungenNachEinrichtung %>%
@@ -303,7 +307,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(y = ~erstimpfungen, type = "scatter", mode = "none", fill = 'tonexty', color = ~altersgruppe, stackgroup = 'one', alpha = 1, alpha_stroke = 1, opacity=1, colors = c('#eeeeee','#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#005a32')) %>%
             plotly_default_config() %>%
             plotly_time_range() %>%
-            plotly_hide_axis_titles()
+            plotly_hide_axis_titles() %>%
+            plotly_build()
         },
       ),
       box(
@@ -313,7 +318,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(y = ~impfdosen, type = "scatter", mode = "lines", name = "Impfdosen", size = I(2), yhoverformat = ",d") %>%
             plotly_default_config() %>%
             plotly_time_range() %>%
-            plotly_hide_axis_titles()
+            plotly_hide_axis_titles() %>%
+            plotly_build()
         },
         {
           lastRow <- impfungenMerged %>% filter(!is.na(impfdosen)) %>% slice_tail()
