@@ -129,8 +129,8 @@ plotly_default_config <- function(p) {
     layout(xaxis = list(fixedrange = TRUE, rangemode = 'tozero')) %>%
     layout(yaxis = list(fixedrange = TRUE)) %>%
     layout(hovermode = "x") %>%
-    # legend above plot
-    layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h')) %>%
+    layout(dragmode = FALSE) %>%
+    layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h')) %>% # legend below plot
     identity()
 }
 

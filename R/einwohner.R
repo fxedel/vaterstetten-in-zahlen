@@ -102,7 +102,6 @@ server <- function(id) {
           add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(weiblich)), y = ~weiblich, name = "Frauen",type = "scatter", mode = "none", fill = 'tonexty', fillcolor = "#8da0cb",  stackgroup = "geschlecht") %>%
           add_trace(data = lfstatBevoelkerungCombined, y = ~bevoelkerung, name = "Bevölkerung", type = "scatter", mode = "lines", color = I("#000000")) %>%
           add_trace(data = lfstatBevoelkerungCombined %>% filter(erhebungsart == "Volkszählung"), y = ~bevoelkerung, name = "Volkszählungen", type = "scatter", mode = "markers", hovertemplate = "Volkszählung<extra></extra>", color = I("#000000")) %>%
-          layout(hovermode = "x") %>%
           plotly_default_config() %>%
           plotly_time_range(lfstatBevoelkerungCombined$stichtag) %>%
           plotly_hide_axis_titles() %>%
@@ -115,7 +114,6 @@ server <- function(id) {
           add_trace(y = ~frauenanteil, type = "scatter", mode = "lines", name = "Frauenanteil", color = I("#8da0cb")) %>%
           layout(shapes = list(type='line', x0 = min(data$stichtag), x1 = max(data$stichtag), y0 = 0.5, y1 = 0.5, line = list(dash = 'dot', width = 1))) %>%
           layout(yaxis = list(range = list(0.3, 0.7), tickformat = ',.0%')) %>%
-          layout(hovermode = "x") %>%
           plotly_default_config() %>%
           plotly_time_range(data$stichtag) %>%
           plotly_hide_axis_titles()
@@ -125,23 +123,21 @@ server <- function(id) {
 }
 
 plotly_default_config <- function(p) {
-  return(
-    p %>%
-      config(displayModeBar = FALSE) %>%
-      config(locale = "de") %>%
-      layout(xaxis = list(rangemode = 'tozero')) %>%
-      layout(yaxis = list(fixedrange = TRUE)) %>%
-      identity()
-  )
+  p %>%
+    config(displayModeBar = FALSE) %>%
+    config(locale = "de") %>%
+    layout(xaxis = list(fixedrange = TRUE, rangemode = 'tozero')) %>%
+    layout(yaxis = list(fixedrange = TRUE)) %>%
+    layout(hovermode = "x") %>%
+    layout(dragmode = FALSE) %>%
+    layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h')) %>% # legend below plot
+    identity()
 }
 
 plotly_time_range <- function(p, xaxis) {
   axisWidth <- max(xaxis) - min(xaxis)
   scaleFactor <- 0.01
   p %>%
-    # legend above plot
-    layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h')) %>%
-    # default time selection
     layout(xaxis = list(
       rangeselector = list(
         buttons = list(

@@ -368,13 +368,14 @@ server <- function(id) {
 }
 
 plotly_default_config <- function(p) {
-  return(
-    p %>%
-      config(displayModeBar = FALSE) %>%
-      config(locale = "de") %>%
-      layout(hovermode = "x") %>%
-      identity()
-  )
+  p %>%
+    config(displayModeBar = FALSE) %>%
+    config(locale = "de") %>%
+    layout(xaxis = list(fixedrange = TRUE, rangemode = 'tozero')) %>%
+    layout(yaxis = list(fixedrange = TRUE)) %>%
+    layout(hovermode = "x") %>%
+    layout(dragmode = FALSE) %>%
+    identity()
 }
 
 plotly_time_range <- function(p) {
