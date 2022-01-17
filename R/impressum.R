@@ -22,7 +22,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         )
       )
     ),
-  )
+  ) %>% renderTags()
 })
 
 server <- function(id) {

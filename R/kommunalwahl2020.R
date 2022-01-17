@@ -112,7 +112,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
       ),
     ),
-  )
+  ) %>% renderTags()
 })
 
 # Define the server logic for a module
