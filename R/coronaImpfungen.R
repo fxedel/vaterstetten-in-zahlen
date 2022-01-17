@@ -224,7 +224,6 @@ ui <- memoise(omit_args = "request", function(request, id) {
       box(
         title = "Geimpfte Personen",
         {
-          print("plot_ly geimpfte")
           plot_ly(impfungenMerged %>% filter(!is.na(erstimpfungen)), x = ~datum, yhoverformat = ",d", height = 350) %>%
             add_trace(y = ~erstimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#74a9cf", name = "Erstimpfungen") %>%
             add_trace(y = ~zweitimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#0570b0", name = "Zweitimpfungen") %>%
