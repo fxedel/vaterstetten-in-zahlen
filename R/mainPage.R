@@ -63,12 +63,13 @@ ui <- memoise(omit_args = "request", function(request, id) {
         tagList(
           {
             valueBox(
-            utils$germanNumberFormat(photovoltaik$inBetriebStats$bruttoleistung_kW, suffix = " MWp", scale = 1/1000, accuracy = 0.2),
-            "Installierte Photovoltaik-Leistung in Vaterstetten",
-            color = "yellow",
-            icon = icon("solar-panel"),
-            width = 12
-          )
+              utils$germanNumberFormat(photovoltaik$inBetriebStats$bruttoleistung_kW, suffix = " MWp", scale = 1/1000, accuracy = 0.2),
+              "Installierte Photovoltaik-Leistung in Vaterstetten",
+              color = "yellow",
+              icon = icon("solar-panel"),
+              href = "/?tab=photovoltaik",
+              width = 12
+            )
           },
           actionButton(ns("buttonPhotovoltaik"), "Zu den Photovoltaik-Anlagen", icon = icon("solar-panel"), width = "100%")
         )
