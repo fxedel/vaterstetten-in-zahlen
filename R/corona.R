@@ -34,12 +34,24 @@ fallzahlenArcGISLandkreis <- read_delim(
   )
 )
 
+fallzahlenAltersgruppen <- read_delim(
+  file = "data/corona-fallzahlen/arcgisInzidenzAltersgruppen.csv",
+  delim = ",",
+  col_names = TRUE,
+  col_types = cols(
+    datum = col_date(format = "%Y-%m-%d"),
+    altersgruppe = readr::col_factor(),
+    neuPositiv = col_integer(),
+    inzidenz7tage = col_double()
+  )
+)
+
 ui <- memoise(omit_args = "request", function(request, id) {
   request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
 
   ns <- NS(id)
   tagList(
-    h2("Corona-Fallzahlen in der Gemeinde Vaterstetten"),
+    h2("Corona-Fallzahlen"),
 
     fluidRow(
       box(
@@ -111,6 +123,39 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_build() %>%
             identity()
         }
+      )
+    ),
+
+    fluidRow(
+      box(
+        title = "Neuinfektionen nach Altersgruppe (Landkreis Ebersberg)",
+        {
+          data <- fallzahlenAltersgruppen
+          plot_ly(data, yhoverformat = ",.0d", height = 400) %>%
+            add_trace(x = ~datum, y = ~neuPositiv, color = ~altersgruppe, type = "bar") %>%
+            layout(barmode = 'stack') %>%
+            plotly_default_config() %>%
+            plotly_time_range(fallzahlenAltersgruppen$datum, defaultOffset = 42) %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        },
+        p("Die absoluten Neuinfektionen stellen dar, wie groß der Anteil bestimmter Altersgruppen am Infektionsgeschehen ist. Da die Altersgruppen unterschiedlich groß sind (z.B. umfasst 35-59 fünfmal mehr Jahrgänge als 00-04), sind die Anteile der Altersgruppen naturgemäß sehr unterschiedlich."),
+        p("Die Altersgruppen sind von der externen Datenquelle, dem Landratsamt, so vorgegeben.")
+      ),
+      box(
+        title = "7-Tage-Inzidenz nach Altersgruppe (Landkreis Ebersberg)",
+        {
+          data <- fallzahlenAltersgruppen
+          plot_ly(data, yhoverformat = ",.1f", height = 400) %>%
+            add_trace(x = ~datum, y = ~inzidenz7tage, color = ~altersgruppe, type = "scatter", mode = "lines") %>%
+            plotly_default_config() %>%
+            plotly_time_range(fallzahlenAltersgruppen$datum, defaultOffset = 42) %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        },
+        p("Die 7-Tage-Inzidenz pro Altersgruppe stellt dar, wie groß das Infektionsgeschehen innerhalb einer Altersgruppe ist. Die Größen der Altersgruppen bzw. die Anzahl der Einwohner dieser Altersgruppe ist also herausgerechnet (sie dient als Grundlage für die Berechnung „pro 100.000 Einwohner“).")
       )
     ),
 
