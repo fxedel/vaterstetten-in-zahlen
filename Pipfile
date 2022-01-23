@@ -10,7 +10,7 @@ pytelegrambotapi = "~=3.7"
 arcgis = "~=1.9.1"
 python-interface = "~=1.6.1"
 ipywidgets = "~=7.6.5"
-ipython = "~=7.28.0"
+ipython = "~=7.31.1"
 pillow = "~=9.0.0"
 
 [dev-packages]
