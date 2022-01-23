@@ -29,7 +29,7 @@ jobs:
           pip install pipenv
           pipenv install
       - name: Poll data
-        run: pipenv run python tools/poll.py $TELEGRAM_TOKEN $TELEGRAM_DEBUG_CHAT_ID
+        run: pipenv run python tools/poll.py --telegram-token=$TELEGRAM_TOKEN --telegram-debug-chat-id=$TELEGRAM_DEBUG_CHAT_ID
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_DEBUG_CHAT_ID: ${{ secrets.TELEGRAM_DEBUG_CHAT_ID }}

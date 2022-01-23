@@ -1,15 +1,16 @@
 import pollers.poller
-import pollers.lraEbeArcgis
 import pollers.lraEbeArcgisImpfungen
 import pollers.lraEbeArcgisImpfungenNachEinrichtung
+import pollers.lraEbeArcgisInzidenz
+import pollers.lraEbeArcgisInzidenzGemeinden
 import pollers.mastrPhotovoltaik
 
 from typing import Dict, Type
 
 all: Dict[str, Type[pollers.poller.Poller]] = {
   'mastrPhotovoltaik': pollers.mastrPhotovoltaik.Poller,
-  'lraEbeArcgisInzidenz': pollers.lraEbeArcgis.InzidenzPoller,
-  'lraEbeArcgisInzidenzGemeinden': pollers.lraEbeArcgis.InzidenzGemeindenPoller,
+  'lraEbeArcgisInzidenz': pollers.lraEbeArcgisInzidenz.Poller,
+  'lraEbeArcgisInzidenzGemeinden': pollers.lraEbeArcgisInzidenzGemeinden.Poller,
   'lraEbeArcgisImpfungen': pollers.lraEbeArcgisImpfungen.Poller,
   'lraEbeArcgisImpfungenNachEinrichtung': pollers.lraEbeArcgisImpfungenNachEinrichtung.Poller,
 }
