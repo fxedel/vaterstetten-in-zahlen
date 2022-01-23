@@ -15,6 +15,22 @@ Der Datensatz [arcgisInzidenzLandkreis.csv](./arcgisInzidenzLandkreis.csv) umfas
 - [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (EBE_Landkreis_Inzidenztabelle)
 
 
+## [`arcgisInzidenzAltersgruppen.csv`](./arcgisInzidenzAltersgruppen.csv)
+
+Der Datensatz [arcgisInzidenzAltersgruppen.csv](./arcgisInzidenzAltersgruppen.csv) umfasst die automatisch aktualisierten Neuinfektionen und daraus berechneten Inzidenzen für den Landkreis Ebersberg, aufgeschlüsselt nach Altersgruppe.
+
+|Spalte|Format|Beschreibung
+|-|-|-
+|`datum`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Tag, auf den sich die Fallzahlen beziehen
+|`altersgruppe`|text|Altersgruppe, auf die sich die Zahlen an Neuinfektionen beziehen: `00-04`, `05-14`, `15-34`, `35-59`, `60-79`, `80+`
+|`neuPositiv`|integer|Zahl neuer positiver Testungen; synonym als „Neuinfektionen“ bezeichnet
+|`inzidenz7tage`|float|7-Tage-Inzidenz (Summe Neuinfektionen des aktuellen Tags und der vorherigen 6 Tage pro 100.000 Einwohner dieser Altersgruppe)
+
+### Quellen
+
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (EBE_Altersgruppen_Inzidenztabelle)
+
+
 
 ## [`arcgisInzidenzGemeinden.csv`](./arcgisInzidenzGemeinden.csv)
 
