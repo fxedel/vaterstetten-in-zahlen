@@ -548,13 +548,13 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 2061394,SEE971650501110,,In Betrieb,2019-05-22,2019-01-18,,,,,85591,Vaterstetten,,,,,true,gebaeude,20,Ost,5.5,4.6,false,Teileinspeisung,false
 2061594,SEE934764933215,,In Betrieb,2019-05-22,2019-01-18,,,,,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.625,8.0,false,Teileinspeisung,false
 2113476,SEE987871831462,,In Betrieb,2019-05-23,2019-01-18,,,,,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-Ost,5.5,4.6,false,Teileinspeisung,false
-2130553,SEE915542531809,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 4,ibeko-solar GmbH,85591,Vaterstetten,,,,,true,gebaeude,51,Ost,14.03,14.0,false,Volleinspeisung,false
-2130682,SEE967309831806,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 6,ibeko-solar GmbH,85591,Vaterstetten,,,,,true,gebaeude,78,Ost,21.45,21.0,false,Volleinspeisung,false
-2130743,SEE912667285235,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 8,ibeko-solar GmbH,85591,Vaterstetten,,,,,true,gebaeude,45,Ost,12.375,10.0,false,Volleinspeisung,false
-2135553,SEE968963023422,,In Betrieb,2019-06-05,2019-01-18,,,Birnen-Anger 10,ibeko-solar GmbH,85591,Vaterstetten,,,,,true,gebaeude,53,West,14.58,12.6,false,Volleinspeisung,false
+2130553,SEE915542531809,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 4,ibeko-system GmbH,85591,Vaterstetten,,,,,false,gebaeude,51,Ost,14.03,14.0,false,Volleinspeisung,false
+2130682,SEE967309831806,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 6,ibeko-system GmbH,85591,Vaterstetten,,,,,false,gebaeude,78,Ost,21.45,21.0,false,Volleinspeisung,false
+2130743,SEE912667285235,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 8,ibeko-system GmbH,85591,Vaterstetten,,,,,false,gebaeude,45,Ost,12.375,10.0,false,Volleinspeisung,false
+2135553,SEE968963023422,,In Betrieb,2019-06-05,2019-01-18,,,Birnen-Anger 10,ibeko-system GmbH,85591,Vaterstetten,,,,,false,gebaeude,53,West,14.58,12.6,false,Volleinspeisung,false
 2138232,SEE912858596195,,In Betrieb,2019-06-07,2019-01-18,,,,,85591,Vaterstetten,,,,,false,gebaeude,20,Ost,5.5,4.6,false,Teileinspeisung,false
-2135580,SEE978155222786,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-solar GmbH,85591,Vaterstetten,,,,,true,gebaeude,74,Ost,20.35,18.6,false,Volleinspeisung,false
-2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 14,ibeko-solar GmbH,85591,Vaterstetten,,,,,true,gebaeude,15,Ost,4.125,4.0,false,Volleinspeisung,false
+2135580,SEE978155222786,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-system GmbH,85591,Vaterstetten,,,,,false,gebaeude,74,Ost,20.35,18.6,false,Volleinspeisung,false
+2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 14,ibeko-system GmbH,85591,Vaterstetten,,,,,false,gebaeude,15,Ost,4.125,4.0,false,Volleinspeisung,false
 2258051,SEE983848984827,,In Betrieb,2019-07-31,2019-01-18,,,,,85591,Vaterstetten,,,,,true,gebaeude,35,Ost-West,9.625,8.0,false,Volleinspeisung,false
 2294924,SEE981944894521,,In Betrieb,2019-08-18,2019-01-18,,,,,85591,Vaterstetten,,,,,true,gebaeude,9,Ost-West,2.475,2.2,false,Teileinspeisung,false
 2938809,SEE983654072114,E2104101S000000000000099648200001,In Betrieb,2020-03-30,2019-01-18,,,,,85591,Vaterstetten,,,,,true,gebaeude,11,nachgeführt,3.03,3.0,false,Teileinspeisung,false
@@ -796,9 +796,9 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4479437,SEE969449260683,,In Betrieb,2021-05-12,2021-03-03,,,,,85591,Vaterstetten,,,,,true,gebaeude,27,Süd-Ost,9.99,8.0,false,Teileinspeisung,false
 4391234,SEE986013115491,,In Betrieb,2021-07-16,2021-03-03,,,,,85598,Baldham,,,,,true,gebaeude,18,Süd,5.76,5.0,false,Teileinspeisung,false
 4392776,SEE918062294568,,In Betrieb,2021-03-17,2021-03-04,,,,,85591,Vaterstetten,,,,,true,gebaeude,26,Süd,8.32,8.2,false,Teileinspeisung,false
+4395481,SEE941755505665,,In Betrieb,2021-03-19,2021-03-09,,,,,85598,Baldham,,,,,false,gebaeude,16,Süd,5.28,4.6,false,Teileinspeisung,false
 4411335,SEE906557827094,,In Betrieb,2021-03-29,2021-03-12,,,,,85598,Baldham,,,,,true,gebaeude,28,Süd-Ost,9.66,8.2,false,Teileinspeisung,false
 4396103,SEE915865906469,,In Betrieb,2021-03-19,2021-03-16,,,,,85591,Vaterstetten,,,,,true,gebaeude,28,Süd-Ost,9.24,9.24,false,Teileinspeisung,false
-4395481,SEE941755505665,,In Betrieb,2021-03-19,2021-03-17,,,,,85598,Baldham,,,,,false,gebaeude,16,Süd,5.28,4.6,false,Teileinspeisung,false
 4436622,SEE925790314024,,In Betrieb,2021-04-14,2021-03-23,,,,,85622,Weißenfeld,,,,,false,gebaeude,18,Süd-West,5.94,5.5,false,Teileinspeisung,false
 4491393,SEE914238248793,,In Betrieb,2021-05-21,2021-03-25,,,,,85591,Vaterstetten,,,,,true,gebaeude,18,Süd-West,5.76,5.0,false,Teileinspeisung,false
 4413055,SEE905690893843,,In Betrieb,2021-03-30,2021-03-26,,,,,85591,Vaterstetten,,,,,false,gebaeude,22,Ost-West,8.14,7.0,false,Teileinspeisung,false
@@ -868,8 +868,10 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4833548,SEE944103952401,,In Betrieb,2021-12-23,2021-11-25,,,"Hausdach + An Lerchenfeld 8, 85599 Parsdorf",Brkic GmbH,85599,Parsdorf,Am Lerchenfeld,,48.146429,11.789983,false,gebaeude,164,,54.12,50.0,false,Teileinspeisung,false
 4800581,SEE996965318758,,In Betrieb,2021-12-03,2021-12-03,,,,,85598,Baldham,,,,,false,gebaeude,17,Ost-West,6.4,4.6,false,Teileinspeisung,false
 4739564,SEE976807909559,,In Betrieb,2021-12-27,2021-12-03,,,,,85591,Vaterstetten,,,,,false,gebaeude,23,Süd,7.93,7.0,false,Teileinspeisung,false
+4872575,SEE918435685542,,In Betrieb,2022-01-25,2021-12-14,,,,,85591,Vaterstetten,,,,,false,gebaeude,20,,8.1,6.1,false,,false
 4789535,SEE900693865798,,In Betrieb,2021-12-20,2021-12-16,,,,,85598,Baldham,,,,,false,gebaeude,12,Süd-Ost,4.56,4.56,false,Teileinspeisung,false
 4825988,SEE908101916803,,In Betrieb,2021-12-18,2021-12-18,,,,,85598,Baldham,,,,,false,gebaeude,24,Süd,9.8,9.8,false,Teileinspeisung,false
+4872386,SEE929068204512,,In Betrieb,2022-01-25,2021-12-20,,,,,85598,Baldham,,,,,false,gebaeude,30,Ost-West,9.9,9.9,false,Teileinspeisung,false
 4843282,SEE942887805128,,In Betrieb,2022-01-04,2022-01-03,,,,,85591,Vaterstetten,,,,,false,gebaeude,39,Süd-West,14.625,14.625,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,false,Teileinspeisung,false
 4479221,SEE991149831160,,In Planung,2021-05-11,,2021-08-10,,,,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,false,Teileinspeisung,false

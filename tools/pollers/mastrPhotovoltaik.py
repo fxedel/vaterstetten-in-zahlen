@@ -43,9 +43,10 @@ class Poller(pollers.poller.Poller):
       return
 
     if self.telegram_bot != None and self.telegram_chat_id != None:
+      data = ''.join(csv_diff)
       self.telegram_bot.send_message(
         self.telegram_chat_id,
-        '```\n' + ''.join(csv_diff) + '\n```',
+        '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
         parse_mode = "Markdown"
       )
 
@@ -98,6 +99,7 @@ def is_public(x: dict) -> bool:
     "ABR991822525591", # Landkreis Ebersberg
     "ABR939016877651", # Eurytos Energie GmbH ＆ Co. KG
     "ABR951481578482", # ibeko-solar GmbH
+    "ABR981309102131", # ibeko-system GmbH
   ]
 
   if x['AnlagenbetreiberMaStRNummer'] in whitelist:
