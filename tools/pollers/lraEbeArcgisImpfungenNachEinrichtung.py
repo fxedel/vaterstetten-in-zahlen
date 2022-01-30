@@ -30,9 +30,10 @@ class Poller(pollers.poller.Poller):
       self.write_csv_rows(rows_nach_einrichtung_file, rows_nach_einrichtung)
 
       if self.telegram_bot != None and self.telegram_chat_id != None:
+        data = ''.join(rows_nach_einrichtung_diff)
         self.telegram_bot.send_message(
           self.telegram_chat_id,
-          '```\n' + ''.join(rows_nach_einrichtung_diff) + '\n```',
+          '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
           parse_mode = "Markdown"
         )
 
@@ -43,9 +44,10 @@ class Poller(pollers.poller.Poller):
       self.write_csv_rows(rows_nach_geschlecht_file, rows_nach_geschlecht)
 
       if self.telegram_bot != None and self.telegram_chat_id != None:
+        data = ''.join(rows_nach_geschlecht_diff)
         self.telegram_bot.send_message(
           self.telegram_chat_id,
-          '```\n' + ''.join(rows_nach_geschlecht_diff) + '\n```',
+          '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
           parse_mode = "Markdown"
         )
 
@@ -56,9 +58,10 @@ class Poller(pollers.poller.Poller):
       self.write_csv_rows(rows_nach_alter_file, rows_nach_alter)
 
       if self.telegram_bot != None and self.telegram_chat_id != None:
+        data = ''.join(rows_nach_alter_diff)
         self.telegram_bot.send_message(
           self.telegram_chat_id,
-          '```\n' + ''.join(rows_nach_alter_diff) + '\n```',
+          '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
           parse_mode = "Markdown"
         )
 
