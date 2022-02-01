@@ -50,6 +50,6 @@ function renderVisibleWidgets() {
         // wait 2ms, so a new tab page can be shown without the blocking call to staticRender()
         setTimeout(async () => {
             window.HTMLWidgets.staticRender();
-        }, 2)
+        }, 20)
     }
 }
