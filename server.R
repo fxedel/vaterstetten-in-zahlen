@@ -51,7 +51,7 @@ ui <- function(request) {
     dashboardSidebar(
       width = 280,
       sidebarMenu(id = "tab", selected = query$tab,
-        menuItem("Start", tabName = "main", icon = icon("home"), selected = query$tab == "main"),
+        menuItem("Start", tabName = "main", icon = icon("home"), selected = query$tab == "main" || is.null(query$tab)),
         menuItem("Corona-Fallzahlen", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
         menuItem("Corona-Impfungen", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen"),
         menuItem("Photovoltaik", tabName = "photovoltaik", icon = icon("solar-panel"), selected = query$tab == "photovoltaik"),
