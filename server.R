@@ -120,7 +120,14 @@ ui <- function(request) {
 
 server <- function(input, output, session) {
   observe({
-    updateQueryString(paste0("?tab=", session$input$tab), mode = "push")
+    query = parseQueryString(session$clientData$url_search)
+    if (is.null(query$tab) || query$tab != session$input$tab) {
+      updateQueryString(paste0("?tab=", session$input$tab), mode = "push")
+    }
+  })
+
+  observe({
+    updateTabsetPanel(session, "tab", input$tab)
   })
 
   mainPage$server("mainPage", session)

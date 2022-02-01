@@ -1,3 +1,9 @@
+window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab') ?? 'main';
+    Shiny.setInputValue('tab', tab);
+})
+
 document.addEventListener('DOMContentLoaded', () => {
     preventWidgetsFromRendering()
 })
