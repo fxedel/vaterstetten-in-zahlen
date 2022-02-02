@@ -22,6 +22,9 @@ class Poller(pollers.poller.Poller):
     if len(data) < len(current_rows):
       raise Exception('Queried data has less items (%d) than current data (%d)' % (len(data), len(current_rows)))
 
+    if len(data) > len(current_rows) * 1.5:
+      raise Exception('Queried data has much more items (%d) than current data (%d)' % (len(data), len(current_rows)))
+
     rows = list(map(lambda x: {
       'datum': datetime.utcfromtimestamp(x.attributes['Meldedatum'] / 1000).strftime('%Y-%m-%d'),
       'altersgruppe': str(x.attributes['Altersgruppe']).replace('A', ''), # A60-A79 -> 60-79

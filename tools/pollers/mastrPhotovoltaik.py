@@ -31,6 +31,9 @@ class Poller(pollers.poller.Poller):
     if payload['Total'] < len(current_rows):
       raise Exception('Queried data has less items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
 
+    if payload['Total'] > len(current_rows) * 1.5:
+      raise Exception('Queried data has much more items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
+
     data_filtered = list(filter(filter_vaterstetten, payload['Data']))
     rows = list(map(map_row, data_filtered))
     rows = sorted(rows, key=lambda d: d['registrierungMaStr'])
