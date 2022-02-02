@@ -177,7 +177,7 @@ impfungenAlterMerged <- bind_rows(
     )
 ) %>%
   mutate(
-    altersgruppe = factor(altersgruppe, levels = c("Unbekannt", "0-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+"))
+    altersgruppe = factor(altersgruppe, levels = c("0-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+", "Unbekannt"))
   )
 
 maxDatum = max(impfungenMerged$datum, arcgisImpfungenNachEinrichtung$datum)
@@ -224,7 +224,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
       box(
         title = "Geimpfte Personen",
         {
-          plot_ly(impfungenMerged %>% filter(!is.na(erstimpfungen)), x = ~datum, yhoverformat = ",d", height = 350) %>%
+          plot_ly(impfungenMerged %>% filter(!is.na(erstimpfungen)), x = ~datum, yhoverformat = ",d", height = 400) %>%
             add_trace(y = ~erstimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#74a9cf", name = "Erstimpfungen") %>%
             add_trace(y = ~zweitimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#0570b0", name = "Zweitimpfungen") %>%
             add_trace(y = ~drittimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#023858", name = "Drittimpfungen") %>%
@@ -235,13 +235,14 @@ ui <- memoise(omit_args = "request", function(request, id) {
         },
         {
           lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-          paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", germanNumberFormat(lastRow$erstimpfungen), " Menschen mindestens eine Erstimpfung erhalten, davon ", germanNumberFormat(lastRow$zweitimpfungen), " eine Zweitimpfung und ", germanNumberFormat(lastRow$drittimpfungen), " eine Drittimpfung.")
-        }
+          p(paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", germanNumberFormat(lastRow$erstimpfungen), " Menschen mindestens eine Erstimpfung erhalten, davon ", germanNumberFormat(lastRow$zweitimpfungen), " eine Zweitimpfung und ", germanNumberFormat(lastRow$drittimpfungen), " eine Drittimpfung."))
+        },
+        p(HTML("Die Zahlen beziehen sich auf die Impfungen, die <em>im</em> Landkreis Ebersberg verabreicht wurden; der Wohnort der geimpften Personen ist irrelevant. Dadurch ist es möglich, dass es mehr Zweit- als Erstimpfungen gibt, wenn sich Landkreisbürger*innen in anderen Landkreisen erstimpfen ließen, oder Bürger*innen anderer Landkreise sich im LK Ebersberg zweitimpfen ließen."))
       ),
       box(
         title = "7-Tage-Impfidenz",
         {
-          plot_ly(filter(impfungenMerged, !is.na(impfidenz)), x = ~datum, yhoverformat = ",.1f", height = 350) %>%
+          plot_ly(filter(impfungenMerged, !is.na(impfidenz)), x = ~datum, yhoverformat = ",.1f", height = 400) %>%
             add_trace(y = ~ impfidenz, type = "scatter", mode = "lines", name = "Gesamt-Impfidenz", size = I(2), color = I("#000000")) %>%
             add_trace(y = ~ erstImpfidenz, type = "scatter", mode = "lines", name = "Erst-Impfidenz", size = I(2), color = I("#74a9cf")) %>%
             plotly_default_config() %>%
@@ -251,7 +252,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         },
         {
           lastRow <- impfungenMerged %>% filter(!is.na(impfidenz)) %>% slice_tail()
-          paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", germanNumberFormat(lastRow$impfidenz, accuracy = 0.1), ".")
+          p(paste0("Die 7-Tage-Impfidenz (Anzahl verimpfter Dosen in den letzten 7 Tagen pro 100.000 Einwohner) liegt zum ", format(lastRow$datum, "%d.%m.%Y"), " bei ", germanNumberFormat(lastRow$impfidenz, accuracy = 0.1), "."))
         }
       ),
     ),
@@ -300,12 +301,52 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Erstgeimpfte nach Altersgruppe",
+        title = "Neue Erstgeimpfte pro Woche nach Altersgruppe (nur Impfzentrum)",
         {
-          plot_ly(impfungenAlterMerged, x = ~datum, yhoverformat = ",", height = 350) %>%
-            add_trace(y = ~erstimpfungen, type = "scatter", mode = "none", fill = 'tonexty', color = ~altersgruppe, stackgroup = 'one', alpha = 1, alpha_stroke = 1, opacity=1, colors = c('#eeeeee','#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#005a32')) %>%
+          impfungenAlterMerged %>%
+            group_by(altersgruppe) %>%
+            mutate(erstimpfungenNeu = erstimpfungen - lag(erstimpfungen)) %>%
+            mutate(woche = floor_date(datum, unit = "weeks")) %>%
+            group_by(altersgruppe, woche) %>%
+            summarise(erstimpfungenNeu = max(erstimpfungenNeu), .groups = "drop_last") %>%
+            plot_ly(x = ~woche, yhoverformat = ",", height = 350) %>%
+            add_trace(y = ~erstimpfungenNeu, type = "bar", color = ~altersgruppe, colors = c('#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#005a32','#aaaaaa')) %>%
+            layout(barmode = 'stack') %>%
             plotly_default_config() %>%
-            plotly_time_range() %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build()
+        },
+      ),
+      box(
+        title = "Neue Zweitgeimpfte pro Woche nach Altersgruppe (nur Impfzentrum)",
+        {
+          impfungenAlterMerged %>%
+            group_by(altersgruppe) %>%
+            mutate(zweitimpfungenNeu = zweitimpfungen - lag(zweitimpfungen)) %>%
+            mutate(woche = floor_date(datum, unit = "weeks")) %>%
+            group_by(altersgruppe, woche) %>%
+            summarise(zweitimpfungenNeu = max(zweitimpfungenNeu), .groups = "drop_last") %>%
+            plot_ly(x = ~woche, yhoverformat = ",", height = 350) %>%
+            add_trace(y = ~zweitimpfungenNeu, type = "bar", color = ~altersgruppe, colors = c('#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#005a32','#aaaaaa')) %>%
+            layout(barmode = 'stack') %>%
+            plotly_default_config() %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build()
+        },
+      ),
+      box(
+        title = "Neue Drittgeimpfte pro Woche nach Altersgruppe (nur Impfzentrum)",
+        {
+          impfungenAlterMerged %>%
+            group_by(altersgruppe) %>%
+            mutate(drittimpfungenNeu = drittimpfungen - lag(drittimpfungen)) %>%
+            mutate(woche = floor_date(datum, unit = "weeks")) %>%
+            group_by(altersgruppe, woche) %>%
+            summarise(drittimpfungenNeu = max(drittimpfungenNeu), .groups = "drop_last") %>%
+            plot_ly(x = ~woche, yhoverformat = ",", height = 350) %>%
+            add_trace(y = ~drittimpfungenNeu, type = "bar", color = ~altersgruppe, colors = c('#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#005a32','#aaaaaa')) %>%
+            layout(barmode = 'stack') %>%
+            plotly_default_config() %>%
             plotly_hide_axis_titles() %>%
             plotly_build()
         },
@@ -360,14 +401,13 @@ plotly_default_config <- function(p) {
     layout(yaxis = list(fixedrange = TRUE)) %>%
     layout(hovermode = "x") %>%
     layout(dragmode = FALSE) %>%
+    layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h', y = 1.2, yanchor = "bottom")) %>% # legend above plot
     identity()
 }
 
 plotly_time_range <- function(p) {
   return(
     p %>%
-      # legend above plot
-      layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h', y = 1.2, yanchor = "bottom")) %>%
       # default time selection
       layout(xaxis = list(range = list(maxDatum-91, maxDatum+1))) %>%
       layout(xaxis = list(
@@ -391,6 +431,6 @@ plotly_hide_axis_titles <- function(p) {
     p %>%
       layout(xaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
       layout(yaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
-      layout(margin = list(r = 0, l = 0, t = 0, b = 4, pad = 0))
+      layout(margin = list(r = 0, l = 0, t = 0, b = 4, pad = 8))
   )
 }
