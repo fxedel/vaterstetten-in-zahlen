@@ -749,7 +749,6 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4522961,SEE979160506069,,In Betrieb,2021-06-23,2020-09-25,,,,,85598,Baldham,,,,,false,gebaeude,18,Süd,5.94,1.5,false,Teileinspeisung,false
 3628838,SEE993539818263,,In Betrieb,2020-11-09,2020-09-28,,,,,85591,Vaterstetten,,,,,true,gebaeude,30,Süd,9.9,9.9,false,Teileinspeisung,false
 4353266,SEE988707289822,,In Betrieb,2021-02-15,2020-09-30,,,,,85598,Baldham,,,,,true,gebaeude,29,Süd,9.28,8.0,false,Teileinspeisung,false
-4487696,SEE964811558405,,In Betrieb,2021-05-19,2020-10-01,,,,,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,6.5,6.5,false,Volleinspeisung,false
 3675328,SEE936869386781,,In Betrieb,2020-11-18,2020-10-02,,,,,85591,Vaterstetten,,,,,true,gebaeude,15,Süd-West,4.725,4.725,false,Teileinspeisung,false
 3774629,SEE980184174585,,In Betrieb,2020-12-01,2020-10-02,,,,,85591,Vaterstetten,,,,,true,gebaeude,23,Süd-Ost,7.475,7.0,false,Teileinspeisung,false
 3525384,SEE980740112150,,In Betrieb,2020-10-16,2020-10-15,,,,,85591,Vaterstetten,,,,,true,gebaeude,30,Süd,9.75,9.75,false,Teileinspeisung,false
@@ -811,6 +810,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4507854,SEE993732463864,,In Betrieb,2021-06-03,2021-05-11,,,,,85599,Parsdorf,,,,,true,gebaeude,41,Süd,13.94,13.7,false,Teileinspeisung,false
 4551466,SEE907909074531,,In Betrieb,2021-12-01,2021-05-12,,,,,85591,Vaterstetten,,,,,true,gebaeude,33,Süd,9.9,9.9,false,Teileinspeisung,false
 4526155,SEE981470536650,,In Betrieb,2021-06-18,2021-05-14,,,,,85598,Baldham,,,,,true,gebaeude,10,Süd,3.4,3.0,false,Teileinspeisung,false
+4487696,SEE964811558405,,In Betrieb,2021-05-19,2021-05-18,,,,,85591,Vaterstetten,,,,,false,gebaeude,20,Süd,6.5,6.5,false,Volleinspeisung,false
 4497183,SEE961356164511,,In Betrieb,2021-05-26,2021-05-26,,,,,85591,Vaterstetten,,,,,false,gebaeude,28,,9.52,9.2,false,Teileinspeisung,false
 4528200,SEE989370316648,,In Betrieb,2021-06-20,2021-05-26,,,,,85598,Baldham,,,,,false,gebaeude,12,Süd,4.44,4.44,false,Teileinspeisung,false
 4530102,SEE992544489536,,In Betrieb,2021-06-21,2021-05-26,,,,,85598,Baldham,,,,,false,gebaeude,23,Süd,7.82,7.82,false,Teileinspeisung,false
@@ -869,11 +869,12 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahm
 4800581,SEE996965318758,,In Betrieb,2021-12-03,2021-12-03,,,,,85598,Baldham,,,,,false,gebaeude,17,Ost-West,6.4,4.6,false,Teileinspeisung,false
 4739564,SEE976807909559,,In Betrieb,2021-12-27,2021-12-03,,,,,85591,Vaterstetten,,,,,false,gebaeude,23,Süd,7.93,7.0,false,Teileinspeisung,false
 4872575,SEE918435685542,,In Betrieb,2022-01-25,2021-12-14,,,,,85591,Vaterstetten,,,,,false,gebaeude,20,,8.1,6.1,false,,false
-4789535,SEE900693865798,,In Betrieb,2021-12-20,2021-12-16,,,,,85598,Baldham,,,,,false,gebaeude,12,Süd-Ost,4.56,4.56,false,Teileinspeisung,false
 4825988,SEE908101916803,,In Betrieb,2021-12-18,2021-12-18,,,,,85598,Baldham,,,,,false,gebaeude,24,Süd,9.8,9.8,false,Teileinspeisung,false
 4872386,SEE929068204512,,In Betrieb,2022-01-25,2021-12-20,,,,,85598,Baldham,,,,,false,gebaeude,30,Ost-West,9.9,9.9,false,Teileinspeisung,false
 4843282,SEE942887805128,,In Betrieb,2022-01-04,2022-01-03,,,,,85591,Vaterstetten,,,,,false,gebaeude,39,Süd-West,14.625,14.625,false,Teileinspeisung,false
 4877761,SEE965822264453,,In Betrieb,2022-01-28,2022-01-18,,,,,85598,Baldham,,,,,false,gebaeude,28,Süd-Ost,11.2,10.0,false,Teileinspeisung,false
+4884314,SEE986874205812,,In Betrieb,2022-02-01,2022-01-25,,,,,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.08,6.0,false,Teileinspeisung,false
+4789535,SEE900693865798,,In Betrieb,2021-12-20,2022-02-01,,,,,85598,Baldham,,,,,false,gebaeude,12,Ost,4.56,4.56,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,false,Teileinspeisung,false
 4479221,SEE991149831160,,In Planung,2021-05-11,,2021-08-10,,,,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,false,Teileinspeisung,false
