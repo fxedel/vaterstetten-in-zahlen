@@ -2,11 +2,11 @@ window.addEventListener('popstate', () => {
     const params = new URLSearchParams(window.location.search);
     const tab = params.get('tab') ?? 'main';
     Shiny.setInputValue('tab', tab);
-})
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-    preventWidgetsFromRendering()
-})
+    preventWidgetsFromRendering();
+});
 
 $(document).on('shiny:connected', event => {
     renderVisibleWidgets();
@@ -56,6 +56,6 @@ function renderVisibleWidgets() {
         // wait 2ms, so a new tab page can be shown without the blocking call to staticRender()
         setTimeout(async () => {
             window.HTMLWidgets.staticRender();
-        }, 20)
+        }, 20);
     }
 }
