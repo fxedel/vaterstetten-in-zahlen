@@ -7,14 +7,13 @@ import requests
 
 from pollers.mastrGeneric import MastrGenericPoller
 
-class MastrPhotovoltaikPoller(MastrGenericPoller):
-
+class MastrSpeicherPoller(MastrGenericPoller):
   def run(self):
-    csv_filename = os.path.join('energie', 'mastrPhotovoltaik.csv');
+    csv_filename = os.path.join('energie', 'mastrSpeicher.csv');
     current_rows = self.read_csv_rows(csv_filename)
 
     start = time.time()
-    req = requests.get("https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize=1000&group=&filter=Gemeinde~eq~'Vaterstetten'~and~Energieträger~eq~'%d'" % self.ENERGIETRAEGER_SOLARE_STRAHLUNGSENERGIE_ID)
+    req = requests.get("https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize=1000&group=&filter=Gemeinde~eq~'Vaterstetten'~and~Energieträger~eq~'%d'" % self.ENERGIETRAEGER_SPEICHER_ID)
     print('> Queried data in %.1fs' % (time.time() - start))
 
     if req.status_code != 200:
@@ -62,7 +61,6 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     return {
       'MaStRId': x['Id'],
       'MaStRNummer': x['MaStRNummer'],
-      'EEGAnlagenschluessel': x['EegAnlagenschluessel'],
       'status': x['BetriebsStatusName'],
       'registrierungMaStR': self.parse_date(x['EinheitRegistrierungsdatum']),
       'inbetriebnahme': self.parse_date(x['InbetriebnahmeDatum']),
@@ -77,12 +75,10 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'lat': x['Breitengrad'],
       'long': x['Laengengrad'],
       'netzbetreiberPruefung': str(x['IsNBPruefungAbgeschlossen'] == self.NETZBETREIBERPRUEFUNG_GEPRUEFT_ID).lower(),
-      'typ': self.LAGE_BY_ID[x['LageEinheit']],
-      'module': x['AnzahlSolarModule'],
-      'ausrichtung': x['HauptausrichtungSolarModuleBezeichnung'],
+      'batterietechnologie': self.BATTERIETECHNOLOGIE_BY_ID[x['Batterietechnologie']],
       'bruttoleistung_kW': x['Bruttoleistung'],
       'nettonennleistung_kW': x['Nettonennleistung'],
-      'EEGAusschreibung': str(x['EegZuschlag'] is not None).lower(),
+      'kapazitaet_kWh': x['NutzbareSpeicherkapazitaet'],
       'einspeisung': x['VollTeilEinspeisungBezeichnung'],
-      'mieterstrom': str(x['MieterstromAngemeldet'] == True).lower(),
+      'istNotstromaggregat': str(x['IsEinheitNotstromaggregat']).lower(),
     }

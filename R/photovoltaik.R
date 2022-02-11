@@ -26,7 +26,7 @@ mastr <- read_delim(
     module = col_integer(),
     ausrichtung = col_character(),
     bruttoleistung_kW = col_double(),
-    nettonennleistung_kw = col_double(),
+    nettonennleistung_kW = col_double(),
     EEGAusschreibung = col_logical(),
     einspeisung = readr::col_factor(c("Teileinspeisung", "Volleinspeisung")),
     mieterstrom = col_logical()

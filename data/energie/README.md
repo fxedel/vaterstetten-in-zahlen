@@ -10,7 +10,7 @@ Der Datensatz [mastrPhotovoltaik.csv](./mastrPhotovoltaik.csv) umfasst sämtlich
 |`MaStRNummer`|`SEE[0-9]{12}`|Öffentliche Kennnummer der Anlage im Markstammdatenregister: `SEE` gefolgt von einer zwölf-stelligen Ziffer, z.&nbsp;B. `SEE943971188158`.
 |`EEGAnlagenschluessel`|`E[0-9A-Z]{32}`|EEG-Anlagenschlüssel, falls es sich um eine EEG-Anlage handelt: `E` gefolgt von einer 32-stelligen Kombination aus Zahlen und Buchstaben (siehe unten für Details).
 |`status`|text|`In Planung`, `In Betrieb`, `Vorübergehend stillgelegt` oder `Endgültig stillgelegt`.
-|`registrierungMaStr`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Registrierung der Anlage im Marktstammdatenregister. Dies kann weit vor oder weit nach Inbetriebnahme der Anlage sein. Die früheste Registrierung erfolgte 2019, während die älteste Anlage 2000 in Betrieb genommen wurde.
+|`registrierungMaStR`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Registrierung der Anlage im Marktstammdatenregister. Dies kann weit vor oder weit nach Inbetriebnahme der Anlage sein. Die früheste Registrierung erfolgte 2019, während die älteste Anlage 2000 in Betrieb genommen wurde.
 |`inbetriebnahme`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Tatsächliche Inbetriebnahme der Anlage. Ist bei `status`=`In Planung` meist leer, da ist allerdings `inbetriebnahmeGeplant` gesetzt.
 |`inbetriebnahmeGeplant`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Geplante Inbetriebnahme der Anlage falls `status`=`In Planung`.
 |`stilllegung`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Endgültige Stilllegung der Anlage falls `status`=`Endgültig stillgelegt`.
@@ -27,12 +27,12 @@ Der Datensatz [mastrPhotovoltaik.csv](./mastrPhotovoltaik.csv) umfasst sämtlich
 |`module`|integer|Anzahl der Photovoltaikmodule
 |`ausrichtung`|text|Hauptausrichtung der Photovoltaikmodule, z.&nbsp;B. `Nord`, `Nord-Ost`, `Ost`, `Ost-West`, `Süd-Ost`, `Süd`, `Süd-West`, `West`, `Nord-West`, `nachgeführt`
 |`bruttoleistung_kW`|float|Bruttoleistung in Kilowatt-Peak. Dies entspricht der Summe der Modulleistungen.
-|`nettonennleistung_kw`|float|Nettonennleistung in Kilowatt-Peak. Dies entspricht dem kleineren Wert aus Wechselrichterleistung und Summe der Modulleistungen.
+|`nettonennleistung_kW`|float|Nettonennleistung in Kilowatt-Peak. Dies entspricht dem kleineren Wert aus Wechselrichterleistung und Summe der Modulleistungen.
 |`EEGAusschreibung`|`true`/`false`|Ob an einer EEG-Ausschreibung teilgenommen wurde (nur bei sehr großen Anlagen).
 |`einspeisung`|text|Umfang der Einspeisung: `Teileinspeisung` oder `Volleinspeisung`
 |`mieterstrom`|`true`/`false`|Ob es sich um einer Mieterstrom-Anlage handelt.
 
-* `nettonennleistung_kw` ≤ `bruttoleistung_kW`
+* `nettonennleistung_kW` ≤ `bruttoleistung_kW`
 
 
 ### EEG-Anlagenschlüssel
@@ -52,6 +52,44 @@ Für Netzbetreiber mit einer Betriebsnummer >10009999 unterscheidet sich das For
 Siehe auch:
 - „Regeln für die Generierung von eindeutigen EEG-Anlagenschlüsseln durch die Anschlussnetzbetreiber“, Bundesverband für Energie- und Wasserwirtschaft e.&nbsp;V. (BDEW), 24. September 2020, https://www.bdew.de/media/documents/2020-09-24_Erg%C3%A4nzung-zu-Umsetzungshilfe-EEG-2017_Generierung-EEG-Anlagenschl%C3%BCssel.pdf
 - „Die Zusammensetzung des EEG-Anlagenschlüssel“, kinewables GmbH, 27. November 2018, https://www.kinewables.de/news-termine/aktuelles-detail/die-zusammensetzung-des-eeg-anlagenschluessel.html
+
+### Quellen und Lizenz
+
+- [Marktstammdatenregister der Bundesnetzagentur](../quellen/MaStR.md), JSON-Endpunkt `GetErweiterteOeffentlicheEinheitStromerzeugung`
+
+
+
+## [`mastrSpeicher.csv`](./mastrSpeicher.csv)
+
+Der Datensatz [mastrSpeicher.csv](./mastrSpeicher.csv) umfasst sämtliche Stromspeicher in der Gemeinde Vaterstetten, die im [Marktstammdatenregister](https://www.marktstammdatenregister.de) erfasst sind.
+
+|Spalte|Format|Beschreibung
+|-|-|-
+|`MaStRId`|integer|ID der Anlage im Marktstammdatenregister. Wird u.&nbsp;a. in der URL der Detailansicht verwendet, z.&nbsp;B. mit ID [1956745](https://www.marktstammdatenregister.de/MaStR/Einheit/Detail/IndexOeffentlich/1956745).
+|`MaStRNummer`|`SEE[0-9]{12}`|Öffentliche Kennnummer der Anlage im Markstammdatenregister: `SEE` gefolgt von einer zwölf-stelligen Ziffer, z.&nbsp;B. `SEE943971188158`.
+|`status`|text|`In Planung`, `In Betrieb`, `Vorübergehend stillgelegt` oder `Endgültig stillgelegt`.
+|`registrierungMaStR`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Registrierung der Anlage im Marktstammdatenregister. Dies kann weit vor oder weit nach Inbetriebnahme der Anlage sein. Die früheste Registrierung erfolgte 2019, während die älteste Anlage 2014 in Betrieb genommen wurde.
+|`inbetriebnahme`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Tatsächliche Inbetriebnahme der Anlage. Ist bei `status`=`In Planung` meist leer, da ist allerdings `inbetriebnahmeGeplant` gesetzt.
+|`inbetriebnahmeGeplant`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Geplante Inbetriebnahme der Anlage falls `status`=`In Planung`.
+|`stilllegung`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Endgültige Stilllegung der Anlage falls `status`=`Endgültig stillgelegt`.
+|`name`|text|Angegebener Name der Anlage (nur bei Organisationen oder größeren Anlagen)
+|`betreiber`|text|Betreiber der Anlage (nur bei Organisationen oder größeren Anlagen)
+|`plz`|`[0-9]{5}`|Standort: Postleitzahl
+|`ort`|text|Standort: Ortsname (`Baldham`, `Vaterstetten`, `Weißenfeld`, `Hergolding`, `Parsdorf`, `Purfing` oder `Neufarn`)
+|`strasse`|text|Standort: Straßenname (nur bei größeren Anlagen)
+|`hausnummer`|text|Standort: Hausnummer (nur bei größeren Anlagen)
+|`lat`|float|Standort: Breitengrad, z.&nbsp;B. `48.11154` (nur bei größeren Anlagen)
+|`long`|float|Standort: Längengrad, z.&nbsp;B. `11.778989` (nur bei größeren Anlagen)
+|`netzbetreiberPruefung`|`true`/`false`|Ob die Netzbetreiberprüfung bereits erfolgt ist.
+|`batterietechnologie`|text|Batterietechnologie: `Blei`, `Hochtemperatur`, `Lithium`, `Nickel-Cadmium / Nickel-Metallhydrid`, `Redox-Flow` oder `Sonstige`
+|`bruttoleistung_kW`|float|Maximale Entladeleistung im Dauerbetrieb.
+|`nettonennleistung_kW`|float|Nettonennleistung in Kilowatt. Dies entspricht dem kleineren Wert aus Wechselrichterleistung und Entladeleistung.
+|`kapazitaet_kWh`|float|Speicherkapazität in Kilowattstunden.
+|`einspeisung`|text|Umfang der Einspeisung: `Teileinspeisung` oder `Volleinspeisung`
+|`istNotstromaggregat`|`true`/`false`|Ob die Anlage als Notstromaggregat verwendet wird, d.&nbsp;h. zur Versorgung bei Stromnetzstörungen dient.
+
+* `nettonennleistung_kW` ≤ `bruttoleistung_kW`
+
 
 ### Quellen und Lizenz
 

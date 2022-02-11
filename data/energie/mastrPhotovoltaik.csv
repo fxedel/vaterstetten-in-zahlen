@@ -1,4 +1,4 @@
-MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStr,inbetriebnahme,inbetriebnahmeGeplant,stilllegung,name,betreiber,plz,ort,strasse,hausnummer,lat,long,netzbetreiberPruefung,typ,module,ausrichtung,bruttoleistung_kW,nettonennleistung_kw,EEGAusschreibung,einspeisung,mieterstrom
+MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGeplant,stilllegung,name,betreiber,plz,ort,strasse,hausnummer,lat,long,netzbetreiberPruefung,typ,module,ausrichtung,bruttoleistung_kW,nettonennleistung_kW,EEGAusschreibung,einspeisung,mieterstrom
 3778717,SEE990523262057,E21875011000000000000306631500000,Endgültig stillgelegt,2021-01-31,2000-10-27,,2020-12-31,,,85591,Vaterstetten,,,,,false,gebaeude,1,Süd,0.2,0.2,false,Volleinspeisung,false
 3684044,SEE947074965098,E21875011000000000000306347700000,In Betrieb,2020-11-19,2001-02-01,,,,,85598,Baldham,,,,,true,gebaeude,20,Süd,2.9,2.5,false,Volleinspeisung,false
 2631689,SEE921964597187,,Endgültig stillgelegt,2019-12-27,2001-03-31,,2021-12-04,,,85598,Baldham,,,,,false,gebaeude,30,Süd,3.3,3.3,false,Volleinspeisung,false
