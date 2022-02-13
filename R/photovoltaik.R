@@ -15,8 +15,9 @@ mastr <- read_delim(
     stilllegung = col_date(format = "%Y-%m-%d"),
     name = col_character(),
     betreiber = col_character(),
+    gebaeudeNutzung = readr::col_factor(c("haushalt", "GHD", "industrie", "landwirtschaft", "oeffentlich", "sonstige")),
     plz = readr::col_factor(),
-    ort = readr::col_factor(c("Baldham", "Vaterstetten", "Weißenfeld", "Hergolding", "Parsdorf", "Purfing", "Neufarn")),
+    ort = readr::col_factor(),
     strasse = col_character(),
     hausnummer = col_character(),
     lat = col_double(),
@@ -33,6 +34,24 @@ mastr <- read_delim(
   )
 ) %>%
   mutate(
+    gebaeudeNutzung = recode_factor(gebaeudeNutzung,
+      haushalt = "Private Haushalte",
+      GHD = "Gewerbe, Handel, Dienstleistungen",
+      industrie = "Industrie",
+      landwirtschaft = "Landwirtschaft",
+      oeffentlich = "Öffentliche Gebäude",
+      sonstige = "Sonstige",
+    ),
+    # just to ensure order of ort factor; this can't be done above, since col_factor() has a problem with "Weißenfeld" (probably the umlaut)
+    ort = recode_factor(ort,
+      "Baldham" = "Baldham",
+      "Vaterstetten" = "Vaterstetten",
+      "Weißenfeld" = "Weißenfeld",
+      "Hergolding" = "Hergolding",
+      "Parsdorf" = "Parsdorf",
+      "Purfing" = "Purfing",
+      "Neufarn" = "Neufarn",
+    ),
     anlagenGroesse = cut(
       bruttoleistung_kW,
       breaks = c(0, 10, 100, Inf),
@@ -42,11 +61,14 @@ mastr <- read_delim(
   ) %>%
   identity()
 
-installationenNachJahrGroesse <- mastr %>%
-  filter(!is.na(inbetriebnahme)) %>%
-  group_by(year = year(inbetriebnahme), anlagenGroesse) %>%
-  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
-  identity()
+installationenNachJahrGrouped <- memoise(function(groupVar) {
+  mastr %>%
+    filter(!is.na(inbetriebnahme)) %>%
+    group_by(year = year(inbetriebnahme), across(all_of(groupVar))) %>%
+    summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+    identity()
+})
+
 
 anlagenKumulativ <- merge(
   mastr %>%
@@ -167,25 +189,6 @@ plotlyAnlagen <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv")
   plotly_build() %>%
   identity()
 
-plotlyLeistungNachJahrGroesse <- plot_ly(installationenNachJahrGroesse, x = ~year, yhoverformat = ",.0f", height = 350) %>%
-  add_trace(y = ~bruttoleistung_kW, type = "bar", color = ~anlagenGroesse) %>%
-  layout(yaxis = list(exponentformat = "none", ticksuffix = " kWp")) %>%
-  layout(barmode = 'stack') %>%
-  plotly_axis_spacing(installationenNachJahrGroesse$year, left = 0, right = 0.02) %>%
-  plotly_default_config() %>%
-  plotly_hide_axis_titles() %>%
-  plotly_build() %>%
-  identity()
-
-plotlyAnlagenNachJahrGroesse <- plot_ly(installationenNachJahrGroesse, x = ~year, yhoverformat = ",d", height = 350) %>%
-  add_trace(y = ~anlagen, type = "bar", color = ~anlagenGroesse) %>%
-  layout(barmode = 'stack') %>%
-  plotly_axis_spacing(installationenNachJahrGroesse$year, left = 0, right = 0.02) %>%
-  plotly_default_config() %>%
-  plotly_hide_axis_titles() %>%
-  plotly_build() %>%
-  identity()
-
 ui <- memoise(omit_args = "request", function(request, id) {
   request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
 
@@ -212,12 +215,30 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Neu installierte Leistung nach Jahr",
-        plotlyLeistungNachJahrGroesse
+        title = "Neu installierte Leistung pro Jahr",
+        selectInput(
+          ns("neuLeistungGroupVar"),
+          label = NULL,
+          choices = list(
+            "Gruppiert nach Anlagengröße" = "anlagenGroesse",
+            "Gruppiert nach Standort" = "ort",
+            "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung"
+          )
+        ),
+        plotlyOutput(ns("neuLeistungPlotly"), height = 350)
       ),
       box(
-        title = "Neu installierte Anlagen nach Jahr",
-        plotlyAnlagenNachJahrGroesse
+        title = "Neu installierte Anlagen pro Jahr",
+        selectInput(
+          ns("neuAnlagenGroupVar"),
+          label = NULL,
+          choices = list(
+            "Gruppiert nach Anlagengröße" = "anlagenGroesse",
+            "Gruppiert nach Standort" = "ort",
+            "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung"
+          )
+        ),
+        plotlyOutput(ns("neuAnlagenPlotly"), height = 350)
       ),
     ),
 
@@ -238,6 +259,30 @@ server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      output$neuLeistungPlotly <- renderPlotly({
+        data <- installationenNachJahrGrouped(input$neuLeistungGroupVar)
+        plot_ly(data, x = ~year, yhoverformat = ",.0f") %>%
+          add_trace(y = ~bruttoleistung_kW, type = "bar", color = ~get(input$neuLeistungGroupVar)) %>%
+          layout(yaxis = list(exponentformat = "none", ticksuffix = " kWp")) %>%
+          layout(barmode = 'stack') %>%
+          plotly_axis_spacing(data$year, left = 0, right = 0.02) %>%
+          plotly_default_config() %>%
+          plotly_hide_axis_titles() %>%
+          plotly_build() %>%
+          identity()
+      })
+
+      output$neuAnlagenPlotly <- renderPlotly({
+        data <- installationenNachJahrGrouped(input$neuAnlagenGroupVar)
+        plot_ly(data, x = ~year, yhoverformat = ",d") %>%
+          add_trace(y = ~anlagen, type = "bar", color = ~get(input$neuAnlagenGroupVar)) %>%
+          layout(barmode = 'stack') %>%
+          plotly_axis_spacing(data$year, left = 0, right = 0.02) %>%
+          plotly_default_config() %>%
+          plotly_hide_axis_titles() %>%
+          plotly_build() %>%
+          identity()
+      })
     }
   )
 }
