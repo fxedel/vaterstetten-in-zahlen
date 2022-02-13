@@ -20,7 +20,10 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     if req.status_code != 200:
       raise Exception('Can\'t access webpage: Status code ' + str(req.status_code))
 
-    payload = json.loads(req.text)
+    # MaStR seems to use full-width ampersand ＆ (U+FF06) instead of normal ampersand & (U+0026)
+    body = req.text.replace('＆', '&')
+
+    payload = json.loads(body)
 
     if payload['Errors'] != None:
       raise Exception('Data error: %s' % payload['Errors'])
@@ -70,6 +73,9 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'stilllegung': self.parse_date(x['EndgueltigeStilllegungDatum']),
       'name': x['EinheitName'] if self.is_public(x) else None,
       'betreiber': x['AnlagenbetreiberName'] if self.is_public(x) else None,
+      'gebaeudeNutzung':
+        self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] if x['NutzungsbereichGebSA'] is not None else
+        self.NUTZUNGSBEREICH_SONSTIGE if not self.LAGE_BY_ID[x['LageEinheit']] == self.LAGE_FREIFLAECHE else None,
       'plz': x['Plz'],
       'ort': x['Ort'],
       'strasse': x['Strasse'],
@@ -82,6 +88,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'ausrichtung': x['HauptausrichtungSolarModuleBezeichnung'],
       'bruttoleistung_kW': x['Bruttoleistung'],
       'nettonennleistung_kW': x['Nettonennleistung'],
+      'leistungsBegrenzung': self.LEISTUNGSBEGRENZUNG_BY_ID[x['Leistungsbegrenzung']] if x['Leistungsbegrenzung'] is not None else None,
       'EEGAusschreibung': str(x['EegZuschlag'] is not None).lower(),
       'einspeisung': x['VollTeilEinspeisungBezeichnung'],
       'mieterstrom': str(x['MieterstromAngemeldet'] == True).lower(),

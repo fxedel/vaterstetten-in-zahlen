@@ -131,6 +131,9 @@ class MastrGenericPoller(Poller):
     if x['AnlagenbetreiberMaStRNummer'] in whitelist:
       return True
 
+    if x['NutzungsbereichGebSA'] is not None and self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] == self.NUTZUNGSBEREICH_OEFFENTLICH:
+      return True
+
     has_betreiber_name = x['AnlagenbetreiberName'] is not None
 
     if has_betreiber_name and x['AnlagenbetreiberName'].startswith('natürliche Person'):
