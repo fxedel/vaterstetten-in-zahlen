@@ -20,8 +20,8 @@ class Poller(pollers.poller.Poller):
     if len(data) == 0:
       raise Exception('Queried data is empty')
 
-    if len(data) < len(current_rows):
-      raise Exception('Queried data has less items (%d) than current data (%d)' % (len(data), len(current_rows)))
+    if len(data) < len(current_rows) * (1/1.5):
+      raise Exception('Queried data has much less items (%d) than current data (%d)' % (len(data), len(current_rows)))
 
     if len(data) > len(current_rows) * 1.5:
       raise Exception('Queried data has much more items (%d) than current data (%d)' % (len(data), len(current_rows)))

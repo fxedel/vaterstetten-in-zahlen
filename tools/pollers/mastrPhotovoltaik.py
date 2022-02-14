@@ -34,8 +34,8 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     if payload['Total'] != len(payload['Data']):
       raise Exception('Total count (%d) does not match list length (%d)' % (payload['Total'], len(payload['Data'])))
 
-    if payload['Total'] < len(current_rows):
-      raise Exception('Queried data has less items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
+    if payload['Total'] < len(current_rows) * (1/1.5):
+      raise Exception('Queried data has much less items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
 
     if payload['Total'] > len(current_rows) * 1.5:
       raise Exception('Queried data has much more items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
