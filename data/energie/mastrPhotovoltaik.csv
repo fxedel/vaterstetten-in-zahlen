@@ -488,7 +488,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3879218,SEE932366940761,E2104101S000000000000091388200001,In Betrieb,2020-12-14,2017-09-12,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,15,Süd-West,4.5,4.0,50%,false,Teileinspeisung,false
 3863684,SEE912530674371,E21041015000000000000091599500001,In Betrieb,2020-12-12,2017-10-24,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,31,Süd,5.4,5.4,sonstige,false,Teileinspeisung,false
 4003026,SEE990652794870,E2104101SS00000000000009176750000,In Betrieb,2020-12-30,2017-10-25,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,18,Süd,5.4,5.4,70%,false,Teileinspeisung,false
-3123761,SEE997459340903,E2104101S000000000000092570600001,In Betrieb,2020-06-07,2017-10-27,,,,,landwirtschaft,85622,Weißenfeld,,,,,false,gebaeude,120,Ost,32.4,25.0,ohne,false,Teileinspeisung,false
+3123761,SEE997459340903,E2104101S000000000000092570600001,In Betrieb,2020-06-07,2017-10-27,,,,,landwirtschaft,85622,Weißenfeld,,,,,true,gebaeude,120,Ost,32.4,25.0,ohne,false,Teileinspeisung,false
 3938492,SEE921270796915,E2104101S000000000000091704900001,In Betrieb,2020-12-22,2017-11-15,,,RS VS Zweckverband,Landkreis Ebersberg,oeffentlich,85598,Baldham,,,,,true,gebaeude,,Süd,29.7,29.7,,false,Volleinspeisung,false
 2019003,SEE991951596738,,In Betrieb,2019-04-29,2017-11-22,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,25,Süd-West,7.5,6.0,70%,false,Teileinspeisung,false
 3115442,SEE974187351371,E2104101S160000000000092856900001,In Betrieb,2020-06-05,2017-11-22,,,,,GHD,85599,Parsdorf,,,,,false,gebaeude,38,Ost-West,9.88,9.88,70%,false,Teileinspeisung,false
@@ -840,7 +840,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4633835,SEE987431578967,,In Betrieb,2021-09-05,2021-09-05,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,15,Süd,4.95,4.95,70%,false,Teileinspeisung,false
 4650849,SEE991238293732,,In Betrieb,2021-09-16,2021-09-08,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,15,Ost,5.475,5.475,70%,false,Teileinspeisung,false
 4719593,SEE926283433864,,In Betrieb,2021-10-22,2021-09-09,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,19,Süd-West,6.08,6.0,70%,false,Teileinspeisung,false
-4692633,SEE937600631962,,In Betrieb,2021-10-11,2021-09-22,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,24,Süd-Ost,9.0,9.0,70%,false,Teileinspeisung,false
+4692633,SEE937600631962,,In Betrieb,2021-10-11,2021-09-22,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd-Ost,9.0,9.0,70%,false,Teileinspeisung,false
 4670369,SEE989400405656,,In Betrieb,2021-09-28,2021-09-23,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,34,Ost,13.6,10.0,70%,false,Teileinspeisung,false
 4680396,SEE976885731325,,In Betrieb,2021-10-04,2021-09-24,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,25,Nord-Ost,9.375,8.2,70%,false,Teileinspeisung,false
 4768385,SEE983225044397,,In Betrieb,2021-11-15,2021-09-29,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,25,Süd,9.875,8.0,70%,false,Teileinspeisung,false
