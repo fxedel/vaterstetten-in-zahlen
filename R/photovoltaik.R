@@ -9,7 +9,7 @@ mastr <- read_delim(
     MaStRId = col_integer(),
     MaStRNummer = col_character(),
     EEGAnlagenschluessel = col_character(),
-    status = readr::col_factor(c("In Planung", "In Betrieb", "Vorübergehend stillgelegt", "Endgültig stillgelegt"), ordered = TRUE),
+    status = readr::col_factor(),
     inbetriebnahme = col_date(format = "%Y-%m-%d"),
     inbetriebnahmeGeplant = col_date(format = "%Y-%m-%d"),
     stilllegung = col_date(format = "%Y-%m-%d"),
@@ -239,6 +239,84 @@ ui <- memoise(omit_args = "request", function(request, id) {
           )
         ),
         plotlyOutput(ns("neuAnlagenPlotly"), height = 350)
+      ),
+    ),
+
+    fluidRow(
+      box(
+        width = 12,
+        datatable(
+          {
+            mastr %>%
+              transmute(
+                "Name" = name,
+                "Betreiber" = betreiber,
+                "Status" = status,
+                # "Bruttoleistung" = bruttoleistung_kW,
+                # "Bruttoleistung" = utils$germanNumberFormat(bruttoleistung_kW, accuracy = 0.01),
+                # "Bruttoleistung" = utils$germanNumberFormat(bruttoleistung_kW, accuracy = 0.01, suffix = " $"),
+                "Bruttoleistung" = utils$germanNumberFormat(bruttoleistung_kW, accuracy = 0.01, suffix = " kW<sub>p</sub>"),
+                "bruttoleistungNumber" = bruttoleistung_kW,
+                "foo" = list(
+                  value = bruttoleistung_kW,
+                  display = utils$germanNumberFormat(bruttoleistung_kW, accuracy = 0.01, suffix = " kW<sub>p</sub>")
+                ),
+                "Adresse" = ifelse(is.na(strasse),
+                  paste0(plz, " ", ort),
+                  paste0('<a href="https://www.openstreetmap.org/?mlat=', lat, '&mlon=', long, '#map=19/', lat, '/', long, '">', strasse, " ", hausnummer, ", ", plz, " ", ort, "</a>")
+                )
+              )
+          },
+          extensions = "Responsive",
+          options = list(
+            # autoWidth = TRUE,
+            order = list(list(3, "desc")), # Bruttoleistung DESC
+            scrollX = TRUE,
+            responsive = TRUE,
+            language = list(
+              decimal = ",",
+              thousands = "."
+            ),
+            columnDefs = list(
+              # list(
+              #   # targets = "bruttoleistungNumber",
+              #   visible = FALSE
+              # ),
+              list(
+                # targets = "_all",
+                targets = 3,
+                # targets = "Bruttoleistung",
+                title = "Foo bar",
+                # type = "html-num-fmt"
+                className = "dt-right",
+                # data = list(
+                #   # "_" = 4, # bruttoleistungNumber
+                #   "_" = "Bruttoleistung",
+                #   filter = "bruttoleistungNumber", # bruttoleistungNumber
+                #   sort = "bruttoleistungNumber" # bruttoleistungNumber
+                # )
+                # data = JS(NULL),
+                # render = list(
+                #   # "_" = 4, # bruttoleistungNumber
+                #   "_" = "Bruttoleistung",
+                #   filter = "bruttoleistungNumber", # bruttoleistungNumber
+                #   sort = "bruttoleistungNumber" # bruttoleistungNumber
+                # )
+                data = "foo",
+                render = list(
+                  # "_" = 4, # bruttoleistungNumber
+                  "_" = "display",
+                  filter = "value", # bruttoleistungNumber
+                  sort = "value" # bruttoleistungNumber
+                )
+              )
+            )
+          ),
+          width = "100%",
+          # fillContainer = TRUE,
+          rownames = FALSE,
+          escape = FALSE
+        )
       ),
     ),
 
