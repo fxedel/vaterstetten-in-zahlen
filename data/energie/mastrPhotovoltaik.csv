@@ -317,6 +317,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3335163,SEE990426077024,E2104101S000000000000026091900001,In Betrieb,2020-08-11,2011-12-09,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,51,Süd-West,9.945,9.945,ohne,false,Volleinspeisung,false
 1867225,SEE950158789916,E2104101S160000000000025722600001,In Betrieb,2019-02-20,2011-12-12,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd,3.2,3.2,ohne,false,Teileinspeisung,false
 4266934,SEE941366838107,E2104101S160000000000028637500000,In Betrieb,2021-01-28,2011-12-12,,,Parsdorf,Ziegltrum Gartenbau KG,GHD,85599,Parsdorf,Münchener Straße,2 a,48.146114,11.793999,true,gebaeude,714,Süd,135.66,121.2,ohne,false,Teileinspeisung,false
+4919522,SEE922345918713,E2104101S160000000000028637500000,In Betrieb,2022-02-23,2011-12-12,,,Lagerhalle,Ziegltrum Gartenbau KG,GHD,85599,Parsdorf,Münchener Straße,2 a,48.146114,11.793999,false,gebaeude,632,Süd,135.7,135.7,ohne,false,Teileinspeisung,false
 2609548,SEE908643004693,E21041011S00000000000002211230001,In Betrieb,2019-12-18,2011-12-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd-Ost,4.2,4.2,sonstige,false,Teileinspeisung,false
 3232496,SEE955520474636,E2104101S160000000000024680200001,In Betrieb,2020-07-11,2011-12-15,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,24,Süd-Ost,5.4,5.4,ohne,false,Teileinspeisung,false
 2251379,SEE910323972758,E21041011S00000000000001974900001,In Betrieb,2019-07-28,2011-12-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd,3.92,3.92,ohne,false,Volleinspeisung,false
@@ -590,12 +591,12 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2342163,SEE982582930091,,In Betrieb,2019-09-09,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,11,Ost-West,3.08,3.0,70%,false,Teileinspeisung,false
 2441383,SEE990073185196,,In Betrieb,2019-10-22,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,17,Ost-West,5.695,4.6,70%,false,Teileinspeisung,false
 2558356,SEE986472883122,,In Betrieb,2019-12-03,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost-West,5.6,4.6,70%,false,Teileinspeisung,false
-2925177,SEE970349977779,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 1,ibeko-solar GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,29,Ost,8.12,7.0,70%,false,Volleinspeisung,false
-2925216,SEE939536430381,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 3,ibeko-solar GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,West,4.48,4.48,70%,false,Volleinspeisung,false
-2925249,SEE956523203483,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 5,ibeko-solar GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,65,West,18.2,16.1,70%,false,Volleinspeisung,false
-2925291,SEE979437775334,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 7,ibeko-solar GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,54,West,15.12,12.0,70%,false,Volleinspeisung,false
-2925307,SEE994911592559,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 9,ibeko-solar GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,45,West,12.36,11.6,70%,false,Volleinspeisung,false
-2925331,SEE901532561390,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 11,ibeko-solar GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,104,West,29.12,24.3,70%,false,Volleinspeisung,false
+2925177,SEE970349977779,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 1,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,29,Ost,8.12,7.0,70%,false,Volleinspeisung,false
+2925216,SEE939536430381,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 3,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,West,4.48,4.48,70%,false,Volleinspeisung,false
+2925249,SEE956523203483,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 5,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,65,West,18.2,16.1,70%,false,Volleinspeisung,false
+2925291,SEE979437775334,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 7,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,54,West,15.12,12.0,70%,false,Volleinspeisung,false
+2925307,SEE994911592559,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 9,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,45,West,12.36,11.6,70%,false,Volleinspeisung,false
+2925331,SEE901532561390,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 11,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,104,West,29.12,24.3,70%,false,Volleinspeisung,false
 3008150,SEE901890856848,E2104101S000000000000102647900001,In Betrieb,2020-04-14,2019-06-28,,,,,GHD,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,5.6,4.6,70%,false,Teileinspeisung,false
 2215756,SEE930466339546,,In Betrieb,2021-03-12,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,15,Ost-West,4.2,3.5,70%,false,Teileinspeisung,false
 2208121,SEE942718399703,,In Betrieb,2019-07-08,2019-07-02,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude-other,12,Süd,3.72,3.68,70%,false,Teileinspeisung,false
@@ -878,6 +879,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4802660,SEE999612982746,,In Betrieb,2022-02-05,2022-02-05,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,1,Süd,3.4,3.0,70%,false,Teileinspeisung,false
 4826011,SEE902475817513,,In Betrieb,2022-02-06,2022-02-05,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,1,Süd,3.4,3.0,70%,false,Teileinspeisung,false
 4901618,SEE902351926476,,In Betrieb,2022-02-13,2022-02-10,,,,,haushalt,85646,Purfing,,,,,false,gebaeude,16,Süd,5.75,5.5,70%,false,Teileinspeisung,false
+4918747,SEE958358969602,,In Betrieb,2022-02-23,2022-02-23,,,,,haushalt,85598,Baldham,Mendelssohnstraße,47,48.108357,11.787848,false,gebaeude,12,Süd,4560.0,4560.0,70%,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung,false
 4479221,SEE991149831160,,In Planung,2021-05-11,,2021-08-10,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,ohne,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung,false
