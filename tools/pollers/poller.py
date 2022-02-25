@@ -38,7 +38,7 @@ class Poller:
       writer.writerows(csv_rows)
       print('> Updated file \'%s\'' % file_name)
 
-  def get_csv_diff(self, file_name: str, new_data: List[dict]) -> List[str]:
+  def get_csv_diff(self, file_name: str, new_data: List[dict], context: int = 1) -> List[str]:
     with open(os.path.join(data_dir, file_name),mode='r') as file:
       current_csv_content = file.read()
 
@@ -48,4 +48,9 @@ class Poller:
     writer.writerows(new_data)
     new_csv_content = output.getvalue()
 
-    return list(difflib.unified_diff(current_csv_content.splitlines(True), new_csv_content.splitlines(True), file_name, n = 1))
+    return list(difflib.unified_diff(
+      current_csv_content.splitlines(True),
+      new_csv_content.splitlines(True),
+      file_name,
+      n = context
+    ))
