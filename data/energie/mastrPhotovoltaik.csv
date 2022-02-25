@@ -635,7 +635,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2764079,SEE987258561197,,In Betrieb,2020-02-05,2019-11-29,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd,2.2,1.6,70%,false,Teileinspeisung,false
 2764954,SEE944109089460,,In Betrieb,2020-02-05,2019-11-29,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd,2.2,1.6,70%,false,Volleinspeisung,false
 2822952,SEE941563213684,,In Betrieb,2020-02-23,2019-11-29,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,4,Süd,2.2,1.6,ohne,false,,false
-2408591,SEE980036490160,,In Betrieb,2020-04-03,2019-11-29,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd-West,2.2,1.6,70%,false,Volleinspeisung,false
+2408591,SEE980036490160,,In Betrieb,2020-04-03,2019-11-29,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,8,Süd-West,2.2,1.6,70%,false,Volleinspeisung,false
 3397249,SEE973608295102,,In Betrieb,2021-03-25,2019-11-29,,,,,landwirtschaft,85598,Baldham,,,,,true,gebaeude,70,Süd,22.75,22.75,ohne,false,Teileinspeisung,false
 3397351,SEE904183702167,,In Betrieb,2021-03-25,2019-11-29,,,,,landwirtschaft,85598,Baldham,Purfinger Straße,60,48.118094,11.808586,true,gebaeude,196,Süd,63.7,60.0,ohne,false,Teileinspeisung,false
 2386441,SEE950084499415,,In Betrieb,2019-09-28,2019-12-19,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,30,Süd-West,9.75,8.0,70%,false,Teileinspeisung,false
@@ -875,15 +875,16 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4843282,SEE942887805128,,In Betrieb,2022-01-04,2022-01-03,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,39,Süd-West,14.625,14.625,70%,false,Teileinspeisung,false
 4877761,SEE965822264453,,In Betrieb,2022-01-28,2022-01-18,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,28,Süd-Ost,11.2,10.0,70%,false,Teileinspeisung,false
 4884314,SEE986874205812,,In Betrieb,2022-02-01,2022-01-25,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.08,6.0,70%,false,Teileinspeisung,false
+4916348,SEE932835023254,,In Betrieb,2022-02-24,2022-01-27,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
 4789535,SEE900693865798,,In Betrieb,2021-12-20,2022-02-01,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,12,Ost,4.56,4.56,70%,false,Teileinspeisung,false
 4802660,SEE999612982746,,In Betrieb,2022-02-05,2022-02-05,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,1,Süd,3.4,3.0,70%,false,Teileinspeisung,false
 4826011,SEE902475817513,,In Betrieb,2022-02-06,2022-02-05,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,1,Süd,3.4,3.0,70%,false,Teileinspeisung,false
 4901618,SEE902351926476,,In Betrieb,2022-02-13,2022-02-10,,,,,haushalt,85646,Purfing,,,,,false,gebaeude,16,Süd,5.75,5.5,70%,false,Teileinspeisung,false
 4918747,SEE958358969602,,In Betrieb,2022-02-23,2022-02-23,,,,,haushalt,85598,Baldham,Mendelssohnstraße,47,48.108357,11.787848,false,gebaeude,12,Süd,4560.0,4560.0,70%,false,Teileinspeisung,false
+4921523,SEE984149300156,,In Betrieb,2022-02-24,2022-02-24,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd,0.345,0.3,sonstige,false,Volleinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung,false
 4479221,SEE991149831160,,In Planung,2021-05-11,,2021-08-10,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,ohne,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung,false
 4741872,SEE906744921635,,In Planung,2021-11-02,,2022-02-28,,,,haushalt,85598,Baldham,,,,,false,gebaeude,24,Süd,9.12,9.12,70%,false,Teileinspeisung,false
 4826298,SEE990252312757,,In Planung,2021-12-19,,2022-03-31,,,,haushalt,85598,Baldham,,,,,false,gebaeude,,Süd,24.7,20.0,ohne,false,Teileinspeisung,false
 4891493,SEE977251132173,,In Planung,2022-02-22,,2022-05-21,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
-4916348,SEE932835023254,,In Planung,2022-02-22,,2022-05-21,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
