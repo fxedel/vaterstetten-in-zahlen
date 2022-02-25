@@ -37,6 +37,7 @@ class MastrSpeicherPoller(MastrGenericPoller):
       raise Exception('Queried data has much more items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
 
     data_filtered = list(filter(self.filter_vaterstetten, payload['Data']))
+    data_filtered = list(filter(self.filter_plausability, data_filtered))
     rows = list(map(self.map_row, data_filtered))
     rows = sorted(rows, key=lambda d: d['registrierungMaStR'])
     rows = sorted(rows, key=lambda d: d['inbetriebnahmeGeplant'] or '')
@@ -56,6 +57,15 @@ class MastrSpeicherPoller(MastrGenericPoller):
       )
 
     self.write_csv_rows(csv_filename, rows)
+
+  def filter_plausability(self, x: dict) -> bool:
+    if str(x['SpannungsebenenNamen']).startswith('Niederspannung') and str(x['AnlagenbetreiberName']).startswith('natürliche Person'):
+    
+      if x['NutzbareSpeicherkapazitaet'] >= 300:
+        # 300 kWh is about 10% of a typical household's yearly power consumption (3000 kWh), but batteries normally only last a single day
+        return False
+
+    return True
 
   def map_row(self, x: dict) -> dict:
     return {
