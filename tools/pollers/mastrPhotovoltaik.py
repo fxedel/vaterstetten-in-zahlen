@@ -41,12 +41,13 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       raise Exception('Queried data has much more items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
 
     data_filtered = list(filter(self.filter_vaterstetten, payload['Data']))
+    data_filtered = list(filter(self.filter_plausability, data_filtered))
     rows = list(map(self.map_row, data_filtered))
     rows = sorted(rows, key=lambda d: d['registrierungMaStR'])
     rows = sorted(rows, key=lambda d: d['inbetriebnahmeGeplant'] or '')
     rows = sorted(rows, key=lambda d: d['inbetriebnahme'] or 'Z')
 
-    csv_diff = self.get_csv_diff(csv_filename, rows)
+    csv_diff = self.get_csv_diff(csv_filename, rows, context = 0)
 
     if len(csv_diff) == 0:
       return
@@ -61,6 +62,17 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
 
     self.write_csv_rows(csv_filename, rows)
 
+  def filter_plausability(self, x: dict) -> bool:
+    if x['NutzungsbereichGebSA'] is not None and self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] == self.NUTZUNGSBEREICH_HAUSHALT:
+      if x['Bruttoleistung'] >= 200:
+        # more than 200 kW is very unlikely for a simple household
+        return False
+      if x['Nettonennleistung'] >= 200:
+        # more than 200 kW is very unlikely for a simple household
+        return False
+
+    return True
+    
   def map_row(self, x: dict) -> dict:
     return {
       'MaStRId': x['Id'],
