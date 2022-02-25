@@ -43,7 +43,7 @@ class MastrSpeicherPoller(MastrGenericPoller):
     rows = sorted(rows, key=lambda d: d['inbetriebnahmeGeplant'] or '')
     rows = sorted(rows, key=lambda d: d['inbetriebnahme'] or 'Z')
 
-    csv_diff = self.get_csv_diff(csv_filename, rows)
+    csv_diff = self.get_csv_diff(csv_filename, rows, context = 0)
 
     if len(csv_diff) == 0:
       return
