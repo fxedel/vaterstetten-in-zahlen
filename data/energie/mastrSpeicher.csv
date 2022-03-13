@@ -1,5 +1,5 @@
 MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGeplant,stilllegung,name,betreiber,plz,ort,strasse,hausnummer,lat,long,netzbetreiberPruefung,batterietechnologie,bruttoleistung_kW,nettonennleistung_kW,kapazitaet_kWh,einspeisung,istNotstromaggregat
-3986049,SEE955705735668,In Betrieb,2020-12-28,2014-03-26,,,,,85598,Baldham,,,,,false,Lithium,3.7,3.7,7.2,Teileinspeisung,false
+3986049,SEE955705735668,In Betrieb,2020-12-28,2014-03-26,,,,,85598,Baldham,,,,,false,Lithium,7.6,4.6,7.2,Teileinspeisung,false
 4040615,SEE967195799044,In Betrieb,2021-01-04,2015-01-30,,,,,85598,Baldham,,,,,false,Lithium,3.0,3.0,9.2,Teileinspeisung,false
 1836067,SEE921303467386,In Betrieb,2019-02-10,2015-04-23,,,,,85598,Baldham,,,,,true,Lithium,4.6,4.6,4.6,Teileinspeisung,true
 3757127,SEE924131340777,In Betrieb,2020-11-29,2015-11-25,,,,,85598,Baldham,,,,,false,Lithium,1.5,1.5,2.0,Teileinspeisung,false
