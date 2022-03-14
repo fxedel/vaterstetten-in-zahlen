@@ -30,4 +30,4 @@ jobs:
             cd ${{ secrets.DEPLOYMENT_PATH }}
             git pull
             Rscript -e "renv::restore()"
-            systemctl --user restart vaterstetten-in-zahlen.service
+            XDG_RUNTIME_DIR=/run/user/`id -u` systemctl --user restart vaterstetten-in-zahlen.service
