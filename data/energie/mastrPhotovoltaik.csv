@@ -88,7 +88,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3162927,SEE921697017563,E21875011000000000000373275300000,In Betrieb,2020-06-19,2008-06-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,54,Süd,9.72,9.0,ohne,false,Volleinspeisung,false
 3135657,SEE905237268189,E21875011000000000000373420700000,In Betrieb,2020-06-10,2008-07-14,,,,,GHD,85599,Parsdorf,,,,,true,gebaeude,160,Süd,29.75,29.75,ohne,false,Volleinspeisung,false
 2654439,SEE992569022701,,In Betrieb,2020-01-03,2008-07-15,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,24,Süd,5.16,4.6,70%,false,Volleinspeisung,false
-2639415,SEE981459442927,E21875011000000000000373868400000,In Betrieb,2019-12-29,2008-08-07,,,,,GHD,85599,Parsdorf,,,,,false,gebaeude,134,Süd,29.48,24.45,ohne,false,Volleinspeisung,false
+2639415,SEE981459442927,E21875011000000000000373868400000,In Betrieb,2019-12-29,2008-08-07,,,,,GHD,85599,Parsdorf,,,,,true,gebaeude,134,Süd,29.48,24.45,ohne,false,Volleinspeisung,false
 3231197,SEE923201397963,E21875011000000000000374419300000,In Betrieb,2020-07-10,2008-09-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,18,Süd-West,3.24,3.24,ohne,false,Volleinspeisung,false
 3130739,SEE905193343852,E21875011000000000000375035300000,In Betrieb,2020-06-09,2008-10-08,,,Fishermans,Müller Karl und Müller Rosa GbR,GHD,85599,Parsdorf,Gruber Straße,13,48.146241,11.786685,true,gebaeude,188,Süd,34.0,34.0,ohne,false,Volleinspeisung,false
 3844098,SEE991930807190,E21875011000000000000374873400000,In Betrieb,2020-12-09,2008-10-10,,,,,sonstige,85646,Purfing,,,,,false,gebaeude,121,Süd,27.83,27.4,ohne,false,Volleinspeisung,false
@@ -799,7 +799,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4395481,SEE941755505665,,In Betrieb,2021-03-19,2021-03-09,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,16,Süd,5.28,4.6,ohne,false,Teileinspeisung,false
 4411335,SEE906557827094,,In Betrieb,2021-03-29,2021-03-12,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,28,Süd-Ost,9.66,8.2,70%,false,Teileinspeisung,false
 4396103,SEE915865906469,,In Betrieb,2021-03-19,2021-03-16,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,28,Süd-Ost,9.24,9.24,70%,false,Teileinspeisung,false
-4436622,SEE925790314024,,In Betrieb,2021-04-14,2021-03-23,,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,18,Süd-West,5.94,5.5,ohne,false,Teileinspeisung,false
+4436622,SEE925790314024,,In Betrieb,2021-04-14,2021-03-25,,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,18,Süd-West,5.94,5.5,ohne,false,Teileinspeisung,false
 4491393,SEE914238248793,,In Betrieb,2021-05-21,2021-03-25,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,18,Süd-West,5.76,5.0,ohne,false,Teileinspeisung,false
 4413055,SEE905690893843,,In Betrieb,2021-03-30,2021-03-26,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Ost-West,8.14,7.0,70%,false,Teileinspeisung,false
 4413446,SEE956604566377,,In Betrieb,2021-03-30,2021-03-29,,,Anlage 12,Frontier GmbH,GHD,85599,Hergolding,Parsdorfer Straße,33,48.126962,11.788422,false,gebaeude,205,West,80.98,80.98,ohne,false,Teileinspeisung,false
@@ -856,7 +856,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4814088,SEE968799405614,,In Betrieb,2021-12-12,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,56,Ost-West,21.56,16.0,70%,false,Teileinspeisung,false
 4738294,SEE933549991891,,In Betrieb,2021-11-01,2021-10-29,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,24,,8.88,8.0,70%,false,Teileinspeisung,false
 4829632,SEE912956879848,,In Betrieb,2021-12-21,2021-10-29,,,,,GHD,85598,Baldham,,,,,false,gebaeude,36,Süd,11.88,11.88,70%,false,Teileinspeisung,false
-4753745,SEE974165321044,,In Betrieb,2021-11-08,2021-11-08,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Süd,8.36,8.36,70%,false,Teileinspeisung,false
+4753745,SEE974165321044,,In Betrieb,2021-11-08,2021-11-08,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Süd,8.36,8.36,70%,false,Teileinspeisung,false
 4753861,SEE982442567870,,In Betrieb,2021-11-08,2021-11-08,,,,,haushalt,85646,Purfing,,,,,true,gebaeude,15,Süd,5.625,5.0,70%,false,Teileinspeisung,false
 4772338,SEE946521766189,,In Betrieb,2021-11-17,2021-11-08,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,30,Ost-West,11.4,11.4,70%,false,Teileinspeisung,false
 4805037,SEE917382245083,,In Betrieb,2021-12-06,2021-11-08,,,,,sonstige,85646,Purfing,,,,,false,gebaeude,27,West,9.9,9.9,70%,false,Teileinspeisung,false
