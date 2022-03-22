@@ -34,12 +34,12 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 2001338,SEE949159880975,In Betrieb,2019-04-18,2018-10-05,,,,,85598,Baldham,,,,,false,Lithium,2.5,2.5,6.4,Teileinspeisung,false
 4813437,SEE996073267061,Endgültig stillgelegt,2021-12-11,2018-11-09,,2022-02-14,,,85591,Vaterstetten,,,,,false,Redox-Flow,1.5,1.5,6.8,Teileinspeisung,false
 3324705,SEE943322146721,In Betrieb,2020-08-07,2018-11-30,,,,,85598,Baldham,,,,,true,Lithium,5.0,3.6,5.0,Volleinspeisung,false
-2632630,SEE931604463048,In Betrieb,2019-12-27,2018-12-04,,,,,85598,Baldham,,,,,false,Lithium,3.2,3.2,10.0,Teileinspeisung,false
+2632630,SEE931604463048,In Betrieb,2019-12-27,2018-12-04,,,,,85598,Baldham,,,,,false,Lithium,3.3,3.3,10.0,Teileinspeisung,false
 1866882,SEE900963152573,In Betrieb,2019-02-20,2018-12-10,,,,,85598,Baldham,,,,,true,Lithium,9.6,6.0,10.4,Teileinspeisung,false
 3323122,SEE900155688002,In Betrieb,2020-08-06,2019-01-10,,,,,85591,Vaterstetten,,,,,true,Lithium,3.0,3.0,10.0,Teileinspeisung,true
 2028647,SEE964189085589,In Betrieb,2019-05-05,2019-01-18,,,,,85591,Vaterstetten,,,,,true,Lithium,6.0,4.6,6.0,Teileinspeisung,false
 2061414,SEE931124497493,In Betrieb,2019-05-22,2019-01-18,,,,,85591,Vaterstetten,,,,,false,Lithium,6.0,4.6,6.0,Teileinspeisung,false
-2063793,SEE945027274556,In Betrieb,2019-05-22,2019-01-18,,,,,85591,Vaterstetten,,,,,false,Lithium,2.0,2.0,2.0,Teileinspeisung,false
+2063793,SEE945027274556,In Betrieb,2019-05-22,2019-01-18,,,,,85591,Vaterstetten,,,,,true,Lithium,2.0,2.0,2.0,Teileinspeisung,false
 2295064,SEE914215143622,In Betrieb,2019-08-18,2019-01-18,,,,,85591,Vaterstetten,,,,,true,Lithium,1.5,1.5,2.0,Teileinspeisung,false
 1874011,SEE958254212192,In Betrieb,2019-02-22,2019-01-24,,,,,85598,Baldham,,,,,true,Lithium,7.0,7.0,10.0,Teileinspeisung,false
 2025010,SEE937484464052,In Betrieb,2019-05-03,2019-05-03,,,,,85591,Vaterstetten,,,,,true,Lithium,3.3,3.3,11.25,Teileinspeisung,false
@@ -223,7 +223,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 4877796,SEE985828598208,In Betrieb,2022-01-28,2022-01-18,,,,,85598,Baldham,,,,,true,Lithium,10.0,10.0,10.2,Teileinspeisung,false
 4958612,SEE940119086628,In Betrieb,2022-03-18,2022-02-04,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,4.0,10.0,Teileinspeisung,true
 4904795,SEE934359953178,In Betrieb,2022-02-16,2022-02-08,,,,,85598,Baldham,,,,,false,Lithium,6.656,5.0,8.0,Teileinspeisung,false
-4901642,SEE947651979104,In Betrieb,2022-02-13,2022-02-10,,,,,85646,Purfing,,,,,false,Lithium,5.12,5.12,5.12,Teileinspeisung,false
+4901642,SEE947651979104,In Betrieb,2022-02-13,2022-02-10,,,,,85646,Purfing,,,,,true,Lithium,5.12,5.12,5.12,Teileinspeisung,false
 4926813,SEE919258410304,In Betrieb,2022-03-01,2022-02-28,,,,,85598,Baldham,,,,,false,Lithium,7.7,6.0,7.7,Teileinspeisung,false
 4933949,SEE997569907256,In Betrieb,2022-03-04,2022-03-02,,,,,85591,Vaterstetten,,,,,false,Lithium,4.5,4.5,11.6,Teileinspeisung,false
 4937052,SEE985970704335,In Betrieb,2022-03-07,2022-03-02,,,,,85591,Vaterstetten,,,,,false,Lithium,3.75,3.75,7.5,Teileinspeisung,false
