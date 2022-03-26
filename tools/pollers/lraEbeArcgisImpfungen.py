@@ -53,11 +53,17 @@ def feature_to_row(feature: Feature):
   elif attrs['Impfungen_Tag'] >= 10000:
     raise Exception('Implausible data: %s' % feature)
 
+  prefixes = ['Erst', 'Zweit', 'Dritt', 'Viert']
+
+  if not sum([attrs[prefix + 'impfungen_SUM'] for prefix in prefixes]) == attrs['Impfungen_SUM']:
+    raise Exception('Implausible data (Impfungen_SUM): %s' % feature.attributes)
+
   return {
     'datum': datetime.utcfromtimestamp(attrs['Meldedatum'] / 1000).strftime('%Y-%m-%d'),
     'erstimpfungen': str(attrs['Erstimpfungen_SUM']),
     'zweitimpfungen': str(attrs['Zweitimpfungen_SUM']),
     'drittimpfungen': str(attrs['Drittimpfungen_SUM']),
+    'viertimpfungen': str(attrs['Viertimpfungen_SUM']),
     'impfdosen': str(attrs['Impfungen_SUM']),
     'impfdosenNeu': str(attrs['Impfungen_Tag']),
   }

@@ -12,11 +12,11 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 |`erstimpfungen`|integer|Kumulative Zahl verabreichter Erstimpfungen
 |`zweitimpfungen`|integer|Kumulative Zahl verabreichter Zweitimpfungen
 |`drittimpfungen`|integer|Kumulative Zahl verabreichter Drittimpfungen
+|`viertimpfungen`|integer|Kumulative Zahl verabreichter Viertimpfungen
 |`impfdosen`|integer|Kumulative Zahl verabreichter Impfdosen
 |`impfdosenNeu`|integer|Zahl neu verabreichter Impfdosen im Vergleich zum Vortag
 
-* `erstimpfungen` + `zweitimpfungen` + `drittimpfungen` > `impfdosen`, vermutlich aufgrund von Johnson&Johnson-Impfungen, die gleichzeitig `erstimpfungen` und `zweitimpfungen` um je eins erhöhen
-* `erstimpfungen` ≤ `zweitimpfungen` ≤ `drittimpfungen`
+* `erstimpfungen` + `zweitimpfungen` + `drittimpfungen` + `viertimpfungen` = `impfdosen`
 
 ### Quellen
 
@@ -24,7 +24,7 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 
 
 
-## [`arcgisImpfungenNachEinrichtung.csv`](./arcgisImpfungenNachAlter.csv)
+## [`arcgisImpfungenNachEinrichtung.csv`](./arcgisImpfungenNachEinrichtung.csv)
 
 Der Datensatz [arcgisImpfungenNachEinrichtung.csv](./arcgisImpfungenNachEinrichtung.csv) umfasst die Zahl an verabreichten Impfungen im gesamten Landkreis Ebersberg, aufgeschlüsselt nach Einrichtung, in der die Impfung verabreicht wurde.
 
@@ -37,10 +37,10 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 |`erstimpfungen`|integer|Kumulative Zahl verabreichter Erstimpfungen
 |`zweitimpfungen`|integer|Kumulative Zahl verabreichter Zweitimpfungen
 |`drittimpfungen`|integer|Kumulative Zahl verabreichter Drittimpfungen
+|`viertimpfungen`|integer|Kumulative Zahl verabreichter Viertimpfungen
 |`impfdosen`|integer|Kumulative Zahl verabreichter Impfdosen
 
-* `erstimpfungen` + `zweitimpfungen` + `drittimpfungen` = `impfdosen` (vermutlich werden Johnson&Johnson-Impfungen zweifach zu `impfdosen` gezählt)
-* `erstimpfungen` ≤ `zweitimpfungen` ≤ `drittimpfungen`
+* `erstimpfungen` + `zweitimpfungen` + `drittimpfungen` + `viertimpfungen` = `impfdosen`
 
 ### Quellen
 
@@ -62,8 +62,7 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 |`erstimpfungen`|integer|Kumulative Zahl verabreichter Erstimpfungen
 |`zweitimpfungen`|integer|Kumulative Zahl verabreichter Zweitimpfungen
 |`drittimpfungen`|integer|Kumulative Zahl verabreichter Drittimpfungen
-
-* `erstimpfungen` ≤ `zweitimpfungen` ≤ `drittimpfungen`
+|`viertimpfungen`|integer|Kumulative Zahl verabreichter Viertimpfungen
 
 ### Quellen
 
@@ -85,8 +84,7 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 |`erstimpfungen`|integer|Kumulative Zahl verabreichter Erstimpfungen
 |`zweitimpfungen`|integer|Kumulative Zahl verabreichter Zweitimpfungen
 |`drittimpfungen`|integer|Kumulative Zahl verabreichter Drittimpfungen
-
-* `erstimpfungen` ≤ `zweitimpfungen` ≤ `drittimpfungen`
+|`viertimpfungen`|integer|Kumulative Zahl verabreichter Viertimpfungen
 
 ### Quellen
 

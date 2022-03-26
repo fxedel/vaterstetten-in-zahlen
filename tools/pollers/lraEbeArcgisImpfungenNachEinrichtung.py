@@ -257,6 +257,19 @@ def check_cumulative_plausability(features: List[Feature]):
     'I3_Alter70_80',
     'I3_Alter80',
     'I3_SummeAlter',
+    'I4_Weiblich',
+    'I4_Maennlich',
+    'I4_Divers',
+    'I4_SummeGeschlecht',
+    'I4_Alter20',
+    'I4_Alter20_30',
+    'I4_Alter30_40',
+    'I4_Alter40_50',
+    'I4_Alter50_60',
+    'I4_Alter60_70',
+    'I4_Alter70_80',
+    'I4_Alter80',
+    'I4_SummeAlter',
   ]
 
   for i, feature in enumerate(features):
@@ -289,20 +302,24 @@ def check_cumulative_plausability(features: List[Feature]):
 def map_nach_einrichtung(feature: Feature):
   attrs = feature.attributes.copy()
 
-  # SummeGeschlecht and SummeAlter may be off by one or two days, which should be less than 4000 vaccinations.
-  # Furthermore, they might me a little bit (up to 20 vaccinations) ahead (probably because of slightly different times of survey).
-  if attrs['I1_SummeGeschlecht'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeGeschlecht'] >= attrs['Erstimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I1_SummeGeschlecht and Erstimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
-  if attrs['I2_SummeGeschlecht'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeGeschlecht'] >= attrs['Zweitimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I2_SummeGeschlecht and Zweitimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
-  if attrs['I3_SummeGeschlecht'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeGeschlecht'] >= attrs['Drittimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I3_SummeGeschlecht and Drittimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
-  if attrs['I1_SummeAlter'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeAlter'] >= attrs['Erstimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I1_SummeAlter and Erstimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
-  if attrs['I2_SummeAlter'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeAlter'] >= attrs['Zweitimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I2_SummeAlter and Zweitimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
-  if attrs['I3_SummeAlter'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeAlter'] >= attrs['Drittimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I3_SummeAlter and Drittimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
+  prefixes = ['Erst', 'Zweit', 'Dritt', 'Viert']
+
+  for i, prefix in enumerate(prefixes):
+    col_impfungen = prefix + 'impfungen_proTyp'
+    col_sum_geschlecht = 'I%d_SummeGeschlecht' % (i+1)
+    col_sum_alter = 'I%d_SummeAlter' % (i+1)
+
+    # SummeGeschlecht and SummeAlter may be off by one or two days, which should be less than 4000 vaccinations.
+    # Furthermore, they might me a little bit (up to 20 vaccinations) ahead (probably because of slightly different times of survey).
+
+    if attrs[col_sum_geschlecht] != None and not attrs[col_impfungen] + 20 >= attrs[col_sum_geschlecht] >= attrs[col_impfungen] - 4000:
+      raise Exception('Implausible data (%s and %s): %s' % (col_sum_geschlecht, col_impfungen, attrs_to_str(feature.attributes)))
+
+    if attrs[col_sum_alter] != None and not attrs[col_impfungen] + 20 >= attrs[col_sum_alter] >= attrs[col_impfungen] - 4000:
+      raise Exception('Implausible data (%s and %s): %s' % (col_sum_alter, col_impfungen, attrs_to_str(feature.attributes)))
+
+  if not sum([none_to_zero(attrs[prefix + 'impfungen_proTyp']) for prefix in prefixes]) == none_to_zero(attrs['Impfungen_proTyp']):
+    raise Exception('Implausible data (Impfungen_proTyp): %s' % attrs_to_str(feature.attributes))
 
   row = {
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
@@ -310,6 +327,7 @@ def map_nach_einrichtung(feature: Feature):
     'erstimpfungen': none_to_na(attrs['Erstimpfungen_proTyp']),
     'zweitimpfungen': none_to_na(attrs['Zweitimpfungen_proTyp']),
     'drittimpfungen': str(none_to_zero(attrs['Drittimpfungen_proTyp'])),
+    'viertimpfungen': str(none_to_zero(attrs['Viertimpfungen_proTyp'])),
     'impfdosen': str(attrs['Impfungen_proTyp']),
   }
 
@@ -318,17 +336,17 @@ def map_nach_einrichtung(feature: Feature):
 def map_nach_geschlecht(feature: Feature):
   attrs = feature.attributes.copy()
 
-  if none_to_zero(attrs['I1_SummeGeschlecht']) == 0 and none_to_zero(attrs['I2_SummeGeschlecht']) == 0 and none_to_zero(attrs['I3_SummeGeschlecht']) == 0:
+  if sum([none_to_zero(attrs['I%d_SummeGeschlecht' % (i+1)]) for i in range(0, 4)]) == 0:
     return []
 
   geschlechter = ['Weiblich', 'Maennlich', 'Divers']
 
-  if none_to_zero(attrs['I1_SummeGeschlecht']) != sum([none_to_zero(attrs['I1_' + column]) for column in geschlechter]):
-    raise Exception('Implausible data (I1_SummeGeschlecht wrong): %s' % attrs_to_str(feature.attributes))
-  if none_to_zero(attrs['I2_SummeGeschlecht']) != sum([none_to_zero(attrs['I2_' + column]) for column in geschlechter]):
-    raise Exception('Implausible data (I2_SummeGeschlecht wrong): %s' % attrs_to_str(feature.attributes))
-  if none_to_zero(attrs['I3_SummeGeschlecht']) != sum([none_to_zero(attrs['I3_' + column]) for column in geschlechter]):
-    raise Exception('Implausible data (I3_SummeGeschlecht wrong): %s' % attrs_to_str(feature.attributes))
+  for i in range(0, 4):
+    col_prefix = 'I%d_' % (i+1)
+    col_sum_geschlecht = 'I%d_SummeGeschlecht' % (i+1)
+
+    if none_to_zero(attrs[col_sum_geschlecht]) != sum([none_to_zero(attrs[col_prefix + column]) for column in geschlechter]):
+      raise Exception('Implausible data (%s wrong): %s' % (col_sum_geschlecht, attrs_to_str(feature.attributes)))
 
   return [{
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
@@ -337,12 +355,13 @@ def map_nach_geschlecht(feature: Feature):
     'erstimpfungen': none_to_na(attrs['I1_' + geschlecht]),
     'zweitimpfungen': none_to_na(attrs['I2_' + geschlecht]),
     'drittimpfungen': str(none_to_zero(attrs['I3_' + geschlecht])),
+    'viertimpfungen': str(none_to_zero(attrs['I4_' + geschlecht])),
   } for geschlecht in geschlechter]
 
 def map_nach_alter(feature: Feature):
   attrs = feature.attributes.copy()
 
-  if none_to_zero(attrs['I1_SummeAlter']) == 0 and none_to_zero(attrs['I2_SummeAlter']) == 0 and none_to_zero(attrs['I3_SummeAlter']) == 0:
+  if sum([none_to_zero(attrs['I%d_SummeAlter' % (i+1)]) for i in range(0, 4)]) == 0:
     return []
 
   altersgruppen = {
@@ -356,12 +375,12 @@ def map_nach_alter(feature: Feature):
     'Alter80': '80+',
   }
 
-  if none_to_zero(attrs['I1_SummeAlter']) != sum([none_to_zero(attrs['I1_' + column]) for column, _ in altersgruppen.items()]):
-    raise Exception('Implausible data (I1_SummeAlter wrong): %s' % attrs_to_str(feature.attributes))
-  if none_to_zero(attrs['I2_SummeAlter']) != sum([none_to_zero(attrs['I2_' + column]) for column, _ in altersgruppen.items()]):
-    raise Exception('Implausible data (I2_SummeAlter wrong): %s' % attrs_to_str(feature.attributes))
-  if none_to_zero(attrs['I3_SummeAlter']) != sum([none_to_zero(attrs['I3_' + column]) for column, _ in altersgruppen.items()]):
-    raise Exception('Implausible data (I3_SummeAlter wrong): %s' % attrs_to_str(feature.attributes))
+  for i in range(0, 4):
+    col_prefix = 'I%d_' % (i+1)
+    col_sum_alter = 'I%d_SummeAlter' % (i+1)
+
+    if none_to_zero(attrs[col_sum_alter]) != sum([none_to_zero(attrs[col_prefix + column]) for column, _ in altersgruppen.items()]):
+      raise Exception('Implausible data (%s wrong): %s' % (col_sum_alter, attrs_to_str(feature.attributes)))
 
   datum = timestamp_to_iso_date(attrs['Meldedatum'])
 
@@ -372,6 +391,7 @@ def map_nach_alter(feature: Feature):
     'erstimpfungen': none_to_na(attrs['I1_' + column]),
     'zweitimpfungen': none_to_na(attrs['I2_' + column]),
     'drittimpfungen': none_to_na(attrs['I3_' + column]) if datum >= '2021-09-20' else str(none_to_zero(attrs['I3_' + column])), # third vaccinations started on 2021-09-20
+    'viertimpfungen': none_to_na(attrs['I4_' + column]) if datum >= '2022-02-14' else str(none_to_zero(attrs['I4_' + column])), # third vaccinations started on 2022-02-14
   } for column, altersgruppe in altersgruppen.items()]
 
 def timestamp_to_iso_date(timestamp: int) -> str:

@@ -36,6 +36,7 @@ arcgisImpfungenRaw <- read_delim(
     erstimpfungen = col_integer(),
     zweitimpfungen = col_integer(),
     drittimpfungen = col_integer(),
+    viertimpfungen = col_integer(),
     impfdosen = col_integer(),
     impfdosenNeu = col_integer()
   )
@@ -58,14 +59,17 @@ enrichImpfungenData <- function(x) {
         zweitimpfungenFilled = zweitimpfungen,
         zweitimpfungenLast = lag(zweitimpfungen),
         drittimpfungenFilled = drittimpfungen,
-        drittimpfungenLast = lag(drittimpfungen)
+        drittimpfungenLast = lag(drittimpfungen),
+        viertimpfungenFilled = viertimpfungen,
+        viertimpfungenLast = lag(viertimpfungen)
       ) %>%
-      fill(impfdosenFilled, erstimpfungenFilled, zweitimpfungenFilled, drittimpfungenFilled, .direction = "up") %>%
-      fill(impfdosenLast, erstimpfungenLast, zweitimpfungenLast, drittimpfungenLast, .direction = "down") %>%
+      fill(impfdosenFilled, erstimpfungenFilled, zweitimpfungenFilled, drittimpfungenFilled, viertimpfungenFilled, .direction = "up") %>%
+      fill(impfdosenLast, erstimpfungenLast, zweitimpfungenLast, drittimpfungenLast, viertimpfungenLast, .direction = "down") %>%
       add_count(impfdosenFilled, impfdosenLast, name = "impfdosenDays") %>%
       add_count(erstimpfungenFilled, erstimpfungenLast, name = "erstimpfungenDays") %>%
       add_count(zweitimpfungenFilled, zweitimpfungenLast, name = "zweitimpfungenDays") %>%
       add_count(drittimpfungenFilled, drittimpfungenLast, name = "drittimpfungenDays") %>%
+      add_count(viertimpfungenFilled, viertimpfungenLast, name = "viertimpfungenDays") %>%
       mutate(
         impfdosenNeuProTag = (impfdosenFilled - impfdosenLast) / impfdosenDays,
         impfdosenFilled = NULL,
@@ -82,7 +86,11 @@ enrichImpfungenData <- function(x) {
         drittimpfungenNeuProTag = (drittimpfungenFilled - drittimpfungenLast) / drittimpfungenDays,
         drittimpfungenFilled = NULL,
         drittimpfungenLast = NULL,
-        drittimpfungenDays = NULL
+        drittimpfungenDays = NULL,
+        viertimpfungenNeuProTag = (viertimpfungenFilled - viertimpfungenLast) / viertimpfungenDays,
+        viertimpfungenFilled = NULL,
+        viertimpfungenLast = NULL,
+        viertimpfungenDays = NULL
       )
   )
 }
@@ -95,6 +103,7 @@ impfungenMerged <- bind_rows(
       erstimpfungen,
       zweitimpfungen,
       drittimpfungen = 0,
+      viertimpfungen = 0,
       impfdosen = erstimpfungen + zweitimpfungen,
       impfdosenNeu = impfdosen - lag(impfdosen)
     ) %>% enrichImpfungenData(),
@@ -104,6 +113,7 @@ impfungenMerged <- bind_rows(
       erstimpfungen,
       zweitimpfungen,
       drittimpfungen,
+      viertimpfungen,
       impfdosen,
       impfdosenNeu
     ) %>% enrichImpfungenData()
@@ -120,13 +130,14 @@ arcgisImpfungenNachEinrichtungRaw <- read_delim(
     erstimpfungen = col_integer(),
     zweitimpfungen = col_integer(),
     drittimpfungen = col_integer(),
+    viertimpfungen = col_integer(),
     impfdosen = col_integer()
   )
 )
 arcgisImpfungenNachEinrichtung <- arcgisImpfungenNachEinrichtungRaw %>%
   group_by(einrichtung) %>%
   complete(datum = seq(min(arcgisImpfungenNachEinrichtungRaw$datum), max(arcgisImpfungenNachEinrichtungRaw$datum), "days"), fill = list()) %>%
-  fill(erstimpfungen, zweitimpfungen, drittimpfungen, impfdosen, .direction = "down") %>%
+  fill(erstimpfungen, zweitimpfungen, drittimpfungen, viertimpfungen, impfdosen, .direction = "down") %>%
   mutate(
     impfdosenNeu = impfdosen - lag(impfdosen)
   )
@@ -141,7 +152,8 @@ arcgisImpfungenNachAlter <- read_delim(
     altersgruppe = readr::col_factor(levels = c("0-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+")),
     erstimpfungen = col_integer(),
     zweitimpfungen = col_integer(),
-    drittimpfungen = col_integer()
+    drittimpfungen = col_integer(),
+    viertimpfungen = col_integer()
   )
 )
 
@@ -154,7 +166,8 @@ impfungenAlterMerged <- bind_rows(
       altersgruppe = "Unbekannt",
       erstimpfungen = erstimpfungen - erstimpfungenAb80 - erstimpfungenHausaerzte,
       zweitimpfungen = zweitimpfungen - zweitimpfungenAb80 - zweitimpfungenHausaerzte,
-      drittimpfungen = 0
+      drittimpfungen = 0,
+      viertimpfungen = 0
     ),
   impfungenRaw %>%
     filter(datum < min(arcgisImpfungenNachAlter$datum)) %>%
@@ -173,7 +186,8 @@ impfungenAlterMerged <- bind_rows(
       altersgruppe,
       erstimpfungen,
       zweitimpfungen,
-      drittimpfungen
+      drittimpfungen,
+      viertimpfungen
     )
 ) %>%
   mutate(
@@ -228,6 +242,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(y = ~erstimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#74a9cf", name = "Erstimpfungen") %>%
             add_trace(y = ~zweitimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#0570b0", name = "Zweitimpfungen") %>%
             add_trace(y = ~drittimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#023858", name = "Drittimpfungen") %>%
+            add_trace(y = ~viertimpfungen, type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#26A69A", name = "Viertimpfungen") %>%
             plotly_default_config() %>%
             plotly_time_range() %>%
             plotly_hide_axis_titles() %>%
@@ -235,7 +250,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         },
         {
           lastRow <- impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-          p(paste0("Aktuell (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ") haben ", germanNumberFormat(lastRow$erstimpfungen), " Menschen mindestens eine Erstimpfung erhalten, davon ", germanNumberFormat(lastRow$zweitimpfungen), " eine Zweitimpfung und ", germanNumberFormat(lastRow$drittimpfungen), " eine Drittimpfung."))
+          p(paste0("Im Landkreis Ebersberg haben ", germanNumberFormat(lastRow$erstimpfungen), " Menschen eine Erstimpfung erhalten, ", germanNumberFormat(lastRow$zweitimpfungen), " eine Zweitimpfung, ", germanNumberFormat(lastRow$drittimpfungen), " eine Drittimpfung und ",germanNumberFormat(lastRow$viertimpfungen), " eine Viertimpfung (Stand:\u00A0", format(lastRow$datum, "%d.%m.%Y"), ")."))
         },
         p(HTML("Die Zahlen beziehen sich auf die Impfungen, die <em>im</em> Landkreis Ebersberg verabreicht wurden; der Wohnort der geimpften Personen ist irrelevant. Dadurch ist es möglich, dass es mehr Zweit- als Erstimpfungen gibt, wenn sich Landkreisbürger*innen in anderen Landkreisen erstimpfen ließen, oder Bürger*innen anderer Landkreise sich im LK Ebersberg zweitimpfen ließen."))
       ),
@@ -262,6 +277,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         title = "Verabreichte Impfdosen pro Tag",
         {
           plot_ly(filter(impfungenMerged, !is.na(erstimpfungenNeuProTag)), x = ~datum, yhoverformat = ",", height = 350) %>%
+            add_trace(y = ~viertimpfungenNeuProTag, type = "bar", name = "Viertimpfungen", color = I("#26A69A"), width = 24*60*60*1000) %>%
             add_trace(y = ~drittimpfungenNeuProTag, type = "bar", name = "Drittimpfungen", color = I("#023858"), width = 24*60*60*1000) %>%
             add_trace(y = ~zweitimpfungenNeuProTag, type = "bar", name = "Zweitimpfungen", color = I("#0570b0"), width = 24*60*60*1000) %>%
             add_trace(y = ~erstimpfungenNeuProTag, type = "bar", name = "Erstimpfungen", color = I("#74a9cf"), width = 24*60*60*1000) %>%
@@ -350,6 +366,25 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_hide_axis_titles() %>%
             plotly_build()
         },
+        p(HTML("Bei den Zahlen der ersten Woche handelt es sich wahrscheinlich um Nachtragungen der vorherigen Wochen.")),
+      ),
+      box(
+        title = "Neue Viertgeimpfte pro Woche nach Altersgruppe (nur Impfzentrum)",
+        {
+          impfungenAlterMerged %>%
+            group_by(altersgruppe) %>%
+            mutate(viertimpfungenNeu = viertimpfungen - lag(viertimpfungen)) %>%
+            mutate(woche = floor_date(datum, unit = "weeks")) %>%
+            group_by(altersgruppe, woche) %>%
+            summarise(viertimpfungenNeu = max(viertimpfungenNeu), .groups = "drop_last") %>%
+            plot_ly(x = ~woche, yhoverformat = ",", height = 350) %>%
+            add_trace(y = ~viertimpfungenNeu, type = "bar", color = ~altersgruppe, colors = c('#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#005a32','#aaaaaa')) %>%
+            layout(barmode = 'stack') %>%
+            plotly_default_config() %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build()
+        },
+        p(HTML("Bei den Zahlen der ersten Woche handelt es sich wahrscheinlich um Nachtragungen der vorherigen Wochen.")),
       ),
       box(
         title = "Verabreichte Impfdosen insgesamt",
