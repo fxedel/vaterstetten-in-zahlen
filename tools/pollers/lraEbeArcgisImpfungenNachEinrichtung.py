@@ -157,6 +157,16 @@ def apply_manual_fixes(features: List[Feature]):
         ensure_attr_value(feature, 'I1_Divers', 27)
         replace_attr_value(feature, 'I1_SummeGeschlecht', 61499, attrs['I1_SummeAlter'])
         ensure_attr_value(feature, 'I1_SummeAlter', 58169)
+      elif datum == '2022-03-10':
+        # I2_Maennlich is probably just missing a digit
+        ensure_attr_value(feature, 'Zweitimpfungen_proTyp', 60500)
+        ensure_attr_value(feature, 'I2_Weiblich', 31429)
+        replace_attr_value(feature, 'I2_Maennlich', 2907, 29047)
+        ensure_attr_value(feature, 'I2_Divers', 23)
+        replace_attr_value(feature, 'I2_SummeGeschlecht', 34359, attrs['I2_SummeGeschlecht']-2907+29047)
+        # I2_Alter50_60 was 9684 the day before and 9686 the after, so 9658 probably has mixed up digits
+        replace_attr_value(feature, 'I2_Alter50_60', 9658, 9685)
+        replace_attr_value(feature, 'I2_SummeAlter', 60472, attrs['I2_SummeAlter']-9658+9685)
 
     elif einrichtung == 'Praxis':
       if datum == '2021-04-21':
@@ -188,9 +198,15 @@ def apply_manual_fixes(features: List[Feature]):
         replace_attr_value(feature, 'I2_Alter80', 0, None)
         replace_attr_value(feature, 'I2_SummeAlter', 0, None)
 
+    elif einrichtung == 'Kreisklinik':
+      if datum == '2022-02-17':
+        # first vaccinations were 735 the day before and after
+        replace_attr_value(feature, 'Erstimpfungen_proTyp', 725, 735)
+        replace_attr_value(feature, 'Impfungen_proTyp', 1723, attrs['Impfungen_proTyp']-725+735)
+
 def ensure_attr_value(feature: Feature, attr_key: str, value: Any):
   if feature.attributes[attr_key] != value:
-    raise Exception('Expected %s to be %s, but is %s:\n%s' % (attr_key, value, feature.attributes[attr_key], feature))
+    raise Exception('Expected %s to be %s, but is %s:\n%s' % (attr_key, value, feature.attributes[attr_key], attrs_to_str(feature.attributes)))
 
 def replace_attr_value(feature: Feature, attr_key: str, old_val: Any, new_val: Any):
   ensure_attr_value(feature, attr_key, old_val)
@@ -248,12 +264,25 @@ def check_cumulative_plausability(features: List[Feature]):
       if feature.attributes[attr_name] is None:
         continue
 
+      datum = timestamp_to_iso_date(feature.attributes['Meldedatum'])
+      value = feature.attributes[attr_name]
+
+      if datum == '2022-03-05':
+        if attr_name == 'Drittimpfungen_proTyp' or attr_name.startswith('I3'):
+          # this seems to be a data correction, where fourth vaccinations were wrongly counted as third vaccinations
+          continue
+
       j = i - 1
       while (j >= 0 and feature.attributes['Einrichtung'] == features[j].attributes['Einrichtung']):
-        if not features[j].attributes[attr_name] is None:
-          if feature.attributes[attr_name] < features[j].attributes[attr_name]:
-            raise Exception('Implausible data (non-cumulative %s): %s to %s' % (attr_name, features[j], feature))
+        feature_old = features[j]
+        datum_old = timestamp_to_iso_date(feature_old.attributes['Meldedatum'])
+        value_old = feature_old.attributes[attr_name]
+
+        if not value_old is None:
+          if value_old > value:
+            raise Exception('Implausible data (non-cumulative %s): %s (%s) to %s (%s)' % (attr_name, value_old, datum_old, value, datum))
           break
+
         j -= 1
 
 
@@ -263,17 +292,17 @@ def map_nach_einrichtung(feature: Feature):
   # SummeGeschlecht and SummeAlter may be off by one or two days, which should be less than 4000 vaccinations.
   # Furthermore, they might me a little bit (up to 20 vaccinations) ahead (probably because of slightly different times of survey).
   if attrs['I1_SummeGeschlecht'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeGeschlecht'] >= attrs['Erstimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I1_SummeGeschlecht and Erstimpfungen_proTyp): %s' % feature)
+    raise Exception('Implausible data (I1_SummeGeschlecht and Erstimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
   if attrs['I2_SummeGeschlecht'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeGeschlecht'] >= attrs['Zweitimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I2_SummeGeschlecht and Zweitimpfungen_proTyp): %s' % feature)
+    raise Exception('Implausible data (I2_SummeGeschlecht and Zweitimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
   if attrs['I3_SummeGeschlecht'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeGeschlecht'] >= attrs['Drittimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I3_SummeGeschlecht and Drittimpfungen_proTyp): %s' % feature)
+    raise Exception('Implausible data (I3_SummeGeschlecht and Drittimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
   if attrs['I1_SummeAlter'] != None and not attrs['Erstimpfungen_proTyp'] + 20 >= attrs['I1_SummeAlter'] >= attrs['Erstimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I1_SummeAlter and Erstimpfungen_proTyp): %s' % feature)
+    raise Exception('Implausible data (I1_SummeAlter and Erstimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
   if attrs['I2_SummeAlter'] != None and not attrs['Zweitimpfungen_proTyp'] + 20 >= attrs['I2_SummeAlter'] >= attrs['Zweitimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I2_SummeAlter and Zweitimpfungen_proTyp): %s' % feature)
+    raise Exception('Implausible data (I2_SummeAlter and Zweitimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
   if attrs['I3_SummeAlter'] != None and not attrs['Drittimpfungen_proTyp'] + 20 >= attrs['I3_SummeAlter'] >= attrs['Drittimpfungen_proTyp'] - 4000:
-    raise Exception('Implausible data (I3_SummeAlter and Drittimpfungen_proTyp): %s' % feature)
+    raise Exception('Implausible data (I3_SummeAlter and Drittimpfungen_proTyp): %s' % attrs_to_str(feature.attributes))
 
   row = {
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
@@ -295,11 +324,11 @@ def map_nach_geschlecht(feature: Feature):
   geschlechter = ['Weiblich', 'Maennlich', 'Divers']
 
   if none_to_zero(attrs['I1_SummeGeschlecht']) != sum([none_to_zero(attrs['I1_' + column]) for column in geschlechter]):
-    raise Exception('Implausible data (I1_SummeGeschlecht wrong): %s' % feature)
+    raise Exception('Implausible data (I1_SummeGeschlecht wrong): %s' % attrs_to_str(feature.attributes))
   if none_to_zero(attrs['I2_SummeGeschlecht']) != sum([none_to_zero(attrs['I2_' + column]) for column in geschlechter]):
-    raise Exception('Implausible data (I2_SummeGeschlecht wrong): %s' % feature)
+    raise Exception('Implausible data (I2_SummeGeschlecht wrong): %s' % attrs_to_str(feature.attributes))
   if none_to_zero(attrs['I3_SummeGeschlecht']) != sum([none_to_zero(attrs['I3_' + column]) for column in geschlechter]):
-    raise Exception('Implausible data (I3_SummeGeschlecht wrong): %s' % feature)
+    raise Exception('Implausible data (I3_SummeGeschlecht wrong): %s' % attrs_to_str(feature.attributes))
 
   return [{
     'datum': timestamp_to_iso_date(attrs['Meldedatum']),
@@ -328,11 +357,11 @@ def map_nach_alter(feature: Feature):
   }
 
   if none_to_zero(attrs['I1_SummeAlter']) != sum([none_to_zero(attrs['I1_' + column]) for column, _ in altersgruppen.items()]):
-    raise Exception('Implausible data (I1_SummeAlter wrong): %s' % feature)
+    raise Exception('Implausible data (I1_SummeAlter wrong): %s' % attrs_to_str(feature.attributes))
   if none_to_zero(attrs['I2_SummeAlter']) != sum([none_to_zero(attrs['I2_' + column]) for column, _ in altersgruppen.items()]):
-    raise Exception('Implausible data (I2_SummeAlter wrong): %s' % feature)
+    raise Exception('Implausible data (I2_SummeAlter wrong): %s' % attrs_to_str(feature.attributes))
   if none_to_zero(attrs['I3_SummeAlter']) != sum([none_to_zero(attrs['I3_' + column]) for column, _ in altersgruppen.items()]):
-    raise Exception('Implausible data (I3_SummeAlter wrong): %s' % feature)
+    raise Exception('Implausible data (I3_SummeAlter wrong): %s' % attrs_to_str(feature.attributes))
 
   datum = timestamp_to_iso_date(attrs['Meldedatum'])
 
@@ -359,3 +388,14 @@ def none_to_na(num: Optional[int]) -> str:
     return 'NA'
 
   return str(num)
+
+def attrs_to_str(attrs: dict) -> str:
+  str = 'OBJECTID %s from %s:\n' % (attrs['OBJECTID'], timestamp_to_iso_date(attrs['Meldedatum']))
+
+  for key in attrs:
+    if key in ['OBJECTID', 'Meldedatum']:
+      continue
+
+    str += '%s: %s\n' % (key, attrs[key])
+
+  return str
