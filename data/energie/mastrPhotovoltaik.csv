@@ -591,12 +591,12 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2342163,SEE982582930091,,In Betrieb,2019-09-09,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,11,Ost-West,3.08,3.0,70%,false,Teileinspeisung,false
 2441383,SEE990073185196,,In Betrieb,2019-10-22,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,17,Ost-West,5.695,4.6,70%,false,Teileinspeisung,false
 2558356,SEE986472883122,,In Betrieb,2019-12-03,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost-West,5.6,4.6,70%,false,Teileinspeisung,false
-2925177,SEE970349977779,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 1,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,29,Ost,8.12,7.0,70%,false,Volleinspeisung,false
-2925216,SEE939536430381,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 3,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,West,4.48,4.48,70%,false,Volleinspeisung,false
-2925249,SEE956523203483,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 5,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,65,West,18.2,16.1,70%,false,Volleinspeisung,false
-2925291,SEE979437775334,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 7,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,54,West,15.12,12.0,70%,false,Volleinspeisung,false
+2925177,SEE970349977779,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 1,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,29,Ost,8.12,7.0,70%,false,Volleinspeisung,false
+2925216,SEE939536430381,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 3,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,West,4.48,4.48,70%,false,Volleinspeisung,false
+2925249,SEE956523203483,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 5,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,65,West,18.2,16.1,70%,false,Volleinspeisung,false
+2925291,SEE979437775334,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 7,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,54,West,15.12,12.0,70%,false,Volleinspeisung,false
 2925307,SEE994911592559,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 9,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,45,West,12.36,11.6,70%,false,Volleinspeisung,false
-2925331,SEE901532561390,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 11,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,104,West,29.12,24.3,70%,false,Volleinspeisung,false
+2925331,SEE901532561390,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 11,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,104,West,29.12,24.3,70%,false,Volleinspeisung,false
 3008150,SEE901890856848,E2104101S000000000000102647900001,In Betrieb,2020-04-14,2019-06-28,,,,,GHD,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,5.6,4.6,70%,false,Teileinspeisung,false
 2215756,SEE930466339546,,In Betrieb,2021-03-12,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,15,Ost-West,4.2,3.5,70%,false,Teileinspeisung,false
 2208121,SEE942718399703,,In Betrieb,2019-07-08,2019-07-02,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude-other,12,Süd,3.72,3.68,70%,false,Teileinspeisung,false
@@ -858,7 +858,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4742868,SEE903400521147,,In Betrieb,2021-11-08,2021-10-27,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,11,Süd,4.18,4.0,70%,false,Teileinspeisung,false
 4732371,SEE993869830621,,In Betrieb,2021-10-28,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Ost-West,9.75,9.75,,false,Teileinspeisung,false
 4814088,SEE968799405614,,In Betrieb,2021-12-12,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,56,Ost-West,21.56,16.0,70%,false,Teileinspeisung,false
-4738294,SEE933549991891,,In Betrieb,2021-11-01,2021-10-29,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,24,,8.88,8.0,70%,false,Teileinspeisung,false
+4738294,SEE933549991891,,In Betrieb,2021-11-01,2021-10-29,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,24,,8.88,8.0,70%,false,Teileinspeisung,false
 4829632,SEE912956879848,,In Betrieb,2021-12-21,2021-10-29,,,,,GHD,85598,Baldham,,,,,true,gebaeude,36,Süd,11.88,11.88,70%,false,Teileinspeisung,false
 4753745,SEE974165321044,,In Betrieb,2021-11-08,2021-11-08,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Süd,8.36,8.36,70%,false,Teileinspeisung,false
 4753861,SEE982442567870,,In Betrieb,2021-11-08,2021-11-08,,,,,haushalt,85646,Purfing,,,,,true,gebaeude,15,Süd,5.625,5.0,70%,false,Teileinspeisung,false
@@ -891,6 +891,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4933938,SEE926758205637,,In Betrieb,2022-03-04,2022-03-02,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,30,Süd,11.4,11.4,70%,false,Teileinspeisung,false
 4934170,SEE963686206091,,In Betrieb,2022-03-07,2022-03-02,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Süd-West,8.25,8.25,70%,false,Teileinspeisung,false
 4946157,SEE930208605496,,In Betrieb,2022-03-12,2022-03-11,,,,,sonstige,85622,Weißenfeld,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
+4982654,SEE961057775238,,In Betrieb,2022-03-31,2022-03-13,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.66,0.6,ohne,false,Teileinspeisung,false
 4947267,SEE932938912134,,In Betrieb,2022-03-28,2022-03-20,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,2,Süd,0.6,0.6,sonstige,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung,false
 4479221,SEE991149831160,,In Planung,2021-05-11,,2021-08-10,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,ohne,false,Teileinspeisung,false
