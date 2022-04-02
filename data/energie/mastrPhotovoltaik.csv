@@ -871,7 +871,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4764045,SEE925989209629,,In Betrieb,2021-11-12,2021-11-12,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,14,Ost,5.32,5.0,70%,false,Teileinspeisung,false
 4821537,SEE995149481042,,In Betrieb,2021-12-15,2021-11-22,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,17,Süd,5.61,5.0,70%,false,Teileinspeisung,false
 4797616,SEE997473102884,,In Betrieb,2021-12-01,2021-11-24,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,32,Süd-West,10.7,10.7,70%,false,Teileinspeisung,false
-4810682,SEE974251795988,,In Betrieb,2021-12-09,2021-11-24,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,30,Süd-West,9.9,7.0,70%,false,Teileinspeisung,false
+4810682,SEE974251795988,,In Betrieb,2021-12-09,2021-11-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Süd-West,9.9,7.0,70%,false,Teileinspeisung,false
 4833548,SEE944103952401,,In Betrieb,2021-12-23,2021-11-25,,,"Hausdach + An Lerchenfeld 8, 85599 Parsdorf",Brkic GmbH,sonstige,85599,Parsdorf,Am Lerchenfeld,,48.146429,11.789983,false,gebaeude,164,,54.12,50.0,ohne,false,Teileinspeisung,false
 4800581,SEE996965318758,,In Betrieb,2021-12-03,2021-12-03,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,17,Ost-West,6.4,4.6,70%,false,Teileinspeisung,false
 4872575,SEE918435685542,,In Betrieb,2022-01-25,2021-12-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,,8.1,6.1,70%,false,,false
@@ -890,6 +890,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4926791,SEE992760175183,,In Betrieb,2022-03-01,2022-02-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,6.4,6.0,ohne,false,Teileinspeisung,false
 4933938,SEE926758205637,,In Betrieb,2022-03-04,2022-03-02,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,30,Süd,11.4,11.4,70%,false,Teileinspeisung,false
 4934170,SEE963686206091,,In Betrieb,2022-03-07,2022-03-02,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Süd-West,8.25,8.25,70%,false,Teileinspeisung,false
+4983641,SEE954752722287,,In Betrieb,2022-04-01,2022-03-09,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,36,Süd-Ost,13.68,13.0,70%,false,Teileinspeisung,false
 4946157,SEE930208605496,,In Betrieb,2022-03-12,2022-03-11,,,,,sonstige,85622,Weißenfeld,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
 4982654,SEE961057775238,,In Betrieb,2022-03-31,2022-03-13,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.66,0.6,ohne,false,Teileinspeisung,false
 4947267,SEE932938912134,,In Betrieb,2022-03-28,2022-03-20,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,2,Süd,0.6,0.6,sonstige,false,Teileinspeisung,false
