@@ -24,7 +24,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 3321116,SEE921519454620,In Betrieb,2020-08-06,2018-01-08,,,,,85622,Weißenfeld,,,,,true,Lithium,5.5,4.6,5.5,Teileinspeisung,false
 3123897,SEE994199476299,In Betrieb,2020-06-07,2018-01-09,,,,,85622,Weißenfeld,,,,,true,Lithium,17.6,4.6,17.6,Teileinspeisung,false
 2636074,SEE998858737776,In Betrieb,2019-12-28,2018-01-25,,,,,85599,Parsdorf,,,,,true,Lithium,5.0,5.0,13.5,Teileinspeisung,true
-3126149,SEE959966115993,In Betrieb,2020-06-08,2018-03-12,,,,,85591,Vaterstetten,,,,,false,Lithium,3.2,3.2,8.0,Teileinspeisung,false
+3126149,SEE959966115993,In Betrieb,2020-06-08,2018-03-12,,,,,85591,Vaterstetten,,,,,true,Lithium,3.2,3.2,8.0,Teileinspeisung,false
 2060454,SEE969061592698,In Betrieb,2019-05-21,2018-03-21,,,,,85598,Baldham,,,,,true,Lithium,3.3,3.3,10.0,Teileinspeisung,false
 3326771,SEE980525384574,In Betrieb,2020-08-08,2018-05-03,,,,,85591,Vaterstetten,,,,,true,Lithium,3.3,3.3,8.0,Teileinspeisung,false
 3343431,SEE996516729378,In Betrieb,2020-08-14,2018-05-08,,,,,85591,Vaterstetten,,,,,true,Lithium,3.0,3.0,15.84,Teileinspeisung,false
@@ -225,7 +225,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 4958612,SEE940119086628,In Betrieb,2022-03-18,2022-02-04,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,4.0,10.0,Teileinspeisung,true
 4901642,SEE947651979104,In Betrieb,2022-02-13,2022-02-10,,,,,85646,Purfing,,,,,true,Lithium,5.12,5.12,5.12,Teileinspeisung,false
 4926813,SEE919258410304,In Betrieb,2022-03-01,2022-02-28,,,,,85598,Baldham,,,,,false,Lithium,7.7,6.0,7.7,Teileinspeisung,false
-4933949,SEE997569907256,In Betrieb,2022-03-04,2022-03-02,,,,,85591,Vaterstetten,,,,,false,Lithium,4.5,4.5,11.6,Teileinspeisung,false
+4933949,SEE997569907256,In Betrieb,2022-03-04,2022-03-02,,,,,85591,Vaterstetten,,,,,true,Lithium,4.5,4.5,11.6,Teileinspeisung,false
 4937052,SEE985970704335,In Betrieb,2022-03-07,2022-03-02,,,,,85591,Vaterstetten,,,,,false,Lithium,3.75,3.75,7.5,Teileinspeisung,false
 4983704,SEE964790530454,In Betrieb,2022-04-01,2022-03-09,,,,,85646,Neufarn,,,,,false,Lithium,13.68,3.0,9.9,Teileinspeisung,false
 4479240,SEE986254476528,In Planung,2021-05-11,,2021-08-10,,,,85646,Neufarn,,,,,false,Lithium,8.16,8.16,11.04,Teileinspeisung,false
