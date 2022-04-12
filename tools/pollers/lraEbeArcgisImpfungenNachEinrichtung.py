@@ -167,6 +167,10 @@ def apply_manual_fixes(features: List[Feature]):
         # I2_Alter50_60 was 9684 the day before and 9686 the after, so 9658 probably has mixed up digits
         replace_attr_value(feature, 'I2_Alter50_60', 9658, 9685)
         replace_attr_value(feature, 'I2_SummeAlter', 60472, attrs['I2_SummeAlter']-9658+9685)
+      elif datum == '2022-04-11':
+        replace_attr_value(feature, 'I3_Divers', 18, 19)
+        replace_attr_value(feature, 'I3_SummeGeschlecht', 55484, attrs['I3_SummeGeschlecht']-18+19)
+
 
     elif einrichtung == 'Praxis':
       if datum == '2021-04-21':
