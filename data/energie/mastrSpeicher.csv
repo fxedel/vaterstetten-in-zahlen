@@ -214,7 +214,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 4805065,SEE951862506905,In Betrieb,2021-12-06,2021-11-08,,,,,85646,Purfing,,,,,false,Lithium,5.0,5.0,12.4,Teileinspeisung,false
 4817611,SEE943107977304,In Betrieb,2021-12-13,2021-11-08,,,,,85591,Vaterstetten,,,,,true,Lithium,5.12,5.12,5.12,Teileinspeisung,false
 4830554,SEE925798085155,In Betrieb,2021-12-21,2021-11-11,,,,,85591,Vaterstetten,,,,,true,Lithium,4.2,4.2,5.9,Teileinspeisung,false
-4825546,SEE964736438226,In Betrieb,2021-12-17,2021-11-22,,,,,85591,Vaterstetten,,,,,false,Lithium,7.68,5.13,7.7,Teileinspeisung,false
+4825546,SEE964736438226,In Betrieb,2021-12-17,2021-11-22,,,,,85591,Vaterstetten,,,,,false,Lithium,3.84,3.84,7.7,Teileinspeisung,false
 4810703,SEE967171562679,In Betrieb,2021-12-09,2021-11-24,,,,,85591,Vaterstetten,,,,,true,Lithium,4.6,4.6,13.5,Teileinspeisung,false
 4873920,SEE910142396964,In Betrieb,2022-01-26,2021-12-14,,,,,85591,Vaterstetten,,,,,false,Lithium,3.84,3.84,8.0,Teileinspeisung,false
 4823955,SEE944760627889,In Betrieb,2021-12-16,2021-12-16,,,,,85591,Vaterstetten,,,,,false,Lithium,3.0,3.0,5.6,Teileinspeisung,false
@@ -222,12 +222,13 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 4872408,SEE933144346164,In Betrieb,2022-01-25,2021-12-20,,,,,85598,Baldham,,,,,true,Lithium,6.76,6.76,7.7,Teileinspeisung,false
 4843283,SEE900654312729,In Betrieb,2022-01-04,2022-01-03,,,,,85591,Vaterstetten,,,,,true,Lithium,2.5,2.5,10.0,Teileinspeisung,false
 4877796,SEE985828598208,In Betrieb,2022-01-28,2022-01-18,,,,,85598,Baldham,,,,,true,Lithium,10.0,10.0,10.2,Teileinspeisung,false
-4958612,SEE940119086628,In Betrieb,2022-03-18,2022-02-04,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,4.0,10.0,Teileinspeisung,true
+4958612,SEE940119086628,In Betrieb,2022-03-18,2022-01-24,,,,,85591,Vaterstetten,,,,,false,Lithium,4.5,4.5,8.77,Teileinspeisung,true
 4901642,SEE947651979104,In Betrieb,2022-02-13,2022-02-10,,,,,85646,Purfing,,,,,true,Lithium,5.12,5.12,5.12,Teileinspeisung,false
 4926813,SEE919258410304,In Betrieb,2022-03-01,2022-02-28,,,,,85598,Baldham,,,,,false,Lithium,7.7,6.0,7.7,Teileinspeisung,false
 4933949,SEE997569907256,In Betrieb,2022-03-04,2022-03-02,,,,,85591,Vaterstetten,,,,,true,Lithium,4.5,4.5,11.6,Teileinspeisung,false
 4937052,SEE985970704335,In Betrieb,2022-03-07,2022-03-02,,,,,85591,Vaterstetten,,,,,false,Lithium,3.75,3.75,7.5,Teileinspeisung,false
 4983704,SEE964790530454,In Betrieb,2022-04-01,2022-03-09,,,,,85646,Neufarn,,,,,false,Lithium,13.68,3.0,9.9,Teileinspeisung,false
+5001106,SEE928373098939,In Betrieb,2022-04-11,2022-04-07,,,,,85598,Baldham,,,,,false,Lithium,15.12,15.12,15.12,Teileinspeisung,false
 4479240,SEE986254476528,In Planung,2021-05-11,,2021-08-10,,,,85646,Neufarn,,,,,false,Lithium,8.16,8.16,11.04,Teileinspeisung,false
 4503878,SEE947397967991,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,Lithium,10.2,10.2,11.04,Teileinspeisung,false
 4739715,SEE914273666811,In Planung,2021-11-02,,2022-02-28,,,,85598,Baldham,,,,,false,Lithium,18.0,4.5,9.75,Teileinspeisung,true
