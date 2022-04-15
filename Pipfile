@@ -4,14 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "~=2.25"
-beautifulsoup4 = "~=4.9"
-pytelegrambotapi = "~=3.7"
 arcgis = "~=1.9.1"
-python-interface = "~=1.6.1"
-ipywidgets = "~=7.6.5"
+beautifulsoup4 = "~=4.9"
 ipython = "~=7.31.1"
-pillow = "~=9.0.0"
+ipywidgets = "~=7.6.5"
+jupyter-server = ">=1.15.4"
+notebook = ">=6.4.10"
+pillow = ">=9.0.1"
+pytelegrambotapi = "~=3.7"
+python-interface = "~=1.6.1"
+requests = "~=2.25"
 
 [dev-packages]
 
