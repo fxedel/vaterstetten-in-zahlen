@@ -42,7 +42,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 2295064,SEE914215143622,In Betrieb,2019-08-18,2019-01-18,,,,,85591,Vaterstetten,,,,,true,Lithium,1.5,1.5,2.0,Teileinspeisung,false
 1874011,SEE958254212192,In Betrieb,2019-02-22,2019-01-24,,,,,85598,Baldham,,,,,true,Lithium,7.0,7.0,10.0,Teileinspeisung,false
 2025010,SEE937484464052,In Betrieb,2019-05-03,2019-05-03,,,,,85591,Vaterstetten,,,,,true,Lithium,3.3,3.3,11.25,Teileinspeisung,false
-3986049,SEE955705735668,In Betrieb,2020-12-28,2019-05-15,,,,,85598,Baldham,,,,,false,Lithium,4.6,4.6,7.68,Teileinspeisung,false
+3986049,SEE955705735668,In Betrieb,2020-12-28,2019-05-15,,,,,85598,Baldham,,,,,true,Lithium,4.6,4.6,7.68,Teileinspeisung,false
 2150104,SEE976251562034,In Betrieb,2019-06-13,2019-05-17,,,,,85598,Baldham,,,,,false,Lithium,5.0,4.6,5.0,Teileinspeisung,false
 2199712,SEE996791635937,In Betrieb,2019-07-04,2019-06-28,,,,,85591,Vaterstetten,,,,,true,Lithium,1.5,1.5,2.0,Teileinspeisung,false
 2213133,SEE903491057402,In Betrieb,2019-07-10,2019-06-28,,,,,85591,Vaterstetten,,,,,true,Lithium,3.0,3.0,6.0,Teileinspeisung,false
@@ -233,3 +233,4 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 4479240,SEE986254476528,In Planung,2021-05-11,,2021-08-10,,,,85646,Neufarn,,,,,false,Lithium,8.16,8.16,11.04,Teileinspeisung,false
 4503878,SEE947397967991,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,Lithium,10.2,10.2,11.04,Teileinspeisung,false
 4739715,SEE914273666811,In Planung,2021-11-02,,2022-02-28,,,,85598,Baldham,,,,,false,Lithium,18.0,4.5,9.75,Teileinspeisung,true
+5009186,SEE996950590206,In Planung,2022-04-15,,2022-05-31,,,,85598,Baldham,,,,,false,Lithium,13.2,13.2,26.4,Teileinspeisung,false
