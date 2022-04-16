@@ -148,11 +148,11 @@ plotly_default_config <- function(p) {
   p %>%
     config(displayModeBar = FALSE) %>%
     config(locale = "de") %>%
-    layout(xaxis = list(fixedrange = TRUE, rangemode = 'tozero')) %>%
+    layout(xaxis = list(fixedrange = TRUE, rangemode = "tozero")) %>%
     layout(yaxis = list(fixedrange = TRUE)) %>%
     layout(hovermode = "x") %>%
     layout(dragmode = FALSE) %>%
-    layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h')) %>% # legend below plot
+    layout(legend = list(bgcolor = "#ffffffaa", orientation = "h")) %>% # legend below plot
     identity()
 }
 
@@ -171,8 +171,8 @@ plotly_hide_axis_titles <- function(p) {
 }
 
 plotlyLeistung <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"), yhoverformat = ",.2f", height = 350) %>%
-  add_trace(y = ~leistungStillgelegt / 1000, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#ff0000"), name = "Stillgelegt") %>%
-  add_trace(y = ~leistungInBetrieb / 1000, type = "scatter", mode = "lines", fill = 'tonexty', color = I("#0570b0"), name = "In Betrieb") %>%
+  add_trace(y = ~leistungStillgelegt / 1000, type = "scatter", mode = "lines", fill = "tozeroy", color = I("#ff0000"), name = "Stillgelegt") %>%
+  add_trace(y = ~leistungInBetrieb / 1000, type = "scatter", mode = "lines", fill = "tonexty", color = I("#0570b0"), name = "In Betrieb") %>%
   layout(yaxis = list(exponentformat = "none", ticksuffix = " MWp")) %>%
   plotly_axis_spacing(anlagenKumulativ$datum, left = 0, right = 0.02) %>%
   plotly_default_config() %>%
@@ -181,8 +181,8 @@ plotlyLeistung <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"
   identity()
 
 plotlyAnlagen <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"), yhoverformat = ",d", height = 350) %>%
-  add_trace(y = ~anlagenStillgelegt, type = "scatter", mode = "lines", fill = 'tozeroy', color = I("#ff0000"), name = "Stillgelegt") %>%
-  add_trace(y = ~anlagenInBetrieb, type = "scatter", mode = "lines", fill = 'tonexty', color = I("#0570b0"), name = "In Betrieb") %>%
+  add_trace(y = ~anlagenStillgelegt, type = "scatter", mode = "lines", fill = "tozeroy", color = I("#ff0000"), name = "Stillgelegt") %>%
+  add_trace(y = ~anlagenInBetrieb, type = "scatter", mode = "lines", fill = "tonexty", color = I("#0570b0"), name = "In Betrieb") %>%
   plotly_axis_spacing(anlagenKumulativ$datum, left = 0, right = 0.02) %>%
   plotly_default_config() %>%
   plotly_hide_axis_titles() %>%
@@ -244,6 +244,64 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
+        title = "Mittlere Modulleistung in Watt-Peak pro Modul",
+        {
+          data <- mastr %>%
+            filter(status == "In Betrieb") %>%
+            group_by(year = year(inbetriebnahme)) %>%
+            mutate(
+              modulleistung = bruttoleistung_kW / module
+            ) %>%
+            filter(!is.na(modulleistung)) %>%
+            filter(modulleistung < 1) %>% # more than 1 kWp per module is very unlikely 
+            summarise(
+              modulleistungP25 = quantile(modulleistung, .20),
+              modulleistungMed = median(modulleistung),
+              modulleistungP75 = quantile(modulleistung, .80),
+            )
+
+          plot_ly(data, x = ~year, yhoverformat = ",.1f", height = 350) %>%
+            add_trace(y = ~modulleistungP75 * 1000, type = "scatter", mode = "lines", color = I("transparent"), name = "75%-Perzentil") %>%
+            add_trace(y = ~modulleistungP25 * 1000, type = "scatter", mode = "lines", color = I("transparent"), name = "25%-Perzentil", fill = "tonexty", fillcolor = "rgba(5, 112, 176, 0.3)") %>%
+            add_trace(y = ~modulleistungMed * 1000, type = "scatter", mode = "lines", color = I("#0570b0"), name = "Median") %>%
+            layout(yaxis = list(exponentformat = "none", ticksuffix = " Wp", rangemode = "tozero")) %>%
+            plotly_axis_spacing(data$year, left = 0, right = 0.02) %>%
+            plotly_default_config() %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+          },
+      ),
+      box(
+        title = "Stecker-Solarmodule („Balkonkraftwerke“)",
+        {
+          data <-  mastr %>% 
+            filter(typ == "stecker") %>%
+            filter(status == "In Betrieb") %>%
+            group_by(inbetriebnahme) %>%
+            summarise(module = sum(module)) %>%
+            mutate(module = cumsum(module)) %>%
+            add_row(
+              inbetriebnahme = parse_date("2020-01-01"),
+              module = 0,
+              .before = 0
+            )
+
+          plot_ly(data, x = ~inbetriebnahme, line = list(shape = "hv"), yhoverformat = ",d", height = 350) %>%
+            add_trace(y = ~module, type = "scatter", mode = "lines", color = I("#0570b0"), fill = "tozeroy", name = "Module") %>%
+            layout(yaxis = list(rangemode = "tozero")) %>%
+            plotly_axis_spacing(data$inbetriebnahme, left = 0, right = 0.02) %>%
+            plotly_default_config() %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        },
+        p(HTML("Mehr Infos zu Balkonkraftwerken gibt es im <a href=\"https://muenchen.solar2030.de/balkonkraftwerk/\">Guide von München Solar2030</a>, außerdem gibt es seit Januar 2022 eine Förderung von 25&nbsp;% und maximal 250&nbsp;€ von der <a href=\"https://www.vaterstetten.de/Rathaus/Rathaus/Energie.htm/Seiten/Energieeinspar-Foerderprogramme.html\">Gemeinde Vaterstetten</a>.")),
+      ),
+    ),
+
+    fluidRow(
+      box(
         title = "Datengrundlage",
         status = "primary",
         solidHeader = TRUE,
@@ -264,7 +322,7 @@ server <- function(id) {
         plot_ly(data, x = ~year, yhoverformat = ",.0f") %>%
           add_trace(y = ~bruttoleistung_kW, type = "bar", color = ~get(input$neuLeistungGroupVar)) %>%
           layout(yaxis = list(exponentformat = "none", ticksuffix = " kWp")) %>%
-          layout(barmode = 'stack') %>%
+          layout(barmode = "stack") %>%
           plotly_axis_spacing(data$year, left = 0, right = 0.02) %>%
           plotly_default_config() %>%
           plotly_hide_axis_titles() %>%
@@ -276,7 +334,7 @@ server <- function(id) {
         data <- installationenNachJahrGrouped(input$neuAnlagenGroupVar)
         plot_ly(data, x = ~year, yhoverformat = ",d") %>%
           add_trace(y = ~anlagen, type = "bar", color = ~get(input$neuAnlagenGroupVar)) %>%
-          layout(barmode = 'stack') %>%
+          layout(barmode = "stack") %>%
           plotly_axis_spacing(data$year, left = 0, right = 0.02) %>%
           plotly_default_config() %>%
           plotly_hide_axis_titles() %>%
