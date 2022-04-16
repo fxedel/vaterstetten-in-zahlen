@@ -4,13 +4,50 @@ stimmbezirke <- st_read("data/kommunalwahl2020/stimmbezirke.geojson") %>%
     geometry
   )
 
-parteien <- read_csv("data/kommunalwahl2020/parteien.csv")
+parteien <- read_csv(
+  file = "data/kommunalwahl2020/parteien.csv",
+  col_types = cols(
+    parteiNr = readr::col_factor(),
+    partei = readr::col_factor(),
+    farbe = col_character()
+  )
+)
 
-gemeinderatPersonen <- read_csv("data/kommunalwahl2020/gemeinderatPersonen.csv")
+gemeinderatPersonen <- read_csv(
+  file = "data/kommunalwahl2020/gemeinderatPersonen.csv",
+  col_types = cols(
+    partei = readr::col_factor(levels = levels(parteien$partei)),
+    listenNr = col_integer(),
+    name = col_character()
+  )
+)
 
-gemeinderatErgebnisAllgemein <- read_csv("data/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv")
+gemeinderatErgebnisAllgemein <- read_csv(
+  file = "data/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv",
+  col_types = cols(
+    stimmbezirk = readr::col_factor(),
+    stimmbezirkNr = readr::col_factor(),
+    wahlberechtigte = col_integer(),
+    waehler = col_integer(),
+    ungueltigeStimmzettel = col_integer(),
+    gueltigeStimmzettel = col_integer(),
+    gueltigeStimmen = col_integer(),
+    stimmzettelNurListenkreuz = col_integer(),
+    stimmzettelNurEineListe = col_integer()
+  )
+)
 
-gemeinderatErgebnisNachPartei <- read_csv("data/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv") %>%
+gemeinderatErgebnisNachPartei <- read_csv(
+  file = "data/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv",
+  col_types = cols(
+    stimmbezirk = readr::col_factor(),
+    stimmbezirkNr = readr::col_factor(),
+    partei = readr::col_factor(levels = levels(parteien$partei)),
+    stimmen = col_integer(),
+    stimmzettelNurListenkreuz = col_integer(),
+    stimmzettelNurEineListe = col_integer()
+  )
+) %>%
   # add farbe, parteiNr
   inner_join(parteien, by = "partei") %>%
 
@@ -18,7 +55,16 @@ gemeinderatErgebnisNachPartei <- read_csv("data/kommunalwahl2020/gemeinderatErge
   inner_join(gemeinderatErgebnisAllgemein %>% select(stimmbezirk, gueltigeStimmen), by = "stimmbezirk") %>%
   mutate(stimmenAnteil = stimmen/gueltigeStimmen, gueltigeStimmen = NULL)
 
-gemeinderatErgebnisNachPerson <- read_csv("data/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv") %>%
+gemeinderatErgebnisNachPerson <- read_csv(
+  file = "data/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv",
+  col_types = cols(
+    stimmbezirk = readr::col_factor(),
+    stimmbezirkNr = readr::col_factor(),
+    partei = readr::col_factor(),
+    listenNr = col_integer(),
+    stimmen = col_integer()
+  )
+) %>%
   # add name
   left_join(gemeinderatPersonen, by = c("partei", "listenNr")) %>%
 
@@ -122,30 +168,38 @@ server <- function(id) {
     function(input, output, session) {
 
       output$parteistimmenMap <- renderLeaflet({
-        map <- leaflet(stimmbezirke, options = leafletOptions(
+        leaflet(stimmbezirke, options = leafletOptions(
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
-          addProviderTiles(providers$CartoDB.Positron)
-        isolate(printMapPartei())
-        map
+          addProviderTiles(providers$CartoDB.Positron) %>%
+          printParteistimmenMap() %>%
+          isolate() # updates will be done by leafletProxy, no need to re-render whole map
       })
 
-      printMapPartei <- function() {
+      observe({
+        printParteistimmenMap(leafletProxy("parteistimmenMap"))
+      })
+
+      printParteistimmenMap <- function(leafletObject) {
         partei <- gemeinderatParteien %>% filter(partei == input$parteistimmenMapPartei) %>% head()
         ergebnisPartei <- gemeinderatErgebnisNachPartei %>% filter(partei == input$parteistimmenMapPartei)
         mapData <- stimmbezirke %>% left_join(ergebnisPartei, by = "stimmbezirk")
         pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPartei$stimmenAnteil)))
 
-        leafletProxy("parteistimmenMap", data = mapData) %>%
+        leafletObject %>%
           clearShapes() %>% clearControls() %>%
           addPolygons(
+            data = mapData,
             stroke = FALSE,
             fillOpacity = 0.6,
             label = ~paste0(stimmbezirk, ": ", scales::percent(stimmenAnteil, accuracy = 0.1)),
             fillColor = ~pal(stimmenAnteil)
           ) %>%
-          addLegend("topright", pal = pal, values = ~stimmenAnteil,
+          addLegend("topright",
+            data = mapData,
+            pal = pal,
+            values = ~stimmenAnteil,
             title = NULL,
             labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
             opacity = 0.8,
@@ -153,21 +207,21 @@ server <- function(id) {
           )
       }
 
-      observe({
-        printMapPartei()
-      })
-
       output$personenstimmenMap <- renderLeaflet({
-        map <- leaflet(stimmbezirke, options = leafletOptions(
+        leaflet(options = leafletOptions(
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
-          addProviderTiles(providers$CartoDB.Positron)
-        isolate(printPersonenstimmenMap())
-        map
+          addProviderTiles(providers$CartoDB.Positron) %>%
+          printPersonenstimmenMap() %>%
+          isolate() # updates will be done by leafletProxy, no need to re-render whole map
       })
 
-      printPersonenstimmenMap <- function() {
+      observe({
+        printPersonenstimmenMap(leafletProxy("personenstimmenMap"))
+      })
+
+      printPersonenstimmenMap <- function(leafletObject) {
         parts <- str_split(input$personenstimmenMapPerson, "-", 2, simplify = TRUE)
         personPartei <- parts[1,1]
         personListenNr <- parts[1,2]
@@ -179,25 +233,25 @@ server <- function(id) {
         mapData <- stimmbezirke %>% left_join(ergebnisPerson, by = "stimmbezirk")
         pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(mapData$stimmenAnteilPartei)))
 
-        leafletProxy("personenstimmenMap", data = mapData) %>%
+        leafletObject %>%
           clearShapes() %>% clearControls() %>%
           addPolygons(
+            data = mapData,
             stroke = FALSE,
             fillOpacity = 0.6,
             label = ~paste0(stimmbezirk, ": ", scales::percent(stimmenAnteilPartei, accuracy = 0.1)),
             fillColor = ~pal(stimmenAnteilPartei)
           ) %>%
-          addLegend("topright", pal = pal, values = ~stimmenAnteilPartei,
+          addLegend("topright",
+            data = mapData,
+            pal = pal,
+            values = ~stimmenAnteilPartei,
             title = NULL,
             labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
             opacity = 0.8,
             bins = 5
           )
       }
-
-      observe({
-        printPersonenstimmenMap()
-      })
     }
   )
 }
