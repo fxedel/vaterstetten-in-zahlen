@@ -265,12 +265,14 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(y = ~modulleistungP25 * 1000, type = "scatter", mode = "lines", color = I("transparent"), name = "25%-Perzentil", fill = "tonexty", fillcolor = "rgba(5, 112, 176, 0.3)") %>%
             add_trace(y = ~modulleistungMed * 1000, type = "scatter", mode = "lines", color = I("#0570b0"), name = "Median") %>%
             layout(yaxis = list(exponentformat = "none", ticksuffix = " Wp", rangemode = "tozero")) %>%
+            layout(showlegend = FALSE) %>%
             plotly_axis_spacing(data$year, left = 0, right = 0.02) %>%
             plotly_default_config() %>%
             plotly_hide_axis_titles() %>%
             plotly_build() %>%
             identity()
           },
+        p(HTML("Die Linie entspricht dem Median („mittlere“ Modulleistung), der farbige Bereich dem 25%- bis 75%-Perzentil, also der mittleren Hälfte aller Anlagen.")),
       ),
       box(
         title = "Stecker-Solarmodule („Balkonkraftwerke“)",
@@ -297,6 +299,54 @@ ui <- memoise(omit_args = "request", function(request, id) {
             identity()
         },
         p(HTML("Mehr Infos zu Balkonkraftwerken gibt es im <a href=\"https://muenchen.solar2030.de/balkonkraftwerk/\">Guide von München Solar2030</a>, außerdem gibt es seit Januar 2022 eine Förderung von 25&nbsp;% und maximal 250&nbsp;€ von der <a href=\"https://www.vaterstetten.de/Rathaus/Rathaus/Energie.htm/Seiten/Energieeinspar-Foerderprogramme.html\">Gemeinde Vaterstetten</a>.")),
+      ),
+    ),
+
+    fluidRow(
+      box(
+        title = "Meldeverzug zwischen Inbetriebnahme und MaStR-Registrierung",
+        {
+          data <- mastr %>%
+            filter(status == "In Betrieb") %>%
+            filter(inbetriebnahme >= "2019-02-01") %>% 
+            filter(inbetriebnahme <= registrierungMaStR) %>%
+            mutate(
+              registrierungsDelay = as.integer(registrierungMaStR - inbetriebnahme)
+            ) %>%
+            group_by(month = floor_date(inbetriebnahme, unit = "month")) %>%
+            summarise(
+              anlagen = n(),
+              delayMin = min(registrierungsDelay),
+              delayP25 = quantile(registrierungsDelay, 0.25),
+              delayMedian = median(registrierungsDelay),
+              delayP75 = quantile(registrierungsDelay, 0.75),
+              delayMax = max(registrierungsDelay),
+              delaySd = sd(registrierungsDelay),
+            ) %>%
+            mutate(
+              limit = as.integer(Sys.Date() - month)
+            ) %>%
+            mutate(
+              limit = ifelse(limit > max(delayMax), NA, limit)
+            )
+
+          plot_ly(data, x = ~month, yhoverformat = ",d", height = 350) %>%
+            add_trace(y = ~delayMin, type = "scatter", mode = "lines", color = I("transparent"), name = "Min") %>%
+            add_trace(y = ~delayMax, type = "scatter", mode = "lines", color = I("transparent"), name = "Max", fill = "tonexty", fillcolor = "rgba(5, 112, 176, 0.2)") %>%
+            add_trace(y = ~delayP25, type = "scatter", mode = "lines", color = I("transparent"), name = "75%-Perzentil") %>%
+            add_trace(y = ~delayP75, type = "scatter", mode = "lines", color = I("transparent"), name = "25%-Perzentil", fill = "tonexty", fillcolor = "rgba(5, 112, 176, 0.2)") %>%
+            add_trace(y = ~delayMedian, type = "scatter", mode = "lines", color = I("#0570b0"), name = "Median") %>%
+            add_trace(y = ~limit, type = "scatter", mode = "lines", color = I("#ff0000"), name = "Limit", line = list(dash = "dot")) %>%
+            layout(yaxis = list(exponentformat = "none", ticksuffix = " Tage", rangemode = "tozero")) %>%
+            layout(showlegend = FALSE) %>%
+            plotly_axis_spacing(data$month, left = 0, right = 0.02) %>%
+            plotly_default_config() %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        },
+        p(HTML("Dargestellt wird der Abstand zwischen Inbetriebnahme und Registrierung im Marktstammdatenregister, gruppiert nach Monat der Inbetriebnahme. Die Linie entspricht dem Median („mittlerer“ Abstand), der dunklere Bereich dem 25%- bis 75%-Perzentil und der hellere Bereich allen Werten. Es werden nur Inbetriebnahmen seit dem 1. Februar 2019 berücksichtigt, da erst seit diesem Zeitpunkt die Registrierung im MaStR möglich und innerhalb eines Monats nach Inbetriebnahme auch verpflichtend ist. Die rote Linie stellt den maximal möglichen Meldeverzug dar, der durch das heutige Datum gegeben ist.")),
+        p(HTML("Obwohl der Meldeverzug 2021 augenscheinlich deutlich geringer wurde, kann dies auch einfach daran liegen, dass Anlagen mit einem hohen Meldeverzug naturgemäß noch nicht eingetragen sind – es bleibt abzuwarten, wie viele Anlagen in Zukunft noch nachgetragen werden.")),
       ),
     ),
 
