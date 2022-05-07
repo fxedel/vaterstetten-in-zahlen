@@ -474,7 +474,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3126434,SEE953900205405,E2104101S000000000000083475700001,In Betrieb,2020-06-08,2016-09-27,,,,,GHD,85599,Parsdorf,,,,,false,gebaeude,38,Ost-West,9.88,9.88,70%,false,Teileinspeisung,false
 3672619,SEE953645782834,E2104101S000000000000084100100001,In Betrieb,2021-01-27,2016-10-10,,,Photovoltaik LP,Auer Baustoffe GmbH & Co. KG,GHD,85599,Parsdorf,,,,,true,gebaeude,115,Süd,29.9,29.9,ohne,false,Teileinspeisung,false
 2387624,SEE954928814624,,In Betrieb,2019-09-29,2016-10-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Ost,5.72,5.72,70%,false,Teileinspeisung,false
-3619897,SEE912786958621,,In Betrieb,2020-11-07,2016-11-22,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,18,Süd-Ost,5.67,5.0,70%,false,Teileinspeisung,false
+3619897,SEE912786958621,,In Betrieb,2020-11-07,2016-11-22,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,18,Süd-Ost,5.67,5.0,70%,false,Teileinspeisung,false
 3339753,SEE954065404412,E2104101S000000000000085233400001,In Betrieb,2020-08-13,2017-01-10,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,36,Süd,9.72,9.72,70%,false,Teileinspeisung,false
 1914570,SEE999147042915,E2104101S000000000000085831400001,In Betrieb,2019-03-07,2017-02-02,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,18,Ost,5.886,5.886,70%,false,Teileinspeisung,false
 3895850,SEE907119992847,E2104101S000000000000086403900001,In Betrieb,2020-12-16,2017-03-03,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,22,Süd,5.28,5.28,ohne,false,Teileinspeisung,false
@@ -857,7 +857,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4763324,SEE912971808878,,In Betrieb,2021-11-12,2021-10-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,44,,16.5,16.0,70%,false,Teileinspeisung,false
 4764045,SEE925989209629,,In Betrieb,2021-11-12,2021-10-12,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,14,Ost,5.32,5.0,70%,false,Teileinspeisung,false
 4699063,SEE960613088515,,In Betrieb,2021-10-13,2021-10-13,,,PV-Anlage Weißenfeld,3E Eigene Erneuerbare Energien eG,oeffentlich,85622,Weißenfeld,,,,,true,gebaeude,60,Süd-Ost,22.5,22.5,70%,false,Volleinspeisung,false
-4916348,SEE932835023254,,In Betrieb,2022-02-24,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
+4916348,SEE932835023254,,In Betrieb,2022-02-24,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
 4891493,SEE977251132173,,In Betrieb,2022-03-10,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
 4739688,SEE944530694981,,In Betrieb,2021-11-01,2021-10-27,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd,7.11,6.0,70%,false,Teileinspeisung,false
 4742868,SEE903400521147,,In Betrieb,2021-11-08,2021-10-27,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,11,Süd,4.18,4.0,70%,false,Teileinspeisung,false
@@ -909,6 +909,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5020352,SEE981887048791,,In Betrieb,2022-04-24,2022-04-24,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.74,0.56,ohne,false,Teileinspeisung,false
 4479221,SEE991149831160,,In Betrieb,2022-04-28,2022-04-27,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,ohne,false,Teileinspeisung,false
 5039654,SEE948520663780,,In Betrieb,2022-05-03,2022-05-01,,,,,sonstige,85598,Baldham,,,,,false,stecker,1,Süd,0.36,0.3,ohne,false,,false
+5045960,SEE961660498166,,In Betrieb,2022-05-06,2022-05-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Ost-West,4.48,4.48,ohne,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung,false
 4741872,SEE906744921635,,In Planung,2021-11-02,,2022-02-28,,,,haushalt,85598,Baldham,,,,,false,gebaeude,24,Süd,9.12,9.12,70%,false,Teileinspeisung,false
