@@ -125,7 +125,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2747191,SEE947984457621,E21041011000000000000379336400000,In Betrieb,2020-02-01,2009-07-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,18,Süd,3.3,3.3,ohne,false,Volleinspeisung,false
 2747659,SEE905241726316,E21041011000000000000379336700000,In Betrieb,2020-02-01,2009-07-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,4.4,3.8,ohne,false,Volleinspeisung,false
 2763202,SEE999418850638,E21041011000000000000379336200000,In Betrieb,2020-02-05,2009-07-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,20,Süd,2.96,2.3,ohne,false,Volleinspeisung,false
-5041054,SEE929154916718,E21041011000000000000379162600000,In Betrieb,2022-05-04,2009-07-09,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,28,Süd,5.04,4.4,ohne,false,Volleinspeisung,false
+5041054,SEE929154916718,E21041011000000000000379162600000,In Betrieb,2022-05-04,2009-07-09,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,28,Süd,5.04,4.4,ohne,false,Volleinspeisung,false
 3268474,SEE983651055578,E21041011000000000000379139600000,In Betrieb,2020-07-22,2009-07-20,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,38,Süd,6.84,6.0,70%,false,Volleinspeisung,false
 3932012,SEE969332435020,E21041011000000000000379073700000,In Betrieb,2020-12-21,2009-07-24,,,,,GHD,85646,Neufarn,,,,,true,gebaeude,55,Süd,12.1,12.1,ohne,false,Volleinspeisung,false
 4283945,SEE941415365165,,In Betrieb,2021-01-29,2009-07-27,,,,,landwirtschaft,85646,Neufarn,,,,,true,gebaeude,,Süd,29.67,25.0,ohne,false,Volleinspeisung,false
@@ -918,4 +918,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4826298,SEE990252312757,,In Planung,2021-12-19,,2022-04-25,,,,haushalt,85598,Baldham,,,,,false,gebaeude,,Süd,24.7,20.0,ohne,false,Teileinspeisung,false
 5033983,SEE902727337660,,In Planung,2022-05-01,,2022-05-11,,,,haushalt,85598,Baldham,,,,,false,gebaeude,35,Süd,13.125,8.2,70%,false,Teileinspeisung,false
 5044004,SEE992812688098,,In Planung,2022-05-05,,2022-06-01,,,,haushalt,85598,Baldham,,,,,false,gebaeude,30,Süd,9.9,9.2,70%,false,Teileinspeisung,false
+5048586,SEE950668920601,,In Planung,2022-05-09,,2022-06-10,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,5.68,5.68,70%,false,Teileinspeisung,false
+5048649,SEE976382360974,,In Planung,2022-05-09,,2022-06-10,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,5.68,5.68,70%,false,Teileinspeisung,false
+5048680,SEE989242517883,,In Planung,2022-05-09,,2022-06-10,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,9,Süd,3.195,3.0,70%,false,Teileinspeisung,false
 4997662,SEE904857462137,,In Planung,2022-04-08,,2022-08-15,,,,haushalt,85598,Baldham,,,,,false,gebaeude,10,Süd,3.75,3.7,70%,false,Teileinspeisung,false
