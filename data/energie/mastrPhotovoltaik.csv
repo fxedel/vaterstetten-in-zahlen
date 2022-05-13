@@ -385,7 +385,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4199493,SEE963936392833,E2104101S160000000000049597200001,In Betrieb,2021-01-21,2012-12-21,,,B229108,Bernhard Eschbaumer,GHD,85646,Neufarn,Purfinger Straße,16,48.144899,11.819863,true,gebaeude,,Süd-West,85.0,80.0,sonstige,false,Teileinspeisung,false
 4376906,SEE915961285949,,In Betrieb,2021-03-14,2012-12-22,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,10,Süd,3.6,3.6,ohne,false,Volleinspeisung,false
 1954641,SEE928543618516,E2104101S160000000000048131800001,In Betrieb,2019-03-25,2012-12-27,,,3E-PV-Kinderkrippe Vaterstetten,3E-eG Eigene Erneuerbare Energie Genossenschaft,oeffentlich,85591,Vaterstetten,,,,,true,gebaeude,,Süd,29.89,29.89,ohne,false,Teileinspeisung,false
-5052021,SEE988814027140,E2104101S160000000000042604400001,In Betrieb,2022-05-10,2013-01-14,,,,,sonstige,85598,Baldham,,,,,false,gebaeude,67,Süd,16.42,16.42,,false,,false
+5052021,SEE988814027140,E2104101S160000000000042604400001,In Betrieb,2022-05-10,2013-01-14,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,67,Süd,16.42,16.42,,false,,false
 3979456,SEE924092884587,E2104101S160000000000043547100001,In Betrieb,2020-12-28,2013-02-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,1,Süd,5.5,5.5,ohne,false,Teileinspeisung,false
 3269401,SEE905886358217,E2104101S160000000000045634600001,In Betrieb,2020-07-22,2013-03-19,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,13,Süd,3.185,3.0,ohne,false,Teileinspeisung,false
 3452933,SEE943537831795,E2104101S160000000000046487700001,In Betrieb,2020-09-24,2013-04-16,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,12,Süd,3.0,3.0,70%,false,Teileinspeisung,false
@@ -419,7 +419,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3315530,SEE988127791226,E2104101S160000000000058301600001,In Betrieb,2020-08-04,2014-01-10,,,,,landwirtschaft,85598,Baldham,Parsdorfer Straße,5,48.115552,11.795619,false,gebaeude,204,Ost-West,49.98,49.8,ohne,false,Teileinspeisung,false
 5051297,SEE974641829989,E2104101S160000000000057503000001,In Betrieb,2022-05-10,2014-02-28,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,38,Süd,10.26,10.26,,false,,false
 5051955,SEE997040097452,E2104101S160000000000057495800001,In Betrieb,2022-05-10,2014-02-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,70,Süd,18.9,17.0,,false,,false
-5052099,SEE986398911220,E2104101S160000000000070763400001,In Betrieb,2022-05-10,2014-02-28,,,,,sonstige,85598,Baldham,,,,,false,gebaeude,32,Süd,8.0,5.6,,false,,false
+5052099,SEE986398911220,E2104101S160000000000070763400001,In Betrieb,2022-05-10,2014-02-28,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,32,Süd,8.0,5.6,,false,,false
 3405054,SEE938234009059,E2104101S160000000000058444300001,In Betrieb,2020-09-06,2014-03-12,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,42,Süd,9.45,9.45,70%,false,Teileinspeisung,false
 3337769,SEE991633960307,E2104101S160000000000057885400001,In Betrieb,2020-08-12,2014-03-25,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Süd-West,5.39,5.39,70%,false,Teileinspeisung,false
 3985850,SEE919013607093,E2104101S160000000000060144200001,In Betrieb,2020-12-28,2014-03-26,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,West,6.36,6.0,70%,false,Teileinspeisung,false
@@ -916,6 +916,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5039654,SEE948520663780,,In Betrieb,2022-05-03,2022-05-01,,,,,sonstige,85598,Baldham,,,,,false,stecker,1,Süd,0.36,0.3,ohne,false,,false
 5045960,SEE961660498166,,In Betrieb,2022-05-06,2022-05-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Ost-West,4.48,4.48,ohne,false,Teileinspeisung,false
 5047460,SEE993610671640,,In Betrieb,2022-05-08,2022-05-04,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd,6.75,6.75,70%,false,Teileinspeisung,false
+5055987,SEE982384454054,,In Betrieb,2022-05-12,2022-05-06,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung,false
 4741872,SEE906744921635,,In Planung,2021-11-02,,2022-02-28,,,,haushalt,85598,Baldham,,,,,false,gebaeude,24,Süd,9.12,9.12,70%,false,Teileinspeisung,false
