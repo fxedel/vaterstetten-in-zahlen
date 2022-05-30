@@ -872,7 +872,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4814088,SEE968799405614,,In Betrieb,2021-12-12,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,56,Ost-West,21.56,16.0,70%,false,Teileinspeisung,false
 4738294,SEE933549991891,,In Betrieb,2021-11-01,2021-10-29,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,24,,8.88,8.0,70%,false,Teileinspeisung,false
 4829632,SEE912956879848,,In Betrieb,2021-12-21,2021-10-29,,,,,GHD,85598,Baldham,,,,,true,gebaeude,36,Süd,11.88,11.88,70%,false,Teileinspeisung,false
-5024810,SEE999605687825,,In Betrieb,2022-04-26,2021-10-29,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,29,Süd-Ost,10.88,8.0,70%,false,Teileinspeisung,false
+5024810,SEE999605687825,,In Betrieb,2022-04-26,2021-10-29,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,29,Süd-Ost,10.88,8.0,70%,false,Teileinspeisung,false
 4753745,SEE974165321044,,In Betrieb,2021-11-08,2021-11-08,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Süd,8.36,8.36,70%,false,Teileinspeisung,false
 4753861,SEE982442567870,,In Betrieb,2021-11-08,2021-11-08,,,,,haushalt,85646,Purfing,,,,,true,gebaeude,15,Süd,5.625,5.0,70%,false,Teileinspeisung,false
 4772338,SEE946521766189,,In Betrieb,2021-11-17,2021-11-08,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,30,Ost-West,11.4,11.4,70%,false,Teileinspeisung,false
@@ -932,6 +932,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5068073,SEE957020497054,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung,false
 5068091,SEE994277902597,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,9,Süd,3.195,3.0,70%,false,Teileinspeisung,false
 5068116,SEE930608377047,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,14,Süd-Ost,4.97,4.97,70%,false,Teileinspeisung,false
+5089304,SEE966454687979,,In Betrieb,2022-05-30,2022-04-29,,,,,haushalt,85646,Purfing,,,,,false,gebaeude,10,Süd,3.55,3.55,70%,false,Teileinspeisung,false
 5039654,SEE948520663780,,In Betrieb,2022-05-03,2022-05-01,,,,,sonstige,85598,Baldham,,,,,false,stecker,1,Süd,0.36,0.3,ohne,false,,false
 5045960,SEE961660498166,,In Betrieb,2022-05-06,2022-05-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Ost-West,4.48,4.48,ohne,false,Teileinspeisung,false
 5067141,SEE926163032613,,In Betrieb,2022-05-17,2022-05-05,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,22,Ost,8.25,8.0,70%,false,Teileinspeisung,false
