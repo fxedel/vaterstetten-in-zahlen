@@ -170,6 +170,9 @@ def apply_manual_fixes(features: List[Feature]):
       elif datum == '2022-04-11':
         replace_attr_value(feature, 'I3_Divers', 18, 19)
         replace_attr_value(feature, 'I3_SummeGeschlecht', 55484, attrs['I3_SummeGeschlecht']-18+19)
+      elif datum == '2022-05-30':
+        replace_attr_value(feature, 'I2_Alter30_40', 8148, 8158)
+        replace_attr_value(feature, 'I2_SummeAlter', 60925, attrs['I2_SummeAlter']-8148+8158)
 
 
     elif einrichtung == 'Praxis':
