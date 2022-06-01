@@ -237,7 +237,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 5001106,SEE928373098939,In Betrieb,2022-04-11,2022-04-07,,,,,85598,Baldham,,,,,false,Lithium,15.12,15.12,15.12,Teileinspeisung,false
 5029782,SEE938099336529,In Betrieb,2022-04-28,2022-04-14,,,,,85591,Vaterstetten,,,,,false,Lithium,8.76,8.76,12.8,Teileinspeisung,false
 4479240,SEE986254476528,In Betrieb,2022-04-28,2022-04-27,,,,,85646,Neufarn,,,,,false,Lithium,8.16,8.16,11.04,Teileinspeisung,false
-5089509,SEE961705064684,In Betrieb,2022-05-30,2022-04-29,,,,,85646,Purfing,,,,,false,Lithium,4.6,3.68,10.0,Teileinspeisung,false
+5089509,SEE961705064684,In Betrieb,2022-05-30,2022-04-29,,,,,85646,Purfing,,,,,false,Lithium,4.6,4.6,10.0,Teileinspeisung,false
 5041841,SEE900453104778,In Betrieb,2022-05-04,2022-05-04,,,,,85591,Vaterstetten,,,,,false,Lithium,8.0,8.0,10.0,Teileinspeisung,false
 5072053,SEE987680979140,In Betrieb,2022-05-19,2022-05-05,,,,,85598,Baldham,,,,,false,Lithium,6.24,6.24,8.0,Teileinspeisung,false
 5079036,SEE965899469713,In Betrieb,2022-05-23,2022-05-10,,,,,85599,Parsdorf,,,,,false,Lithium,4.6,4.6,10.0,Teileinspeisung,false
@@ -245,6 +245,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 5059374,SEE983453851941,In Betrieb,2022-05-13,2022-05-12,,,,,85598,Baldham,,,,,false,Lithium,9.0,9.0,17.55,Teileinspeisung,false
 5033993,SEE997013053751,In Betrieb,2022-05-13,2022-05-13,,,,,85598,Baldham,,,,,false,Lithium,10.0,8.2,10.0,Teileinspeisung,true
 5044236,SEE938847297850,In Betrieb,2022-05-24,2022-05-24,,,,,85598,Baldham,,,,,false,Lithium,3.75,3.75,7.5,Teileinspeisung,false
+5096388,SEE953950643455,In Betrieb,2022-06-01,2022-05-31,,,,,85622,Weißenfeld,,,,,false,Lithium,5.0,5.0,10.0,Teileinspeisung,false
 4503878,SEE947397967991,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,Lithium,10.2,10.2,11.04,Teileinspeisung,false
 4739715,SEE914273666811,In Planung,2021-11-02,,2022-02-28,,,,85598,Baldham,,,,,false,Lithium,18.0,4.5,9.75,Teileinspeisung,true
 5009186,SEE996950590206,In Planung,2022-04-15,,2022-05-31,,,,85598,Baldham,,,,,false,Lithium,13.2,13.2,26.4,Teileinspeisung,false
