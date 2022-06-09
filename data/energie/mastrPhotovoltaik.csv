@@ -591,7 +591,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2209610,SEE983343950655,E2104101S000000000000104556900001,In Betrieb,2020-08-14,2019-06-27,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,1,Süd-West,2.2,1.6,70%,false,Teileinspeisung,false
 2198539,SEE903082240794,,In Betrieb,2019-07-04,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,9,Ost,2.52,2.2,70%,false,Teileinspeisung,false
 2213074,SEE963013954404,,In Betrieb,2019-07-10,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,17,West,5.695,5.0,70%,false,Teileinspeisung,false
-2264587,SEE902561528330,,In Betrieb,2019-08-03,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Ost-West,5.6,4.6,70%,false,Teileinspeisung,false
+2264587,SEE902561528330,,In Betrieb,2019-08-03,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost-West,5.6,4.6,70%,false,Teileinspeisung,false
 2273275,SEE990119753099,,In Betrieb,2019-08-07,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,15,Ost-West,4.2,3.5,70%,false,Teileinspeisung,false
 2295959,SEE986620371556,E2104101S000000000000102650400001,In Betrieb,2019-08-22,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,32,Ost-West,8.96,7.0,70%,false,Teileinspeisung,false
 2318232,SEE953749100565,,In Betrieb,2019-08-28,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,9,Ost-West,2.52,2.2,70%,false,Teileinspeisung,false
@@ -840,7 +840,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4620162,SEE992804122982,,In Betrieb,2021-09-02,2021-07-19,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,27,Süd,9.99,9.99,70%,false,Teileinspeisung,false
 4574455,SEE910129023401,,In Betrieb,2021-07-21,2021-07-20,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,17,Süd,6.8,4.6,70%,false,Teileinspeisung,false
 4782657,SEE928463109941,,In Betrieb,2021-11-23,2021-07-21,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,57,Süd-West,22.23,22.23,70%,false,Teileinspeisung,false
-4783064,SEE961489349601,,In Betrieb,2021-11-23,2021-07-21,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,33,Nord-Ost,12.87,9.0,70%,false,Teileinspeisung,false
+4783064,SEE961489349601,,In Betrieb,2021-11-23,2021-07-21,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,33,Nord-Ost,12.87,9.0,70%,false,Teileinspeisung,false
 4659912,SEE980370860131,,In Betrieb,2021-09-22,2021-07-30,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd-Ost,10.65,10.0,70%,false,Teileinspeisung,false
 4659986,SEE985924102071,,In Betrieb,2021-09-22,2021-07-30,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,30,Süd-Ost,10.65,10.0,70%,false,Teileinspeisung,false
 4667316,SEE957073068690,,In Betrieb,2021-09-29,2021-07-30,,,,,landwirtschaft,85599,Hergolding,Waldstraße,16,48.125792,11.794757,false,gebaeude,799,West,299.625,299.625,ohne,false,Teileinspeisung,false
@@ -852,7 +852,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4633835,SEE987431578967,,In Betrieb,2021-09-05,2021-09-05,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,15,Süd,4.95,4.95,70%,false,Teileinspeisung,false
 4650849,SEE991238293732,,In Betrieb,2021-09-16,2021-09-08,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,15,Ost,5.475,5.475,70%,false,Teileinspeisung,false
 4719593,SEE926283433864,,In Betrieb,2021-10-22,2021-09-09,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,19,Süd-West,6.08,6.0,70%,false,Teileinspeisung,false
-4979986,SEE956952860288,,In Betrieb,2022-03-30,2021-09-21,,,,,landwirtschaft,85646,Purfing,,,,,false,gebaeude,24,Süd,7.92,7.92,70%,false,Teileinspeisung,false
+4979986,SEE956952860288,,In Betrieb,2022-03-30,2021-09-21,,,,,landwirtschaft,85646,Purfing,,,,,true,gebaeude,24,Süd,7.92,7.92,70%,false,Teileinspeisung,false
 4692633,SEE937600631962,,In Betrieb,2021-10-11,2021-09-22,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd-Ost,9.0,9.0,70%,false,Teileinspeisung,false
 4670369,SEE989400405656,,In Betrieb,2021-09-28,2021-09-23,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,34,Ost,13.6,10.0,70%,false,Teileinspeisung,false
 4680396,SEE976885731325,,In Betrieb,2021-10-04,2021-09-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,25,Nord-Ost,9.375,8.2,70%,false,Teileinspeisung,false
