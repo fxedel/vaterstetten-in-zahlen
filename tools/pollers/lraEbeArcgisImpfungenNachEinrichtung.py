@@ -173,6 +173,11 @@ def apply_manual_fixes(features: List[Feature]):
       elif datum == '2022-05-30':
         replace_attr_value(feature, 'I2_Alter30_40', 8148, 8158)
         replace_attr_value(feature, 'I2_SummeAlter', 60925, attrs['I2_SummeAlter']-8148+8158)
+      elif datum == '2022-06-03':
+        replace_attr_value(feature, 'Erstimpfungen_proTyp', 61287, 62287)
+        replace_attr_value(feature, 'Impfungen_proTyp', 181203, attrs['Impfungen_proTyp']-61287+62287)
+        replace_attr_value(feature, 'I1_Weiblich', 31782, 32782)
+        replace_attr_value(feature, 'I1_SummeGeschlecht', 61287, attrs['I1_SummeGeschlecht']-31782+32782)
 
 
     elif einrichtung == 'Praxis':
@@ -224,6 +229,7 @@ def check_cumulative_plausability(features: List[Feature]):
     'Erstimpfungen_proTyp',
     'Zweitimpfungen_proTyp',
     'Drittimpfungen_proTyp',
+    'Viertimpfungen_proTyp',
     'Impfungen_proTyp',
     'I1_Weiblich',
     'I1_Maennlich',
