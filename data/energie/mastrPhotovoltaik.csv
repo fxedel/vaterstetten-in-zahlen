@@ -201,7 +201,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2225234,SEE918094453667,E21041011000000000000388003500000,In Betrieb,2019-07-16,2010-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,5.16,4.6,ohne,false,Volleinspeisung,false
 3048469,SEE931726193816,E21041011000000000000387104600000,In Betrieb,2020-05-12,2010-06-10,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Süd-Ost,5.94,5.94,ohne,false,Volleinspeisung,false
 4103073,SEE912322509317,,In Betrieb,2021-01-11,2010-06-14,,,,,landwirtschaft,85646,Neufarn,Münchener Str.,1,48.147717,11.822611,true,gebaeude,,Süd,51.84,51.0,ohne,false,Volleinspeisung,false
-3079237,SEE936076574322,E21041011000000000000389064700000,In Betrieb,2020-05-24,2010-06-16,,,,,GHD,85622,Weißenfeld,,,,,true,gebaeude,149,Süd-Ost,32.4,0.217,ohne,false,Volleinspeisung,false
+3079237,SEE936076574322,E21041011000000000000389064700000,In Betrieb,2020-05-24,2010-06-16,,,,,GHD,85622,Weißenfeld,Gut Ammerthal,7,48.143856,11.76177,false,gebaeude,149,Süd-Ost,32.4,32.4,ohne,false,Volleinspeisung,false
 3180302,SEE932123338893,E21041011000000000000388089600000,In Betrieb,2020-06-25,2010-06-16,,,,,landwirtschaft,85591,Vaterstetten,Baldhamer Straße,99,48.112,11.782651,true,gebaeude,2094,Ost-West,360.0,360.0,sonstige,false,Volleinspeisung,false
 3623237,SEE949283138096,E21041011000000000000395757600000,In Betrieb,2020-11-08,2010-06-17,,,Schule,natürliche Person (ABR945820683838),oeffentlich,85599,Parsdorf,,,,,true,gebaeude,119,Süd-Ost,23.13,23.13,70%,false,Volleinspeisung,false
 4087391,SEE995311847492,E21041011000000000000387968900000,In Betrieb,2021-01-09,2010-06-18,,,,,haushalt,85646,Purfing,,,,,false,gebaeude,30,Süd,5.55,5.55,ohne,false,Volleinspeisung,false
@@ -866,7 +866,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4764045,SEE925989209629,,In Betrieb,2021-11-12,2021-10-12,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,14,Ost,5.32,5.0,70%,false,Teileinspeisung,false
 4699063,SEE960613088515,,In Betrieb,2021-10-13,2021-10-13,,,PV-Anlage Weißenfeld,3E Eigene Erneuerbare Energien eG,oeffentlich,85622,Weißenfeld,,,,,true,gebaeude,60,Süd-Ost,22.5,22.5,70%,false,Volleinspeisung,false
 4916348,SEE932835023254,,In Betrieb,2022-02-24,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
-4891493,SEE977251132173,,In Betrieb,2022-03-10,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
+4891493,SEE977251132173,,In Betrieb,2022-03-10,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
 4739688,SEE944530694981,,In Betrieb,2021-11-01,2021-10-27,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd,7.11,6.0,70%,false,Teileinspeisung,false
 4732371,SEE993869830621,,In Betrieb,2021-10-28,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Ost-West,9.75,9.75,,false,Teileinspeisung,false
 4814088,SEE968799405614,,In Betrieb,2021-12-12,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,56,Ost-West,21.56,16.0,70%,false,Teileinspeisung,false
@@ -950,7 +950,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5101174,SEE936438240445,,In Betrieb,2022-06-04,2022-06-01,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.4,0.4,ohne,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung,false
-4826298,SEE990252312757,,In Planung,2021-12-19,,2022-04-25,,,,haushalt,85598,Baldham,,,,,false,gebaeude,,Süd,24.7,20.0,ohne,false,Teileinspeisung,false
 5084598,SEE901578530435,,In Planung,2022-05-26,,2022-06-30,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,25,Süd-West,9.5,9.5,70%,false,Teileinspeisung,false
+4826298,SEE990252312757,,In Planung,2021-12-19,,2022-07-31,,,,haushalt,85598,Baldham,,,,,false,gebaeude,,Süd,24.7,20.0,ohne,false,Teileinspeisung,false
 5113063,SEE999383515082,,In Planung,2022-06-11,,2022-08-01,,,,haushalt,85598,Baldham,,,,,false,gebaeude,23,Süd,9.2,8.8,70%,false,Teileinspeisung,false
 4997662,SEE904857462137,,In Planung,2022-04-08,,2022-08-15,,,,haushalt,85598,Baldham,,,,,false,gebaeude,10,Süd,3.75,3.7,70%,false,Teileinspeisung,false
