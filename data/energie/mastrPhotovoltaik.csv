@@ -867,7 +867,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4699063,SEE960613088515,,In Betrieb,2021-10-13,2021-10-13,,,PV-Anlage Weißenfeld,3E Eigene Erneuerbare Energien eG,oeffentlich,85622,Weißenfeld,,,,,true,gebaeude,60,Süd-Ost,22.5,22.5,70%,false,Volleinspeisung,false
 4916348,SEE932835023254,,In Betrieb,2022-02-24,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
 4891493,SEE977251132173,,In Betrieb,2022-03-10,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
-4741872,SEE906744921635,,In Betrieb,2022-06-02,2021-10-25,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,24,Süd,9.12,9.12,70%,false,Teileinspeisung,false
+4741872,SEE906744921635,,In Betrieb,2022-06-02,2021-10-25,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,9.12,9.12,70%,false,Teileinspeisung,false
 4739688,SEE944530694981,,In Betrieb,2021-11-01,2021-10-27,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd,7.11,6.0,70%,false,Teileinspeisung,false
 4732371,SEE993869830621,,In Betrieb,2021-10-28,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Ost-West,9.75,9.75,,false,Teileinspeisung,false
 4814088,SEE968799405614,,In Betrieb,2021-12-12,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,56,Ost-West,21.56,16.0,70%,false,Teileinspeisung,false
@@ -916,6 +916,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5001010,SEE939866085589,,In Betrieb,2022-04-11,2022-04-07,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,44,Süd,14.52,14.52,70%,false,Teileinspeisung,false
 5030764,SEE994091746810,,In Betrieb,2022-04-28,2022-04-14,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
 5037543,SEE992844653774,,In Betrieb,2022-05-03,2022-04-14,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
+5067964,SEE946345685628,,In Betrieb,2022-05-18,2022-04-14,,,,,GHD,85598,Baldham,,,,,false,gebaeude,8,Süd,2.84,2.84,ohne,false,Teileinspeisung,false
 5058287,SEE988929520154,,In Betrieb,2022-05-13,2022-04-19,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd,0.31,0.3,ohne,false,Teileinspeisung,false
 5022179,SEE917374999185,,In Betrieb,2022-04-25,2022-04-21,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Süd-West,8.69,8.5,70%,false,Teileinspeisung,false
 5020352,SEE981887048791,,In Betrieb,2022-04-24,2022-04-24,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.74,0.56,ohne,false,Teileinspeisung,false
@@ -927,7 +928,6 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5067833,SEE955962487041,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd-Ost,5.68,5.68,70%,false,Teileinspeisung,false
 5067869,SEE969384732863,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd-Ost,5.68,5.68,70%,false,Teileinspeisung,false
 5067910,SEE918617561497,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,8,Süd,2.84,2.84,70%,false,Teileinspeisung,false
-5067964,SEE946345685628,,In Betrieb,2022-05-18,2022-04-28,,,,,GHD,85598,Baldham,,,,,false,gebaeude,8,Süd,2.84,2.84,ohne,false,Teileinspeisung,false
 5067996,SEE997888276064,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,11,Süd,3.905,3.905,70%,false,Teileinspeisung,false
 5068035,SEE929050182439,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,12,Süd,4.26,4.0,70%,false,Teileinspeisung,false
 5068057,SEE922165155558,,In Betrieb,2022-05-18,2022-04-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung,false
