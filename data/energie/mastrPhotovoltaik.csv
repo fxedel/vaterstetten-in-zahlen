@@ -698,6 +698,8 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4063282,SEE903060627838,,In Betrieb,2021-01-06,2020-06-05,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,30,Süd,9.75,9.75,70%,false,Teileinspeisung,false
 4326967,SEE915920084514,,In Betrieb,2021-02-08,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,5.6,4.6,70%,false,Teileinspeisung,false
 4385784,SEE955238850128,,In Betrieb,2021-03-13,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.975,8.0,70%,false,Teileinspeisung,false
+5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
+5143854,SEE974607330917,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 11,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,100,Ost,28.5,27.6,70%,false,Volleinspeisung,false
 3115497,SEE914199824234,,In Betrieb,2020-07-15,2020-06-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,31,Süd-West,9.765,6.0,70%,false,Teileinspeisung,false
 3387220,SEE963853857286,,In Betrieb,2020-08-31,2020-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Süd,5.61,4.6,70%,false,Teileinspeisung,false
 3381243,SEE966929022083,,In Betrieb,2020-09-21,2020-06-09,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,45,Süd-Ost,14.85,14.85,70%,false,Teileinspeisung,false
@@ -868,7 +870,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4916348,SEE932835023254,,In Betrieb,2022-02-24,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
 4891493,SEE977251132173,,In Betrieb,2022-03-10,2021-10-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,14,Süd-Ost,5.46,5.46,70%,false,Teileinspeisung,false
 4741872,SEE906744921635,,In Betrieb,2022-06-02,2021-10-25,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,9.12,9.12,70%,false,Teileinspeisung,false
-4739688,SEE944530694981,,In Betrieb,2021-11-01,2021-10-27,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd,7.11,6.0,70%,false,Teileinspeisung,false
+4739688,SEE944530694981,,In Betrieb,2021-11-01,2021-10-27,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,18,Süd,7.11,6.0,70%,false,Teileinspeisung,false
 4732371,SEE993869830621,,In Betrieb,2021-10-28,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Ost-West,9.75,9.75,,false,Teileinspeisung,false
 4814088,SEE968799405614,,In Betrieb,2021-12-12,2021-10-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,56,Ost-West,21.56,16.0,70%,false,Teileinspeisung,false
 4738294,SEE933549991891,,In Betrieb,2021-11-01,2021-10-29,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,24,,8.88,8.0,70%,false,Teileinspeisung,false
