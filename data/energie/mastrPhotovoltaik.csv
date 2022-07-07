@@ -506,7 +506,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3320895,SEE971235544037,E2104101S000000000000093404300001,In Betrieb,2020-08-06,2018-01-08,,,,,haushalt,85622,Weißenfeld,,,,,true,gebaeude,19,Süd,5.4,5.4,70%,false,Teileinspeisung,false
 3077142,SEE962166785132,E21041011000000000000248878600001,In Betrieb,2020-05-23,2018-01-20,,,,,sonstige,85646,Neufarn,,,,,true,gebaeude,12,Süd,3.6,3.6,ohne,false,Teileinspeisung,false
 4700483,SEE927766882841,E21041011000000000000307831700001,In Betrieb,2021-10-14,2018-01-23,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,14,Süd-Ost,4.41,4.41,70%,false,Teileinspeisung,false
-3433158,SEE937212073297,E21041011000000000000283672900001,In Betrieb,2020-09-17,2018-01-29,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,,Süd,9.0,9.0,70%,false,Teileinspeisung,false
+3433158,SEE937212073297,E21041011000000000000283672900001,In Betrieb,2020-09-17,2018-01-29,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,,Süd,9.0,9.0,70%,false,Teileinspeisung,false
 3328774,SEE996259166652,E2104101S000000000000093671500001,In Betrieb,2020-08-09,2018-02-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,30,Süd,8.1,8.0,70%,false,Volleinspeisung,false
 2700146,SEE954100182879,,In Betrieb,2020-01-20,2018-03-13,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,,Süd,6.3,6.3,70%,false,Volleinspeisung,false
 2060327,SEE959577611006,E2104101S000000000000085621900001,In Betrieb,2019-05-21,2018-03-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,33,Süd,9.9,9.9,50%,false,Teileinspeisung,false
@@ -700,6 +700,8 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4385784,SEE955238850128,,In Betrieb,2021-03-13,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.975,8.0,70%,false,Teileinspeisung,false
 5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
 5143854,SEE974607330917,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 11,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,100,Ost,28.5,27.6,70%,false,Volleinspeisung,false
+5165282,SEE924388521639,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 1,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,46,Ost-West,12.88,12.5,70%,false,Volleinspeisung,false
+5165302,SEE909984338300,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 3,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,33,Ost-West,9.405,8.0,70%,false,Volleinspeisung,false
 3115497,SEE914199824234,,In Betrieb,2020-07-15,2020-06-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,31,Süd-West,9.765,6.0,70%,false,Teileinspeisung,false
 3387220,SEE963853857286,,In Betrieb,2020-08-31,2020-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Süd,5.61,4.6,70%,false,Teileinspeisung,false
 3381243,SEE966929022083,,In Betrieb,2020-09-21,2020-06-09,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,45,Süd-Ost,14.85,14.85,70%,false,Teileinspeisung,false
@@ -793,6 +795,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4218611,SEE942110187199,,In Betrieb,2021-05-03,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,11,Süd,3.14,3.0,70%,false,Teileinspeisung,false
 4378873,SEE993719739739,,In Betrieb,2021-06-08,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,,5.7,5.7,70%,false,Teileinspeisung,false
 4765604,SEE913082847299,,In Betrieb,2021-11-14,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Süd,9.975,9.975,70%,false,Teileinspeisung,false
+5164999,SEE967884930451,,In Betrieb,2022-07-07,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,26,Ost-West,7.85,7.85,70%,false,Teileinspeisung,false
 4182810,SEE946920933397,E21041011000000000000251490800001,In Betrieb,2022-03-26,2021-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,19,Süd-West,6.27,6.27,70%,false,Teileinspeisung,false
 4396417,SEE991594485581,,In Betrieb,2021-10-07,2021-01-21,,,,,sonstige,85591,Vaterstetten,,,,,true,gebaeude,12,Süd-West,4.14,4.14,70%,false,Teileinspeisung,false
 4298372,SEE966505400670,,In Betrieb,2021-01-31,2021-01-25,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,18,Süd,5.94,4.6,70%,false,Teileinspeisung,false
@@ -952,7 +955,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5111470,SEE973745935565,,In Betrieb,2022-06-10,2022-05-30,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd-West,6.08,6.08,ohne,false,Teileinspeisung,false
 5114145,SEE921608418649,,In Betrieb,2022-06-15,2022-05-30,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,30,Süd,11.1,10.0,70%,false,Teileinspeisung,false
 5147821,SEE989553991587,,In Betrieb,2022-06-29,2022-05-30,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.62,0.6,ohne,false,Teileinspeisung,false
-5074493,SEE987548094275,,In Betrieb,2022-05-21,2022-05-31,,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,42,Süd-Ost,15.54,10.0,70%,false,Teileinspeisung,false
+5074493,SEE987548094275,,In Betrieb,2022-05-21,2022-05-31,,,,,haushalt,85622,Weißenfeld,,,,,true,gebaeude,42,Süd-Ost,15.54,10.0,70%,false,Teileinspeisung,false
 5093281,SEE963285646762,,In Betrieb,2022-05-31,2022-05-31,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,13,Süd,5.33,5.0,ohne,false,Teileinspeisung,false
 5101174,SEE936438240445,,In Betrieb,2022-06-04,2022-06-01,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.4,0.4,ohne,false,Teileinspeisung,false
 5129814,SEE906370529731,,In Betrieb,2022-06-21,2022-06-20,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,West,0.15,0.15,ohne,false,Teileinspeisung,false
