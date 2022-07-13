@@ -13,31 +13,21 @@ class MastrSpeicherPoller(MastrGenericPoller):
     current_rows = self.read_csv_rows(csv_filename)
 
     start = time.time()
-    req = requests.get("https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize=1000&group=&filter=Gemeinde~eq~'Vaterstetten'~and~Energieträger~eq~'%d'" % self.ENERGIETRAEGER_SPEICHER_ID)
+    data = self.query_with_pagination(
+      filter = "Gemeinde~eq~'Vaterstetten'~and~Energieträger~eq~'%d'" % self.ENERGIETRAEGER_SPEICHER_ID,
+      page_size = 500,
+    )
     print('> Queried data in %.1fs' % (time.time() - start))
 
-    if req.status_code != 200:
-      raise Exception('Can\'t access webpage: Status code ' + str(req.status_code))
-
-    payload = json.loads(req.text)
-
-    if payload['Errors'] != None:
-      raise Exception('Data error: %s' % payload['Errors'])
-
-    if payload['Total'] == 0:
-      raise Exception('Queried data is empty')
-
-    if payload['Total'] != len(payload['Data']):
-      raise Exception('Total count (%d) does not match list length (%d)' % (payload['Total'], len(payload['Data'])))
-
-    if payload['Total'] < len(current_rows) * (1/1.5):
-      raise Exception('Queried data has much less items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
-
-    if payload['Total'] > len(current_rows) * 1.5:
-      raise Exception('Queried data has much more items (%d) than current data (%d)' % (payload['Total'], len(current_rows)))
-
-    data_filtered = list(filter(self.filter_vaterstetten, payload['Data']))
+    data_filtered = list(filter(self.filter_vaterstetten, data))
     data_filtered = list(filter(self.filter_plausability, data_filtered))
+
+    if len(data_filtered) < len(current_rows) * (1/1.5):
+      raise Exception('Queried data has much less items (%d) than current data (%d)' % (len(data_filtered), len(current_rows)))
+
+    if len(data_filtered) > len(current_rows) * 1.5:
+      raise Exception('Queried data has much more items (%d) than current data (%d)' % (len(data_filtered), len(current_rows)))
+
     rows = list(map(self.map_row, data_filtered))
     rows = sorted(rows, key=lambda d: d['registrierungMaStR'])
     rows = sorted(rows, key=lambda d: d['inbetriebnahmeGeplant'] or '')

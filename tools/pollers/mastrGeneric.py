@@ -1,5 +1,9 @@
 from datetime import datetime
+import json
+from typing import List
 import re
+
+import requests
 
 from pollers.poller import *
 
@@ -106,6 +110,44 @@ class MastrGenericPoller(Poller):
     717: NUTZUNGSBEREICH_OEFFENTLICH,
     718: NUTZUNGSBEREICH_SONSTIGE,
   }
+
+  def query_with_pagination(self, page_size = 500, filter = '') -> List:
+    items = []
+    total = None
+    page = 1
+
+    while total is None or len(items) < total:
+      url = f"https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize={page_size}&group=&filter={filter}&page={page}"
+      req = requests.get(url)
+
+      if req.status_code != 200:
+        raise Exception('Can\'t access webpage: Status code ' + str(req.status_code))
+
+      # MaStR seems to use full-width ampersand ＆ (U+FF06) instead of normal ampersand & (U+0026)
+      body = req.text.replace('＆', '&')
+
+      payload = json.loads(body)
+
+      if payload['Errors'] != None:
+        raise Exception('Data error: %s' % payload['Errors'])
+
+      if payload['Total'] == 0:
+        raise Exception('Queried data is empty')
+      elif total is None:
+        total = payload['Total']
+      elif payload['Total'] != total:
+        raise Exception('Total count changed during consecutive paginated queries')
+
+      if len(payload['Data']) > page_size:
+        raise Exception('Received more items in single query than expected: page_size = %d, got %d' % (page_size, len(payload['Data'])))
+
+      items += payload['Data']
+      page += 1
+
+    if len(items) > total:
+      raise Exception('Received more items in total than expected: total count = %d, got %d' % (total, len(items)))
+
+    return items
 
   def is_public(self, x: dict) -> bool:
     whitelist = [
