@@ -698,10 +698,11 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4063282,SEE903060627838,,In Betrieb,2021-01-06,2020-06-05,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,30,Süd,9.75,9.75,70%,false,Teileinspeisung,false
 4326967,SEE915920084514,,In Betrieb,2021-02-08,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,5.6,4.6,70%,false,Teileinspeisung,false
 4385784,SEE955238850128,,In Betrieb,2021-03-13,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.975,8.0,70%,false,Teileinspeisung,false
-5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
+5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
 5143854,SEE974607330917,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 11,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,100,Ost,28.5,27.6,70%,false,Volleinspeisung,false
 5165282,SEE924388521639,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 1,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,46,Ost-West,12.88,12.5,70%,false,Volleinspeisung,false
 5165302,SEE909984338300,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 3,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,33,Ost-West,9.405,8.0,70%,false,Volleinspeisung,false
+5174031,SEE958839888668,,In Betrieb,2022-07-12,2020-06-05,,,Kirsch-Anger 7,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,99,Ost-West,28.025,27.6,70%,false,Volleinspeisung,false
 3115497,SEE914199824234,,In Betrieb,2020-07-15,2020-06-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,31,Süd-West,9.765,6.0,70%,false,Teileinspeisung,false
 3387220,SEE963853857286,,In Betrieb,2020-08-31,2020-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Süd,5.61,4.6,70%,false,Teileinspeisung,false
 3381243,SEE966929022083,,In Betrieb,2020-09-21,2020-06-09,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,45,Süd-Ost,14.85,14.85,70%,false,Teileinspeisung,false
@@ -796,6 +797,11 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4378873,SEE993719739739,,In Betrieb,2021-06-08,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,,5.7,5.7,70%,false,Teileinspeisung,false
 4765604,SEE913082847299,,In Betrieb,2021-11-14,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Süd,9.975,9.975,70%,false,Teileinspeisung,false
 5164999,SEE967884930451,,In Betrieb,2022-07-07,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,26,Ost-West,7.85,7.85,70%,false,Teileinspeisung,false
+5174394,SEE966848019058,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 2,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,66,Ost-West,22.185,22.185,70%,false,Volleinspeisung,false
+5174433,SEE926215846861,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 6,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,36,Ost-West,10.26,10.0,70%,false,Volleinspeisung,false
+5174457,SEE934707285814,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 10,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,90,Ost-West,27.85,27.85,70%,false,Volleinspeisung,false
+5174476,SEE945283027408,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 12,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,26,Ost-West,7.85,7.85,70%,false,Volleinspeisung,false
+5174514,SEE974480204688,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 16,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,96,Ost-West,29.34,29.34,70%,false,Volleinspeisung,false
 4182810,SEE946920933397,E21041011000000000000251490800001,In Betrieb,2022-03-26,2021-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,19,Süd-West,6.27,6.27,70%,false,Teileinspeisung,false
 4396417,SEE991594485581,,In Betrieb,2021-10-07,2021-01-21,,,,,sonstige,85591,Vaterstetten,,,,,true,gebaeude,12,Süd-West,4.14,4.14,70%,false,Teileinspeisung,false
 4298372,SEE966505400670,,In Betrieb,2021-01-31,2021-01-25,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,18,Süd,5.94,4.6,70%,false,Teileinspeisung,false
