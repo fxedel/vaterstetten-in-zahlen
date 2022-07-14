@@ -417,7 +417,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3906716,SEE915170281497,E2104101S160000000000058599400001,In Betrieb,2020-12-17,2013-12-09,,,,,sonstige,85599,Parsdorf,,,,,true,gebaeude,49,West,12.5,12.5,70%,false,Teileinspeisung,false
 3544800,SEE924432267315,E2104101S160000000000055182600001,In Betrieb,2020-10-21,2013-12-12,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,50,Süd,12.5,12.0,70%,false,Teileinspeisung,false
 3291510,SEE956551155945,E2104101S160000000000055757000001,In Betrieb,2020-07-28,2014-01-03,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-West,6.54,6.125,70%,false,Teileinspeisung,false
-3315530,SEE988127791226,E2104101S160000000000058301600001,In Betrieb,2020-08-04,2014-01-10,,,,,landwirtschaft,85598,Baldham,Parsdorfer Straße,5,48.115552,11.795619,false,gebaeude,204,Ost-West,49.98,49.8,ohne,false,Teileinspeisung,false
+3315530,SEE988127791226,E2104101S160000000000058301600001,In Betrieb,2020-08-04,2014-01-10,,,,,landwirtschaft,85598,Baldham,Parsdorfer Straße,5,48.115552,11.795619,true,gebaeude,204,Ost-West,49.98,49.8,ohne,false,Teileinspeisung,false
 5051297,SEE974641829989,E2104101S160000000000057503000001,In Betrieb,2022-05-10,2014-02-28,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,38,Süd,10.26,10.26,,false,,false
 5051955,SEE997040097452,E2104101S160000000000057495800001,In Betrieb,2022-05-10,2014-02-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,70,Süd,18.9,17.0,,false,,false
 5052099,SEE986398911220,E2104101S160000000000070763400001,In Betrieb,2022-05-10,2014-02-28,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,32,Süd,8.0,5.6,,false,,false
@@ -897,7 +897,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4797616,SEE997473102884,,In Betrieb,2021-12-01,2021-11-24,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,32,Süd-West,10.7,10.7,70%,false,Teileinspeisung,false
 4810682,SEE974251795988,,In Betrieb,2021-12-09,2021-11-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Süd-West,9.9,7.0,70%,false,Teileinspeisung,false
 4833548,SEE944103952401,,In Betrieb,2021-12-23,2021-11-25,,,"Hausdach + An Lerchenfeld 8, 85599 Parsdorf",Brkic GmbH,sonstige,85599,Parsdorf,Am Lerchenfeld,,48.146429,11.789983,false,gebaeude,164,,54.12,50.0,ohne,false,Teileinspeisung,false
-5136415,SEE986460602582,,In Betrieb,2022-06-23,2021-11-30,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,26,Süd,9.8,9.8,70%,false,Teileinspeisung,false
+5136415,SEE986460602582,,In Betrieb,2022-06-23,2021-11-30,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,26,Süd,9.88,9.88,70%,false,Teileinspeisung,false
 4800581,SEE996965318758,,In Betrieb,2021-12-03,2021-12-02,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Ost-West,6.885,4.6,70%,false,Teileinspeisung,false
 4872575,SEE918435685542,,In Betrieb,2022-01-25,2021-12-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,,8.0,6.1,70%,false,,false
 4825988,SEE908101916803,,In Betrieb,2021-12-18,2021-12-18,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,9.8,9.8,70%,false,Teileinspeisung,false
@@ -974,6 +974,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5156772,SEE930500881789,,In Betrieb,2022-07-04,2022-07-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,18,Süd,7.2,7.2,70%,false,Teileinspeisung,false
 5167890,SEE976434032019,,In Betrieb,2022-07-08,2022-07-07,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,74,Ost,29.97,29.97,70%,false,Teileinspeisung,false
 5168774,SEE907919823228,,In Betrieb,2022-07-09,2022-07-09,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.75,0.6,ohne,false,Teileinspeisung,false
+5177417,SEE919559273141,,In Betrieb,2022-07-14,2022-07-14,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd-Ost,0.375,0.36,,false,Teileinspeisung,false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung,false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung,false
 5084598,SEE901578530435,,In Planung,2022-05-26,,2022-06-30,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,25,Süd-West,9.5,9.5,70%,false,Teileinspeisung,false
