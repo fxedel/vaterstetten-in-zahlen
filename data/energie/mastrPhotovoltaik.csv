@@ -927,7 +927,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5169680,SEE945213871910,,In Betrieb,2022-07-10,2022-04-07,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,30,Ost-West,9.9,8.0,70%,false,Teileinspeisung,false
 5030764,SEE994091746810,,In Betrieb,2022-04-28,2022-04-14,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
 5037543,SEE992844653774,,In Betrieb,2022-05-03,2022-04-14,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
-5048586,SEE950668920601,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,5.68,5.5,70%,false,Teileinspeisung,false
+5048586,SEE950668920601,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,16,Süd,5.68,5.5,70%,false,Teileinspeisung,false
 5067869,SEE969384732863,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd-Ost,5.68,5.5,70%,false,Teileinspeisung,false
 5067964,SEE946345685628,,In Betrieb,2022-05-18,2022-04-14,,,,,GHD,85598,Baldham,,,,,false,gebaeude,8,Süd,2.84,2.84,ohne,false,Teileinspeisung,false
 5068035,SEE929050182439,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,12,Süd,4.26,4.2,70%,false,Teileinspeisung,false
@@ -955,7 +955,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5058073,SEE908355953098,,In Betrieb,2022-05-13,2022-05-12,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,6.16,6.16,70%,false,Teileinspeisung,false
 5033983,SEE902727337660,,In Betrieb,2022-05-13,2022-05-13,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,35,Süd,13.125,8.2,70%,false,Teileinspeisung,false
 5112528,SEE904033718249,,In Betrieb,2022-06-10,2022-05-20,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Nord-Ost,5.6,5.6,70%,false,Teileinspeisung,false
-5044004,SEE992812688098,,In Betrieb,2022-05-24,2022-05-24,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,30,Süd,9.9,9.2,70%,false,Teileinspeisung,false
+5044004,SEE992812688098,,In Betrieb,2022-05-24,2022-05-24,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,30,Süd,9.9,9.2,70%,false,Teileinspeisung,false
 5128966,SEE971907822852,,In Betrieb,2022-06-23,2022-05-24,,,,,sonstige,85598,Baldham,,,,,false,gebaeude,30,Süd,9.45,9.45,ohne,false,Teileinspeisung,false
 5132582,SEE910977765911,,In Betrieb,2022-06-22,2022-05-25,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.67,0.6,ohne,false,Teileinspeisung,false
 5101581,SEE909963175339,,In Betrieb,2022-06-05,2022-05-30,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,15,Süd-West,5.03,4.6,70%,false,Teileinspeisung,false
