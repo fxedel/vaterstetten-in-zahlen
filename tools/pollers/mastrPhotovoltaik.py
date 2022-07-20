@@ -16,7 +16,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     start = time.time()
     data = self.query_with_pagination(
       filter = "Gemeinde~eq~'Vaterstetten'~and~Energieträger~eq~'%d'" % self.ENERGIETRAEGER_SOLARE_STRAHLUNGSENERGIE_ID,
-      page_size = 500,
+      page_size = 2000,
     )
     print('> Queried data in %.1fs' % (time.time() - start))
 
