@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+from time import sleep
 from typing import List
 import re
 
@@ -143,6 +144,8 @@ class MastrGenericPoller(Poller):
 
       items += payload['Data']
       page += 1
+
+      sleep(0.2) # sleep 200ms to avoid Connection reset by peer errors
 
     if len(items) > total:
       raise Exception('Received more items in total than expected: total count = %d, got %d' % (total, len(items)))

@@ -1,9 +1,5 @@
-from datetime import datetime
-import json
 import os
 import time
-import re
-import requests
 
 from pollers.mastrGeneric import MastrGenericPoller
 
@@ -16,7 +12,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     start = time.time()
     data = self.query_with_pagination(
       filter = "Gemeinde~eq~'Vaterstetten'~and~Energieträger~eq~'%d'" % self.ENERGIETRAEGER_SOLARE_STRAHLUNGSENERGIE_ID,
-      page_size = 2000,
+      page_size = 500,
     )
     print('> Queried data in %.1fs' % (time.time() - start))
 
