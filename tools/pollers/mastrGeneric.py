@@ -119,6 +119,7 @@ class MastrGenericPoller(Poller):
 
     while total is None or len(items) < total:
       url = f"https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize={page_size}&group=&filter={filter}&page={page}"
+      print (f"> Query {url}")
       req = requests.get(url)
 
       if req.status_code != 200:
@@ -145,7 +146,7 @@ class MastrGenericPoller(Poller):
       items += payload['Data']
       page += 1
 
-      sleep(0.2) # sleep 200ms to avoid Connection reset by peer errors
+      sleep(0.5) # sleep 500ms to avoid Connection reset by peer errors
 
     if len(items) > total:
       raise Exception('Received more items in total than expected: total count = %d, got %d' % (total, len(items)))
