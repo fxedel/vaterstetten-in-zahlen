@@ -120,7 +120,9 @@ class MastrGenericPoller(Poller):
     while total is None or len(items) < total:
       url = f"https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize={page_size}&group=&filter={filter}&page={page}"
       print (f"> Query {url}")
-      req = requests.get(url)
+      req = requests.get(url, headers = {
+        'Connection': 'keep-alive'
+      })
 
       if req.status_code != 200:
         raise Exception('Can\'t access webpage: Status code ' + str(req.status_code))
