@@ -204,6 +204,18 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
+        title = "Disclaimer",
+        status = "warning",
+        solidHeader = TRUE,
+        width = 12,
+        tagList(
+          p(HTML('Diese Zahlen basieren auf Eintragungen im <a href="https://www.marktstammdatenregister.de">Marktstammdatenregister</a>. Obwohl die Eintragung innerhalb eines Monats nach Inbetriebnahme verpflichtend und Voraussetzung für EEG-Förderung ist, werden viele Anlagen mit sehr großem Zeitverzug (bis zu zwei Jahre) eingetragen (siehe Grafik „Meldeverzug“ weiter unten). Somit sind die Zahlen für die letzten ein bis zwei Jahren wahrscheinlich zu niedrig. Außerdem werden immer wieder inkorrekte Angaben, z.&nbsp;B. zur Leistung, getätigt. Offensichtlich falsche Werte wurden bereits herausgefiltert.'))
+        )
+      )
+    ),
+
+    fluidRow(
+      box(
         title = "Installierte Photovoltaik-Leistung",
         plotlyLeistung
       ),
@@ -346,7 +358,6 @@ ui <- memoise(omit_args = "request", function(request, id) {
             identity()
         },
         p(HTML("Dargestellt wird der Abstand zwischen Inbetriebnahme und Registrierung im Marktstammdatenregister, gruppiert nach Monat der Inbetriebnahme. Die Linie entspricht dem Median („mittlerer“ Abstand), der dunklere Bereich dem 25%- bis 75%-Perzentil und der hellere Bereich allen Werten. Es werden nur Inbetriebnahmen seit dem 1. Februar 2019 berücksichtigt, da erst seit diesem Zeitpunkt die Registrierung im MaStR möglich und innerhalb eines Monats nach Inbetriebnahme auch verpflichtend ist. Die rote Linie stellt den maximal möglichen Meldeverzug dar, der durch das heutige Datum gegeben ist.")),
-        p(HTML("Obwohl der Meldeverzug 2021 augenscheinlich deutlich geringer wurde, kann dies auch einfach daran liegen, dass Anlagen mit einem hohen Meldeverzug naturgemäß noch nicht eingetragen sind – es bleibt abzuwarten, wie viele Anlagen in Zukunft noch nachgetragen werden.")),
       ),
     ),
 
