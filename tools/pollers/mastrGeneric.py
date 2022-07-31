@@ -121,7 +121,7 @@ class MastrGenericPoller(Poller):
       url = f"https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung?pageSize={page_size}&group=&filter={filter}&page={page}"
       print (f"> Query {url}")
       req = requests.get(url, headers = {
-        'Connection': 'keep-alive'
+        'Connection': 'close'
       })
 
       if req.status_code != 200:
