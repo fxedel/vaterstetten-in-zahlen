@@ -8,6 +8,8 @@ photovoltaik <- new.env()
 sys.source("R/photovoltaik.R", envir = photovoltaik, chdir = FALSE)
 einwohner <- new.env()
 sys.source("R/einwohner.R", envir = einwohner, chdir = FALSE)
+hgv <- new.env()
+sys.source("R/hgv.R", envir = hgv, chdir = FALSE)
 
 
 ui <- memoise(omit_args = "request", function(request, id) {
@@ -91,7 +93,25 @@ ui <- memoise(omit_args = "request", function(request, id) {
           },
           actionButton(ns("buttonEinwohner"), "Zu den Einwohnerstatistiken", icon = icon("users"), width = "100%")
         )
-      )
+      ),
+      box(
+        title = "Humboldt-Gymnasium Vaterstetten",
+        width = 6,
+        tagList(
+          {
+            row <- hgv$hgv[which.max(hgv$hgv$Schueler),]
+            valueBox(
+              utils$germanNumberFormat(row$Schueler),
+              paste0("Höchste Schülerzahl am HGV (Schuljahr ", row$Schuljahresbeginn, "/", row$Schuljahresbeginn+1, ")"),
+              color = "aqua",
+              icon = icon("school"),
+              href = "/?tab=hgv",
+              width = 12
+            )
+          },
+          actionButton(ns("buttonHGV"), "Zu den HGV-Statistiken", icon = icon("school"), width = "100%")
+        )
+      ),
     ),
 
     fluidRow(
@@ -120,6 +140,9 @@ server <- function(id, parentSession) {
       })
       observeEvent(input$buttonEinwohner, {
         updateTabsetPanel(parentSession, "tab", selected = "einwohner")
+      })
+      observeEvent(input$buttonHGV, {
+        updateTabsetPanel(parentSession, "tab", selected = "hgv")
       })
     }
   )
