@@ -47,7 +47,7 @@ ui <- function(request) {
       title = "Vaterstetten in Zahlen",
       titleWidth = 280,
       tags$li(class = "dropdown",
-        a(tagList(icon("github"), "Download"), href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data")
+        a(tagList(icon("github"), "Daten-Download"), href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data")
       )
     ),
     dashboardSidebar(
