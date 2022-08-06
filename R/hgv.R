@@ -100,7 +100,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         status = "info",
         solidHeader = TRUE,
         tagList(
-          p(HTML('Für einige Jahre fehlen noch (genaue) Daten. Haben Sie die passenden Jahresberichte oder vergleichbare Quellen parat? Dann freuen wir uns über eine Datenspende an <a href="mailto:felix@vaterstetten-in-zahlen.de">felix@vaterstetten-in-zahlen.de</a> oder gleich via <a href="https://github.com/fxedel/vaterstetten-in-zahlen">GitHub</a>. Insbesondere fehlen noch:')),
+          p(HTML('Für einige Jahre fehlen noch (genaue) Daten. Haben Sie die passenden Jahresberichte oder vergleichbare Quellen parat? Dann freuen wir uns über eine Datenspende an <a href="mailto:felix@vaterstetten-in-zahlen.de">felix@vaterstetten-in-zahlen.de</a> oder gleich via <a href="https://github.com/fxedel/vaterstetten-in-zahlen">GitHub</a>')),
           p("Insbesondere wären folgende Jahresberichte hilfreich:"),
           tags$ul(
             tags$li("Schuljahre 1970/1971 bis 1974/1975 (zur Vervollständigung und Verifizierung der vorhandenen Daten)"),
