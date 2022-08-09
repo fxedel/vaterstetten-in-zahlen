@@ -134,6 +134,11 @@ server <- function(input, output, session) {
     updateTabsetPanel(session, "tab", input$tab)
   })
 
+  observe({
+    req(input$logo)
+    updateTabsetPanel(session, "tab", selected = "main")
+  })
+
   mainPage$server("mainPage", session)
   corona$server("corona")
   coronaImpfungen$server("coronaImpfungen")

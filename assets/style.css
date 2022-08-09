@@ -11,6 +11,10 @@ a > i {
   text-align: start;
 }
 
+.main-header > .logo:hover {
+  cursor: pointer;
+}
+
 .main-header > .logo::before {
   content: "";
   display: inline-block;

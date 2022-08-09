@@ -6,6 +6,12 @@ window.addEventListener('popstate', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     preventWidgetsFromRendering();
+
+    const logo = document.querySelector('.logo');
+    logo.addEventListener('click', () => {
+        Shiny.setInputValue('logo', 1, {priority: 'event'});
+    })
+    console.log(logo, 'listener added')
 });
 
 $(document).on('shiny:connected', event => {
@@ -17,6 +23,11 @@ $(document).on('shiny:inputchanged', event => {
         window.dispatchEvent(new CustomEvent("resize"));
     } else if (event.name === 'tab') {
         renderVisibleWidgets();
+        document.body.parentElement.scrollTo(0, 0);
+
+        if (document.body.classList.contains('sidebar-open')) {
+            document.body.classList.remove('sidebar-open')
+        }
     }
 });
 
@@ -53,7 +64,7 @@ function renderVisibleWidgets() {
     }
 
     if (renderNeeded) {
-        // wait 2ms, so a new tab page can be shown without the blocking call to staticRender()
+        // wait some millis, so a new tab page can be shown without the blocking call to staticRender()
         setTimeout(async () => {
             window.HTMLWidgets.staticRender();
         }, 20);
