@@ -8,12 +8,13 @@ arcgis = "~=1.9.1"
 beautifulsoup4 = "~=4.9"
 ipython = "~=7.31.1"
 ipywidgets = "~=7.6.5"
-jupyter-server = ">=1.15.4"
-notebook = ">=6.4.10"
-pillow = ">=9.0.1"
+jupyter-server = ">=1.17.0"
+notebook = ">=6.4.12"
+pillow = ">=9.1.1"
 pytelegrambotapi = "~=3.7"
 python-interface = "~=1.6.1"
 requests = "~=2.25"
+ujson = ">=5.4.0"
 
 [dev-packages]
 
