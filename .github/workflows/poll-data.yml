@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pipenv
-          pipenv install
+          pipenv install --verbose
       - name: Poll data
         run: pipenv run python tools/poll.py --telegram-token=$TELEGRAM_TOKEN --telegram-debug-chat-id=$TELEGRAM_DEBUG_CHAT_ID
         env:
