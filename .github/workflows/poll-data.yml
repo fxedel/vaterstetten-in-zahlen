@@ -24,10 +24,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
-      - name: Install dependencies
-        run: |
-          pip install --ignore-installed --verbose pipenv==2022.8.5
-          pipenv install --verbose
+      - name: Install pipenv
+        run: pip install --ignore-installed pipenv==2022.8.5
+      - name: Install python packages
+        run: pipenv install
       - name: Poll data
         run: pipenv run python tools/poll.py --telegram-token=$TELEGRAM_TOKEN --telegram-debug-chat-id=$TELEGRAM_DEBUG_CHAT_ID
         env:
