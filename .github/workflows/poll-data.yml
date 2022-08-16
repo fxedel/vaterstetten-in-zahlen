@@ -26,7 +26,7 @@ jobs:
           python-version: '3.8'
       - name: Install dependencies
         run: |
-          pip install pipenv
+          pip install --ignore-installed --verbose pipenv==2022.8.5
           pipenv install --verbose
       - name: Poll data
         run: pipenv run python tools/poll.py --telegram-token=$TELEGRAM_TOKEN --telegram-debug-chat-id=$TELEGRAM_DEBUG_CHAT_ID
