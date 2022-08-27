@@ -184,6 +184,9 @@ def apply_manual_fixes(features: List[Feature]):
       elif datum == '2022-08-13':
         replace_attr_value(feature, 'I1_Alter30_40', 6840, 8028)
         replace_attr_value(feature, 'I1_SummeAlter', 61139, attrs['I1_SummeAlter']-6840+8028)
+      elif datum == '2022-08-27':
+        replace_attr_value(feature, 'I4_Alter40_50', 254, 154)
+        replace_attr_value(feature, 'I4_SummeAlter', 4321, attrs['Viertimpfungen_proTyp'])
 
 
     elif einrichtung == 'Praxis':
