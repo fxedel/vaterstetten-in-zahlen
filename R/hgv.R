@@ -105,7 +105,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
           tags$ul(
             tags$li("Schuljahre 1970/1971 bis 1974/1975 (zur Vervollständigung und Verifizierung der vorhandenen Daten)"),
             tags$li("Schuljahr 1976/1977 (fehlt bislang komplett)"),
-            tags$li("Schuljahre ab 2020/2021 (fehlen bislang komplett)"),
+            tags$li("Schuljahr 2021/2022 (fehlt bislang komplett)"),
           ),
           p("Außerdem fehlen folgende Daten, die in den Jahresberichten nicht mehr enthalten sind:"),
           tags$ul(
