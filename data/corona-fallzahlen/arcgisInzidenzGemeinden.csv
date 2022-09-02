@@ -767,13 +767,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-04-06,Anzing,12,1365.19
 2022-04-07,Anzing,16,1456.2
 2022-04-08,Anzing,15,1615.47
-2022-04-09,Anzing,6,1615.47
-2022-04-10,Anzing,6,1592.72
-2022-04-11,Anzing,8,1683.73
-2022-04-12,Anzing,13,1729.24
-2022-04-13,Anzing,8,1638.23
-2022-04-14,Anzing,17,1660.98
-2022-04-15,Anzing,2,1365.19
+2022-04-09,Anzing,5,1592.72
+2022-04-10,Anzing,6,1569.97
+2022-04-11,Anzing,8,1660.98
+2022-04-12,Anzing,13,1706.48
+2022-04-13,Anzing,8,1615.47
+2022-04-14,Anzing,17,1638.23
+2022-04-15,Anzing,2,1342.43
 2022-04-16,Anzing,1,1251.42
 2022-04-17,Anzing,2,1160.41
 2022-04-18,Anzing,2,1023.89
@@ -912,6 +912,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Anzing,2,113.77
 2022-08-30,Anzing,2,159.27
 2022-08-31,Anzing,1,136.52
+2022-09-01,Anzing,3,182.03
 2020-03-02,Aßling,0,0
 2020-03-03,Aßling,0,0
 2020-03-04,Aßling,0,0
@@ -1825,6 +1826,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Aßling,6,219.59
 2022-08-30,Aßling,5,329.38
 2022-08-31,Aßling,3,373.3
+2022-09-01,Aßling,0,329.38
 2020-03-02,Baiern,0,0
 2020-03-03,Baiern,0,0
 2020-03-04,Baiern,0,0
@@ -2738,6 +2740,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Baiern,1,132.63
 2022-08-30,Baiern,0,132.63
 2022-08-31,Baiern,0,132.63
+2022-09-01,Baiern,0,132.63
 2020-03-02,Bruck,0,0
 2020-03-03,Bruck,0,0
 2020-03-04,Bruck,0,0
@@ -3651,6 +3654,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Bruck,1,152.09
 2022-08-30,Bruck,1,228.14
 2022-08-31,Bruck,2,304.18
+2022-09-01,Bruck,0,304.18
 2020-03-02,Ebersberg,0,0
 2020-03-03,Ebersberg,0,0
 2020-03-04,Ebersberg,0,0
@@ -4390,13 +4394,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-03-08,Ebersberg,47,1768.61
 2022-03-09,Ebersberg,44,1883.24
 2022-03-10,Ebersberg,46,2006.06
-2022-03-11,Ebersberg,56,2186.2
-2022-03-12,Ebersberg,41,2317.2
-2022-03-13,Ebersberg,27,2325.39
-2022-03-14,Ebersberg,20,2300.83
-2022-03-15,Ebersberg,63,2431.83
-2022-03-16,Ebersberg,52,2497.34
-2022-03-17,Ebersberg,31,2374.52
+2022-03-11,Ebersberg,55,2178.01
+2022-03-12,Ebersberg,41,2309.01
+2022-03-13,Ebersberg,27,2317.2
+2022-03-14,Ebersberg,20,2292.64
+2022-03-15,Ebersberg,63,2423.65
+2022-03-16,Ebersberg,52,2489.15
+2022-03-17,Ebersberg,31,2366.33
 2022-03-18,Ebersberg,58,2390.89
 2022-03-19,Ebersberg,28,2284.45
 2022-03-20,Ebersberg,11,2153.44
@@ -4564,6 +4568,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Ebersberg ,10,245.64
 2022-08-30,Ebersberg ,5,212.89
 2022-08-31,Ebersberg ,1,188.32
+2022-09-01,Ebersberg ,1,163.76
 2020-03-02,Egmating,0,0
 2020-03-03,Egmating,0,0
 2020-03-04,Egmating,0,0
@@ -5477,6 +5482,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Egmating,0,42.41
 2022-08-30,Egmating,0,0
 2022-08-31,Egmating,0,0
+2022-09-01,Egmating,0,0
 2020-03-02,Emmering,0,0
 2020-03-03,Emmering,0,0
 2020-03-04,Emmering,0,0
@@ -6390,6 +6396,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Emmering,1,67.29
 2022-08-30,Emmering,0,67.29
 2022-08-31,Emmering,1,134.59
+2022-09-01,Emmering,0,134.59
 2020-03-02,Forstinning,0,0
 2020-03-03,Forstinning,0,0
 2020-03-04,Forstinning,0,0
@@ -7091,13 +7098,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-01-29,Forstinning,7,1610.84
 2022-01-30,Forstinning,5,1636.41
 2022-01-31,Forstinning,2,1636.41
-2022-02-01,Forstinning,12,1585.27
-2022-02-02,Forstinning,10,1559.7
-2022-02-03,Forstinning,5,1355.15
-2022-02-04,Forstinning,2,1099.46
-2022-02-05,Forstinning,4,1022.76
-2022-02-06,Forstinning,0,894.91
-2022-02-07,Forstinning,5,971.62
+2022-02-01,Forstinning,11,1559.7
+2022-02-02,Forstinning,10,1534.13
+2022-02-03,Forstinning,5,1329.58
+2022-02-04,Forstinning,2,1073.89
+2022-02-05,Forstinning,4,997.19
+2022-02-06,Forstinning,0,869.34
+2022-02-07,Forstinning,5,946.05
 2022-02-08,Forstinning,4,767.07
 2022-02-09,Forstinning,8,715.93
 2022-02-10,Forstinning,8,792.64
@@ -7303,6 +7310,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Forstinning,2,178.98
 2022-08-30,Forstinning,1,178.98
 2022-08-31,Forstinning,3,178.98
+2022-09-01,Forstinning,0,153.41
 2020-03-02,Frauenneuharting,0,0
 2020-03-03,Frauenneuharting,0,0
 2020-03-04,Frauenneuharting,0,0
@@ -8216,6 +8224,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Frauenneuharting,1,63.33
 2022-08-30,Frauenneuharting,1,126.66
 2022-08-31,Frauenneuharting,0,126.66
+2022-09-01,Frauenneuharting,0,126.66
 2020-03-02,Glonn,0,0
 2020-03-03,Glonn,0,0
 2020-03-04,Glonn,0,0
@@ -9129,6 +9138,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Glonn,0,38.19
 2022-08-30,Glonn,1,57.28
 2022-08-31,Glonn,2,95.47
+2022-09-01,Glonn,3,133.66
 2020-03-02,Grafing bei München,1,7.24
 2020-03-03,Grafing bei München,1,14.49
 2020-03-04,Grafing bei München,0,14.49
@@ -10026,13 +10036,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-13,Grafing bei München,0,289.75
 2022-08-14,Grafing bei München,0,289.75
 2022-08-15,Grafing bei München,0,152.12
-2022-08-16,Grafing bei München,13,188.34
-2022-08-17,Grafing bei München,8,217.31
-2022-08-18,Grafing bei München,4,217.31
-2022-08-19,Grafing bei München,3,202.83
-2022-08-20,Grafing bei München,0,202.83
-2022-08-21,Grafing bei München,0,202.83
-2022-08-22,Grafing bei München,8,260.78
+2022-08-16,Grafing bei München,12,181.09
+2022-08-17,Grafing bei München,8,210.07
+2022-08-18,Grafing bei München,4,210.07
+2022-08-19,Grafing bei München,3,195.58
+2022-08-20,Grafing bei München,0,195.58
+2022-08-21,Grafing bei München,0,195.58
+2022-08-22,Grafing bei München,8,253.53
 2022-08-23,Grafing bei München,5,202.83
 2022-08-24,Grafing bei München,5,181.09
 2022-08-25,Grafing bei München,0,152.12
@@ -10042,6 +10052,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Grafing bei München,6,144.88
 2022-08-30,Grafing bei München,3,130.39
 2022-08-31,Grafing bei München,6,137.63
+2022-09-01,Grafing bei München,3,159.36
 2020-03-02,Hohenlinden,0,0
 2020-03-03,Hohenlinden,0,0
 2020-03-04,Hohenlinden,0,0
@@ -10955,6 +10966,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Hohenlinden,3,153.8
 2022-08-30,Hohenlinden,5,276.84
 2022-08-31,Hohenlinden,0,276.84
+2022-09-01,Hohenlinden,1,276.84
 2020-03-02,Kirchseeon,0,0
 2020-03-03,Kirchseeon,0,0
 2020-03-04,Kirchseeon,0,0
@@ -11698,13 +11710,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-03-12,Kirchseeon,47,1998.31
 2022-03-13,Kirchseeon,16,1960.78
 2022-03-14,Kirchseeon,32,2120.27
-2022-03-15,Kirchseeon,47,2270.38
-2022-03-16,Kirchseeon,41,2411.11
-2022-03-17,Kirchseeon,35,2401.73
-2022-03-18,Kirchseeon,34,2364.2
-2022-03-19,Kirchseeon,31,2214.09
-2022-03-20,Kirchseeon,7,2129.66
-2022-03-21,Kirchseeon,32,2129.66
+2022-03-15,Kirchseeon,46,2261.0
+2022-03-16,Kirchseeon,41,2401.73
+2022-03-17,Kirchseeon,35,2392.34
+2022-03-18,Kirchseeon,34,2354.82
+2022-03-19,Kirchseeon,31,2204.71
+2022-03-20,Kirchseeon,7,2120.27
+2022-03-21,Kirchseeon,32,2120.27
 2022-03-22,Kirchseeon,31,1979.55
 2022-03-23,Kirchseeon,51,2073.37
 2022-03-24,Kirchseeon,34,2063.98
@@ -11868,6 +11880,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Kirchseeon,3,131.34
 2022-08-30,Kirchseeon,1,112.58
 2022-08-31,Kirchseeon,3,93.82
+2022-09-01,Kirchseeon,1,84.44
 2020-03-02,Markt Schwaben,0,0
 2020-03-03,Markt Schwaben,0,0
 2020-03-04,Markt Schwaben,0,0
@@ -12781,6 +12794,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Markt Schwaben,9,246.02
 2022-08-30,Markt Schwaben,13,303.91
 2022-08-31,Markt Schwaben,6,311.14
+2022-09-01,Markt Schwaben,4,318.38
 2020-03-02,Moosach,0,0
 2020-03-03,Moosach,0,0
 2020-03-04,Moosach,0,0
@@ -13694,6 +13708,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Moosach,0,66.36
 2022-08-30,Moosach,0,66.36
 2022-08-31,Moosach,0,66.36
+2022-09-01,Moosach,0,0
 2020-03-02,Oberpframmern,0,0
 2020-03-03,Oberpframmern,0,0
 2020-03-04,Oberpframmern,0,0
@@ -14607,6 +14622,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Oberpframmern,4,245.9
 2022-08-30,Oberpframmern,0,204.92
 2022-08-31,Oberpframmern,0,204.92
+2022-09-01,Oberpframmern,1,245.9
 2020-03-02,Pliening,0,0
 2020-03-03,Pliening,0,0
 2020-03-04,Pliening,0,0
@@ -15323,13 +15339,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-02-13,Pliening,5,1498.26
 2022-02-14,Pliening,9,1498.26
 2022-02-15,Pliening,23,1777.0
-2022-02-16,Pliening,15,1602.79
-2022-02-17,Pliening,9,1585.37
-2022-02-18,Pliening,8,1306.62
-2022-02-19,Pliening,7,1324.04
-2022-02-20,Pliening,9,1393.73
-2022-02-21,Pliening,14,1480.84
-2022-02-22,Pliening,14,1324.04
+2022-02-16,Pliening,14,1585.37
+2022-02-17,Pliening,9,1567.94
+2022-02-18,Pliening,8,1289.2
+2022-02-19,Pliening,7,1306.62
+2022-02-20,Pliening,9,1376.31
+2022-02-21,Pliening,14,1463.41
+2022-02-22,Pliening,14,1306.62
 2022-02-23,Pliening,18,1376.31
 2022-02-24,Pliening,13,1445.99
 2022-02-25,Pliening,13,1533.1
@@ -15520,6 +15536,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Pliening,6,243.9
 2022-08-30,Pliening,0,226.48
 2022-08-31,Pliening,3,243.9
+2022-09-01,Pliening,0,191.64
 2020-03-02,Poing,0,0
 2020-03-03,Poing,0,0
 2020-03-04,Poing,0,0
@@ -16215,13 +16232,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-01-23,Poing,11,1273.61
 2022-01-24,Poing,12,1267.4
 2022-01-25,Poing,51,1298.46
-2022-01-26,Poing,63,1428.93
-2022-01-27,Poing,60,1665.01
-2022-01-28,Poing,62,1925.94
-2022-01-29,Poing,33,1814.12
-2022-01-30,Poing,15,1838.97
-2022-01-31,Poing,22,1901.09
-2022-02-01,Poing,62,1969.43
+2022-01-26,Poing,62,1422.71
+2022-01-27,Poing,60,1658.8
+2022-01-28,Poing,62,1919.73
+2022-01-29,Poing,33,1807.9
+2022-01-30,Poing,15,1832.75
+2022-01-31,Poing,22,1894.88
+2022-02-01,Poing,62,1963.22
 2022-02-02,Poing,53,1907.31
 2022-02-03,Poing,58,1894.88
 2022-02-04,Poing,44,1783.05
@@ -16314,13 +16331,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-05-02,Poing,35,832.5
 2022-05-03,Poing,21,782.8
 2022-05-04,Poing,18,764.17
-2022-05-05,Poing,50,888.42
-2022-05-06,Poing,16,869.78
-2022-05-07,Poing,0,869.78
-2022-05-08,Poing,0,869.78
-2022-05-09,Poing,36,875.99
-2022-05-10,Poing,30,931.91
-2022-05-11,Poing,15,913.27
+2022-05-05,Poing,49,882.21
+2022-05-06,Poing,16,863.57
+2022-05-07,Poing,0,863.57
+2022-05-08,Poing,0,863.57
+2022-05-09,Poing,36,869.78
+2022-05-10,Poing,30,925.7
+2022-05-11,Poing,15,907.06
 2022-05-12,Poing,6,639.91
 2022-05-13,Poing,11,608.85
 2022-05-14,Poing,14,695.83
@@ -16433,6 +16450,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Poing,6,192.59
 2022-08-30,Poing,7,167.74
 2022-08-31,Poing,4,161.53
+2022-09-01,Poing,7,161.53
 2020-03-02,Steinhöring,0,0
 2020-03-03,Steinhöring,0,0
 2020-03-04,Steinhöring,0,0
@@ -17346,6 +17364,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Steinhöring,7,270.14
 2022-08-30,Steinhöring,0,245.58
 2022-08-31,Steinhöring,0,196.46
+2022-09-01,Steinhöring,0,171.91
 2020-03-02,Vaterstetten,0,0
 2020-03-03,Vaterstetten,0,0
 2020-03-04,Vaterstetten,0,0
@@ -18249,16 +18268,17 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-19,Vaterstetten,8,153.29
 2022-08-20,Vaterstetten,0,153.29
 2022-08-21,Vaterstetten,0,153.29
-2022-08-22,Vaterstetten,23,246.08
-2022-08-23,Vaterstetten,18,278.35
-2022-08-24,Vaterstetten,13,278.35
-2022-08-25,Vaterstetten,7,278.35
-2022-08-26,Vaterstetten,6,270.28
-2022-08-27,Vaterstetten,0,270.28
-2022-08-28,Vaterstetten,0,270.28
+2022-08-22,Vaterstetten,22,242.04
+2022-08-23,Vaterstetten,18,274.32
+2022-08-24,Vaterstetten,13,274.32
+2022-08-25,Vaterstetten,7,274.32
+2022-08-26,Vaterstetten,6,266.25
+2022-08-27,Vaterstetten,0,266.25
+2022-08-28,Vaterstetten,0,266.25
 2022-08-29,Vaterstetten,14,233.97
 2022-08-30,Vaterstetten,10,201.7
 2022-08-31,Vaterstetten,7,177.5
+2022-09-01,Vaterstetten,12,197.67
 2020-03-02,Zorneding,0,0
 2020-03-03,Zorneding,0,0
 2020-03-04,Zorneding,0,0
@@ -18997,13 +19017,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-03-07,Zorneding,29,1603.25
 2022-03-08,Zorneding,37,1731.51
 2022-03-09,Zorneding,24,1742.2
-2022-03-10,Zorneding,36,1891.83
-2022-03-11,Zorneding,20,1945.28
-2022-03-12,Zorneding,23,2062.85
-2022-03-13,Zorneding,17,1988.03
-2022-03-14,Zorneding,21,1902.52
-2022-03-15,Zorneding,32,1849.08
-2022-03-16,Zorneding,42,2041.47
+2022-03-10,Zorneding,35,1881.15
+2022-03-11,Zorneding,20,1934.59
+2022-03-12,Zorneding,23,2052.16
+2022-03-13,Zorneding,17,1977.34
+2022-03-14,Zorneding,21,1891.83
+2022-03-15,Zorneding,32,1838.39
+2022-03-16,Zorneding,42,2030.78
 2022-03-17,Zorneding,43,2116.29
 2022-03-18,Zorneding,18,2094.91
 2022-03-19,Zorneding,21,2073.54
@@ -19172,3 +19192,4 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-08-29,Zorneding,6,213.77
 2022-08-30,Zorneding,8,235.14
 2022-08-31,Zorneding,3,235.14
+2022-09-01,Zorneding,3,235.14
