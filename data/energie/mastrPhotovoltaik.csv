@@ -990,7 +990,8 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5167890,SEE976434032019,,In Betrieb,2022-07-08,2022-07-07,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,74,Ost,29.97,29.97,70%,false,Teileinspeisung,false
 5168774,SEE907919823228,,In Betrieb,2022-07-09,2022-07-09,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.75,0.6,ohne,false,Teileinspeisung,false
 5177417,SEE919559273141,,In Betrieb,2022-07-14,2022-07-14,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd-Ost,0.375,0.36,,false,Teileinspeisung,false
-5113063,SEE999383515082,,In Betrieb,2022-07-22,2022-07-21,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,23,Süd,9.2,8.2,70%,false,Teileinspeisung,false
+5301248,SEE988194105360,,In Betrieb,2022-09-06,2022-07-14,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd,0.31,0.3,ohne,false,Teileinspeisung,false
+5113063,SEE999383515082,,In Betrieb,2022-07-22,2022-07-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,23,Süd,9.2,8.2,70%,false,Teileinspeisung,false
 5230616,SEE938549991452,,In Betrieb,2022-08-08,2022-07-26,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,13,Süd,4.81,4.1,70%,false,Teileinspeisung,false
 5206715,SEE900905493665,,In Betrieb,2022-07-27,2022-07-27,,,,,sonstige,85599,Parsdorf,,,,,false,stecker,2,Süd,0.76,0.6,ohne,false,Teileinspeisung,false
 5233287,SEE901452479249,,In Betrieb,2022-08-09,2022-07-29,,,,,GHD,85591,Vaterstetten,,,,,false,gebaeude,81,Süd-Ost,29.97,29.97,ohne,false,Teileinspeisung,false
