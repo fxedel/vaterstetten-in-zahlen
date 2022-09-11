@@ -24,8 +24,10 @@ schulleiter <- hgv %>%
   group_by(Schulleiter) %>%
   summarise(
     Anfang = min(Schuljahresbeginn),
-    Ende = max(Schuljahresbeginn) + 1,
+    Ende = max(Schuljahresbeginn),
     .groups = "drop"
+  ) %>% mutate(
+    Jahre = Ende - Anfang + 1,
   )
 
 
@@ -48,7 +50,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         plotlyOutput(ns("plotTotal")),
         p({
           lastRow <- hgv %>% filter(!is.na(Schueler)) %>% slice_tail()
-          paste0("Im Schuljahr ", lastRow$Schuljahresbeginn, "/", lastRow$Schuljahresbeginn, ") haben ", utils$germanNumberFormat(lastRow$Schueler), " Schüler:innen das Humboldt-Gymnasium besucht, davon ", utils$germanNumberFormat(lastRow$SchuelerMaennlich), " männlich und ", utils$germanNumberFormat(lastRow$SchuelerWeiblich)," weiblich.")
+          paste0("Im Schuljahr ", lastRow$Schuljahresbeginn, "/", lastRow$Schuljahresbeginn+1, " haben ", utils$germanNumberFormat(lastRow$Schueler), " Schüler:innen das Humboldt-Gymnasium besucht, davon ", utils$germanNumberFormat(lastRow$SchuelerMaennlich), " männlich und ", utils$germanNumberFormat(lastRow$SchuelerWeiblich)," weiblich.")
         }),
         p("Es wird bevorzugt die Schülerzahl zum Schuljahresbeginn dargestellt; ist diese nicht bekannt, wird die Schülerzahl zum Schuljahresende verwendet."),
       ),
@@ -75,9 +77,20 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(y = ~Zugaenge, name = "Zugänge", type = "bar", text = ~Zugaenge, marker = list(color = "#069a2e"), hovertemplate = "%{text} Zugänge<extra></extra>") %>%
             add_trace(y = ~-Abgaenge, name = "Abgänge", type = "bar", text = ~Abgaenge, marker = list(color = "#c9211e"), hovertemplate = "%{text} Abgänge<extra></extra>") %>%
             plotly_default_config() %>%
+            plotly_time_range() %>%
             layout(yaxis = list(title = "Schüler:innen", tickformat = ",d")) %>%
             layout(xaxis = list(title = "")) %>%
             layout(barmode = "relative") %>%
+            plotly_build()
+        },
+      ),
+      box(
+        title = "Amtszeiten der Schulleiter",
+        width = 6,
+        {
+          plot_ly(data = schulleiter, y = ~Schulleiter, x = ~Jahre, type = 'bar', orientation = 'h', text = ~paste0(Jahre, " Schuljahre\n", Anfang, "/", Anfang+1, " – ", Ende, "/", Ende+1), hoverinfo = "none") %>%
+            plotly_default_config() %>%
+            layout(yaxis = list(title = "", categoryorder = "total ascending")) %>%
             plotly_build()
         },
       ),
@@ -121,18 +134,23 @@ ui <- memoise(omit_args = "request", function(request, id) {
 })
 
 
-plotly_default_config <- function(p, xvals) {
+plotly_default_config <- function(p) {
   p %>%
     config(locale = "de") %>%
     config(displaylogo = FALSE) %>%
     config(displayModeBar = TRUE) %>%
     config(modeBarButtons = list(list("toImage"))) %>%
     config(toImageButtonOptions = list(scale = 2)) %>%
-    layout(xaxis = list(fixedrange = TRUE, range = c(1969, 2022))) %>%
     layout(yaxis = list(fixedrange = TRUE, rangemode = "tozero")) %>%
-    layout(hovermode = "x") %>%
     layout(dragmode = FALSE) %>%
     layout(legend = list(bgcolor = "#ffffffaa", orientation = "h")) %>% # legend below plot
+    identity()
+}
+
+plotly_time_range <- function(p) {
+  p %>%
+    layout(hovermode = "x") %>%
+    layout(xaxis = list(fixedrange = TRUE, range = c(min(hgv$Schuljahresbeginn)-1, max(hgv$Schuljahresbeginn)+1))) %>%
     identity()
 }
 
@@ -169,6 +187,7 @@ server <- function(id) {
 
         p %>%
           plotly_default_config() %>%
+          plotly_time_range() %>%
           layout(yaxis = list(title = "Schüler:innen", tickformat = ",d")) %>%
           layout(xaxis = list(title = "Schuljahresbeginn")) %>%
           plotly_build()
@@ -180,6 +199,7 @@ server <- function(id) {
             add_trace(y = ~SchuelerMaennlich, name = "Schüler", type = "scatter", mode = "lines+markers", color = I("#1fc3aa"), text = ~SchuelerMaennlich/(SchuelerMaennlich+SchuelerWeiblich), hovertemplate = "%{y} Schüler (%{text:.1%}),<extra></extra>") %>%
             add_trace(y = ~SchuelerWeiblich, name = "Schülerinnen", type = "scatter", mode = "lines+markers", color = I("#8624f5"), text = ~SchuelerWeiblich/(SchuelerMaennlich+SchuelerWeiblich), hovertemplate = "%{y} Schülerinnen (%{text:.1%}),<extra></extra>") %>%
             plotly_default_config() %>%
+            plotly_time_range() %>%
             layout(yaxis = list(title = "Schüler:innen", tickformat = ",d")) %>%
             layout(xaxis = list(title = "")) %>%
             layout(hovermode = "x unified") %>%
@@ -189,6 +209,7 @@ server <- function(id) {
             add_trace(y = ~SchuelerMaennlich/(SchuelerMaennlich+SchuelerWeiblich), name = "Anteil männlich", type = "scatter", mode = "lines+markers", color = I("#1fc3aa"), text = ~paste0(SchuelerMaennlich, " von ", (SchuelerMaennlich+SchuelerWeiblich)), hovertemplate = "%{y:.1%} männlich (%{text}),<extra></extra>") %>%
             add_trace(y = ~SchuelerWeiblich/(SchuelerMaennlich+SchuelerWeiblich), name = "Anteil weiblich", type = "scatter", mode = "lines+markers", color = I("#8624f5"), text = ~paste0(SchuelerWeiblich, " von ", (SchuelerMaennlich+SchuelerWeiblich)), hovertemplate = "%{y:.1%} weiblich (%{text}),<extra></extra>") %>%
             plotly_default_config() %>%
+            plotly_time_range() %>%
             layout(yaxis = list(title = "Anteil an allen Schüler:innen", range = c(0.3, 0.7), tickformat = ".0%", hoverformat = ".0%")) %>%
             layout(xaxis = list(title = "")) %>%
             layout(hovermode = "x unified") %>%
