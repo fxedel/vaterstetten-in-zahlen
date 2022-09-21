@@ -701,7 +701,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4385784,SEE955238850128,,In Betrieb,2021-03-13,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.975,8.0,70%,false,Teileinspeisung,false
 5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
 5143854,SEE974607330917,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 11,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,100,Ost,28.5,27.6,70%,false,Volleinspeisung,false
-5165282,SEE924388521639,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 1,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,46,Ost-West,12.88,12.5,70%,false,Volleinspeisung,false
+5165282,SEE924388521639,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 1,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,46,Ost-West,12.88,12.5,70%,false,Volleinspeisung,false
 5165302,SEE909984338300,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 3,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,33,Ost-West,9.405,8.0,70%,false,Volleinspeisung,false
 5174031,SEE958839888668,,In Betrieb,2022-07-12,2020-06-05,,,Kirsch-Anger 7,ibeko-system GmbH,haushalt,85591,Vaterstetten,,,,,false,gebaeude,99,Ost-West,28.025,27.6,70%,false,Volleinspeisung,false
 3115497,SEE914199824234,,In Betrieb,2020-07-15,2020-06-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,31,Süd-West,9.765,6.0,70%,false,Teileinspeisung,false
@@ -905,7 +905,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4810682,SEE974251795988,,In Betrieb,2021-12-09,2021-11-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Süd-West,9.9,7.0,70%,false,Teileinspeisung,false
 4833548,SEE944103952401,,In Betrieb,2021-12-23,2021-11-25,,,"Hausdach + An Lerchenfeld 8, 85599 Parsdorf",Brkic GmbH,sonstige,85599,Parsdorf,Am Lerchenfeld,,48.146429,11.789983,false,gebaeude,164,,54.12,50.0,ohne,false,Teileinspeisung,false
 5005514,SEE970613682507,,In Betrieb,2022-04-13,2021-11-25,,,,,GHD,85599,Parsdorf,,,,,true,gebaeude,90,,29.7,25.0,ohne,false,Teileinspeisung,false
-5136415,SEE986460602582,,In Betrieb,2022-06-23,2021-11-30,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,26,Süd,9.88,9.88,70%,false,Teileinspeisung,false
+5136415,SEE986460602582,,In Betrieb,2022-06-23,2021-11-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,9.88,9.88,70%,false,Teileinspeisung,false
 4800581,SEE996965318758,,In Betrieb,2021-12-03,2021-12-02,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Ost-West,6.885,4.6,70%,false,Teileinspeisung,false
 4872575,SEE918435685542,,In Betrieb,2022-01-25,2021-12-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,,8.0,6.1,70%,false,,false
 4825988,SEE908101916803,,In Betrieb,2021-12-18,2021-12-18,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,9.8,9.8,70%,false,Teileinspeisung,false
@@ -1001,7 +1001,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5239613,SEE921499959924,,In Betrieb,2022-08-11,2022-07-31,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
 5238246,SEE951244235201,,In Betrieb,2022-08-11,2022-08-01,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd,7.5,7.0,70%,false,Teileinspeisung,false
 4826298,SEE990252312757,,In Betrieb,2022-08-12,2022-08-04,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,72,Süd,24.7,20.0,70%,false,Teileinspeisung,false
-5259055,SEE934075676924,,In Betrieb,2022-08-22,2022-08-10,,,,,sonstige,85598,Baldham,,,,,false,gebaeude,14,Süd,5.32,4.2,ohne,false,Teileinspeisung,false
+5259055,SEE934075676924,,In Betrieb,2022-08-22,2022-08-10,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,14,Süd,5.32,4.2,ohne,false,Teileinspeisung,false
 5268480,SEE954900770139,,In Betrieb,2022-08-24,2022-08-19,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,35,Nord-Ost,13.65,12.0,70%,false,Teileinspeisung,false
 5264239,SEE984756240838,,In Betrieb,2022-08-22,2022-08-20,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,20,Süd,10.0,10.0,ohne,false,Teileinspeisung,false
 5275475,SEE918376739489,,In Betrieb,2022-08-26,2022-08-26,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd,7.6,6.0,70%,false,Teileinspeisung,false
@@ -1012,6 +1012,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5084598,SEE901578530435,,In Planung,2022-05-26,,2022-06-30,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,25,Süd-West,9.5,9.5,70%,false,Teileinspeisung,false
 5278139,SEE951799955364,,In Planung,2022-08-28,,2022-09-16,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-Ost,8.0,8.0,70%,false,Teileinspeisung,false
 5333236,SEE921343304481,,In Planung,2022-09-18,,2022-09-30,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.6,0.6,sonstige,false,Teileinspeisung,false
+5338286,SEE919187724138,,In Planung,2022-09-20,,2022-09-30,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,29,Süd,11.745,11.745,,false,Teileinspeisung,false
 5295568,SEE917553300870,,In Planung,2022-09-04,,2022-10-01,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Ost,0.72,0.6,ohne,false,Teileinspeisung,false
 5304821,SEE913231927315,,In Planung,2022-09-07,,2022-10-01,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,,Süd,9.57,9.57,70%,false,Teileinspeisung,false
 5281951,SEE995773857725,,In Planung,2022-08-30,,2022-10-16,,PV001,Kugler Feinkost GmbH,GHD,85599,Parsdorf,Taxetstraße,5,48.14731,11.79305,false,gebaeude,848,West,318.0,240.0,ohne,false,Teileinspeisung,false
