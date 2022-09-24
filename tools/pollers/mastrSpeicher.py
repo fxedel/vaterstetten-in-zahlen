@@ -71,7 +71,7 @@ class MastrSpeicherPoller(MastrGenericPoller):
       'lat': x['Breitengrad'],
       'long': x['Laengengrad'],
       'netzbetreiberPruefung': str(x['IsNBPruefungAbgeschlossen'] == self.NETZBETREIBERPRUEFUNG_GEPRUEFT_ID).lower(),
-      'batterietechnologie': self.BATTERIETECHNOLOGIE_BY_ID[x['Batterietechnologie']],
+      'batterietechnologie': self.BATTERIETECHNOLOGIE_BY_ID[x['Batterietechnologie']] if not x['Batterietechnologie'] is None else None,
       'bruttoleistung_kW': x['Bruttoleistung'],
       'nettonennleistung_kW': x['Nettonennleistung'],
       'kapazitaet_kWh': x['NutzbareSpeicherkapazitaet'],
