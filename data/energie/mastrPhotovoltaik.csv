@@ -556,10 +556,10 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2061394,SEE971650501110,,In Betrieb,2019-05-22,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost,5.5,4.6,70%,false,Teileinspeisung,false
 2061594,SEE934764933215,,In Betrieb,2019-05-22,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.625,8.0,70%,false,Teileinspeisung,false
 2113476,SEE987871831462,,In Betrieb,2019-05-23,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-Ost,5.5,4.6,70%,false,Teileinspeisung,false
-2130553,SEE915542531809,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 4,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,51,Ost,14.03,14.0,70%,false,Volleinspeisung,false
-2130682,SEE967309831806,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 6,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,78,Ost,21.45,21.0,70%,false,Volleinspeisung,false
+2130553,SEE915542531809,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 4,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,51,Ost,14.03,14.0,70%,false,Volleinspeisung,false
+2130682,SEE967309831806,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 6,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,78,Ost,21.45,21.0,70%,false,Volleinspeisung,false
 2130743,SEE912667285235,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 8,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,45,Ost,12.375,10.0,70%,false,Volleinspeisung,false
-2135553,SEE968963023422,,In Betrieb,2019-06-05,2019-01-18,,,Birnen-Anger 10,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,53,West,14.58,12.6,70%,false,Volleinspeisung,false
+2135553,SEE968963023422,,In Betrieb,2019-06-05,2019-01-18,,,Birnen-Anger 10,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,53,West,14.58,12.6,70%,false,Volleinspeisung,false
 2138232,SEE912858596195,,In Betrieb,2019-06-07,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost,5.5,4.6,70%,false,Teileinspeisung,false
 2135580,SEE978155222786,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,74,Ost,20.35,18.6,70%,false,Volleinspeisung,false
 2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 14,ibeko-solar GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,15,Ost,4.125,4.0,70%,false,Volleinspeisung,false
@@ -602,7 +602,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2925177,SEE970349977779,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 1,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,29,Ost,8.12,7.0,70%,false,Volleinspeisung,false
 2925216,SEE939536430381,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 3,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,West,4.48,4.48,70%,false,Volleinspeisung,false
 2925249,SEE956523203483,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 5,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,65,West,18.2,16.1,70%,false,Volleinspeisung,false
-2925291,SEE979437775334,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 7,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,54,West,15.12,12.0,70%,false,Volleinspeisung,false
+2925291,SEE979437775334,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 7,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,54,West,15.12,12.0,70%,false,Volleinspeisung,false
 2925307,SEE994911592559,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 9,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,45,West,12.6,11.6,70%,false,Volleinspeisung,false
 2925331,SEE901532561390,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 11,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,104,West,29.12,24.3,70%,false,Volleinspeisung,false
 3008150,SEE901890856848,E2104101S000000000000102647900001,In Betrieb,2020-04-14,2019-06-28,,,,,GHD,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,5.6,4.6,70%,false,Teileinspeisung,false
@@ -699,11 +699,11 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4063282,SEE903060627838,,In Betrieb,2021-01-06,2020-06-05,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,30,Süd,9.75,9.75,70%,false,Teileinspeisung,false
 4326967,SEE915920084514,,In Betrieb,2021-02-08,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,5.6,4.6,70%,false,Teileinspeisung,false
 4385784,SEE955238850128,,In Betrieb,2021-03-13,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.975,8.0,70%,false,Teileinspeisung,false
-5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
-5143854,SEE974607330917,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 11,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,100,Ost,28.5,27.6,70%,false,Volleinspeisung,false
+5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
+5143854,SEE974607330917,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 11,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,100,Ost,28.5,27.6,70%,false,Volleinspeisung,false
 5165282,SEE924388521639,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 1,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,46,Ost-West,12.88,12.5,70%,false,Volleinspeisung,false
 5165302,SEE909984338300,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 3,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,33,Ost-West,9.405,8.0,70%,false,Volleinspeisung,false
-5174031,SEE958839888668,,In Betrieb,2022-07-12,2020-06-05,,,Kirsch-Anger 7,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,99,Ost-West,28.025,27.6,70%,false,Volleinspeisung,false
+5174031,SEE958839888668,,In Betrieb,2022-07-12,2020-06-05,,,Kirsch-Anger 7,ibeko-solar GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,99,Ost-West,28.025,27.6,70%,false,Volleinspeisung,false
 3115497,SEE914199824234,,In Betrieb,2020-07-15,2020-06-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,31,Süd-West,9.765,6.0,70%,false,Teileinspeisung,false
 3387220,SEE963853857286,,In Betrieb,2020-08-31,2020-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Süd,5.61,4.6,70%,false,Teileinspeisung,false
 3381243,SEE966929022083,,In Betrieb,2020-09-21,2020-06-09,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,45,Süd-Ost,14.85,14.85,70%,false,Teileinspeisung,false
@@ -937,14 +937,14 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5030764,SEE994091746810,,In Betrieb,2022-04-28,2022-04-14,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
 5037543,SEE992844653774,,In Betrieb,2022-05-03,2022-04-14,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung,false
 5048586,SEE950668920601,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,16,Süd,5.68,5.5,70%,false,Teileinspeisung,false
-5048649,SEE976382360974,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,5.68,5.5,70%,false,Teileinspeisung,false
-5048680,SEE989242517883,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,9,Süd,3.195,3.0,70%,false,Teileinspeisung,false
+5048649,SEE976382360974,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,16,Süd,5.68,5.5,70%,false,Teileinspeisung,false
+5048680,SEE989242517883,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,9,Süd,3.195,3.0,70%,false,Teileinspeisung,false
 5067833,SEE955962487041,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd-Ost,5.68,5.5,70%,false,Teileinspeisung,false
 5067869,SEE969384732863,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd-Ost,5.68,5.5,70%,false,Teileinspeisung,false
 5067964,SEE946345685628,,In Betrieb,2022-05-18,2022-04-14,,,,,GHD,85598,Baldham,,,,,false,gebaeude,8,Süd,2.84,2.84,ohne,false,Teileinspeisung,false
 5068035,SEE929050182439,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,12,Süd,4.26,4.2,70%,false,Teileinspeisung,false
-5068057,SEE922165155558,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung,false
-5068073,SEE957020497054,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung,false
+5068057,SEE922165155558,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung,false
+5068073,SEE957020497054,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung,false
 5068091,SEE994277902597,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,9,Süd,3.195,3.0,70%,false,Teileinspeisung,false
 5067766,SEE987370968522,,In Betrieb,2022-05-18,2022-04-18,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,9,Süd,3.195,3.0,70%,false,Teileinspeisung,false
 5058287,SEE988929520154,,In Betrieb,2022-05-13,2022-04-19,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd,0.31,0.3,ohne,false,Teileinspeisung,false
