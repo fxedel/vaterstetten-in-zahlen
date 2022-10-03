@@ -310,7 +310,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_build() %>%
             identity()
         },
-        p(HTML("Mehr Infos zu Balkonkraftwerken gibt es im <a href=\"https://muenchen.solar2030.de/balkonkraftwerk/\">Guide von München Solar2030</a>, außerdem gibt es seit Januar 2022 eine Förderung von 25&nbsp;% und maximal 250&nbsp;€ von der <a href=\"https://www.vaterstetten.de/Rathaus/Rathaus/Energie.htm/Seiten/Energieeinspar-Foerderprogramme.html\">Gemeinde Vaterstetten</a>.")),
+        p(HTML("Mehr Infos zu Balkonkraftwerken gibt es im <a href=\"https://muenchen.solar2030.de/balkonkraftwerk/\">Guide von München Solar2030</a>.<br>Von Januar bis Ende September 2022 gab es eine Förderung von 25&nbsp;% und maximal 250&nbsp;€ von der <a href=\"https://www.vaterstetten.de/Rathaus/Rathaus/Energie.htm/Seiten/Energieeinspar-Foerderprogramme.html\">Gemeinde Vaterstetten</a>.")),
       ),
     ),
 
