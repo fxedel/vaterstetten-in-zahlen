@@ -50,8 +50,7 @@ class Poller(pollers.poller.Poller):
 
 def apply_manual_fixes(features: List[Feature]):
   for feature in features:
-    attrs = feature.attributes # just a shorthand to make following statements shorter
-    datum = timestamp_to_iso_date(attrs['Meldedatum'])
+    datum = timestamp_to_iso_date(feature.attributes['Meldedatum'])
     
     if datum == '2022-06-03':
       replace_attr_value(feature, 'Erstimpfungen_SUM', 101217, 102217)
@@ -59,6 +58,30 @@ def apply_manual_fixes(features: List[Feature]):
       replace_attr_value(feature, 'Impfungen_Tag', -976, 1000-976)
     elif datum == '2022-06-04':
       replace_attr_value(feature, 'Impfungen_Tag', 1016, 16)
+    elif datum == '2022-09-07':
+      # a data update states and an unusal high amount of new vaccinations on 2022-09-07
+      # and a negative number of new vaccinations on 2022-09-10;
+      # this seems like an error, so we stick to the old data for these days
+      replace_attr_value(feature, 'Erstimpfungen_SUM', 102301, 102297)
+      replace_attr_value(feature, 'Zweitimpfungen_SUM', 104861, 104851)
+      replace_attr_value(feature, 'Drittimpfungen_SUM', 92164, 92141)
+      replace_attr_value(feature, 'Viertimpfungen_SUM', 9499, 9203)
+      replace_attr_value(feature, 'Impfungen_SUM', 308825, 308492)
+      replace_attr_value(feature, 'Impfungen_Tag', 363, 30)
+    elif datum == '2022-09-09':
+      replace_attr_value(feature, 'Erstimpfungen_SUM', 102303, 102299)
+      replace_attr_value(feature, 'Zweitimpfungen_SUM', 104861, 104851)
+      replace_attr_value(feature, 'Drittimpfungen_SUM', 92176, 92153)
+      replace_attr_value(feature, 'Viertimpfungen_SUM', 9519, 9223)
+      replace_attr_value(feature, 'Impfungen_SUM', 308859, 308526)
+    elif datum == '2022-09-10':
+      replace_attr_value(feature, 'Erstimpfungen_SUM', 102303, 102299)
+      replace_attr_value(feature, 'Zweitimpfungen_SUM', 104862, 104852)
+      replace_attr_value(feature, 'Drittimpfungen_SUM', 92189, 92166)
+      replace_attr_value(feature, 'Viertimpfungen_SUM', 9537, 9241)
+      replace_attr_value(feature, 'Impfungen_SUM', 308891, 308558)
+    elif datum == '2022-09-12':
+      replace_attr_value(feature, 'Impfungen_Tag', -238, 95)
 
 def ensure_attr_value(feature: Feature, attr_key: str, value: Any):
   if feature.attributes[attr_key] != value:
