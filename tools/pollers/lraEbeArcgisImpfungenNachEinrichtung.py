@@ -19,11 +19,13 @@ class Poller(pollers.poller.Poller):
     if len(data) == 0:
       raise Exception('Queried data is empty')
 
-    features_filtered = list(filter_duplicate_days(data.features))
-    apply_manual_fixes(features_filtered)
-    check_cumulative_plausability(features_filtered)
+    features = data.features
+    features = list(filter_ignored(features))
+    features = list(filter_duplicate_days(features))
+    apply_manual_fixes(features)
+    check_cumulative_plausability(features)
 
-    rows_nach_einrichtung = list(map(map_nach_einrichtung, features_filtered))
+    rows_nach_einrichtung = list(map(map_nach_einrichtung, features))
     rows_nach_einrichtung_file = os.path.join('corona-impfungen', 'arcgisImpfungenNachEinrichtung.csv')
     rows_nach_einrichtung_diff = self.get_csv_diff(rows_nach_einrichtung_file, rows_nach_einrichtung)
     if len(rows_nach_einrichtung_diff) > 0:
@@ -37,7 +39,7 @@ class Poller(pollers.poller.Poller):
           parse_mode = "Markdown"
         )
 
-    rows_nach_geschlecht = list(itertools.chain.from_iterable(map(map_nach_geschlecht, features_filtered)))
+    rows_nach_geschlecht = list(itertools.chain.from_iterable(map(map_nach_geschlecht, features)))
     rows_nach_geschlecht_file = os.path.join('corona-impfungen', 'arcgisImpfungenNachGeschlecht.csv')
     rows_nach_geschlecht_diff = self.get_csv_diff(rows_nach_geschlecht_file, rows_nach_geschlecht)
     if len(rows_nach_geschlecht_diff) > 0:
@@ -51,7 +53,7 @@ class Poller(pollers.poller.Poller):
           parse_mode = "Markdown"
         )
 
-    rows_nach_alter = list(itertools.chain.from_iterable(map(map_nach_alter, features_filtered)))
+    rows_nach_alter = list(itertools.chain.from_iterable(map(map_nach_alter, features)))
     rows_nach_alter_file = os.path.join('corona-impfungen', 'arcgisImpfungenNachAlter.csv')
     rows_nach_alter_diff = self.get_csv_diff(rows_nach_alter_file, rows_nach_alter)
     if len(rows_nach_alter_diff) > 0:
@@ -75,6 +77,17 @@ def filter_duplicate_days(features: List[Feature]):
       filtered[-1] = feature
 
   return filtered
+
+def filter_ignored(features: List[Feature]):
+  ignored_days = {
+    'Impfzentrum': [],
+    'Praxis': [
+      '2022-09-07', # just a duplicate of 2022-09-26
+    ],
+    'Kreisklinik': [],
+  }
+
+  return filter(lambda feature: not timestamp_to_iso_date(feature.attributes['Meldedatum']) in ignored_days[feature.attributes['Einrichtung']], features)
 
 def apply_manual_fixes(features: List[Feature]):
   for feature in features:
