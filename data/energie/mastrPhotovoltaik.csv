@@ -479,6 +479,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 1838187,SEE929069395400,E2104101S000000000000083605800001,In Betrieb,2019-02-10,2016-09-20,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,38,Süd-Ost,9.88,9.88,70%,false,Teileinspeisung,false
 3126434,SEE953900205405,E2104101S000000000000083475700001,In Betrieb,2020-06-08,2016-09-27,,,,,GHD,85599,Parsdorf,,,,,false,gebaeude,38,Ost-West,9.88,9.88,70%,false,Teileinspeisung,false
 3672619,SEE953645782834,E2104101S000000000000084100100001,In Betrieb,2021-01-27,2016-10-10,,,Photovoltaik LP,Auer Baustoffe GmbH & Co. KG,GHD,85599,Parsdorf,,,,,true,gebaeude,115,Süd,29.9,29.9,ohne,false,Teileinspeisung,false
+5377559,SEE973251641936,E2104101S000000000000085524600001,In Betrieb,2022-10-06,2016-10-14,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude,24,Süd-West,6.24,6.24,70%,false,Teileinspeisung,false
 2387624,SEE954928814624,,In Betrieb,2019-09-29,2016-10-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Ost,5.72,5.72,70%,false,Teileinspeisung,false
 3619897,SEE912786958621,,In Betrieb,2020-11-07,2016-11-22,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,18,Süd-Ost,5.67,5.0,70%,false,Teileinspeisung,false
 3339753,SEE954065404412,E2104101S000000000000085233400001,In Betrieb,2020-08-13,2017-01-10,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,36,Süd,9.72,9.72,70%,false,Teileinspeisung,false
@@ -965,6 +966,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5232814,SEE985075054564,,In Betrieb,2022-08-09,2022-05-04,,,PV Parsdorfer Weg 26,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,71,Süd-West,23.43,20.0,70%,false,Teileinspeisung,false
 5232833,SEE903096075481,,In Betrieb,2022-08-09,2022-05-04,,,PV Parsdorfer Weg 28,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,41,Süd-West,13.53,13.53,70%,false,Teileinspeisung,false
 5232848,SEE982295156771,,In Betrieb,2022-08-09,2022-05-04,,,PV Parsdorfer Weg 30,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,42,Süd-West,13.86,13.86,70%,false,Teileinspeisung,false
+5376209,SEE988568192040,,In Betrieb,2022-10-06,2022-05-04,,,PV Parsdorfer Weg 32 - Kita,Eurytos Energie GmbH & Co. KG,sonstige,85591,Vaterstetten,,,,,false,gebaeude,64,Süd-West,21.12,20.0,70%,false,Teileinspeisung,false
 5067141,SEE926163032613,,In Betrieb,2022-05-17,2022-05-05,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,22,Ost,8.25,8.0,70%,false,Teileinspeisung,false
 5055987,SEE982384454054,,In Betrieb,2022-05-12,2022-05-06,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung,false
 5078979,SEE987511657902,,In Betrieb,2022-05-23,2022-05-10,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,30,Süd,11.25,11.25,70%,false,Teileinspeisung,false
