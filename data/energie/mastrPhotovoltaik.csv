@@ -862,7 +862,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4659912,SEE980370860131,,In Betrieb,2021-09-22,2021-07-30,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd-Ost,10.65,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4659986,SEE985924102071,,In Betrieb,2021-09-22,2021-07-30,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,30,Süd-Ost,10.65,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4667316,SEE957073068690,,In Betrieb,2021-09-29,2021-07-30,,,,,landwirtschaft,85599,Hergolding,Waldstraße,16,48.125792,11.794757,false,gebaeude,799,West,299.625,299.625,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-4479221,SEE991149831160,,In Betrieb,2022-04-28,2021-07-30,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,30,Süd,10.65,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+4479221,SEE991149831160,,In Betrieb,2022-04-28,2021-07-30,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4606434,SEE927068350291,,In Betrieb,2021-08-14,2021-08-06,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,15,Süd-West,5.63,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4632101,SEE969314296663,,In Betrieb,2021-09-03,2021-08-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,28,Süd,10.5,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4632595,SEE970037337328,,In Betrieb,2021-09-03,2021-09-02,,,,,haushalt,85646,Purfing,,,,,false,gebaeude,15,Süd-West,5.925,5.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -948,7 +948,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5067869,SEE969384732863,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd-Ost,5.68,5.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5067910,SEE918617561497,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,8,Süd,2.84,2.84,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5067964,SEE946345685628,,In Betrieb,2022-05-18,2022-04-14,,,,,GHD,85598,Baldham,,,,,true,gebaeude,8,Süd,2.84,2.84,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5067996,SEE997888276064,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,11,Süd,3.905,3.905,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5067996,SEE997888276064,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,11,Süd,3.905,3.905,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5068035,SEE929050182439,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,12,Süd,4.26,4.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5068057,SEE922165155558,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5068073,SEE957020497054,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,7,Süd,2.485,2.485,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
