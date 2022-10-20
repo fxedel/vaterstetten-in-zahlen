@@ -20,6 +20,10 @@ class Poller:
     pass
 
   def read_csv_rows(self, file_name: str) -> List[dict]:
+    with open(os.path.join(data_dir, file_name), mode='a') as csv_file:
+      # create file if needed
+      pass
+
     with open(os.path.join(data_dir, file_name), mode='r') as csv_file:
       csv_reader = csv.DictReader(csv_file)
 
@@ -54,3 +58,20 @@ class Poller:
       file_name,
       n = context
     ))
+
+  def send_csv_diff_via_telegram(self, csv_diff: List[str]):
+    if len(csv_diff) == 0:
+      return
+
+    if self.telegram_bot == None:
+      return
+
+    if self.telegram_chat_id == None:
+      return
+
+    data = ''.join(csv_diff)
+    self.telegram_bot.send_message(
+      self.telegram_chat_id,
+      '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
+      parse_mode = "Markdown"
+    )

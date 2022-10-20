@@ -20,7 +20,7 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 
 ### Quellen
 
-- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (EBE_Gesamtsummen_Impfmeldungen_Öffentlich)
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (EBE_Gesamtsummen_Impfmeldungen_Öffentlich)
 
 
 
@@ -44,7 +44,7 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 
 ### Quellen
 
-- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (Covid19_Impfmeldungen_Öffentlich)
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (Covid19_Impfmeldungen_Öffentlich)
 
 
 
@@ -66,7 +66,7 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 
 ### Quellen
 
-- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (Covid19_Impfmeldungen_Öffentlich)
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (Covid19_Impfmeldungen_Öffentlich)
 
 
 
@@ -88,7 +88,7 @@ Die Daten werden automatisiert erstellt und umfassen den Zeitraum seit dem 21. A
 
 ### Quellen
 
-- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (Covid19_Impfmeldungen_Öffentlich)
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (Covid19_Impfmeldungen_Öffentlich)
 
 
 
