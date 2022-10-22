@@ -12,7 +12,7 @@ Der Datensatz [arcgisInzidenzLandkreis.csv](./arcgisInzidenzLandkreis.csv) umfas
 
 ### Quellen
 
-- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (EBE_Landkreis_Inzidenztabelle)
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (EBE_Landkreis_Inzidenztabelle)
 
 
 ## [`arcgisInzidenzAltersgruppen.csv`](./arcgisInzidenzAltersgruppen.csv)
@@ -28,7 +28,7 @@ Der Datensatz [arcgisInzidenzAltersgruppen.csv](./arcgisInzidenzAltersgruppen.cs
 
 ### Quellen
 
-- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (EBE_Altersgruppen_Inzidenztabelle)
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (EBE_Altersgruppen_Inzidenztabelle)
 
 
 
@@ -45,7 +45,7 @@ Der Datensatz [arcgisInzidenzGemeinden.csv](./arcgisInzidenzGemeinden.csv) umfas
 
 ### Quellen
 
-- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-corona-arcgis.md) (EBE_Gemeinden_Inzidenztabelle)
+- [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (EBE_Gemeinden_Inzidenztabelle)
 
 
 

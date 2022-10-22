@@ -4,6 +4,8 @@ import pollers.lraEbeArcgisImpfungenNachEinrichtung
 import pollers.lraEbeArcgisInzidenz
 import pollers.lraEbeArcgisInzidenzGemeinden
 import pollers.lraEbeArcgisInzidenzAltersgruppen
+import pollers.lraEbeArcgisSchueler
+import pollers.lraEbeArcgisSchuelerNachWohnort
 from pollers.mastrPhotovoltaik import MastrPhotovoltaikPoller
 from pollers.mastrSpeicher import MastrSpeicherPoller
 
@@ -17,4 +19,6 @@ all: Dict[str, Type[pollers.poller.Poller]] = {
   'lraEbeArcgisInzidenzAltersgruppen': pollers.lraEbeArcgisInzidenzAltersgruppen.Poller,
   'lraEbeArcgisImpfungen': pollers.lraEbeArcgisImpfungen.Poller,
   'lraEbeArcgisImpfungenNachEinrichtung': pollers.lraEbeArcgisImpfungenNachEinrichtung.Poller,
+  'lraEbeArcgisSchueler': pollers.lraEbeArcgisSchueler.Poller,
+  'lraEbeArcgisSchuelerNachWohnort': pollers.lraEbeArcgisSchuelerNachWohnort.Poller,
 }

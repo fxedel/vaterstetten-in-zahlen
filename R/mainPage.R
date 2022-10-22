@@ -95,10 +95,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 6,
         tagList(
           {
-            row <- hgv$hgv[which.max(hgv$hgv$Schueler),]
+            row <- hgv$hgv[which.max(hgv$hgv$schueler),]
             actionLink(ns("linkHGV"), valueBox(
-              utils$germanNumberFormat(row$Schueler),
-              paste0("Höchste Schülerzahl am HGV (Schuljahr ", row$Schuljahresbeginn, "/", row$Schuljahresbeginn+1, ")"),
+              utils$germanNumberFormat(row$schueler),
+              paste0("Höchste Schülerzahl am HGV (Schuljahr ", row$schuljahresbeginn, "/", row$schuljahresbeginn+1, ")"),
               color = "aqua",
               icon = icon("school"),
               width = 12
