@@ -50,7 +50,8 @@ class Poller(pollers.poller.Poller):
 
 def apply_manual_fixes(features: List[Feature]):
   for feature in features:
-    datum = timestamp_to_iso_date(feature.attributes['Meldedatum'])
+    attrs = feature.attributes
+    datum = timestamp_to_iso_date(attrs['Meldedatum'])
     
     if datum == '2022-06-03':
       replace_attr_value(feature, 'Erstimpfungen_SUM', 101217, 102217)
@@ -82,6 +83,9 @@ def apply_manual_fixes(features: List[Feature]):
       replace_attr_value(feature, 'Impfungen_SUM', 308891, 308558)
     elif datum == '2022-09-12':
       replace_attr_value(feature, 'Impfungen_Tag', -238, 95)
+    elif datum == '2022-10-21':
+      replace_attr_value(feature, 'Zweitimpfungen_SUM', 104889, 104883)
+      replace_attr_value(feature, 'Impfungen_SUM', 312623, attrs['Impfungen_SUM']-104889+104883)
 
 def ensure_attr_value(feature: Feature, attr_key: str, value: Any):
   if feature.attributes[attr_key] != value:
@@ -156,10 +160,10 @@ def timestamp_to_iso_date(timestamp: int) -> str:
   return datetime.utcfromtimestamp(timestamp / 1000).strftime('%Y-%m-%d')
 
 def attrs_to_str(attrs: dict) -> str:
-  str = 'OBJECTID %s from %s:\n' % (attrs['OBJECTID'], timestamp_to_iso_date(attrs['Meldedatum']))
+  str = 'ObjectId %s from %s:\n' % (attrs['ObjectId'], timestamp_to_iso_date(attrs['Meldedatum']))
 
   for key in attrs:
-    if key in ['OBJECTID', 'Meldedatum']:
+    if key in ['ObjectId', 'Meldedatum']:
       continue
 
     str += '%s: %s\n' % (key, attrs[key])
