@@ -85,7 +85,7 @@ Der Datensatz [hgvJahresberichte.csv](./hgvJahresberichte.csv) umfasst Daten zum
 
 #### Schuljahr 1991/1992
 
-Im Jahresbericht ist als Schülerzahl zum Schuljahresbeginn `960` angegeben, die Summe aus den einzelnen Klassenstärken ergibt jedoch `958`. Mit `958` ist die Tabelle aus diesem Jahresbericht wieder in sich stimmig (also `SchuelerSchuljahresbeginn` + `Zugaenge` – `Abgaenge` = `SchuelerSchuljahresende`, sowie `SchuelerMaennlich` + `SchuelerWeiblich` = `SchuelerSchuljahresende` und die Summen aus den Klassenwerten stimmen auch), deshalb wurde der Wert korrigiert.
+Im Jahresbericht ist als Schülerzahl zum Schuljahresbeginn `960` angegeben, die Summe aus den einzelnen Klassenstärken ergibt jedoch `958`. Mit `958` ist die Tabelle aus diesem Jahresbericht wieder in sich stimmig (also `schuelerSchuljahresbeginn` + `zugaenge` – `abgaenge` = `schuelerSchuljahresende`, sowie `schuelerMaennlich` + `schuelerWeiblich` = `schuelerSchuljahresende` und die Summen aus den Klassenwerten stimmen auch), deshalb wurde der Wert korrigiert.
 
 #### Schuljahr 2005/2006
 
