@@ -21,7 +21,7 @@ Der Datensatz [arcgisSchueler.csv](./arcgisSchueler.csv) umfasst Daten zu den Sc
 
 Der Datensatz [arcgisSchuelerPrognose2022.csv](./arcgisSchuelerPrognose2022.csv) umfasst eine Prognose aus dem Frühjahr 2022 zu den Schülerzahlen der Schulen des Landkreises Ebersberg (Gymnasien, Realschulen, Förderschulen), nach Schuljahr, bis zum Jahr 2035.
 
-Grundlage der Prognose ist die Einwohnerentwicklung im Landkreis Ebersberg, die anhand von Altersstruktur, Feritiliät, Moritiliät, Wanderungen und Siedlungsentwicklung bestimmt wird.
+Grundlage der Prognose ist die Einwohnerentwicklung im Landkreis Ebersberg, die anhand von Altersstruktur, Fertilität, Mortalität, Wanderungen und Siedlungsentwicklung bestimmt wird.
 
 Weitere Informationen zur Prognose:
 * [Sitzung des Ausschusses für Soziales, Familie, Bildung, Sport und Kultur des Kreistages Ebersberg, TOP 6](https://buergerinfo.lra-ebe.de/si0057.asp?__ksinr=1399)
@@ -74,7 +74,7 @@ Der Datensatz [hgvJahresberichte.csv](./hgvJahresberichte.csv) umfasst Daten zum
 |`schuelerWeiblich`|integer|Anzahl weiblicher Schülerinnen. Stichtag ist möglichst das Schuljahresende, kann aber variieren.
 |`kommentar`|text|Zusatzinfo zum Schuljahr, die eventuell auch einen Erklärungsansatz für die Schülerzahl bietet.
 
-* `SchuelerSchuljahresbeginn` + `Zugaenge` – `Abgaenge` = `SchuelerSchuljahresende`
+* `schuelerSchuljahresbeginn` + `zugaenge` – `abgaenge` = `schuelerSchuljahresende`
 
 
 ### Quellen
@@ -89,4 +89,4 @@ Im Jahresbericht ist als Schülerzahl zum Schuljahresbeginn `960` angegeben, die
 
 #### Schuljahr 2005/2006
 
-Im Jahresbericht ist als Schülerzahl zum Schuljahresbeginn `1305` angegeben, die Summe aus den einzelnen Klassenstärken ergibt jedoch `1295`. Mit `1295` ist die Tabelle aus diesem Jahresbericht wieder in sich stimmig (also `SchuelerMaennlich` + `SchuelerWeiblich` = `SchuelerSchuljahresbeginn` und die Summen aus den Klassenwerten stimmen auch), deshalb wurde der Wert korrigiert.
+Im Jahresbericht ist als Schülerzahl zum Schuljahresbeginn `1305` angegeben, die Summe aus den einzelnen Klassenstärken ergibt jedoch `1295`. Mit `1295` ist die Tabelle aus diesem Jahresbericht wieder in sich stimmig (also `schuelerMaennlich` + `schuelerWeiblich` = `schuelerSchuljahresbeginn` und die Summen aus den Klassenwerten stimmen auch), deshalb wurde der Wert korrigiert.
