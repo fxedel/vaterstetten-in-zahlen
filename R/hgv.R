@@ -188,7 +188,7 @@ server <- function(id) {
           plotly_default_config() %>%
           plotly_time_range() %>%
           layout(yaxis = list(title = "Schüler:innen", tickformat = ",d")) %>%
-          layout(xaxis = list(title = "schuljahresbeginn")) %>%
+          layout(xaxis = list(title = "Schuljahresbeginn")) %>%
           plotly_build()
       })
 
