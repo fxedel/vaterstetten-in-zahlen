@@ -95,7 +95,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 6,
         tagList(
           {
-            row <- hgv$arcgisSchuelerPrognose[which.max(hgv$arcgisSchuelerPrognose$schueler),]
+            row <- hgv$arcgisSchuelerPrognose[which.max(hgv$arcgisSchuelerPrognose$schuljahresbeginn),]
             actionLink(ns("linkHGV"), valueBox(
               utils$germanNumberFormat(row$schueler),
               paste0("Schüler:innen werden am HGV für das Schuljahr ", row$schuljahresbeginn, "/", row$schuljahresbeginn+1, " prognostiziert"),
@@ -104,7 +104,24 @@ ui <- memoise(omit_args = "request", function(request, id) {
               width = 12
             ))
           },
-          actionButton(ns("buttonHGV"), "Zu den HGV-Statistiken", icon = icon("school"), width = "100%")
+          actionButton(ns("buttonHGV"), "Zum Humboldt-Gymnasium", icon = icon("school"), width = "100%")
+        )
+      ),
+      box(
+        title = "Staatliche Realschule Vaterstetten",
+        width = 6,
+        tagList(
+          {
+            row <- rsv$arcgisSchuelerPrognose[which.max(rsv$arcgisSchuelerPrognose$schuljahresbeginn),]
+            actionLink(ns("linkRSV"), valueBox(
+              utils$germanNumberFormat(row$schueler),
+              paste0("Schüler:innen werden an der Realschule für das Schuljahr ", row$schuljahresbeginn, "/", row$schuljahresbeginn+1, " prognostiziert"),
+              color = "aqua",
+              icon = icon("school"),
+              width = 12
+            ))
+          },
+          actionButton(ns("buttonRSV"), "Zur Realschule Vaterstetten", icon = icon("school"), width = "100%")
         )
       ),
     ),
@@ -143,6 +160,10 @@ server <- function(id, parentSession) {
       observe({
         req(input$linkHGV | input$buttonHGV)
         updateTabsetPanel(parentSession, "tab", selected = "hgv")
+      })
+      observe({
+        req(input$linkRSV | input$buttonRSV)
+        updateTabsetPanel(parentSession, "tab", selected = "rsv")
       })
     }
   )

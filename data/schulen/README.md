@@ -9,12 +9,13 @@ Der Datensatz [arcgisSchueler.csv](./arcgisSchueler.csv) umfasst Daten zu den Sc
 |`schule`|text|Name der Schule. 
 |`schuljahresbeginn`|integer|Jahr, in dem das Schuljahr begann, z.&nbsp;B. `1999` für das Schuljahr `1999/2000`.
 |`schueler`|integer|Anzahl Schüler:innen
-|`klassen`|integer|Anzahl Klassen (ohne Oberstufe am Gymnasium)
+|`klassen`|integer|Anzahl Klassen (meist ohne Oberstufe am Gymnasium)
 
 
 ### Quellen
 
 * [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (service_a22606ef95d34115b9b209cc73bd6c55)
+
 
 
 ## [`arcgisSchuelerPrognose2022.csv`](./arcgisSchuelerPrognose2022.csv)
@@ -42,6 +43,7 @@ Weitere Informationen zur Prognose:
 * [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (service_a22606ef95d34115b9b209cc73bd6c55)
 
 
+
 ## [`arcgisSchuelerNachWohnort.csv`](./arcgisSchuelerNachWohnort.csv)
 
 Der Datensatz [arcgisSchuelerNachWohnort.csv](./arcgisSchuelerNachWohnort.csv) umfasst Daten zum Wohnort der Schüler:innen der Schulen des Landkreises Ebersberg, nach Schuljahr.
@@ -57,6 +59,7 @@ Der Datensatz [arcgisSchuelerNachWohnort.csv](./arcgisSchuelerNachWohnort.csv) u
 ### Quellen
 
 * [ArcGIS-API des Landratsamtes Ebersberg](../quellen/lra-ebe-arcgis.md) (Herkunft)
+
 
 
 ## [`hgvJahresberichte.csv`](./hgvJahresberichte.csv)
@@ -82,6 +85,7 @@ Der Datensatz [hgvJahresberichte.csv](./hgvJahresberichte.csv) umfasst Daten zum
 ### Quellen
 
 * Jahresberichte des Humboldt-Gymnasiums Vaterstetten, zur Verfügung gestellt durch Lehrkräfte und Privatleute.
+* Zeitungsberichte, Webseiten (für Schulleiter:innen und Kommentare)
 
 ### Fehlerkorrekturen
 
@@ -92,3 +96,30 @@ Im Jahresbericht ist als Schülerzahl zum Schuljahresbeginn `960` angegeben, die
 #### Schuljahr 2005/2006
 
 Im Jahresbericht ist als Schülerzahl zum Schuljahresbeginn `1305` angegeben, die Summe aus den einzelnen Klassenstärken ergibt jedoch `1295`. Mit `1295` ist die Tabelle aus diesem Jahresbericht wieder in sich stimmig (also `schuelerMaennlich` + `schuelerWeiblich` = `schuelerSchuljahresbeginn` und die Summen aus den Klassenwerten stimmen auch), deshalb wurde der Wert korrigiert.
+
+
+
+## [`rsvJahresberichte.csv`](./rsvJahresberichte.csv)
+
+Der Datensatz [rsvJahresberichte.csv](./rsvJahresberichte.csv) umfasst Daten zur [Staatlichen Realschule Vaterstetten](https://rsvaterstetten.de/) aus den Jahresberichten, nach Schuljahr. Er ist aktuell noch weitgehend leer (nur einzelne Schulleiter:innen sind eingetragen).
+
+|Spalte|Format|Beschreibung
+|-|-|-
+|`schuljahresbeginn`|integer|Jahr, in dem das Schuljahr begann, z.&nbsp;B. `1999` für das Schuljahr `1999/2000`.
+|`schulleiter`|text|Name des/der Schulleiter:in
+|`schuelerSchuljahresbeginn`|integer|Anzahl Schüler:innen zum Schuljahresbeginn
+|`zugaenge`|integer|Unterjährige Zugänge an Schüler:innen
+|`abgaenge`|integer|Unterjährige Abgänge an Schüler:innen
+|`schuelerSchuljahresende`|integer|Anzahl Schüler:innen zum Schuljahresende
+|`schuelerMaennlich`|integer|Anzahl männlicher Schüler. Stichtag ist möglichst das Schuljahresende, kann aber variieren.
+|`schuelerWeiblich`|integer|Anzahl weiblicher Schülerinnen. Stichtag ist möglichst das Schuljahresende, kann aber variieren.
+|`klassen`|integer|Anzahl Klassen
+|`kommentar`|text|Zusatzinfo zum Schuljahr, die eventuell auch einen Erklärungsansatz für die Schülerzahl bietet.
+
+* `schuelerSchuljahresbeginn` + `zugaenge` – `abgaenge` = `schuelerSchuljahresende`
+
+
+### Quellen
+
+* Jahresberichte der Staatlichen Realschule Vaterstetten – zukünftig
+* Zeitungsberichte, Webseiten (für Schulleiter:innen und Kommentare)
