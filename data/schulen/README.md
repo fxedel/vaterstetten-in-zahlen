@@ -27,13 +27,14 @@ Weitere Informationen zur Prognose:
 * [Sitzung des Ausschusses für Soziales, Familie, Bildung, Sport und Kultur des Kreistages Ebersberg, TOP 6](https://buergerinfo.lra-ebe.de/si0057.asp?__ksinr=1399)
   * [Sitzungsvorlage](https://buergerinfo.lra-ebe.de/getfile.asp?id=67288&type=view)
   * [Präsentation](https://buergerinfo.lra-ebe.de/getfile.asp?id=67923&type=do)
+* [Landratsamt Ebersberg: Schulentwicklung](https://www.lra-ebe.de/landratsamt/unsere-fachbereiche?schulentwicklung&orga=27239)
+* [Bildungsdashboard](https://experience.arcgis.com/experience/da3e6d0ac8774a3a9e3ad227e7123c30) des Landkreises Ebersberg
 
 |Spalte|Format|Beschreibung
 |-|-|-
 |`schule`|text|Name der Schule. 
 |`schuljahresbeginn`|integer|Jahr, in dem das Schuljahr begann, z.&nbsp;B. `1999` für das Schuljahr `1999/2000`.
 |`schueler`|integer|Anzahl Schüler:innen
-|`klassen`|integer|Anzahl Klassen (ohne Oberstufe am Gymnasium)
 
 
 ### Quellen
@@ -72,6 +73,7 @@ Der Datensatz [hgvJahresberichte.csv](./hgvJahresberichte.csv) umfasst Daten zum
 |`schuelerSchuljahresende`|integer|Anzahl Schüler:innen zum Schuljahresende
 |`schuelerMaennlich`|integer|Anzahl männlicher Schüler. Stichtag ist möglichst das Schuljahresende, kann aber variieren.
 |`schuelerWeiblich`|integer|Anzahl weiblicher Schülerinnen. Stichtag ist möglichst das Schuljahresende, kann aber variieren.
+|`klassen`|integer|Anzahl Klassen (ohne Oberstufe)
 |`kommentar`|text|Zusatzinfo zum Schuljahr, die eventuell auch einen Erklärungsansatz für die Schülerzahl bietet.
 
 * `schuelerSchuljahresbeginn` + `zugaenge` – `abgaenge` = `schuelerSchuljahresende`

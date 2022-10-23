@@ -95,10 +95,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 6,
         tagList(
           {
-            row <- hgv$hgv[which.max(hgv$hgv$schueler),]
+            row <- hgv$arcgisSchuelerPrognose[which.max(hgv$arcgisSchuelerPrognose$schueler),]
             actionLink(ns("linkHGV"), valueBox(
               utils$germanNumberFormat(row$schueler),
-              paste0("Höchste Schülerzahl am HGV (Schuljahr ", row$schuljahresbeginn, "/", row$schuljahresbeginn+1, ")"),
+              paste0("Schüler:innen werden am HGV für das Schuljahr ", row$schuljahresbeginn, "/", row$schuljahresbeginn+1, " prognostiziert"),
               color = "aqua",
               icon = icon("school"),
               width = 12
