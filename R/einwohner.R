@@ -108,6 +108,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         tagList(
           p(HTML('Datenquelle: Bayerisches Landesamt für Statistik – <a href="https://www.statistik.bayern.de">www.statistik.bayern.de</a>.'))
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/einwohner", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
     ),
