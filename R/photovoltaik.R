@@ -368,6 +368,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         p(HTML('Datengrundlage ist das <a href="https://www.marktstammdatenregister.de">Marktstammdatenregister</a> (MaStR) der Bundesnetzagentur, in dem alle Anlagen und Einheiten des deutschen Energiesystems registriert sind bzw. sein sollten. Die öffentlich zugänglichen Daten stehen unter der <a href="https://www.govdata.de/dl-de/by-2-0">Datenlizenz Deutschland – Namensnennung – Version 2.0</a>.')),
+        p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/energie", "Zum Daten-Download mit Dokumentation")),
       ),
     ),
   ) %>% renderTags()
