@@ -30,6 +30,8 @@ einwohner <- new.env()
 sys.source("R/einwohner.R", envir = einwohner, chdir = FALSE)
 hgv <- new.env()
 sys.source("R/hgv.R", envir = hgv, chdir = FALSE)
+rsv <- new.env()
+sys.source("R/rsv.R", envir = rsv, chdir = FALSE)
 kommunalwahl2020 <- new.env()
 sys.source("R/kommunalwahl2020.R", envir = kommunalwahl2020, chdir = FALSE)
 impressum <- new.env()
@@ -59,6 +61,7 @@ ui <- function(request) {
         menuItem("Photovoltaik", tabName = "photovoltaik", icon = icon("solar-panel"), selected = query$tab == "photovoltaik"),
         menuItem("Einwohner", tabName = "einwohner", icon = icon("users"), selected = query$tab == "einwohner"),
         menuItem("Humboldt-Gymnasium", tabName = "hgv", icon = icon("school"), selected = query$tab == "hgv"),
+        menuItem("Realschule Vaterstetten", tabName = "rsv", icon = icon("school"), selected = query$tab == "rsv"),
         menuItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", icon = icon("vote-yea"), selected = query$tab == "kommunalwahl2020"),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"), selected = query$tab == "impressum")
       )
@@ -104,6 +107,7 @@ ui <- function(request) {
         tabItem(tabName = "photovoltaik", photovoltaik$ui(request, "photovoltaik")),
         tabItem(tabName = "einwohner", einwohner$ui(request, "einwohner")),
         tabItem(tabName = "hgv", hgv$ui(request, "hgv")),
+        tabItem(tabName = "rsv", rsv$ui(request, "rsv")),
         tabItem(tabName = "kommunalwahl2020", kommunalwahl2020$ui(request, "kommunalwahl2020")),
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
@@ -145,6 +149,7 @@ server <- function(input, output, session) {
   photovoltaik$server("photovoltaik")
   einwohner$server("einwohner")
   hgv$server("hgv")
+  rsv$server("rsv")
   kommunalwahl2020$server("kommunalwahl2020")
   impressum$server("impressum")
 }
