@@ -7,7 +7,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2428059,SEE915814135667,,In Betrieb,2019-10-17,2001-05-27,,,,,GHD,85646,Neufarn,,,,,false,gebaeude,180,Süd,27.0,27.0,ohne,false,Volleinspeisung,false
 1991910,SEE918211483102,E21875011000000000000271550100000,In Betrieb,2019-04-14,2001-07-03,,,,,landwirtschaft,85591,Vaterstetten,Johann-Sebastian-Bach-Straße,7,48.11154,11.778989,true,gebaeude,336,Süd,51.0,50.0,ohne,false,Volleinspeisung,false
 3716447,SEE959204146321,E21875011000000000000255066200000,In Betrieb,2020-11-24,2001-09-11,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,1,,2.24,2.24,,false,Volleinspeisung,false
-3478741,SEE916117810046,E21875011000000000000297547000000,In Betrieb,2020-10-02,2001-10-05,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,12,Süd,1.8,1.8,ohne,false,Volleinspeisung,false
+3478741,SEE916117810046,E21875011000000000000297547000000,Endgültig stillgelegt,2020-10-02,2001-10-05,,2022-09-20,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,12,Süd,1.8,1.8,ohne,false,Volleinspeisung,false
 2050191,SEE911664141407,E21875011000000000000297421600000,In Betrieb,2020-12-02,2001-11-15,,,PV-Rathaus-Vaterstetten-Eingang,Gemeinde Vaterstetten,oeffentlich,85591,Vaterstetten,,,,,true,gebaeude,8,Süd,1.18,1.18,ohne,false,Volleinspeisung,false
 3261903,SEE931610749754,E21875011000000000000297686600000,In Betrieb,2020-07-20,2001-12-18,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,14,Süd,1.52,1.52,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2117036,SEE969536093385,E21875011000000000000297609500000,In Betrieb,2019-05-26,2001-12-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,11,Süd,0.45,0.45,ohne,false,Volleinspeisung,false
@@ -1013,12 +1013,13 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5379079,SEE969926272383,,In Betrieb,2022-10-07,2022-08-23,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,26,Süd,9.75,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5275475,SEE918376739489,,In Betrieb,2022-08-26,2022-08-26,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd,7.6,6.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5342646,SEE944833745915,,In Betrieb,2022-09-21,2022-08-26,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5305910,SEE996774284176,,In Betrieb,2022-09-08,2022-09-01,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,26,Süd,9.75,9.75,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5374599,SEE904234067665,,In Betrieb,2022-10-05,2022-09-05,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,32,Ost,12.96,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5305910,SEE996774284176,,In Betrieb,2022-09-08,2022-09-08,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,26,Süd,9.75,9.75,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5373111,SEE938981674708,,In Betrieb,2022-10-05,2022-09-08,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,20,Süd,7.3,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5332805,SEE977852287883,,In Betrieb,2022-09-18,2022-09-13,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd,9.62,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5278139,SEE951799955364,,In Betrieb,2022-10-02,2022-09-13,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-Ost,8.0,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5348869,SEE935587826654,,In Betrieb,2022-09-24,2022-09-19,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.6,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5423771,SEE938972418861,,In Betrieb,2022-10-25,2022-09-20,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,46,Süd,10.43,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5387076,SEE989824497152,,In Betrieb,2022-10-11,2022-09-21,,,,,sonstige,85599,Parsdorf,,,,,false,gebaeude,61,Nord,25.0,25.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5281951,SEE995773857725,,In Betrieb,2022-10-21,2022-09-21,,,PV001,Kugler Feinkost GmbH,GHD,85599,Parsdorf,Taxetstraße,5,48.14731,11.79305,false,gebaeude,848,West,318.0,240.0,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5333236,SEE921343304481,,In Betrieb,2022-09-26,2022-09-26,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.6,0.6,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
