@@ -508,7 +508,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3320895,SEE971235544037,E2104101S000000000000093404300001,In Betrieb,2020-08-06,2018-01-08,,,,,haushalt,85622,Weißenfeld,,,,,true,gebaeude,19,Süd,5.4,5.4,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3077142,SEE962166785132,E21041011000000000000248878600001,In Betrieb,2020-05-23,2018-01-20,,,,,sonstige,85646,Neufarn,,,,,true,gebaeude,12,Süd,3.6,3.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4700483,SEE927766882841,E21041011000000000000307831700001,In Betrieb,2021-10-14,2018-01-23,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,14,Süd-Ost,4.41,4.41,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-3433158,SEE937212073297,E21041011000000000000283672900001,In Betrieb,2020-09-17,2018-01-29,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,,Süd,9.0,9.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+3433158,SEE937212073297,E21041011000000000000283672900001,In Betrieb,2020-09-17,2018-01-29,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,,Süd,9.0,9.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3328774,SEE996259166652,E2104101S000000000000093671500001,In Betrieb,2020-08-09,2018-02-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,30,Süd,8.1,8.0,70%,false,Volleinspeisung,false
 2700146,SEE954100182879,,In Betrieb,2020-01-20,2018-03-13,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,,Süd,6.3,6.3,70%,false,Volleinspeisung,false
 2060327,SEE959577611006,E2104101S000000000000085621900001,In Betrieb,2019-05-21,2018-03-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,33,Süd,9.9,9.9,50%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -688,6 +688,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3089062,SEE950071258896,,In Betrieb,2020-06-19,2020-05-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,29,Süd-Ost,9.28,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3308444,SEE936960239238,,In Betrieb,2020-08-03,2020-05-22,,,,,haushalt,85646,Purfing,,,,,true,gebaeude,30,Süd,9.45,9.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3362246,SEE937645106210,,In Betrieb,2020-08-21,2020-05-22,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd-Ost,8.4,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5427502,SEE929311229040,,In Betrieb,2022-10-26,2020-05-22,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,18,West,5.58,5.58,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3191380,SEE940509634613,,In Betrieb,2020-06-29,2020-05-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd,4.41,4.41,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3114432,SEE974185079987,,In Betrieb,2020-06-05,2020-05-30,,,NMB AS KIEL KG - PARSDORF,NMB Star Asset Sun Kiel GmbH & Co KG,GHD,85599,Parsdorf,Gruber Str.,12,48.0848,11.4714,true,gebaeude,317,Süd,99.855,90.0,70%,false,Volleinspeisung,false
 3102156,SEE917745224212,,In Betrieb,2020-05-31,2020-05-31,,,200531_PV_VGP_GERMUE_A1,VGP Renewable Energy S.à.r.l.,industrie,85599,Parsdorf,Am Gewerbepark,1,48.155,11.782,true,gebaeude,2376,Ost-West,748.44,670.0,ohne,false,Volleinspeisung,false
