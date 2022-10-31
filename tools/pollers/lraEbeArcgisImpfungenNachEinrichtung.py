@@ -208,6 +208,13 @@ def apply_manual_fixes(features: List[Feature]):
       elif datum == '2022-10-24':
         replace_attr_value(feature, 'I2_Alter40_50', 8168, 8059)
         replace_attr_value(feature, 'I2_SummeAlter', 61128, 61019)
+      elif datum == '2022-10-28':
+        replace_attr_value(feature, 'I2_Alter40_50', 8168, 8059)
+        replace_attr_value(feature, 'I2_SummeAlter', 61128, 61019)
+      elif datum == '2022-10-29':
+        # just a safe guard for the fixes above, that the number of second vaccinations really did not change
+        ensure_attr_value(feature, 'I2_Alter40_50', 8059)
+        ensure_attr_value(feature, 'I2_SummeAlter', 61019)
 
 
     elif einrichtung == 'Praxis':
