@@ -559,11 +559,11 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2113476,SEE987871831462,,In Betrieb,2019-05-23,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-Ost,5.5,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2130553,SEE915542531809,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 4,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,51,Ost,14.03,14.0,70%,false,Volleinspeisung,false
 2130682,SEE967309831806,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 6,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,78,Ost,21.45,21.0,70%,false,Volleinspeisung,false
-2130743,SEE912667285235,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 8,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,45,Ost,12.375,10.0,70%,false,Volleinspeisung,false
+2130743,SEE912667285235,,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 8,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,45,Ost,12.375,10.0,70%,false,Volleinspeisung,false
 2135553,SEE968963023422,,In Betrieb,2019-06-05,2019-01-18,,,Birnen-Anger 10,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,53,West,14.58,12.6,70%,false,Volleinspeisung,false
 2138232,SEE912858596195,,In Betrieb,2019-06-07,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost,5.5,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-2135580,SEE978155222786,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,74,Ost,20.35,18.6,70%,false,Volleinspeisung,false
-2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 14,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,false,gebaeude,15,Ost,4.125,4.0,70%,false,Volleinspeisung,false
+2135580,SEE978155222786,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,74,Ost,20.35,18.6,70%,false,Volleinspeisung,false
+2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 14,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,15,Ost,4.125,4.0,70%,false,Volleinspeisung,false
 2258051,SEE983848984827,,In Betrieb,2019-07-31,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost-West,9.625,8.0,70%,false,Volleinspeisung,false
 2294924,SEE981944894521,,In Betrieb,2019-08-18,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,9,Ost-West,2.475,2.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2938809,SEE983654072114,E2104101S000000000000099648200001,In Betrieb,2020-03-30,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,11,nachgeführt,3.03,3.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -600,9 +600,9 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2342163,SEE982582930091,,In Betrieb,2019-09-09,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,11,Ost-West,3.08,3.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2441383,SEE990073185196,,In Betrieb,2019-10-22,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,17,Ost-West,5.695,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2558356,SEE986472883122,,In Betrieb,2019-12-03,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost-West,5.6,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-2925177,SEE970349977779,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 1,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,29,Ost,8.12,7.0,70%,false,Volleinspeisung,false
+2925177,SEE970349977779,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 1,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,29,Ost,8.12,7.0,70%,false,Volleinspeisung,false
 2925216,SEE939536430381,,In Betrieb,2020-03-26,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,West,4.48,4.48,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-2925249,SEE956523203483,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 5,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,65,West,18.2,16.1,70%,false,Volleinspeisung,false
+2925249,SEE956523203483,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 5,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,65,West,18.2,16.1,70%,false,Volleinspeisung,false
 2925291,SEE979437775334,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 7,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,54,West,15.12,12.0,70%,false,Volleinspeisung,false
 2925307,SEE994911592559,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 9,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,45,West,12.6,11.6,70%,false,Volleinspeisung,false
 2925331,SEE901532561390,,In Betrieb,2020-03-26,2019-06-28,,,Quitten-Hof 11,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,104,West,29.12,24.3,70%,false,Volleinspeisung,false
@@ -704,8 +704,8 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4385784,SEE955238850128,,In Betrieb,2021-03-13,2020-06-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost,9.975,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5143759,SEE943052826610,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 15,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,49,Ost,13.965,13.965,70%,false,Volleinspeisung,false
 5143854,SEE974607330917,,In Betrieb,2022-06-28,2020-06-05,,,Kirsch-Anger 11,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,100,Ost,28.5,27.6,70%,false,Volleinspeisung,false
-5165282,SEE924388521639,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 1,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,46,Ost-West,12.88,12.5,70%,false,Volleinspeisung,false
-5165302,SEE909984338300,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 3,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,33,Ost-West,9.405,8.0,70%,false,Volleinspeisung,false
+5165282,SEE924388521639,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 1,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,46,Ost-West,12.88,12.5,70%,false,Volleinspeisung,false
+5165302,SEE909984338300,,In Betrieb,2022-07-07,2020-06-05,,,Kirsch-Anger 3,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,33,Ost-West,9.405,8.0,70%,false,Volleinspeisung,false
 5174031,SEE958839888668,,In Betrieb,2022-07-12,2020-06-05,,,Kirsch-Anger 7,ibeko-system GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,true,gebaeude,99,Ost-West,28.025,27.6,70%,false,Volleinspeisung,false
 3115497,SEE914199824234,,In Betrieb,2020-07-15,2020-06-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,31,Süd-West,9.765,6.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3387220,SEE963853857286,,In Betrieb,2020-08-31,2020-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Süd,5.61,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1016,6 +1016,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5305910,SEE996774284176,,In Betrieb,2022-09-08,2022-09-01,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,9.75,9.75,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5374599,SEE904234067665,,In Betrieb,2022-10-05,2022-09-05,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,32,Ost,12.96,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5373111,SEE938981674708,,In Betrieb,2022-10-05,2022-09-08,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,20,Süd,7.3,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5445535,SEE977294591722,,In Betrieb,2022-11-03,2022-09-12,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,40,Süd,14.4,14.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5332805,SEE977852287883,,In Betrieb,2022-09-18,2022-09-13,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd,9.62,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5278139,SEE951799955364,,In Betrieb,2022-10-02,2022-09-13,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-Ost,8.0,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5348869,SEE935587826654,,In Betrieb,2022-09-24,2022-09-19,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.6,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
