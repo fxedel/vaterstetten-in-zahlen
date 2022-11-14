@@ -6,10 +6,12 @@ vaterstetten-in-zahlen.de is an open source project whose goal is to visualize (
 
 ### Initial setup
 
+Install the newest version of R via the CRAN package, see https://www.digitalocean.com/community/tags/r?type=tutorial&subtype=tutorial
+
 Make sure the following packages are installed:
 
 ```sh
-apt install r-recommended libcurl4-openssl-dev libgdal-dev libssl-dev libudunits2-dev libxml2-dev gfortran
+apt install libcurl4-openssl-dev libgdal-dev libssl-dev libudunits2-dev libxml2-dev gfortran
 ```
 
 Then, start an R session and install the needed R packages:
