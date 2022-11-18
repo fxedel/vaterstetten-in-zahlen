@@ -563,7 +563,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2135553,SEE968963023422,,In Betrieb,2019-06-05,2019-01-18,,,Birnen-Anger 10,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,53,West,14.58,12.6,70%,false,Volleinspeisung,false
 2138232,SEE912858596195,,In Betrieb,2019-06-07,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost,5.5,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2135580,SEE978155222786,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,74,Ost,20.35,18.6,70%,false,Volleinspeisung,false
-2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 14,ibeko-system GmbH Klaus Bernhardt,sonstige,85591,Vaterstetten,,,,,true,gebaeude,15,Ost,4.125,4.0,70%,false,Volleinspeisung,false
+2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude,15,Ost,4.125,4.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2258051,SEE983848984827,,In Betrieb,2019-07-31,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost-West,9.625,8.0,70%,false,Volleinspeisung,false
 2294924,SEE981944894521,,In Betrieb,2019-08-18,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,9,Ost-West,2.475,2.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2938809,SEE983654072114,E2104101S000000000000099648200001,In Betrieb,2020-03-30,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,11,nachgeführt,3.03,3.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -609,7 +609,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3008150,SEE901890856848,E2104101S000000000000102647900001,In Betrieb,2020-04-14,2019-06-28,,,,,GHD,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,5.6,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2215756,SEE930466339546,,In Betrieb,2021-03-12,2019-06-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,15,Ost-West,4.2,3.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2208121,SEE942718399703,,In Betrieb,2019-07-08,2019-07-02,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude-other,12,Süd,3.72,3.68,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-2291994,SEE920076494087,E2104101S000000000000104829200001,In Betrieb,2019-08-27,2019-07-11,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,25,Ost-West,6.875,6.875,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+2291994,SEE920076494087,E2104101S000000000000104829200001,In Betrieb,2019-08-27,2019-07-11,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,25,Ost-West,6.875,6.875,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2287421,SEE985374949318,,In Betrieb,2019-10-21,2019-07-11,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,9,Süd-Ost,2.97,2.97,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2248039,SEE930329055484,,In Betrieb,2019-07-26,2019-07-12,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,11,Süd-West,3.63,3.63,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2288102,SEE974223053795,,In Betrieb,2019-11-05,2019-07-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,19,Süd,6.175,4.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -950,7 +950,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5048680,SEE989242517883,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,9,Süd,3.195,3.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5067833,SEE955962487041,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd-Ost,5.68,5.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5067869,SEE969384732863,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd-Ost,5.68,5.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5067910,SEE918617561497,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,8,Süd,2.84,2.84,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5067910,SEE918617561497,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,8,Süd,2.84,2.84,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5067964,SEE946345685628,,In Betrieb,2022-05-18,2022-04-14,,,,,GHD,85598,Baldham,,,,,true,gebaeude,8,Süd,2.84,2.84,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5067996,SEE997888276064,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,11,Süd,3.905,3.905,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5068035,SEE929050182439,,In Betrieb,2022-05-18,2022-04-14,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,12,Süd,4.26,4.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -964,14 +964,6 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5089304,SEE966454687979,,In Betrieb,2022-05-30,2022-04-29,,,,,haushalt,85646,Purfing,,,,,true,gebaeude,10,Süd,3.55,3.55,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5039654,SEE948520663780,,In Betrieb,2022-05-03,2022-05-01,,,,,sonstige,85598,Baldham,,,,,false,stecker,1,Süd,0.36,0.3,ohne,false,,false
 5045960,SEE961660498166,,In Betrieb,2022-05-06,2022-05-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Ost-West,4.48,4.48,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5223633,SEE912488646789,,In Betrieb,2022-08-09,2022-05-04,,,PV Kotterweg 2,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,52,Süd-West,17.16,17.16,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5232721,SEE974211480695,,In Betrieb,2022-08-09,2022-05-04,,,PV Kotterweg 4,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,48,Süd-West,15.84,15.84,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5232748,SEE989848920803,,In Betrieb,2022-08-09,2022-05-04,,,PV Kotterweg 6,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,52,Süd-West,17.16,17.16,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5232767,SEE939053382705,,In Betrieb,2022-08-09,2022-05-04,,,PV Kotterweg 8,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,52,Süd-West,17.16,17.16,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5232795,SEE929902336386,,In Betrieb,2022-08-09,2022-05-04,,,PV Parsdorfer Weg 24,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,45,Süd-West,14.85,14.85,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5232814,SEE985075054564,,In Betrieb,2022-08-09,2022-05-04,,,PV Parsdorfer Weg 26,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,71,Süd-West,23.43,20.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5232833,SEE903096075481,,In Betrieb,2022-08-09,2022-05-04,,,PV Parsdorfer Weg 28,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,41,Süd-West,13.53,13.53,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5232848,SEE982295156771,,In Betrieb,2022-08-09,2022-05-04,,,PV Parsdorfer Weg 30,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,42,Süd-West,13.86,13.86,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5376209,SEE988568192040,,In Betrieb,2022-10-06,2022-05-04,,,PV Parsdorfer Weg 32 - Kita,Eurytos Energie GmbH & Co. KG,sonstige,85591,Vaterstetten,,,,,false,gebaeude,64,Süd-West,21.12,20.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5055987,SEE982384454054,,In Betrieb,2022-05-12,2022-05-06,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5078979,SEE987511657902,,In Betrieb,2022-05-23,2022-05-10,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,30,Süd,11.25,11.25,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -989,16 +981,23 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5074493,SEE987548094275,,In Betrieb,2022-05-21,2022-05-31,,,,,haushalt,85622,Weißenfeld,,,,,true,gebaeude,42,Süd-Ost,15.54,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5101174,SEE936438240445,,In Betrieb,2022-06-04,2022-06-01,,,,,sonstige,85591,Vaterstetten,,,,,true,stecker,2,Süd,0.4,0.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5287088,SEE942512908873,,In Betrieb,2022-08-31,2022-06-01,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,1,Ost-West,9.75,9.75,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5110525,SEE966043175122,,In Betrieb,2022-10-01,2022-06-09,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.74,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5129814,SEE906370529731,,In Betrieb,2022-06-21,2022-06-20,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,West,0.15,0.15,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5132410,SEE964865876142,,In Betrieb,2022-06-22,2022-06-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,27,Süd-Ost,10.395,10.395,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5478448,SEE995935156727,,In Betrieb,2022-11-16,2022-06-22,,,,,sonstige,85599,Parsdorf,,,,,false,stecker,3,Süd,0.92,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5315016,SEE966599726342,,In Betrieb,2022-09-11,2022-06-23,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,25,West,11.06,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5223633,SEE912488646789,,In Betrieb,2022-08-09,2022-06-27,,,PV Kotterweg 2,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,52,Süd-West,17.16,17.16,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5232721,SEE974211480695,,In Betrieb,2022-08-09,2022-06-27,,,PV Kotterweg 4,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,48,Süd-West,15.84,15.84,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5232748,SEE989848920803,,In Betrieb,2022-08-09,2022-06-27,,,PV Kotterweg 6,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,52,Süd-West,17.16,17.16,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5232767,SEE939053382705,,In Betrieb,2022-08-09,2022-06-27,,,PV Kotterweg 8,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,52,Süd-West,17.16,17.16,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5232795,SEE929902336386,,In Betrieb,2022-08-09,2022-06-27,,,PV Parsdorfer Weg 24,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,45,Süd-West,14.85,14.85,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5232814,SEE985075054564,,In Betrieb,2022-08-09,2022-06-27,,,PV Parsdorfer Weg 26,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,71,Süd-West,23.43,20.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5232833,SEE903096075481,,In Betrieb,2022-08-09,2022-06-27,,,PV Parsdorfer Weg 28,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,41,Süd-West,13.53,13.53,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5232848,SEE982295156771,,In Betrieb,2022-08-09,2022-06-27,,,PV Parsdorfer Weg 30,Eurytos Energie GmbH & Co. KG,haushalt,85591,Vaterstetten,,,,,false,gebaeude,42,Süd-West,13.86,13.86,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5181610,SEE939884725603,,In Betrieb,2022-07-15,2022-06-30,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,26,Süd,9.75,9.75,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5153728,SEE900660743012,,In Betrieb,2022-07-02,2022-07-01,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd-Ost,0.31,0.3,ohne,false,Volleinspeisung,false
 5156582,SEE955570116470,,In Betrieb,2022-07-04,2022-07-04,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.6,0.6,sonstige,false,Volleinspeisung,false
 5156772,SEE930500881789,,In Betrieb,2022-07-04,2022-07-04,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,18,Süd,7.2,7.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5278139,SEE951799955364,,In Betrieb,2022-10-02,2022-07-06,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-Ost,8.0,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5278139,SEE951799955364,,In Betrieb,2022-10-02,2022-07-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-Ost,8.0,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5167890,SEE976434032019,,In Betrieb,2022-07-08,2022-07-07,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,74,Ost,29.97,29.97,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5168774,SEE907919823228,,In Betrieb,2022-07-09,2022-07-09,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.75,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5177417,SEE919559273141,,In Betrieb,2022-07-14,2022-07-14,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd-Ost,0.375,0.36,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1028,6 +1027,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5281951,SEE995773857725,,In Betrieb,2022-10-21,2022-09-21,,,PV001,Kugler Feinkost GmbH,GHD,85599,Parsdorf,Taxetstraße,5,48.14731,11.79305,false,gebaeude,848,West,318.0,240.0,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5333236,SEE921343304481,,In Betrieb,2022-09-26,2022-09-26,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.6,0.6,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5369081,SEE913323076945,,In Betrieb,2022-10-03,2022-09-29,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-West,7.7,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5110525,SEE966043175122,,In Betrieb,2022-10-01,2022-10-01,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.74,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5383368,SEE969626461810,,In Betrieb,2022-10-09,2022-10-01,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5428291,SEE994967768526,E21041011000000000000275137100001,In Betrieb,2022-10-27,2022-10-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,24,Süd,7.98,7.98,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5475245,SEE975705016864,,In Betrieb,2022-11-15,2022-10-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd-West,5.6,5.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
