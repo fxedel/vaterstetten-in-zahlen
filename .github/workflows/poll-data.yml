@@ -23,7 +23,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.10'
       - name: Install pipenv
         run: pip install --ignore-installed pipenv==2022.8.5
       - name: Install python packages

@@ -19,4 +19,4 @@ ujson = ">=5.4.0"
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"
