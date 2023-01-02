@@ -1907,13 +1907,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-07-19,Aßling,11,1025.53
 2022-07-20,Aßling,8,1134.63
 2022-07-21,Aßling,8,1200.09
-2022-07-22,Aßling,9,1243.73
-2022-07-23,Aßling,0,1243.73
-2022-07-24,Aßling,0,1243.73
-2022-07-25,Aßling,16,1134.63
-2022-07-26,Aßling,3,960.07
-2022-07-27,Aßling,12,1047.35
-2022-07-28,Aßling,5,981.89
+2022-07-22,Aßling,8,1221.91
+2022-07-23,Aßling,0,1221.91
+2022-07-24,Aßling,0,1221.91
+2022-07-25,Aßling,16,1112.81
+2022-07-26,Aßling,3,938.25
+2022-07-27,Aßling,12,1025.53
+2022-07-28,Aßling,5,960.07
 2022-07-29,Aßling,1,807.33
 2022-07-30,Aßling,0,807.33
 2022-07-31,Aßling,0,807.33
@@ -2071,6 +2071,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Aßling,0,65.46
 2022-12-31,Aßling,0,65.46
 2023-01-01,Aßling,0,65.46
+2023-01-02,Aßling,2,109.1
 2020-03-02,Baiern,0,0
 2020-03-03,Baiern,0,0
 2020-03-04,Baiern,0,0
@@ -3107,6 +3108,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Baiern,0,0
 2022-12-31,Baiern,0,0
 2023-01-01,Baiern,0,0
+2023-01-02,Baiern,1,66.27
 2020-03-02,Bruck,0,0
 2020-03-03,Bruck,0,0
 2020-03-04,Bruck,0,0
@@ -5179,6 +5181,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Ebersberg,0,131.04
 2022-12-31,Ebersberg,0,131.04
 2023-01-01,Ebersberg,0,131.04
+2023-01-02,Ebersberg ,4,163.8
 2020-03-02,Egmating,0,0
 2020-03-03,Egmating,0,0
 2020-03-04,Egmating,0,0
@@ -6215,6 +6218,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Egmating,0,85.07
 2022-12-31,Egmating,0,85.07
 2023-01-01,Egmating,0,85.07
+2023-01-02,Egmating,1,127.61
 2020-03-02,Emmering,0,0
 2020-03-03,Emmering,0,0
 2020-03-04,Emmering,0,0
@@ -8287,6 +8291,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Forstinning,0,76.88
 2022-12-31,Forstinning,0,76.88
 2023-01-01,Forstinning,0,76.88
+2023-01-02,Forstinning,1,102.51
 2020-03-02,Frauenneuharting,0,0
 2020-03-03,Frauenneuharting,0,0
 2020-03-04,Frauenneuharting,0,0
@@ -10359,6 +10364,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Glonn,0,56.81
 2022-12-31,Glonn,0,56.81
 2023-01-01,Glonn,0,56.81
+2023-01-02,Glonn,2,94.68
 2020-03-02,Grafing bei München,1,7.18
 2020-03-03,Grafing bei München,1,14.35
 2020-03-04,Grafing bei München,0,14.35
@@ -11143,13 +11149,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-04-22,Grafing bei München,18,1062.0
 2022-04-23,Grafing bei München,19,997.42
 2022-04-24,Grafing bei München,16,990.24
-2022-04-25,Grafing bei München,20,975.89
-2022-04-26,Grafing bei München,16,1026.12
-2022-04-27,Grafing bei München,26,940.01
-2022-04-28,Grafing bei München,20,968.71
-2022-04-29,Grafing bei München,10,911.31
-2022-04-30,Grafing bei München,0,774.97
-2022-05-01,Grafing bei München,0,660.16
+2022-04-25,Grafing bei München,19,968.71
+2022-04-26,Grafing bei München,16,1018.94
+2022-04-27,Grafing bei München,26,932.84
+2022-04-28,Grafing bei München,20,961.54
+2022-04-29,Grafing bei München,10,904.13
+2022-04-30,Grafing bei München,0,767.8
+2022-05-01,Grafing bei München,0,652.99
 2022-05-02,Grafing bei München,24,688.86
 2022-05-03,Grafing bei München,20,717.57
 2022-05-04,Grafing bei München,15,638.63
@@ -11228,13 +11234,13 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-07-16,Grafing bei München,0,731.92
 2022-07-17,Grafing bei München,0,731.92
 2022-07-18,Grafing bei München,50,853.9
-2022-07-19,Grafing bei München,27,904.13
-2022-07-20,Grafing bei München,26,968.71
-2022-07-21,Grafing bei München,39,1054.82
-2022-07-22,Grafing bei München,25,1198.34
-2022-07-23,Grafing bei München,0,1198.34
-2022-07-24,Grafing bei München,0,1198.34
-2022-07-25,Grafing bei München,51,1205.51
+2022-07-19,Grafing bei München,26,896.96
+2022-07-20,Grafing bei München,26,961.54
+2022-07-21,Grafing bei München,39,1047.65
+2022-07-22,Grafing bei München,25,1191.16
+2022-07-23,Grafing bei München,0,1191.16
+2022-07-24,Grafing bei München,0,1191.16
+2022-07-25,Grafing bei München,51,1198.34
 2022-07-26,Grafing bei München,30,1227.04
 2022-07-27,Grafing bei München,10,1112.23
 2022-07-28,Grafing bei München,24,1004.59
@@ -11395,6 +11401,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Grafing bei München,2,107.63
 2022-12-31,Grafing bei München,0,107.63
 2023-01-01,Grafing bei München,0,107.63
+2023-01-02,Grafing bei München,4,136.34
 2020-03-02,Hohenlinden,0,0
 2020-03-03,Hohenlinden,0,0
 2020-03-04,Hohenlinden,0,0
@@ -12431,6 +12438,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Hohenlinden,1,149.84
 2022-12-31,Hohenlinden,0,149.84
 2023-01-01,Hohenlinden,0,149.84
+2023-01-02,Hohenlinden,1,179.8
 2020-03-02,Kirchseeon,0,0
 2020-03-03,Kirchseeon,0,0
 2020-03-04,Kirchseeon,0,0
@@ -13467,6 +13475,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Kirchseeon,6,103.24
 2022-12-31,Kirchseeon,0,103.24
 2023-01-01,Kirchseeon,0,103.24
+2023-01-02,Kirchseeon,3,131.39
 2020-03-02,Markt Schwaben,0,0
 2020-03-03,Markt Schwaben,0,0
 2020-03-04,Markt Schwaben,0,0
@@ -14503,6 +14512,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Markt Schwaben,2,196.21
 2022-12-31,Markt Schwaben,0,196.21
 2023-01-01,Markt Schwaben,0,196.21
+2023-01-02,Markt Schwaben,1,203.47
 2020-03-02,Moosach,0,0
 2020-03-03,Moosach,0,0
 2020-03-04,Moosach,0,0
@@ -17611,6 +17621,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Pliening,1,101.95
 2022-12-31,Pliening,0,101.95
 2023-01-01,Pliening,0,101.95
+2023-01-02,Pliening,1,118.95
 2020-03-02,Poing,0,0
 2020-03-03,Poing,0,0
 2020-03-04,Poing,0,0
@@ -18480,19 +18491,19 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-07-16,Poing,0,1377.63
 2022-07-17,Poing,0,1377.63
 2022-07-18,Poing,96,1695.55
-2022-07-19,Poing,80,1845.16
-2022-07-20,Poing,48,1857.62
-2022-07-21,Poing,63,1951.13
-2022-07-22,Poing,46,2075.8
-2022-07-23,Poing,0,2075.8
-2022-07-24,Poing,0,2075.8
-2022-07-25,Poing,77,1957.36
-2022-07-26,Poing,43,1726.72
-2022-07-27,Poing,21,1558.41
-2022-07-28,Poing,20,1290.36
-2022-07-29,Poing,11,1072.19
-2022-07-30,Poing,0,1072.19
-2022-07-31,Poing,0,1072.19
+2022-07-19,Poing,79,1838.92
+2022-07-20,Poing,48,1851.39
+2022-07-21,Poing,63,1944.89
+2022-07-22,Poing,46,2069.57
+2022-07-23,Poing,0,2069.57
+2022-07-24,Poing,0,2069.57
+2022-07-25,Poing,76,1944.89
+2022-07-26,Poing,43,1720.48
+2022-07-27,Poing,21,1552.18
+2022-07-28,Poing,20,1284.13
+2022-07-29,Poing,11,1065.95
+2022-07-30,Poing,0,1065.95
+2022-07-31,Poing,0,1065.95
 2022-08-01,Poing,24,741.8
 2022-08-02,Poing,21,604.66
 2022-08-03,Poing,15,567.26
@@ -18647,6 +18658,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Poing,2,155.84
 2022-12-31,Poing,0,155.84
 2023-01-01,Poing,0,155.84
+2023-01-02,Poing,3,174.54
 2020-03-02,Steinhöring,0,0
 2020-03-03,Steinhöring,0,0
 2020-03-04,Steinhöring,0,0
@@ -20719,6 +20731,7 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Vaterstetten,1,75.93
 2022-12-31,Vaterstetten,0,75.93
 2023-01-01,Vaterstetten,0,75.93
+2023-01-02,Vaterstetten,7,103.9
 2020-03-02,Zorneding,0,0
 2020-03-03,Zorneding,0,0
 2020-03-04,Zorneding,0,0
@@ -21755,3 +21768,4 @@ datum,ort,neuPositiv,inzidenz7tage
 2022-12-30,Zorneding,3,108.32
 2022-12-31,Zorneding,0,108.32
 2023-01-01,Zorneding,0,108.32
+2023-01-02,Zorneding,4,151.65
