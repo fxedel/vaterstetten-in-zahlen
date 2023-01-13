@@ -802,7 +802,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4765604,SEE913082847299,,In Betrieb,2021-11-14,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Süd,9.975,9.975,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5174394,SEE966848019058,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 2,ibeko-systen GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,66,Ost-West,22.185,22.185,70%,false,Volleinspeisung,false
 5174433,SEE926215846861,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 6,ibeko-systen GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,36,Ost-West,10.26,10.0,70%,false,Volleinspeisung,false
-5174476,SEE945283027408,,In Betrieb,2022-07-12,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,26,Ost-West,7.85,7.85,70%,false,Volleinspeisung,false
+5174476,SEE945283027408,,In Betrieb,2022-07-12,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,26,Ost-West,7.85,7.85,70%,false,Volleinspeisung,false
 5174514,SEE974480204688,,In Betrieb,2022-07-12,2021-01-15,,,Mirabellen-Hof 16,ibeko-systen GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,96,Ost-West,29.34,29.34,70%,false,Volleinspeisung,false
 5200226,SEE960386867188,,In Betrieb,2022-07-25,2021-01-15,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,30,Ost-West,9.3,9.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5200720,SEE913205286752,,In Betrieb,2022-07-25,2021-01-15,,,PV Anlage,ibeko-systen GmbH Klaus Bernhardt,haushalt,85591,Vaterstetten,,,,,false,gebaeude,30,Ost-West,9.25,9.0,70%,false,Volleinspeisung,false
@@ -1088,3 +1088,4 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5564355,SEE935472629285,,In Planung,2022-12-27,,2023-01-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,24,Süd-Ost,9.72,8.4,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5549407,SEE948169626184,,In Planung,2022-12-17,,2023-01-04,,,,haushalt,85598,Baldham,,,,,false,gebaeude,8,Süd,3.0,2.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5369687,SEE949581868718,,In Planung,2022-10-03,,2023-01-24,,,,haushalt,85598,Baldham,,,,,false,gebaeude,25,Süd,9.63,9.63,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5604883,SEE931441636711,,In Planung,2023-01-12,,2023-02-10,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,10,Süd,4.0,3.68,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
