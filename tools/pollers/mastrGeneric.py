@@ -203,7 +203,12 @@ class MastrGenericPoller(Poller):
     if dateStr == None:
       return None
 
-    unix_timestamp = re.search(r'^\/Date\(([0-9]+)\)\/$', dateStr).group(1)
+    regex_match = re.search(r'^\/Date\((-?[0-9]+)\)\/$', dateStr)
+
+    if regex_match == None:
+      raise Exception(f'Unknown date format: "{dateStr}"')
+
+    unix_timestamp = regex_match.group(1)
     return datetime.utcfromtimestamp(int(unix_timestamp) / 1000).strftime('%Y-%m-%d')
 
   def parse_hausnummer(self, hausnummerStr: str) -> str:

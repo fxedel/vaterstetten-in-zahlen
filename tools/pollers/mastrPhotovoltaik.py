@@ -48,11 +48,19 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
   def filter_plausability(self, x: dict) -> bool:
     if x['NutzungsbereichGebSA'] is not None and self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] == self.NUTZUNGSBEREICH_HAUSHALT:
       if x['Bruttoleistung'] >= 200:
+        print(f"> Ignored entity due to Bruttoleistung = {x['Bruttoleistung']} >= 200: Name '{x['EinheitName']}' (https://www.marktstammdatenregister.de/MaStR/Einheit/Detail/IndexOeffentlich/{x['Id']})")
         # more than 200 kW is very unlikely for a simple household
         return False
       if x['Nettonennleistung'] >= 200:
+        print(f"> Ignored entity due to Nettonennleistung = {x['Nettonennleistung']} >= 200: Name '{x['EinheitName']}' (https://www.marktstammdatenregister.de/MaStR/Einheit/Detail/IndexOeffentlich/{x['Id']})")
         # more than 200 kW is very unlikely for a simple household
         return False
+
+    inbetriebnahme = self.parse_date(x['InbetriebnahmeDatum'])
+    if inbetriebnahme != None and inbetriebnahme < '2000-01-01':
+      # the EEG was not even in force, this is probably wrong
+      print(f"> Ignored entity due to inbetriebnahme = '{inbetriebnahme}' < '2000-01-01': Name '{x['EinheitName']}' (https://www.marktstammdatenregister.de/MaStR/Einheit/Detail/IndexOeffentlich/{x['Id']})")
+      return False
 
     return True
     
