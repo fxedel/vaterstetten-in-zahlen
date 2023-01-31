@@ -49,6 +49,7 @@ class MastrSpeicherPoller(MastrGenericPoller):
     
       if x['NutzbareSpeicherkapazitaet'] >= 300:
         # 300 kWh is about 10% of a typical household's yearly power consumption (3000 kWh), but batteries normally only last a single day
+        print(f"> Ignored entity due to NutzbareSpeicherkapazitaet = {x['NutzbareSpeicherkapazitaet']} >= 300: Name '{x['EinheitName']}' (https://www.marktstammdatenregister.de/MaStR/Einheit/Detail/IndexOeffentlich/{x['Id']})")
         return False
 
     return True
