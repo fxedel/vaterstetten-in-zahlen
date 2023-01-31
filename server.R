@@ -56,12 +56,12 @@ ui <- function(request) {
       width = 280,
       sidebarMenu(id = "tab", selected = query$tab,
         menuItem("Start", tabName = "main", icon = icon("home"), selected = query$tab == "main" || is.null(query$tab)),
-        menuItem("Corona-Fallzahlen", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
-        menuItem("Corona-Impfungen", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen"),
-        menuItem("Photovoltaik", tabName = "photovoltaik", icon = icon("solar-panel"), selected = query$tab == "photovoltaik"),
         menuItem("Einwohner", tabName = "einwohner", icon = icon("users"), selected = query$tab == "einwohner"),
+        menuItem("Photovoltaik", tabName = "photovoltaik", icon = icon("solar-panel"), selected = query$tab == "photovoltaik"),
         menuItem("Humboldt-Gymnasium", tabName = "hgv", icon = icon("school"), selected = query$tab == "hgv"),
         menuItem("Realschule Vaterstetten", tabName = "rsv", icon = icon("school"), selected = query$tab == "rsv"),
+        menuItem("Corona-Fallzahlen", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
+        menuItem("Corona-Impfungen", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen"),
         menuItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", icon = icon("vote-yea"), selected = query$tab == "kommunalwahl2020"),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"), selected = query$tab == "impressum")
       )
