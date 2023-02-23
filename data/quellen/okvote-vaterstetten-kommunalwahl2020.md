@@ -1,6 +1,6 @@
 # OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten
 
-**Webseite:** https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html/.
+**Webseite:** https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html.
 
 Darüber wurden folgende Rohdaten gesichert:
 
