@@ -983,7 +983,6 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5287088,SEE942512908873,,In Betrieb,2022-08-31,2022-06-01,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,1,Ost-West,9.75,9.75,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5761725,SEE953334312700,,In Betrieb,2023-02-22,2022-06-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,27,Ost-West,9.71,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5582679,SEE989993445121,,In Betrieb,2023-01-05,2022-06-17,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,38,Süd,13.875,12.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5129814,SEE906370529731,,In Betrieb,2022-06-21,2022-06-20,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,West,0.2,0.2,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5719166,SEE968836749886,,In Betrieb,2023-02-12,2022-06-20,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,18,Süd,7.0,7.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5132410,SEE964865876142,,In Betrieb,2022-06-22,2022-06-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,27,Süd-Ost,10.395,10.395,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5478448,SEE995935156727,,In Betrieb,2022-11-16,2022-06-22,,,,,sonstige,85599,Parsdorf,,,,,false,stecker,3,Süd,0.92,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -999,6 +998,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5232848,SEE982295156771,,In Betrieb,2022-08-09,2022-06-27,,,PV Parsdorfer Weg 30,Eurytos Energie GmbH & Co. KG Thomas Stadtmüller,haushalt,85591,Vaterstetten,,,,,true,gebaeude,42,Süd-West,13.86,13.86,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5376209,SEE988568192040,,In Betrieb,2022-10-06,2022-06-27,,,PV Parsdorfer Weg 32 - Kita,Eurytos Energie GmbH & Co. KG Thomas Stadtmüller,sonstige,85591,Vaterstetten,,,,,true,gebaeude,64,Süd-West,21.12,20.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5181610,SEE939884725603,,In Betrieb,2022-07-15,2022-06-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,9.75,9.75,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5129814,SEE906370529731,,In Betrieb,2022-06-21,2022-07-01,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,West,0.2,0.2,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5153728,SEE900660743012,,In Betrieb,2022-07-02,2022-07-01,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,1,Süd-Ost,0.31,0.3,ohne,false,Volleinspeisung,false
 5541005,SEE983217465254,,In Betrieb,2022-12-13,2022-07-01,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,2,Süd-West,0.68,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5156582,SEE955570116470,,In Betrieb,2022-07-04,2022-07-04,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.6,0.6,sonstige,false,Volleinspeisung,false
