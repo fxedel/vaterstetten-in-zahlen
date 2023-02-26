@@ -25,7 +25,7 @@ jobs:
       - name: Install pipenv
         run: pip install --ignore-installed pipenv==2023.2.18
       - name: Install setuptools
-        run: pip install setuptools==57.4.0
+        run: pip install setuptools==57.4.0 && pipenv install "setuptools~=57.4.0"
       - name: Install python packages
         run: pipenv sync
       - name: Poll data
