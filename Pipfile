@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-arcgis = "~=1.9.1"
 beautifulsoup4 = "~=4.9"
 pytelegrambotapi = ">=4.0"
 python-interface = "~=1.6.1"
 requests = "~=2.25"
+setuptools = "~=57.4.0"
+arcgis = "~=1.9.1"
 
 [dev-packages]
 
