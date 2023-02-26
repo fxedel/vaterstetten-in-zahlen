@@ -27,7 +27,7 @@ jobs:
       - name: Install pipenv
         run: pip install --ignore-installed pipenv==2023.2.18
       - name: Install python packages
-        run: pipenv install
+        run: pipenv sync
       - name: Poll data
         run: pipenv run python tools/poll.py --telegram-token=$TELEGRAM_TOKEN --telegram-debug-chat-id=$TELEGRAM_DEBUG_CHAT_ID
         env:
