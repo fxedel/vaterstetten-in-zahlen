@@ -39,6 +39,15 @@ def read_csv_rows(file_name: str) -> List[dict]:
 try:
   lines = []
 
+  rows_energiemonitor = read_csv_rows(os.path.join('energie', 'bayernwerkEnergiemonitorLandkreis.csv'))
+  lines += [
+    '*Energie-Daten für den Landkreis Ebersberg*',
+    '_Stichtag:_ *' + rows_energiemonitor[-1]['datum'] + '*',
+    '_Verbrauch:_ *' + rows_energiemonitor[-1]['inzidenz7tage'] + '*',
+    '_Neue Fälle zum Vortag:_ *' + rows_vaterstetten[-1]['neuPositiv'] + '*',
+    '',
+  ]
+
   rows_gemeinden = read_csv_rows(os.path.join('corona-fallzahlen', 'arcgisInzidenzGemeinden.csv'))
   rows_vaterstetten = list(filter(lambda x: x['ort'] == 'Vaterstetten', rows_gemeinden))
   lines += [
@@ -55,17 +64,6 @@ try:
     '_7-Tage-Inzidenz:_ *' + rows_landkreis[-1]['inzidenz7tage'] + '*',
     '_Neue Fälle zum Vortag:_ *' + rows_landkreis[-1]['neuPositiv'] + '*',
     '_Stand:_ *' + rows_landkreis[-1]['datum'] + '*',
-    '',
-  ]
-
-  rows_impfungen = read_csv_rows(os.path.join('corona-impfungen', 'arcgisImpfungen.csv'))
-  lines += [
-    '*Impfungen im Landkreis Ebersberg*',
-    '_Erstimpfungen_: *%s*' % rows_impfungen[-1]['erstimpfungen'],
-    '_Zweitimpfungen_: *%s*' % rows_impfungen[-1]['zweitimpfungen'],
-    '_Drittimpfungen_: *%s*' % rows_impfungen[-1]['drittimpfungen'],
-    '_Verabreichte Impfdosen_: *%s*' % rows_impfungen[-1]['impfdosen'],
-    '_Stand:_ *%s*' % rows_impfungen[-1]['datum'],
     '',
   ]
 
