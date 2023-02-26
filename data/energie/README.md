@@ -94,3 +94,37 @@ Der Datensatz [mastrSpeicher.csv](./mastrSpeicher.csv) umfasst sämtliche Stroms
 ### Quellen und Lizenz
 
 - [Marktstammdatenregister der Bundesnetzagentur](../quellen/MaStR.md), JSON-Endpunkt `GetErweiterteOeffentlicheEinheitStromerzeugung`
+
+
+
+## [`bayernwerkEnergiemonitorLandkreis.csv`](./bayernwerkEnergiemonitorLandkreis.csv)
+
+Der Datensatz [bayernwerkEnergiemonitorLandkreis.csv](./bayernwerkEnergiemonitorLandkreis.csv) umfasst Tagesdaten zu Stromverbrauch und -erzeugung im Landkreis Ebersberg.
+
+|Spalte|Format|Beschreibung
+|-|-|-
+|`datum`|[ISO 8601](https://de.wikipedia.org/wiki/ISO_8601), `YYYY-MM-DD`|Datum
+|`verbrauch_kWh`|float|Gesamter Stromverbrauch
+|`verbrauchPrivat_kWh`|float|Stromverbrauch Private Haushalte
+|`verbrauchGewerbe_kWh`|float|Stromverbrauch Industrie und Gewerbe
+|`verbrauchOeffentlich_kWh`|float|Stromverbrauch öffentliche / kommunale Anlagen
+|`erzeugung_kWh`|float|Gesamte Stromerzeugung
+|`erzeugungErneuerbar_kWh`|float|Gesamte erneuerbare Stromerzeugung
+|`erzeugungBiomasse_kWh`|float|Stromerzeugung Biomasse / Biogas
+|`erzeugungSolar_kWh`|float|Stromerzeugung Solar (Photovoltaik). Daten erst seit 2022-11-16 vorhanden.
+|`erzeugungWasserkraft_kWh`|float|Stromerzeugung Wasserkraft
+|`erzeugungWind_kWh`|float|Stromerzeugung Windkraft. Daten erst seit 2022-11-16 vorhanden.
+|`erzeugungAndere_kWh`|float|Stromerzeugung weiterer Erzeuger (i.&nbsp;A. nicht erneuerbar)
+|`netzeinspeisung_kWh`|float|Netzeinspeisung (d.&nbsp;h. wenn im Landkreis mehr Strom erzeugt wird, als verbraucht werden kann) 
+|`netzbezug_kWh`|float|Netzbezug (d.&nbsp;h. wenn im Landkreis mehr Strom verbraucht wird, als erzeugt werden kann) 
+|`ueberschuss`|float|Genaue Funktion unbekannt, Rohname `energyExcessCounter` lässt auf Anzahl Stromüberschüsse vermuten. Bislang immer 0.
+
+* `verbrauch_kWh` = `verbrauchPrivat_kWh` + `verbrauchGewerbe_kWh` + `verbrauchOeffentlich_kWh`
+* `erzeugung_kWh` = `erzeugungErneuerbar_kWh` + `erzeugungAndere_kWh`
+* `erzeugungErneuerbar_kWh` = `erzeugungBiomasse_kWh` + `erzeugungSolar_kWh` + `erzeugungWasserkraft_kWh` + `erzeugungWind_kWh`
+
+
+### Quellen und Lizenz
+
+- BayernWerk Netz GmbH: [Energiemonitor Landkreis Ebersberg](https://energiemonitor.bayernwerk.de/ebersberg-landkreis)
+  - API-Endpunkt [https://api-energiemonitor.eon.com/historic-data?regionCode=09175]
