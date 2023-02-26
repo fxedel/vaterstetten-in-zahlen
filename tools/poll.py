@@ -1,4 +1,5 @@
 import argparse
+import os
 import telebot
 import time
 import traceback
@@ -75,8 +76,15 @@ for key, pollerClass in needed_pollers.items():
     failed = True
 
     if telegram_bot != None:
-      message = "Exception in poller %s after %.1fs: %s" % (key, (end - start), traceback.format_exc())
-      telegram_bot.send_message(telegram_debug_chat_id, message[:4096])
+      lines = []
+      lines.append("Exception in poller %s after %.1fs: %s" % (key, (end - start), e))
+      lines.append("[GitHub Actions](https://github.com/fxedel/vaterstetten-in-zahlen/actions) | [GitHub Action Run](https://github.com/fxedel/vaterstetten-in-zahlen/actions/runs/%s)" % os.getenv('GITHUB_RUN_ID'))
+      telegram_bot.send_message(
+        telegram_debug_chat_id,
+        ('\n'.join(lines))[:4096],
+        parse_mode = "Markdown",
+        disable_web_page_preview = True
+      )
 
 if failed:
   exit(1)
