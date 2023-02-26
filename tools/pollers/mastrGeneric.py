@@ -144,6 +144,8 @@ class MastrGenericPoller(Poller):
 
       if len(payload['Data']) > page_size:
         raise Exception('Received more items in single query than expected: page_size = %d, got %d' % (page_size, len(payload['Data'])))
+      if len(payload['Data']) == 0:
+        break
 
       items += payload['Data']
       page += 1
@@ -152,6 +154,12 @@ class MastrGenericPoller(Poller):
 
     if len(items) > total:
       raise Exception('Received more items in total than expected: total count = %d, got %d' % (total, len(items)))
+    if len(items) < total:
+      if len(items)+1 == total:
+        # Sometimes, the returned data is exactly one item less the total amount. We decide to ignore that error.
+        pass
+      else:
+        raise Exception('Received less items in total than expected: total count = %d, got %d' % (total, len(items)))
 
     return items
 
