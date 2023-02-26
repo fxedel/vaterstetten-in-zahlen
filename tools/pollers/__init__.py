@@ -9,6 +9,7 @@ import pollers.lraEbeArcgisSchueler
 import pollers.lraEbeArcgisSchuelerNachWohnort
 from pollers.mastrPhotovoltaik import MastrPhotovoltaikPoller
 from pollers.mastrSpeicher import MastrSpeicherPoller
+import pollers.overpassStreets
 
 from typing import Dict, Type
 
@@ -23,4 +24,5 @@ all: Dict[str, Type[pollers.poller.Poller]] = {
   'lraEbeArcgisImpfungenNachEinrichtung': pollers.lraEbeArcgisImpfungenNachEinrichtung.Poller,
   'lraEbeArcgisSchueler': pollers.lraEbeArcgisSchueler.Poller,
   'lraEbeArcgisSchuelerNachWohnort': pollers.lraEbeArcgisSchuelerNachWohnort.Poller,
+  'overpassStreets': pollers.overpassStreets.Poller,
 }
