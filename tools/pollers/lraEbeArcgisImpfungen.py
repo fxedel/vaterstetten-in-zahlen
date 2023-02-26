@@ -32,20 +32,6 @@ class Poller(pollers.poller.Poller):
     check_cumulative_plausability(features)
 
     rows = list(map(feature_to_row, data.features))
-
-    csv_diff = self.get_csv_diff(csv_filename, rows)
-
-    if len(csv_diff) == 0:
-      return
-
-    if self.telegram_bot != None and self.telegram_chat_id != None:
-      data = ''.join(csv_diff)
-      self.telegram_bot.send_message(
-        self.telegram_chat_id,
-        '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
-        parse_mode = "Markdown"
-      )
-
     self.write_csv_rows(csv_filename, rows)
 
 def apply_manual_fixes(features: List[Feature]):

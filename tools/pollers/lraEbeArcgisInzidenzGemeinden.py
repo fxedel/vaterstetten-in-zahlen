@@ -32,17 +32,4 @@ class Poller(pollers.poller.Poller):
       'inzidenz7tage': str(round(x.attributes['inzidenz_letzte7Tage'], 2)),
     }, data.features))
 
-    csv_diff = self.get_csv_diff(csv_filename, rows)
-
-    if len(csv_diff) == 0:
-      return
-
-    if self.telegram_bot != None and self.telegram_chat_id != None:
-      data = ''.join(csv_diff)
-      self.telegram_bot.send_message(
-        self.telegram_chat_id,
-        '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
-        parse_mode = "Markdown"
-      )
-
     self.write_csv_rows(csv_filename, rows)
