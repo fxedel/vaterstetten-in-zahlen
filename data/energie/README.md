@@ -114,14 +114,15 @@ Der Datensatz [bayernwerkEnergiemonitorLandkreis.csv](./bayernwerkEnergiemonitor
 |`erzeugungSolar_kWh`|float|Stromerzeugung Solar (Photovoltaik). Daten erst seit 2022-11-16 vorhanden.
 |`erzeugungWasserkraft_kWh`|float|Stromerzeugung Wasserkraft
 |`erzeugungWind_kWh`|float|Stromerzeugung Windkraft. Daten erst seit 2022-11-16 vorhanden.
-|`erzeugungAndere_kWh`|float|Stromerzeugung weiterer Erzeuger (i.&nbsp;A. nicht erneuerbar)
+|`erzeugungAndereErneuerbar_kWh`|float|Stromerzeugung weiterer erneuerbarer Erzeuger
+|`erzeugungNichtErneuerbar_kWh`|float|Gesamte nicht erneuerbare Stromerzeugung
 |`netzeinspeisung_kWh`|float|Netzeinspeisung (d.&nbsp;h. wenn im Landkreis mehr Strom erzeugt wird, als verbraucht werden kann) 
 |`netzbezug_kWh`|float|Netzbezug (d.&nbsp;h. wenn im Landkreis mehr Strom verbraucht wird, als erzeugt werden kann) 
 |`ueberschuss`|float|Genaue Funktion unbekannt, Rohname `energyExcessCounter` lässt auf Anzahl Stromüberschüsse vermuten. Bislang immer 0.
 
 * `verbrauch_kWh` = `verbrauchPrivat_kWh` + `verbrauchGewerbe_kWh` + `verbrauchOeffentlich_kWh`
-* `erzeugung_kWh` = `erzeugungErneuerbar_kWh` + `erzeugungAndere_kWh`
-* `erzeugungErneuerbar_kWh` = `erzeugungBiomasse_kWh` + `erzeugungSolar_kWh` + `erzeugungWasserkraft_kWh` + `erzeugungWind_kWh`
+* `erzeugung_kWh` = `erzeugungErneuerbar_kWh` + `erzeugungNichtErneuerbar_kWh`
+* `erzeugungErneuerbar_kWh` = `erzeugungBiomasse_kWh` + `erzeugungSolar_kWh` + `erzeugungWasserkraft_kWh` + `erzeugungWind_kWh` + `erzeugungAndereErneuerbar_kWh`
 
 
 ### Quellen und Lizenz
