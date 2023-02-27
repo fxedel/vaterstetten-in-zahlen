@@ -41,10 +41,20 @@ try:
 
   rows_energiemonitor = read_csv_rows(os.path.join('energie', 'bayernwerkEnergiemonitorLandkreis.csv'))
   lines += [
-    '*Energie-Daten für den Landkreis Ebersberg*',
-    '_Stichtag:_ *' + rows_energiemonitor[-1]['datum'] + '*',
-    '_Verbrauch:_ *' + rows_energiemonitor[-1]['inzidenz7tage'] + '*',
-    '_Neue Fälle zum Vortag:_ *' + rows_vaterstetten[-1]['neuPositiv'] + '*',
+    '*Strom-Daten für den Landkreis Ebersberg*',
+    f"_Stichtag:_ *{rows_energiemonitor[-1]['datum']}*",
+    f"_Verbrauch:_ *{round(float(rows_energiemonitor[-1]['verbrauch_kWh'])/1000)} MWh*",
+    f"_\tdavon Private Haushalte:_ *{round(float(rows_energiemonitor[-1]['verbrauchPrivat_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['verbrauchPrivat_kWh'])/float(rows_energiemonitor[-1]['verbrauch_kWh'])*100)}%)",
+    f"_\tdavon Industrie & Gewerbe:_ *{round(float(rows_energiemonitor[-1]['verbrauchGewerbe_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['verbrauchGewerbe_kWh'])/float(rows_energiemonitor[-1]['verbrauch_kWh'])*100)}%)",
+    f"_\tdavon öffentlich/kommunal:_ *{round(float(rows_energiemonitor[-1]['verbrauchOeffentlich_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['verbrauchOeffentlich_kWh'])/float(rows_energiemonitor[-1]['verbrauch_kWh'])*100)}%)",
+    f"_Erzeugung:_ *{round(float(rows_energiemonitor[-1]['erzeugung_kWh'])/1000)} MWh*",
+    f"_\tdavon nicht erneuerbar:_ *{round(float(rows_energiemonitor[-1]['erzeugungNichtErneuerbar_kWh'])/1000)} MWh*",
+    f"_\tdavon erneuerbar:_ *{round(float(rows_energiemonitor[-1]['erzeugungErneuerbar_kWh'])/1000)} MWh*",
+    f"_\t\tdavon Biomasse:_ *{round(float(rows_energiemonitor[-1]['erzeugungBiomasse_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['erzeugungBiomasse_kWh'])/float(rows_energiemonitor[-1]['erzeugungErneuerbar_kWh'])*100)}%)",
+    f"_\t\tdavon Solar:_ *{round(float(rows_energiemonitor[-1]['erzeugungSolar_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['erzeugungSolar_kWh'])/float(rows_energiemonitor[-1]['erzeugungErneuerbar_kWh'])*100)}%)",
+    f"_\t\tdavon Windkraft:_ *{round(float(rows_energiemonitor[-1]['erzeugungWind_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['erzeugungWind_kWh'])/float(rows_energiemonitor[-1]['erzeugungErneuerbar_kWh'])*100)}%)",
+    f"_\t\tdavon Wasserkraft:_ *{round(float(rows_energiemonitor[-1]['erzeugungWasserkraft_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['erzeugungWasserkraft_kWh'])/float(rows_energiemonitor[-1]['erzeugungErneuerbar_kWh'])*100)}%)",
+    f"_\t\tdavon weitere Erneuerbare:_ *{round(float(rows_energiemonitor[-1]['erzeugungAndereErneuerbar_kWh'])/1000)} MWh* ({round(float(rows_energiemonitor[-1]['erzeugungAndereErneuerbar_kWh'])/float(rows_energiemonitor[-1]['erzeugungErneuerbar_kWh'])*100)}%)",
     '',
   ]
 
