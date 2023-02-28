@@ -63,6 +63,11 @@ class Poller(pollers.poller.Poller):
       
       rows.append(row)
 
+    csv_diff = self.get_csv_diff(csv_filename, rows, context = 0)
+
+    if len(csv_diff) == 0:
+      return
+
     if self.telegram_bot != None and self.telegram_chat_id != None:
       csv_diff = self.get_csv_diff(csv_filename, rows, context = 0)
       data = ''.join(csv_diff)
