@@ -10,6 +10,7 @@ Die Namensnennung des Bayerischen Landesamtes für Statistik als Rechteinhaber h
 * 2018: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2018/09175132.pdf
 * 2019: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2019/09175132.pdf
 * 2020: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2020/09175132.pdf
+* 2021: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2021/09175132.pdf
 
 
 ## GENESIS-Tabellen
@@ -54,15 +55,15 @@ Methodik: https://www.statistik.bayern.de/mam/statistik/gebiet_bevoelkerung/demo
 
 Berücksichtigt Bevölkerungsstand 2011-2019, Fertilität, Mortalität, Binnenwanderung, Außenwanderung
 
-* [Alle Tabellen](https://www.statistikdaten.bayern.de/genesis/online?operation=statistic&code=12421)
+* [Alle Tabellen](https://www.statistikdaten.bayern.de/genesis/online?operation=statistic&code=12421D)
 * [12421-101](https://www.statistikdaten.bayern.de/genesis/online/table/12421-101): 2019-2039 jährlich, Bevölkerung
 * [12421-102z](https://www.statistikdaten.bayern.de/genesis/online/table/12421-102z): 2019-2039 jährlich, Bevölkerung, nach Geschlecht
 * [12421-103z](https://www.statistikdaten.bayern.de/genesis/online/table/12421-103z): 2019-2039 jährlich, Bevölkerung, nach 4 Altersgruppen
 * [12421-104z](https://www.statistikdaten.bayern.de/genesis/online/table/12421-104z): 2019-2039 jährlich, Bevölkerung, nach Geschlecht und 4 Altersgruppen
 * [12421-105](https://www.statistikdaten.bayern.de/genesis/online/table/12421-105): 2019-2039 jährlich, Durchschnittsalter oder Jugendquotient oder Altenquotient
 * [12421-106](https://www.statistikdaten.bayern.de/genesis/online/table/12421-106): 2019-2039 jährlich, Durchschnittsalter oder Jugendquotient oder Altenquotient, nach Geschlecht
-* [12421-106z](https://www.statistikdaten.bayern.de/genesis/online/table/12421-106z): 2019-2039 jährlich, Bevölkerung, Bevölkerungsentwicklung absolut/relativ ggü 2019
-* [12421-105](https://www.statistikdaten.bayern.de/genesis/online/table/12421-105): 2019-2039 jährlich, Durchschnittsalter, Jugendquotient, Altenquotient, nach Geschlecht
+* [12421-107z](https://www.statistikdaten.bayern.de/genesis/online/table/12421-107z): 2019-2039 jährlich, Bevölkerung, Bevölkerungsentwicklung relativ ggü 2019
+* [12421-108z](https://www.statistikdaten.bayern.de/genesis/online/table/12421-108z): 2019-2039 jährlich, Durchschnittsalter, Jugendquotient, Altenquotient, nach Geschlecht
 
 #### Geburten
 
