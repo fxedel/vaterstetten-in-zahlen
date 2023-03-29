@@ -1116,7 +1116,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5720747,SEE939989186514,,In Betrieb,2023-02-13,2023-02-06,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,6.48,6.48,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5702863,SEE928461952327,,In Betrieb,2023-02-08,2023-02-07,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,21,Süd-West,7.88,7.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5721482,SEE963976404930,,In Betrieb,2023-02-13,2023-02-08,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,6.0,6.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5710784,SEE936583145329,,In Betrieb,2023-02-09,2023-02-09,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,22,Ost-West,8.25,8.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5710784,SEE936583145329,,In Betrieb,2023-02-09,2023-02-09,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,22,Ost-West,8.25,8.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5717331,SEE930695696045,,In Betrieb,2023-02-12,2023-02-11,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5717339,SEE940764950886,,In Betrieb,2023-02-12,2023-02-11,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5604883,SEE931441636711,E21041015000000000000080995100001,In Betrieb,2023-02-12,2023-02-12,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,10,Süd,4.0,3.68,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1138,12 +1138,15 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5921324,SEE961272331141,,In Betrieb,2023-03-27,2023-03-11,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.72,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5848802,SEE970476823611,,In Betrieb,2023-03-13,2023-03-13,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5906574,SEE925551249114,,In Betrieb,2023-03-24,2023-03-13,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,24,Süd,8.88,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5928917,SEE985571410604,,In Betrieb,2023-03-29,2023-03-13,,,,,sonstige,85622,Weißenfeld,,,,,false,stecker,2,Süd,0.81,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5857247,SEE986893003772,,In Betrieb,2023-03-14,2023-03-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Süd,8.91,8.91,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5334149,SEE994108320545,,In Betrieb,2023-03-15,2023-03-15,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,23,Süd-Ost,9.315,9.315,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5894800,SEE911458737571,,In Betrieb,2023-03-22,2023-03-22,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,32,Süd-West,13.6,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5887347,SEE961454693425,,In Betrieb,2023-03-23,2023-03-23,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.76,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5924623,SEE972466918031,,In Betrieb,2023-03-28,2023-03-24,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,14,,5.39,4.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5928697,SEE965233418513,,In Betrieb,2023-03-29,2023-03-25,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.74,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5926799,SEE987333829167,,In Betrieb,2023-03-28,2023-03-27,,,Parsdorf-Lagerhalle-2023,Auer Baustoffe GmbH & Co. KG,GHD,85599,Parsdorf,,,,,false,gebaeude,72,Ost-West,29.88,25.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5929714,SEE993525619430,,In Betrieb,2023-03-29,2023-03-29,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,4,Süd,0.76,0.6,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4510336,SEE971349805161,,In Planung,2021-06-07,,2021-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,6.0,6.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5338286,SEE919187724138,,In Planung,2022-09-20,,2022-09-30,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,29,Süd,11.745,11.745,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
