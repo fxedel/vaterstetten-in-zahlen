@@ -1060,7 +1060,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5417229,SEE943926884289,,In Betrieb,2022-10-22,2022-10-22,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.75,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5420469,SEE946523460573,,In Betrieb,2022-10-24,2022-10-22,,,,,haushalt,85599,Parsdorf,,,,,true,gebaeude,13,Nord-Ost,5.33,4.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5421292,SEE924141664849,,In Betrieb,2022-10-24,2022-10-24,,,,,sonstige,85599,Parsdorf,,,,,false,stecker,2,West,0.74,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5446689,SEE964940547370,,In Betrieb,2022-11-04,2022-10-26,,,,,GHD,85598,Baldham,,,,,true,gebaeude,20,West,7.7,7.7,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5446689,SEE964940547370,,In Betrieb,2022-11-04,2022-10-26,,,,,GHD,85598,Baldham,,,,,false,gebaeude,20,West,7.7,7.7,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5435599,SEE902654340238,,In Betrieb,2022-11-02,2022-10-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,64,West,24.64,22.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5434345,SEE934901351834,,In Betrieb,2022-10-29,2022-10-29,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.73,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5442235,SEE920030019479,,In Betrieb,2022-11-02,2022-11-02,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd-West,7.2,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1171,12 +1171,12 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5517474,SEE920396894864,,In Planung,2022-12-02,,2022-12-31,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,2,Süd,0.6,0.6,ohne,false,Volleinspeisung,false
 5622910,SEE922618037134,,In Planung,2023-01-17,,2023-02-11,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-Ost,0.8,0.6,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5869894,SEE905886651660,,In Planung,2023-03-16,,2023-03-17,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-Ost,0.83,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5777658,SEE931302738950,,In Planung,2023-02-26,,2023-03-31,,,,haushalt,85646,Purfing,,,,,false,gebaeude,22,Süd,7.7,7.7,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5760678,SEE919900409342,,In Planung,2023-02-22,,2023-04-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,18,Süd,6.93,6.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5845335,SEE907625796014,,In Planung,2023-03-12,,2023-04-01,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.81,0.6,,false,Volleinspeisung,false
 5954227,SEE952472054497,,In Planung,2023-04-03,,2023-04-17,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,21,Süd-Ost,3.78,3.78,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5609452,SEE967204385121,,In Planung,2023-01-13,,2023-05-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,13,Süd-West,5.27,5.27,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5914059,SEE953482594980,,In Planung,2023-03-26,,2023-05-01,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.75,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5927454,SEE991995795951,,In Planung,2023-03-28,,2023-05-01,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-Ost,0.6,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5777658,SEE931302738950,,In Planung,2023-02-26,,2023-05-31,,,,haushalt,85646,Purfing,,,,,false,gebaeude,22,Süd,7.7,7.7,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5947516,SEE948230385170,,In Planung,2023-04-02,,2023-06-01,,,,haushalt,85598,Baldham,,,,,false,gebaeude,15,Süd,6.15,6.15,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5948954,SEE967036378766,,In Planung,2023-04-02,,2023-07-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,25,West,10.0,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
