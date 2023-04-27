@@ -34,8 +34,9 @@ class Poller(pollers.poller.Poller):
     rows = []
     for item in data:
 
+      erzeugung = item['feedIn'] + item['energyIntoGrid']
       feedInOther = item['feedInPerCluster'].get('others', 0)
-      feedInNonRenewable = item['feedIn'] - item['feedInRenewables']
+      feedInNonRenewable = erzeugung - item['feedInRenewables']
       feedInOtherRenewable = (feedInOther - feedInNonRenewable)
 
       row = {
@@ -44,7 +45,7 @@ class Poller(pollers.poller.Poller):
         'verbrauchPrivat_kWh': item['consumptionPerCluster']['domestic'],
         'verbrauchGewerbe_kWh': item['consumptionPerCluster']['industrial'],
         'verbrauchOeffentlich_kWh': item['consumptionPerCluster']['public'],
-        'erzeugung_kWh': item['feedIn'],
+        'erzeugung_kWh': erzeugung,
         'erzeugungErneuerbar_kWh': item['feedInRenewables'],
         'erzeugungBiomasse_kWh': item['feedInPerCluster'].get('bio', 0),
         'erzeugungSolar_kWh': item['feedInPerCluster'].get('solar', 0),

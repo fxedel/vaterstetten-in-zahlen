@@ -118,7 +118,7 @@ Der Datensatz [bayernwerkEnergiemonitorLandkreis.csv](./bayernwerkEnergiemonitor
 |`erzeugungNichtErneuerbar_kWh`|float|Gesamte nicht erneuerbare Stromerzeugung
 |`netzeinspeisung_kWh`|float|Netzeinspeisung (d.&nbsp;h. wenn im Landkreis mehr Strom erzeugt wird, als verbraucht werden kann) 
 |`netzbezug_kWh`|float|Netzbezug (d.&nbsp;h. wenn im Landkreis mehr Strom verbraucht wird, als erzeugt werden kann) 
-|`ueberschuss`|float|Genaue Funktion unbekannt, Rohname `energyExcessCounter` lässt auf Anzahl Stromüberschüsse vermuten. Bislang immer 0.
+|`ueberschuss`|float|Genaue Funktion unbekannt, Rohname `energyExcessCounter` lässt auf Anzahl Stromüberschüsse vermuten.
 
 * `verbrauch_kWh` = `verbrauchPrivat_kWh` + `verbrauchGewerbe_kWh` + `verbrauchOeffentlich_kWh`
 * `erzeugung_kWh` = `erzeugungErneuerbar_kWh` + `erzeugungNichtErneuerbar_kWh`
