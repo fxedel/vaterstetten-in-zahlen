@@ -310,14 +310,14 @@ def get_etymology_type(element: dict) -> str:
     ]:
       return 'Komponisten'
 
-    return 'Andere Personen'
+    return 'andere Personen'
 
   if 'http://www.wikidata.org/entity/Q5113' in types:
     return 'Vögel'
   elif 'http://www.wikidata.org/entity/Q729' in types or item in [
     'http://www.wikidata.org/entity/Q145201', # weasel, which are "organisms known by a particular common name"
   ]:
-    return 'Andere Tiere'
+    return 'andere Tiere'
 
   if 'http://www.wikidata.org/entity/Q1364' in types or 'http://www.wikidata.org/entity/Q3314483' in types:
     return 'Früchte'
@@ -326,7 +326,7 @@ def get_etymology_type(element: dict) -> str:
   elif 'http://www.wikidata.org/entity/Q756' in types or item in [
     'http://www.wikidata.org/entity/Q80005', # fern
   ]:
-    return 'Andere Pflanzen'
+    return 'andere Pflanzen'
 
   if 'http://www.wikidata.org/entity/Q8502' in types:
     # mountain

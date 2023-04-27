@@ -25,34 +25,73 @@ wikidataNamensherkuenfte <- read_delim(
     Geschlecht = readr::col_factor(levels = c("maennlich", "weiblich")),
   )
 ) %>% mutate(
-  Typ = factor(Typ, levels = c(
-    "Personen mit Lokalbezug",
-    "Komponisten",
-    "Andere Personen",
-    "Vögel",
-    "Andere Tiere",
-    "Obst",
-    "Bäume",
-    "Pflanzen",
-    "Berge",
-    "Ortsnamen",
-    "Jahreszeiten",
-    "Himmelskörper",
-    "Bauwerke",
-    "Sonstige"
-  ))
+  Geschlecht = recode_factor(Geschlecht,
+    "maennlich" = "männlich",
+    "weiblich" = "weiblich"
+  )
 )
 
 strassenNamensherkuenfte <- left_join(
   osmStrassen %>% separate_longer_delim(NamensherkunftWikidata, "/"),
   wikidataNamensherkuenfte,
   by = join_by(NamensherkunftWikidata == WikidataObjekt)
-# ) %>% mutate(
-#   Typ = coalesce(Typ, "Unbekannt")
+) %>% mutate(
+  Typ = coalesce(Typ, "Unbekannt")
+) %>% mutate(
+  Typ = factor(Typ, levels = c(
+    "Personen mit Lokalbezug",
+    "Komponisten",
+    "andere Personen",
+    "Vögel",
+    "andere Tiere",
+    "Früchte",
+    "Bäume",
+    "andere Pflanzen",
+    "Berge",
+    "Ortsnamen",
+    "Jahreszeiten",
+    "Himmelskörper",
+    "Bauwerke",
+    "Sonstige",
+    "Unbekannt"
+  ))
 )
 
-pal <- c("red", "green", "blue", "goldenrod", "magenta")
-pal <- setNames(pal, c("Personen mit Lokalbezug", "Pflanzen", "Americas", "Oceania", "Africa"))
+typColors <- c(
+  "Personen mit Lokalbezug" = "#880000",
+  "Komponisten" = "#ee7700",
+  "andere Personen" = "#ee0000",
+  "Vögel" = "#33ddff",
+  "andere Tiere" = "#00ffdd",
+  "Früchte" = "#66ff00",
+  "Bäume" = "#006600",
+  "andere Pflanzen" = "#66cc00",
+  "Berge" = "#bb4400",
+  "Ortsnamen" = "#e8bf28",
+  "Jahreszeiten" = "#aa00aa",
+  "Himmelskörper" = "#000066",
+  "Bauwerke" = "#ccccff",
+  "Sonstige" = "#cccccc",
+  "Unbekannt" = "#999999"
+)
+
+typTextColors <- c(
+  "Personen mit Lokalbezug" = "#ffffff",
+  "Komponisten" = "#000000",
+  "andere Personen" = "#ffffff",
+  "Vögel" = "#000000",
+  "andere Tiere" = "#000000",
+  "Früchte" = "#000000",
+  "Bäume" = "#ffffff",
+  "andere Pflanzen" = "#000000",
+  "Berge" = "#ffffff",
+  "Ortsnamen" = "#000000",
+  "Jahreszeiten" = "#ffffff",
+  "Himmelskörper" = "#ffffff",
+  "Bauwerke" = "#000000",
+  "Sonstige" = "#000000",
+  "Unbekannt" = "#ffffff"
+)
 
 ui <- memoise(omit_args = "request", function(request, id) {
   request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
@@ -69,15 +108,18 @@ ui <- memoise(omit_args = "request", function(request, id) {
             strassenNamensherkuenfte %>% count(Typ) %>% filter(!is.na(Typ)),
             x = ~n,
             y = ~Typ,
-            # color = ~Typ,
-            # colors = pal,
+            color = ~Typ,
+            colors = typColors,
             height = 350,
             type = "bar",
             orientation = "h",
             text = ~n,
-            hoverinfo = "none",
+            hoverinfo = "y",
+            hovertemplate = "%{x} %{y}<extra></extra>",
             textangle = 0,
-            textposition = "inside"
+            insidetextfont = list(color = typTextColors),
+            outsidetextfont = list(color = "#222222"),
+            showlegend = FALSE
           ) %>%
             plotly_default_config() %>%
             layout(yaxis = list(autorange = "reversed")) %>%
@@ -85,8 +127,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_hide_axis_titles() %>%
             plotly_build() %>%
             identity()
-          },
-        p(HTML("Die Linie entspricht dem Median („mittlere“ Modulleistung), der farbige Bereich dem 25%- bis 75%-Perzentil, also der mittleren Hälfte aller Anlagen.")),
+        },
       ),
       box(
         title = "Straßennamen für Personen, nach Geschlecht",
@@ -109,8 +150,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_hide_axis_titles() %>%
             plotly_build() %>%
             identity()
-          },
-        p(HTML("Die Linie entspricht dem Median („mittlere“ Modulleistung), der farbige Bereich dem 25%- bis 75%-Perzentil, also der mittleren Hälfte aller Anlagen.")),
+        },
       ),
     )
 
@@ -124,9 +164,7 @@ plotly_default_config <- function(p) {
     config(displayModeBar = TRUE) %>%
     config(modeBarButtons = list(list("toImage"))) %>%
     config(toImageButtonOptions = list(scale = 2)) %>%
-    # layout(yaxis = list(fixedrange = TRUE, rangemode = "tozero")) %>%
     layout(dragmode = FALSE) %>%
-    # layout(legend = list(bgcolor = "#ffffffaa", orientation = "h")) %>% # legend below plot
     identity()
 }
 
