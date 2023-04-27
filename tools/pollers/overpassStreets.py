@@ -319,14 +319,14 @@ def get_etymology_type(element: dict) -> str:
   ]:
     return 'Andere Tiere'
 
-  if 'http://www.wikidata.org/entity/Q3314483' in types:
-    return 'Obst'
+  if 'http://www.wikidata.org/entity/Q1364' in types or 'http://www.wikidata.org/entity/Q3314483' in types:
+    return 'Früchte'
   elif 'http://www.wikidata.org/entity/Q10884' in types:
     return 'Bäume'
   elif 'http://www.wikidata.org/entity/Q756' in types or item in [
     'http://www.wikidata.org/entity/Q80005', # fern
   ]:
-    return 'Pflanzen'
+    return 'Andere Pflanzen'
 
   if 'http://www.wikidata.org/entity/Q8502' in types:
     # mountain
@@ -417,7 +417,8 @@ WHERE {
       wd:Q756       # plant
       wd:Q5113      # bird
       wd:Q10884     # tree
-      wd:Q3314483   # fruit
+      wd:Q1364      # fruit
+      wd:Q3314483   # fruit, edible in the raw state
     }
     ?item (wdt:P171|wdt:P279)* ?type.
   }

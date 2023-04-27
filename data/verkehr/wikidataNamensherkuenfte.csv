@@ -1,5 +1,5 @@
 WikidataObjekt,Bezeichnung,Beschreibung,Typ,Geschlecht
-Q196,Kirsche,Frucht,Obst,
+Q196,Kirsche,Frucht,Früchte,
 Q254,Wolfgang Amadeus Mozart,Musiker und Komponist der Wiener Klassik,Komponisten,maennlich
 Q255,Ludwig van Beethoven,deutscher Komponist (1770–1827),Komponisten,maennlich
 Q405,Mond,einziger natürlicher Trabant der Erde,Himmelskörper,
@@ -27,17 +27,17 @@ Q8331,Fuchs,Trivialname für eine Gruppe von mehr oder weniger eng verwandten Ar
 Q9554,Martin Luther,"deutscher Augustinermönch, Theologieprofessor und Urheber der Reformation",Andere Personen,maennlich
 Q9726,Gioachino Rossini,italienischer Komponist,Komponisten,maennlich
 Q10856,Tauben,Familie der Klasse Vögel (Aves),Vögel,
-Q11009,Nussfrucht,"Schließfrucht, bei der alle drei Schichten der Fruchtwand verholzen",Obst,
+Q11009,Nussfrucht,"Schließfrucht, bei der alle drei Schichten der Fruchtwand verholzen",Früchte,
 Q12004,Eichen,Gattung der Familie Buchengewächse (Fagaceae),Bäume,
 Q12024,Kiefern,Gattung der Familie Kieferngewächse (Pinaceae),Bäume,
 Q12117,Getreide,kultivierte Pflanzen der Familie der Süßgräser,Sonstige,
 Q14683,Haussperling,Art der Gattung Passer,Vögel,
 Q16970,Kirchengebäude,Gebäude errichtet für Andacht und Gottesdienste einer christlichen Religionsgemeinschaft,Bauwerke,
-Q22701,Schwarzer Holunder,Art der Gattung Holunder (Sambucus),Pflanzen,
+Q22701,Schwarzer Holunder,Art der Gattung Holunder (Sambucus),Andere Pflanzen,
 Q23390,Hirsche,Familie der Ordnung Paarhufer (Artiodactyla),Andere Tiere,
 Q25222,Eulen,Ordnung der Klasse Vögel (Aves),Vögel,
 Q25234,Amsel,Singvogel der Gattung Echte Drosseln (Turdus),Vögel,
-Q25239,Erlen,Gattung der Familie Birkengewächse (Betulaceae),Pflanzen,
+Q25239,Erlen,Gattung der Familie Birkengewächse (Betulaceae),Andere Pflanzen,
 Q25243,Birken,Gattung der Familie Birkengewächse (Betulaceae),Bäume,
 Q25307,Elster,Art der Gattung Echte Elstern (Pica),Vögel,
 Q25334,Rotkehlchen,Art der Gattung Erithacus,Vögel,
@@ -58,14 +58,14 @@ Q28358,Wachtel,Art der Gattung Erdwachteln (Coturnix),Vögel,
 Q28999,Johann Eduard Maria Strauss,Österrreichischer Komponist,Komponisten,maennlich
 Q29858,Lerchen,Familie der Ordnung Sperlingsvögel,Vögel,
 Q30097,Iltisse,Untergattung der Gattung Mustela,Andere Tiere,
-Q34687,Rosen,Gattung der Familie Rosengewächse (Rosaceae),Pflanzen,
+Q34687,Rosen,Gattung der Familie Rosengewächse (Rosaceae),Andere Pflanzen,
 Q35054,Postamt,Gebäude für die Kunden eines Postunternehmens,Bauwerke,
-Q36050,Weiden,Gattung der Familie Weidengewächse (Salicaceae),Pflanzen,
+Q36050,Weiden,Gattung der Familie Weidengewächse (Salicaceae),Andere Pflanzen,
 Q39614,Friedhof,Bestattungsort verstorbener Menschen oder Tiere,Bauwerke,
 Q39861,Schwalben,Familie in der Ordnung der Sperlingsvögel,Vögel,
 Q41309,Franz Liszt,ungarischer Komponist und Pianist der Romantik,Komponisten,maennlich
 Q41555,Jacques Offenbach,deutsch-französischer Komponist und Cellist,Komponisten,maennlich
-Q42292,Ahorne,Gattung der Familie Seifenbaumgewächse (Sapindaceae),Pflanzen,
+Q42292,Ahorne,Gattung der Familie Seifenbaumgewächse (Sapindaceae),Andere Pflanzen,
 Q43483,Brunnen,Bauwerk zur Wassergewinnung,Bauwerke,
 Q44086,Carl Orff,deutscher Komponist und Musikpädagoge,Komponisten,maennlich
 Q44269,Nikolaus von Myra,Heiliger der Ost- und Westkirche,Andere Personen,maennlich
@@ -78,54 +78,54 @@ Q55488,Bahnhof,Verkehrs- und Betriebsanlage einer Bahn,Bauwerke,
 Q57139,Max Reger,"deutscher Komponist, Pianist und Dirigent",Komponisten,maennlich
 Q57743,Anger,grasbewachsenes Land oder ein Dorfplatz in Gemeinbesitz,Bauwerke,
 Q77743,Erika Köth,deutsche Kammersängerin und Sopranistin,Personen mit Lokalbezug,weiblich
-Q80005,Farne,Typ von Pflanzen,Pflanzen,
-Q81666,Akazien,Gattung der Familie Hülsenfrüchtler (Fabaceae),Pflanzen,
+Q80005,Farne,Typ von Pflanzen,Andere Pflanzen,
+Q81666,Akazien,Gattung der Familie Hülsenfrüchtler (Fabaceae),Andere Pflanzen,
 Q81752,Anton Bruckner,österreichischer Komponist,Komponisten,maennlich
 Q83309,Johann Strauss,österreichischer Kapellmeister und Komponist,Komponisten,maennlich
 Q84241,Karl Böhm,österreichischer Dirigent,Personen mit Lokalbezug,maennlich
-Q93201,Tulpen,Gattung der Familie Liliengewächse (Liliaceae),Pflanzen,
+Q93201,Tulpen,Gattung der Familie Liliengewächse (Liliaceae),Andere Pflanzen,
 Q93996,Ernst Mach,"österreichischer Physiker, Philosoph und Wissenschaftstheoretiker (1838-1916)",Personen mit Lokalbezug,maennlich
 Q97169,Korbinian Aigner,katholischer Pfarrer und Pomologe,Andere Personen,maennlich
-Q102088,Gebirgs-Rose,Art der Gattung Rosen (Rosa),Pflanzen,
+Q102088,Gebirgs-Rose,Art der Gattung Rosen (Rosa),Andere Pflanzen,
 Q122069,Reh,"kleinste Art der Trughirsche, Art der Gattung Rehe (Gattung Capreolus)",Andere Tiere,
-Q122990,Seidelbast,Gattung der Familie Seidelbastgewächse (Thymelaeaceae),Pflanzen,
+Q122990,Seidelbast,Gattung der Familie Seidelbastgewächse (Thymelaeaceae),Andere Pflanzen,
 Q127849,Linden,Gattung der Familie Malvengewächse (Malvaceae),Bäume,
-Q128887,Eschen,Gattung der Familie Ölbaumgewächse (Oleaceae),Pflanzen,
-Q129018,Schlehdorn,Art der Gattung Prunus,Pflanzen,
+Q128887,Eschen,Gattung der Familie Ölbaumgewächse (Oleaceae),Andere Pflanzen,
+Q129018,Schlehdorn,Art der Gattung Prunus,Andere Pflanzen,
 Q129324,Kastanien,Gattung der Familie Buchengewächse (Fagaceae),Bäume,
 Q130759,Christoph Willibald Gluck,deutscher Komponist,Komponisten,maennlich
-Q130918,Dahlien,Gattung der Familie Korbblütler (Asteraceae),Pflanzen,
-Q131113,Ulmen,Gattung der Familie Ulmengewächse (Ulmaceae),Pflanzen,
-Q131448,Holunder,Gattung der Familie Moschuskrautgewächse (Adoxaceae),Pflanzen,
+Q130918,Dahlien,Gattung der Familie Korbblütler (Asteraceae),Andere Pflanzen,
+Q131113,Ulmen,Gattung der Familie Ulmengewächse (Ulmaceae),Andere Pflanzen,
+Q131448,Holunder,Gattung der Familie Moschuskrautgewächse (Adoxaceae),Andere Pflanzen,
 Q132232,Clara Schumann,deutsche Pianistin und Komponistin,Komponisten,weiblich
-Q132557,Weißdorne,Gattung der Familie Rosengewächse (Rosaceae),Pflanzen,
-Q133773,Cypripedium,Gattung der Familie der Orchideen (Orchidaceae),Pflanzen,
-Q144682,Enziane,Gattung der Familie Enziangewächse (Gentianaceae),Pflanzen,
+Q132557,Weißdorne,Gattung der Familie Rosengewächse (Rosaceae),Andere Pflanzen,
+Q133773,Cypripedium,Gattung der Familie der Orchideen (Orchidaceae),Andere Pflanzen,
+Q144682,Enziane,Gattung der Familie Enziangewächse (Gentianaceae),Andere Pflanzen,
 Q145201,Wiesel,Gruppe von Marderarten,Andere Tiere,
-Q145889,Hasel,Gattung der Familie Birkengewächse (Betulaceae),Pflanzen,
-Q146095,Veilchen,Gattung der Familie Veilchengewächse (Violaceae),Pflanzen,
-Q146391,Mohn,Gattung der Familie Mohngewächse (Papaveraceae),Pflanzen,
-Q147184,Goldregen,Gattung der Familie Hülsenfrüchtler (Fabaceae),Pflanzen,
-Q147325,Malven,Gattung der Familie Malvengewächse (Malvaceae),Pflanzen,
-Q147345,Misteln,"Gattung der Familie Sandelholzgewächse (Santalaceae), Ektoparasit",Pflanzen,
-Q149741,Mirabelle,Unterart der Art Pflaume (Prunus domestica),Pflanzen,
+Q145889,Hasel,Gattung der Familie Birkengewächse (Betulaceae),Andere Pflanzen,
+Q146095,Veilchen,Gattung der Familie Veilchengewächse (Violaceae),Andere Pflanzen,
+Q146391,Mohn,Gattung der Familie Mohngewächse (Papaveraceae),Andere Pflanzen,
+Q147184,Goldregen,Gattung der Familie Hülsenfrüchtler (Fabaceae),Andere Pflanzen,
+Q147325,Malven,Gattung der Familie Malvengewächse (Malvaceae),Andere Pflanzen,
+Q147345,Misteln,"Gattung der Familie Sandelholzgewächse (Santalaceae), Ektoparasit",Andere Pflanzen,
+Q149741,Mirabelle,Unterart der Art Pflaume (Prunus domestica),Andere Pflanzen,
 Q153643,Heinrich Schütz,deutscher Komponist und Musiker des Frühbarock,Komponisten,maennlich
 Q154203,Albert Lortzing,"deutscher Komponist, Schauspieler und Sänger",Komponisten,maennlich
 Q155878,Birkhuhn,Art der Gattung Birkhühner (Lyrurus),Vögel,
-Q156099,Nelken,Gattung der Familie Nelkengewächse (Caryophyllaceae),Pflanzen,
-Q156696,Ginster,Gattung der Familie Hülsenfrüchtler (Fabaceae),Pflanzen,
-Q156901,Schwertlilien,Gattung der Familie der Schwertliliengewächse (Iridaceae),Pflanzen,
-Q157017,Magnolien,Gattung der Familie Magnoliengewächse (Magnoliaceae),Pflanzen,
-Q157211,Storchschnäbel,Gattung der Familie Storchschnabelgewächse (Geraniaceae),Pflanzen,
-Q157449,Flieder,Gattung der Familie Ölbaumgewächse (Oleaceae),Pflanzen,
-Q158974,Primeln,Gattung der Familie Primelgewächse (Primulaceae),Pflanzen,
+Q156099,Nelken,Gattung der Familie Nelkengewächse (Caryophyllaceae),Andere Pflanzen,
+Q156696,Ginster,Gattung der Familie Hülsenfrüchtler (Fabaceae),Andere Pflanzen,
+Q156901,Schwertlilien,Gattung der Familie der Schwertliliengewächse (Iridaceae),Andere Pflanzen,
+Q157017,Magnolien,Gattung der Familie Magnoliengewächse (Magnoliaceae),Andere Pflanzen,
+Q157211,Storchschnäbel,Gattung der Familie Storchschnabelgewächse (Geraniaceae),Andere Pflanzen,
+Q157449,Flieder,Gattung der Familie Ölbaumgewächse (Oleaceae),Andere Pflanzen,
+Q158974,Primeln,Gattung der Familie Primelgewächse (Primulaceae),Andere Pflanzen,
 Q160063,Heinrich Marschner,deutscher Komponist,Komponisten,maennlich
-Q160279,Gestreifter Seidelbast,Art der Gattung Seidelbast (Daphne),Pflanzen,
+Q160279,Gestreifter Seidelbast,Art der Gattung Seidelbast (Daphne),Andere Pflanzen,
 Q160835,Finken,Familie der Ordnung Sperlingsvögel (Passeriformes),Vögel,
 Q163919,Watzmann,Berg in den Alpen,Berge,
-Q164186,Aurikel,Art der Gattung Primeln (Primula),Pflanzen,
+Q164186,Aurikel,Art der Gattung Primeln (Primula),Andere Pflanzen,
 Q168473,Meisen,Familie der Sperlingsvögel,Vögel,
-Q178265,Leontopodium nivale,Art der Gattung Leontopodium (Edelweiß),Pflanzen,
+Q178265,Leontopodium nivale,Art der Gattung Leontopodium (Edelweiß),Andere Pflanzen,
 Q179277,Giovanni Pierluigi da Palestrina,italienischer Komponist und Erneuerer der Kirchenmusik,Komponisten,maennlich
 Q180647,Brauneck,Ausläufer der Benediktenwand oberhalb Lenggries,Berge,
 Q184178,Johann Strauss,österreichischer Komponist und Kapellmeister,Komponisten,maennlich
@@ -133,30 +133,30 @@ Q188869,Acker,landwirtschaftlich genutzter Boden,Sonstige,
 Q191917,Franz Lehár,österreichischer Komponist,Komponisten,maennlich
 Q200184,Otter,Unterfamilie der Familie Marder (Mustelidae),Andere Tiere,
 Q205857,Kleiber,Familie der Ordnung Sperlingsvögel,Vögel,
-Q206998,Heidekräuter,Gattung der Familie Heidekrautgewächse (Ericaceae),Pflanzen,
-Q207848,Arnika,Art der Gattung Arnika (Arnica),Pflanzen,
+Q206998,Heidekräuter,Gattung der Familie Heidekrautgewächse (Ericaceae),Andere Pflanzen,
+Q207848,Arnika,Art der Gattung Arnika (Arnica),Andere Pflanzen,
 Q226775,Zorneding,"Gemeinde in Bayern, Deutschland",Ortsnamen,
 Q244660,Blomberg,Berg in Deutschland,Berge,
 Q259617,Wasserburg am Inn,Gemeinde im Landkreis Rosenheim in Bayern,Ortsnamen,
 Q263280,Kampenwand,Berg in den Alpen,Berge,
 Q264501,Feldkirchen,Gemeinde im Landkreis München in Bayern,Ortsnamen,
 Q269862,Allauch,französische Gemeinde im Département Bouches-du-Rhône,Ortsnamen,
-Q281124,Eichhörnchen,Gattung der Familie Hörnchen (Sciuridae),Andere Tiere,
+Q281124,Eichhörnchen,Gattung der Familie Hörnchen,Andere Tiere,
 Q315546,Geigelstein,Berg in den Alpen,Berge,
-Q315930,Heimgarten,Berg in den Alpen,Berge,
+Q315930,Heimgarten,Berg in den Bayerischen Voralpen,Berge,
 Q321002,Wallberg,Berg in den Alpen,Berge,
-Q336989,Heu,"getrocknete, oberirdische Biomasse von Grünlandpflanzen wie Gräsern, Kräutern und Hülsenfrüchtlern",Pflanzen,
+Q336989,Heu,"getrocknete, oberirdische Biomasse von Grünlandpflanzen wie Gräsern, Kräutern und Hülsenfrüchtlern",Andere Pflanzen,
 Q348527,Carl Zeller,österreichischer Komponist,Komponisten,maennlich
 Q456099,Carl Millöcker,österreichischer Operettenkomponist,Komponisten,maennlich
 Q458097,Rotwand,Berg in den Alpen,Berge,
 Q458775,Werner Egk,deutscher Komponist,Komponisten,maennlich
 Q510276,Poing,"Gemeinde in Bayern, Deutschland",Ortsnamen,
-Q517130,Astern,Gattung der Familie Korbblütler (Asteraceae),Pflanzen,
+Q517130,Astern,Gattung der Familie Korbblütler (Asteraceae),Andere Pflanzen,
 Q522378,Anzing,Gemeinde in Deutschland,Ortsnamen,
 Q542921,Vaterstetten,bevölkerungsreichste Gemeinde des oberbayerischen Landkreises Ebersberg,Ortsnamen,
 Q585796,Dreitorspitze,Gebirgsmassiv im Wetterstein,Berge,
 Q671207,Karwendel,Gebirgsgruppe der Alpen,Berge,
-Q753099,Liguster,Gattung der Familie Ölbaumgewächse (Oleaceae),Pflanzen,
+Q753099,Liguster,Gattung der Familie Ölbaumgewächse (Oleaceae),Andere Pflanzen,
 Q762650,August Lanner,österreichischer Komponist,Komponisten,maennlich
 Q804782,Baldham,bevölkerungsreichster Ortsteil der oberbayerischen Gemeinde Vaterstetten,Ortsnamen,
 Q819150,Krauss-Maffei,Industrieunternehmen im Maschinenbau,Sonstige,
@@ -165,7 +165,7 @@ Q833896,Wank,Berg in den Alpen,Berge,
 Q875536,Klosterkirche St. Anna im Lehel,Kirchengebäude in München,Bauwerke,
 Q882165,Brünnstein,Berg in den Alpen,Berge,
 Q883041,Hochkalter,Berg in den Alpen,Berge,
-Q886167,Blume,Pflanze mit auffallenden Blüten,Pflanzen,
+Q886167,Blume,Pflanze mit auffallenden Blüten,Andere Pflanzen,
 Q904144,Brecherspitz,Berg in den Alpen,Berge,
 Q1107656,Garten,"abgegrenztes Stück Land, in dem Pflanzen angebaut werden",Bauwerke,
 Q1234846,Dohlen,Gattung der Familie Rabenvögel (Corvidae),Vögel,
@@ -178,19 +178,19 @@ Q1980469,Neufarn,Ortsteil der Gemeinde Vaterstetten im oberbayerischen Landkreis
 Q2118817,Purfing,Ortsteil von Vaterstetten,Ortsnamen,
 Q2133484,Rauschberg,Berg in den Alpen,Berge,
 Q2739519,Karl Krafft-Lortzing,Dirigent und Komponist,Komponisten,maennlich
-Q2751465,Quittenfrucht,Frucht,Obst,
-Q3314483,Obst,"roh genießbare, meist wasser- und zuckerhaltige Früchte oder Teile davon",Obst,
-Q5194627,Lilien,Gattung der Familie Liliengewächse (Liliaceae),Pflanzen,
+Q2751465,Quittenfrucht,Frucht,Früchte,
+Q3314483,Obst,"roh genießbare, meist wasser- und zuckerhaltige Früchte oder Teile davon",Früchte,
+Q5194627,Lilien,Gattung der Familie Liliengewächse (Liliaceae),Andere Pflanzen,
 Q5261336,Spinus,Gattung der Familie Finken (Fringillidae),Vögel,
-Q5686857,Hippophae,Gattung in der Familie der Ölweidengewächse (Elaeagnaceae),Pflanzen,
-Q7215110,Roggen,Gattung der Familie Süßgräser (Poaceae),Pflanzen,
+Q5686857,Hippophae,Gattung in der Familie der Ölweidengewächse (Elaeagnaceae),Andere Pflanzen,
+Q7215110,Roggen,Gattung der Familie Süßgräser (Poaceae),Andere Pflanzen,
 Q7777019,Wiese,"landwirtschaftliches Grünland, das durch Mähen zur Erzeugung von Heu oder Grassilage genutzt wird",Sonstige,
 Q10328397,Dachse,Unterfamilie der Raubtiere,Andere Tiere,
-Q13099586,Birne,Frucht,Obst,
+Q13099586,Birne,Frucht,Früchte,
 Q13426919,Kiebitze,Gattung der Familie Regenpfeifer (Charadriidae),Vögel,
 Q15060197,Stümpfling,Berg in den Alpen,Berge,
 Q15061740,Weißenfeld,Ortsteil von Vaterstetten,Ortsnamen,
-Q19842373,Brombeere,Frucht einer der zahlreichen Arten der Brombeeren,Obst,
+Q19842373,Brombeere,Frucht einer der zahlreichen Arten der Brombeeren,Früchte,
 Q24035845,Sportzentrum Vaterstetten,Sportkomplex im bayerischen Vaterstetten östlich von München,Bauwerke,
 Q37527832,Paro,Familienname,Sonstige,
 Q51879766,Parsdorf,"Gemeindeteil der Gemeinde Vaterstetten im Landkreis Ebersberg, Bayern",Ortsnamen,
@@ -208,7 +208,7 @@ Q115462526,Philipp Maas,Lehrer und zweiter Bürgermeister in Vaterstetten,Person
 Q115462552,Ludwig Plötz,Polizist und zweiter Bürgermeister in Vaterstetten,Personen mit Lokalbezug,maennlich
 Q115462633,Franz Kamerseder,Bürgermeister in Zorneding,Personen mit Lokalbezug,maennlich
 Q115462782,Josef Hiller,"Bauunternehmer, der das heutige Bild der Gemeinde Vaterstetten mitgeprägt hat",Personen mit Lokalbezug,maennlich
-Q115463377,Hans Luft,Gründungmitglied des Vaterstettener Fußballvereins,Andere Personen,maennlich
+Q115463377,Hans Luft,Gründungmitglied des Vaterstettener Fußballvereins,Personen mit Lokalbezug,maennlich
 Q115463474,Rose Breitenbach,Vaterstettener Unternehmerin,Personen mit Lokalbezug,weiblich
 Q115463589,Anton Kastner,"Katholischer Pfarrer, verantwortlich für den Bau der Pfarrkirche Zum kostbaren Blut Christi in Vaterstetten",Personen mit Lokalbezug,maennlich
 Q115463626,Franz Hollweck,Bürgermeister der Gemeinde Parsdorf,Personen mit Lokalbezug,maennlich
