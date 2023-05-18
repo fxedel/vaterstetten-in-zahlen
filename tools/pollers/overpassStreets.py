@@ -79,7 +79,7 @@ class Poller(pollers.poller.Poller):
         'NamensherkunftWikidata': '/'.join(street['name:etymology:wikidata']),
         'Postleitzahl': '/'.join(street['postal_codes']),
         'OSMWayIDs': '/'.join([str(id) for id in street['way_ids']]),
-        'Geometry': json.dumps(street['geometry'], separators = (',', ':')),
+        'Geometry': street['geometry'],
       } for street in streets]
 
       csv_diff = self.get_csv_diff(csv_filename, rows)
@@ -191,7 +191,23 @@ class Poller(pollers.poller.Poller):
       postal_codes.sort()
       way_ids = [street_way['id'] for street_way in street_ways]
       way_ids.sort()
-      geometry = [[[point['lat'], point['lon']] for point in street_way['geometry']] for street_way in street_ways]
+
+      geometry_sf = 'MULTILINESTRING ('
+      for (i, street_way) in enumerate(street_ways):
+        geometry_sf += '('
+
+        for (j, node) in enumerate(street_way['geometry']):
+          geometry_sf += f"{node['lon']} {node['lat']}"
+
+          if j < len(street_way['geometry']) - 1:
+            geometry_sf += ', '
+
+        geometry_sf += ')'
+
+        if i < len(street_ways) - 1:
+          geometry_sf += ', '
+
+      geometry_sf += ')'
 
       if len(etymologies) >= 2:
         raise Exception(f'Different etymologies: street name = {name}, postal_codes = {postal_codes}, etymologies = {etymologies}')
@@ -207,7 +223,7 @@ class Poller(pollers.poller.Poller):
         'name:etymology:wikidata': etymologies,
         'postal_codes': postal_codes,
         'way_ids': way_ids,
-        'geometry': geometry,
+        'geometry': geometry_sf,
       }
       streets += [street]
 
@@ -321,7 +337,9 @@ def get_etymology_type(element: dict) -> str:
 
   if 'http://www.wikidata.org/entity/Q1364' in types or 'http://www.wikidata.org/entity/Q3314483' in types:
     return 'Früchte'
-  elif 'http://www.wikidata.org/entity/Q10884' in types:
+  elif 'http://www.wikidata.org/entity/Q10884' in types or item in [
+    'http://www.wikidata.org/entity/Q4421', # forest
+  ]:
     return 'Bäume'
   elif 'http://www.wikidata.org/entity/Q756' in types or item in [
     'http://www.wikidata.org/entity/Q80005', # fern

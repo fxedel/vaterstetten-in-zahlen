@@ -10,8 +10,9 @@ osmStrassen <- read_delim(
     NamensherkunftWikidata = col_character(),
     Postleitzahl = col_character(),
     OSMWayIDs = col_character(),
+    Geometry = col_character(),
   )
-)
+) %>% st_as_sf(wkt = "Geometry")
 
 wikidataNamensherkuenfte <- read_delim(
   file = "data/verkehr/wikidataNamensherkuenfte.csv",
@@ -58,7 +59,7 @@ strassenNamensherkuenfte <- left_join(
 )
 
 typColors <- c(
-  "Personen mit Lokalbezug" = "#880000",
+  "Personen mit Lokalbezug" = "#bb0033",
   "Komponisten" = "#ee7700",
   "andere Personen" = "#ee0000",
   "Vögel" = "#33ddff",
@@ -66,13 +67,13 @@ typColors <- c(
   "Früchte" = "#66ff00",
   "Bäume" = "#006600",
   "andere Pflanzen" = "#66cc00",
-  "Berge" = "#bb4400",
+  "Berge" = "#995533",
   "Ortsnamen" = "#e8bf28",
-  "Jahreszeiten" = "#aa00aa",
+  "Jahreszeiten" = "#cc00cc",
   "Himmelskörper" = "#000066",
-  "Bauwerke" = "#ccccff",
-  "Sonstige" = "#cccccc",
-  "Unbekannt" = "#999999"
+  "Bauwerke" = "#aaaaff",
+  "Sonstige" = "#aaaaaa",
+  "Unbekannt" = "#333333"
 )
 
 typTextColors <- c(
@@ -152,7 +153,26 @@ ui <- memoise(omit_args = "request", function(request, id) {
             identity()
         },
       ),
-    )
+    ),
+
+    fluidRow(
+      box(
+        width = 6,
+        {
+          leaflet(options = leafletOptions(
+            zoom = 13,
+            center = list(lng = 11.798, lat = 48.12)
+          ), height = 550) %>%
+            addProviderTiles(providers$CartoDB.Positron) %>%
+            addPolylines(
+              data = strassenNamensherkuenfte$Geometry,
+              color = unname(typColors[strassenNamensherkuenfte$Typ]),
+              label = paste0(strassenNamensherkuenfte$Name, ": ", strassenNamensherkuenfte$Typ)
+            ) %>%
+            identity()
+        }
+      )
+    ),
 
   ) %>% renderTags()
 })
