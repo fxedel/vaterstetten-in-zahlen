@@ -174,6 +174,21 @@ ui <- memoise(omit_args = "request", function(request, id) {
       )
     ),
 
+    fluidRow(
+      box(
+        title = "Datengrundlage und Methodik",
+        status = "primary",
+        solidHeader = TRUE,
+        width = 12,
+        p(HTML('Die Kartendaten, also die Straßen mit u.&nbsp;a. Name, Namensherkunft und geometrischer Struktur stammen von <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> (OSM) und stehen unter der <a href="https://opendatacommons.org/licenses/odbl/">Open Data Commons Open Database License</a>. Der Datenabruf erfolgt über die <a href="https://overpass-api.de/">Overpass API</a>.')),
+        p(HTML('Die Namensherkünfte sind in OSM als Referenzen auf <a href="https://www.wikidata.org">Wikidata</a>-Objekte hinterlegt. Für die Beschreibung und Kategorisierung dieser Namensherkünfte werden daher diese Wikidata-Objekte über die <a href="https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service">SPARQL API</a> abgerufen.')),
+        p(HTML('Straßen, die zwar gleich benannt sind, aber offensichtlich nicht zusammengehören (z.&nbsp;B. durch unterschiedliche Postleitzahlen, Ortsteile), werden getrennt aufgeführt und gezählt. Beispiele dafür sind die Schwalbenstraße in Baldham und Vaterstetten, sowie die vier Weißenfelder Straßen, die jeweils von Ottendichl, Feldkirchen, Ammerthal und Parsdorf nach Weißenfeld führen. Unbenannte Straßen und Straßen, die nur nummeriert sind (EBE 4 oder A 99), werden nicht berücksichtigt. Benannte Fuß-/Radwege werden wie Straßen behandelt.')),
+        p(HTML('Manche Straßen sind mehreren Herkünften – meist Personen – zugeordnet; entweder, weil sie tatsächlich mehreren Personen gewidmet sind, oder weil die Widmung unbekannt ist und mehrere Personen in Frage kommen. Dies ist z.&nbsp;B. bei der Schumannstraße der Fall (Clara und/oder Robert Schumann).')),
+        p(HTML('OpenStreetMap und Wikidata werden von Freiwilligen gepflegt, jede:r kann sich daran beteiligen. Zum Eintragen der Namensherkünfte, die in OSM hinterlegt sind, gibt es ein praktisches Tool von <a href="https://mapcomplete.osm.be/etymology">Mapcomplete</a>. Eine ähnliche Kartendarstellung der Namensherkünfte gibt es auf <a href="https://etymology.dsantini.it/#11.778,48.104,13.7,type">etymology.dsantini.it</a>. Das Projekt <a href="https://github.com/EqualStreetNames/equalstreetnames/">EqualStreetNames</a> fokussiert sich auf die Geschlechterverteilung von öffentlichen Benennungen.')),
+        p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/verkehr", "Zum Daten-Download mit Dokumentation")),
+      ),
+    ),
+
   ) %>% renderTags()
 })
 

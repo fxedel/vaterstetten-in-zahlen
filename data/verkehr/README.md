@@ -2,7 +2,7 @@
 
 ## [`osmStrassen.csv`](./osmStrassen.csv)
 
-Der Datensatz [osmStrassen.csv](./osmStrassen.csv) umfasst sämtliche (benannte) Straßen in der Gemeinde Vaterstetten, die in [OpenStreetMap](https://www.openstreetmap.org/relation/929822) (OSM) erfasst sind. Straßen, die zwar gleich benannt sind, aber offensichtlich nicht zusammengehören (z.&nbsp;B. durch unterschiedliche Postleitzahlen, Ortsteile), werden getrennt aufgeführt.
+Der Datensatz [osmStrassen.csv](./osmStrassen.csv) umfasst sämtliche benannten Straßen und Wege in der Gemeinde Vaterstetten, die in [OpenStreetMap](https://www.openstreetmap.org/relation/929822) (OSM) erfasst sind. Straßen, die zwar gleich benannt sind, aber offensichtlich nicht zusammengehören (z.&nbsp;B. durch unterschiedliche Postleitzahlen, Ortsteile), werden getrennt aufgeführt.
 
 |Spalte|Format|Beschreibung
 |-|-|-
