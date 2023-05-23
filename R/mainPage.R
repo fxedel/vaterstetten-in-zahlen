@@ -1,9 +1,7 @@
 utils <- new.env()
 sys.source("R/utils.R", envir = utils, chdir = FALSE)
-corona <- new.env()
-sys.source("R/corona.R", envir = corona, chdir = FALSE)
-coronaImpfungen <- new.env()
-sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
+strassennamen <- new.env()
+sys.source("R/strassennamen.R", envir = strassennamen, chdir = FALSE)
 photovoltaik <- new.env()
 sys.source("R/photovoltaik.R", envir = photovoltaik, chdir = FALSE)
 einwohner <- new.env()
@@ -21,59 +19,6 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Corona in Vaterstetten",
-        width = 6,
-        tagList(
-          {
-            lastRowCorona <- corona$fallzahlenArcGISGemeinden %>% filter(ort == "Vaterstetten") %>% slice_tail()
-            actionLink(ns("linkCorona"), valueBox(
-              utils$germanNumberFormat(lastRowCorona$inzidenz7tage, accuracy = .1),
-              paste0("7-Tage-Inzidenz (", format(lastRowCorona$datum, "%d.%m.%Y"), ")"),
-              color = "red",
-              icon = icon("virus"),
-              width = 12
-            ))
-          },
-          actionButton(ns("buttonCorona"), "Zu den Corona-Fallzahlen", icon = icon("virus"), width = "100%")
-        )
-      ),
-      box(
-        title = "Impfungen im Landkreis",
-        width = 6,
-        tagList(
-          {
-            lastRowCoronaImpfungen <- coronaImpfungen$impfungenMerged %>% filter(!is.na(erstimpfungen)) %>% slice_tail()
-            actionLink(ns("linkCoronaImpfungen"), valueBox(
-              utils$germanNumberFormat(lastRowCoronaImpfungen$erstimpfungen / coronaImpfungen$einwohnerZahlLkEbe * 100, accuracy = .1, suffix = "%"),
-              paste0("Erstimpfquote (", format(lastRowCoronaImpfungen$datum, "%d.%m.%Y"), ")"),
-              color = "blue",
-              icon = icon("syringe"),
-              width = 12
-            ))
-          },
-          actionButton(ns("buttonCoronaImpfungen"), "Zu den Corona-Impfungen", icon = icon("syringe"), width = "100%")
-        )
-      )
-    ),
-
-    fluidRow(
-      box(
-        title = "Photovoltaik in Vaterstetten",
-        width = 6,
-        tagList(
-          {
-            actionLink(ns("linkPhotovoltaik"), valueBox(
-              utils$germanNumberFormat(photovoltaik$inBetriebStats$bruttoleistung_kW, suffix = " MWp", scale = 1/1000, accuracy = 0.2),
-              "Installierte Photovoltaik-Leistung in Vaterstetten",
-              color = "yellow",
-              icon = icon("solar-panel"),
-              width = 12
-            ))
-          },
-          actionButton(ns("buttonPhotovoltaik"), "Zu den Photovoltaik-Anlagen", icon = icon("solar-panel"), width = "100%")
-        )
-      ),
-      box(
         title = "Einwohner in Vaterstetten",
         width = 6,
         tagList(
@@ -90,6 +35,25 @@ ui <- memoise(omit_args = "request", function(request, id) {
           actionButton(ns("buttonEinwohner"), "Zu den Einwohnerstatistiken", icon = icon("users"), width = "100%")
         )
       ),
+      box(
+        title = "Photovoltaik in Vaterstetten",
+        width = 6,
+        tagList(
+          {
+            actionLink(ns("linkPhotovoltaik"), valueBox(
+              utils$germanNumberFormat(photovoltaik$inBetriebStats$bruttoleistung_kW, suffix = " MWp", scale = 1/1000, accuracy = 0.2),
+              "Installierte Photovoltaik-Leistung in Vaterstetten",
+              color = "yellow",
+              icon = icon("solar-panel"),
+              width = 12
+            ))
+          },
+          actionButton(ns("buttonPhotovoltaik"), "Zu den Photovoltaik-Anlagen", icon = icon("solar-panel"), width = "100%")
+        )
+      ),
+    ),
+
+    fluidRow(
       box(
         title = "Humboldt-Gymnasium Vaterstetten",
         width = 6,
@@ -128,11 +92,27 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
+        title = "Straßen in Vaterstetten",
+        width = 6,
+        tagList(
+          {
+            actionLink(ns("linkStrassen"), valueBox(
+              nrow(strassennamen$osmStrassen),
+              paste0("Straßen gibt es in der Gemeinde"),
+              color = "maroon",
+              icon = icon("road"),
+              width = 12
+            ))
+          },
+          actionButton(ns("buttonStrassen"), "Zu den Straßennamen", icon = icon("road"), width = "100%")
+        )
+      ),
+      box(
         width = 6,
         tagList(
           "Weitere Visualisierungen sind in Arbeit …"
         )
-      )
+      ),
     ),
   ) %>% renderTags()
 })
@@ -142,12 +122,8 @@ server <- function(id, parentSession) {
     id,
     function(input, output, session) {
       observe({
-        req(input$linkCorona | input$buttonCorona)
-        updateTabsetPanel(parentSession, "tab", selected = "corona")
-      })
-      observe({
-        req(input$linkCoronaImpfungen | input$buttonCoronaImpfungen)
-        updateTabsetPanel(parentSession, "tab", selected = "coronaImpfungen")
+        req(input$linkStrassen | input$buttonStrassen)
+        updateTabsetPanel(parentSession, "tab", selected = "strassennamen")
       })
       observe({
         req(input$linkPhotovoltaik | input$buttonPhotovoltaik)

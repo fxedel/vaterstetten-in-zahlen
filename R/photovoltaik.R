@@ -9,7 +9,7 @@ mastr <- read_delim(
     MaStRId = col_integer(),
     MaStRNummer = col_character(),
     EEGAnlagenschluessel = col_character(),
-    status = readr::col_factor(c("In Planung", "In Betrieb", "Vorübergehend stillgelegt", "Endgültig stillgelegt"), ordered = TRUE),
+    status = readr::col_factor(),
     inbetriebnahme = col_date(format = "%Y-%m-%d"),
     inbetriebnahmeGeplant = col_date(format = "%Y-%m-%d"),
     stilllegung = col_date(format = "%Y-%m-%d"),
@@ -29,7 +29,7 @@ mastr <- read_delim(
     bruttoleistung_kW = col_double(),
     nettonennleistung_kW = col_double(),
     EEGAusschreibung = col_logical(),
-    einspeisung = readr::col_factor(c("Teileinspeisung", "Volleinspeisung")),
+    einspeisung = readr::col_factor(),
     mieterstrom = col_logical()
   )
 ) %>%
@@ -42,7 +42,14 @@ mastr <- read_delim(
       oeffentlich = "Öffentliche Gebäude",
       sonstige = "Sonstige",
     ),
-    # just to ensure order of ort factor; this can't be done above, since col_factor() has a problem with "Weißenfeld" (probably the umlaut)
+    # just to ensure order of factors; this can't be done above, since col_factor() has a problem with umlauts as in "Weißenfeld"
+    status = recode_factor(status, 
+      "In Planung" = "In Planung",
+      "In Betrieb" = "In Betrieb",
+      "Vorübergehend stillgelegt" = "Vorübergehend stillgelegt",
+      "Endgültig stillgelegt" = "Endgültig stillgelegt",
+      .ordered = TRUE
+    ),
     ort = recode_factor(ort,
       "Baldham" = "Baldham",
       "Vaterstetten" = "Vaterstetten",
@@ -406,3 +413,4 @@ server <- function(id) {
     }
   )
 }
+
