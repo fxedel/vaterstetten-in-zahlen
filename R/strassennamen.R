@@ -56,11 +56,15 @@ strassenNamensherkuenfte <- left_join(
     "Sonstige",
     "Unbekannt"
   ))
+) %>% mutate(
+  Typ = recode_factor(Typ,
+    "Komponisten" = "Komponist:innen"
+  )
 )
 
 typColors <- c(
   "Personen mit Lokalbezug" = "#bb0033",
-  "Komponisten" = "#ee7700",
+  "Komponist:innen" = "#ee7700",
   "andere Personen" = "#ee0000",
   "Vögel" = "#33ddff",
   "andere Tiere" = "#00ffdd",
