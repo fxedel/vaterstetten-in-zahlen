@@ -94,6 +94,11 @@ typTextColors <- c(
   "Unbekannt" = "#ffffff"
 )
 
+genderColors <- c(
+  "männlich" = "#1fc3aa",
+  "weiblich" = "#8624f5"
+)
+
 ui <- memoise(omit_args = "request", function(request, id) {
   request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
 
@@ -137,6 +142,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             strassenNamensherkuenfte %>% count(Geschlecht),
             x = ~n,
             y = ~Geschlecht,
+            color = ~Geschlecht,
+            colors = genderColors,
             height = 350,
             type = "bar",
             orientation = "h",

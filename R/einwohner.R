@@ -69,8 +69,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 12,
         {
           plot_ly(x = ~stichtag, yhoverformat = ",d", xhoverformat = "%-d. %b %Y", height = 350) %>%
-            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(maennlich)), y = ~maennlich, name = "Männer", type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#66c2a5", stackgroup = "geschlecht") %>%
-            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(weiblich)), y = ~weiblich, name = "Frauen",type = "scatter", mode = "none", fill = 'tonexty', fillcolor = "#8da0cb",  stackgroup = "geschlecht") %>%
+            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(maennlich)), y = ~maennlich, name = "Männer", type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#1fc3aa", stackgroup = "geschlecht") %>%
+            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(weiblich)), y = ~weiblich, name = "Frauen",type = "scatter", mode = "none", fill = 'tonexty', fillcolor = "#8624f5",  stackgroup = "geschlecht") %>%
             add_trace(data = lfstatBevoelkerungCombined, y = ~bevoelkerung, name = "Bevölkerung", type = "scatter", mode = "lines", color = I("#000000")) %>%
             add_trace(data = lfstatBevoelkerungCombined %>% filter(erhebungsart == "Volkszählung"), y = ~bevoelkerung, name = "Volkszählungen", type = "scatter", mode = "markers", hovertemplate = "Volkszählung<extra></extra>", color = I("#000000")) %>%
             plotly_default_config() %>%
