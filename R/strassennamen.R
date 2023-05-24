@@ -12,6 +12,8 @@ osmStrassen <- read_delim(
     OSMWayIDs = col_character(),
     Geometry = col_character(),
   )
+) %>% mutate(
+  StreetID = row_number()
 ) %>% st_as_sf(wkt = "Geometry")
 
 wikidataNamensherkuenfte <- read_delim(
@@ -170,15 +172,47 @@ ui <- memoise(omit_args = "request", function(request, id) {
       box(
         width = 6,
         {
+          data <- strassenNamensherkuenfte %>%
+            mutate(
+              label = ifelse(is.na(NamensherkunftWikidata), "", paste0(
+                '<strong style="font-size: 1.2em; margin-top: .5em; display: block">',
+                  # TODO: to add links like these, the label should somehow be permanent (on click?)
+                  # '<a href="https://www.wikidata.org/wiki/', htmlEscape(NamensherkunftWikidata), '">',
+                  # htmlEscape(Bezeichnung),
+                  # '</a>',
+                  htmlEscape(Bezeichnung), ' (', htmlEscape(NamensherkunftWikidata), ')',
+                '</strong>',
+                htmlEscape(Beschreibung)
+              ))
+            ) %>%
+            group_by(StreetID, Name, Geometry) %>% summarize(
+              Typ = paste(unique(Typ), collapse = "/"),
+              label = paste(label, collapse = "<br />"),
+              .groups = "drop"
+            )
+          
           leaflet(options = leafletOptions(
             zoom = 13,
             center = list(lng = 11.798, lat = 48.12)
           ), height = 550) %>%
             addProviderTiles(providers$CartoDB.Positron) %>%
             addPolylines(
-              data = strassenNamensherkuenfte$Geometry,
-              color = unname(typColors[strassenNamensherkuenfte$Typ]),
-              label = paste0(strassenNamensherkuenfte$Name, ": ", strassenNamensherkuenfte$Typ)
+              data = data$Geometry,
+              color = unname(typColors[data$Typ]),
+              label = lapply(paste0(
+                '<strong style="font-size: 1.4em">', htmlEscape(data$Name), '</strong>',
+                '<br />',
+                htmlEscape(data$Typ),
+                data$label
+              ), HTML),
+              labelOptions = labelOptions(
+                style = list(
+                  'min-width' = '150px',
+                  'max-width' = '250px',
+                  'width' = 'max-content',
+                  'white-space' = 'normal'
+                )
+              )
             ) %>%
             identity()
         }
