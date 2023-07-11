@@ -151,13 +151,13 @@ valueBoxAnlagenInPlanung <- valueBox(
 )
 
 
-plotly_default_config <- function(p) {
+plotly_default_config <- function(p, hovermode = "x") {
   p %>%
     config(displayModeBar = FALSE) %>%
     config(locale = "de") %>%
     layout(xaxis = list(fixedrange = TRUE, rangemode = "tozero")) %>%
     layout(yaxis = list(fixedrange = TRUE)) %>%
-    layout(hovermode = "x") %>%
+    layout(hovermode = hovermode) %>%
     layout(dragmode = FALSE) %>%
     layout(legend = list(bgcolor = "#ffffffaa", orientation = "h")) %>% # legend below plot
     identity()
@@ -330,41 +330,27 @@ ui <- memoise(omit_args = "request", function(request, id) {
             filter(inbetriebnahme >= "2019-02-01") %>% 
             filter(inbetriebnahme <= registrierungMaStR) %>%
             mutate(
-              registrierungsDelay = as.integer(registrierungMaStR - inbetriebnahme)
-            ) %>%
-            group_by(month = floor_date(inbetriebnahme, unit = "month")) %>%
-            summarise(
-              anlagen = n(),
-              delayMin = min(registrierungsDelay),
-              delayP25 = quantile(registrierungsDelay, 0.25),
-              delayMedian = median(registrierungsDelay),
-              delayP75 = quantile(registrierungsDelay, 0.75),
-              delayMax = max(registrierungsDelay),
-              delaySd = sd(registrierungsDelay),
+              registrierungsDelay = as.integer(registrierungMaStR - inbetriebnahme),
+              limit = as.integer(Sys.Date() - inbetriebnahme)
             ) %>%
             mutate(
-              limit = as.integer(Sys.Date() - month)
+              limit = ifelse(limit > max(registrierungsDelay), NA, limit)
             ) %>%
-            mutate(
-              limit = ifelse(limit > max(delayMax), NA, limit)
-            )
+            identity()
 
-          plot_ly(data, x = ~month, yhoverformat = ",d", height = 350) %>%
-            add_trace(y = ~delayMin, type = "scatter", mode = "lines", color = I("transparent"), name = "Min") %>%
-            add_trace(y = ~delayMax, type = "scatter", mode = "lines", color = I("transparent"), name = "Max", fill = "tonexty", fillcolor = "rgba(5, 112, 176, 0.2)") %>%
-            add_trace(y = ~delayP25, type = "scatter", mode = "lines", color = I("transparent"), name = "75%-Perzentil") %>%
-            add_trace(y = ~delayP75, type = "scatter", mode = "lines", color = I("transparent"), name = "25%-Perzentil", fill = "tonexty", fillcolor = "rgba(5, 112, 176, 0.2)") %>%
-            add_trace(y = ~delayMedian, type = "scatter", mode = "lines", color = I("#0570b0"), name = "Median") %>%
+          plot_ly(data, x = ~inbetriebnahme, yhoverformat = ",d", height = 350) %>%
+            add_trace(y = ~registrierungsDelay, type = "scatter", mode = "markers", marker = list(opacity = 0.3, size = 8), name = "Meldeverzug") %>%
             add_trace(y = ~limit, type = "scatter", mode = "lines", color = I("#ff0000"), name = "Limit", line = list(dash = "dot")) %>%
-            layout(yaxis = list(exponentformat = "none", ticksuffix = " Tage", rangemode = "tozero")) %>%
+            layout(xaxis = list(title = "Inbetriebnahme")) %>%
+            layout(yaxis = list(title = "Meldeverzug", exponentformat = "none", ticksuffix = " Tage", rangemode = "tozero")) %>%
             layout(showlegend = FALSE) %>%
-            plotly_axis_spacing(data$month, left = 0, right = 0.02) %>%
-            plotly_default_config() %>%
-            plotly_hide_axis_titles() %>%
+            plotly_axis_spacing(data$inbetriebnahme, left = 0.02, right = 0.02) %>%
+            plotly_default_config(hovermode = "closest") %>%
+            # plotly_hide_axis_titles() %>%
             plotly_build() %>%
             identity()
         },
-        p(HTML("Dargestellt wird der Abstand zwischen Inbetriebnahme und Registrierung im Marktstammdatenregister, gruppiert nach Monat der Inbetriebnahme. Die Linie entspricht dem Median („mittlerer“ Abstand), der dunklere Bereich dem 25%- bis 75%-Perzentil und der hellere Bereich allen Werten. Es werden nur Inbetriebnahmen seit dem 1. Februar 2019 berücksichtigt, da erst seit diesem Zeitpunkt die Registrierung im MaStR möglich und innerhalb eines Monats nach Inbetriebnahme auch verpflichtend ist. Die rote Linie stellt den maximal möglichen Meldeverzug dar, der durch das heutige Datum gegeben ist.")),
+        p(HTML("Jeder Punkt stellt eine Anlage dar, wobei die Höhe des Punkts (also die Lage auf der Y-Achse) den Meldeverzug, also den Abstand zwischen Inbetriebnahme und Registrierung im Marktstammdatenregister darstellt. Es werden nur Inbetriebnahmen seit dem 1. Februar 2019 berücksichtigt, da erst seit diesem Zeitpunkt die Registrierung im MaStR möglich und innerhalb eines Monats nach Inbetriebnahme auch verpflichtend ist. Die rote Linie stellt den maximal möglichen Meldeverzug dar, der durch das heutige Datum gegeben ist.")),
       ),
     ),
 
