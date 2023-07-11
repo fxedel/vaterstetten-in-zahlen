@@ -65,6 +65,13 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     return True
     
   def map_row(self, x: dict) -> dict:
+    lage = self.LAGE_BY_ID[x['LageEinheit']]
+
+    if lage == self.LAGE_STECKER:
+      if x['AnzahlSolarModule'] > 2 and x['Nettonennleistung'] > 0.6:
+        print(f"> Entity with LageEinheit = '{lage}' has AnzahlSolarModule = {x['AnzahlSolarModule']} > 2 and Nettonennleistung = {x['Nettonennleistung']} > 0.6, setting LageEinheit := '{self.LAGE_GEBAEUDE}': Name '{x['EinheitName']}' (https://www.marktstammdatenregister.de/MaStR/Einheit/Detail/IndexOeffentlich/{x['Id']})")
+        lage = self.LAGE_GEBAEUDE
+
     return {
       'MaStRId': x['Id'],
       'MaStRNummer': x['MaStRNummer'],
@@ -78,7 +85,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'betreiber': x['AnlagenbetreiberName'] if self.is_public(x) else None,
       'gebaeudeNutzung':
         self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] if x['NutzungsbereichGebSA'] is not None else
-        self.NUTZUNGSBEREICH_SONSTIGE if not self.LAGE_BY_ID[x['LageEinheit']] == self.LAGE_FREIFLAECHE else None,
+        self.NUTZUNGSBEREICH_SONSTIGE if not lage == self.LAGE_FREIFLAECHE else None,
       'plz': x['Plz'],
       'ort': x['Ort'],
       'strasse': x['Strasse'],
@@ -86,7 +93,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'lat': x['Breitengrad'],
       'long': x['Laengengrad'],
       'netzbetreiberPruefung': str(x['IsNBPruefungAbgeschlossen'] == self.NETZBETREIBERPRUEFUNG_GEPRUEFT_ID).lower(),
-      'typ': self.LAGE_BY_ID[x['LageEinheit']],
+      'typ': lage,
       'module': x['AnzahlSolarModule'],
       'ausrichtung': x['HauptausrichtungSolarModuleBezeichnung'],
       'bruttoleistung_kW': x['Bruttoleistung'],
