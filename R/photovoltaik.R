@@ -317,7 +317,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_build() %>%
             identity()
         },
-        p(HTML("Mehr Infos zu Balkonkraftwerken gibt es im <a href=\"https://muenchen.solar2030.de/balkonkraftwerk/\">Guide von München Solar2030</a>.<br>Von Januar bis Ende September 2022, sowie seit Januar 2023 gibt es eine Förderung von 25&nbsp;% und maximal 250&nbsp;€ von der <a href=\"https://www.vaterstetten.de/bauen-umwelt/energie-und-klimaschutz/energieeinspar-foerderprogramm/\">Gemeinde Vaterstetten</a>.")),
+        p(HTML("Mehr Infos zu Balkonkraftwerken gibt es im <a href=\"https://muenchen.solar2030.de/balkonkraftwerk/\">Guide von München Solar2030</a>.<br>Von Januar bis Ende September 2022, sowie von Januar 2023 bis Juni 2023 gab es eine Förderung von 25&nbsp;% und maximal 250&nbsp;€ von der <a href=\"https://www.vaterstetten.de/bauen-umwelt/energie-und-klimaschutz/energieeinspar-foerderprogramm/\">Gemeinde Vaterstetten</a>.")),
       ),
     ),
 
@@ -346,7 +346,6 @@ ui <- memoise(omit_args = "request", function(request, id) {
             layout(showlegend = FALSE) %>%
             plotly_axis_spacing(data$inbetriebnahme, left = 0.02, right = 0.02) %>%
             plotly_default_config(hovermode = "closest") %>%
-            # plotly_hide_axis_titles() %>%
             plotly_build() %>%
             identity()
         },
