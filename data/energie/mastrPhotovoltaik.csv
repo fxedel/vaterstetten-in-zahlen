@@ -1169,7 +1169,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5887347,SEE961454693425,,In Betrieb,2023-03-23,2023-03-23,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.76,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6023459,SEE997049137395,E21041011000000000000282547300001,In Betrieb,2023-04-19,2023-03-23,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,32,Nord,13.12,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6354603,SEE927408731476,,In Betrieb,2023-06-20,2023-03-23,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,46,West,18.86,18.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5924623,SEE972466918031,,In Betrieb,2023-03-28,2023-03-24,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,14,,5.39,4.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5924623,SEE972466918031,E21041011000000000000275319700001,In Betrieb,2023-03-28,2023-03-24,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,14,,5.39,4.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5928697,SEE965233418513,,In Betrieb,2023-03-29,2023-03-25,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.74,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5926799,SEE987333829167,,In Betrieb,2023-03-28,2023-03-27,,,Parsdorf-Lagerhalle-2023,Auer Baustoffe GmbH & Co. KG,GHD,85599,Parsdorf,,,,,false,gebaeude,72,Ost-West,29.88,25.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6055011,SEE935381163535,,In Betrieb,2023-04-25,2023-03-28,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,25,Süd,9.375,8.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1265,6 +1265,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 6450178,SEE942828429727,,In Betrieb,2023-07-05,2023-07-05,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6476645,SEE912249028427,,In Betrieb,2023-07-10,2023-07-05,,,,,sonstige,85598,Baldham,,,,,false,gebaeude,29,Süd-West,11.89,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6464572,SEE953419991059,,In Betrieb,2023-07-07,2023-07-07,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,40,Süd-Ost,15.4,12.0,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+6096211,SEE967447402142,,In Betrieb,2023-07-20,2023-07-07,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,23,West,8.395,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6471852,SEE907040772228,,In Betrieb,2023-07-09,2023-07-08,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.6,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6475797,SEE981751680027,,In Betrieb,2023-07-10,2023-07-10,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,21,Süd,7.98,7.98,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6490633,SEE971548486598,,In Betrieb,2023-07-12,2023-07-11,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,28,Nord-Ost,11.62,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1287,6 +1288,5 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 6444170,SEE927249696248,,In Planung,2023-07-04,,2023-07-07,,,,sonstige,85646,Purfing,,,,,false,gebaeude,15,Süd,5.55,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6222403,SEE968419887462,,In Planung,2023-05-27,,2023-07-15,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.62,0.6,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6529902,SEE976141175245,,In Planung,2023-07-19,,2023-07-20,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-6096211,SEE967447402142,,In Planung,2023-05-13,,2023-07-31,,,,haushalt,85598,Baldham,,,,,false,gebaeude,23,West,8.395,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6448713,SEE994470594049,,In Planung,2023-07-05,,2023-08-01,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.6,0.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6431088,SEE907449269701,,In Planung,2023-07-03,,2023-09-01,,,,haushalt,85598,Baldham,,,,,false,gebaeude,,,10.0,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
