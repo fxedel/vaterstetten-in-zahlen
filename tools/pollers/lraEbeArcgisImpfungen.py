@@ -18,20 +18,22 @@ class Poller(pollers.poller.Poller):
     data = layer.query(order_by_fields='Meldedatum')
     print('> Queried data in %.1fs' % (time.time() - start))
 
-    if len(data) == 0:
+    features = data.features
+    features = list(filter(lambda x: int(x.attributes['ObjectId']) >= 1989, features)) # 1-497, 498-994, 995-1491, 1492-1988, 1989-2485
+
+    if len(features) == 0:
       raise Exception('Queried data is empty')
 
-    if len(data) < len(current_rows) * (1/1.5):
-      raise Exception('Queried data has much less items (%d) than current data (%d)' % (len(data), len(current_rows)))
+    if len(features) < len(current_rows) * (1/1.5):
+      raise Exception('Queried data has much less items (%d) than current data (%d)' % (len(features), len(current_rows)))
 
-    if len(data) > len(current_rows) * 1.5:
-      raise Exception('Queried data has much more items (%d) than current data (%d)' % (len(data), len(current_rows)))
+    if len(features) > len(current_rows) * 1.5:
+      raise Exception('Queried data has much more items (%d) than current data (%d)' % (len(features), len(current_rows)))
 
-    features = data.features
     apply_manual_fixes(features)
     check_cumulative_plausability(features)
 
-    rows = list(map(feature_to_row, data.features))
+    rows = list(map(feature_to_row, features))
     self.write_csv_rows(csv_filename, rows)
 
 def apply_manual_fixes(features: List[Feature]):
