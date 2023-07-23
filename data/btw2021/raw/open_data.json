@@ -1,0 +1,282 @@
+{
+  "wahllokal_felder": [
+    {
+      "feld": "datum",
+      "wert": ""
+    },
+    {
+      "feld": "ags",
+      "wert": ""
+    },
+    {
+      "feld": "Bezirk-Nr",
+      "wert": ""
+    },
+    {
+      "feld": "Bezirk-Name",
+      "wert": ""
+    },
+    {
+      "feld": "Bezirk-Art",
+      "wert": ""
+    },
+    {
+      "feld": "Wahlraum-Bezeichnung",
+      "wert": ""
+    },
+    {
+      "feld": "Wahlraum-Adresse",
+      "wert": ""
+    },
+    {
+      "feld": "Wahlraum-Barrierefrei",
+      "wert": ""
+    },
+    {
+      "feld": "Wahlraum-Barrierefrei-Ergaenzung",
+      "wert": ""
+    }
+  ],
+  "strassen_felder": [],
+  "csvs": [
+    {
+      "wahl": "Wahl zum Deutschen Bundestag",
+      "ebene": "Gemeinde-Ergebnis",
+      "url": "Open-Data-Bundestagswahl1573.csv"
+    },
+    {
+      "wahl": "Wahl zum Deutschen Bundestag",
+      "ebene": "Übersicht über Wahlbezirke",
+      "url": "Open-Data-Bundestagswahl1576.csv"
+    }
+  ],
+  "ergebnisgrafiken": [
+    {
+      "wahl": "Wahl zum Deutschen Bundestag - Gemeinde Vaterstetten - Erststimmen",
+      "wahl_id": 157,
+      "stimmentyp": 0,
+      "link": {
+        "id": "ebene_3_id_105",
+        "type": "ergebnisgrafik",
+        "title": "Gemeinde Vaterstetten"
+      }
+    },
+    {
+      "wahl": "Wahl zum Deutschen Bundestag - Gemeinde Vaterstetten - Zweitstimmen",
+      "wahl_id": 157,
+      "stimmentyp": 1,
+      "link": {
+        "id": "ebene_3_id_105",
+        "type": "ergebnisgrafik",
+        "title": "Gemeinde Vaterstetten"
+      }
+    }
+  ],
+  "dateifelder": [
+    {
+      "name": "Wahl zum Deutschen Bundestag",
+      "felder": [
+        {
+          "feld": "datum",
+          "wert": "Datum des Wahltermins"
+        },
+        {
+          "feld": "wahl",
+          "wert": "Name der Wahl"
+        },
+        {
+          "feld": "ags",
+          "wert": "AGS der Behörde"
+        },
+        {
+          "feld": "gebiet-nr",
+          "wert": "Nummer des Wahlgebiets"
+        },
+        {
+          "feld": "gebiet-name",
+          "wert": "Name des Wahlgebiets"
+        },
+        {
+          "feld": "max-schnellmeldungen",
+          "wert": "Anzahl an insgesamt erwarteten Schnellmeldungen im Wahlgebiet"
+        },
+        {
+          "feld": "anz-schnellmeldungen",
+          "wert": "Anzahl an bisher eingegangenen Schnellmeldungen im Wahlgebiet"
+        },
+        {
+          "feld": "A1",
+          "wert": "Wahlberechtigte ohne Sperrvermerk 'W'"
+        },
+        {
+          "feld": "A2",
+          "wert": "Wahlberechtigte mit Sperrvermerk 'W'"
+        },
+        {
+          "feld": "A3",
+          "wert": "Wahlberechtigte nicht im Wählerverzeichnis"
+        },
+        {
+          "feld": "A",
+          "wert": "Wahlberechtigte insgesamt"
+        },
+        {
+          "feld": "B",
+          "wert": "Wähler"
+        },
+        {
+          "feld": "B1",
+          "wert": "Wähler mit Wahlschein"
+        },
+        {
+          "feld": "C",
+          "wert": "Ungültige Erststimmen"
+        },
+        {
+          "feld": "D",
+          "wert": "Gültige Erststimmen"
+        },
+        {
+          "feld": "E",
+          "wert": "Ungültige Zweitstimmen"
+        },
+        {
+          "feld": "F",
+          "wert": "Gültige Zweitstimmen"
+        },
+        {
+          "feld": "D1",
+          "wert": "Erststimmen für Partei 1"
+        },
+        {
+          "feld": "...",
+          "wert": "..."
+        },
+        {
+          "feld": "D99",
+          "wert": "Erststimmen für Partei 99"
+        },
+        {
+          "feld": "F1",
+          "wert": "Zweitstimmen für Partei 1"
+        },
+        {
+          "feld": "...",
+          "wert": "..."
+        },
+        {
+          "feld": "F99",
+          "wert": "Zweitstimmen für Partei 99"
+        }
+      ],
+      "parteien": [
+        {
+          "feld": "D1 / F1",
+          "wert": "Christlich-Soziale Union in Bayern e.V."
+        },
+        {
+          "feld": "D2 / F2",
+          "wert": "Sozialdemokratische Partei Deutschlands"
+        },
+        {
+          "feld": "D3 / F3",
+          "wert": "Alternative für Deutschland"
+        },
+        {
+          "feld": "D4 / F4",
+          "wert": "Freie Demokratische Partei"
+        },
+        {
+          "feld": "D5 / F5",
+          "wert": "BÜNDNIS 90/DIE GRÜNEN"
+        },
+        {
+          "feld": "D6 / F6",
+          "wert": "DIE LINKE"
+        },
+        {
+          "feld": "D7 / F7",
+          "wert": "FREIE WÄHLER"
+        },
+        {
+          "feld": "D8 / F8",
+          "wert": "Ökologisch-Demokratische Partei"
+        },
+        {
+          "feld": "D9 / F9",
+          "wert": "PARTEI MENSCH UMWELT TIERSCHUTZ"
+        },
+        {
+          "feld": "D10 / F10",
+          "wert": "Bayernpartei"
+        },
+        {
+          "feld": "D11 / F11",
+          "wert": "Partei für Arbeit, Rechtsstaat, Tierschutz, Elitenförderung und basisdemokratische Initiative"
+        },
+        {
+          "feld": "D12 / F12",
+          "wert": "Piratenpartei Deutschland"
+        },
+        {
+          "feld": "D13 / F13",
+          "wert": "Nationaldemokratische Partei Deutschlands"
+        },
+        {
+          "feld": "D14 / F14",
+          "wert": "V-Partei³ - Partei für Veränderung, Vegetarier und Veganer"
+        },
+        {
+          "feld": "D15 / F15",
+          "wert": "Partei für Gesundheitsforschung"
+        },
+        {
+          "feld": "D16 / F16",
+          "wert": "Marxistisch-Leninistische Partei Deutschlands"
+        },
+        {
+          "feld": "D17 / F17",
+          "wert": "Deutsche Kommunistische Partei"
+        },
+        {
+          "feld": "D18 / F18",
+          "wert": "Basisdemokratische Partei Deutschland"
+        },
+        {
+          "feld": "D19 / F19",
+          "wert": "Bündnis C - Christen für Deutschland"
+        },
+        {
+          "feld": "D20 / F20",
+          "wert": "DER DRITTE WEG"
+        },
+        {
+          "feld": "D21 / F21",
+          "wert": "Die Urbane. Eine HipHop Partei"
+        },
+        {
+          "feld": "D22 / F22",
+          "wert": "Liberal-Konservative Reformer"
+        },
+        {
+          "feld": "D23 / F23",
+          "wert": "Partei der Humanisten"
+        },
+        {
+          "feld": "D24 / F24",
+          "wert": "Team Todenhöfer – Die Gerechtigkeitspartei"
+        },
+        {
+          "feld": "D25 / F25",
+          "wert": "UNABHÄNGIGE für bürgernahe Demokratie"
+        },
+        {
+          "feld": "D26 / F26",
+          "wert": "Volt Deutschland"
+        }
+      ]
+    }
+  ],
+  "file_version": "21.9.12",
+  "file_timestamp": "08.10.2021 12:26:30 038"
+}

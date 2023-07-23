@@ -27,7 +27,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
 
 
 ## [`gemeinderatErgebnisNachPartei.csv`](./gemeinderatErgebnisNachPartei.csv)
@@ -49,7 +49,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
 
 
 ## [`gemeinderatErgebnisNachPerson.csv`](./gemeinderatErgebnisNachPerson.csv)
@@ -68,7 +68,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
 
 
 ## [`gemeinderatPersonen.csv`](./gemeinderatPersonen.csv)
@@ -83,7 +83,7 @@ Der Datensatz [gemeinderatPersonen.csv](./gemeinderatPersonen.csv) umfasst die N
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (händisch übertragen)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (händisch übertragen)
 
 
 ## [`parteien.csv`](./parteien.csv)
@@ -100,7 +100,7 @@ Der Datensatz wurde händisch erstellt.
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`parteiNr`)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`parteiNr`)
 * Eigene Definition (`farbe`)
 
 
@@ -108,8 +108,8 @@ Der Datensatz wurde händisch erstellt.
 
 Der Geodatensatz [`stimmbezirke.geojson`](./stimmbezirke.geojson) stellt die Gebietszuteilung der Wahllokalstimmbezirke 1 bis 24 dar. Die Daten sind im [GeoJSON-Format](https://de.wikipedia.org/wiki/GeoJSON) gespeichert, jeder Stimmbezirk ist dabei ein Polygon oder MultiPolygon.
 
-Der Geodatensatz wurde mit dem Tool [uMap](http://umap.openstreetmap.fr/de/) händisch erstellt und als GeoJSON exportiert. Die uMap-Karte kann hier abgerufen werden: [http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031](http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031)
+Der Geodatensatz wurde mit dem Tool [uMap](https://umap.openstreetmap.fr/de/) händisch erstellt und als GeoJSON exportiert. Die uMap-Karte kann hier abgerufen werden: [https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031](https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031)
 
 ### Quellen
 
-* Gemeinde Vaterstetten (Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf dessen Basis die [uMap-Karte](http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031) erstellt werden konnte)
+* Gemeinde Vaterstetten (Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf dessen Basis die [uMap-Karte](https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031) erstellt werden konnte)

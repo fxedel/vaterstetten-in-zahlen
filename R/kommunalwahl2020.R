@@ -91,7 +91,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Eingezeichnet sind die 24 Wahllokal-Stimmbezirke, die auch in <a href=\"http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind der Sonderstimmbezirk 25 in den Altenheimen sowie die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler nicht dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Weiter ist zu beachten, dass manche Stimmbezirke teils sehr kleine isolierte Gebiete aufweisen (wie der Spechtweg oder das Gut Ammerthal) – das dortige Ergebnis entspricht dennoch dem Durchschnitt im ganzen Stimmbezirk, es ist also keine punktuelle Interpretation möglich.")),
+          p(HTML("Eingezeichnet sind die 24 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind der Sonderstimmbezirk 25 in den Altenheimen sowie die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler nicht dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Weiter ist zu beachten, dass manche Stimmbezirke teils sehr kleine isolierte Gebiete aufweisen (wie der Spechtweg oder das Gut Ammerthal) – das dortige Ergebnis entspricht dennoch dem Durchschnitt im ganzen Stimmbezirk, es ist also keine punktuelle Interpretation möglich.")),
         ),
       ),
     ),
@@ -154,7 +154,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
+          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
           p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/kommunalwahl2020", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
