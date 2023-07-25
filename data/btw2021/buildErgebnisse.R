@@ -14,7 +14,7 @@ stimmbezirke <- read_delim(
     `Bezirk-Nr` = col_integer()
   )
 ) %>% mutate(
-  stimmbezirkArt = case_match(`Bezirk-Art`,
+  StimmbezirkArt = case_match(`Bezirk-Art`,
     "W" ~ "Wahllokal",
     "B" ~ "Briefwahl"
   )
@@ -27,7 +27,7 @@ rawGesamt <- read_delim(
   col_types = cols(
     `gebiet-nr` = col_integer()
   )
-) %>% mutate(stimmbezirk = "Gesamt")
+) %>% mutate(Stimmbezirk = "Gesamt")
 rawNachStimmbezirk <- read_delim(
   file = "data/btw2021/raw/Open-Data-Bundestagswahl1576.csv",
   delim = ";",
@@ -35,11 +35,11 @@ rawNachStimmbezirk <- read_delim(
   col_types = cols(
     `gebiet-nr` = col_integer()
   )
-) %>% mutate(stimmbezirk = `gebiet-name`)
+) %>% mutate(Stimmbezirk = `gebiet-name`)
   
 rawCombined = bind_rows(rawGesamt, rawNachStimmbezirk) %>%
   left_join(
-    stimmbezirke %>% select(`Bezirk-Nr`, stimmbezirkArt),
+    stimmbezirke %>% select(`Bezirk-Nr`, StimmbezirkArt),
     by = join_by(`gebiet-nr` == `Bezirk-Nr`)
   )
 
@@ -50,13 +50,13 @@ parteien <- read_csv("data/btw2021/parteien.csv")
 
 ergebnisAllgemein <- rawCombined %>%
   transmute(
-    stimmbezirk,
-    stimmbezirkNr = `gebiet-nr`,
-    stimmbezirkArt,
-    wahlberechtigte = A,
-    waehler = B,
-    ungueltigeStimmen = C,
-    gueltigeStimmen = D
+    Stimmbezirk,
+    StimmbezirkNr = `gebiet-nr`,
+    StimmbezirkArt,
+    Wahlberechtigte = A,
+    Waehler = B,
+    UngueltigeStimmen = C,
+    GueltigeStimmen = D
   )
 write_csv(
   ergebnisAllgemein,
@@ -64,20 +64,20 @@ write_csv(
 )
 
 ergebnisNachPartei <- rawCombined %>%
-  rename_with(~ paste(.x, "stimmen", sep = "_"), matches("^D\\d+$")) %>%
+  rename_with(~ paste(.x, "Stimmen", sep = "_"), matches("^D\\d+$")) %>%
   pivot_longer(
     matches("^D\\d+_[a-z]+$"),
     names_prefix = "D",
-    names_to = c("parteiNr", ".value"),
+    names_to = c("ParteiNr", ".value"),
     names_sep = "_",
-    names_transform = c(parteiNr = as.numeric)
+    names_transform = c(ParteiNr = as.numeric)
   ) %>%
-  left_join(parteien %>% select(Nr, Kuerzel), by = join_by(parteiNr == Nr)) %>%
+  left_join(parteien, by = "ParteiNr") %>%
   transmute(
-    stimmbezirk,
-    stimmbezirkNr = `gebiet-nr`,
-    partei = Kuerzel,
-    stimmen
+    Stimmbezirk,
+    StimmbezirkNr = `gebiet-nr`,
+    ParteiKuerzel,
+    Stimmen
   )
 write_csv(
   ergebnisNachPartei,
@@ -89,13 +89,13 @@ write_csv(
 
 ergebnisAllgemein <- rawCombined %>%
   transmute(
-    stimmbezirk,
-    stimmbezirkNr = `gebiet-nr`,
-    stimmbezirkArt,
-    wahlberechtigte = A,
-    waehler = B,
-    ungueltigeStimmen = E,
-    gueltigeStimmen = F
+    Stimmbezirk,
+    StimmbezirkNr = `gebiet-nr`,
+    StimmbezirkArt,
+    Wahlberechtigte = A,
+    Waehler = B,
+    UngueltigeStimmen = E,
+    GueltigeStimmen = F
   )
 write_csv(
   ergebnisAllgemein,
@@ -103,20 +103,20 @@ write_csv(
 )
 
 ergebnisNachPartei <- rawCombined %>%
-  rename_with(~ paste(.x, "stimmen", sep = "_"), matches("^F\\d+$")) %>%
+  rename_with(~ paste(.x, "Stimmen", sep = "_"), matches("^F\\d+$")) %>%
   pivot_longer(
     matches("^F\\d+_[a-z]+$"),
     names_prefix = "F",
-    names_to = c("parteiNr", ".value"),
+    names_to = c("ParteiNr", ".value"),
     names_sep = "_",
-    names_transform = c(parteiNr = as.numeric)
+    names_transform = c(ParteiNr = as.numeric)
   ) %>%
-  left_join(parteien %>% select(Nr, Kuerzel), by = join_by(parteiNr == Nr)) %>%
+  left_join(parteien, by = "ParteiNr") %>%
   transmute(
-    stimmbezirk,
-    stimmbezirkNr = `gebiet-nr`,
-    partei = Kuerzel,
-    stimmen
+    Stimmbezirk,
+    StimmbezirkNr = `gebiet-nr`,
+    ParteiKuerzel,
+    Stimmen
   )
 write_csv(
   ergebnisNachPartei,

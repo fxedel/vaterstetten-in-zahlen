@@ -8,16 +8,16 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
-|`stimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder leer für Gesamt.
-|`wahlberechtigte`|integer|Anzahl der Wahlberechtigten (für Briefwahlstimmbezirke immer `0`)
-|`waehler`|integer|Anzahl der Wähler<sup>[1]<sup>
-|`ungueltigeStimmen`|integer|Anzahl ungültiger Stimmen
-|`gueltigeStimmen`|integer|Anzahl gültiger Stimmen
+|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
+|`StimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`StimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder leer für Gesamt.
+|`Wahlberechtigte`|integer|Anzahl der Wahlberechtigten (für Briefwahlstimmbezirke immer `0`)
+|`Waehler`|integer|Anzahl der Wähler<sup>[1]<sup>
+|`UngueltigeStimmen`|integer|Anzahl ungültiger Stimmen
+|`GueltigeStimmen`|integer|Anzahl gültiger Stimmen
 
-* `waehler` ≤ `wahlberechtigte`, falls es kein Briefwahlstimmbezirk ist
-* `waehler` = `ungueltigeStimmen` + `gueltigeStimmen`
+* `Waehler` ≤ `Wahlberechtigte`, falls es kein Briefwahlstimmbezirk ist
+* `Waehler` = `UngueltigeStimmen` + `GueltigeStimmen`
 
 <sup>[1]</sup> Briefwähler werden nicht in ihrem eigentlichen (Wahllokal-)Stimmbezirk als Wähler gezählt, sondern in einem Briefwahlstimmbezirk. Daher ist es nicht möglich, die Wahlbeteiligung nach Stimmbezirk aufgeschlüsselt anzugeben, da nicht bekannt ist, wie viele Briefwähler es in den Stimmbezirken gibt.
 
@@ -34,10 +34,10 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
-|`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
-|`stimmen`|integer|Anzahl gültiger Stimmen für diese Partei
+|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
+|`StimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`ParteiKuerzel`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`Stimmen`|integer|Anzahl gültiger Stimmen für diese Partei
 
 ### Quellen
 
@@ -46,12 +46,12 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 
 ## [`direktkandidaten.csv`](./direktkandidaten.csv)
 
-Der Datensatz [direktkandidaten.csv](./direktkandidaten.csv) umfasst die Namen und Parteien der Direktkandidaten für die Erststimmen. (Der Datensatz kann z.&nbsp;B. als Lookup für `erststimmenNachPartei.csv` verwendet werden, da aus Redundanzgründen dort auf die Namen verzichtet wurde.)
+Der Datensatz [direktkandidaten.csv](./direktkandidaten.csv) umfasst die Namen und Parteien der Direktkandidat:innen für die Erststimmen. (Der Datensatz kann z.&nbsp;B. als Lookup für `erststimmenNachPartei.csv` verwendet werden, da aus Redundanzgründen dort auf die Namen verzichtet wurde.)
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`Partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
-|`Name`|text|Name der Person
+|`ParteiKuerzel`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`Direktkandidat`|text|Name der Person
 
 ### Quellen
 
@@ -66,15 +66,15 @@ Der Datensatz wurde händisch erstellt.
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`Nr`|integer|Nummer der Partei (vorgegeben durch Rohformat)
-|`Kuerzel`|text|Kurzname der Partei (z.&nbsp;B. `CSU` oder `GRÜNE`)
-|`Name`|text|Offizieller Name der Partei (z.&nbsp;B. `Christlich-Soziale Union in Bayern e.V.` oder `BÜNDNIS 90/DIE GRÜNEN`)
-|`Farbe`|[hexcolor](https://de.wikipedia.org/wiki/Hexadezimale_Farbdefinition)|(Inoffizielle) Farbe der Partei (z.&nbsp;B. `#ff0000`)
+|`ParteiNr`|integer|Nummer der Partei (vorgegeben durch Rohformat)
+|`ParteiKuerzel`|text|Kurzname der Partei (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`ParteiName`|text|Offizieller Name der Partei (z.&nbsp;B. `Christlich-Soziale Union in Bayern e.V.` oder `BÜNDNIS 90/DIE GRÜNEN`)
+|`ParteiFarbe`|[hexcolor](https://de.wikipedia.org/wiki/Hexadezimale_Farbdefinition)|(Inoffizielle) Farbe der Partei (z.&nbsp;B. `#ff0000`)
 
 ### Quellen
 
 * [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](../quellen/okvote.md) (händisch übertragen)
-* Eigene Definition (`Farbe`)
+* Eigene Definition (`ParteiFarbe`)
 
 
 ## [`stimmbezirke.geojson`](./stimmbezirke.geojson)

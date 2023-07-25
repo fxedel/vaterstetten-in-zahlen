@@ -1,101 +1,98 @@
 stimmbezirke <- st_read("data/btw2021/stimmbezirke.geojson") %>%
   transmute(
-    stimmbezirk = name,
+    Stimmbezirk = name,
     geometry
   )
 
 parteien <- read_csv(
   file = "data/btw2021/parteien.csv",
   col_types = cols(
-    Nr = readr::col_factor(),
-    Kuerzel = readr::col_factor(),
-    Name = readr::col_factor(),
-    Farbe = col_character()
+    ParteiNr = readr::col_factor(),
+    ParteiKuerzel = readr::col_factor(),
+    ParteiName = readr::col_factor(),
+    ParteiFarbe = col_character()
   )
 )
 
 direktkandidaten <- read_csv(
   file = "data/btw2021/direktkandidaten.csv",
   col_types = cols(
-    Partei = readr::col_factor(),
-    Name = readr::col_factor()
+    ParteiKuerzel = readr::col_factor(),
+    Direktkandidat = readr::col_factor()
   )
 )
 
 erststimmenAllgemein <- read_csv(
   file = "data/btw2021/erststimmenAllgemein.csv",
   col_types = cols(
-    stimmbezirk = readr::col_factor(),
-    stimmbezirkNr = readr::col_factor(),
-    stimmbezirkArt = readr::col_factor(),
-    wahlberechtigte = col_integer(),
-    waehler = col_integer(),
-    ungueltigeStimmen = col_integer(),
-    gueltigeStimmen = col_integer()
+    Stimmbezirk = readr::col_factor(),
+    StimmbezirkNr = readr::col_factor(),
+    StimmbezirkArt = readr::col_factor(),
+    Wahlberechtigte = col_integer(),
+    Waehler = col_integer(),
+    UngueltigeStimmen = col_integer(),
+    GueltigeStimmen = col_integer()
   )
 )
 
 erststimmenNachStimmbezirkArt <- erststimmenAllgemein %>%
-  filter(!is.na(stimmbezirkArt)) %>%
-  group_by(stimmbezirkArt) %>%
+  filter(!is.na(StimmbezirkArt)) %>%
+  group_by(StimmbezirkArt) %>%
   summarise(
-    waehler = sum(waehler),
-    ungueltigeStimmen = sum(ungueltigeStimmen),
-    gueltigeStimmen = sum(gueltigeStimmen)
+    Waehler = sum(Waehler),
+    UngueltigeStimmen = sum(UngueltigeStimmen),
+    GueltigeStimmen = sum(GueltigeStimmen)
   )
 
 erststimmenNachPartei <- read_csv(
   file = "data/btw2021/erststimmenNachPartei.csv",
   col_types = cols(
-    stimmbezirk = readr::col_factor(),
-    stimmbezirkNr = readr::col_factor(),
-    partei = readr::col_factor(levels = levels(parteien$Kuerzel)),
-    stimmen = col_integer()
+    Stimmbezirk = readr::col_factor(),
+    StimmbezirkNr = readr::col_factor(),
+    ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
+    Stimmen = col_integer()
   )
 ) %>%
-  inner_join(parteien, by = join_by(partei == Kuerzel)) %>%
-  inner_join(direktkandidaten %>% transmute(
-    Partei,
-    Direktkandidat = Name
-  ), by = join_by(partei == Partei)) %>%
-  inner_join(erststimmenAllgemein %>% select(stimmbezirk, gueltigeStimmen), by = "stimmbezirk") %>%
-  mutate(stimmenAnteil = stimmen/gueltigeStimmen)
+  inner_join(parteien, by = "ParteiKuerzel") %>%
+  inner_join(direktkandidaten, by = "ParteiKuerzel") %>%
+  inner_join(erststimmenAllgemein, by = c("Stimmbezirk", "StimmbezirkNr")) %>%
+  mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
 
 
 zweitstimmenAllgemein <- read_csv(
   file = "data/btw2021/zweitstimmenAllgemein.csv",
   col_types = cols(
-    stimmbezirk = readr::col_factor(),
-    stimmbezirkNr = readr::col_factor(),
-    stimmbezirkArt = readr::col_factor(),
-    wahlberechtigte = col_integer(),
-    waehler = col_integer(),
-    ungueltigeStimmen = col_integer(),
-    gueltigeStimmen = col_integer()
+    Stimmbezirk = readr::col_factor(),
+    StimmbezirkNr = readr::col_factor(),
+    StimmbezirkArt = readr::col_factor(),
+    Wahlberechtigte = col_integer(),
+    Waehler = col_integer(),
+    UngueltigeStimmen = col_integer(),
+    GueltigeStimmen = col_integer()
   )
 )
 
 zweitstimmenNachStimmbezirkArt <- zweitstimmenAllgemein %>%
-  filter(!is.na(stimmbezirkArt)) %>%
-  group_by(stimmbezirkArt) %>%
+  filter(!is.na(StimmbezirkArt)) %>%
+  group_by(StimmbezirkArt) %>%
   summarise(
-    waehler = sum(waehler),
-    ungueltigeStimmen = sum(ungueltigeStimmen),
-    gueltigeStimmen = sum(gueltigeStimmen)
+    Waehler = sum(Waehler),
+    UngueltigeStimmen = sum(UngueltigeStimmen),
+    GueltigeStimmen = sum(GueltigeStimmen)
   )
 
 zweitstimmenNachPartei <- read_csv(
   file = "data/btw2021/zweitstimmenNachPartei.csv",
   col_types = cols(
-    stimmbezirk = readr::col_factor(),
-    stimmbezirkNr = readr::col_factor(),
-    partei = readr::col_factor(levels = levels(parteien$Kuerzel)),
-    stimmen = col_integer()
+    Stimmbezirk = readr::col_factor(),
+    StimmbezirkNr = readr::col_factor(),
+    ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
+    Stimmen = col_integer()
   )
 ) %>%
-  inner_join(parteien, by = join_by(partei == Kuerzel)) %>%
-  inner_join(zweitstimmenAllgemein %>% select(stimmbezirk, gueltigeStimmen), by = "stimmbezirk") %>%
-  mutate(stimmenAnteil = stimmen/gueltigeStimmen)
+  inner_join(parteien, by = "ParteiKuerzel") %>%
+  inner_join(zweitstimmenAllgemein, by = c("Stimmbezirk", "StimmbezirkNr")) %>%
+  mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
 
 
 
@@ -131,8 +128,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             yhoverformat = ",d",
             showlegend = TRUE
           ) %>%
-            add_trace(y = ~stimmbezirkArt, x = ~ungueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
-            add_trace(y = ~stimmbezirkArt, x = ~gueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
+            add_trace(y = ~StimmbezirkArt, x = ~UngueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
+            add_trace(y = ~StimmbezirkArt, x = ~GueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
             plotly_default_config() %>%
             layout(yaxis = list(autorange = "reversed")) %>%
             layout(uniformtext = list(minsize = 14, mode = "show")) %>%
@@ -154,8 +151,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             yhoverformat = ",d",
             showlegend = TRUE
           ) %>%
-            add_trace(y = ~stimmbezirkArt, x = ~ungueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
-            add_trace(y = ~stimmbezirkArt, x = ~gueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
+            add_trace(y = ~StimmbezirkArt, x = ~UngueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
+            add_trace(y = ~StimmbezirkArt, x = ~GueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
             plotly_default_config() %>%
             layout(yaxis = list(autorange = "reversed")) %>%
             layout(uniformtext = list(minsize = 14, mode = "show")) %>%
@@ -176,10 +173,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
           label = "Partei",
           choices = {
             data <- direktkandidaten %>% mutate(
-              label = paste0(Partei, " (", Name, ")")
+              Label = paste0(ParteiKuerzel, " (", Direktkandidat, ")")
             )
             
-            choices = setNames(data$Partei, data$label)
+            choices = setNames(data$ParteiKuerzel, data$Label)
             choices
           }
         ),
@@ -192,7 +189,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         selectInput(
           ns("zweitstimmenMapPartei"),
           label = "Partei",
-          choices = parteien$Kuerzel
+          choices = parteien$ParteiKuerzel
         ),
         leafletOutput(ns("zweitstimmenMap"), height = 550),
         p(),
@@ -236,10 +233,10 @@ server <- function(id) {
       })
 
       printErststimmenMap <- function(leafletObject) {
-        partei <- parteien %>% filter(Kuerzel == input$erststimmenMapPartei) %>% head()
-        ergebnisPartei <- erststimmenNachPartei %>% filter(partei == input$erststimmenMapPartei)
-        mapData <- stimmbezirke %>% left_join(ergebnisPartei, by = "stimmbezirk")
-        pal <- colorNumeric(c("#ffffff", partei$Farbe), c(0, max(ergebnisPartei$stimmenAnteil)))
+        partei <- parteien %>% filter(ParteiKuerzel == input$erststimmenMapPartei) %>% head()
+        ergebnisPartei <- erststimmenNachPartei %>% filter(ParteiKuerzel == input$erststimmenMapPartei)
+        mapData <- stimmbezirke %>% left_join(ergebnisPartei, by = "Stimmbezirk")
+        pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
@@ -248,15 +245,15 @@ server <- function(id) {
             stroke = FALSE,
             fillOpacity = 0.6,
             label = ~paste0(
-              stimmbezirk, ": ", scales::percent(stimmenAnteil, accuracy = 0.1), "<br />",
-              "(", stimmen, " von ", gueltigeStimmen, " Stimmen)"
+              Stimmbezirk, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
+              "(", Stimmen, " von ", GueltigeStimmen, " Stimmen)"
             ) %>% lapply(HTML),
-            fillColor = ~pal(stimmenAnteil)
+            fillColor = ~pal(StimmenAnteil)
           ) %>%
           addLegend("topright",
             data = mapData,
             pal = pal,
-            values = ~stimmenAnteil,
+            values = ~StimmenAnteil,
             title = NULL,
             labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
             opacity = 0.8,
@@ -279,10 +276,10 @@ server <- function(id) {
       })
 
       printZweitstimmenMap <- function(leafletObject) {
-        partei <- parteien %>% filter(Kuerzel == input$zweitstimmenMapPartei) %>% head()
-        ergebnisPartei <- zweitstimmenNachPartei %>% filter(partei == input$zweitstimmenMapPartei)
-        mapData <- stimmbezirke %>% left_join(ergebnisPartei, by = "stimmbezirk")
-        pal <- colorNumeric(c("#ffffff", partei$Farbe), c(0, max(ergebnisPartei$stimmenAnteil)))
+        partei <- parteien %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei) %>% head()
+        ergebnisPartei <- zweitstimmenNachPartei %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei)
+        mapData <- stimmbezirke %>% left_join(ergebnisPartei, by = "Stimmbezirk")
+        pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
@@ -291,15 +288,15 @@ server <- function(id) {
             stroke = FALSE,
             fillOpacity = 0.6,
             label = ~paste0(
-              stimmbezirk, ": ", scales::percent(stimmenAnteil, accuracy = 0.1), "<br />",
-              "(", stimmen, " von ", gueltigeStimmen, " Stimmen)"
+              Stimmbezirk, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
+              "(", Stimmen, " von ", GueltigeStimmen, " Stimmen)"
             ) %>% lapply(HTML),
-            fillColor = ~pal(stimmenAnteil)
+            fillColor = ~pal(StimmenAnteil)
           ) %>%
           addLegend("topright",
             data = mapData,
             pal = pal,
-            values = ~stimmenAnteil,
+            values = ~StimmenAnteil,
             title = NULL,
             labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
             opacity = 0.8,
