@@ -9,8 +9,8 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 |Spalte|Format|Beschreibung
 |-|-|-
 |`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`StimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt
-|`StimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder leer für Gesamt
+|`StimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
+|`StimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder `NA` für Gesamt
 |`Wahlberechtigte`|integer|Anzahl der Wahlberechtigten (für Briefwahlstimmbezirke immer `0`)
 |`Waehler`|integer|Anzahl der Wähler<sup>[1]<sup>
 |`UngueltigeStimmen`|integer|Anzahl ungültiger Stimmen

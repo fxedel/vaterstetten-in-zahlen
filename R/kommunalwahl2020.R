@@ -27,6 +27,7 @@ gemeinderatErgebnisAllgemein <- read_csv(
   col_types = cols(
     stimmbezirk = readr::col_factor(),
     stimmbezirkNr = readr::col_factor(),
+    stimmbezirkArt = readr::col_factor(),
     wahlberechtigte = col_integer(),
     waehler = col_integer(),
     ungueltigeStimmzettel = col_integer(),
@@ -36,6 +37,16 @@ gemeinderatErgebnisAllgemein <- read_csv(
     stimmzettelNurEineListe = col_integer()
   )
 )
+
+gemeinderatErgebnisNachStimmbezirkArt <- gemeinderatErgebnisAllgemein %>%
+  filter(!is.na(stimmbezirkArt)) %>%
+  group_by(stimmbezirkArt) %>%
+  summarise(
+    waehler = sum(waehler),
+    ungueltigeStimmzettel = sum(ungueltigeStimmzettel),
+    gueltigeStimmzettel = sum(gueltigeStimmzettel),
+    gueltigeStimmen = sum(gueltigeStimmen)
+  )
 
 gemeinderatErgebnisNachPartei <- read_csv(
   file = "data/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv",
@@ -91,14 +102,42 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Eingezeichnet sind die 24 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind der Sonderstimmbezirk 25 in den Altenheimen sowie die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler nicht dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Weiter ist zu beachten, dass manche Stimmbezirke teils sehr kleine isolierte Gebiete aufweisen (wie der Spechtweg oder das Gut Ammerthal) – das dortige Ergebnis entspricht dennoch dem Durchschnitt im ganzen Stimmbezirk, es ist also keine punktuelle Interpretation möglich.")),
+          p(HTML("Eingezeichnet sind die 24 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind der Sonderstimmbezirk 25 in den Altenheimen sowie die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler (mehr als 50% aller Wähler!) nicht dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Jeder dargestellte Wahllokal-Stimmbezirk umfasst etwa 150 bis 350 Wähler:innen. Weiter ist zu beachten, dass manche Stimmbezirke teils sehr kleine isolierte Gebiete aufweisen (wie der Spechtweg oder das Gut Ammerthal) – das dortige Ergebnis entspricht dennoch dem Durchschnitt im ganzen Stimmbezirk, es ist also keine punktuelle Interpretation möglich.")),
         ),
       ),
     ),
 
     fluidRow(
       box(
-        title = "Parteistimmen nach Stimmbezirk",
+        title = "Gemeinderatsstimmen nach Stimmbezirk-Art",
+        {
+          plot_ly(
+            gemeinderatErgebnisNachStimmbezirkArt,
+            height = 150,
+            type = "bar",
+            orientation = "h",
+            yhoverformat = ",d",
+            showlegend = TRUE
+          ) %>%
+            add_trace(y = ~stimmbezirkArt, x = ~ungueltigeStimmzettel, name = "ungültig", marker = list(color = "#B71C1C")) %>%
+            add_trace(y = ~stimmbezirkArt, x = ~gueltigeStimmzettel, name = "gültig", marker = list(color = "#81C784")) %>%
+            plotly_default_config() %>%
+            layout(yaxis = list(autorange = "reversed")) %>%
+            layout(uniformtext = list(minsize = 14, mode = "show")) %>%
+            layout(barmode = 'stack') %>%
+            layout(hovermode = "y unified") %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        },
+        p(),
+        p("Anzahl ungültiger bzw. gültiger Stimmzettel in Wahllokal-Stimmbezirken und Briefwahlbezirken.")
+      ),
+    ),
+
+    fluidRow(
+      box(
+        title = "Gemeinderat: Parteistimmen nach Stimmbezirk",
         selectInput(
           ns("parteistimmenMapPartei"),
           label = "Partei",
@@ -109,7 +148,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         p("Die 24 Wahllokal-Stimmbezirke sind jeweils nach den Gemeinderatsstimmen der ausgewählten Partei-Liste eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen.")
       ),
       box(
-        title = "Personenstimmen nach Stimmbezirk, relativ zu Parteistimmen",
+        title = "Gemeinderat: Personenstimmen nach Stimmbezirk, relativ zu Parteistimmen",
         selectInput(
           ns("personenstimmenMapPerson"),
           label = "Person",
@@ -129,7 +168,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Häufelungen auf einzelne Kandidat*innen",
+        title = "Gemeinderat: Häufelungen auf einzelne Kandidat*innen",
         width = 12,
         {
           gemeinderatErgebnisNachPerson %>%
@@ -255,4 +294,23 @@ server <- function(id) {
       }
     }
   )
+}
+
+plotly_default_config <- function(p) {
+  p %>%
+    config(locale = "de") %>%
+    config(displaylogo = FALSE) %>%
+    config(displayModeBar = TRUE) %>%
+    config(modeBarButtons = list(list("toImage"))) %>%
+    config(toImageButtonOptions = list(scale = 2)) %>%
+    layout(dragmode = FALSE) %>%
+    identity()
+}
+
+plotly_hide_axis_titles <- function(p) {
+  p %>%
+    layout(xaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+    layout(yaxis = list(title = list(standoff = 0, font = list(size = 1)))) %>%
+    layout(margin = list(l = 0, pad = 0, b = 30)) %>%
+    identity()
 }

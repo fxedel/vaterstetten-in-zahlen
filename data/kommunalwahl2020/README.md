@@ -9,7 +9,8 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |Spalte|Format|Beschreibung
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
+|`stimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder `NA` für Gesamt
 |`wahlberechtigte`|integer|Anzahl der Wahlberechtigten (für Briefwahlstimmbezirke immer `0`)
 |`waehler`|integer|Anzahl der Wähler<sup>[1]<sup>
 |`ungueltigeStimmzettel`|integer|Anzahl ungültiger Stimmzettel
@@ -39,7 +40,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |Spalte|Format|Beschreibung
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
 |`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
 |`stimmen`|integer|Anzahl gültiger Stimmen für diese Partei
 |`stimmzettelNurListenkreuz`|integer|Anzahl Stimmzettel, auf denen nur diese Partei-Liste angekreuzt wurde (ohne „Häufeln“)
@@ -61,7 +62,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |Spalte|Format|Beschreibung
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
 |`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
 |`listenNr`|integer|Listen-Nummer der Person, auf die sich die Zeile bezieht (z.&nbsp;B. `1` für den 1. Listenplatz)
 |`stimmen`|integer|Anzahl gültiger Stimmen für diese Person
