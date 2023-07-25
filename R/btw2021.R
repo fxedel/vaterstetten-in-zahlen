@@ -110,7 +110,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Eingezeichnet sind die 14 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke_659020#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler (ca 2/3 der Wähler!) nicht dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Weiter ist zu beachten, dass manche Stimmbezirke teils sehr kleine isolierte Gebiete aufweisen (wie der Hofkellermeisterweg oder das Gut Ammerthal) – das dortige Ergebnis entspricht dennoch dem Durchschnitt im ganzen Stimmbezirk, es ist also keine punktuelle Interpretation möglich.")),
+          p(HTML("Eingezeichnet sind die 14 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke_659020#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler (ca. ⅔ der Wähler!) nicht dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Jeder Wahllokal-Stimmbezirk umfasst etwa 250 bis 550 Wähler:innen.")),
         ),
       ),
     ),
@@ -182,7 +182,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("erststimmenMap"), height = 550),
         p(),
-        p("Die 24 Wahllokal-Stimmbezirke sind jeweils nach den Gemeinderatsstimmen der ausgewählten Partei-Liste eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen.")
+        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen.")
       ),
       box(
         title = "Zweitstimmen nach Stimmbezirk (ohne Briefwahl)",
@@ -193,7 +193,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("zweitstimmenMap"), height = 550),
         p(),
-        p("Die 24 Wahllokal-Stimmbezirke sind jeweils nach den Gemeinderatsstimmen der ausgewählten Partei-Liste eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen.")
+        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Zweitstimmen der ausgewählten Partei eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen.")
       ),
     ),
 
