@@ -118,55 +118,6 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Erststimmen nach Stimmbezirk-Art",
-        {
-          plot_ly(
-            erststimmenNachStimmbezirkArt,
-            height = 150,
-            type = "bar",
-            orientation = "h",
-            yhoverformat = ",d",
-            showlegend = TRUE
-          ) %>%
-            add_trace(y = ~StimmbezirkArt, x = ~UngueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
-            add_trace(y = ~StimmbezirkArt, x = ~GueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
-            plotly_default_config() %>%
-            layout(yaxis = list(autorange = "reversed")) %>%
-            layout(uniformtext = list(minsize = 14, mode = "show")) %>%
-            layout(barmode = 'stack') %>%
-            layout(hovermode = "y unified") %>%
-            plotly_hide_axis_titles() %>%
-            plotly_build() %>%
-            identity()
-        },
-      ),
-      box(
-        title = "Zweitstimmen nach Stimmbezirk-Art",
-        {
-          plot_ly(
-            zweitstimmenNachStimmbezirkArt,
-            height = 150,
-            type = "bar",
-            orientation = "h",
-            yhoverformat = ",d",
-            showlegend = TRUE
-          ) %>%
-            add_trace(y = ~StimmbezirkArt, x = ~UngueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
-            add_trace(y = ~StimmbezirkArt, x = ~GueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
-            plotly_default_config() %>%
-            layout(yaxis = list(autorange = "reversed")) %>%
-            layout(uniformtext = list(minsize = 14, mode = "show")) %>%
-            layout(barmode = 'stack') %>%
-            layout(hovermode = "y unified") %>%
-            plotly_hide_axis_titles() %>%
-            plotly_build() %>%
-            identity()
-        },
-      ),
-    ),
-
-    fluidRow(
-      box(
         title = "Erststimmen nach Stimmbezirk (ohne Briefwahl)",
         selectInput(
           ns("erststimmenMapPartei"),
@@ -182,18 +133,126 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("erststimmenMap"), height = 550),
         p(),
-        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen.")
+        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen."),
+        p("Klicke auf den Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
+      column(
+        width = 6,
+        box(
+          width = NULL,
+          title = "Erststimmen nach Stimmbezirk",
+          selectInput(
+            ns("erststimmenBarChoices"),
+            label = "Stimmbezirk",
+            choices = {
+              data <- erststimmenAllgemein %>% mutate(
+                Label = if_else(
+                  is.na(StimmbezirkNr),
+                  Stimmbezirk,
+                  paste0(Stimmbezirk, " (", StimmbezirkArt, ")")
+                )
+              )
+              
+              choices = setNames(data$Stimmbezirk, data$Label)
+              choices
+            }
+          ),
+          plotlyOutput(ns("erststimmenBarPlotly"))
+        ),
+        box(
+          width = NULL,
+          title = "Erststimmen nach Stimmbezirk-Art",
+          {
+            plot_ly(
+              erststimmenNachStimmbezirkArt,
+              height = 100,
+              orientation = "h",
+              showlegend = TRUE
+            ) %>%
+              add_bars(y = ~StimmbezirkArt, x = ~UngueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
+              add_bars(y = ~StimmbezirkArt, x = ~GueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
+              plotly_default_config() %>%
+              layout(yaxis = list(autorange = "reversed")) %>%
+              layout(xaxis = list(tickformat = ",d", hoverformat = ",d")) %>%
+              layout(uniformtext = list(minsize = 14, mode = "show")) %>%
+              layout(barmode = 'stack') %>%
+              layout(hovermode = "y unified") %>%
+              plotly_hide_axis_titles() %>%
+              plotly_build() %>%
+              identity()
+          },
+        ),
+      ),
+    ),
+
+    br(),
+
+    fluidRow(
       box(
         title = "Zweitstimmen nach Stimmbezirk (ohne Briefwahl)",
         selectInput(
           ns("zweitstimmenMapPartei"),
           label = "Partei",
-          choices = parteien$ParteiKuerzel
+          choices = {
+            data <- parteien %>% mutate(
+              Label = paste0(ParteiKuerzel, " (", ParteiName, ")")
+            )
+            
+            choices = setNames(data$ParteiKuerzel, data$Label)
+            choices
+          },
         ),
         leafletOutput(ns("zweitstimmenMap"), height = 550),
         p(),
-        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Zweitstimmen der ausgewählten Partei eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen.")
+        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Zweitstimmen der ausgewählten Partei eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen."),
+        p("Klicke auf den Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
+      ),
+      column(
+        width = 6,
+        box(
+          width = NULL,
+          title = "Zweitstimmen nach Stimmbezirk",
+          selectInput(
+            ns("zweitstimmenBarChoices"),
+            label = "Stimmbezirk",
+            choices = {
+              data <- zweitstimmenAllgemein %>% mutate(
+                Label = if_else(
+                  is.na(StimmbezirkNr),
+                  Stimmbezirk,
+                  paste0(Stimmbezirk, " (", StimmbezirkArt, ")")
+                )
+              )
+              
+              choices = setNames(data$Stimmbezirk, data$Label)
+              choices
+            }
+          ),
+          plotlyOutput(ns("zweitstimmenBarPlotly"), height = 500)
+        ),
+        box(
+          width = NULL,
+          title = "Zweitstimmen nach Stimmbezirk-Art",
+          {
+            plot_ly(
+              zweitstimmenNachStimmbezirkArt,
+              height = 100,
+              orientation = "h",
+              showlegend = TRUE
+            ) %>%
+              add_bars(y = ~StimmbezirkArt, x = ~UngueltigeStimmen, name = "ungültig", marker = list(color = "#B71C1C")) %>%
+              add_bars(y = ~StimmbezirkArt, x = ~GueltigeStimmen, name = "gültig", marker = list(color = "#81C784")) %>%
+              plotly_default_config() %>%
+              layout(yaxis = list(autorange = "reversed")) %>%
+              layout(xaxis = list(tickformat = ",d", hoverformat = ",d")) %>%
+              layout(uniformtext = list(minsize = 14, mode = "show")) %>%
+              layout(barmode = 'stack') %>%
+              layout(hovermode = "y unified") %>%
+              plotly_hide_axis_titles() %>%
+              plotly_build() %>%
+              identity()
+          },
+        ),
       ),
     ),
 
@@ -244,6 +303,7 @@ server <- function(id) {
             data = mapData,
             stroke = FALSE,
             fillOpacity = 0.6,
+            layerId = ~Stimmbezirk,
             label = ~paste0(
               Stimmbezirk, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
               "(", Stimmen, " von ", GueltigeStimmen, " Stimmen)"
@@ -287,6 +347,7 @@ server <- function(id) {
             data = mapData,
             stroke = FALSE,
             fillOpacity = 0.6,
+            layerId = ~Stimmbezirk,
             label = ~paste0(
               Stimmbezirk, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
               "(", Stimmen, " von ", GueltigeStimmen, " Stimmen)"
@@ -302,6 +363,55 @@ server <- function(id) {
             opacity = 0.8,
             bins = 5
           )
+      }
+
+      observe({
+        event <- input$erststimmenMap_shape_click
+
+        if (!is.null(event)) {
+          updateSelectInput(session, "erststimmenBarChoices", selected = event$id)
+        }
+      })
+
+      observe({
+        printStimmenBarPlotly(input$erststimmenBarChoices, erststimmenNachPartei, "erststimmenBarPlotly")
+      })
+
+      observe({
+        event <- input$zweitstimmenMap_shape_click
+
+        if (!is.null(event)) {
+          updateSelectInput(session, "zweitstimmenBarChoices", selected = event$id)
+        }
+      })
+
+      observe({
+        printStimmenBarPlotly(input$zweitstimmenBarChoices, zweitstimmenNachPartei, "zweitstimmenBarPlotly")
+      })
+
+      printStimmenBarPlotly <- function(stimmbezirk, stimmenNachPartei, outputName) {
+        data <- stimmenNachPartei %>%
+          filter(Stimmbezirk == stimmbezirk) %>%
+          mutate(ParteiKuerzel = droplevels(ParteiKuerzel))
+
+        output[[outputName]] <- renderPlotly({
+          plot_ly(
+            data,
+            showlegend = FALSE
+          ) %>%
+            add_bars(y = ~ParteiKuerzel, x = ~StimmenAnteil, name = "Stimmenanteil", marker = ~list(color = ParteiFarbe),
+              text = ~scales::percent(StimmenAnteil, accuracy = 0.1),
+              hovertext = ~paste0("(", Stimmen, " von ", GueltigeStimmen, " Stimmen)")
+            ) %>%
+            plotly_default_config() %>%
+            layout(yaxis = list(autorange = "reversed")) %>%
+            layout(xaxis = list(tickformat = ".0%", hoverformat = ".1%", range = c(0, 0.55))) %>%
+            layout(uniformtext = list(minsize = 14, mode = "show")) %>%
+            layout(hovermode = "y unified") %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        })
       }
 
     }

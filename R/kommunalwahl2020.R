@@ -114,13 +114,12 @@ ui <- memoise(omit_args = "request", function(request, id) {
           plot_ly(
             gemeinderatErgebnisNachStimmbezirkArt,
             height = 150,
-            type = "bar",
             orientation = "h",
             yhoverformat = ",d",
             showlegend = TRUE
           ) %>%
-            add_trace(y = ~stimmbezirkArt, x = ~ungueltigeStimmzettel, name = "ungültig", marker = list(color = "#B71C1C")) %>%
-            add_trace(y = ~stimmbezirkArt, x = ~gueltigeStimmzettel, name = "gültig", marker = list(color = "#81C784")) %>%
+            add_bars(y = ~stimmbezirkArt, x = ~ungueltigeStimmzettel, name = "ungültig", marker = list(color = "#B71C1C")) %>%
+            add_bars(y = ~stimmbezirkArt, x = ~gueltigeStimmzettel, name = "gültig", marker = list(color = "#81C784")) %>%
             plotly_default_config() %>%
             layout(yaxis = list(autorange = "reversed")) %>%
             layout(uniformtext = list(minsize = 14, mode = "show")) %>%
