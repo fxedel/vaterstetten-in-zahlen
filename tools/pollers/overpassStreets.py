@@ -366,7 +366,7 @@ def get_etymology_type(element: dict) -> str:
     return 'Himmelskörper'
 
   if 'http://www.wikidata.org/entity/Q811979' in types:
-    # astronomic object
+    # architectural structure
     return 'Bauwerke'
 
   return 'Sonstige'
