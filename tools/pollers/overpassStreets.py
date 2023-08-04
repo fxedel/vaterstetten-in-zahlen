@@ -58,6 +58,10 @@ additional_street_connections = [
     'way_ids': [24964491, 1065946913]
   },
   {
+    'name': 'Frühlingstraße', # Baldham
+    'way_ids': [132661382, 228569312]
+  },
+  {
     'name': 'Parsdorfer Straße', # Hergolding / Baldham-Dorf
     'way_ids': [228732169, 5107120]
   },
