@@ -2,6 +2,20 @@ library(readr)
 library(dplyr)
 library(tidyr)
 
+stimmbezirke <- read_delim(
+  file = "data/kommunalwahl2020/raw/opendata-wahllokale.csv",
+  delim = ";",
+  col_names = TRUE,
+  col_types = cols(
+    `Bezirk-Nr` = col_integer()
+  )
+) %>% mutate(
+  stimmbezirkArt = case_match(`Bezirk-Art`,
+    "W" ~ "Wahllokal",
+    "B" ~ "Briefwahl"
+  )
+)
+
 rawGesamt <- read_delim(
   file = "data/kommunalwahl2020/raw/Open-Data-Gemeinderatswahl-Bayern1163.csv",
   delim = ";",
@@ -9,7 +23,7 @@ rawGesamt <- read_delim(
   col_types = cols(
     `gebiet-nr` = col_integer()
   )
-) %>% mutate(stimmbezirk = "Gesamt")
+) %>% mutate(`gebiet-nr` = NA, stimmbezirk = "Gesamt")
 rawNachStimmbezirk <- read_delim(
   file = "data/kommunalwahl2020/raw/Open-Data-Gemeinderatswahl-Bayern1166.csv",
   delim = ";",
@@ -18,7 +32,11 @@ rawNachStimmbezirk <- read_delim(
     `gebiet-nr` = col_integer()
   )
 ) %>% mutate(stimmbezirk = `gebiet-name`)
-rawCombined = bind_rows(rawGesamt, rawNachStimmbezirk)
+rawCombined = bind_rows(rawGesamt, rawNachStimmbezirk) %>%
+  left_join(
+    stimmbezirke %>% select(`Bezirk-Nr`, stimmbezirkArt),
+    by = join_by(`gebiet-nr` == `Bezirk-Nr`)
+  )
 
 parteien <- read_csv("data/kommunalwahl2020/parteien.csv")
 
@@ -26,6 +44,7 @@ ergebnisAllgemein <- rawCombined %>%
   transmute(
     stimmbezirk,
     stimmbezirkNr = `gebiet-nr`,
+    stimmbezirkArt,
     wahlberechtigte = A,
     waehler = B,
     ungueltigeStimmzettel = C,

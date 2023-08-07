@@ -9,7 +9,8 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |Spalte|Format|Beschreibung
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
+|`stimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder `NA` für Gesamt
 |`wahlberechtigte`|integer|Anzahl der Wahlberechtigten (für Briefwahlstimmbezirke immer `0`)
 |`waehler`|integer|Anzahl der Wähler<sup>[1]<sup>
 |`ungueltigeStimmzettel`|integer|Anzahl ungültiger Stimmzettel
@@ -27,7 +28,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
 
 
 ## [`gemeinderatErgebnisNachPartei.csv`](./gemeinderatErgebnisNachPartei.csv)
@@ -39,7 +40,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |Spalte|Format|Beschreibung
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
 |`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
 |`stimmen`|integer|Anzahl gültiger Stimmen für diese Partei
 |`stimmzettelNurListenkreuz`|integer|Anzahl Stimmzettel, auf denen nur diese Partei-Liste angekreuzt wurde (ohne „Häufeln“)
@@ -49,7 +50,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
 
 
 ## [`gemeinderatErgebnisNachPerson.csv`](./gemeinderatErgebnisNachPerson.csv)
@@ -61,14 +62,14 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |Spalte|Format|Beschreibung
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt.
+|`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
 |`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
 |`listenNr`|integer|Listen-Nummer der Person, auf die sich die Zeile bezieht (z.&nbsp;B. `1` für den 1. Listenplatz)
 |`stimmen`|integer|Anzahl gültiger Stimmen für diese Person
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`Open-Data-Gemeinderatswahl-Bayern1163.csv` und `Open-Data-Gemeinderatswahl-Bayern1166.csv`, nur einzelne Spalten)
 
 
 ## [`gemeinderatPersonen.csv`](./gemeinderatPersonen.csv)
@@ -83,7 +84,7 @@ Der Datensatz [gemeinderatPersonen.csv](./gemeinderatPersonen.csv) umfasst die N
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (händisch übertragen)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (händisch übertragen)
 
 
 ## [`parteien.csv`](./parteien.csv)
@@ -100,7 +101,7 @@ Der Datensatz wurde händisch erstellt.
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote-vaterstetten-kommunalwahl2020.md) (`parteiNr`)
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](../quellen/okvote.md) (`parteiNr`)
 * Eigene Definition (`farbe`)
 
 
@@ -108,8 +109,8 @@ Der Datensatz wurde händisch erstellt.
 
 Der Geodatensatz [`stimmbezirke.geojson`](./stimmbezirke.geojson) stellt die Gebietszuteilung der Wahllokalstimmbezirke 1 bis 24 dar. Die Daten sind im [GeoJSON-Format](https://de.wikipedia.org/wiki/GeoJSON) gespeichert, jeder Stimmbezirk ist dabei ein Polygon oder MultiPolygon.
 
-Der Geodatensatz wurde mit dem Tool [uMap](http://umap.openstreetmap.fr/de/) händisch erstellt und als GeoJSON exportiert. Die uMap-Karte kann hier abgerufen werden: [http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031](http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031)
+Der Geodatensatz wurde mit dem Tool [uMap](https://umap.openstreetmap.fr/de/) händisch erstellt und als GeoJSON exportiert. Die uMap-Karte kann hier abgerufen werden: [https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031](https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031)
 
 ### Quellen
 
-* Gemeinde Vaterstetten (Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf dessen Basis die [uMap-Karte](http://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031) erstellt werden konnte)
+* Gemeinde Vaterstetten (Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf dessen Basis die [uMap-Karte](https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1098/11.8031) erstellt werden konnte)
