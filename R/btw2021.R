@@ -382,14 +382,23 @@ ui <- memoise(omit_args = "request", function(request, id) {
             addProviderTiles(providers$CartoDB.Positron) %>%
             addPolygons(
               data = mapData,
-              stroke = FALSE,
+              stroke = TRUE,
+              weight = 0.0001, # stroke width
+              color = "#000000", # stroke color
+              opacity = 0.0001, # stroke opacity
+              fillColor = ~pal(Wahlbeteiligung),
               fillOpacity = 0.6,
               layerId = ~StimmbezirkAggregiert,
               label = ~paste0(
                 StimmbezirkAggregiert, ": ", scales::percent(Wahlbeteiligung, accuracy = 0.1), "<br />",
                 "(", utils$germanNumberFormat(Waehler), " Wähler:innen bei ", utils$germanNumberFormat(Wahlberechtigte), " Wahlberechtigten)"
               ) %>% lapply(HTML),
-              fillColor = ~pal(Wahlbeteiligung)
+              highlight = highlightOptions(
+                bringToFront = TRUE,
+                sendToBack = TRUE,
+                weight = 3, # stroke width
+                opacity = 1.0, # stroke opacity
+              )
             ) %>%
             addLegend("topright",
               data = mapData,
@@ -422,14 +431,23 @@ ui <- memoise(omit_args = "request", function(request, id) {
             addProviderTiles(providers$CartoDB.Positron) %>%
             addPolygons(
               data = mapData,
-              stroke = FALSE,
+              stroke = TRUE,
+              weight = 0.0001, # stroke width
+              color = "#000000", # stroke color
+              opacity = 0.0001, # stroke opacity
+              fillColor = ~pal(Briefwahlquote),
               fillOpacity = 0.6,
               layerId = ~StimmbezirkAggregiert,
               label = ~paste0(
                 StimmbezirkAggregiert, ": ", scales::percent(Briefwahlquote, accuracy = 0.1), "<br />",
                 "(", utils$germanNumberFormat(WaehlerBriefwahl), " Briefwähler:innen bei insgesamt ", utils$germanNumberFormat(Waehler), " Wähler:innen)"
               ) %>% lapply(HTML),
-              fillColor = ~pal(Briefwahlquote)
+              highlight = highlightOptions(
+                bringToFront = TRUE,
+                sendToBack = TRUE,
+                weight = 3, # stroke width
+                opacity = 1.0, # stroke opacity
+              )
             ) %>%
             addLegend("topright",
               data = mapData,
@@ -495,14 +513,23 @@ server <- function(id) {
           clearShapes() %>% clearControls() %>%
           addPolygons(
             data = mapData,
-            stroke = FALSE,
+            stroke = TRUE,
+            weight = 0.0001, # stroke width
+            color = "#000000", # stroke color
+            opacity = 0.0001, # stroke opacity
+            fillColor = ~pal(StimmenAnteil),
             fillOpacity = 0.6,
             layerId = ~StimmbezirkAggregiert,
             label = ~paste0(
               StimmbezirkAggregiert, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
               "(", utils$germanNumberFormat(Stimmen), " von ", utils$germanNumberFormat(GueltigeStimmen), " Stimmen)"
             ) %>% lapply(HTML),
-            fillColor = ~pal(StimmenAnteil)
+            highlight = highlightOptions(
+              bringToFront = TRUE,
+              sendToBack = TRUE,
+              weight = 3, # stroke width
+              opacity = 1.0, # stroke opacity
+            )
           ) %>%
           addLegend("topright",
             data = mapData,
@@ -539,14 +566,23 @@ server <- function(id) {
           clearShapes() %>% clearControls() %>%
           addPolygons(
             data = mapData,
-            stroke = FALSE,
+            stroke = TRUE,
+            weight = 0.0001, # stroke width
+            color = "#000000", # stroke color
+            opacity = 0.0001, # stroke opacity
+            fillColor = ~pal(StimmenAnteil),
             fillOpacity = 0.6,
             layerId = ~StimmbezirkAggregiert,
             label = ~paste0(
               StimmbezirkAggregiert, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
               "(", utils$germanNumberFormat(Stimmen), " von ", utils$germanNumberFormat(GueltigeStimmen), " Stimmen)"
             ) %>% lapply(HTML),
-            fillColor = ~pal(StimmenAnteil)
+            highlight = highlightOptions(
+              bringToFront = TRUE,
+              sendToBack = TRUE,
+              weight = 3, # stroke width
+              opacity = 1.0, # stroke opacity
+            )
           ) %>%
           addLegend("topright",
             data = mapData,

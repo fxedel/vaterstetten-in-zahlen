@@ -230,10 +230,19 @@ server <- function(id) {
           clearShapes() %>% clearControls() %>%
           addPolygons(
             data = mapData,
-            stroke = FALSE,
+            stroke = TRUE,
+            weight = 0.0001, # stroke width
+            color = "#000000", # stroke color
+            opacity = 0.0001, # stroke opacity
+            fillColor = ~pal(stimmenAnteil),
             fillOpacity = 0.6,
             label = ~paste0(stimmbezirk, ": ", scales::percent(stimmenAnteil, accuracy = 0.1)),
-            fillColor = ~pal(stimmenAnteil)
+            highlight = highlightOptions(
+              bringToFront = TRUE,
+              sendToBack = TRUE,
+              weight = 3, # stroke width
+              opacity = 1.0, # stroke opacity
+            )
           ) %>%
           addLegend("topright",
             data = mapData,
@@ -276,10 +285,19 @@ server <- function(id) {
           clearShapes() %>% clearControls() %>%
           addPolygons(
             data = mapData,
-            stroke = FALSE,
+            stroke = TRUE,
+            weight = 0.0001, # stroke width
+            color = "#000000", # stroke color
+            opacity = 0.0001, # stroke opacity
+            fillColor = ~pal(stimmenAnteilPartei),
             fillOpacity = 0.6,
             label = ~paste0(stimmbezirk, ": ", scales::percent(stimmenAnteilPartei, accuracy = 0.1)),
-            fillColor = ~pal(stimmenAnteilPartei)
+            highlight = highlightOptions(
+              bringToFront = TRUE,
+              sendToBack = TRUE,
+              weight = 3, # stroke width
+              opacity = 1.0, # stroke opacity
+            )
           ) %>%
           addLegend("topright",
             data = mapData,
