@@ -8,9 +8,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`StimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
-|`StimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder `NA` für Gesamt
+|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 1` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
 |`Wahlberechtigte`|integer|Anzahl der Wahlberechtigten (für Briefwahlstimmbezirke immer `0`)
 |`Waehler`|integer|Anzahl der Wähler<sup>[1]<sup>
 |`UngueltigeStimmen`|integer|Anzahl ungültiger Stimmen
@@ -34,8 +32,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`StimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `0` für Gesamt
+|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 1` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
 |`ParteiKuerzel`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
 |`Stimmen`|integer|Anzahl gültiger Stimmen für diese Partei
 
@@ -75,6 +72,24 @@ Der Datensatz wurde händisch erstellt.
 
 * [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](../quellen/okvote.md) (händisch übertragen)
 * Eigene Definition (`ParteiFarbe`)
+
+
+## [`stimmbezirke.csv`](./stimmbezirke.csv)
+
+Der Datensatz [`stimmbezirke.csv`](./stimmbezirke.csv) umfasst alle 27 Stimmbezirke. Die Briefwahlstimmbezirke (31 bis 43) lassen sich jeweils genau einem Wahllokalstimmbezirk (1 bis 14) zuordnen (mit Ausnahme des Briefwahlstimmbezirks 31, der sich den beiden Wahllokalstimmbezirken 1 und 2 zuordnen lässt). Diese Zuordnung wird über die Spalte `StimmbezirkAggregiert` realisiert. Die aggregierten Stimmbezirke lassen sich somit also ebenfalls auf ein geographisches Gebiet zurückführen und umfassen alle Stimmen (sowohl Urnen-, als auch Briefwahl).
+
+Der Datensatz wurde händisch erstellt.
+
+|Spalte|Format|Beschreibung
+|-|-|-
+|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 1` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
+|`StimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder `NA` für Gesamt
+|`StimmbezirkAggregiert`|text|Name des aggregierten Stimmbezirks (z.&nbsp;B. `Stimmbezirke 1/2/31` für die Stimmbezirke 1, 2 und 31) oder `Gesamt` für alle Stimmbezirke
+
+### Quellen
+
+* Gemeinde Vaterstetten (persönliche Nachfrage)
+* [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](../quellen/okvote.md) (`opendata-wahllokale.csv`, nur einzelne Spalten)
 
 
 ## [`stimmbezirke.geojson`](./stimmbezirke.geojson)

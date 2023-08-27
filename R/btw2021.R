@@ -1,7 +1,26 @@
-stimmbezirke <- st_read("data/btw2021/stimmbezirke.geojson") %>%
+utils <- new.env()
+sys.source("R/utils.R", envir = utils, chdir = FALSE)
+
+
+stimmbezirke <- read_csv(
+  file = "data/btw2021/stimmbezirke.csv",
+  col_types = cols(
+    Stimmbezirk = readr::col_factor(),
+    StimmbezirkArt = readr::col_factor(),
+    StimmbezirkAggregiert = readr::col_factor()
+  )
+)
+
+stimmbezirkeGeodata <- st_read("data/btw2021/stimmbezirke.geojson") %>%
   transmute(
     Stimmbezirk = name,
     geometry
+  ) %>%
+  left_join(stimmbezirke) %>%
+  group_by(StimmbezirkAggregiert) %>%
+  summarise(
+    geometry = st_combine(geometry),
+    .groups = "drop"
   )
 
 parteien <- read_csv(
@@ -26,16 +45,42 @@ erststimmenAllgemein <- read_csv(
   file = "data/btw2021/erststimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
-    StimmbezirkNr = readr::col_factor(),
-    StimmbezirkArt = readr::col_factor(),
     Wahlberechtigte = col_integer(),
     Waehler = col_integer(),
     UngueltigeStimmen = col_integer(),
     GueltigeStimmen = col_integer()
   )
-)
+) %>% 
+  inner_join(stimmbezirke, by = join_by(Stimmbezirk))
 
-erststimmenNachStimmbezirkArt <- erststimmenAllgemein %>%
+erststimmenAllgemeinNachStimmbezirkAggregiert <- erststimmenAllgemein %>%
+  group_by(StimmbezirkAggregiert, StimmbezirkArt) %>%
+  summarise(
+    Wahlberechtigte = sum(Wahlberechtigte),
+    Waehler = sum(Waehler),
+    UngueltigeStimmen = sum(UngueltigeStimmen),
+    GueltigeStimmen = sum(GueltigeStimmen),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    id_cols = StimmbezirkAggregiert,
+    names_from = StimmbezirkArt,
+    values_from = Waehler,
+    names_prefix = "Waehler",
+    unused_fn = sum
+  ) %>%
+  mutate(
+    Waehler = WaehlerWahllokal + WaehlerBriefwahl
+  ) %>% mutate(
+    WaehlerNA = NULL,
+    Waehler = coalesce(Waehler, sum(Waehler, na.rm=TRUE)),
+    WaehlerWahllokal = coalesce(WaehlerWahllokal, sum(WaehlerWahllokal, na.rm=TRUE)),
+    WaehlerBriefwahl = coalesce(WaehlerBriefwahl, sum(WaehlerBriefwahl, na.rm=TRUE)),
+    Wahlbeteiligung = Waehler/Wahlberechtigte,
+    Briefwahlquote = WaehlerBriefwahl/Waehler
+  )
+
+erststimmenAllgemeinNachStimmbezirkArt <- erststimmenAllgemein %>%
   filter(!is.na(StimmbezirkArt)) %>%
   group_by(StimmbezirkArt) %>%
   summarise(
@@ -48,31 +93,86 @@ erststimmenNachPartei <- read_csv(
   file = "data/btw2021/erststimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
-    StimmbezirkNr = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
     Stimmen = col_integer()
   )
 ) %>%
+  inner_join(stimmbezirke, by = join_by(Stimmbezirk))
+
+erststimmenNachParteiNachStimmbezirkAggregiert <- erststimmenNachPartei %>%
+  group_by(StimmbezirkAggregiert, ParteiKuerzel) %>%
+  summarise(
+    Stimmen = sum(Stimmen),
+    .groups = "drop"
+  ) %>%
   inner_join(parteien, by = "ParteiKuerzel") %>%
   inner_join(direktkandidaten, by = "ParteiKuerzel") %>%
-  inner_join(erststimmenAllgemein, by = c("Stimmbezirk", "StimmbezirkNr")) %>%
+  inner_join(erststimmenAllgemeinNachStimmbezirkAggregiert %>% select(StimmbezirkAggregiert, GueltigeStimmen), by = c("StimmbezirkAggregiert")) %>%
   mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
+
+erststimmenNachParteiNachStimmbezirkArt <- erststimmenNachPartei %>%
+  group_by(StimmbezirkArt, ParteiKuerzel) %>%
+  summarise(
+    Stimmen = sum(Stimmen),
+    .groups = "drop"
+  ) %>%
+  inner_join(parteien, by = "ParteiKuerzel") %>%
+  inner_join(direktkandidaten, by = "ParteiKuerzel") %>%
+  inner_join(erststimmenAllgemeinNachStimmbezirkArt %>% select(StimmbezirkArt, GueltigeStimmen), by = c("StimmbezirkArt")) %>%
+  mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
+
+erststimmenNachParteiNachCombined <- bind_rows(
+  erststimmenNachParteiNachStimmbezirkAggregiert %>%
+    mutate(Filter = StimmbezirkAggregiert, StimmbezirkAggregiert = NULL) %>%
+    filter(Filter == "Gesamt"),
+  erststimmenNachParteiNachStimmbezirkArt %>%
+    mutate(Filter = paste0("Alle ", StimmbezirkArt, "bezirke"), StimmbezirkArt = NULL),
+  erststimmenNachParteiNachStimmbezirkAggregiert %>%
+    mutate(Filter = StimmbezirkAggregiert, StimmbezirkAggregiert = NULL) %>%
+    filter(Filter != "Gesamt")
+)
 
 
 zweitstimmenAllgemein <- read_csv(
   file = "data/btw2021/zweitstimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
-    StimmbezirkNr = readr::col_factor(),
-    StimmbezirkArt = readr::col_factor(),
     Wahlberechtigte = col_integer(),
     Waehler = col_integer(),
     UngueltigeStimmen = col_integer(),
     GueltigeStimmen = col_integer()
   )
-)
+) %>% 
+  inner_join(stimmbezirke, by = join_by(Stimmbezirk))
 
-zweitstimmenNachStimmbezirkArt <- zweitstimmenAllgemein %>%
+zweitstimmenAllgemeinNachStimmbezirkAggregiert <- zweitstimmenAllgemein %>%
+  group_by(StimmbezirkAggregiert, StimmbezirkArt) %>%
+  summarise(
+    Wahlberechtigte = sum(Wahlberechtigte),
+    Waehler = sum(Waehler),
+    UngueltigeStimmen = sum(UngueltigeStimmen),
+    GueltigeStimmen = sum(GueltigeStimmen),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    id_cols = StimmbezirkAggregiert,
+    names_from = StimmbezirkArt,
+    values_from = Waehler,
+    names_prefix = "Waehler",
+    unused_fn = sum
+  ) %>%
+  mutate(
+    Waehler = WaehlerWahllokal + WaehlerBriefwahl
+  ) %>% mutate(
+    WaehlerNA = NULL,
+    Waehler = coalesce(Waehler, sum(Waehler, na.rm=TRUE)),
+    WaehlerWahllokal = coalesce(WaehlerWahllokal, sum(WaehlerWahllokal, na.rm=TRUE)),
+    WaehlerBriefwahl = coalesce(WaehlerBriefwahl, sum(WaehlerBriefwahl, na.rm=TRUE)),
+    Wahlbeteiligung = Waehler/Wahlberechtigte,
+    Briefwahlquote = WaehlerBriefwahl/Waehler
+  )
+
+zweitstimmenAllgemeinNachStimmbezirkArt <- zweitstimmenAllgemein %>%
   filter(!is.na(StimmbezirkArt)) %>%
   group_by(StimmbezirkArt) %>%
   summarise(
@@ -85,15 +185,42 @@ zweitstimmenNachPartei <- read_csv(
   file = "data/btw2021/zweitstimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
-    StimmbezirkNr = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
     Stimmen = col_integer()
   )
 ) %>%
+  inner_join(stimmbezirke, by = join_by(Stimmbezirk))
+
+zweitstimmenNachParteiNachStimmbezirkAggregiert <- zweitstimmenNachPartei %>%
+  group_by(StimmbezirkAggregiert, ParteiKuerzel) %>%
+  summarise(
+    Stimmen = sum(Stimmen),
+    .groups = "drop"
+  ) %>%
   inner_join(parteien, by = "ParteiKuerzel") %>%
-  inner_join(zweitstimmenAllgemein, by = c("Stimmbezirk", "StimmbezirkNr")) %>%
+  inner_join(zweitstimmenAllgemeinNachStimmbezirkAggregiert %>% select(StimmbezirkAggregiert, GueltigeStimmen), by = c("StimmbezirkAggregiert")) %>%
   mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
 
+zweitstimmenNachParteiNachStimmbezirkArt <- zweitstimmenNachPartei %>%
+  group_by(StimmbezirkArt, ParteiKuerzel) %>%
+  summarise(
+    Stimmen = sum(Stimmen),
+    .groups = "drop"
+  ) %>%
+  inner_join(parteien, by = "ParteiKuerzel") %>%
+  inner_join(zweitstimmenAllgemeinNachStimmbezirkArt %>% select(StimmbezirkArt, GueltigeStimmen), by = c("StimmbezirkArt")) %>%
+  mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
+
+zweitstimmenNachParteiNachCombined <- bind_rows(
+  zweitstimmenNachParteiNachStimmbezirkAggregiert %>%
+    mutate(Filter = StimmbezirkAggregiert, StimmbezirkAggregiert = NULL) %>%
+    filter(Filter == "Gesamt"),
+  zweitstimmenNachParteiNachStimmbezirkArt %>%
+    mutate(Filter = paste0("Alle ", StimmbezirkArt, "bezirke"), StimmbezirkArt = NULL),
+  zweitstimmenNachParteiNachStimmbezirkAggregiert %>%
+    mutate(Filter = StimmbezirkAggregiert, StimmbezirkAggregiert = NULL) %>%
+    filter(Filter != "Gesamt")
+)
 
 
 ui <- memoise(omit_args = "request", function(request, id) {
@@ -110,7 +237,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Eingezeichnet sind die 14 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke_659020#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler (ca. ⅔ der Wähler!) nicht dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Jeder Wahllokal-Stimmbezirk umfasst etwa 250 bis 550 Wähler:innen.")),
+          p(HTML("Insgesamt gibt es 27 Stimmbezirke. Eingezeichnet sind die 14 Wahllokal-Stimmbezirke (1 bis 14), die auch in <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke_659020#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Die 13 Briefwahlbezirke (31 bis 43) lassen sich den Wahllokal-Stimmbezirken zuordnen, sodass jedes Gebiet die Stimmen eines Wahllokal-Stimmbezirks sowie eines Briefwahlbezirks umfasst. Ausnahme sind die Wahllokal-Stimmebezirke 1 und 2, die mit dem Briefwahlbezirk 31 zusammengefasst wurden und somit gemeinsam drei Stimmbezirke umfassen.")),
         ),
       ),
     ),
@@ -118,7 +245,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Erststimmen nach Stimmbezirk (ohne Briefwahl)",
+        title = "Erststimmen nach Stimmbezirk",
         selectInput(
           ns("erststimmenMapPartei"),
           label = "Partei",
@@ -133,8 +260,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("erststimmenMap"), height = 550),
         p(),
-        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen."),
-        p("Klicke auf den Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
+        p("Die Gebiete sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        p("Klicke auf einen Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
       column(
         width = 6,
@@ -145,17 +272,9 @@ ui <- memoise(omit_args = "request", function(request, id) {
             ns("erststimmenBarChoices"),
             label = "Stimmbezirk",
             choices = {
-              data <- erststimmenAllgemein %>% mutate(
-                Label = if_else(
-                  is.na(StimmbezirkNr),
-                  Stimmbezirk,
-                  paste0(Stimmbezirk, " (", StimmbezirkArt, ")")
-                )
-              )
-              
-              choices = setNames(data$Stimmbezirk, data$Label)
-              choices
-            }
+              (erststimmenNachParteiNachCombined %>% filter(ParteiNr == 1))$Filter
+            },
+            selected = "Gesamt"
           ),
           plotlyOutput(ns("erststimmenBarPlotly"))
         ),
@@ -164,7 +283,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
           title = "Erststimmen nach Stimmbezirk-Art",
           {
             plot_ly(
-              erststimmenNachStimmbezirkArt,
+              erststimmenAllgemeinNachStimmbezirkArt,
               height = 100,
               orientation = "h",
               showlegend = TRUE
@@ -189,7 +308,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Zweitstimmen nach Stimmbezirk (ohne Briefwahl)",
+        title = "Zweitstimmen nach Stimmbezirk",
         selectInput(
           ns("zweitstimmenMapPartei"),
           label = "Partei",
@@ -204,8 +323,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("zweitstimmenMap"), height = 550),
         p(),
-        p("Die 14 Wahllokal-Stimmbezirke sind jeweils nach den Zweitstimmen der ausgewählten Partei eingefärbt. Nicht berücksichtigt sind Briefwahlstimmen, die ca. ⅔ der Gesamtstimmen ausmachen."),
-        p("Klicke auf den Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
+        p("Die Gebiete sind jeweils nach den Zweitstimmen der ausgewählten Partei:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        p("Klicke auf einen Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
       column(
         width = 6,
@@ -216,17 +335,9 @@ ui <- memoise(omit_args = "request", function(request, id) {
             ns("zweitstimmenBarChoices"),
             label = "Stimmbezirk",
             choices = {
-              data <- zweitstimmenAllgemein %>% mutate(
-                Label = if_else(
-                  is.na(StimmbezirkNr),
-                  Stimmbezirk,
-                  paste0(Stimmbezirk, " (", StimmbezirkArt, ")")
-                )
-              )
-              
-              choices = setNames(data$Stimmbezirk, data$Label)
-              choices
-            }
+              (zweitstimmenNachParteiNachCombined %>% filter(ParteiNr == 1))$Filter
+            },
+            selected = "Gesamt"
           ),
           plotlyOutput(ns("zweitstimmenBarPlotly"), height = 500)
         ),
@@ -235,7 +346,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
           title = "Zweitstimmen nach Stimmbezirk-Art",
           {
             plot_ly(
-              zweitstimmenNachStimmbezirkArt,
+              zweitstimmenAllgemeinNachStimmbezirkArt,
               height = 100,
               orientation = "h",
               showlegend = TRUE
@@ -253,6 +364,89 @@ ui <- memoise(omit_args = "request", function(request, id) {
               identity()
           },
         ),
+      ),
+    ),
+
+    fluidRow(
+      box(
+        title = "Wahlbeteiligung nach Stimmbezirk",
+        {
+          data <- erststimmenAllgemeinNachStimmbezirkAggregiert
+          mapData <- stimmbezirkeGeodata %>% left_join(data, by = "StimmbezirkAggregiert")
+          pal <- colorNumeric(c("#888888", "#000000"), c(min(data$Wahlbeteiligung), max(data$Wahlbeteiligung)))
+
+          leaflet(stimmbezirkeGeodata, height = 550, options = leafletOptions(
+            zoom = 13,
+            center = list(lng = 11.798, lat = 48.12)
+          )) %>%
+            addProviderTiles(providers$CartoDB.Positron) %>%
+            addPolygons(
+              data = mapData,
+              stroke = FALSE,
+              fillOpacity = 0.6,
+              layerId = ~StimmbezirkAggregiert,
+              label = ~paste0(
+                StimmbezirkAggregiert, ": ", scales::percent(Wahlbeteiligung, accuracy = 0.1), "<br />",
+                "(", utils$germanNumberFormat(Waehler), " Wähler:innen bei ", utils$germanNumberFormat(Wahlberechtigte), " Wahlberechtigten)"
+              ) %>% lapply(HTML),
+              fillColor = ~pal(Wahlbeteiligung)
+            ) %>%
+            addLegend("topright",
+              data = mapData,
+              pal = pal,
+              values = ~Wahlbeteiligung,
+              title = NULL,
+              labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+              opacity = 0.8,
+              bins = 5
+            )
+        },
+        p(),
+        p("Die Gebiete sind jeweils nach dem Anteil der abgegebenen Stimmen (ungültige eingeschlossen) im Verhältnis zu allen Wahlberechtigten eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        {
+          rowGesamt <- erststimmenAllgemeinNachStimmbezirkAggregiert %>% filter(StimmbezirkAggregiert == "Gesamt")
+          p(paste0("Die gesamte Wahlbeteiligung in der Gemeinde Vaterstetten beträgt ", scales::percent(rowGesamt$Wahlbeteiligung, accuracy = 0.1), " (", utils$germanNumberFormat(rowGesamt$Waehler), " Wähler:innen bei insgesamt ", utils$germanNumberFormat(rowGesamt$Wahlberechtigte), " Wahlberechtigten)."))
+        },
+      ),
+      box(
+        title = "Briefwahlquote nach Stimmbezirk",
+        {
+          data <- erststimmenAllgemeinNachStimmbezirkAggregiert
+          mapData <- stimmbezirkeGeodata %>% left_join(data, by = "StimmbezirkAggregiert")
+          pal <- colorNumeric(c("#888888", "#000000"), c(min(data$Briefwahlquote), max(data$Briefwahlquote)))
+
+          leaflet(stimmbezirkeGeodata, height = 550, options = leafletOptions(
+            zoom = 13,
+            center = list(lng = 11.798, lat = 48.12)
+          )) %>%
+            addProviderTiles(providers$CartoDB.Positron) %>%
+            addPolygons(
+              data = mapData,
+              stroke = FALSE,
+              fillOpacity = 0.6,
+              layerId = ~StimmbezirkAggregiert,
+              label = ~paste0(
+                StimmbezirkAggregiert, ": ", scales::percent(Briefwahlquote, accuracy = 0.1), "<br />",
+                "(", utils$germanNumberFormat(WaehlerBriefwahl), " Briefwähler:innen bei insgesamt ", utils$germanNumberFormat(Waehler), " Wähler:innen)"
+              ) %>% lapply(HTML),
+              fillColor = ~pal(Briefwahlquote)
+            ) %>%
+            addLegend("topright",
+              data = mapData,
+              pal = pal,
+              values = ~Briefwahlquote,
+              title = NULL,
+              labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+              opacity = 0.8,
+              bins = 5
+            )
+        },
+        p(),
+        p("Die Gebiete sind jeweils nach dem Anteil der Briefwahlstimmen im Verhältnis zu allen abgegebenen Stimmen (ungültige eingeschlossen) eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        {
+          rowGesamt <- erststimmenAllgemeinNachStimmbezirkAggregiert %>% filter(StimmbezirkAggregiert == "Gesamt")
+          p(paste0("Die gesamte Briefwahlquote in der Gemeinde Vaterstetten beträgt ", scales::percent(rowGesamt$Briefwahlquote, accuracy = 0.1), " (", utils$germanNumberFormat(rowGesamt$WaehlerBriefwahl), " Briefwähler:innen bei insgesamt ", utils$germanNumberFormat(rowGesamt$Waehler), " Wähler:innen)."))
+        },
       ),
     ),
 
@@ -278,7 +472,7 @@ server <- function(id) {
     function(input, output, session) {
 
       output$erststimmenMap <- renderLeaflet({
-        leaflet(stimmbezirke, options = leafletOptions(
+        leaflet(stimmbezirkeGeodata, options = leafletOptions(
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
@@ -293,8 +487,8 @@ server <- function(id) {
 
       printErststimmenMap <- function(leafletObject) {
         partei <- parteien %>% filter(ParteiKuerzel == input$erststimmenMapPartei) %>% head()
-        ergebnisPartei <- erststimmenNachPartei %>% filter(ParteiKuerzel == input$erststimmenMapPartei)
-        mapData <- stimmbezirke %>% left_join(ergebnisPartei, by = "Stimmbezirk")
+        ergebnisPartei <- erststimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$erststimmenMapPartei)
+        mapData <- stimmbezirkeGeodata %>% left_join(ergebnisPartei, by = "StimmbezirkAggregiert")
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
         leafletObject %>%
@@ -303,10 +497,10 @@ server <- function(id) {
             data = mapData,
             stroke = FALSE,
             fillOpacity = 0.6,
-            layerId = ~Stimmbezirk,
+            layerId = ~StimmbezirkAggregiert,
             label = ~paste0(
-              Stimmbezirk, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
-              "(", Stimmen, " von ", GueltigeStimmen, " Stimmen)"
+              StimmbezirkAggregiert, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
+              "(", utils$germanNumberFormat(Stimmen), " von ", utils$germanNumberFormat(GueltigeStimmen), " Stimmen)"
             ) %>% lapply(HTML),
             fillColor = ~pal(StimmenAnteil)
           ) %>%
@@ -322,7 +516,7 @@ server <- function(id) {
       }
 
       output$zweitstimmenMap <- renderLeaflet({
-        leaflet(stimmbezirke, options = leafletOptions(
+        leaflet(stimmbezirkeGeodata, options = leafletOptions(
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
@@ -337,8 +531,8 @@ server <- function(id) {
 
       printZweitstimmenMap <- function(leafletObject) {
         partei <- parteien %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei) %>% head()
-        ergebnisPartei <- zweitstimmenNachPartei %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei)
-        mapData <- stimmbezirke %>% left_join(ergebnisPartei, by = "Stimmbezirk")
+        ergebnisPartei <- zweitstimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei)
+        mapData <- stimmbezirkeGeodata %>% left_join(ergebnisPartei, by = "StimmbezirkAggregiert")
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
         leafletObject %>%
@@ -347,10 +541,10 @@ server <- function(id) {
             data = mapData,
             stroke = FALSE,
             fillOpacity = 0.6,
-            layerId = ~Stimmbezirk,
+            layerId = ~StimmbezirkAggregiert,
             label = ~paste0(
-              Stimmbezirk, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
-              "(", Stimmen, " von ", GueltigeStimmen, " Stimmen)"
+              StimmbezirkAggregiert, ": ", scales::percent(StimmenAnteil, accuracy = 0.1), "<br />",
+              "(", utils$germanNumberFormat(Stimmen), " von ", utils$germanNumberFormat(GueltigeStimmen), " Stimmen)"
             ) %>% lapply(HTML),
             fillColor = ~pal(StimmenAnteil)
           ) %>%
@@ -374,7 +568,7 @@ server <- function(id) {
       })
 
       observe({
-        printStimmenBarPlotly(input$erststimmenBarChoices, erststimmenNachPartei, "erststimmenBarPlotly")
+        printStimmenBarPlotly(input$erststimmenBarChoices, erststimmenNachParteiNachCombined, "erststimmenBarPlotly")
       })
 
       observe({
@@ -386,12 +580,12 @@ server <- function(id) {
       })
 
       observe({
-        printStimmenBarPlotly(input$zweitstimmenBarChoices, zweitstimmenNachPartei, "zweitstimmenBarPlotly")
+        printStimmenBarPlotly(input$zweitstimmenBarChoices, zweitstimmenNachParteiNachCombined, "zweitstimmenBarPlotly")
       })
 
-      printStimmenBarPlotly <- function(stimmbezirk, stimmenNachPartei, outputName) {
+      printStimmenBarPlotly <- function(chosenFilter, stimmenNachPartei, outputName) {
         data <- stimmenNachPartei %>%
-          filter(Stimmbezirk == stimmbezirk) %>%
+          filter(Filter == chosenFilter) %>%
           mutate(ParteiKuerzel = droplevels(ParteiKuerzel))
 
         output[[outputName]] <- renderPlotly({
@@ -401,7 +595,7 @@ server <- function(id) {
           ) %>%
             add_bars(y = ~ParteiKuerzel, x = ~StimmenAnteil, name = "Stimmenanteil", marker = ~list(color = ParteiFarbe),
               text = ~scales::percent(StimmenAnteil, accuracy = 0.1),
-              hovertext = ~paste0("(", Stimmen, " von ", GueltigeStimmen, " Stimmen)")
+              hovertext = ~paste0("(", utils$germanNumberFormat(Stimmen), " von ", utils$germanNumberFormat(GueltigeStimmen), " Stimmen)")
             ) %>%
             plotly_default_config() %>%
             layout(yaxis = list(autorange = "reversed")) %>%
