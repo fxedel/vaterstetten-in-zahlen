@@ -436,7 +436,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4964506,SEE977568276287,E2104101S000000000000067997200001,In Betrieb,2022-03-22,2014-09-12,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Süd-West,5.61,5.5,70%,false,Volleinspeisung,false
 3333299,SEE901364293407,E2104101S000000000000065218500001,In Betrieb,2020-08-10,2014-09-24,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,12,Süd-West,3.0,3.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3301316,SEE902327316676,E2104101S000000000000066802600001,In Betrieb,2020-07-31,2014-11-05,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,10,Süd,3.27,3.27,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-3302827,SEE912877327541,E2104101S000000000000067606100001,In Betrieb,2020-08-01,2014-11-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-West,5.0,5.0,ohne,false,,false
+3302827,SEE912877327541,E2104101S000000000000067606100001,In Betrieb,2020-08-01,2014-11-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-West,5.0,5.0,ohne,false,,false
 3352285,SEE901833352840,E2104101S160000000000069898300001,In Betrieb,2020-08-18,2015-01-15,,,PVA B+B 41,GEW-Solar Besitz & Betriebs GmbH & Co. KG,sonstige,85599,Parsdorf,Taxetstraße,3,48.1489,11.793101,true,gebaeude,,Süd,1525.0,1480.0,ohne,false,Volleinspeisung,false
 3352310,SEE910695480509,,In Betrieb,2020-08-18,2015-01-16,,,PVA B+B 42,GEW-Solar Besitz & Betriebs GmbH & Co. KG,sonstige,85599,Parsdorf,Taxetstraße,1,48.148578,11.790814,true,gebaeude,,Süd,475.5,475.5,ohne,false,Volleinspeisung,false
 4040156,SEE945909377535,E2104101S000000000000069028300001,In Betrieb,2021-01-04,2015-01-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,36,Süd,9.0,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -563,7 +563,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2130743,SEE912667285235,E2104101S000000000000102540900001,In Betrieb,2019-06-03,2019-01-18,,,Birnen-Anger 8,ibeko-solar GmbH,sonstige,85591,Vaterstetten,,,,,false,gebaeude,45,Ost,12.375,10.0,70%,false,Volleinspeisung,false
 2135553,SEE968963023422,E2104101S000000000000102544600001,In Betrieb,2019-06-05,2019-01-18,,,Birnen-Anger 10,ibeko-solar GmbH,sonstige,85591,Vaterstetten,,,,,false,gebaeude,53,West,14.58,12.6,70%,false,Volleinspeisung,false
 2138232,SEE912858596195,,In Betrieb,2019-06-07,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Ost,5.5,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-2135580,SEE978155222786,E2104101S000000000000102337200001,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-solar GmbH,sonstige,85591,Vaterstetten,,,,,false,gebaeude,74,Ost,20.35,18.6,70%,false,Volleinspeisung,false
+2135580,SEE978155222786,E2104101S000000000000102337200001,In Betrieb,2019-07-25,2019-01-18,,,Birnen-Anger 12,ibeko-solar GmbH,sonstige,85591,Vaterstetten,,,,,true,gebaeude,74,Ost,20.35,18.6,70%,false,Volleinspeisung,false
 2246050,SEE948919459598,,In Betrieb,2019-07-25,2019-01-18,,,,,sonstige,85591,Vaterstetten,,,,,true,gebaeude,15,Ost,4.125,4.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2258051,SEE983848984827,,In Betrieb,2019-07-31,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,35,Ost-West,9.625,8.0,70%,false,Volleinspeisung,false
 2294924,SEE981944894521,,In Betrieb,2019-08-18,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,9,Ost-West,2.475,2.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
