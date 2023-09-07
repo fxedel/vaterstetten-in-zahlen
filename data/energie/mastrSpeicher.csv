@@ -262,7 +262,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 5096388,SEE953950643455,In Betrieb,2022-06-01,2022-05-31,,,,,85622,Weißenfeld,,,,,true,Lithium,5.0,5.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 5287197,SEE913119882859,In Betrieb,2022-08-31,2022-06-01,,,,,85598,Baldham,,,,,true,Lithium,2.5,2.5,5.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 5890722,SEE920896408783,In Betrieb,2023-03-21,2022-06-11,,,,,85591,Vaterstetten,,,,,false,Lithium,19.5,19.5,17.5,Teileinspeisung (einschließlich Eigenverbrauch),true
-6016797,SEE990391871955,In Betrieb,2023-04-18,2022-06-20,,,,,85622,Weißenfeld,,,,,false,Lithium,10.0,10.0,20.0,Teileinspeisung (einschließlich Eigenverbrauch),false
+6016797,SEE990391871955,In Betrieb,2023-04-18,2022-06-20,,,,,85622,Weißenfeld,,,,,true,Lithium,10.0,10.0,20.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 5204899,SEE974242252278,In Betrieb,2022-07-27,2022-06-21,,,,,85598,Baldham,,,,,true,Lithium,6.0,6.0,12.3,Teileinspeisung (einschließlich Eigenverbrauch),true
 5312122,SEE937052412775,In Betrieb,2022-11-30,2022-06-24,,,,,85598,Baldham,,,,,true,Lithium,8.76,8.76,12.8,Teileinspeisung (einschließlich Eigenverbrauch),true
 5156791,SEE909556704779,In Betrieb,2022-07-04,2022-07-04,,,,,85591,Vaterstetten,,,,,true,Lithium,4.6,4.6,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -384,6 +384,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 6244117,SEE964528863892,In Betrieb,2023-06-11,2023-06-09,,,,,85598,Baldham,,,,,false,Lithium,12.6,12.6,14.4,Teileinspeisung (einschließlich Eigenverbrauch),true
 6462356,SEE978893828837,In Betrieb,2023-07-07,2023-06-14,,,,,85591,Vaterstetten,,,,,false,Lithium,9.0,9.0,16.2,Teileinspeisung (einschließlich Eigenverbrauch),true
 5947592,SEE983083596632,In Betrieb,2023-07-15,2023-06-14,,,,,85598,Baldham,,,,,false,Lithium,10.0,10.0,11.5,Teileinspeisung (einschließlich Eigenverbrauch),true
+6816365,SEE951240430372,In Betrieb,2023-09-06,2023-06-15,,,,,85599,Parsdorf,,,,,false,Lithium,5.0,5.0,16.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 6483151,SEE977106547824,In Betrieb,2023-07-11,2023-06-19,,,,,85622,Weißenfeld,,,,,false,Lithium,10.0,10.0,10.24,Teileinspeisung (einschließlich Eigenverbrauch),false
 6470125,SEE933941531381,In Betrieb,2023-07-09,2023-06-20,,,,,85598,Baldham,,,,,false,Lithium,4.6,4.6,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 6372415,SEE923532576181,In Betrieb,2023-06-22,2023-06-21,,,,,85598,Baldham,,,,,false,Lithium,5.0,5.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -409,6 +410,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 6812683,SEE969335019760,In Betrieb,2023-09-05,2023-07-24,,,,,85598,Baldham,,,,,false,Lithium,6.0,6.0,9.6,Teileinspeisung (einschließlich Eigenverbrauch),false
 6673732,SEE909509199805,In Betrieb,2023-08-11,2023-07-30,,,,,85598,Baldham,,,,,false,Lithium,10.0,10.0,16.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 6654773,SEE979572241305,In Betrieb,2023-08-08,2023-08-02,,,,,85591,Vaterstetten,,,,,false,Lithium,7.0,7.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),true
+6817070,SEE905050338526,In Betrieb,2023-09-06,2023-08-17,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,10.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),true
 4503878,SEE947397967991,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,Lithium,10.2,10.2,11.04,Teileinspeisung (einschließlich Eigenverbrauch),false
 5340296,SEE925422589233,In Planung,2022-09-21,,2022-09-30,,,,85622,Weißenfeld,,,,,false,,3.75,3.75,7.5,Teileinspeisung (einschließlich Eigenverbrauch),none
 5529956,SEE957292841609,In Planung,2022-12-08,,2022-12-15,,,,85591,Vaterstetten,,,,,false,Lithium,4.6,4.6,4.0,Teileinspeisung (einschließlich Eigenverbrauch),true
