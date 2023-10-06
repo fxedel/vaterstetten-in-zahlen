@@ -1271,7 +1271,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 6372404,SEE984800107681,,In Betrieb,2023-06-22,2023-06-21,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,40,Ost-West,16.4,11.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6374260,SEE994846808954,,In Betrieb,2023-06-23,2023-06-21,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,3,Süd,0.9,0.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6374213,SEE905492886395,,In Betrieb,2023-06-23,2023-06-23,,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,26,Süd,10.66,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-6346911,SEE995704686509,E21041011000000000000384763000001,In Betrieb,2023-07-10,2023-06-23,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,45,West,15.54,15.54,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+6346911,SEE995704686509,E21041011000000000000384763000001,In Betrieb,2023-07-10,2023-06-23,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,45,West,15.54,15.54,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6613295,SEE975197606406,,In Betrieb,2023-08-01,2023-06-23,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude,26,Süd-Ost,9.88,9.88,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6401769,SEE959826668546,,In Betrieb,2023-07-13,2023-06-24,,,,,sonstige,85599,Parsdorf,,,,,false,stecker,2,Süd-Ost,0.6,0.6,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6444170,SEE927249696248,,In Betrieb,2023-07-24,2023-06-25,,,,,sonstige,85646,Purfing,,,,,false,gebaeude,15,Süd,5.55,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
