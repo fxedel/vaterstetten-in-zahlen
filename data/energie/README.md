@@ -28,6 +28,7 @@ Der Datensatz [mastrPhotovoltaik.csv](./mastrPhotovoltaik.csv) umfasst sämtlich
 |`ausrichtung`|text|Hauptausrichtung der Photovoltaikmodule, z.&nbsp;B. `Nord`, `Nord-Ost`, `Ost`, `Ost-West`, `Süd-Ost`, `Süd`, `Süd-West`, `West`, `Nord-West`, `nachgeführt`
 |`bruttoleistung_kW`|float|Bruttoleistung in Kilowatt-Peak. Dies entspricht der Summe der Modulleistungen.
 |`nettonennleistung_kW`|float|Nettonennleistung in Kilowatt-Peak. Dies entspricht dem kleineren Wert aus Wechselrichterleistung und Summe der Modulleistungen.
+|`leistungsBegrenzung`|text|Leistungsbegrenzung der PV-Anlage: `70%`, `60%`, `50%`, `sonstige` oder `ohne`
 |`EEGAusschreibung`|`true`/`false`|Ob an einer EEG-Ausschreibung teilgenommen wurde (nur bei sehr großen Anlagen).
 |`einspeisung`|text|Umfang der Einspeisung: `Teileinspeisung` oder `Volleinspeisung`
 |`mieterstrom`|`true`/`false`|Ob es sich um einer Mieterstrom-Anlage handelt.

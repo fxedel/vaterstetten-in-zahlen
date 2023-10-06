@@ -28,6 +28,7 @@ mastr <- read_delim(
     ausrichtung = col_character(),
     bruttoleistung_kW = col_double(),
     nettonennleistung_kW = col_double(),
+    leistungsBegrenzung = readr::col_factor(c("70%", "60%", "50%", "sonstige", "ohne")),
     EEGAusschreibung = col_logical(),
     einspeisung = readr::col_factor(),
     mieterstrom = col_logical()
@@ -41,6 +42,12 @@ mastr <- read_delim(
       landwirtschaft = "Landwirtschaft",
       oeffentlich = "Öffentliche Gebäude",
       sonstige = "Sonstige",
+    ),
+    typ = recode_factor(typ,
+      "freiflaeche" = "Freifläche", 
+      "gebaeude" = "Gebäude (Dach)", 
+      "gebaeude-other" = "Gebäude (andere)", 
+      "stecker" = "Steckersolar / Balkon", 
     ),
     # just to ensure order of factors; this can't be done above, since col_factor() has a problem with umlauts as in "Weißenfeld"
     status = recode_factor(status, 
@@ -76,6 +83,47 @@ installationenNachJahrGrouped <- memoise(function(groupVar) {
     identity()
 })
 
+installationenNachTyp <- mastr %>%
+  filter(status == "In Betrieb") %>%
+  group_by(typ) %>%
+  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+  complete(typ, fill = list(anlagen = 0, bruttoleistung_kW = 0)) %>%
+  identity()
+
+installationenNachOrt <- mastr %>%
+  filter(status == "In Betrieb") %>%
+  group_by(ort) %>%
+  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+  complete(ort, fill = list(anlagen = 0, bruttoleistung_kW = 0)) %>%
+  identity()
+
+installationenNachGebaeudeNutzung <- mastr %>%
+  filter(status == "In Betrieb") %>%
+  group_by(gebaeudeNutzung) %>%
+  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+  complete(gebaeudeNutzung, fill = list(anlagen = 0, bruttoleistung_kW = 0)) %>%
+  identity()
+
+installationenNachEinspeisung <- mastr %>%
+  filter(status == "In Betrieb") %>%
+  group_by(einspeisung) %>%
+  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+  complete(einspeisung, fill = list(anlagen = 0, bruttoleistung_kW = 0)) %>%
+  identity()
+
+installationenNachLeistungsBegrenzung <- mastr %>%
+  filter(status == "In Betrieb") %>%
+  group_by(leistungsBegrenzung) %>%
+  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+  complete(leistungsBegrenzung, fill = list(anlagen = 0, bruttoleistung_kW = 0)) %>%
+  identity()
+
+installationenNachAusrichtung <- mastr %>%
+  filter(status == "In Betrieb") %>%
+  group_by(ausrichtung) %>%
+  summarise(bruttoleistung_kW = sum(bruttoleistung_kW), anlagen = n(), .groups = "drop") %>%
+  complete(ausrichtung, fill = list(anlagen = 0, bruttoleistung_kW = 0)) %>%
+  identity()
 
 anlagenKumulativ <- merge(
   mastr %>%
@@ -187,12 +235,13 @@ plotlyLeistung <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"
   plotly_build() %>%
   identity()
 
-plotlyAnlagen <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"), yhoverformat = ",d", height = 350) %>%
+plotlyAnlagen <- plot_ly(anlagenKumulativ, x = ~datum, line = list(shape = "hv"), height = 350) %>%
   add_trace(y = ~anlagenStillgelegt, type = "scatter", mode = "lines", fill = "tozeroy", color = I("#ff0000"), name = "Stillgelegt") %>%
   add_trace(y = ~anlagenInBetrieb, type = "scatter", mode = "lines", fill = "tonexty", color = I("#0570b0"), name = "In Betrieb") %>%
   plotly_axis_spacing(anlagenKumulativ$datum, left = 0, right = 0.02) %>%
   plotly_default_config() %>%
   plotly_hide_axis_titles() %>%
+  layout(yaxis = list(tickformat = ",d")) %>%
   plotly_build() %>%
   identity()
 
@@ -241,7 +290,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
           choices = list(
             "Gruppiert nach Anlagengröße" = "anlagenGroesse",
             "Gruppiert nach Standort" = "ort",
-            "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung"
+            "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung",
+            "Gruppiert nach Einspeiseart" = "einspeisung",
+            "Gruppiert nach Leistungsbegrenzung" = "leistungsBegrenzung",
+            "Gruppiert nach Netzbetreiberprüfung" = "netzbetreiberPruefung"
           )
         ),
         plotlyOutput(ns("neuLeistungPlotly"), height = 350)
@@ -254,7 +306,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
           choices = list(
             "Gruppiert nach Anlagengröße" = "anlagenGroesse",
             "Gruppiert nach Standort" = "ort",
-            "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung"
+            "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung",
+            "Gruppiert nach Einspeiseart" = "einspeisung",
+            "Gruppiert nach Leistungsbegrenzung" = "leistungsBegrenzung",
+            "Gruppiert nach Netzbetreiberprüfung" = "netzbetreiberPruefung"
           )
         ),
         plotlyOutput(ns("neuAnlagenPlotly"), height = 350)
@@ -294,23 +349,23 @@ ui <- memoise(omit_args = "request", function(request, id) {
         p(HTML("Die Linie entspricht dem Median („mittlere“ Modulleistung), der farbige Bereich dem 25%- bis 75%-Perzentil, also der mittleren Hälfte aller Anlagen.")),
       ),
       box(
-        title = "Stecker-Solarmodule („Balkonkraftwerke“)",
+        title = "Stecker-Solaranlagen („Balkonkraftwerke“)",
         {
           data <-  mastr %>% 
-            filter(typ == "stecker") %>%
+            filter(typ == "Steckersolar / Balkon") %>%
             filter(status == "In Betrieb") %>%
             group_by(inbetriebnahme) %>%
-            summarise(module = sum(module)) %>%
-            mutate(module = cumsum(module)) %>%
+            summarise(anlagen = n()) %>%
+            mutate(anlagen = cumsum(anlagen)) %>%
             add_row(
               inbetriebnahme = parse_date("2020-01-01"),
-              module = 0,
+              anlagen = 0,
               .before = 0
             )
 
-          plot_ly(data, x = ~inbetriebnahme, line = list(shape = "hv"), yhoverformat = ",d", height = 350) %>%
-            add_trace(y = ~module, type = "scatter", mode = "lines", color = I("#0570b0"), fill = "tozeroy", name = "Module") %>%
-            layout(yaxis = list(rangemode = "tozero")) %>%
+          plot_ly(data, x = ~inbetriebnahme, line = list(shape = "hv"), height = 350) %>%
+            add_trace(y = ~anlagen, type = "scatter", mode = "lines", color = I("#0570b0"), fill = "tozeroy", name = "Anlagen") %>%
+            layout(yaxis = list(rangemode = "tozero", tickformat = ",d")) %>%
             plotly_axis_spacing(data$inbetriebnahme, left = 0, right = 0.02) %>%
             plotly_default_config() %>%
             plotly_hide_axis_titles() %>%
@@ -318,6 +373,87 @@ ui <- memoise(omit_args = "request", function(request, id) {
             identity()
         },
         p(HTML("Mehr Infos zu Balkonkraftwerken gibt es im <a href=\"https://muenchen.solar2030.de/balkonkraftwerk/\">Guide von München Solar2030</a>.<br>Von Januar bis Ende September 2022, sowie von Januar 2023 bis Juni 2023 gab es eine Förderung von 25&nbsp;% und maximal 250&nbsp;€ von der <a href=\"https://www.vaterstetten.de/bauen-umwelt/energie-und-klimaschutz/energieeinspar-foerderprogramm/\">Gemeinde Vaterstetten</a>.")),
+      ),
+    ),
+
+    fluidRow(
+      box(
+        title = "Anlagen nach Typ",
+        width = 4,
+        selectInput(
+          ns("anlagenNachTypVar"),
+          label = NULL,
+          choices = list(
+            "Anzahl Anlagen" = "anlagen",
+            "Installierte Leistung" = "bruttoleistung_kW"
+          )
+        ),
+        plotlyOutput(ns("anlagenNachTypPlotly"), height = 350),
+      ),
+      box(
+        title = "Anlagen nach Ort",
+        width = 4,
+        selectInput(
+          ns("anlagenNachOrtVar"),
+          label = NULL,
+          choices = list(
+            "Anzahl Anlagen" = "anlagen",
+            "Installierte Leistung" = "bruttoleistung_kW"
+          )
+        ),
+        plotlyOutput(ns("anlagenNachOrtPlotly"), height = 350),
+      ),
+      box(
+        title = "Anlagen nach Gebäudenutzung",
+        width = 4,
+        selectInput(
+          ns("anlagenNachGebaeudeNutzungVar"),
+          label = NULL,
+          choices = list(
+            "Anzahl Anlagen" = "anlagen",
+            "Installierte Leistung" = "bruttoleistung_kW"
+          )
+        ),
+        plotlyOutput(ns("anlagenNachGebaeudeNutzungPlotly"), height = 350),
+      ),
+      box(
+        title = "Anlagen nach Einspeiseart",
+        width = 4,
+        selectInput(
+          ns("anlagenNachEinspeisungVar"),
+          label = NULL,
+          choices = list(
+            "Anzahl Anlagen" = "anlagen",
+            "Installierte Leistung" = "bruttoleistung_kW"
+          )
+        ),
+        plotlyOutput(ns("anlagenNachEinspeisungPlotly"), height = 350),
+      ),
+      box(
+        title = "Anlagen nach Leistungsbegrenzung",
+        width = 4,
+        selectInput(
+          ns("anlagenNachLeistungsBegrenzungVar"),
+          label = NULL,
+          choices = list(
+            "Anzahl Anlagen" = "anlagen",
+            "Installierte Leistung" = "bruttoleistung_kW"
+          )
+        ),
+        plotlyOutput(ns("anlagenNachLeistungsBegrenzungPlotly"), height = 350),
+      ),
+      box(
+        title = "Anlagen nach Ausrichtung",
+        width = 4,
+        selectInput(
+          ns("anlagenNachAusrichtungVar"),
+          label = NULL,
+          choices = list(
+            "Anzahl Anlagen" = "anlagen",
+            "Installierte Leistung" = "bruttoleistung_kW"
+          )
+        ),
+        plotlyOutput(ns("anlagenNachAusrichtungPlotly"), height = 350),
       ),
     ),
 
@@ -394,6 +530,48 @@ server <- function(id) {
           plotly_hide_axis_titles() %>%
           plotly_build() %>%
           identity()
+      })
+
+      renderAnlagenNachVar <- function(data, groupVar, valueVar) {
+        xaxisAnlagen = list(tickformat = ",d")
+        xaxisLeistung = list(tickformat = ",.0f", exponentformat = "none", ticksuffix = " kWp")
+        xaxis = if (valueVar == "anlagen") xaxisAnlagen else xaxisLeistung
+
+        plot_ly(data, y = ~get(groupVar)) %>%
+          add_trace(x = ~get(valueVar), type = "bar", color = ~get(groupVar), text = ~paste0(
+            utils$germanNumberFormat(anlagen), " Anlagen, ", utils$germanNumberFormat(bruttoleistung_kW), " kWp"
+          ), textposition = "auto", insidetextfont = list(color = "#ffffff"), outsidetextfont = list(color = "#333333"), hoverinfo = "text") %>%
+          plotly_default_config(hovermode = "closest") %>%
+          plotly_hide_axis_titles() %>%
+          layout(showlegend = FALSE) %>%
+          layout(xaxis = xaxis) %>%
+          layout(yaxis = list(autorange = "reversed")) %>%
+          plotly_build() %>%
+          identity()
+      }
+
+      output$anlagenNachTypPlotly <- renderPlotly({
+        renderAnlagenNachVar(installationenNachTyp, "typ", input$anlagenNachTypVar)
+      })
+
+      output$anlagenNachOrtPlotly <- renderPlotly({
+        renderAnlagenNachVar(installationenNachOrt, "ort", input$anlagenNachOrtVar)
+      })
+
+      output$anlagenNachGebaeudeNutzungPlotly <- renderPlotly({
+        renderAnlagenNachVar(installationenNachGebaeudeNutzung, "gebaeudeNutzung", input$anlagenNachGebaeudeNutzungVar)
+      })
+
+      output$anlagenNachEinspeisungPlotly <- renderPlotly({
+        renderAnlagenNachVar(installationenNachEinspeisung, "einspeisung", input$anlagenNachEinspeisungVar)
+      })
+
+      output$anlagenNachLeistungsBegrenzungPlotly <- renderPlotly({
+        renderAnlagenNachVar(installationenNachLeistungsBegrenzung, "leistungsBegrenzung", input$anlagenNachLeistungsBegrenzungVar)
+      })
+
+      output$anlagenNachAusrichtungPlotly <- renderPlotly({
+        renderAnlagenNachVar(installationenNachAusrichtung, "ausrichtung", input$anlagenNachAusrichtungVar)
       })
     }
   )
