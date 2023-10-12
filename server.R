@@ -38,6 +38,8 @@ kommunalwahl2020 <- new.env()
 sys.source("R/kommunalwahl2020.R", envir = kommunalwahl2020, chdir = FALSE)
 btw2021 <- new.env()
 sys.source("R/btw2021.R", envir = btw2021, chdir = FALSE)
+landtagswahl2023 <- new.env()
+sys.source("R/landtagswahl2023.R", envir = landtagswahl2023, chdir = FALSE)
 impressum <- new.env()
 sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
 
@@ -69,6 +71,7 @@ ui <- function(request) {
         menuItem("Corona-Impfungen", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen"),
         menuItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", icon = icon("vote-yea"), selected = query$tab == "kommunalwahl2020"),
         menuItem("Bundestagswahl 2021", tabName = "btw2021", icon = icon("vote-yea"), selected = query$tab == "btw2021"),
+        menuItem("Landtagswahl 2023", tabName = "landtagswahl2023", icon = icon("vote-yea"), selected = query$tab == "landtagswahl2023"),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"), selected = query$tab == "impressum")
       )
     ),
@@ -117,6 +120,7 @@ ui <- function(request) {
         tabItem(tabName = "strassennamen", strassennamen$ui(request, "strassennamen")),
         tabItem(tabName = "kommunalwahl2020", kommunalwahl2020$ui(request, "kommunalwahl2020")),
         tabItem(tabName = "btw2021", btw2021$ui(request, "btw2021")),
+        tabItem(tabName = "landtagswahl2023", landtagswahl2023$ui(request, "landtagswahl2023")),
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
       fluidRow(
@@ -161,6 +165,7 @@ server <- function(input, output, session) {
   strassennamen$server("strassennamen")
   kommunalwahl2020$server("kommunalwahl2020")
   btw2021$server("btw2021")
+  landtagswahl2023$server("landtagswahl2023")
   impressum$server("impressum")
 }
 

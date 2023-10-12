@@ -1,49 +1,45 @@
 # This script needs to be executed from the project's root directy:
-# $ Rscript data/btw2021/buildErgebnisse.R
+# $ Rscript data/ltw2023/buildErgebnisse.R
 # since it requires renv to be loaded
 
 library(readr)
 library(dplyr)
 library(tidyr)
 
-rawGesamt <- read_delim(
-  file = "data/btw2021/raw/Open-Data-Bundestagswahl1573.csv",
+rawLandtagswahl <- read_delim(
+  file = "data/ltw2023/raw/landtagswahlStimmen.csv",
   delim = ";",
-  col_names = TRUE,
-  col_types = cols(
-    `gebiet-nr` = col_integer()
+  col_names = TRUE
+) %>%
+  filter(Gemeindename == "Vaterstetten") %>%
+  mutate(
+    Stimmbezirk = case_match(Gebietsname,
+      "Vaterstetten" ~ "Gesamt",
+      .default = Gebietsname
+    ),
+    Wahlberechtigte = `Wahlberechtigte gesamt (A)`,
+    Waehler = `Waehler gesamt (B)`
   )
-) %>% mutate(Stimmbezirk = "Gesamt")
-rawNachStimmbezirk <- read_delim(
-  file = "data/btw2021/raw/Open-Data-Bundestagswahl1576.csv",
-  delim = ";",
-  col_names = TRUE,
-  col_types = cols(
-    `gebiet-nr` = col_integer()
-  )
-) %>% mutate(Stimmbezirk = `gebiet-name`)
-  
-rawCombined = bind_rows(rawGesamt, rawNachStimmbezirk)
 
-parteien <- read_csv("data/btw2021/parteien.csv")
+parteien <- read_csv("data/ltw2023/parteien.csv")
 
 
 ## Erststimmen
 
-ergebnisAllgemein <- rawCombined %>%
+ergebnisAllgemein <- rawLandtagswahl %>%
   transmute(
     Stimmbezirk,
-    Wahlberechtigte = A,
-    Waehler = B,
-    UngueltigeStimmen = C,
-    GueltigeStimmen = D
+    Wahlberechtigte,
+    Waehler,
+    UngueltigeStimmen = `Direktstimmen ungueltige (C)`,
+    GueltigeStimmen = `Direktstimmen gueltige (D)`
   )
 write_csv(
   ergebnisAllgemein,
-  file = "data/btw2021/erststimmenAllgemein.csv"
+  file = "data/ltw2023/landtagswahlErststimmenAllgemein.csv"
 )
 
-ergebnisNachPartei <- rawCombined %>%
+ergebnisNachPartei <- rawLandtagswahl %>%
   rename_with(~ paste(.x, "Stimmen", sep = "_"), matches("^D\\d+$")) %>%
   pivot_longer(
     matches("^D\\d+_[a-z]+$"),
@@ -60,26 +56,26 @@ ergebnisNachPartei <- rawCombined %>%
   )
 write_csv(
   ergebnisNachPartei,
-  file = "data/btw2021/erststimmenNachPartei.csv"
+  file = "data/ltw2023/landtagswahlErststimmenNachPartei.csv"
 )
 
 
 ## Zweitstimmen
 
-ergebnisAllgemein <- rawCombined %>%
+ergebnisAllgemein <- rawLandtagswahl %>%
   transmute(
     Stimmbezirk,
-    Wahlberechtigte = A,
-    Waehler = B,
-    UngueltigeStimmen = E,
-    GueltigeStimmen = F
+    Wahlberechtigte,
+    Waehler,
+    UngueltigeStimmen = `Listenstimmen ungueltige (E)`,
+    GueltigeStimmen = `Listenstimmen gueltige (F)`
   )
 write_csv(
   ergebnisAllgemein,
-  file = "data/btw2021/zweitstimmenAllgemein.csv"
+  file = "data/ltw2023/landtagswahlZweitstimmenAllgemein.csv"
 )
 
-ergebnisNachPartei <- rawCombined %>%
+ergebnisNachPartei <- rawLandtagswahl %>%
   rename_with(~ paste(.x, "Stimmen", sep = "_"), matches("^F\\d+$")) %>%
   pivot_longer(
     matches("^F\\d+_[a-z]+$"),
@@ -96,5 +92,5 @@ ergebnisNachPartei <- rawCombined %>%
   )
 write_csv(
   ergebnisNachPartei,
-  file = "data/btw2021/zweitstimmenNachPartei.csv"
+  file = "data/ltw2023/landtagswahlZweitstimmenNachPartei.csv"
 )

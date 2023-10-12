@@ -3,7 +3,7 @@ sys.source("R/utils.R", envir = utils, chdir = FALSE)
 
 
 stimmbezirke <- read_csv(
-  file = "data/btw2021/stimmbezirke.csv",
+  file = "data/ltw2023/stimmbezirke.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     StimmbezirkArt = readr::col_factor(),
@@ -11,7 +11,7 @@ stimmbezirke <- read_csv(
   )
 )
 
-stimmbezirkeGeodata <- st_read("data/btw2021/stimmbezirke.geojson") %>%
+stimmbezirkeGeodata <- st_read("data/ltw2023/stimmbezirke.geojson") %>%
   transmute(
     Stimmbezirk = name,
     geometry
@@ -24,7 +24,7 @@ stimmbezirkeGeodata <- st_read("data/btw2021/stimmbezirke.geojson") %>%
   )
 
 parteien <- read_csv(
-  file = "data/btw2021/parteien.csv",
+  file = "data/ltw2023/parteien.csv",
   col_types = cols(
     ParteiNr = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(),
@@ -34,7 +34,7 @@ parteien <- read_csv(
 )
 
 direktkandidaten <- read_csv(
-  file = "data/btw2021/direktkandidaten.csv",
+  file = "data/ltw2023/landtagswahlDirektkandidaten.csv",
   col_types = cols(
     ParteiKuerzel = readr::col_factor(),
     Direktkandidat = readr::col_factor()
@@ -42,7 +42,7 @@ direktkandidaten <- read_csv(
 )
 
 erststimmenAllgemein <- read_csv(
-  file = "data/btw2021/erststimmenAllgemein.csv",
+  file = "data/ltw2023/landtagswahlErststimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -90,7 +90,7 @@ erststimmenAllgemeinNachStimmbezirkArt <- erststimmenAllgemein %>%
   )
 
 erststimmenNachPartei <- read_csv(
-  file = "data/btw2021/erststimmenNachPartei.csv",
+  file = "data/ltw2023/landtagswahlErststimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -134,7 +134,7 @@ erststimmenNachParteiNachCombined <- bind_rows(
 
 
 zweitstimmenAllgemein <- read_csv(
-  file = "data/btw2021/zweitstimmenAllgemein.csv",
+  file = "data/ltw2023/landtagswahlZweitstimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -182,7 +182,7 @@ zweitstimmenAllgemeinNachStimmbezirkArt <- zweitstimmenAllgemein %>%
   )
 
 zweitstimmenNachPartei <- read_csv(
-  file = "data/btw2021/zweitstimmenNachPartei.csv",
+  file = "data/ltw2023/landtagswahlZweitstimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -228,7 +228,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
   ns <- NS(id)
   tagList(
-    h2("Bundestagswahl 26. September 2021 in der Gemeinde Vaterstetten"),
+    h2("Landtagswahl 8. Oktober 2023 in der Gemeinde Vaterstetten"),
 
     fluidRow(
       box(
@@ -237,7 +237,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Insgesamt gibt es 27 Stimmbezirke. Eingezeichnet sind die 14 Wahllokal-Stimmbezirke (1 bis 14), die auch in <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Die 13 Briefwahlbezirke (31 bis 43) lassen sich den Wahllokal-Stimmbezirken zuordnen, sodass jedes Gebiet die Stimmen eines Wahllokal-Stimmbezirks sowie eines Briefwahlbezirks umfasst. Ausnahme sind die Wahllokal-Stimmebezirke 1 und 2, die mit dem Briefwahlbezirk 31 zusammengefasst wurden und somit gemeinsam drei Stimmbezirke umfassen.")),
+          p(HTML("Insgesamt gibt es 30 Stimmbezirke. Eingezeichnet sind die 15 Wahllokal-Stimmbezirke (1 bis 15), die auch in <a href=\"https://umap.openstreetmap.fr/de/map/landtagswahl-2023-stimmbezirke-vaterstetten_966387\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Die 15 Briefwahlbezirke (31 bis 45) lassen sich den Wahllokal-Stimmbezirken zuordnen, sodass jedes Gebiet die Stimmen eines Wahllokal-Stimmbezirks sowie eines Briefwahlbezirks umfasst.")),
         ),
       ),
     ),
@@ -260,7 +260,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("erststimmenMap"), height = 550),
         p(),
-        p("Die Gebiete sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        p("Die Gebiete sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
         p("Klicke auf einen Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
       column(
@@ -323,7 +323,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("zweitstimmenMap"), height = 550),
         p(),
-        p("Die Gebiete sind jeweils nach den Zweitstimmen der ausgewählten Partei:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        p("Die Gebiete sind jeweils nach den Zweitstimmen der ausgewählten Partei:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
         p("Klicke auf einen Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
       column(
@@ -411,7 +411,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             )
         },
         p(),
-        p("Die Gebiete sind jeweils nach dem Anteil der abgegebenen Stimmen (ungültige eingeschlossen) im Verhältnis zu allen Wahlberechtigten eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        p("Die Gebiete sind jeweils nach dem Anteil der abgegebenen Stimmen (ungültige eingeschlossen) im Verhältnis zu allen Wahlberechtigten eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
         {
           rowGesamt <- erststimmenAllgemeinNachStimmbezirkAggregiert %>% filter(StimmbezirkAggregiert == "Gesamt")
           p(paste0("Die gesamte Wahlbeteiligung in der Gemeinde Vaterstetten beträgt ", scales::percent(rowGesamt$Wahlbeteiligung, accuracy = 0.1), " (", utils$germanNumberFormat(rowGesamt$Waehler), " Wähler:innen bei insgesamt ", utils$germanNumberFormat(rowGesamt$Wahlberechtigte), " Wahlberechtigten)."))
@@ -460,7 +460,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             )
         },
         p(),
-        p("Die Gebiete sind jeweils nach dem Anteil der Briefwahlstimmen im Verhältnis zu allen abgegebenen Stimmen (ungültige eingeschlossen) eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        p("Die Gebiete sind jeweils nach dem Anteil der Briefwahlstimmen im Verhältnis zu allen abgegebenen Stimmen (ungültige eingeschlossen) eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
         {
           rowGesamt <- erststimmenAllgemeinNachStimmbezirkAggregiert %>% filter(StimmbezirkAggregiert == "Gesamt")
           p(paste0("Die gesamte Briefwahlquote in der Gemeinde Vaterstetten beträgt ", scales::percent(rowGesamt$Briefwahlquote, accuracy = 0.1), " (", utils$germanNumberFormat(rowGesamt$WaehlerBriefwahl), " Briefwähler:innen bei insgesamt ", utils$germanNumberFormat(rowGesamt$Waehler), " Wähler:innen)."))
@@ -475,8 +475,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/opendata.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
-          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/btw2021", "Zum Daten-Download mit Dokumentation")),
+          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://wahlen.osrz-akdb.de/ob-p/175000/0/20231008/landtagswahl_stkl_1_stk/index.html\">Wahlportal des Landkreises Ebersberg</a>, dort werden die Daten als <a href=\"https://wahlen.osrz-akdb.de/ob-p/175000/0/20231008/landtagswahl_stkl_1_stk/presse.html\">CSV-Datei</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/landtagswahl-2023-stimmbezirke-vaterstetten_966387\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/ltw2023", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
     ),

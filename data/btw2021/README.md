@@ -17,7 +17,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 * `Waehler` ≤ `Wahlberechtigte`, falls es kein Briefwahlstimmbezirk ist
 * `Waehler` = `UngueltigeStimmen` + `GueltigeStimmen`
 
-<sup>[1]</sup> Briefwähler werden nicht in ihrem eigentlichen (Wahllokal-)Stimmbezirk als Wähler gezählt, sondern in einem Briefwahlstimmbezirk. Daher ist es nicht möglich, die Wahlbeteiligung nach Stimmbezirk aufgeschlüsselt anzugeben, da nicht bekannt ist, wie viele Briefwähler es in den Stimmbezirken gibt.
+<sup>[1]</sup> Briefwähler werden nicht in ihrem eigentlichen (Wahllokal-)Stimmbezirk als Wähler gezählt, sondern im zugehörigen Briefwahlstimmbezirk.
 
 ### Quellen
 
@@ -96,8 +96,8 @@ Der Datensatz wurde händisch erstellt.
 
 Der Geodatensatz [`stimmbezirke.geojson`](./stimmbezirke.geojson) stellt die Gebietszuteilung der Wahllokalstimmbezirke 1 bis 14 dar. Die Daten sind im [GeoJSON-Format](https://de.wikipedia.org/wiki/GeoJSON) gespeichert, jeder Stimmbezirk ist dabei ein Polygon oder MultiPolygon.
 
-Der Geodatensatz wurde mit dem Tool [uMap](https://umap.openstreetmap.fr/de/) händisch erstellt und als GeoJSON exportiert. Die uMap-Karte kann hier abgerufen werden: [https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke_659020#14/48.1098/11.8031](https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke_659020#14/48.1098/11.8031)
+Der Geodatensatz wurde mit dem Tool [uMap](https://umap.openstreetmap.fr/de/) händisch erstellt und als GeoJSON exportiert. Die uMap-Karte kann hier abgerufen werden: [https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442](https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442)
 
 ### Quellen
 
-* Gemeinde Vaterstetten (Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf dessen Basis die [uMap-Karte](https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke_659020#14/48.1098/11.8031) erstellt werden konnte)
+* Gemeinde Vaterstetten (Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf dessen Basis die [uMap-Karte](https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442) erstellt werden konnte)
