@@ -31,10 +31,12 @@ jobs:
       - name: Install python packages
         run: pipenv sync
       - name: Poll data
-        run: pipenv run python tools/poll.py --telegram-token=$TELEGRAM_TOKEN --telegram-debug-chat-id=$TELEGRAM_DEBUG_CHAT_ID
+        run: pipenv run python tools/poll.py
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_DEBUG_CHAT_ID: ${{ secrets.TELEGRAM_DEBUG_CHAT_ID }}
+          GENESIS_LFSTAT_USERNAME: ${{ secrets.GENESIS_LFSTAT_USERNAME }}
+          GENESIS_LFSTAT_PASSWORD: ${{ secrets.GENESIS_LFSTAT_PASSWORD }}
         continue-on-error: true
         timeout-minutes: 10
       - name: Commit

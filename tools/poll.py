@@ -1,10 +1,13 @@
 import argparse
+import dotenv
 import os
 import telebot
 import time
 import traceback
 
 import pollers
+
+dotenv.load_dotenv()
 
 parser = argparse.ArgumentParser(
   usage = "%(prog)s [OPTIONS]",
@@ -18,28 +21,17 @@ parser.add_argument(
   nargs = '+',
   help = 'Pollers to execute, defaults to all pollers. Available pollers: %s' % ', '.join(pollers.all.keys())
 )
-parser.add_argument(
-  '--telegram-token',
-  help = 'Telegram bot token if messages should be sent, in the format \'[0-9]+:[0-9A-Za-z-]+\''
-)
-parser.add_argument(
-  '--telegram-debug-chat-id',
-  help = 'Telegram chat ID for debug messages'
-)
-parser.add_argument(
-  '--telegram-public-chat-id',
-  help = 'Telegram chat ID for public messages, defaults to debug chat id.'
-)
 
 args = parser.parse_args()
 
 telegram_bot = None
 
-if args.telegram_token :
-  telegram_bot = telebot.TeleBot(args.telegram_token)
+telegram_token = os.environ.get('TELEGRAM_TOKEN')
+telegram_debug_chat_id = os.environ.get('TELEGRAM_DEBUG_CHAT_ID')
+telegram_public_chat_id = os.environ.get('TELEGRAM_PUBLIC_CHAT_ID')
 
-telegram_debug_chat_id = args.telegram_debug_chat_id
-telegram_public_chat_id = args.telegram_public_chat_id
+if telegram_token:
+  telegram_bot = telebot.TeleBot(os.environ['TELEGRAM_TOKEN'])
 
 if telegram_debug_chat_id and not telegram_public_chat_id:
   telegram_public_chat_id = telegram_debug_chat_id
@@ -77,7 +69,7 @@ for key, pollerClass in needed_pollers.items():
 
     if telegram_bot != None:
       lines = []
-      lines.append("Exception in poller %s after %.1fs: %s" % (key, (end - start), e))
+      lines.append(f"Exception in poller {key} after {(end - start):.1f}s: `{type(e).__name__}: {e}`")
       lines.append("[GitHub Actions](https://github.com/fxedel/vaterstetten-in-zahlen/actions) | [GitHub Action Run](https://github.com/fxedel/vaterstetten-in-zahlen/actions/runs/%s)" % os.getenv('GITHUB_RUN_ID'))
       telegram_bot.send_message(
         telegram_debug_chat_id,
