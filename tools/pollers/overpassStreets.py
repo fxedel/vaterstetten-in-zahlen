@@ -13,7 +13,7 @@ overpass_api_url = 'https://overpass-api.de/api/interpreter'
 overpass_query_administrative = '''
 [out:json][timeout:30];
 area["boundary"="administrative"]["name"="Vaterstetten"]->.boundingarea;
-way(area.boundingarea)["highway"]["highway"!="services"]["highway"!="bus_stop"]["name"];
+way(area.boundingarea)["highway"]["highway"!="services"]["highway"!="bus_stop"]["name"]["area"!="yes"];
 out geom;
 '''
 
