@@ -912,7 +912,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4833548,SEE944103952401,,In Betrieb,2021-12-23,2021-11-25,,,"Hausdach + An Lerchenfeld 8, 85599 Parsdorf",Brkic GmbH,sonstige,85599,Parsdorf,Am Lerchenfeld,8,48.146429,11.789983,false,gebaeude,164,,54.12,50.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5005514,SEE970613682507,,In Betrieb,2022-04-13,2021-11-25,,,,,GHD,85599,Parsdorf,,,,,true,gebaeude,90,,29.7,25.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5136415,SEE986460602582,,In Betrieb,2022-06-23,2021-11-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,9.88,9.88,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5520314,SEE958025791925,E21041011000000000000350784400001,In Betrieb,2022-12-04,2021-12-01,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,15,Süd,5.55,5.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5520314,SEE958025791925,E21041011000000000000350784400001,In Betrieb,2022-12-04,2021-12-01,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,15,Süd,5.55,5.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4800581,SEE996965318758,,In Betrieb,2021-12-03,2021-12-02,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,17,Ost-West,6.885,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4872575,SEE918435685542,,In Betrieb,2022-01-25,2021-12-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,,8.0,6.1,70%,false,,false
 4825988,SEE908101916803,,In Betrieb,2021-12-18,2021-12-18,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,9.8,9.8,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1406,7 +1406,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 7225814,SEE960886617559,,In Betrieb,2023-11-22,2023-11-21,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,23,Ost,9.6,9.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7098976,SEE905675217909,,In Betrieb,2023-11-28,2023-11-22,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,60,West,24.9,18.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7296355,SEE987126225909,,In Betrieb,2023-12-06,2023-11-24,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,24,Süd,9.84,9.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-7263195,SEE921157756261,,In Betrieb,2023-11-29,2023-11-25,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,12,Süd,5.4,5.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+7263195,SEE921157756261,,In Betrieb,2023-11-29,2023-11-25,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,12,Süd,5.4,5.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7263983,SEE924795333894,,In Betrieb,2023-11-29,2023-11-29,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,19,Ost-West,7.03,5.0,sonstige,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5420331,SEE944713209056,,In Planung,2022-10-24,,2022-11-30,,,,sonstige,85598,Baldham,,,,,false,gebaeude,38,Süd-West,15.58,15.58,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
