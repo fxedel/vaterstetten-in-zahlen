@@ -4,6 +4,8 @@ Die Veröffentlichungen und Daten des Bayerischen Landesamtes für Statistik ste
 
 Die Namensnennung des Bayerischen Landesamtes für Statistik als Rechteinhaber hat in folgender Weise zu erfolgen: „Datenquelle: Bayerisches Landesamt für Statistik - [www.statistik.bayern.de](https://www.statistik.bayern.de)“
 
+Die Vorgänger des Landesamts für Statistik hießen unter anderem „Königlich-Bayerisches Statistisches Bureau“ oder „Königlich Bayerisches Statistisches Landesamt“.
+
 ## Veröffentlichtung „Statistik kommunal“ für Vaterstetten
 
 * 2017: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2017/09175132.pdf
@@ -11,6 +13,7 @@ Die Namensnennung des Bayerischen Landesamtes für Statistik als Rechteinhaber h
 * 2019: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2019/09175132.pdf
 * 2020: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2020/09175132.pdf
 * 2021: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2021/09175132.pdf
+* 2022: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2022/09175132.pdf
 
 
 ## GENESIS-Tabellen

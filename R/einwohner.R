@@ -69,10 +69,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 12,
         {
           plot_ly(x = ~stichtag, yhoverformat = ",d", xhoverformat = "%-d. %b %Y", height = 350) %>%
-            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(maennlich)), y = ~maennlich, name = "Männer", type = "scatter", mode = "none", fill = 'tozeroy', fillcolor = "#1fc3aa", stackgroup = "geschlecht") %>%
-            add_trace(data = lfstatBevoelkerungCombined %>% filter(!is.na(weiblich)), y = ~weiblich, name = "Frauen",type = "scatter", mode = "none", fill = 'tonexty', fillcolor = "#8624f5",  stackgroup = "geschlecht") %>%
-            add_trace(data = lfstatBevoelkerungCombined, y = ~bevoelkerung, name = "Bevölkerung", type = "scatter", mode = "lines", color = I("#000000")) %>%
-            add_trace(data = lfstatBevoelkerungCombined %>% filter(erhebungsart == "Volkszählung"), y = ~bevoelkerung, name = "Volkszählungen", type = "scatter", mode = "markers", hovertemplate = "Volkszählung<extra></extra>", color = I("#000000")) %>%
+            add_trace(data = lfstatBevoelkerungCombined, y = ~maennlich, name = "Männer", type = "scatter", mode = "lines+markers", color = I("#1fc3aa"), marker = list(size = 3)) %>%
+            add_trace(data = lfstatBevoelkerungCombined, y = ~weiblich, name = "Frauen", type = "scatter", mode = "lines+markers", color = I("#8624f5"), marker = list(size = 3)) %>%
+            add_trace(data = lfstatBevoelkerungCombined, y = ~bevoelkerung, name = "Bevölkerung", text = ~erhebungsart, type = "scatter", mode = "lines", color = I("#000000")) %>%
+            add_trace(data = lfstatBevoelkerungCombined %>% filter(erhebungsart == "Volkszählung"), y = ~bevoelkerung, name = "Volkszählungen", type = "scatter", mode = "markers", hoverinfo = "none", color = I("#000000")) %>%
             plotly_default_config() %>%
             plotly_time_range(lfstatBevoelkerungCombined$stichtag) %>%
             plotly_hide_axis_titles() %>%
@@ -129,22 +129,24 @@ plotly_default_config <- function(p) {
     config(locale = "de") %>%
     layout(xaxis = list(fixedrange = TRUE, rangemode = 'tozero')) %>%
     layout(yaxis = list(fixedrange = TRUE)) %>%
-    layout(hovermode = "x") %>%
+    layout(hovermode = "x unified") %>%
     layout(dragmode = FALSE) %>%
     layout(legend = list(bgcolor = "#ffffffaa", orientation = 'h')) %>% # legend below plot
     identity()
 }
 
 plotly_time_range <- function(p, xaxis) {
-  axisWidth <- max(xaxis) - min(xaxis)
-  scaleFactor <- 0.01
+  range_start = min(xaxis)-365
+  range_end = max(xaxis)+90
   p %>%
+    # default time selection
+    layout(xaxis = list(range = list(range_start, range_end))) %>%
     layout(xaxis = list(
       rangeselector = list(
         buttons = list(
-          list(count = 10, label = "10 Jahre", step = "year", stepmode = "backward"),
-          list(count = 50, label = "50 Jahre", step = "year", stepmode = "backward"),
-          list(step = "all", label = "Gesamt")
+          list(count = 20, label = "20 Jahre", step = "year", stepmode = "backward"),
+          list(count = 70, label = "70 Jahre", step = "year", stepmode = "backward"),
+          list(count = range_end - range_start, label = "Gesamt", step = "day", stepmode = "backward")
         )
       )
     )) %>%

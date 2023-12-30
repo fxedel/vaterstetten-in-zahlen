@@ -56,10 +56,12 @@ Der Datensatz [lfstatVolkszaehlungen.csv](./lfstatVolkszaehlungen.csv) umfasst d
 
 ### Quellen
 
-- [Bayerisches Landesamt für Statistik](../quellen/LfStat.md):
-  - Tabelle 12111-101z (Volkszählungen 1840-1987, nur Bevölkerung)
+- [Bayerisches Landesamt für Statistik](../quellen/LfStat.md) (und dessen Vorgängerbehörden):
+  - Tabelle 12111-101z (Volkszählungen 1840-1987 außer 1867 und 1910, nur Bevölkerung)
   - Tabelle 12111-103r (Volkszählungen 1970 und 1978, Geschlechter)
-  - „Statistik kommunal 2020“ (Volkszählung 2011)
+  - [Verzeichniß der Gemeinden des Königreichs Bayern nach dem Stande der Bevölkerung im Dezember 1867](https://www.bavarikon.de/object/bav:BSB-MDZ-00000BSB10316430), S. 26, unter „Parsdorf“ (Volkszählung 1867)
+  - [Gemeinde-Verzeichnis für das Königreich Bayern nach der Volkszählung vom 1. Dezember 1910 und dem Gebietsstand vom 1. Juli 1911](http://www.literature.at/viewer.alo?objid=10516&viewmode=fullscreen), S. 10, unter „Parsdorf“ (Volkszählung 1910)
+  - [Statistik kommunal 2022](https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2022/09175132.pdf) (Volkszählung 2011)
 
 
 
