@@ -1,6 +1,7 @@
 import pollers.poller
 import pollers.bayernwerkEnergiemonitor
-import pollers.lfstatEinwohner
+import pollers.lfstatFortschreibungJahre
+import pollers.lfstatFortschreibungQuartale
 import pollers.lraEbeArcgisImpfungen
 import pollers.lraEbeArcgisInzidenz
 import pollers.lraEbeArcgisInzidenzGemeinden
@@ -14,7 +15,8 @@ from typing import Dict, Type
 
 all: Dict[str, Type[pollers.poller.Poller]] = {
   'bayernwerkEnergiemonitor': pollers.bayernwerkEnergiemonitor.Poller,
-  'lfstatEinwohner': pollers.lfstatEinwohner.Poller,
+  'lfstatFortschreibungJahre': pollers.lfstatFortschreibungJahre.Poller,
+  'lfstatFortschreibungQuartale': pollers.lfstatFortschreibungQuartale.Poller,
   'mastrSpeicher': MastrSpeicherPoller,
   'mastrPhotovoltaik': MastrPhotovoltaikPoller,
   'lraEbeArcgisInzidenz': pollers.lraEbeArcgisInzidenz.Poller,
