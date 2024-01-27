@@ -65,7 +65,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3831769,SEE926040305281,,In Betrieb,2020-12-08,2006-08-01,,,,,landwirtschaft,85599,Parsdorf,,,,,false,gebaeude,16,Süd,2.8,2.5,ohne,false,Volleinspeisung,false
 4200126,SEE947498614060,E21875011000000000000362408100000,In Betrieb,2021-01-21,2006-08-25,,,B46730,Bernhard Eschbaumer,GHD,85646,Neufarn,,,,,true,gebaeude,,Süd,28.0,27.6,ohne,false,Volleinspeisung,false
 3169557,SEE951966577795,E21875011000000000000363239800000,In Betrieb,2020-06-22,2006-09-04,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,5.04,5.0,ohne,false,Volleinspeisung,false
-4026666,SEE934973136698,E21875011000000000000363292400000,In Betrieb,2021-01-29,2006-11-14,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,54,Süd-West,8.91,6.4,ohne,false,Volleinspeisung,false
+4026666,SEE934973136698,E21875011000000000000363292400000,In Betrieb,2021-01-29,2006-11-14,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,54,Süd-West,8.91,6.4,ohne,false,Volleinspeisung,false
 3350998,SEE989732306829,E21875011000000000000364120500000,In Betrieb,2021-10-22,2006-12-13,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,8,Süd,2.16,2.16,ohne,false,Volleinspeisung,false
 3889477,SEE940958622094,E21875011000000000000367843800000,In Betrieb,2020-12-15,2006-12-15,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,2,Süd-West,8.16,8.16,ohne,false,Volleinspeisung,false
 3186584,SEE993772460052,E21875011000000000000367507300000,In Betrieb,2020-06-27,2007-03-21,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,10,Süd,2.25,2.1,ohne,false,Volleinspeisung,false
@@ -1380,6 +1380,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 7501070,SEE980479622982,,In Betrieb,2024-01-26,2023-10-03,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,24,Ost-West,9.96,9.96,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7137316,SEE988922950804,,In Betrieb,2023-11-06,2023-10-04,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Ost-West,8.91,8.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7263454,SEE931829099763,,In Betrieb,2023-12-04,2023-10-09,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,24,Süd,9.0,9.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+7502306,SEE961311138236,,In Betrieb,2024-01-27,2023-10-09,,,,,GHD,85599,Hergolding,,,,,false,gebaeude,47,Süd,19.5,19.5,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7072148,SEE933083515348,,In Betrieb,2023-10-23,2023-10-16,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,2,Süd,0.6,0.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6879195,SEE967437964872,,In Betrieb,2023-11-15,2023-10-16,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,37,Ost-West,14.99,14.99,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7065972,SEE931476176138,,In Betrieb,2023-10-22,2023-10-20,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,16,Süd,6.72,6.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
