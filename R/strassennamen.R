@@ -42,7 +42,7 @@ strassenNamensherkuenfte <- left_join(
   Typ = coalesce(Typ, "Unbekannt")
 ) %>% mutate(
   Typ = factor(Typ, levels = c(
-    "Komponist:innen",
+    "Komponisten",
     "Personen mit Lokalbezug",
     "andere Personen",
     "Vögel",
