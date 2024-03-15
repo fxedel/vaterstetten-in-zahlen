@@ -55,7 +55,7 @@ for key, pollerClass in needed_pollers.items():
     print('Executing poller %s:' % key)
 
     start = time.time()
-    poller = pollerClass(telegram_bot, telegram_public_chat_id)
+    poller = pollerClass(telegram_bot, telegram_public_chat_id, telegram_debug_chat_id)
     poller.run()
 
     end = time.time()

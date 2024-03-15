@@ -73,36 +73,99 @@ additional_street_connections = [
 
 class Poller(pollers.poller.Poller):
   def run(self):
-      streets = self.query_osm_streets()
+    streets = self.query_osm_streets()
 
-      csv_filename = os.path.join('verkehr', 'osmStrassen.csv');
-      # current_rows = self.read_csv_rows(csv_filename)
+    street_rows = [{
+      'Name': street['name'],
+      'NamensherkunftWikidata': '/'.join(street['name:etymology:wikidata']),
+      'Postleitzahl': '/'.join(street['postal_codes']),
+      'OSMWayIDs': '/'.join([str(id) for id in street['way_ids']]),
+      'Geometry': street['geometry'],
+    } for street in streets]
+    csv_filename = os.path.join('verkehr', 'osmStrassen.csv')
+    old_street_rows = self.read_csv_rows(csv_filename)
+    self.write_csv_rows(csv_filename, street_rows)
 
-      rows = [{
-        'Name': street['name'],
-        'NamensherkunftWikidata': '/'.join(street['name:etymology:wikidata']),
-        'Postleitzahl': '/'.join(street['postal_codes']),
-        'OSMWayIDs': '/'.join([str(id) for id in street['way_ids']]),
-        'Geometry': street['geometry'],
-      } for street in streets]
+    wikidata_object_ids = list(set([item for street in streets for item in street['name:etymology:wikidata']]))
+    wikidata_object_ids.sort(key = lambda x: int(x[1:]))
 
-      csv_diff = self.get_csv_diff(csv_filename, rows)
-      self.send_csv_diff_via_telegram(csv_diff)
-      self.write_csv_rows(csv_filename, rows)
+    etymologies = self.query_etymologies(wikidata_object_ids)
+    etymologies.sort(key = lambda x: int(x['WikidataObjekt'][1:]))
+    csv_filename = os.path.join('verkehr', 'wikidataNamensherkuenfte.csv')
+    old_etymologies = self.read_csv_rows(csv_filename)
+    self.write_csv_rows(csv_filename, etymologies)
 
-      wikidata_object_ids = list(set([item for street in streets for item in street['name:etymology:wikidata']]))
-      wikidata_object_ids.sort(key = lambda x: int(x[1:]))
+    # detect etymology changes
+    etymology_key_func = lambda x: x['WikidataObjekt']
+    old_etymologies_by_key = self.list_with_unique_key(old_etymologies, etymology_key_func)
+    etymologies_by_key = self.list_with_unique_key(etymologies, etymology_key_func)
+    (etymologies_removed, etymologies_changed, etymologies_added) = self.dict_diff(old_etymologies_by_key, etymologies_by_key)
+  
+    if len(etymologies_changed) > 0:
+      lines = []
+      lines.append('*Namensherkünfte geändert*')
 
-      etymologies = self.query_etymologies(wikidata_object_ids)
-      etymologies.sort(key = lambda x: int(x['WikidataObjekt'][1:]))
+      for key in etymologies_changed:
+        old_value = old_etymologies_by_key[key]
+        new_value = etymologies_by_key[key]
 
-      csv_filename = os.path.join('verkehr', 'wikidataNamensherkuenfte.csv');
-      # current_rows = self.read_csv_rows(csv_filename)
+        fields = set(new_value.keys()).intersection(old_value.keys())
+        fields = list(filter(lambda field: old_value[field] != new_value[field], fields))
 
-      csv_diff = self.get_csv_diff(csv_filename, etymologies)
-      self.send_csv_diff_via_telegram(csv_diff)
-      self.write_csv_rows(csv_filename, etymologies)
+        if len(fields) == 0:
+          continue
 
+        bezeichnung = key if 'Bezeichnung' in fields else new_value['Bezeichnung']
+        field_texts = map(lambda field: f'{field} "{old_value[field]}" → "{new_value[field]}"', fields)
+        lines.append(f"[{bezeichnung}](https://www.wikidata.org/wiki/{key}): {', '.join(field_texts)}")
+
+      if len(lines) > 1:
+        lines.append(' | '.join([
+          '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=strassennamen)',
+          '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/verkehr/wikidataNamensherkuenfte.csv)',
+        ]))
+        self.send_public_telegram_message(lines)
+
+    # detect street changes
+    street_key_func = lambda x: f"{x['Name']}-{x['Postleitzahl']}"
+    old_street_rows_by_key = self.list_with_unique_key(old_street_rows, street_key_func, auto_increment = True)
+    street_rows_by_key = self.list_with_unique_key(street_rows, street_key_func, auto_increment = True)
+    (streets_removed, streets_changed, streets_added) = self.dict_diff(old_street_rows_by_key, street_rows_by_key)
+  
+    if len(streets_changed) > 0:
+      lines = []
+      lines.append('*Straßen geändert*')
+
+      etymology_to_string = lambda etymology: f"[{etymology['Bezeichnung']}](https://www.wikidata.org/wiki/{etymology['WikidataObjekt']}) ({etymology['Typ']})" if etymology != None else 'None'
+
+      for key in streets_removed:
+        lines.append(f'{key} entfernt')
+      for key in streets_added:
+        etymology = etymologies_by_key.get(street_rows_by_key[key]['NamensherkunftWikidata'])
+        lines.append(f'{key} hinzugefügt: Namensherkunft = {etymology_to_string(etymology)}')
+      for key in streets_changed:
+        old_value = old_street_rows_by_key[key]
+        new_value = street_rows_by_key[key]
+
+        fields = set(new_value.keys()).intersection(old_value.keys())
+        fields = list(filter(lambda field: field not in ['OSMWayIDs', 'Geometry'], fields))
+        fields = list(filter(lambda field: old_value[field] != new_value[field], fields))
+
+        if len(fields) == 0:
+          continue
+
+        field_texts = map(lambda field:
+          f'Namensherkunft {etymology_to_string(old_etymologies_by_key.get(old_value[field]))} → {etymology_to_string(etymologies_by_key.get(new_value[field]))}' if field == 'NamensherkunftWikidata' else
+          f'{field} "{old_value[field]}" → "{new_value[field]}"',
+          fields)
+        lines.append(f"{key} geändert: {', '.join(field_texts)}")
+
+      if len(lines) > 1:
+        lines.append(' | '.join([
+          '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=strassennamen)',
+          '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/verkehr/osmStrassen.csv)',
+        ]))
+        self.send_public_telegram_message(lines)
 
   def query_osm_streets(self) -> dict:
     data_administrative = self.query_osm(overpass_query_administrative)

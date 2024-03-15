@@ -4,17 +4,19 @@ import io
 import os
 import time
 import telebot
-from typing import List, Optional
+from typing import Callable, List, Optional
 
 
 class Poller:
   def __init__(
     self,
     telegram_bot: Optional[telebot.TeleBot],
-    telegram_chat_id: Optional[str],
+    telegram_public_chat_id: Optional[str],
+    telegram_debug_chat_id: Optional[str],
   ):
     self.telegram_bot = telegram_bot
-    self.telegram_chat_id = telegram_chat_id
+    self.telegram_public_chat_id = telegram_public_chat_id
+    self.telegram_debug_chat_id = telegram_debug_chat_id
 
     self.data_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
     self.cache_dir = os.path.join(self.data_dir, '.cache')
@@ -69,15 +71,77 @@ class Poller:
     if self.telegram_bot == None:
       return
 
-    if self.telegram_chat_id == None:
+    if self.telegram_public_chat_id == None:
       return
 
     data = ''.join(csv_diff)
     self.telegram_bot.send_message(
-      self.telegram_chat_id,
+      self.telegram_public_chat_id,
       '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
       parse_mode = "Markdown"
     )
+
+  def send_public_telegram_message(self, lines: list[str]):
+    if len(lines) == 0:
+      return
+
+    if self.telegram_bot == None:
+      return
+
+    if self.telegram_public_chat_id == None:
+      return
+
+    self.telegram_bot.send_message(
+      self.telegram_public_chat_id,
+      '\n'.join(lines),
+      parse_mode = "Markdown",
+      disable_web_page_preview = True
+    )
+
+
+  def list_with_unique_key(self, list: List[dict], key_func: Callable[[dict], str], auto_increment: bool = False) -> dict[str, dict]:
+    dicts_by_key: dict[str, List[dict]] = {}
+
+    for item in list:
+      key = key_func(item)
+
+      if not key in dicts_by_key:
+        dicts_by_key[key] = []
+
+      dicts_by_key[key].append(item)
+
+    dict_by_unique_key: dict[str, dict] = {}
+
+    for (key, val) in dicts_by_key.items():
+      if len(val) == 1:
+        dict_by_unique_key[key] = val[0]
+      elif auto_increment:
+        for (i, item) in enumerate(val):
+          unique_key = f'{key}-{i+1}'
+          if unique_key in dict_by_unique_key:
+            raise Exception(f'Auto-incremented key "{unique_key}" is not unique in list')
+          dict_by_unique_key[unique_key] = item
+      else:
+        raise Exception(f'Key "{key}" is not unique in list')
+
+    return dict_by_unique_key
+
+  def dict_diff(self, before: dict[str, dict], after: dict[str, dict]) -> tuple[list[str], list[str], list[str]]:
+    removed = []
+    changed = []
+    added = []
+
+    for key in before:
+      if not key in after:
+        removed.append(key)
+      elif before[key] != after[key]:
+        changed.append(key)
+
+    for key in after:
+      if not key in before:
+        added.append(key)
+
+    return (removed, changed, added)
 
   def has_cache_file(self, file_name: str, ttl_s: int = None) -> bool:
     cache_file_name = os.path.join(self.cache_dir, file_name)

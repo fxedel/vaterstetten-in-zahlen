@@ -29,8 +29,7 @@ class Poller(pollers.poller.Poller):
 
     rows = [feature_to_row(x) for x in features]
 
-    csv_diff = self.get_csv_diff(csv_filename, rows)
-    self.send_csv_diff_via_telegram(csv_diff)
+    # TODO: add proper diff message
     self.write_csv_rows(csv_filename, rows)
 
 def is_not_empty(feature: Feature):

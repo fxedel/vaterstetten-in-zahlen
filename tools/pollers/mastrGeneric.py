@@ -257,3 +257,6 @@ class MastrGenericPoller(Poller):
       return False
 
     return True
+  
+  def einheit_url(self, id: str) -> str:
+    return f"https://www.marktstammdatenregister.de/MaStR/Einheit/Detail/IndexOeffentlich/{id}"
