@@ -42,13 +42,14 @@ strassenNamensherkuenfte <- left_join(
   Typ = coalesce(Typ, "Unbekannt")
 ) %>% mutate(
   Typ = factor(Typ, levels = c(
+    "Komponist:innen",
     "Personen mit Lokalbezug",
-    "Komponisten",
     "andere Personen",
     "Vögel",
     "andere Tiere",
     "Früchte",
     "Bäume",
+    "Blumen",
     "andere Pflanzen",
     "Berge",
     "Ortsnamen",
@@ -65,17 +66,18 @@ strassenNamensherkuenfte <- left_join(
 )
 
 typColors <- c(
-  "Personen mit Lokalbezug" = "#bb0033",
   "Komponist:innen" = "#ee7700",
+  "Personen mit Lokalbezug" = "#aa0033",
   "andere Personen" = "#ee0000",
   "Vögel" = "#33ddff",
   "andere Tiere" = "#00ffdd",
   "Früchte" = "#66ff00",
   "Bäume" = "#006600",
+  "Blumen" = "#dd66cc",
   "andere Pflanzen" = "#66cc00",
   "Berge" = "#995533",
   "Ortsnamen" = "#e8bf28",
-  "Jahreszeiten" = "#cc00cc",
+  "Jahreszeiten" = "#aa00cc",
   "Himmelskörper" = "#000066",
   "Bauwerke" = "#aaaaff",
   "Sonstige" = "#aaaaaa",
@@ -83,13 +85,14 @@ typColors <- c(
 )
 
 typTextColors <- c(
+  "Komponist:innen" = "#000000",
   "Personen mit Lokalbezug" = "#ffffff",
-  "Komponisten" = "#000000",
   "andere Personen" = "#ffffff",
   "Vögel" = "#000000",
   "andere Tiere" = "#000000",
   "Früchte" = "#000000",
   "Bäume" = "#ffffff",
+  "Blumen" = "#000000",
   "andere Pflanzen" = "#000000",
   "Berge" = "#ffffff",
   "Ortsnamen" = "#000000",

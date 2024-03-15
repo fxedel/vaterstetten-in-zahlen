@@ -402,6 +402,8 @@ def get_etymology_type(element: dict) -> str:
   ]:
     return 'andere Tiere'
 
+  if 'http://www.wikidata.org/entity/Q506' in types or 'http://www.wikidata.org/entity/Q886167' in types:
+    return 'Blumen'
   if 'http://www.wikidata.org/entity/Q1364' in types or 'http://www.wikidata.org/entity/Q3314483' in types:
     return 'Früchte'
   elif 'http://www.wikidata.org/entity/Q10884' in types or item in [
@@ -493,6 +495,7 @@ WHERE {
       wd:Q486972    # human settlement
       wd:Q811979    # architectural structure
       wd:Q6999      # astronomic object
+      wd:Q506       # flower (Blüte)
     }
     ?item (wdt:P31|wdt:P279)+ ?type.
   }
@@ -504,6 +507,7 @@ WHERE {
       wd:Q10884     # tree
       wd:Q1364      # fruit
       wd:Q3314483   # fruit, edible in the raw state
+      wd:Q886167    # flower (Blume)
     }
     ?item (wdt:P171|wdt:P279)* ?type.
   }
