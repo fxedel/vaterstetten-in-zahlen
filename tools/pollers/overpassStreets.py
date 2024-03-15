@@ -85,6 +85,7 @@ class Poller(pollers.poller.Poller):
     csv_filename = os.path.join('verkehr', 'osmStrassen.csv')
     old_street_rows = self.read_csv_rows(csv_filename)
     self.write_csv_rows(csv_filename, street_rows)
+    new_street_rows = self.read_csv_rows(csv_filename)
 
     wikidata_object_ids = list(set([item for street in streets for item in street['name:etymology:wikidata']]))
     wikidata_object_ids.sort(key = lambda x: int(x[1:]))
@@ -94,12 +95,13 @@ class Poller(pollers.poller.Poller):
     csv_filename = os.path.join('verkehr', 'wikidataNamensherkuenfte.csv')
     old_etymologies = self.read_csv_rows(csv_filename)
     self.write_csv_rows(csv_filename, etymologies)
+    new_etymologies = self.read_csv_rows(csv_filename)
 
     # detect etymology changes
     etymology_key_func = lambda x: x['WikidataObjekt']
     old_etymologies_by_key = self.list_with_unique_key(old_etymologies, etymology_key_func)
-    etymologies_by_key = self.list_with_unique_key(etymologies, etymology_key_func)
-    (etymologies_removed, etymologies_changed, etymologies_added) = self.dict_diff(old_etymologies_by_key, etymologies_by_key)
+    new_etymologies_by_key = self.list_with_unique_key(new_etymologies, etymology_key_func)
+    (etymologies_removed, etymologies_changed, etymologies_added) = self.dict_diff(old_etymologies_by_key, new_etymologies_by_key)
   
     if len(etymologies_changed) > 0:
       lines = []
@@ -107,7 +109,7 @@ class Poller(pollers.poller.Poller):
 
       for key in etymologies_changed:
         old_value = old_etymologies_by_key[key]
-        new_value = etymologies_by_key[key]
+        new_value = new_etymologies_by_key[key]
 
         fields = set(new_value.keys()).intersection(old_value.keys())
         fields = list(filter(lambda field: old_value[field] != new_value[field], fields))
@@ -129,8 +131,8 @@ class Poller(pollers.poller.Poller):
     # detect street changes
     street_key_func = lambda x: f"{x['Name']}-{x['Postleitzahl']}"
     old_street_rows_by_key = self.list_with_unique_key(old_street_rows, street_key_func, auto_increment = True)
-    street_rows_by_key = self.list_with_unique_key(street_rows, street_key_func, auto_increment = True)
-    (streets_removed, streets_changed, streets_added) = self.dict_diff(old_street_rows_by_key, street_rows_by_key)
+    new_street_rows_by_key = self.list_with_unique_key(new_street_rows, street_key_func, auto_increment = True)
+    (streets_removed, streets_changed, streets_added) = self.dict_diff(old_street_rows_by_key, new_street_rows_by_key)
   
     if len(streets_changed) > 0:
       lines = []
@@ -141,11 +143,11 @@ class Poller(pollers.poller.Poller):
       for key in streets_removed:
         lines.append(f'{key} entfernt')
       for key in streets_added:
-        etymology = etymologies_by_key.get(street_rows_by_key[key]['NamensherkunftWikidata'])
+        etymology = new_etymologies_by_key.get(new_street_rows_by_key[key]['NamensherkunftWikidata'])
         lines.append(f'{key} hinzugefügt: Namensherkunft = {etymology_to_string(etymology)}')
       for key in streets_changed:
         old_value = old_street_rows_by_key[key]
-        new_value = street_rows_by_key[key]
+        new_value = new_street_rows_by_key[key]
 
         fields = set(new_value.keys()).intersection(old_value.keys())
         fields = list(filter(lambda field: field not in ['OSMWayIDs', 'Geometry'], fields))
@@ -155,7 +157,7 @@ class Poller(pollers.poller.Poller):
           continue
 
         field_texts = map(lambda field:
-          f'Namensherkunft {etymology_to_string(old_etymologies_by_key.get(old_value[field]))} → {etymology_to_string(etymologies_by_key.get(new_value[field]))}' if field == 'NamensherkunftWikidata' else
+          f'Namensherkunft {etymology_to_string(old_etymologies_by_key.get(old_value[field]))} → {etymology_to_string(new_etymologies_by_key.get(new_value[field]))}' if field == 'NamensherkunftWikidata' else
           f'{field} "{old_value[field]}" → "{new_value[field]}"',
           fields)
         lines.append(f"{key} geändert: {', '.join(field_texts)}")
