@@ -340,7 +340,7 @@ class Poller(pollers.poller.Poller):
       etymologies.append({
         'WikidataObjekt': shorten_wikidata_entity_reference(element['item']['value']),
         'Bezeichnung': element['itemLabel']['value'],
-        'Beschreibung': element['itemDescription']['value'],
+        'Beschreibung': element.get('itemDescription', {}).get('value'),
         'Typ': get_etymology_type(element),
         'Geschlecht': get_etymology_gender(element),
       })
