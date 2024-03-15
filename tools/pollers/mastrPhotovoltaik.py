@@ -45,10 +45,10 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
 
       for key in keys_removed:
         item = old_rows_by_key[key]
-        lines.append(f'[{key}]({self.einheit_url(item["MaStRId"])}) entfernt: name = "{item["name"]}"')
+        lines.append(f'[{key}]({self.einheit_url(key)}) entfernt: name = "{item["name"]}"')
       for key in keys_added:
         item = new_rows_by_key[key]
-        lines.append(f'[{key}]({self.einheit_url(item["MaStRId"])}) hinzugefügt:')
+        lines.append(f'[{key}]({self.einheit_url(key)}) hinzugefügt:')
         for (field, value) in item.items():
           if field in ['MaStRId', 'MaStRNummer', 'EEGAnlagenschluessel']:
             continue
@@ -64,11 +64,14 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
         fields = list(filter(lambda field: field not in [], fields))
         fields = list(filter(lambda field: str(old_value[field]) != str(new_value[field]), fields))
 
+        if set(fields).issubset(['EEGAnlagenschluessel', 'netzbetreiberPruefung']):
+          continue
+
         if len(fields) == 0:
           continue
 
         field_texts = map(lambda field: f'{field} "{old_value[field]}" → "{new_value[field]}"', fields)
-        lines.append(f"[{key}]({self.einheit_url(item['MaStRId'])}) geändert:")
+        lines.append(f"[{key}]({self.einheit_url(key)}) geändert:")
         lines += field_texts
       
       lines = list(map(lambda x: x.replace('_', '\_'), lines))
