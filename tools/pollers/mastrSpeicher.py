@@ -67,9 +67,9 @@ class MastrSpeicherPoller(MastrGenericPoller):
           continue
 
         field_texts = map(lambda field: f'{field} "{old_value[field]}" → "{new_value[field]}"', fields)
-        lines.append(f"[{key}]({self.einheit_url(item['MaStRId'])}) geändert:")
+        lines.append(f"[{key}]({self.einheit_url(new_value['MaStRId'])}) geändert:")
         lines += field_texts
-      
+
       lines = list(map(lambda x: x.replace('_', '\_'), lines))
 
       if len(lines) > 1:
