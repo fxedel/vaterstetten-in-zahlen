@@ -18,17 +18,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Install APT requirements
+        run: sudo apt install -y libkrb5-dev
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.10'
       - name: Install pipenv
         run: pip install --ignore-installed pipenv==2023.2.18
-      - name: Install setuptools
-        run: pip install setuptools==57.4.0 && pipenv install "setuptools~=57.4.0"
       - name: Install python packages
         run: pipenv sync
-      - name: Poll data
+      - name: Run python script
         run: pipenv run python tools/dailySummary.py $TELEGRAM_TOKEN $TELEGRAM_DEBUG_CHAT_ID $TELEGRAM_PUBLIC_CHAT_ID
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
