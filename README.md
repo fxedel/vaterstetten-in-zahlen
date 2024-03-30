@@ -11,7 +11,7 @@ Install the newest version of R via the CRAN package, see https://www.digitaloce
 Make sure the following packages are installed:
 
 ```sh
-apt install libcurl4-openssl-dev libgdal-dev libssl-dev libudunits2-dev libxml2-dev gfortran
+apt install libcurl4-openssl-dev libgdal-dev libssl-dev libudunits2-dev libxml2-dev gfortran libkrb5-dev
 ```
 
 Then, start an R session and install the needed R packages:

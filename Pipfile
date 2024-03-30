@@ -5,14 +5,19 @@ name = "pypi"
 
 [packages]
 beautifulsoup4 = "~=4.9"
-pytelegrambotapi = ">=4.0"
+pytelegrambotapi = "~=4.0"
 python-interface = "~=1.6.1"
 requests = "~=2.28"
+arcgis = "~=2.2.0"
+pandas = "~=2.2.1"
+python-dotenv = "~=1.0.1"
+
+# only to fix GitHub Actions:
 setuptools = "~=57.4.0"
-arcgis = "~=1.9.1"
-pandas = "*"
-python-dotenv = "*"
-urllib3 = "<2" # see https://github.com/Esri/arcgis-python-api/issues/1553
+
+# only to fix second-level dependencies:
+#urllib3 = "<2" # see https://github.com/Esri/arcgis-python-api/issues/1553
+dask = {extras = ["dataframe"], version = "*"}
 
 [dev-packages]
 
