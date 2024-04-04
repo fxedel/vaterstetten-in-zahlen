@@ -1,6 +1,7 @@
 name: Poll data
 
-concurrency: poll-data
+concurrency:
+  group: poll-data
 
 # Requires these repository secrets:
 # TELEGRAM_TOKEN - a token for the Telegram bot API

@@ -1,6 +1,7 @@
 name: Deploy
 
-concurrency: deploy
+concurrency:
+  group: deploy
 
 on:
   push:
