@@ -1163,6 +1163,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5773899,SEE974300323261,E21041011000000000000270421900001,In Betrieb,2023-02-24,2023-02-23,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,25,Süd-Ost,9.3,9.3,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5901158,SEE932864468491,,In Betrieb,2023-03-23,2023-02-23,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Süd,8.8,5.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6118925,SEE972546694039,E21041011000000000000373512800001,In Betrieb,2023-07-14,2023-02-28,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Nord-Ost,9.0,9.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+7680783,SEE933150245895,E21041011000000000000326759900001,In Betrieb,2024-03-04,2023-02-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,20,Ost-West,8.0,8.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5799352,SEE967264030511,,In Betrieb,2023-03-01,2023-03-01,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5365360,SEE981814639443,E2104101S000000000000131362800001,In Betrieb,2023-03-10,2023-03-01,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,West,9.84,9.84,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5849629,SEE925116774709,,In Betrieb,2023-03-13,2023-03-01,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.79,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1339,7 +1340,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 6875983,SEE995493460380,E21041011000000000000270839600001,In Betrieb,2023-09-17,2023-07-24,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,22,Süd,8.91,8.91,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6595278,SEE927076867552,E21041011000000000000247919600001,In Betrieb,2023-07-28,2023-07-26,,,,,sonstige,85622,Weißenfeld,,,,,false,stecker,2,Süd,0.6,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6568728,SEE960433201682,E21041011000000000000354418300001,In Betrieb,2024-03-12,2023-07-27,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,West,0.84,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-7442832,SEE905666320670,E21041011000000000000394869800001,In Betrieb,2024-01-15,2023-07-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,43,Süd,17.845,16.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+7442832,SEE905666320670,E21041011000000000000394869800001,In Betrieb,2024-01-15,2023-07-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,43,Süd,17.845,14.5,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7608592,SEE935454881779,,In Betrieb,2024-02-19,2023-07-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,16,Süd,6.08,6.08,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7674955,SEE954486079091,,In Betrieb,2024-03-03,2023-07-28,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,35,Süd,14.2,14.2,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6673706,SEE998826928007,,In Betrieb,2023-08-11,2023-07-30,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,42,Süd,15.96,15.96,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1475,13 +1476,12 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 7489482,SEE948588202044,,In Betrieb,2024-01-24,2024-01-22,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,20,West,8.2,6.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7463632,SEE960721323300,,In Betrieb,2024-01-23,2024-01-23,,,,,sonstige,85598,Baldham,,,,,false,stecker,2,Süd,0.66,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7620526,SEE973208023594,,In Betrieb,2024-02-21,2024-01-24,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Süd,12.45,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-7519693,SEE965584888485,,In Betrieb,2024-01-30,2024-01-27,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd-West,0.89,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+7519693,SEE965584888485,,In Betrieb,2024-01-30,2024-01-27,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,,0.89,0.799,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7620765,SEE984326539324,,In Betrieb,2024-02-21,2024-01-30,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,15,Nord,6.2,5.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7599589,SEE988328686635,,In Betrieb,2024-02-16,2024-01-31,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,32,Ost,13.28,13.28,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7620856,SEE915234619662,,In Betrieb,2024-02-21,2024-01-31,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude,18,Süd,7.47,6.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7550239,SEE992228260482,,In Betrieb,2024-02-06,2024-02-01,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,11,Süd-West,4.4,4.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7483985,SEE948449442435,,In Betrieb,2024-02-04,2024-02-03,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,6,Süd,0.54,0.54,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-7680783,SEE933150245895,E21041011000000000000326759900001,In Betrieb,2024-03-04,2024-02-05,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,20,Ost-West,8.0,8.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 6026622,SEE940729282199,E2104101S000000000000098235300001,In Betrieb,2024-02-06,2024-02-06,,,,,sonstige,85591,Vaterstetten,,,,,false,stecker,2,Süd,0.8,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7769306,SEE910974121987,,In Betrieb,2024-03-21,2024-02-06,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,24,Süd,10.08,10.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7565387,SEE975839108145,,In Betrieb,2024-02-08,2024-02-07,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd,6.0,5.0,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
