@@ -16,13 +16,17 @@ class Poller(pollers.poller.Poller):
     )
 
     start = time.time()
-    table_data_csv = genesis_client.tablefile(
-      name = '12411-009z',
-      startyear = 1900,
-      regionalvariable = "GEMEIN",
-      regionalkey = "09175132"
-    )
-    print('> Queried data in %.1fs' % (time.time() - start))
+    try:
+      table_data_csv = genesis_client.tablefile(
+        name = '12411-009z',
+        startyear = 1900,
+        regionalvariable = "GEMEIN",
+        regionalkey = "09175132"
+      )
+      print('> Queried data in %.1fs' % (time.time() - start))
+    except pollers.genesisClient.TemporaryGenesisError as e:
+      print(f'> Ignoring temporary GENESIS error: {e}')
+      return
 
     df = pd.read_csv(io.StringIO(table_data_csv), delimiter = ";")
 

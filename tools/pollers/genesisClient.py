@@ -1,3 +1,5 @@
+import json
+from typing import Optional
 import requests
 
 BASE_URL_DESTATIS = 'https://www-genesis.destatis.de/genesisWS/rest/2020' # Statistisches Bundesamt
@@ -37,9 +39,17 @@ class Client:
     params['username'] = self.username
     params['password'] = self.password
 
-    response = requests.get(url, params = params, timeout = (5, 15))
+    response = requests.get(url, params = params, timeout = (5, 20))
 
     response.encoding = 'UTF-8'
+
+    data = safe_json_decode(response.text)
+    
+    if data is not None and type(data) is dict and data.get('Type') == 'ERROR' and data.get('Code') in [
+      18, # "Das System fährt gerade hoch, bitte haben Sie einen Moment Geduld!"
+    ]:
+      reason = data.get('Content', f'[error code {data.get("Code")}]')
+      raise TemporaryGenesisError(f'{reason}')
 
     if 400 <= response.status_code <= 599:
       raise Exception(f'Invalid HTTP status {response.status_code} {response.reason}: {response.text}')
@@ -55,3 +65,11 @@ class Client:
     res = self.http_request('data/tablefile', params)
     return res.text
 
+def safe_json_decode(s: str) -> Optional[any]:
+  try:
+    return json.loads(s)
+  except json.JSONDecodeError:
+    return None
+
+class TemporaryGenesisError(Exception):
+  pass
