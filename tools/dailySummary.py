@@ -58,25 +58,6 @@ try:
     '',
   ]
 
-  rows_gemeinden = read_csv_rows(os.path.join('corona-fallzahlen', 'arcgisInzidenzGemeinden.csv'))
-  rows_vaterstetten = list(filter(lambda x: x['ort'] == 'Vaterstetten', rows_gemeinden))
-  lines += [
-    '*Corona-Zahlen für Vaterstetten*',
-    '_7-Tage-Inzidenz:_ *' + rows_vaterstetten[-1]['inzidenz7tage'] + '*',
-    '_Neue Fälle zum Vortag:_ *' + rows_vaterstetten[-1]['neuPositiv'] + '*',
-    '_Stand:_ *' + rows_vaterstetten[-1]['datum'] + '*',
-    '',
-  ]
-
-  rows_landkreis = read_csv_rows(os.path.join('corona-fallzahlen', 'arcgisInzidenzLandkreis.csv'))
-  lines += [
-    '*Corona-Zahlen für den Landkreis Ebersberg*',
-    '_7-Tage-Inzidenz:_ *' + rows_landkreis[-1]['inzidenz7tage'] + '*',
-    '_Neue Fälle zum Vortag:_ *' + rows_landkreis[-1]['neuPositiv'] + '*',
-    '_Stand:_ *' + rows_landkreis[-1]['datum'] + '*',
-    '',
-  ]
-
   lines += [
     '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de)',
   ]
