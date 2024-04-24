@@ -1,9 +1,10 @@
 import hashlib
 import json
+import math
 import os
 import re
-import time
 import requests
+import time
 from typing import List
 
 import pollers.poller
@@ -334,18 +335,21 @@ class Poller(pollers.poller.Poller):
       return data
 
   def query_etymologies(self, wikidata_entity_ids: List[str]):
-    wikidata_data = self.query_wikidata(wikidata_entity_ids)
+    chunk_size = 100
 
     etymologies = []
 
-    for element in wikidata_data['results']['bindings']:
-      etymologies.append({
-        'WikidataObjekt': shorten_wikidata_entity_reference(element['item']['value']),
-        'Bezeichnung': element['itemLabel']['value'],
-        'Beschreibung': element.get('itemDescription', {}).get('value'),
-        'Typ': get_etymology_type(element),
-        'Geschlecht': get_etymology_gender(element),
-      })
+    for i in range(math.ceil(len(wikidata_entity_ids)/chunk_size)):
+      wikidata_data = self.query_wikidata(wikidata_entity_ids[i*chunk_size:(i+1)*chunk_size])
+
+      for element in wikidata_data['results']['bindings']:
+        etymologies.append({
+          'WikidataObjekt': shorten_wikidata_entity_reference(element['item']['value']),
+          'Bezeichnung': element['itemLabel']['value'],
+          'Beschreibung': element.get('itemDescription', {}).get('value'),
+          'Typ': get_etymology_type(element),
+          'Geschlecht': get_etymology_gender(element),
+        })
 
     return etymologies
 
@@ -423,6 +427,9 @@ def get_etymology_type(element: dict) -> str:
   elif 'http://www.wikidata.org/entity/Q46831' in types:
     # mountain range
     return 'Berge'
+  elif 'http://www.wikidata.org/entity/Q1061151' in types:
+    # massif
+    return 'Berge'
 
   if 'http://www.wikidata.org/entity/Q486972' in types and not item == 'http://www.wikidata.org/entity/Q532':
     # human settlement, excluding the generic 'village'
@@ -494,6 +501,7 @@ WHERE {
   OPTIONAL {
     VALUES ?type {
       wd:Q46831     # mountain range
+      wd:Q1061151   # massif
       wd:Q486972    # human settlement
       wd:Q811979    # architectural structure
       wd:Q6999      # astronomic object
