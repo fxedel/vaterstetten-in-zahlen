@@ -106,8 +106,8 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     lage = self.LAGE_BY_ID[x['LageEinheit']]
 
     if lage == self.LAGE_STECKER:
-      if x['AnzahlSolarModule'] > 2 and x['Nettonennleistung'] > 0.6:
-        print(f"> Entity with LageEinheit = '{lage}' has AnzahlSolarModule = {x['AnzahlSolarModule']} > 2 and Nettonennleistung = {x['Nettonennleistung']} > 0.6, setting LageEinheit := '{self.LAGE_GEBAEUDE}': Name '{x['EinheitName']}' ({self.einheit_url(x['Id'])})")
+      if x['AnzahlSolarModule'] > 2 and x['Nettonennleistung'] > 0.8:
+        print(f"> Entity with LageEinheit = '{lage}' has AnzahlSolarModule = {x['AnzahlSolarModule']} > 2 and Nettonennleistung = {x['Nettonennleistung']} > 0.8, setting LageEinheit := '{self.LAGE_GEBAEUDE}': Name '{x['EinheitName']}' ({self.einheit_url(x['Id'])})")
         lage = self.LAGE_GEBAEUDE
 
     return {
