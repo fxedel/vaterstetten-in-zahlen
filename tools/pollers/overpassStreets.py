@@ -70,6 +70,10 @@ additional_street_connections = [
     'name': 'Münchener Straße', # Parsdorf / Neufarn
     'way_ids': [715390238, 821797823]
   },
+  {
+    'name': 'Rosengasse', # Vaterstetten
+    'way_ids': [171005871, 171005872]
+  },
 ]
 
 class Poller(pollers.poller.Poller):
