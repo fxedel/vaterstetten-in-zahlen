@@ -111,7 +111,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3746909,SEE997944092331,E21041011000000000000378872100000,In Betrieb,2020-11-28,2009-05-29,,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,58,Süd-West,10.26,8.4,ohne,false,Volleinspeisung,false
 3605508,SEE903974944212,E21041011000000000000379090000000,In Betrieb,2020-11-04,2009-06-02,,,,,haushalt,85622,Weißenfeld,,,,,true,gebaeude,12,Süd-West,2.16,2.16,ohne,false,Volleinspeisung,false
 3122271,SEE982314854725,E21041011000000000000379315400000,In Betrieb,2020-06-07,2009-06-05,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,18,Süd,3.24,3.24,ohne,false,Volleinspeisung,false
-4764821,SEE901947230515,E2104101S160000000000042824900001,In Betrieb,2021-11-13,2009-06-05,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-Ost,3.57,2.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+4764821,SEE901947230515,E2104101S160000000000042824900001,In Betrieb,2021-11-13,2009-06-05,,,,,sonstige,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-Ost,1.1,1.1,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3611983,SEE922531044820,E21041011000000000000379315000000,In Betrieb,2020-11-05,2009-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,4.32,4.32,ohne,false,Volleinspeisung,false
 3606908,SEE991573920201,E21041011000000000000378685300000,In Betrieb,2020-11-04,2009-06-09,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd,4.4,4.0,ohne,false,Volleinspeisung,false
 4282598,SEE927206256126,E21041011000000000000378348700000,In Betrieb,2021-01-29,2009-06-15,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,22,Süd-West,4.07,4.07,ohne,false,Volleinspeisung,false
@@ -150,7 +150,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2739181,SEE994281310166,E21041011000000000000389444200000,In Betrieb,2020-01-30,2009-10-03,,,,,GHD,85599,Hergolding,,,,,true,gebaeude,10,Süd,20.7,20.7,ohne,false,Volleinspeisung,false
 2635559,SEE959610969033,E21041011000000000000382090200000,In Betrieb,2019-12-28,2009-10-08,,,Anlage 7,Energiehof Stefan Großmann-Neuhäusler,GHD,85598,Baldham,,,48.119553,11.801817,true,gebaeude,356,West,76.54,70.6,ohne,false,Volleinspeisung,false
 2544900,SEE911351734905,E21041011000000000000381010000000,In Betrieb,2019-11-27,2009-10-13,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,32,Süd,5.76,5.76,70%,false,Volleinspeisung,false
-2794717,SEE950510704588,E21041011000000000000381010300000,In Betrieb,2020-02-14,2009-10-19,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,26,Süd,4.68,4.0,ohne,false,Volleinspeisung,false
+2794717,SEE950510704588,E21041011000000000000381010300000,In Betrieb,2020-02-14,2009-10-19,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,26,Süd,6.68,4.0,ohne,false,Volleinspeisung,false
 2886477,SEE996286087326,,In Betrieb,2020-03-14,2009-10-19,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,4.68,4.0,70%,false,Volleinspeisung,false
 3244959,SEE994404949129,E21041011000000000000381418700000,In Betrieb,2020-07-08,2009-11-02,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,32,Süd,7.68,7.5,ohne,false,Volleinspeisung,false
 3670184,SEE987420949952,E21041011000000000000381538200000,In Betrieb,2020-11-17,2009-11-04,,,Photovoltaikanlage WIE 110,Kath. Siedlungswerk München GmbH,haushalt,85591,Vaterstetten,,,,,true,gebaeude,51,Süd-West,9.18,8.0,70%,false,Volleinspeisung,false
