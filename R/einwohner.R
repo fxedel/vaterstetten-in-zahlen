@@ -106,7 +106,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_hide_axis_titles() %>%
             plotly_build()
         },
-        p("Dargestellt sind sowohl Volkszählungsergebnisse, als auch seit 1956 die jährliche und seit 1971 sogar quartalsweise Bevölkerungsfortschreibung auf Basis der Melderegister. Bei den Volkszählungen 1987 und 2011 sind deutliche „Knicks“ zu erkennen: Hier wurde durch die Volkszählung die Ungenauigkeit der Melderegister korrigiert."),
+        p("Dargestellt sind sowohl Volkszählungsergebnisse, als auch seit 1956 die jährliche und seit 1971 sogar quartalsweise Bevölkerungsfortschreibung auf Basis der Melderegister. Bei den Volkszählungen 1987, 2011 und 2022 sind deutliche „Knicks“ zu erkennen: Hier wurde durch die Volkszählung die Ungenauigkeit der Melderegister korrigiert."),
+        p(strong("Achtung: Die quartalsweisen Zahlen seit Juni 2022 sind noch nicht an die Volkszählung vom Mai 2022 angepasst, d. h., die Fortschreibung auf Basis der Melderegister wurde noch nicht durch das Volkszählungsergebnis korrigiert. Da die Bevölkerungszahl aus dem Zensus 2022 um etwa 1150 Einwohner:innen unter der vorherigen Fortschreibungszahl liegt, ist davon auszugehen, dass auch die aktuelle Bevölkerungszahl tatsächlich um etwa diese Zahl niedriger liegt.")),
         p("Mit „Bevölkerung“ sind hier lediglich Personen mit Hauptwohnsitz in der Gemeinde Vaterstetten gemeint, wie es in der Bevölkerungsstatistik üblich ist. Nebenwohnsitze werden zum Teil in anderen Statistiken erfasst. Die Staatsangehörigkeit spielt keine Rolle.")
       ),
       box(
