@@ -139,7 +139,7 @@ class Poller(pollers.poller.Poller):
     new_street_rows_by_key = self.list_with_unique_key(new_street_rows, street_key_func, auto_increment = True)
     (streets_removed, streets_changed, streets_added) = self.dict_diff(old_street_rows_by_key, new_street_rows_by_key)
   
-    if len(streets_changed) > 0:
+    if len(streets_removed) + len(streets_changed) + len(streets_added) > 0:
       lines = []
       lines.append('*Straßen geändert*')
 
@@ -172,6 +172,7 @@ class Poller(pollers.poller.Poller):
           '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=strassennamen)',
           '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/verkehr/osmStrassen.csv)',
         ]))
+        print(lines)
         self.send_public_telegram_message(lines)
 
   def query_osm_streets(self) -> dict:
