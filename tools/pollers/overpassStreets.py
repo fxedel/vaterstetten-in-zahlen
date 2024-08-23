@@ -417,7 +417,7 @@ def get_etymology_type(element: dict) -> str:
     return 'Blumen'
   if 'http://www.wikidata.org/entity/Q1364' in types or 'http://www.wikidata.org/entity/Q3314483' in types:
     return 'Früchte'
-  elif 'http://www.wikidata.org/entity/Q10884' in types or item in [
+  elif 'http://www.wikidata.org/entity/Q10884' in types or 'http://www.wikidata.org/entity/Q757163' in types or item in [
     'http://www.wikidata.org/entity/Q4421', # forest
   ]:
     return 'Bäume'
@@ -520,6 +520,7 @@ WHERE {
       wd:Q756       # plant
       wd:Q5113      # bird
       wd:Q10884     # tree
+      wd:Q757163    # woody plant / Gehölz
       wd:Q1364      # fruit
       wd:Q3314483   # fruit, edible in the raw state
       wd:Q886167    # flower (Blume)
