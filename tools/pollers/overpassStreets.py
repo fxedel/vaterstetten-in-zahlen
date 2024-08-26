@@ -172,7 +172,6 @@ class Poller(pollers.poller.Poller):
           '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=strassennamen)',
           '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/verkehr/osmStrassen.csv)',
         ]))
-        print(lines)
         self.send_public_telegram_message(lines)
 
   def query_osm_streets(self) -> dict:
@@ -408,6 +407,10 @@ def get_etymology_type(element: dict) -> str:
 
   if 'http://www.wikidata.org/entity/Q5113' in types:
     return 'Vögel'
+  elif item in [
+    'http://www.wikidata.org/entity/Q3031', # girl
+  ]:
+    return 'Sonstige' # would be otherwise categorized as "andere Tiere"
   elif 'http://www.wikidata.org/entity/Q729' in types or item in [
     'http://www.wikidata.org/entity/Q145201', # weasel, which are "organisms known by a particular common name"
   ]:
