@@ -185,7 +185,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
                   # '</a>',
                   htmlEscape(Bezeichnung), ' (', htmlEscape(NamensherkunftWikidata), ')',
                 '</strong>',
-                htmlEscape(Beschreibung)
+                htmlEscape(Beschreibung %>% replace_na(""))
               ))
             ) %>%
             group_by(StreetID, Name, Geometry) %>% summarize(
