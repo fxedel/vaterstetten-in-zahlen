@@ -16,6 +16,19 @@ osmStrassen <- read_delim(
   StreetID = row_number()
 ) %>% st_as_sf(wkt = "Geometry")
 
+multiStreetnames <- osmStrassen %>% as.data.frame() %>% group_by(
+  Name,
+) %>% summarise(
+  Anzahl = n(),
+  Postleitzahlen = paste0(Postleitzahl, collapse = ", "),
+) %>% filter(
+  Anzahl > 1
+) %>% select(
+  Name,
+  Anzahl,
+  Postleitzahlen,
+)
+
 wikidataNamensherkuenfte <- read_delim(
   file = "data/verkehr/wikidataNamensherkuenfte.csv",
   delim = ",",
@@ -174,52 +187,26 @@ ui <- memoise(omit_args = "request", function(request, id) {
     fluidRow(
       box(
         width = 6,
+        leafletOutput(ns("map"), height = 550),
+      ),
+      box(
+        width = 6,
+        title = "Mehrfache Straßennamen",
         {
-          data <- strassenNamensherkuenfte %>%
-            mutate(
-              label = ifelse(is.na(NamensherkunftWikidata), "", paste0(
-                '<strong style="font-size: 1.2em; margin-top: .5em; display: block">',
-                  # TODO: to add links like these, the label should somehow be permanent (on click?)
-                  # '<a href="https://www.wikidata.org/wiki/', htmlEscape(NamensherkunftWikidata), '">',
-                  # htmlEscape(Bezeichnung),
-                  # '</a>',
-                  htmlEscape(Bezeichnung), ' (', htmlEscape(NamensherkunftWikidata), ')',
-                '</strong>',
-                htmlEscape(Beschreibung %>% replace_na(""))
-              ))
-            ) %>%
-            group_by(StreetID, Name, Geometry) %>% summarize(
-              Typ = paste(unique(Typ), collapse = "/"),
-              label = paste(label, collapse = "<br />"),
-              .groups = "drop"
-            )
-          
-          leaflet(options = leafletOptions(
-            zoom = 13,
-            center = list(lng = 11.798, lat = 48.12)
-          ), height = 550) %>%
-            addProviderTiles(providers$CartoDB.Positron) %>%
-            addPolylines(
-              data = data$Geometry,
-              color = unname(typColors[data$Typ]),
-              label = lapply(paste0(
-                '<strong style="font-size: 1.4em">', htmlEscape(data$Name), '</strong>',
-                '<br />',
-                htmlEscape(data$Typ),
-                data$label
-              ), HTML),
-              labelOptions = labelOptions(
-                style = list(
-                  'min-width' = '150px',
-                  'max-width' = '250px',
-                  'width' = 'max-content',
-                  'white-space' = 'normal'
-                )
-              )
-            ) %>%
-            identity()
+          datatable(
+            multiStreetnames,
+            selection = "single",
+            rownames = FALSE,
+            elementId = ns("multiStreetTable"),
+            options = list(
+              paging = FALSE,
+              searching = FALSE,
+              ordering = FALSE,
+              info = FALSE
+            ),
+          )
         }
-      )
+      ),
     ),
 
     fluidRow(
@@ -264,7 +251,82 @@ server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      mapData <- strassenNamensherkuenfte %>%
+        mutate(
+          label = ifelse(is.na(NamensherkunftWikidata), "", paste0(
+            '<strong style="font-size: 1.2em; margin-top: .5em; display: block">',
+              # TODO: to add links like these, the label should somehow be permanent (on click?)
+              # '<a href="https://www.wikidata.org/wiki/', htmlEscape(NamensherkunftWikidata), '">',
+              # htmlEscape(Bezeichnung),
+              # '</a>',
+              htmlEscape(Bezeichnung), ' (', htmlEscape(NamensherkunftWikidata), ')',
+            '</strong>',
+            htmlEscape(Beschreibung %>% replace_na(""))
+          ))
+        ) %>%
+        group_by(StreetID, Name, Geometry) %>% summarize(
+          Typ = paste(unique(Typ), collapse = "/"),
+          label = paste(label, collapse = "<br />"),
+          .groups = "drop"
+        )
 
+      output$map <- renderLeaflet({
+        leaflet(options = leafletOptions(
+          zoom = 13,
+          center = list(lng = 11.798, lat = 48.12)
+        )) %>%
+          addProviderTiles(providers$CartoDB.Positron) %>%
+          printMap() %>%
+          isolate() # updates will be done by leafletProxy, no need to re-render whole map
+      })
+
+      currentStreetFilter <- reactiveVal('')
+
+      observe({
+        inputValue = input$multiStreetTable_rows_selected
+        if (is.null(inputValue)) {
+          inputValue = '' # string comparison is way easier than nulls
+        }
+
+        if (inputValue != currentStreetFilter()) {
+          currentStreetFilter(inputValue)
+          printMap(leafletProxy("map"), currentStreetFilter())
+        }
+      })
+
+      printMap <- function(leafletObject, streetFilter = '') {
+        data <- mapData
+        colors <- unname(typColors[data$Typ])
+
+        if (streetFilter != '') {
+          street <- multiStreetnames[streetFilter, ]
+          data <- data %>% filter(
+            Name == street$Name
+          )
+          colors <- '#000000'
+        }
+
+        leafletObject %>%
+          clearShapes() %>% clearControls() %>%
+          addPolylines(
+            data = data$Geometry,
+            color = colors,
+            label = lapply(paste0(
+              '<strong style="font-size: 1.4em">', htmlEscape(data$Name), '</strong>',
+              '<br />',
+              htmlEscape(data$Typ),
+              data$label
+            ), HTML),
+            labelOptions = labelOptions(
+              style = list(
+                'min-width' = '150px',
+                'max-width' = '250px',
+                'width' = 'max-content',
+                'white-space' = 'normal'
+              )
+            )
+          )
+      }
 
     }
   )

@@ -13,6 +13,7 @@ library(shinyWidgets)
 library(stringr)
 library(tidyr)
 library(htmltools)
+library(DT)
 
 # print(.packages())
 
