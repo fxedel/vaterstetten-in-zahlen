@@ -205,7 +205,9 @@ ui <- memoise(omit_args = "request", function(request, id) {
               info = FALSE
             ),
           )
-        }
+        },
+        p(),
+        p("Einige Straßennamen kommen in der Gemeinde Vaterstetten mehrfach vor, jedoch in der Regel unter unterschiedlichen Postleitzahlen. Mit einem Klick auf eine Tabellenzeile werden die entsprechenden Straßen in der Karte hervorgehoben."),
       ),
     ),
 
