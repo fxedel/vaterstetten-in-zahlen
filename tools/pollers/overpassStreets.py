@@ -33,7 +33,7 @@ foreach.postalcodes->.postalcode(
 );
 '''
 
-wikidata_sparql_url = 'https://query.wikidata.org/bigdata/namespace/wdq/sparql'
+wikidata_sparql_url = 'https://query-main.wikidata.org/bigdata/namespace/wdq/sparql'
 
 # some street ways are not connected, e.g. due to special crossings with offset,
 # but we treat them like they were connected since they belong to the same street
