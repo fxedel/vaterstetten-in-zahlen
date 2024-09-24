@@ -78,6 +78,10 @@ additional_street_connections = [
     'name': 'Birkenweg', # Vaterstetten
     'way_ids': [437995861, 996089737]
   },
+  {
+    'name': 'Dreitorspitzstraße', # Vaterstetten
+    'way_ids': [986852148, 157296419]
+  },
 ]
 
 class Poller(pollers.poller.Poller):
