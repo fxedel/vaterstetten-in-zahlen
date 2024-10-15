@@ -41,6 +41,8 @@ btw2021 <- new.env()
 sys.source("R/btw2021.R", envir = btw2021, chdir = FALSE)
 landtagswahl2023 <- new.env()
 sys.source("R/landtagswahl2023.R", envir = landtagswahl2023, chdir = FALSE)
+europawahl2024 <- new.env()
+sys.source("R/europawahl2024.R", envir = europawahl2024, chdir = FALSE)
 impressum <- new.env()
 sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
 
@@ -65,14 +67,21 @@ ui <- function(request) {
         menuItem("Start", tabName = "main", icon = icon("home"), selected = query$tab == "main" || is.null(query$tab)),
         menuItem("Einwohner", tabName = "einwohner", icon = icon("users"), selected = query$tab == "einwohner"),
         menuItem("Photovoltaik", tabName = "photovoltaik", icon = icon("solar-panel"), selected = query$tab == "photovoltaik"),
-        menuItem("Humboldt-Gymnasium", tabName = "hgv", icon = icon("school"), selected = query$tab == "hgv"),
-        menuItem("Realschule Vaterstetten", tabName = "rsv", icon = icon("school"), selected = query$tab == "rsv"),
+        menuItem("Schulen", icon = icon("school"), startExpanded = TRUE,
+          menuSubItem("Humboldt-Gymnasium", tabName = "hgv", selected = query$tab == "hgv"),
+          menuSubItem("Realschule Vaterstetten", tabName = "rsv", selected = query$tab == "rsv")
+        ),
         menuItem("Straßennamen", tabName = "strassennamen", icon = icon("road"), selected = query$tab == "strassennamen"),
-        menuItem("Corona-Fallzahlen", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
-        menuItem("Corona-Impfungen", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen"),
-        menuItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", icon = icon("vote-yea"), selected = query$tab == "kommunalwahl2020"),
-        menuItem("Bundestagswahl 2021", tabName = "btw2021", icon = icon("vote-yea"), selected = query$tab == "btw2021"),
-        menuItem("Landtagswahl 2023", tabName = "landtagswahl2023", icon = icon("vote-yea"), selected = query$tab == "landtagswahl2023"),
+        menuItem("Wahlen", icon = icon("vote-yea"), startExpanded = TRUE,
+          menuSubItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", selected = query$tab == "kommunalwahl2020"),
+          menuSubItem("Bundestagswahl 2021", tabName = "btw2021", selected = query$tab == "btw2021"),
+          menuSubItem("Landtagswahl 2023", tabName = "landtagswahl2023", selected = query$tab == "landtagswahl2023"),
+          menuSubItem("Europawahl 2024", tabName = "europawahl2024", selected = query$tab == "europawahl2024")
+        ),
+        menuItem("Archiv", icon = icon("box-archive"), startExpanded = TRUE,
+          menuItem("Corona-Fallzahlen", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
+          menuItem("Corona-Impfungen", tabName = "coronaImpfungen", icon = icon("syringe"), selected = query$tab == "coronaImpfungen")
+        ),
         menuItem("Impressum", tabName = "impressum", icon = icon("id-card"), selected = query$tab == "impressum")
       )
     ),
@@ -122,6 +131,7 @@ ui <- function(request) {
         tabItem(tabName = "kommunalwahl2020", kommunalwahl2020$ui(request, "kommunalwahl2020")),
         tabItem(tabName = "btw2021", btw2021$ui(request, "btw2021")),
         tabItem(tabName = "landtagswahl2023", landtagswahl2023$ui(request, "landtagswahl2023")),
+        tabItem(tabName = "europawahl2024", europawahl2024$ui(request, "europawahl2024")),
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
       fluidRow(
@@ -167,6 +177,7 @@ server <- function(input, output, session) {
   kommunalwahl2020$server("kommunalwahl2020")
   btw2021$server("btw2021")
   landtagswahl2023$server("landtagswahl2023")
+  europawahl2024$server("europawahl2024")
   impressum$server("impressum")
 }
 

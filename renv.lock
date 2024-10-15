@@ -319,10 +319,10 @@
     },
     "fontawesome": {
       "Package": "fontawesome",
-      "Version": "0.2.2",
+      "Version": "0.5.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "55624ed409e46c5f358b2c060be87f67",
+      "Hash": "c2efdd5f0bcd1ea861c2d4e2a883a67d",
       "Requirements": [
         "htmltools",
         "rlang"

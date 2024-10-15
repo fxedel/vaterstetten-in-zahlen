@@ -167,7 +167,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
     fluidRow(
       box(
-        title = "Gemeinderat: Häufelungen auf einzelne Kandidat*innen",
+        title = "Gemeinderat: Häufelungen auf einzelne Kandidat:innen",
         width = 12,
         {
           gemeinderatErgebnisNachPerson %>%

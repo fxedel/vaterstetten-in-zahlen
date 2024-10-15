@@ -58,3 +58,13 @@ Der Datensatz wurde händisch erstellt.
 
 * [Wahlportal zur Europawahl 2024 im Landkreis Ebersberg](https://wahlen.osrz-akdb.de/ob-p/175000/0/20240609/europawahl_kreis/ergebnisse_gemeinde_09175132.html) (händisch übertragen)
 * Eigene Definition (`ParteiFarbe`)
+
+
+## [`stimmbezirke.csv`](./stimmbezirke.csv)
+
+Der Datensatz [`stimmbezirke.csv`](./stimmbezirke.csv) ist identisch zu [`../landtagswahl2023/stimmbezirke.csv`](../landtagswahl2023/stimmbezirke.csv).
+
+
+## [`stimmbezirke.geojson`](./stimmbezirke.geojson)
+
+Der Datensatz [`stimmbezirke.geojson`](./stimmbezirke.geojson) ist identisch zu [`../landtagswahl2023/stimmbezirke.geojson`](../landtagswahl2023/stimmbezirke.geojson).

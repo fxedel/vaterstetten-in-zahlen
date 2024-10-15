@@ -323,7 +323,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("zweitstimmenMap"), height = 550),
         p(),
-        p("Die Gebiete sind jeweils nach den Zweitstimmen der ausgewählten Partei:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
+        p("Die Gebiete sind jeweils nach den Zweitstimmen der ausgewählten Partei eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
         p("Klicke auf einen Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
       column(
