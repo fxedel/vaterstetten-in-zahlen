@@ -3,7 +3,7 @@ sys.source("R/utils.R", envir = utils, chdir = FALSE)
 
 
 stimmbezirke <- read_csv(
-  file = "data/ltw2023/stimmbezirke.csv",
+  file = "data/wahlen/landtagswahl2023/stimmbezirke.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     StimmbezirkArt = readr::col_factor(),
@@ -11,7 +11,7 @@ stimmbezirke <- read_csv(
   )
 )
 
-stimmbezirkeGeodata <- st_read("data/ltw2023/stimmbezirke.geojson") %>%
+stimmbezirkeGeodata <- st_read("data/wahlen/landtagswahl2023/stimmbezirke.geojson") %>%
   transmute(
     Stimmbezirk = name,
     geometry
@@ -24,7 +24,7 @@ stimmbezirkeGeodata <- st_read("data/ltw2023/stimmbezirke.geojson") %>%
   )
 
 parteien <- read_csv(
-  file = "data/ltw2023/parteien.csv",
+  file = "data/wahlen/landtagswahl2023/parteien.csv",
   col_types = cols(
     ParteiNr = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(),
@@ -34,7 +34,7 @@ parteien <- read_csv(
 )
 
 direktkandidaten <- read_csv(
-  file = "data/ltw2023/landtagswahlDirektkandidaten.csv",
+  file = "data/wahlen/landtagswahl2023/landtagswahlDirektkandidaten.csv",
   col_types = cols(
     ParteiKuerzel = readr::col_factor(),
     Direktkandidat = readr::col_factor()
@@ -42,7 +42,7 @@ direktkandidaten <- read_csv(
 )
 
 erststimmenAllgemein <- read_csv(
-  file = "data/ltw2023/landtagswahlErststimmenAllgemein.csv",
+  file = "data/wahlen/landtagswahl2023/landtagswahlErststimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -90,7 +90,7 @@ erststimmenAllgemeinNachStimmbezirkArt <- erststimmenAllgemein %>%
   )
 
 erststimmenNachPartei <- read_csv(
-  file = "data/ltw2023/landtagswahlErststimmenNachPartei.csv",
+  file = "data/wahlen/landtagswahl2023/landtagswahlErststimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -134,7 +134,7 @@ erststimmenNachParteiNachCombined <- bind_rows(
 
 
 zweitstimmenAllgemein <- read_csv(
-  file = "data/ltw2023/landtagswahlZweitstimmenAllgemein.csv",
+  file = "data/wahlen/landtagswahl2023/landtagswahlZweitstimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -182,7 +182,7 @@ zweitstimmenAllgemeinNachStimmbezirkArt <- zweitstimmenAllgemein %>%
   )
 
 zweitstimmenNachPartei <- read_csv(
-  file = "data/ltw2023/landtagswahlZweitstimmenNachPartei.csv",
+  file = "data/wahlen/landtagswahl2023/landtagswahlZweitstimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -476,7 +476,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 12,
         tagList(
           p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://wahlen.osrz-akdb.de/ob-p/175000/0/20231008/landtagswahl_stkl_1_stk/index.html\">Wahlportal des Landkreises Ebersberg</a>, dort werden die Daten als <a href=\"https://wahlen.osrz-akdb.de/ob-p/175000/0/20231008/landtagswahl_stkl_1_stk/presse.html\">CSV-Datei</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/landtagswahl-2023-stimmbezirke-vaterstetten_966387\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
-          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/ltw2023", "Zum Daten-Download mit Dokumentation")),
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/landtagswahl2023", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
     ),

@@ -3,7 +3,7 @@ sys.source("R/utils.R", envir = utils, chdir = FALSE)
 
 
 stimmbezirke <- read_csv(
-  file = "data/btw2021/stimmbezirke.csv",
+  file = "data/wahlen/bundestagswahl2021/stimmbezirke.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     StimmbezirkArt = readr::col_factor(),
@@ -11,7 +11,7 @@ stimmbezirke <- read_csv(
   )
 )
 
-stimmbezirkeGeodata <- st_read("data/btw2021/stimmbezirke.geojson") %>%
+stimmbezirkeGeodata <- st_read("data/wahlen/bundestagswahl2021/stimmbezirke.geojson") %>%
   transmute(
     Stimmbezirk = name,
     geometry
@@ -24,7 +24,7 @@ stimmbezirkeGeodata <- st_read("data/btw2021/stimmbezirke.geojson") %>%
   )
 
 parteien <- read_csv(
-  file = "data/btw2021/parteien.csv",
+  file = "data/wahlen/bundestagswahl2021/parteien.csv",
   col_types = cols(
     ParteiNr = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(),
@@ -34,7 +34,7 @@ parteien <- read_csv(
 )
 
 direktkandidaten <- read_csv(
-  file = "data/btw2021/direktkandidaten.csv",
+  file = "data/wahlen/bundestagswahl2021/direktkandidaten.csv",
   col_types = cols(
     ParteiKuerzel = readr::col_factor(),
     Direktkandidat = readr::col_factor()
@@ -42,7 +42,7 @@ direktkandidaten <- read_csv(
 )
 
 erststimmenAllgemein <- read_csv(
-  file = "data/btw2021/erststimmenAllgemein.csv",
+  file = "data/wahlen/bundestagswahl2021/erststimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -90,7 +90,7 @@ erststimmenAllgemeinNachStimmbezirkArt <- erststimmenAllgemein %>%
   )
 
 erststimmenNachPartei <- read_csv(
-  file = "data/btw2021/erststimmenNachPartei.csv",
+  file = "data/wahlen/bundestagswahl2021/erststimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -134,7 +134,7 @@ erststimmenNachParteiNachCombined <- bind_rows(
 
 
 zweitstimmenAllgemein <- read_csv(
-  file = "data/btw2021/zweitstimmenAllgemein.csv",
+  file = "data/wahlen/bundestagswahl2021/zweitstimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -182,7 +182,7 @@ zweitstimmenAllgemeinNachStimmbezirkArt <- zweitstimmenAllgemein %>%
   )
 
 zweitstimmenNachPartei <- read_csv(
-  file = "data/btw2021/zweitstimmenNachPartei.csv",
+  file = "data/wahlen/bundestagswahl2021/zweitstimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -476,7 +476,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 12,
         tagList(
           p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/opendata.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
-          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/btw2021", "Zum Daten-Download mit Dokumentation")),
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/bundestagswahl2021", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
     ),

@@ -3,7 +3,7 @@ library(dplyr)
 library(tidyr)
 
 stimmbezirke <- read_delim(
-  file = "data/kommunalwahl2020/raw/opendata-wahllokale.csv",
+  file = "data/wahlen/kommunalwahl2020/raw/opendata-wahllokale.csv",
   delim = ";",
   col_names = TRUE,
   col_types = cols(
@@ -17,7 +17,7 @@ stimmbezirke <- read_delim(
 )
 
 rawGesamt <- read_delim(
-  file = "data/kommunalwahl2020/raw/Open-Data-Gemeinderatswahl-Bayern1163.csv",
+  file = "data/wahlen/kommunalwahl2020/raw/Open-Data-Gemeinderatswahl-Bayern1163.csv",
   delim = ";",
   col_names = TRUE,
   col_types = cols(
@@ -25,7 +25,7 @@ rawGesamt <- read_delim(
   )
 ) %>% mutate(`gebiet-nr` = NA, stimmbezirk = "Gesamt")
 rawNachStimmbezirk <- read_delim(
-  file = "data/kommunalwahl2020/raw/Open-Data-Gemeinderatswahl-Bayern1166.csv",
+  file = "data/wahlen/kommunalwahl2020/raw/Open-Data-Gemeinderatswahl-Bayern1166.csv",
   delim = ";",
   col_names = TRUE,
   col_types = cols(
@@ -38,7 +38,7 @@ rawCombined = bind_rows(rawGesamt, rawNachStimmbezirk) %>%
     by = join_by(`gebiet-nr` == `Bezirk-Nr`)
   )
 
-parteien <- read_csv("data/kommunalwahl2020/parteien.csv")
+parteien <- read_csv("data/wahlen/kommunalwahl2020/parteien.csv")
 
 ergebnisAllgemein <- rawCombined %>%
   transmute(
@@ -55,7 +55,7 @@ ergebnisAllgemein <- rawCombined %>%
   )
 write_csv(
   ergebnisAllgemein,
-  file = "data/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv"
+  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv"
 )
 
 ergebnisNachPartei <- rawCombined %>%
@@ -78,7 +78,7 @@ ergebnisNachPartei <- rawCombined %>%
   )
 write_csv(
   ergebnisNachPartei,
-  file = "data/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv"
+  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv"
 )
 
 ergebnisNachPerson <- rawCombined %>%
@@ -100,6 +100,6 @@ ergebnisNachPerson <- rawCombined %>%
   )
 write_csv(
   ergebnisNachPerson,
-  file = "data/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv"
+  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv"
 )
 

@@ -1,5 +1,5 @@
 # This script needs to be executed from the project's root directy:
-# $ Rscript data/ltw2023/buildErgebnisse.R
+# $ Rscript data/wahlen/landtagswahl2023/buildErgebnisse.R
 # since it requires renv to be loaded
 
 library(readr)
@@ -7,7 +7,7 @@ library(dplyr)
 library(tidyr)
 
 rawLandtagswahl <- read_delim(
-  file = "data/ltw2023/raw/landtagswahlStimmen.csv",
+  file = "data/wahlen/landtagswahl2023/raw/landtagswahlStimmen.csv",
   delim = ";",
   col_names = TRUE
 ) %>%
@@ -21,7 +21,7 @@ rawLandtagswahl <- read_delim(
     Waehler = `Waehler gesamt (B)`
   )
 
-parteien <- read_csv("data/ltw2023/parteien.csv")
+parteien <- read_csv("data/wahlen/landtagswahl2023/parteien.csv")
 
 
 ## Erststimmen
@@ -36,7 +36,7 @@ ergebnisAllgemein <- rawLandtagswahl %>%
   )
 write_csv(
   ergebnisAllgemein,
-  file = "data/ltw2023/landtagswahlErststimmenAllgemein.csv"
+  file = "data/wahlen/landtagswahl2023/landtagswahlErststimmenAllgemein.csv"
 )
 
 ergebnisNachPartei <- rawLandtagswahl %>%
@@ -56,7 +56,7 @@ ergebnisNachPartei <- rawLandtagswahl %>%
   )
 write_csv(
   ergebnisNachPartei,
-  file = "data/ltw2023/landtagswahlErststimmenNachPartei.csv"
+  file = "data/wahlen/landtagswahl2023/landtagswahlErststimmenNachPartei.csv"
 )
 
 
@@ -72,7 +72,7 @@ ergebnisAllgemein <- rawLandtagswahl %>%
   )
 write_csv(
   ergebnisAllgemein,
-  file = "data/ltw2023/landtagswahlZweitstimmenAllgemein.csv"
+  file = "data/wahlen/landtagswahl2023/landtagswahlZweitstimmenAllgemein.csv"
 )
 
 ergebnisNachPartei <- rawLandtagswahl %>%
@@ -92,5 +92,5 @@ ergebnisNachPartei <- rawLandtagswahl %>%
   )
 write_csv(
   ergebnisNachPartei,
-  file = "data/ltw2023/landtagswahlZweitstimmenNachPartei.csv"
+  file = "data/wahlen/landtagswahl2023/landtagswahlZweitstimmenNachPartei.csv"
 )

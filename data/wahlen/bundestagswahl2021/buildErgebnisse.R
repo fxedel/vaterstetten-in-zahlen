@@ -1,5 +1,5 @@
 # This script needs to be executed from the project's root directy:
-# $ Rscript data/btw2021/buildErgebnisse.R
+# $ Rscript data/wahlen/bundestagswahl2021/buildErgebnisse.R
 # since it requires renv to be loaded
 
 library(readr)
@@ -7,7 +7,7 @@ library(dplyr)
 library(tidyr)
 
 rawGesamt <- read_delim(
-  file = "data/btw2021/raw/Open-Data-Bundestagswahl1573.csv",
+  file = "data/wahlen/bundestagswahl2021/raw/Open-Data-Bundestagswahl1573.csv",
   delim = ";",
   col_names = TRUE,
   col_types = cols(
@@ -15,7 +15,7 @@ rawGesamt <- read_delim(
   )
 ) %>% mutate(Stimmbezirk = "Gesamt")
 rawNachStimmbezirk <- read_delim(
-  file = "data/btw2021/raw/Open-Data-Bundestagswahl1576.csv",
+  file = "data/wahlen/bundestagswahl2021/raw/Open-Data-Bundestagswahl1576.csv",
   delim = ";",
   col_names = TRUE,
   col_types = cols(
@@ -25,7 +25,7 @@ rawNachStimmbezirk <- read_delim(
   
 rawCombined = bind_rows(rawGesamt, rawNachStimmbezirk)
 
-parteien <- read_csv("data/btw2021/parteien.csv")
+parteien <- read_csv("data/wahlen/bundestagswahl2021/parteien.csv")
 
 
 ## Erststimmen
@@ -40,7 +40,7 @@ ergebnisAllgemein <- rawCombined %>%
   )
 write_csv(
   ergebnisAllgemein,
-  file = "data/btw2021/erststimmenAllgemein.csv"
+  file = "data/wahlen/bundestagswahl2021/erststimmenAllgemein.csv"
 )
 
 ergebnisNachPartei <- rawCombined %>%
@@ -60,7 +60,7 @@ ergebnisNachPartei <- rawCombined %>%
   )
 write_csv(
   ergebnisNachPartei,
-  file = "data/btw2021/erststimmenNachPartei.csv"
+  file = "data/wahlen/bundestagswahl2021/erststimmenNachPartei.csv"
 )
 
 
@@ -76,7 +76,7 @@ ergebnisAllgemein <- rawCombined %>%
   )
 write_csv(
   ergebnisAllgemein,
-  file = "data/btw2021/zweitstimmenAllgemein.csv"
+  file = "data/wahlen/bundestagswahl2021/zweitstimmenAllgemein.csv"
 )
 
 ergebnisNachPartei <- rawCombined %>%
@@ -96,5 +96,5 @@ ergebnisNachPartei <- rawCombined %>%
   )
 write_csv(
   ergebnisNachPartei,
-  file = "data/btw2021/zweitstimmenNachPartei.csv"
+  file = "data/wahlen/bundestagswahl2021/zweitstimmenNachPartei.csv"
 )

@@ -1,11 +1,11 @@
-stimmbezirke <- st_read("data/kommunalwahl2020/stimmbezirke.geojson") %>%
+stimmbezirke <- st_read("data/wahlen/kommunalwahl2020/stimmbezirke.geojson") %>%
   transmute(
     stimmbezirk = name,
     geometry
   )
 
 parteien <- read_csv(
-  file = "data/kommunalwahl2020/parteien.csv",
+  file = "data/wahlen/kommunalwahl2020/parteien.csv",
   col_types = cols(
     parteiNr = readr::col_factor(),
     partei = readr::col_factor(),
@@ -14,7 +14,7 @@ parteien <- read_csv(
 )
 
 gemeinderatPersonen <- read_csv(
-  file = "data/kommunalwahl2020/gemeinderatPersonen.csv",
+  file = "data/wahlen/kommunalwahl2020/gemeinderatPersonen.csv",
   col_types = cols(
     partei = readr::col_factor(levels = levels(parteien$partei)),
     listenNr = col_integer(),
@@ -23,7 +23,7 @@ gemeinderatPersonen <- read_csv(
 )
 
 gemeinderatErgebnisAllgemein <- read_csv(
-  file = "data/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv",
+  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv",
   col_types = cols(
     stimmbezirk = readr::col_factor(),
     stimmbezirkNr = readr::col_factor(),
@@ -49,7 +49,7 @@ gemeinderatErgebnisNachStimmbezirkArt <- gemeinderatErgebnisAllgemein %>%
   )
 
 gemeinderatErgebnisNachPartei <- read_csv(
-  file = "data/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv",
+  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv",
   col_types = cols(
     stimmbezirk = readr::col_factor(),
     stimmbezirkNr = readr::col_factor(),
@@ -67,7 +67,7 @@ gemeinderatErgebnisNachPartei <- read_csv(
   mutate(stimmenAnteil = stimmen/gueltigeStimmen, gueltigeStimmen = NULL)
 
 gemeinderatErgebnisNachPerson <- read_csv(
-  file = "data/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv",
+  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv",
   col_types = cols(
     stimmbezirk = readr::col_factor(),
     stimmbezirkNr = readr::col_factor(),
@@ -193,7 +193,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 12,
         tagList(
           p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
-          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/kommunalwahl2020", "Zum Daten-Download mit Dokumentation")),
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/kommunalwahl2020", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
     ),
