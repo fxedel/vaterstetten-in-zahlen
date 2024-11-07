@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install pipenv
-        run: pip install --ignore-installed pipenv==2024.4.0s
+        run: pip install --ignore-installed pipenv==2024.4.0
       - name: Install python packages
         run: pipenv sync
       - name: Run python script
