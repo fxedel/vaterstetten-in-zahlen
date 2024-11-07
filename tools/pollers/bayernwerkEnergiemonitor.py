@@ -78,7 +78,7 @@ class Poller(pollers.poller.Poller):
       lines.append('*Energie-Monitordaten gelöscht*')
       lines += keys_removed
 
-      lines = list(map(lambda x: x.replace('_', '\_'), lines))
+      lines = list(map(lambda x: x.replace('_', '\\_'), lines))
 
       if len(lines) > 1:
         lines.append(' | '.join([

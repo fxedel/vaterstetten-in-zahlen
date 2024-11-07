@@ -70,7 +70,7 @@ class MastrSpeicherPoller(MastrGenericPoller):
         lines.append(f"[{key}]({self.einheit_url(new_value['MaStRId'])}) geändert:")
         lines += field_texts
 
-      lines = list(map(lambda x: x.replace('_', '\_'), lines))
+      lines = list(map(lambda x: x.replace('_', '\\_'), lines))
 
       if len(lines) > 1:
         lines.append(' | '.join([

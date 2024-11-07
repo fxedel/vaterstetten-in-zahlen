@@ -296,7 +296,7 @@ class Poller(pollers.poller.Poller):
 
       if len(etymologies) >= 1:
         etymologies = etymologies.pop().split(';')
-        invalid_etymologies = list(filter(lambda x: re.match('^Q\d+$', x) == None, etymologies))
+        invalid_etymologies = list(filter(lambda x: re.match('^Q\\d+$', x) == None, etymologies))
         if len(invalid_etymologies) > 0:
           raise Exception(f'Invalid etymologies: street name = {name}, postal_codes = {postal_codes}, invalid etymologies = {invalid_etymologies}')
 
