@@ -17,15 +17,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install APT requirements
         run: sudo apt update && sudo apt install -y libkrb5-dev
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       - name: Install pipenv
-        run: pip install --ignore-installed pipenv==2023.2.18
+        run: pip install --ignore-installed pipenv==2024.4.0
       - name: Install python packages
         run: pipenv sync
       - name: Run python script
