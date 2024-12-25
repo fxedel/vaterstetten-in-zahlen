@@ -1,5 +1,4 @@
-utils <- new.env()
-sys.source("R/utils.R", envir = utils, chdir = FALSE)
+utils <- loadModule("R/utils.R")
 
 
 stimmbezirke <- read_csv(

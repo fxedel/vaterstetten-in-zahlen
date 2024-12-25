@@ -19,33 +19,33 @@ library(DT, warn.conflicts = FALSE)
 
 Sys.setlocale("LC_TIME", "de_DE.utf8")
 
-mainPage <- new.env()
-sys.source("R/mainPage.R", envir = mainPage, chdir = FALSE)
-corona <- new.env()
-sys.source("R/corona.R", envir = corona, chdir = FALSE)
-coronaImpfungen <- new.env()
-sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
-photovoltaik <- new.env()
-sys.source("R/photovoltaik.R", envir = photovoltaik, chdir = FALSE)
-einwohner <- new.env()
-sys.source("R/einwohner.R", envir = einwohner, chdir = FALSE)
-hgv <- new.env()
-sys.source("R/hgv.R", envir = hgv, chdir = FALSE)
-rsv <- new.env()
-sys.source("R/rsv.R", envir = rsv, chdir = FALSE)
-strassennamen <- new.env()
-sys.source("R/strassennamen.R", envir = strassennamen, chdir = FALSE)
-kommunalwahl2020 <- new.env()
-sys.source("R/wahlen/kommunalwahl2020.R", envir = kommunalwahl2020, chdir = FALSE)
-btw2021 <- new.env()
-sys.source("R/wahlen/btw2021.R", envir = btw2021, chdir = FALSE)
-landtagswahl2023 <- new.env()
-sys.source("R/wahlen/landtagswahl2023.R", envir = landtagswahl2023, chdir = FALSE)
-europawahl2024 <- new.env()
-sys.source("R/wahlen/europawahl2024.R", envir = europawahl2024, chdir = FALSE)
+moduleCache <- new.env()
+loadModule <- function(filename) {
+  if (!(filename %in% names(moduleCache))) {
+    print(paste0("load ", filename))
+    moduleEnv <- new.env()
+    sys.source(filename, envir = moduleEnv, chdir = FALSE)
+    moduleCache[[filename]] <- moduleEnv
+  }
 
-impressum <- new.env()
-sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
+  return(moduleCache[[filename]])
+}
+
+
+mainPage <- loadModule("R/mainPage.R")
+corona <- loadModule("R/corona.R")
+coronaImpfungen <- loadModule("R/coronaImpfungen.R")
+photovoltaik <- loadModule("R/photovoltaik.R")
+einwohner <- loadModule("R/einwohner.R")
+hgv <- loadModule("R/hgv.R")
+rsv <- loadModule("R/rsv.R")
+strassennamen <- loadModule("R/strassennamen.R")
+kommunalwahl2020 <- loadModule("R/wahlen/kommunalwahl2020.R")
+btw2021 <- loadModule("R/wahlen/btw2021.R")
+landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
+europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
+
+impressum <- loadModule("R/impressum.R")
 
 theme_set(theme_light())
 
