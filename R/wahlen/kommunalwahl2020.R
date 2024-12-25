@@ -1,4 +1,4 @@
-stimmbezirke <- st_read("data/wahlen/kommunalwahl2020/stimmbezirke.geojson") %>%
+stimmbezirke <- st_read("data/wahlen/kommunalwahl2020/stimmbezirke.geojson", quiet = TRUE) %>%
   transmute(
     stimmbezirk = name,
     geometry

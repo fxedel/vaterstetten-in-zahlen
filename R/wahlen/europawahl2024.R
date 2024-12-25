@@ -11,12 +11,12 @@ stimmbezirke <- read_csv(
   )
 )
 
-stimmbezirkeGeodata <- st_read("data/wahlen/europawahl2024/stimmbezirke.geojson") %>%
+stimmbezirkeGeodata <- st_read("data/wahlen/europawahl2024/stimmbezirke.geojson", quiet = TRUE) %>%
   transmute(
     Stimmbezirk = name,
     geometry
   ) %>%
-  left_join(stimmbezirke) %>%
+  left_join(stimmbezirke, by = join_by(Stimmbezirk)) %>%
   group_by(StimmbezirkAggregiert) %>%
   summarise(
     geometry = st_combine(geometry),
