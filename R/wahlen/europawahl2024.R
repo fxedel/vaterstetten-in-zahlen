@@ -62,14 +62,16 @@ ergebnisAllgemeinNachStimmbezirkAggregiert <- ergebnisAllgemein %>%
   ) %>%
   mutate(
     Waehler = WaehlerWahllokal + WaehlerBriefwahl
-  ) %>% mutate(
+  ) %>%
+  mutate(
     WaehlerNA = NULL,
     Waehler = coalesce(Waehler, sum(Waehler, na.rm=TRUE)),
     WaehlerWahllokal = coalesce(WaehlerWahllokal, sum(WaehlerWahllokal, na.rm=TRUE)),
     WaehlerBriefwahl = coalesce(WaehlerBriefwahl, sum(WaehlerBriefwahl, na.rm=TRUE)),
     Wahlbeteiligung = Waehler/Wahlberechtigte,
     Briefwahlquote = WaehlerBriefwahl/Waehler
-  )
+  ) %>%
+  left_join(stimmbezirkeGeodata, by = join_by(StimmbezirkAggregiert))
 
 ergebnisAllgemeinNachStimmbezirkArt <- ergebnisAllgemein %>%
   filter(!is.na(StimmbezirkArt)) %>%
@@ -98,6 +100,7 @@ ergebnisNachParteiNachStimmbezirkAggregiert <- ergebnisNachPartei %>%
   ) %>%
   inner_join(parteien, by = "ParteiKuerzel") %>%
   inner_join(ergebnisAllgemeinNachStimmbezirkAggregiert %>% select(StimmbezirkAggregiert, GueltigeStimmen), by = c("StimmbezirkAggregiert")) %>%
+  left_join(stimmbezirkeGeodata, by = join_by(StimmbezirkAggregiert)) %>%
   mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
 
 ergebnisNachParteiNachStimmbezirkArt <- ergebnisNachPartei %>%
@@ -209,16 +212,15 @@ ui <- memoise(omit_args = "request", function(request, id) {
         title = "Wahlbeteiligung nach Stimmbezirk",
         {
           data <- ergebnisAllgemeinNachStimmbezirkAggregiert
-          mapData <- stimmbezirkeGeodata %>% left_join(data, by = "StimmbezirkAggregiert")
           pal <- colorNumeric(c("#bbbbbb", "#000000"), c(0.65, 0.95))
 
-          leaflet(stimmbezirkeGeodata, height = 550, options = leafletOptions(
+          leaflet(height = 550, options = leafletOptions(
             zoom = 13,
             center = list(lng = 11.798, lat = 48.12)
           )) %>%
             addProviderTiles(providers$CartoDB.Positron) %>%
             addPolygons(
-              data = mapData,
+              data = st_as_sf(data),
               stroke = TRUE,
               weight = 0.0001, # stroke width
               color = "#000000", # stroke color
@@ -238,7 +240,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
               )
             ) %>%
             addLegend("topright",
-              data = mapData,
+              data = data,
               pal = pal,
               values = ~Wahlbeteiligung,
               title = NULL,
@@ -258,16 +260,15 @@ ui <- memoise(omit_args = "request", function(request, id) {
         title = "Briefwahlquote nach Stimmbezirk",
         {
           data <- ergebnisAllgemeinNachStimmbezirkAggregiert
-          mapData <- stimmbezirkeGeodata %>% left_join(data, by = "StimmbezirkAggregiert")
           pal <- colorNumeric(c("#888888", "#000000"), c(min(data$Briefwahlquote), max(data$Briefwahlquote)))
 
-          leaflet(stimmbezirkeGeodata, height = 550, options = leafletOptions(
+          leaflet(height = 550, options = leafletOptions(
             zoom = 13,
             center = list(lng = 11.798, lat = 48.12)
           )) %>%
             addProviderTiles(providers$CartoDB.Positron) %>%
             addPolygons(
-              data = mapData,
+              data = st_as_sf(data),
               stroke = TRUE,
               weight = 0.0001, # stroke width
               color = "#000000", # stroke color
@@ -287,7 +288,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
               )
             ) %>%
             addLegend("topright",
-              data = mapData,
+              data = data,
               pal = pal,
               values = ~Briefwahlquote,
               title = NULL,
@@ -327,7 +328,7 @@ server <- function(id) {
     function(input, output, session) {
 
       output$map <- renderLeaflet({
-        leaflet(stimmbezirkeGeodata, options = leafletOptions(
+        leaflet(options = leafletOptions(
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
@@ -343,13 +344,12 @@ server <- function(id) {
       printMap <- function(leafletObject) {
         partei <- parteien %>% filter(ParteiKuerzel == input$mapPartei) %>% head()
         ergebnisPartei <- ergebnisNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$mapPartei)
-        mapData <- stimmbezirkeGeodata %>% left_join(ergebnisPartei, by = "StimmbezirkAggregiert")
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
           addPolygons(
-            data = mapData,
+            data = st_as_sf(ergebnisPartei),
             stroke = TRUE,
             weight = 0.0001, # stroke width
             color = "#000000", # stroke color
@@ -369,7 +369,7 @@ server <- function(id) {
             )
           ) %>%
           addLegend("topright",
-            data = mapData,
+            data = ergebnisPartei,
             pal = pal,
             values = ~StimmenAnteil,
             title = NULL,

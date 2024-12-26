@@ -40,6 +40,8 @@ einwohner <- loadModule("R/einwohner.R")
 hgv <- loadModule("R/hgv.R")
 rsv <- loadModule("R/rsv.R")
 strassennamen <- loadModule("R/strassennamen.R")
+
+wahlenOverview <- loadModule("R/wahlen/overview.R")
 kommunalwahl2020 <- loadModule("R/wahlen/kommunalwahl2020.R")
 btw2021 <- loadModule("R/wahlen/btw2021.R")
 landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
@@ -74,6 +76,7 @@ ui <- function(request) {
         ),
         menuItem("Straßennamen", tabName = "strassennamen", icon = icon("road"), selected = query$tab == "strassennamen"),
         menuItem("Wahlen", icon = icon("vote-yea"), startExpanded = TRUE,
+          menuSubItem("Übersicht", tabName = "wahlenOverview", selected = query$tab == "wahlenOverview"),
           menuSubItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", selected = query$tab == "kommunalwahl2020"),
           menuSubItem("Bundestagswahl 2021", tabName = "btw2021", selected = query$tab == "btw2021"),
           menuSubItem("Landtagswahl 2023", tabName = "landtagswahl2023", selected = query$tab == "landtagswahl2023"),
@@ -129,10 +132,13 @@ ui <- function(request) {
         tabItem(tabName = "hgv", hgv$ui(request, "hgv")),
         tabItem(tabName = "rsv", rsv$ui(request, "rsv")),
         tabItem(tabName = "strassennamen", strassennamen$ui(request, "strassennamen")),
+
+        tabItem(tabName = "wahlenOverview", wahlenOverview$ui(request, "wahlenOverview")),
         tabItem(tabName = "kommunalwahl2020", kommunalwahl2020$ui(request, "kommunalwahl2020")),
         tabItem(tabName = "btw2021", btw2021$ui(request, "btw2021")),
         tabItem(tabName = "landtagswahl2023", landtagswahl2023$ui(request, "landtagswahl2023")),
         tabItem(tabName = "europawahl2024", europawahl2024$ui(request, "europawahl2024")),
+
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
       fluidRow(
@@ -175,10 +181,13 @@ server <- function(input, output, session) {
   hgv$server("hgv")
   rsv$server("rsv")
   strassennamen$server("strassennamen")
+
+  wahlenOverview$server("wahlenOverview")
   kommunalwahl2020$server("kommunalwahl2020")
   btw2021$server("btw2021")
   landtagswahl2023$server("landtagswahl2023")
   europawahl2024$server("europawahl2024")
+
   impressum$server("impressum")
 }
 
