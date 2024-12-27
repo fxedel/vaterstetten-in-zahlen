@@ -342,7 +342,7 @@ server <- function(id) {
       })
 
       printMap <- function(leafletObject) {
-        partei <- parteien %>% filter(ParteiKuerzel == input$mapPartei) %>% head()
+        partei <- parteien %>% filter(ParteiKuerzel == input$mapPartei) %>% first()
         ergebnisPartei <- ergebnisNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$mapPartei)
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 

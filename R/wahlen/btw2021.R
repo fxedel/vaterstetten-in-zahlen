@@ -507,7 +507,7 @@ server <- function(id) {
       })
 
       printErststimmenMap <- function(leafletObject) {
-        partei <- parteien %>% filter(ParteiKuerzel == input$erststimmenMapPartei) %>% head()
+        partei <- parteien %>% filter(ParteiKuerzel == input$erststimmenMapPartei) %>% first()
         ergebnisPartei <- erststimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$erststimmenMapPartei)
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
@@ -559,7 +559,7 @@ server <- function(id) {
       })
 
       printZweitstimmenMap <- function(leafletObject) {
-        partei <- parteien %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei) %>% head()
+        partei <- parteien %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei) %>% first()
         ergebnisPartei <- zweitstimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei)
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 

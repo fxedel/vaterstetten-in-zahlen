@@ -228,7 +228,7 @@ server <- function(id) {
       })
 
       printParteistimmenMap <- function(leafletObject) {
-        partei <- gemeinderatParteien %>% filter(partei == input$parteistimmenMapPartei) %>% head()
+        partei <- gemeinderatParteien %>% filter(partei == input$parteistimmenMapPartei) %>% first()
         ergebnisPartei <- gemeinderatErgebnisNachPartei %>% filter(partei == input$parteistimmenMapPartei)
         pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPartei$stimmenAnteil)))
 
@@ -280,7 +280,7 @@ server <- function(id) {
         personPartei <- parts[1,1]
         personListenNr <- parts[1,2]
 
-        partei <- gemeinderatParteien %>% filter(partei == personPartei) %>% head()
+        partei <- gemeinderatParteien %>% filter(partei == personPartei) %>% first()
         ergebnisPartei <- gemeinderatErgebnisNachPartei %>% filter(partei == personPartei)
         ergebnisPerson <- gemeinderatErgebnisNachPerson %>% filter(partei == personPartei) %>% filter(listenNr == personListenNr)
 
