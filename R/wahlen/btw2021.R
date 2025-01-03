@@ -1,9 +1,8 @@
-utils <- new.env()
-sys.source("R/utils.R", envir = utils, chdir = FALSE)
+utils <- loadModule("R/utils.R")
 
 
 stimmbezirke <- read_csv(
-  file = "data/wahlen/landtagswahl2023/stimmbezirke.csv",
+  file = "data/wahlen/bundestagswahl2021/stimmbezirke.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     StimmbezirkArt = readr::col_factor(),
@@ -11,12 +10,12 @@ stimmbezirke <- read_csv(
   )
 )
 
-stimmbezirkeGeodata <- st_read("data/wahlen/landtagswahl2023/stimmbezirke.geojson") %>%
+stimmbezirkeGeodata <- st_read("data/wahlen/bundestagswahl2021/stimmbezirke.geojson", quiet = TRUE) %>%
   transmute(
     Stimmbezirk = name,
     geometry
   ) %>%
-  left_join(stimmbezirke) %>%
+  left_join(stimmbezirke, by = join_by(Stimmbezirk)) %>%
   group_by(StimmbezirkAggregiert) %>%
   summarise(
     geometry = st_combine(geometry),
@@ -24,7 +23,7 @@ stimmbezirkeGeodata <- st_read("data/wahlen/landtagswahl2023/stimmbezirke.geojso
   )
 
 parteien <- read_csv(
-  file = "data/wahlen/landtagswahl2023/parteien.csv",
+  file = "data/wahlen/bundestagswahl2021/parteien.csv",
   col_types = cols(
     ParteiNr = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(),
@@ -34,7 +33,7 @@ parteien <- read_csv(
 )
 
 direktkandidaten <- read_csv(
-  file = "data/wahlen/landtagswahl2023/landtagswahlDirektkandidaten.csv",
+  file = "data/wahlen/bundestagswahl2021/direktkandidaten.csv",
   col_types = cols(
     ParteiKuerzel = readr::col_factor(),
     Direktkandidat = readr::col_factor()
@@ -42,7 +41,7 @@ direktkandidaten <- read_csv(
 )
 
 erststimmenAllgemein <- read_csv(
-  file = "data/wahlen/landtagswahl2023/landtagswahlErststimmenAllgemein.csv",
+  file = "data/wahlen/bundestagswahl2021/erststimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -71,14 +70,16 @@ erststimmenAllgemeinNachStimmbezirkAggregiert <- erststimmenAllgemein %>%
   ) %>%
   mutate(
     Waehler = WaehlerWahllokal + WaehlerBriefwahl
-  ) %>% mutate(
+  ) %>%
+  mutate(
     WaehlerNA = NULL,
     Waehler = coalesce(Waehler, sum(Waehler, na.rm=TRUE)),
     WaehlerWahllokal = coalesce(WaehlerWahllokal, sum(WaehlerWahllokal, na.rm=TRUE)),
     WaehlerBriefwahl = coalesce(WaehlerBriefwahl, sum(WaehlerBriefwahl, na.rm=TRUE)),
     Wahlbeteiligung = Waehler/Wahlberechtigte,
     Briefwahlquote = WaehlerBriefwahl/Waehler
-  )
+  ) %>%
+  left_join(stimmbezirkeGeodata, by = join_by(StimmbezirkAggregiert))
 
 erststimmenAllgemeinNachStimmbezirkArt <- erststimmenAllgemein %>%
   filter(!is.na(StimmbezirkArt)) %>%
@@ -90,7 +91,7 @@ erststimmenAllgemeinNachStimmbezirkArt <- erststimmenAllgemein %>%
   )
 
 erststimmenNachPartei <- read_csv(
-  file = "data/wahlen/landtagswahl2023/landtagswahlErststimmenNachPartei.csv",
+  file = "data/wahlen/bundestagswahl2021/erststimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -108,6 +109,7 @@ erststimmenNachParteiNachStimmbezirkAggregiert <- erststimmenNachPartei %>%
   inner_join(parteien, by = "ParteiKuerzel") %>%
   inner_join(direktkandidaten, by = "ParteiKuerzel") %>%
   inner_join(erststimmenAllgemeinNachStimmbezirkAggregiert %>% select(StimmbezirkAggregiert, GueltigeStimmen), by = c("StimmbezirkAggregiert")) %>%
+  left_join(stimmbezirkeGeodata, by = join_by(StimmbezirkAggregiert)) %>%
   mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
 
 erststimmenNachParteiNachStimmbezirkArt <- erststimmenNachPartei %>%
@@ -134,7 +136,7 @@ erststimmenNachParteiNachCombined <- bind_rows(
 
 
 zweitstimmenAllgemein <- read_csv(
-  file = "data/wahlen/landtagswahl2023/landtagswahlZweitstimmenAllgemein.csv",
+  file = "data/wahlen/bundestagswahl2021/zweitstimmenAllgemein.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     Wahlberechtigte = col_integer(),
@@ -163,14 +165,16 @@ zweitstimmenAllgemeinNachStimmbezirkAggregiert <- zweitstimmenAllgemein %>%
   ) %>%
   mutate(
     Waehler = WaehlerWahllokal + WaehlerBriefwahl
-  ) %>% mutate(
+  ) %>%
+  mutate(
     WaehlerNA = NULL,
     Waehler = coalesce(Waehler, sum(Waehler, na.rm=TRUE)),
     WaehlerWahllokal = coalesce(WaehlerWahllokal, sum(WaehlerWahllokal, na.rm=TRUE)),
     WaehlerBriefwahl = coalesce(WaehlerBriefwahl, sum(WaehlerBriefwahl, na.rm=TRUE)),
     Wahlbeteiligung = Waehler/Wahlberechtigte,
     Briefwahlquote = WaehlerBriefwahl/Waehler
-  )
+  ) %>%
+  left_join(stimmbezirkeGeodata, by = join_by(StimmbezirkAggregiert))
 
 zweitstimmenAllgemeinNachStimmbezirkArt <- zweitstimmenAllgemein %>%
   filter(!is.na(StimmbezirkArt)) %>%
@@ -182,7 +186,7 @@ zweitstimmenAllgemeinNachStimmbezirkArt <- zweitstimmenAllgemein %>%
   )
 
 zweitstimmenNachPartei <- read_csv(
-  file = "data/wahlen/landtagswahl2023/landtagswahlZweitstimmenNachPartei.csv",
+  file = "data/wahlen/bundestagswahl2021/zweitstimmenNachPartei.csv",
   col_types = cols(
     Stimmbezirk = readr::col_factor(),
     ParteiKuerzel = readr::col_factor(levels = levels(parteien$ParteiKuerzel)),
@@ -199,6 +203,7 @@ zweitstimmenNachParteiNachStimmbezirkAggregiert <- zweitstimmenNachPartei %>%
   ) %>%
   inner_join(parteien, by = "ParteiKuerzel") %>%
   inner_join(zweitstimmenAllgemeinNachStimmbezirkAggregiert %>% select(StimmbezirkAggregiert, GueltigeStimmen), by = c("StimmbezirkAggregiert")) %>%
+  left_join(stimmbezirkeGeodata, by = join_by(StimmbezirkAggregiert)) %>%
   mutate(StimmenAnteil = Stimmen/GueltigeStimmen)
 
 zweitstimmenNachParteiNachStimmbezirkArt <- zweitstimmenNachPartei %>%
@@ -228,7 +233,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
 
   ns <- NS(id)
   tagList(
-    h2("Landtagswahl 8. Oktober 2023 in der Gemeinde Vaterstetten"),
+    h2("Bundestagswahl 26. September 2021 in der Gemeinde Vaterstetten"),
 
     fluidRow(
       box(
@@ -237,7 +242,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Insgesamt gibt es 30 Stimmbezirke. Eingezeichnet sind die 15 Wahllokal-Stimmbezirke (1 bis 15), die auch in <a href=\"https://umap.openstreetmap.fr/de/map/landtagswahl-2023-stimmbezirke-vaterstetten_966387\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Die 15 Briefwahlbezirke (31 bis 45) lassen sich den Wahllokal-Stimmbezirken zuordnen, sodass jedes Gebiet die Stimmen eines Wahllokal-Stimmbezirks sowie eines Briefwahlbezirks umfasst.")),
+          p(HTML("Insgesamt gibt es 27 Stimmbezirke. Eingezeichnet sind die 14 Wahllokal-Stimmbezirke (1 bis 14), die auch in <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Die 13 Briefwahlbezirke (31 bis 43) lassen sich den Wahllokal-Stimmbezirken zuordnen, sodass jedes Gebiet die Stimmen eines Wahllokal-Stimmbezirks sowie eines Briefwahlbezirks umfasst. Ausnahme sind die Wahllokal-Stimmebezirke 1 und 2, die mit dem Briefwahlbezirk 31 zusammengefasst wurden und somit gemeinsam drei Stimmbezirke umfassen.")),
         ),
       ),
     ),
@@ -260,7 +265,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("erststimmenMap"), height = 550),
         p(),
-        p("Die Gebiete sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
+        p("Die Gebiete sind jeweils nach den Erststimmen der ausgewählten Partei-Direktkandidat:innen eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
         p("Klicke auf einen Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
       column(
@@ -323,7 +328,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("zweitstimmenMap"), height = 550),
         p(),
-        p("Die Gebiete sind jeweils nach den Zweitstimmen der ausgewählten Partei eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
+        p("Die Gebiete sind jeweils nach den Zweitstimmen der ausgewählten Partei eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
         p("Klicke auf einen Stimmbezirk, um ihn im Balkendiagramm anzuzeigen.")
       ),
       column(
@@ -372,16 +377,15 @@ ui <- memoise(omit_args = "request", function(request, id) {
         title = "Wahlbeteiligung nach Stimmbezirk",
         {
           data <- erststimmenAllgemeinNachStimmbezirkAggregiert
-          mapData <- stimmbezirkeGeodata %>% left_join(data, by = "StimmbezirkAggregiert")
           pal <- colorNumeric(c("#bbbbbb", "#000000"), c(0.65, 0.95))
 
-          leaflet(stimmbezirkeGeodata, height = 550, options = leafletOptions(
+          leaflet(height = 550, options = leafletOptions(
             zoom = 13,
             center = list(lng = 11.798, lat = 48.12)
           )) %>%
             addProviderTiles(providers$CartoDB.Positron) %>%
             addPolygons(
-              data = mapData,
+              data = st_as_sf(data),
               stroke = TRUE,
               weight = 0.0001, # stroke width
               color = "#000000", # stroke color
@@ -401,7 +405,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
               )
             ) %>%
             addLegend("topright",
-              data = mapData,
+              data = data,
               pal = pal,
               values = ~Wahlbeteiligung,
               title = NULL,
@@ -411,7 +415,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             )
         },
         p(),
-        p("Die Gebiete sind jeweils nach dem Anteil der abgegebenen Stimmen (ungültige eingeschlossen) im Verhältnis zu allen Wahlberechtigten eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
+        p("Die Gebiete sind jeweils nach dem Anteil der abgegebenen Stimmen (ungültige eingeschlossen) im Verhältnis zu allen Wahlberechtigten eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
         {
           rowGesamt <- erststimmenAllgemeinNachStimmbezirkAggregiert %>% filter(StimmbezirkAggregiert == "Gesamt")
           p(paste0("Die gesamte Wahlbeteiligung in der Gemeinde Vaterstetten beträgt ", scales::percent(rowGesamt$Wahlbeteiligung, accuracy = 0.1), " (", utils$germanNumberFormat(rowGesamt$Waehler), " Wähler:innen bei insgesamt ", utils$germanNumberFormat(rowGesamt$Wahlberechtigte), " Wahlberechtigten)."))
@@ -421,16 +425,15 @@ ui <- memoise(omit_args = "request", function(request, id) {
         title = "Briefwahlquote nach Stimmbezirk",
         {
           data <- erststimmenAllgemeinNachStimmbezirkAggregiert
-          mapData <- stimmbezirkeGeodata %>% left_join(data, by = "StimmbezirkAggregiert")
           pal <- colorNumeric(c("#888888", "#000000"), c(min(data$Briefwahlquote), max(data$Briefwahlquote)))
 
-          leaflet(stimmbezirkeGeodata, height = 550, options = leafletOptions(
+          leaflet(height = 550, options = leafletOptions(
             zoom = 13,
             center = list(lng = 11.798, lat = 48.12)
           )) %>%
             addProviderTiles(providers$CartoDB.Positron) %>%
             addPolygons(
-              data = mapData,
+              data = st_as_sf(data),
               stroke = TRUE,
               weight = 0.0001, # stroke width
               color = "#000000", # stroke color
@@ -450,7 +453,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
               )
             ) %>%
             addLegend("topright",
-              data = mapData,
+              data = data,
               pal = pal,
               values = ~Briefwahlquote,
               title = NULL,
@@ -460,7 +463,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             )
         },
         p(),
-        p("Die Gebiete sind jeweils nach dem Anteil der Briefwahlstimmen im Verhältnis zu allen abgegebenen Stimmen (ungültige eingeschlossen) eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk."),
+        p("Die Gebiete sind jeweils nach dem Anteil der Briefwahlstimmen im Verhältnis zu allen abgegebenen Stimmen (ungültige eingeschlossen) eingefärbt. Jedes Gebiet umfasst einen Wahllokalstimmbezirk und einen Briefwahlbezirk; das Gebiet \"Stimmbezirke 1/2/31\" in den Ortschaften umfasst sogar zwei Wahllokalstimmbezirke."),
         {
           rowGesamt <- erststimmenAllgemeinNachStimmbezirkAggregiert %>% filter(StimmbezirkAggregiert == "Gesamt")
           p(paste0("Die gesamte Briefwahlquote in der Gemeinde Vaterstetten beträgt ", scales::percent(rowGesamt$Briefwahlquote, accuracy = 0.1), " (", utils$germanNumberFormat(rowGesamt$WaehlerBriefwahl), " Briefwähler:innen bei insgesamt ", utils$germanNumberFormat(rowGesamt$Waehler), " Wähler:innen)."))
@@ -475,8 +478,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://wahlen.osrz-akdb.de/ob-p/175000/0/20231008/landtagswahl_stkl_1_stk/index.html\">Wahlportal des Landkreises Ebersberg</a>, dort werden die Daten als <a href=\"https://wahlen.osrz-akdb.de/ob-p/175000/0/20231008/landtagswahl_stkl_1_stk/presse.html\">CSV-Datei</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/landtagswahl-2023-stimmbezirke-vaterstetten_966387\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
-          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/landtagswahl2023", "Zum Daten-Download mit Dokumentation")),
+          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/opendata.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/bundestagswahl2021", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
     ),
@@ -490,7 +493,7 @@ server <- function(id) {
     function(input, output, session) {
 
       output$erststimmenMap <- renderLeaflet({
-        leaflet(stimmbezirkeGeodata, options = leafletOptions(
+        leaflet(options = leafletOptions(
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
@@ -504,15 +507,14 @@ server <- function(id) {
       })
 
       printErststimmenMap <- function(leafletObject) {
-        partei <- parteien %>% filter(ParteiKuerzel == input$erststimmenMapPartei) %>% head()
+        partei <- parteien %>% filter(ParteiKuerzel == input$erststimmenMapPartei) %>% first()
         ergebnisPartei <- erststimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$erststimmenMapPartei)
-        mapData <- stimmbezirkeGeodata %>% left_join(ergebnisPartei, by = "StimmbezirkAggregiert")
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
           addPolygons(
-            data = mapData,
+            data = st_as_sf(ergebnisPartei),
             stroke = TRUE,
             weight = 0.0001, # stroke width
             color = "#000000", # stroke color
@@ -532,7 +534,7 @@ server <- function(id) {
             )
           ) %>%
           addLegend("topright",
-            data = mapData,
+            data = ergebnisPartei,
             pal = pal,
             values = ~StimmenAnteil,
             title = NULL,
@@ -557,15 +559,14 @@ server <- function(id) {
       })
 
       printZweitstimmenMap <- function(leafletObject) {
-        partei <- parteien %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei) %>% head()
+        partei <- parteien %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei) %>% first()
         ergebnisPartei <- zweitstimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei)
-        mapData <- stimmbezirkeGeodata %>% left_join(ergebnisPartei, by = "StimmbezirkAggregiert")
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
           addPolygons(
-            data = mapData,
+            data = st_as_sf(ergebnisPartei),
             stroke = TRUE,
             weight = 0.0001, # stroke width
             color = "#000000", # stroke color
@@ -585,7 +586,7 @@ server <- function(id) {
             )
           ) %>%
           addLegend("topright",
-            data = mapData,
+            data = ergebnisPartei,
             pal = pal,
             values = ~StimmenAnteil,
             title = NULL,

@@ -1,13 +1,8 @@
-utils <- new.env()
-sys.source("R/utils.R", envir = utils, chdir = FALSE)
-strassennamen <- new.env()
-sys.source("R/strassennamen.R", envir = strassennamen, chdir = FALSE)
-photovoltaik <- new.env()
-sys.source("R/photovoltaik.R", envir = photovoltaik, chdir = FALSE)
-einwohner <- new.env()
-sys.source("R/einwohner.R", envir = einwohner, chdir = FALSE)
-hgv <- new.env()
-sys.source("R/hgv.R", envir = hgv, chdir = FALSE)
+utils <- loadModule("R/utils.R")
+strassennamen <- loadModule("R/strassennamen.R")
+photovoltaik <- loadModule("R/photovoltaik.R")
+einwohner <- loadModule("R/einwohner.R")
+hgv <- loadModule("R/hgv.R")
 
 
 ui <- memoise(omit_args = "request", function(request, id) {

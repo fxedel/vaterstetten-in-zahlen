@@ -1,5 +1,5 @@
-utils <- new.env()
-sys.source("R/utils.R", envir = utils, chdir = FALSE)
+utils <- loadModule("R/utils.R")
+
 
 rsvJahresberichte <- read_delim(
   file = "data/schulen/rsvJahresberichte.csv",

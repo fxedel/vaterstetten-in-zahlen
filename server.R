@@ -1,50 +1,54 @@
-library(dplyr)
-library(leaflet)
-library(lubridate)
-library(memoise)
-library(plotly)
-library(purrr)
-library(readr)
-library(scales)
-library(sf)
-library(shiny)
-library(shinydashboard)
-library(shinyWidgets)
-library(stringr)
-library(tidyr)
-library(htmltools)
-library(DT)
+library(dplyr, warn.conflicts = FALSE)
+library(leaflet, warn.conflicts = FALSE)
+library(lubridate, warn.conflicts = FALSE)
+library(memoise, warn.conflicts = FALSE)
+library(plotly, warn.conflicts = FALSE)
+library(purrr, warn.conflicts = FALSE)
+library(readr, warn.conflicts = FALSE)
+library(scales, warn.conflicts = FALSE)
+library(sf, warn.conflicts = FALSE)
+library(shiny, warn.conflicts = FALSE)
+library(shinydashboard, warn.conflicts = FALSE)
+library(shinyWidgets, warn.conflicts = FALSE)
+library(bslib, warn.conflicts = FALSE)
+library(stringr, warn.conflicts = FALSE)
+library(tidyr, warn.conflicts = FALSE)
+library(htmltools, warn.conflicts = FALSE)
+library(DT, warn.conflicts = FALSE)
 
 # print(.packages())
 
 Sys.setlocale("LC_TIME", "de_DE.utf8")
 
-mainPage <- new.env()
-sys.source("R/mainPage.R", envir = mainPage, chdir = FALSE)
-corona <- new.env()
-sys.source("R/corona.R", envir = corona, chdir = FALSE)
-coronaImpfungen <- new.env()
-sys.source("R/coronaImpfungen.R", envir = coronaImpfungen, chdir = FALSE)
-photovoltaik <- new.env()
-sys.source("R/photovoltaik.R", envir = photovoltaik, chdir = FALSE)
-einwohner <- new.env()
-sys.source("R/einwohner.R", envir = einwohner, chdir = FALSE)
-hgv <- new.env()
-sys.source("R/hgv.R", envir = hgv, chdir = FALSE)
-rsv <- new.env()
-sys.source("R/rsv.R", envir = rsv, chdir = FALSE)
-strassennamen <- new.env()
-sys.source("R/strassennamen.R", envir = strassennamen, chdir = FALSE)
-kommunalwahl2020 <- new.env()
-sys.source("R/kommunalwahl2020.R", envir = kommunalwahl2020, chdir = FALSE)
-btw2021 <- new.env()
-sys.source("R/btw2021.R", envir = btw2021, chdir = FALSE)
-landtagswahl2023 <- new.env()
-sys.source("R/landtagswahl2023.R", envir = landtagswahl2023, chdir = FALSE)
-europawahl2024 <- new.env()
-sys.source("R/europawahl2024.R", envir = europawahl2024, chdir = FALSE)
-impressum <- new.env()
-sys.source("R/impressum.R", envir = impressum, chdir = FALSE)
+moduleCache <- new.env()
+loadModule <- function(filename) {
+  if (!(filename %in% names(moduleCache))) {
+    print(paste0("load ", filename))
+    moduleEnv <- new.env()
+    sys.source(filename, envir = moduleEnv, chdir = FALSE)
+    moduleCache[[filename]] <- moduleEnv
+  }
+
+  return(moduleCache[[filename]])
+}
+
+
+mainPage <- loadModule("R/mainPage.R")
+corona <- loadModule("R/corona.R")
+coronaImpfungen <- loadModule("R/coronaImpfungen.R")
+photovoltaik <- loadModule("R/photovoltaik.R")
+einwohner <- loadModule("R/einwohner.R")
+hgv <- loadModule("R/hgv.R")
+rsv <- loadModule("R/rsv.R")
+strassennamen <- loadModule("R/strassennamen.R")
+
+wahlenOverview <- loadModule("R/wahlen/overview.R")
+kommunalwahl2020 <- loadModule("R/wahlen/kommunalwahl2020.R")
+btw2021 <- loadModule("R/wahlen/btw2021.R")
+landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
+europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
+
+impressum <- loadModule("R/impressum.R")
 
 theme_set(theme_light())
 
@@ -73,6 +77,7 @@ ui <- function(request) {
         ),
         menuItem("Straßennamen", tabName = "strassennamen", icon = icon("road"), selected = query$tab == "strassennamen"),
         menuItem("Wahlen", icon = icon("vote-yea"), startExpanded = TRUE,
+          menuSubItem("Übersicht", tabName = "wahlenOverview", selected = query$tab == "wahlenOverview"),
           menuSubItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", selected = query$tab == "kommunalwahl2020"),
           menuSubItem("Bundestagswahl 2021", tabName = "btw2021", selected = query$tab == "btw2021"),
           menuSubItem("Landtagswahl 2023", tabName = "landtagswahl2023", selected = query$tab == "landtagswahl2023"),
@@ -128,10 +133,13 @@ ui <- function(request) {
         tabItem(tabName = "hgv", hgv$ui(request, "hgv")),
         tabItem(tabName = "rsv", rsv$ui(request, "rsv")),
         tabItem(tabName = "strassennamen", strassennamen$ui(request, "strassennamen")),
+
+        tabItem(tabName = "wahlenOverview", wahlenOverview$ui(request, "wahlenOverview")),
         tabItem(tabName = "kommunalwahl2020", kommunalwahl2020$ui(request, "kommunalwahl2020")),
         tabItem(tabName = "btw2021", btw2021$ui(request, "btw2021")),
         tabItem(tabName = "landtagswahl2023", landtagswahl2023$ui(request, "landtagswahl2023")),
         tabItem(tabName = "europawahl2024", europawahl2024$ui(request, "europawahl2024")),
+
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
       fluidRow(
@@ -174,10 +182,13 @@ server <- function(input, output, session) {
   hgv$server("hgv")
   rsv$server("rsv")
   strassennamen$server("strassennamen")
+
+  wahlenOverview$server("wahlenOverview")
   kommunalwahl2020$server("kommunalwahl2020")
   btw2021$server("btw2021")
   landtagswahl2023$server("landtagswahl2023")
   europawahl2024$server("europawahl2024")
+
   impressum$server("impressum")
 }
 
