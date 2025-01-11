@@ -1,5 +1,4 @@
-utils <- new.env()
-sys.source("R/utils.R", envir = utils, chdir = FALSE)
+utils <- loadModule("R/utils.R")
 
 mastr <- read_delim(
   file = "data/energie/mastrPhotovoltaik.csv",
