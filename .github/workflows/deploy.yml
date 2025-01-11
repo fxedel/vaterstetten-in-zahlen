@@ -29,6 +29,7 @@ jobs:
           command_timeout: 120m
           script: |
             cd ${{ secrets.DEPLOYMENT_PATH }}
-            git pull
+            git fetch origin
+            git reset origin/master --hard
             Rscript -e "renv::restore()"
             XDG_RUNTIME_DIR=/run/user/`id -u` systemctl --user restart vaterstetten-in-zahlen.service
