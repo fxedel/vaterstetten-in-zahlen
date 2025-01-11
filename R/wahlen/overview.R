@@ -6,15 +6,19 @@ europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
 
 ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
   kommunalwahl2020$gemeinderatErgebnisAllgemein %>%
+    mutate(
+      WaehlerWahllokal = ifelse(stimmbezirkArt == "Wahllokal", waehler, 0),
+      WaehlerBriefwahl = ifelse(stimmbezirkArt == "Briefwahl", waehler, 0)
+    ) %>%
     transmute(
       Wahl = "Kommunalwahl 2020",
       Wahltyp = "Gemeinderatswahl",
       Wahltag = as.Date("2020-03-15"),
       Stimmbezirk = stimmbezirk,
-      Wahlberechtigte = NA, # TODO: Gesamtzahl
-      Waehler = NA, # TODO: Gesamtzahl
-      WaehlerWahllokal = NA, # TODO: Gesamtzahl
-      WaehlerBriefwahl = NA, # TODO: Gesamtzahl
+      Wahlberechtigte = ifelse(Stimmbezirk == "Gesamt", wahlberechtigte, NA),
+      Waehler = ifelse(Stimmbezirk == "Gesamt", waehler, NA),
+      WaehlerWahllokal = ifelse(Stimmbezirk == "Gesamt", sum(WaehlerWahllokal, na.rm = TRUE), NA),
+      WaehlerBriefwahl = ifelse(Stimmbezirk == "Gesamt", sum(WaehlerBriefwahl, na.rm = TRUE), NA),
       GueltigeStimmen = gueltigeStimmzettel,
       UngueltigeStimmen = ungueltigeStimmzettel,
       geometry = geometry
@@ -66,7 +70,8 @@ ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
     Wahl = as.factor(Wahl),
     Wahltyp = as.factor(Wahltyp),
     Wahlbeteiligung = Waehler/Wahlberechtigte,
-    Briefwahlquote = WaehlerBriefwahl/Waehler
+    Briefwahlquote = WaehlerBriefwahl/Waehler,
+    UngueltigQuote = UngueltigeStimmen/Waehler,
   )
 
 unifyParteiFarben <- function(data) {
@@ -169,6 +174,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
     fluidRow(
       box(
         title = "Wahlergebnisse im zeitlichen Verlauf",
+        width = 7,
         {
           data <- ergebnisseNachParteiNachStimmbezirk %>%
             filter(Stimmbezirk == "Gesamt") %>%
@@ -181,14 +187,39 @@ ui <- memoise(omit_args = "request", function(request, id) {
             x = ~Wahltag,
             y = ~StimmenAnteil,
             name = ~ParteiKuerzel,
-            meta = ~paste0(ParteiKuerzel, " (", Wahl, ")"),
             color = ~I(ParteiFarbe),
             yhoverformat = ",.2%",
+            meta = ~paste0(ParteiKuerzel, " (", Wahl, ")"),
             hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{meta}</b></extra>"
           ) %>%
             add_trace(type = "scatter", mode = "lines+markers") %>%
             plotly_default_config() %>%
             layout(yaxis = list(tickformat = ".0%", rangemode = "tozero")) %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        }
+      ),
+      box(
+        title = "Wahlbeteiligung, Briefwahlquote und ungültige Stimmen im zeitlichen Verlauf",
+        width = 5,
+        {
+          data <- ergebnisseAllgemeinNachStimmbezirk %>%
+            filter(Stimmbezirk == "Gesamt")
+
+          plot_ly(
+            data,
+            x = ~Wahltag,
+            yhoverformat = ",.2%",
+            meta = ~paste0("(", Wahl, ")"),
+            hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{text} %{meta}</b></extra>"
+          ) %>%
+            add_trace(y = ~Wahlbeteiligung, name = "Wahlbeteiligung", text = "Wahlbeteiligung", type = "scatter", mode = "lines+markers") %>%
+            add_trace(y = ~Briefwahlquote, name = "Briefwahlquote", text = "Briefwahlquote", type = "scatter", mode = "lines+markers") %>%
+            add_trace(y = ~UngueltigQuote, name = "Ungültige Stimmen", text = "Ungültige Stimmen", type = "scatter", mode = "lines+markers") %>%
+            plotly_default_config() %>%
+            layout(yaxis = list(tickformat = ".0%", rangemode = "tozero")) %>%
+            layout(legend = list(x = 0.7, y = 0.2)) %>% # legend inside plot
             plotly_hide_axis_titles() %>%
             plotly_build() %>%
             identity()
