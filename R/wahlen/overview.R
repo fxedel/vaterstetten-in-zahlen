@@ -11,8 +11,8 @@ ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
       Wahltyp = "Gemeinderatswahl",
       Wahltag = as.Date("2020-03-15"),
       Stimmbezirk = stimmbezirk,
-      Wahlberechtigte = wahlberechtigte,
-      Waehler = waehler,
+      Wahlberechtigte = NA, # TODO: Gesamtzahl
+      Waehler = NA, # TODO: Gesamtzahl
       WaehlerWahllokal = NA, # TODO: Gesamtzahl
       WaehlerBriefwahl = NA, # TODO: Gesamtzahl
       GueltigeStimmen = gueltigeStimmzettel,
@@ -223,32 +223,92 @@ ui <- memoise(omit_args = "request", function(request, id) {
           ),
           column(
             width = 2,
-            input_switch(ns("individualScale"), "Individuelle Farbskala pro Wahl"),
+            input_switch(ns("switchParteistimmenIndividualScale"), "Individuelle Farbskala pro Wahl"),
           ),
         ),
         fluidRow(
           column(
             width = 4,
             h4("Kommunalwahl 2020 (Gemeinderat)"),
-            leafletOutput(ns("mapKommunalwahl2020"), height = 550),
+            leafletOutput(ns("mapParteistimmenKommunalwahl2020"), height = 550),
             p("Hinweis: Bei der Kommunalwahl können die Briefwahlstimmen keinen (geografischen) Stimmbezirken zugeordnet werden, daher stellt diese Karte nur etwa die Hälfte der Stimmen dar."),
           ),
           column(
             width = 4,
             h4("Bundestagswahl 2021 (Zweitstimme)"),
-            leafletOutput(ns("mapBundestagswahl2021"), height = 550),
+            leafletOutput(ns("mapParteistimmenBundestagswahl2021"), height = 550),
           ),
           column(
             width = 4,
             h4("Landtagswahl 2023 (Zweitstimme)"),
-            leafletOutput(ns("mapLandtagswahl2023"), height = 550),
+            leafletOutput(ns("mapParteistimmenLandtagswahl2023"), height = 550),
           ),
         ),
         fluidRow(
           column(
             width = 4,
             h4("Europawahl 2024"),
-            leafletOutput(ns("mapEuropawahl2024"), height = 550),
+            leafletOutput(ns("mapParteistimmenEuropawahl2024"), height = 550),
+          ),
+        ),
+      )
+    ),
+
+    fluidRow(
+      box(
+        title = "Wahlbeteiligung in den Stimmbezirken",
+        width = 12,
+        fluidRow(
+          column(
+            width = 2,
+            input_switch(ns("switchWahlbeteiligungIndividualScale"), "Individuelle Farbskala pro Wahl"),
+          ),
+        ),
+        fluidRow(
+          column(
+            width = 4,
+            h4("Bundestagswahl 2021 (Zweitstimme)"),
+            leafletOutput(ns("mapWahlbeteiligungBundestagswahl2021"), height = 550),
+          ),
+          column(
+            width = 4,
+            h4("Landtagswahl 2023 (Zweitstimme)"),
+            leafletOutput(ns("mapWahlbeteiligungLandtagswahl2023"), height = 550),
+          ),
+          column(
+            width = 4,
+            h4("Europawahl 2024"),
+            leafletOutput(ns("mapWahlbeteiligungEuropawahl2024"), height = 550),
+          ),
+        ),
+      )
+    ),
+
+    fluidRow(
+      box(
+        title = "Briefwahlquote in den Stimmbezirken",
+        width = 12,
+        fluidRow(
+          column(
+            width = 2,
+            input_switch(ns("switchBriefwahlquoteIndividualScale"), "Individuelle Farbskala pro Wahl"),
+          ),
+        ),
+        fluidRow(
+          column(
+            width = 4,
+            h4("Bundestagswahl 2021 (Zweitstimme)"),
+            leafletOutput(ns("mapBriefwahlquoteBundestagswahl2021"), height = 550),
+          ),
+          column(
+            width = 4,
+            h4("Landtagswahl 2023 (Zweitstimme)"),
+            leafletOutput(ns("mapBriefwahlquoteLandtagswahl2023"), height = 550),
+          ),
+          column(
+            width = 4,
+            h4("Europawahl 2024"),
+            leafletOutput(ns("mapBriefwahlquoteEuropawahl2024"), height = 550),
           ),
         ),
       )
@@ -261,37 +321,41 @@ server <- function(id, parentSession) {
   moduleServer(
     id,
     function(input, output, session) {
-      renderParteiStimmenMap <- function(wahl) {
+
+      ## Parteistimmen
+
+      renderParteistimmenMap <- function(wahl) {
         renderLeaflet({
         leaflet(options = leafletOptions(
           zoom = 13,
-          center = list(lng = 11.798, lat = 48.12)
+          center = list(lng = 11.798, lat = 48.12),
+          scrollWheelZoom = FALSE
         )) %>%
           addProviderTiles(providers$CartoDB.Positron) %>%
-          printParteiStimmenMap(wahl) %>%
+          printParteistimmenMap(wahl) %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
         })
       }
 
-      output$mapKommunalwahl2020 <- renderParteiStimmenMap("Kommunalwahl 2020")
-      output$mapBundestagswahl2021 <- renderParteiStimmenMap("Bundestagswahl 2021")
-      output$mapLandtagswahl2023 <- renderParteiStimmenMap("Landtagswahl 2023")
-      output$mapEuropawahl2024 <- renderParteiStimmenMap("Europawahl 2024")
+      output$mapParteistimmenKommunalwahl2020 <- renderParteistimmenMap("Kommunalwahl 2020")
+      output$mapParteistimmenBundestagswahl2021 <- renderParteistimmenMap("Bundestagswahl 2021")
+      output$mapParteistimmenLandtagswahl2023 <- renderParteistimmenMap("Landtagswahl 2023")
+      output$mapParteistimmenEuropawahl2024 <- renderParteistimmenMap("Europawahl 2024")
 
       observe({
-        printParteiStimmenMap(leafletProxy("mapKommunalwahl2020"), "Kommunalwahl 2020")
-        printParteiStimmenMap(leafletProxy("mapBundestagswahl2021"), "Bundestagswahl 2021")
-        printParteiStimmenMap(leafletProxy("mapLandtagswahl2023"), "Landtagswahl 2023")
-        printParteiStimmenMap(leafletProxy("mapEuropawahl2024"), "Europawahl 2024")
+        printParteistimmenMap(leafletProxy("mapParteistimmenKommunalwahl2020"), "Kommunalwahl 2020")
+        printParteistimmenMap(leafletProxy("mapParteistimmenBundestagswahl2021"), "Bundestagswahl 2021")
+        printParteistimmenMap(leafletProxy("mapParteistimmenLandtagswahl2023"), "Landtagswahl 2023")
+        printParteistimmenMap(leafletProxy("mapParteistimmenEuropawahl2024"), "Europawahl 2024")
       })
 
-      printParteiStimmenMap <- function(leafletObject, wahl) {
-        ergebnisParteiAllElections <- ergebnisseNachParteiNachStimmbezirk %>%
+      printParteistimmenMap <- function(leafletObject, wahl) {
+        ergebnisAllElections <- ergebnisseNachParteiNachStimmbezirk %>%
           filter(ParteiKuerzel == input$partei)
-        ergebnisPartei <- ergebnisParteiAllElections %>%
+        ergebnis <- ergebnisAllElections %>%
           filter(Wahl == wahl)
 
-        if (nrow(ergebnisPartei) == 0) {
+        if (nrow(ergebnis) == 0) {
           return(
             leafletObject %>%
               clearShapes() %>%
@@ -305,14 +369,14 @@ server <- function(id, parentSession) {
           last()
         )$ParteiFarbe
 
-        dataForScale <- if (input$individualScale) ergebnisPartei else ergebnisParteiAllElections
+        dataForScale <- if (input$switchParteistimmenIndividualScale) ergebnis else ergebnisAllElections
         pal <- colorNumeric(c("#ffffff", parteiFarbe), c(0, max(dataForScale$StimmenAnteil)))
 
         leafletObject %>%
           clearShapes() %>%
           clearControls() %>%
           addPolygons(
-            data = st_as_sf(ergebnisPartei),
+            data = st_as_sf(ergebnis),
             stroke = TRUE,
             weight = 0.0001, # stroke width
             color = "#000000", # stroke color
@@ -334,6 +398,142 @@ server <- function(id, parentSession) {
             data = dataForScale,
             pal = pal,
             values = ~StimmenAnteil,
+            title = NULL,
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            opacity = 0.8,
+            bins = 5
+          )
+      }
+
+
+      ## Wahlbeteiligung
+
+      renderWahlbeteiligungMap <- function(wahl) {
+        renderLeaflet({
+        leaflet(options = leafletOptions(
+          zoom = 13,
+          center = list(lng = 11.798, lat = 48.12),
+          scrollWheelZoom = FALSE
+        )) %>%
+          addProviderTiles(providers$CartoDB.Positron) %>%
+          printWahlbeteiligungMap(wahl) %>%
+          isolate() # updates will be done by leafletProxy, no need to re-render whole map
+        })
+      }
+
+      output$mapWahlbeteiligungBundestagswahl2021 <- renderWahlbeteiligungMap("Bundestagswahl 2021")
+      output$mapWahlbeteiligungLandtagswahl2023 <- renderWahlbeteiligungMap("Landtagswahl 2023")
+      output$mapWahlbeteiligungEuropawahl2024 <- renderWahlbeteiligungMap("Europawahl 2024")
+
+      observe({
+        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungBundestagswahl2021"), "Bundestagswahl 2021")
+        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungLandtagswahl2023"), "Landtagswahl 2023")
+        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungEuropawahl2024"), "Europawahl 2024")
+      })
+
+      printWahlbeteiligungMap <- function(leafletObject, wahl) {
+        ergebnisAllElections <- ergebnisseAllgemeinNachStimmbezirk %>%
+          filter(!is.na(Wahlbeteiligung))
+        ergebnis <- ergebnisAllElections %>%
+          filter(Wahl == wahl)
+
+        dataForScale <- if (input$switchWahlbeteiligungIndividualScale) ergebnis else ergebnisAllElections
+        pal <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Wahlbeteiligung), max(dataForScale$Wahlbeteiligung)))
+
+        leafletObject %>%
+          clearShapes() %>%
+          clearControls() %>%
+          addPolygons(
+            data = st_as_sf(ergebnis),
+            stroke = TRUE,
+            weight = 0.0001, # stroke width
+            color = "#000000", # stroke color
+            opacity = 0.0001, # stroke opacity
+            fillColor = ~pal(Wahlbeteiligung),
+            fillOpacity = 0.6,
+            layerId = ~Stimmbezirk,
+            label = ~paste0(
+              Stimmbezirk, ": ", scales::percent(Wahlbeteiligung, accuracy = 0.1)
+            ) %>% lapply(HTML),
+            highlight = highlightOptions(
+              bringToFront = TRUE,
+              sendToBack = TRUE,
+              weight = 3, # stroke width
+              opacity = 1.0, # stroke opacity
+            )
+          ) %>%
+          addLegend("topright",
+            data = dataForScale,
+            pal = pal,
+            values = ~Wahlbeteiligung,
+            title = NULL,
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            opacity = 0.8,
+            bins = 5
+          )
+      }
+
+
+      ## Briefwahlquote
+
+      renderBriefwahlquoteMap <- function(wahl) {
+        renderLeaflet({
+        leaflet(options = leafletOptions(
+          zoom = 13,
+          center = list(lng = 11.798, lat = 48.12),
+          scrollWheelZoom = FALSE
+        )) %>%
+          addProviderTiles(providers$CartoDB.Positron) %>%
+          printBriefwahlquoteMap(wahl) %>%
+          isolate() # updates will be done by leafletProxy, no need to re-render whole map
+        })
+      }
+
+      output$mapBriefwahlquoteBundestagswahl2021 <- renderBriefwahlquoteMap("Bundestagswahl 2021")
+      output$mapBriefwahlquoteLandtagswahl2023 <- renderBriefwahlquoteMap("Landtagswahl 2023")
+      output$mapBriefwahlquoteEuropawahl2024 <- renderBriefwahlquoteMap("Europawahl 2024")
+
+      observe({
+        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteBundestagswahl2021"), "Bundestagswahl 2021")
+        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteLandtagswahl2023"), "Landtagswahl 2023")
+        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteEuropawahl2024"), "Europawahl 2024")
+      })
+
+      printBriefwahlquoteMap <- function(leafletObject, wahl) {
+        ergebnisAllElections <- ergebnisseAllgemeinNachStimmbezirk %>%
+          filter(!is.na(Briefwahlquote))
+        ergebnis <- ergebnisAllElections %>%
+          filter(Wahl == wahl)
+
+        dataForScale <- if (input$switchBriefwahlquoteIndividualScale) ergebnis else ergebnisAllElections
+        pal <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Briefwahlquote), max(dataForScale$Briefwahlquote)))
+
+        leafletObject %>%
+          clearShapes() %>%
+          clearControls() %>%
+          addPolygons(
+            data = st_as_sf(ergebnis),
+            stroke = TRUE,
+            weight = 0.0001, # stroke width
+            color = "#000000", # stroke color
+            opacity = 0.0001, # stroke opacity
+            fillColor = ~pal(Briefwahlquote),
+            fillOpacity = 0.6,
+            layerId = ~Stimmbezirk,
+            label = ~paste0(
+              Stimmbezirk, ": ", scales::percent(Briefwahlquote, accuracy = 0.1)
+            ) %>% lapply(HTML),
+            highlight = highlightOptions(
+              bringToFront = TRUE,
+              sendToBack = TRUE,
+              weight = 3, # stroke width
+              opacity = 1.0, # stroke opacity
+            )
+          ) %>%
+          addLegend("topright",
+            data = dataForScale,
+            pal = pal,
+            values = ~Briefwahlquote,
             title = NULL,
             labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
             opacity = 0.8,
