@@ -451,8 +451,8 @@ def get_etymology_type(element: dict) -> str:
     # massif
     return 'Berge'
 
-  if 'http://www.wikidata.org/entity/Q486972' in types and not item == 'http://www.wikidata.org/entity/Q532':
-    # human settlement, excluding the generic 'village'
+  if ('http://www.wikidata.org/entity/Q486972' in types or 'http://www.wikidata.org/entity/Q15284' in types) and not item == 'http://www.wikidata.org/entity/Q532':
+    # human settlements and municipalities, excluding the generic 'village'
     return 'Ortsnamen'
 
   if 'http://www.wikidata.org/entity/Q24384' in types:
@@ -522,6 +522,7 @@ WHERE {
     VALUES ?type {
       wd:Q46831     # mountain range
       wd:Q1061151   # massif
+      wd:Q15284     # municipality
       wd:Q486972    # human settlement
       wd:Q811979    # architectural structure
       wd:Q6999      # astronomic object
