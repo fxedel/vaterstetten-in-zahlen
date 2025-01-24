@@ -11,6 +11,13 @@ concurrency:
 # GENESIS_LFSTAT_PASSWORD - Genesis LfStat Bayern credentials
 # GITHUB_PAT - a personal access token with the repo scope
 
+on:
+  workflow_call:
+    inputs:
+      pollers:
+        required: true
+        type: string
+
 jobs:
   poll-data:
     environment: vaterstetten-in-zahlen.de
