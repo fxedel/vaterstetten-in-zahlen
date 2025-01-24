@@ -4,63 +4,90 @@ btw2021 <- loadModule("R/wahlen/btw2021.R")
 landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
 europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
 
+lfstatWahlergebnisseAllgemein <- read_csv(
+  file = "data/wahlen/lfstatWahlergebnisseAllgemein.csv",
+  col_types = cols(
+    Wahl = readr::col_factor(),
+    Wahltag = col_date(format = "%Y-%m-%d"),
+    Stimmbezirk = readr::col_factor(),
+    Wahlberechtigte = col_integer(),
+    Waehler = col_integer(),
+    Stimmentyp = readr::col_factor(),
+    GueltigeStimmen = col_integer(),
+    UngueltigeStimmen = col_integer()
+  )
+)
+
 ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
+  lfstatWahlergebnisseAllgemein %>% transmute(
+      Wahl = Wahl,
+      Wahltag = Wahltag,
+      Stimmbezirk = Stimmbezirk,
+      Wahlberechtigte = Wahlberechtigte,
+      Waehler = Waehler,
+      WaehlerWahllokal = NA,
+      WaehlerBriefwahl = NA,
+      Stimmentyp = Stimmentyp,
+      GueltigeStimmen = GueltigeStimmen,
+      UngueltigeStimmen = UngueltigeStimmen,
+      geometry = st_sfc(st_multipolygon(), crs = "WGS84")
+  ),
   kommunalwahl2020$gemeinderatErgebnisAllgemein %>%
     mutate(
       WaehlerWahllokal = ifelse(stimmbezirkArt == "Wahllokal", waehler, 0),
       WaehlerBriefwahl = ifelse(stimmbezirkArt == "Briefwahl", waehler, 0)
     ) %>%
     transmute(
-      Wahl = "Kommunalwahl 2020",
-      Wahltyp = "Gemeinderatswahl",
+      Wahl = "Gemeinderatswahl",
       Wahltag = as.Date("2020-03-15"),
       Stimmbezirk = stimmbezirk,
       Wahlberechtigte = ifelse(Stimmbezirk == "Gesamt", wahlberechtigte, NA),
       Waehler = ifelse(Stimmbezirk == "Gesamt", waehler, NA),
       WaehlerWahllokal = ifelse(Stimmbezirk == "Gesamt", sum(WaehlerWahllokal, na.rm = TRUE), NA),
       WaehlerBriefwahl = ifelse(Stimmbezirk == "Gesamt", sum(WaehlerBriefwahl, na.rm = TRUE), NA),
+      Stimmentyp = NA,
       GueltigeStimmen = gueltigeStimmzettel,
       UngueltigeStimmen = ungueltigeStimmzettel,
       geometry = geometry
     ),
   btw2021$zweitstimmenAllgemeinNachStimmbezirkAggregiert %>%
     transmute(
-      Wahl = "Bundestagswahl 2021",
-      Wahltyp = "Bundestagswahl (Zweitstimmen)",
+      Wahl = "Bundestagswahl",
       Wahltag = as.Date("2021-09-26"),
       Stimmbezirk = StimmbezirkAggregiert,
       Wahlberechtigte = Wahlberechtigte,
       Waehler = Waehler,
       WaehlerWahllokal = WaehlerWahllokal,
       WaehlerBriefwahl = WaehlerBriefwahl,
+      Stimmentyp = "Zweitstimme",
       GueltigeStimmen = GueltigeStimmen,
       UngueltigeStimmen = UngueltigeStimmen,
       geometry = geometry
     ),
   landtagswahl2023$zweitstimmenAllgemeinNachStimmbezirkAggregiert %>%
     transmute(
-      Wahl = "Landtagswahl 2023",
-      Wahltyp = "Landtagswahl (Zweitstimmen)",
+      Wahl = "Landtagswahl",
       Wahltag = as.Date("2023-10-08"),
       Stimmbezirk = StimmbezirkAggregiert,
       Wahlberechtigte = Wahlberechtigte,
       Waehler = Waehler,
       WaehlerWahllokal = WaehlerWahllokal,
       WaehlerBriefwahl = WaehlerBriefwahl,
+      Stimmentyp = "Zweitstimme",
       GueltigeStimmen = GueltigeStimmen,
       UngueltigeStimmen = UngueltigeStimmen,
       geometry = geometry
     ),
   europawahl2024$ergebnisAllgemeinNachStimmbezirkAggregiert %>%
     transmute(
-      Wahl = "Europawahl 2024",
-      Wahltyp = "Europawahl",
+      Wahl = "Europawahl",
       Wahltag = as.Date("2024-06-09"),
       Stimmbezirk = StimmbezirkAggregiert,
       Wahlberechtigte = Wahlberechtigte,
       Waehler = Waehler,
       WaehlerWahllokal = WaehlerWahllokal,
       WaehlerBriefwahl = WaehlerBriefwahl,
+      Stimmentyp = NA,
       GueltigeStimmen = GueltigeStimmen,
       UngueltigeStimmen = UngueltigeStimmen,
       geometry = geometry
@@ -68,80 +95,197 @@ ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
 ) %>%
   mutate(
     Wahl = as.factor(Wahl),
-    Wahltyp = as.factor(Wahltyp),
     Wahlbeteiligung = Waehler/Wahlberechtigte,
     Briefwahlquote = WaehlerBriefwahl/Waehler,
+    Stimmentyp = as.factor(Stimmentyp),
     UngueltigQuote = UngueltigeStimmen/Waehler,
+  ) %>%
+  arrange(Wahltag, is.na(WaehlerWahllokal)) %>% # values with WaehlerWahllokal = NA should be last, so they get eliminated by distinct
+  distinct(Wahl, Wahltag, Stimmbezirk, Stimmentyp, .keep_all = TRUE) %>%
+  identity()
+
+lfstatWahlergebnisseNachPartei <- read_csv(
+  file = "data/wahlen/lfstatWahlergebnisseNachPartei.csv",
+  col_types = cols(
+    Wahl = readr::col_factor(),
+    Wahltag = col_date(format = "%Y-%m-%d"),
+    Stimmbezirk = readr::col_factor(),
+    ParteiCode = readr::col_character(),
+    ParteiLabel = readr::col_factor(),
+    Stimmentyp = readr::col_factor(),
+    Stimmen = col_integer()
+  )
+) %>%
+  left_join(
+    tribble(
+      ~ParteiCode, ~ParteiKuerzel, ~ParteiFarbe,
+      "GRUENE", "Grüne", NA,
+      "AFD", "AfD", NA,
+      "FREIEWAEHLER", "FW", NA,
+      "DIELINKE", "Die Linke", NA,
+      "OEDP", "ÖDP", NA,
+      "TIERSCHUTZ", "Tierschutzpartei", NA,
+      "DIEPARTEI", "Die PARTEI", NA,
+      "PIRATEN", "Piraten", NA,
+      "V-PARTEI", "V-Partei³", NA,
+      "GESUNDHEIT", "Gesundheitsforschung", NA,
+      "DIEBASIS", "dieBasis", NA,
+      "BUENDNISC", "Bündnis C", NA,
+      "WEGIII", "III. Weg", NA,
+      "DIEURBANE", "du.", NA,
+      "DIEHUMANISTEN", "PdH", NA,
+      "TEAMTODENHOEFER", "Team Todenhöfer", NA,
+      "UNABHAENGIG", "UNABHÄNGIGE", NA,
+      "VOLT", "Volt", NA,
+      "FAMILIE", "Familie", NA,
+      "TIERSCHUTZ1", "TIERSCHUTZ hier!", NA,
+      "MENSCHLICHEWELT", "Menschliche Welt", NA,
+      "BUENDNISD", "Bündnis Deutschland", NA,
+      "KLIMALISTE", "Klimaliste", NA,
+      "LETZTGENERATION", "Letzte Generation", NA,
+      "PDF", "PdF", NA,
+      "WAEHLERGRUPPEN", "Wählergruppen", NA,
+      "GEMWAHLVOR", "Gemeinsame Wahlvorschläge", NA,
+      "BHE-DG", "BHE-DG", "#C3C318",
+      "GB-BHE", "GB-BHE", "#C3C318",
+      "GDP", "GDP", "#C3C318",
+      "KPD-ALT", "KPD", "#8B0000",
+      "KPD-NEU", "KPD-AO", "#8B0000",
+      "REP", "REP", "#0075BE",
+      "WAV", "WAV", "#FFEC8B",
+      "DFU", "DFU", "#8b1c62",
+      "FBU", "FBU", "#8b4726",
+      "AUD", "AUD", "#F5DC64",
+      "BFB", "BFB", "#0000ff",
+    ),
+    by = join_by(ParteiCode)
+  ) %>%
+  mutate(
+    ParteiKuerzel = coalesce(ParteiKuerzel, ParteiCode)
+  ) %>%
+  mutate(
+    ParteiKuerzel = ifelse(ParteiCode == "GESUNDHEIT" & Wahltag > "2022-01-01", "Verjüngungsforschung", ParteiKuerzel)
+  ) %>%
+  mutate(
+    ParteiKuerzel = ifelse(ParteiCode == "NPD" & Wahltag > "2023-06-01", "Heimat", ParteiKuerzel)
+  ) %>%
+  mutate(
+    # TODO: Probably Wählergruppen before 2014 were also named "Freie Wähler", verify this!
+    ParteiKuerzel = ifelse(ParteiCode == "WAEHLERGRUPPEN" & Wahl == "Gemeinderatswahl" & Wahltag >= "2014-01-01", "FW", ParteiKuerzel)
+  ) %>%
+  mutate(
+    # 2014: FBU/AfD, changed their name before 2020 to just AfD
+    ParteiKuerzel = ifelse(ParteiCode == "GEMWAHLVOR" & Wahl == "Gemeinderatswahl" & Wahltag == "2014-03-16", "AfD", ParteiKuerzel)
+  ) %>%
+  mutate(
+    ParteiKuerzel = as.factor(ParteiKuerzel)
   )
 
-unifyParteiFarben <- function(data) {
-  lastFarben <- data %>%
-    group_by(ParteiKuerzel) %>%
-    summarise(ParteiFarbeUnified = last(ParteiFarbe))
-
-  data %>%
-    left_join(lastFarben, by = join_by(ParteiKuerzel)) %>%
-    mutate(
-      ParteiFarbe = ParteiFarbeUnified,
-      ParteiFarbeUnified = NULL
-    )
-}
-
 ergebnisseNachParteiNachStimmbezirk <- bind_rows(
+  lfstatWahlergebnisseNachPartei %>%
+    left_join(lfstatWahlergebnisseAllgemein, by = join_by(Wahl, Wahltag, Stimmbezirk, Stimmentyp)) %>%
+    transmute(
+      Wahl,
+      Wahltag,
+      Stimmbezirk,
+      ParteiKuerzel,
+      ParteiName = NA,
+      ParteiFarbe,
+      Stimmentyp,
+      GueltigeStimmen,
+      Wahlberechtigte,
+      Stimmen,
+      StimmenAnteil = Stimmen/GueltigeStimmen,
+      StimmenProWahlberechtigte = Stimmen/Wahlberechtigte,
+      geometry = st_sfc(st_multipolygon(), crs = "WGS84")
+    ),
   kommunalwahl2020$gemeinderatErgebnisNachPartei %>%
     transmute(
-      Wahl = "Kommunalwahl 2020",
-      Wahltyp = "Gemeinderatswahl",
+      Wahl = "Gemeinderatswahl",
       Wahltag = as.Date("2020-03-15"),
       Stimmbezirk = stimmbezirk,
       ParteiKuerzel = partei,
       ParteiName = NA,
       ParteiFarbe = farbe,
+      Stimmentyp = NA,
       StimmenAnteil = stimmen/gueltigeStimmen,
+      StimmenProWahlberechtigte = NA,
       geometry = geometry
     ),
   btw2021$zweitstimmenNachParteiNachStimmbezirkAggregiert %>%
     transmute(
-      Wahl = "Bundestagswahl 2021",
-      Wahltyp = "Bundestagswahl (Zweitstimmen)",
+      Wahl = "Bundestagswahl",
       Wahltag = as.Date("2021-09-26"),
       Stimmbezirk = StimmbezirkAggregiert,
       ParteiKuerzel = ParteiKuerzel,
       ParteiName = ParteiName,
       ParteiFarbe = ParteiFarbe,
+      Stimmentyp = "Zweitstimme",
       StimmenAnteil = Stimmen/GueltigeStimmen,
+      StimmenProWahlberechtigte = NA,
       geometry = geometry
     ),
   landtagswahl2023$zweitstimmenNachParteiNachStimmbezirkAggregiert %>%
     transmute(
-      Wahl = "Landtagswahl 2023",
-      Wahltyp = "Landtagswahl (Zweitstimmen)",
+      Wahl = "Landtagswahl",
       Wahltag = as.Date("2023-10-08"),
       Stimmbezirk = StimmbezirkAggregiert,
       ParteiKuerzel = ParteiKuerzel,
       ParteiName = ParteiName,
       ParteiFarbe = ParteiFarbe,
+      Stimmentyp = "Zweitstimme",
       StimmenAnteil = Stimmen/GueltigeStimmen,
+      StimmenProWahlberechtigte = NA,
       geometry = geometry
     ),
   europawahl2024$ergebnisNachParteiNachStimmbezirkAggregiert %>%
     transmute(
-      Wahl = "Europawahl 2024",
-      Wahltyp = "Europawahl",
+      Wahl = "Europawahl",
       Wahltag = as.Date("2024-06-09"),
       Stimmbezirk = StimmbezirkAggregiert,
       ParteiKuerzel = ParteiKuerzel,
       ParteiName = ParteiName,
       ParteiFarbe = ParteiFarbe,
+      Stimmentyp = NA,
       StimmenAnteil = Stimmen/GueltigeStimmen,
+      StimmenProWahlberechtigte = NA,
       geometry = geometry
     ),
 ) %>%
-  unifyParteiFarben() %>%
+
+  # merge some renamed parties
+  left_join(
+    tribble(
+      ~ParteiKuerzelMerged, ~ParteiNameMerged, ~ParteiKuerzel, 
+
+      "Heimat/NPD", "Die Heimat, ehemals Nationaldemokratische Partei Deutschlands", "Heimat",
+      "Heimat/NPD", "Die Heimat, ehemals Nationaldemokratische Partei Deutschlands", "NPD",
+
+      "Verjüngungsforschung/Gesundheitsforschung", "Partei für schulmedizinische Verjüngungsforschung, ehemals Partei für Gesundheitsforschung", "Verjüngungsforschung",
+      "Verjüngungsforschung/Gesundheitsforschung", "Partei für schulmedizinische Verjüngungsforschung, ehemals Partei für Gesundheitsforschung", "Gesundheitsforschung",
+    ),
+    by = join_by(ParteiKuerzel)
+  ) %>%
+  mutate(
+    ParteiKuerzel = coalesce(ParteiKuerzelMerged, ParteiKuerzel),
+    ParteiName = coalesce(ParteiNameMerged, ParteiName),
+  ) %>%
+
+  # unify ParteiFarbe
+  group_by(ParteiKuerzel) %>%
+  fill(ParteiFarbe, .direction = "down") %>%
+  mutate(
+    ParteiFarbe = coalesce(last(ParteiFarbe), "#666666")
+  ) %>%
+  ungroup(ParteiKuerzel) %>%
+
   mutate(
     Wahl = as.factor(Wahl),
-    Wahltyp = as.factor(Wahltyp)
-  )
+    Stimmentyp = as.factor(Stimmentyp)
+  ) %>%
+  arrange(Wahltag) %>%
+  distinct(Wahl, Wahltag, Stimmbezirk, ParteiKuerzel, Stimmentyp, .keep_all = TRUE) %>%
+  identity()
 
 
 plotly_default_config <- function(p) {
@@ -174,7 +318,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
     fluidRow(
       box(
         title = "Wahlergebnisse im zeitlichen Verlauf",
-        width = 7,
+        width = 12,
         {
           data <- ergebnisseNachParteiNachStimmbezirk %>%
             filter(Stimmbezirk == "Gesamt") %>%
@@ -189,10 +333,58 @@ ui <- memoise(omit_args = "request", function(request, id) {
             name = ~ParteiKuerzel,
             color = ~I(ParteiFarbe),
             yhoverformat = ",.2%",
-            meta = ~paste0(ParteiKuerzel, " (", Wahl, ")"),
+            meta = ~paste0(ParteiKuerzel, " (", Wahl, " ", year(Wahltag), ")"),
             hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{meta}</b></extra>"
           ) %>%
             add_trace(type = "scatter", mode = "lines+markers") %>%
+            plotly_default_config() %>%
+            layout(yaxis = list(tickformat = ".0%", rangemode = "tozero")) %>%
+            layout(hovermode = "x", hoverdistance = 5) %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        }
+      ),
+      box(
+        title = "Wahlbeteiligung im zeitlichen Verlauf",
+        width = 4,
+        {
+          data <- ergebnisseAllgemeinNachStimmbezirk %>%
+            filter(Stimmbezirk == "Gesamt")
+
+          plot_ly(
+            data,
+            height = 300,
+            x = ~Wahltag,
+            yhoverformat = ",.2%",
+            meta = ~paste0(Wahl, " ", year(Wahltag)),
+            hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{meta}</b></extra>"
+          ) %>%
+            add_trace(y = ~Wahlbeteiligung, color = ~Wahl, type = "scatter", mode = "lines+markers") %>%
+            plotly_default_config() %>%
+            layout(yaxis = list(tickformat = ".0%", rangemode = "tozero")) %>%
+            layout(legend = list(x = 1.0, y = 0.0, xanchor = "right")) %>% # legend inside plot
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        }
+      ),
+      box(
+        title = "Briefwahlquote im zeitlichen Verlauf",
+        width = 4,
+        {
+          data <- ergebnisseAllgemeinNachStimmbezirk %>%
+            filter(Stimmbezirk == "Gesamt")
+
+          plot_ly(
+            data,
+            height = 300,
+            x = ~Wahltag,
+            yhoverformat = ",.2%",
+            meta = ~paste0(Wahl, " ", year(Wahltag)),
+            hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{meta}</b></extra>"
+          ) %>%
+            add_trace(y = ~Briefwahlquote, type = "scatter", mode = "lines+markers") %>%
             plotly_default_config() %>%
             layout(yaxis = list(tickformat = ".0%", rangemode = "tozero")) %>%
             plotly_hide_axis_titles() %>%
@@ -201,25 +393,24 @@ ui <- memoise(omit_args = "request", function(request, id) {
         }
       ),
       box(
-        title = "Wahlbeteiligung, Briefwahlquote und ungültige Stimmen im zeitlichen Verlauf",
-        width = 5,
+        title = "Ungültige Stimmen im zeitlichen Verlauf",
+        width = 4,
         {
           data <- ergebnisseAllgemeinNachStimmbezirk %>%
             filter(Stimmbezirk == "Gesamt")
 
           plot_ly(
             data,
+            height = 300,
             x = ~Wahltag,
             yhoverformat = ",.2%",
-            meta = ~paste0("(", Wahl, ")"),
-            hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{text} %{meta}</b></extra>"
+            meta = ~paste0(Wahl, " ", year(Wahltag)),
+            hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{meta}</b></extra>"
           ) %>%
-            add_trace(y = ~Wahlbeteiligung, name = "Wahlbeteiligung", text = "Wahlbeteiligung", type = "scatter", mode = "lines+markers") %>%
-            add_trace(y = ~Briefwahlquote, name = "Briefwahlquote", text = "Briefwahlquote", type = "scatter", mode = "lines+markers") %>%
-            add_trace(y = ~UngueltigQuote, name = "Ungültige Stimmen", text = "Ungültige Stimmen", type = "scatter", mode = "lines+markers") %>%
+            add_trace(y = ~UngueltigQuote, color = ~Wahl, type = "scatter", mode = "lines+markers") %>%
             plotly_default_config() %>%
             layout(yaxis = list(tickformat = ".0%", rangemode = "tozero")) %>%
-            layout(legend = list(x = 0.7, y = 0.2)) %>% # legend inside plot
+            layout(legend = list(x = 1.0, y = 1.0, xanchor = "right")) %>% # legend inside plot
             plotly_hide_axis_titles() %>%
             plotly_build() %>%
             identity()
@@ -239,10 +430,14 @@ ui <- memoise(omit_args = "request", function(request, id) {
               label = "Partei",
               choices = {
                 data <- ergebnisseNachParteiNachStimmbezirk %>%
-                  filter(Stimmbezirk != "Gesamt") %>%
-                  filter(!is.na(ParteiName)) %>%
-                  group_by(ParteiKuerzel, ParteiName) %>%
-                  summarise(MaxStimmenAnteil = max(StimmenAnteil), .groups = "drop") %>%
+                  filter(!st_is_empty(geometry)) %>%
+                  group_by(ParteiKuerzel) %>%
+                  fill(ParteiName, .direction = "downup") %>%
+                  summarise(
+                    MaxStimmenAnteil = max(StimmenAnteil),
+                    ParteiName = last(ParteiName),
+                    .groups = "drop",
+                  ) %>%
                   arrange(-MaxStimmenAnteil) %>% mutate(
                     Label = paste0(ParteiKuerzel, " (", ParteiName, ")")
                   )
@@ -260,9 +455,9 @@ ui <- memoise(omit_args = "request", function(request, id) {
         fluidRow(
           column(
             width = 4,
-            h4("Kommunalwahl 2020 (Gemeinderat)"),
-            leafletOutput(ns("mapParteistimmenKommunalwahl2020"), height = 550),
-            p("Hinweis: Bei der Kommunalwahl können die Briefwahlstimmen keinen (geografischen) Stimmbezirken zugeordnet werden, daher stellt diese Karte nur etwa die Hälfte der Stimmen dar."),
+            h4("Gemeinderatswahl 2020"),
+            leafletOutput(ns("mapParteistimmenGemeinderatswahl2020"), height = 550),
+            p("Hinweis: Bei den Kommunalwahlen können die Briefwahlstimmen keinen (geografischen) Stimmbezirken zugeordnet werden, daher stellt diese Karte nur etwa die Hälfte der Stimmen dar."),
           ),
           column(
             width = 4,
@@ -344,6 +539,21 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
       )
     ),
+
+    fluidRow(
+      box(
+        title = "Datengrundlage",
+        status = "primary",
+        solidHeader = TRUE,
+        width = 12,
+        tagList(
+          p(HTML("Datengrundlage für alle Wahlen seit 2020 ist die Gemeinde Vaterstetten selbst; für Details siehe die jeweiligen Unterseiten.")),
+          p(HTML('Datenquelle für alle Wahlen vor 2020: Bayerisches Landesamt für Statistik – <a href="https://www.statistik.bayern.de">www.statistik.bayern.de</a>.')),
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen", "Zum Daten-Download mit Dokumentation")),
+        ),
+      ),
+    ),
+
   ) %>% renderTags()
 })
 
@@ -355,7 +565,7 @@ server <- function(id, parentSession) {
 
       ## Parteistimmen
 
-      renderParteistimmenMap <- function(wahl) {
+      renderParteistimmenMap <- function(wahl, wahljahr) {
         renderLeaflet({
         leaflet(options = leafletOptions(
           zoom = 13,
@@ -363,28 +573,30 @@ server <- function(id, parentSession) {
           scrollWheelZoom = FALSE
         )) %>%
           addProviderTiles(providers$CartoDB.Positron) %>%
-          printParteistimmenMap(wahl) %>%
+          printParteistimmenMap(wahl, wahljahr) %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
         })
       }
 
-      output$mapParteistimmenKommunalwahl2020 <- renderParteistimmenMap("Kommunalwahl 2020")
-      output$mapParteistimmenBundestagswahl2021 <- renderParteistimmenMap("Bundestagswahl 2021")
-      output$mapParteistimmenLandtagswahl2023 <- renderParteistimmenMap("Landtagswahl 2023")
-      output$mapParteistimmenEuropawahl2024 <- renderParteistimmenMap("Europawahl 2024")
+      output$mapParteistimmenGemeinderatswahl2020 <- renderParteistimmenMap("Gemeinderatswahl", 2020)
+      output$mapParteistimmenBundestagswahl2021 <- renderParteistimmenMap("Bundestagswahl", 2021)
+      output$mapParteistimmenLandtagswahl2023 <- renderParteistimmenMap("Landtagswahl", 2023)
+      output$mapParteistimmenEuropawahl2024 <- renderParteistimmenMap("Europawahl", 2024)
 
       observe({
-        printParteistimmenMap(leafletProxy("mapParteistimmenKommunalwahl2020"), "Kommunalwahl 2020")
-        printParteistimmenMap(leafletProxy("mapParteistimmenBundestagswahl2021"), "Bundestagswahl 2021")
-        printParteistimmenMap(leafletProxy("mapParteistimmenLandtagswahl2023"), "Landtagswahl 2023")
-        printParteistimmenMap(leafletProxy("mapParteistimmenEuropawahl2024"), "Europawahl 2024")
+        printParteistimmenMap(leafletProxy("mapParteistimmenGemeinderatswahl2020"), "Gemeinderatswahl", 2020)
+        printParteistimmenMap(leafletProxy("mapParteistimmenBundestagswahl2021"), "Bundestagswahl", 2021)
+        printParteistimmenMap(leafletProxy("mapParteistimmenLandtagswahl2023"), "Landtagswahl", 2023)
+        printParteistimmenMap(leafletProxy("mapParteistimmenEuropawahl2024"), "Europawahl", 2024)
       })
 
-      printParteistimmenMap <- function(leafletObject, wahl) {
+      printParteistimmenMap <- function(leafletObject, wahl, wahljahr) {
         ergebnisAllElections <- ergebnisseNachParteiNachStimmbezirk %>%
+          filter(!st_is_empty(geometry)) %>%
           filter(ParteiKuerzel == input$partei)
         ergebnis <- ergebnisAllElections %>%
-          filter(Wahl == wahl)
+          filter(Wahl == wahl) %>%
+          filter(year(Wahltag) == wahljahr)
 
         if (nrow(ergebnis) == 0) {
           return(
@@ -402,6 +614,7 @@ server <- function(id, parentSession) {
 
         dataForScale <- if (input$switchParteistimmenIndividualScale) ergebnis else ergebnisAllElections
         pal <- colorNumeric(c("#ffffff", parteiFarbe), c(0, max(dataForScale$StimmenAnteil)))
+        palForLegend <- colorNumeric(c("#ffffff", parteiFarbe), c(0, max(dataForScale$StimmenAnteil)) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>%
@@ -427,10 +640,10 @@ server <- function(id, parentSession) {
           ) %>%
           addLegend("topright",
             data = dataForScale,
-            pal = pal,
-            values = ~StimmenAnteil,
+            pal = palForLegend,
+            values = ~StimmenAnteil * -1,
             title = NULL,
-            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
             opacity = 0.8,
             bins = 5
           )
@@ -439,7 +652,7 @@ server <- function(id, parentSession) {
 
       ## Wahlbeteiligung
 
-      renderWahlbeteiligungMap <- function(wahl) {
+      renderWahlbeteiligungMap <- function(wahl, wahljahr) {
         renderLeaflet({
         leaflet(options = leafletOptions(
           zoom = 13,
@@ -447,29 +660,32 @@ server <- function(id, parentSession) {
           scrollWheelZoom = FALSE
         )) %>%
           addProviderTiles(providers$CartoDB.Positron) %>%
-          printWahlbeteiligungMap(wahl) %>%
+          printWahlbeteiligungMap(wahl, wahljahr) %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
         })
       }
 
-      output$mapWahlbeteiligungBundestagswahl2021 <- renderWahlbeteiligungMap("Bundestagswahl 2021")
-      output$mapWahlbeteiligungLandtagswahl2023 <- renderWahlbeteiligungMap("Landtagswahl 2023")
-      output$mapWahlbeteiligungEuropawahl2024 <- renderWahlbeteiligungMap("Europawahl 2024")
+      output$mapWahlbeteiligungBundestagswahl2021 <- renderWahlbeteiligungMap("Bundestagswahl", 2021)
+      output$mapWahlbeteiligungLandtagswahl2023 <- renderWahlbeteiligungMap("Landtagswahl", 2023)
+      output$mapWahlbeteiligungEuropawahl2024 <- renderWahlbeteiligungMap("Europawahl", 2024)
 
       observe({
-        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungBundestagswahl2021"), "Bundestagswahl 2021")
-        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungLandtagswahl2023"), "Landtagswahl 2023")
-        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungEuropawahl2024"), "Europawahl 2024")
+        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungBundestagswahl2021"), "Bundestagswahl", 2021)
+        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungLandtagswahl2023"), "Landtagswahl", 2023)
+        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungEuropawahl2024"), "Europawahl", 2024)
       })
 
-      printWahlbeteiligungMap <- function(leafletObject, wahl) {
+      printWahlbeteiligungMap <- function(leafletObject, wahl, wahljahr) {
         ergebnisAllElections <- ergebnisseAllgemeinNachStimmbezirk %>%
+          filter(!st_is_empty(geometry)) %>%
           filter(!is.na(Wahlbeteiligung))
         ergebnis <- ergebnisAllElections %>%
-          filter(Wahl == wahl)
+          filter(Wahl == wahl) %>%
+          filter(year(Wahltag) == wahljahr)
 
         dataForScale <- if (input$switchWahlbeteiligungIndividualScale) ergebnis else ergebnisAllElections
         pal <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Wahlbeteiligung), max(dataForScale$Wahlbeteiligung)))
+        palForLegend <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Wahlbeteiligung), max(dataForScale$Wahlbeteiligung)) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>%
@@ -495,10 +711,10 @@ server <- function(id, parentSession) {
           ) %>%
           addLegend("topright",
             data = dataForScale,
-            pal = pal,
-            values = ~Wahlbeteiligung,
+            pal = palForLegend,
+            values = ~Wahlbeteiligung * -1,
             title = NULL,
-            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
             opacity = 0.8,
             bins = 5
           )
@@ -507,7 +723,7 @@ server <- function(id, parentSession) {
 
       ## Briefwahlquote
 
-      renderBriefwahlquoteMap <- function(wahl) {
+      renderBriefwahlquoteMap <- function(wahl, wahljahr) {
         renderLeaflet({
         leaflet(options = leafletOptions(
           zoom = 13,
@@ -515,29 +731,32 @@ server <- function(id, parentSession) {
           scrollWheelZoom = FALSE
         )) %>%
           addProviderTiles(providers$CartoDB.Positron) %>%
-          printBriefwahlquoteMap(wahl) %>%
+          printBriefwahlquoteMap(wahl, wahljahr) %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
         })
       }
 
-      output$mapBriefwahlquoteBundestagswahl2021 <- renderBriefwahlquoteMap("Bundestagswahl 2021")
-      output$mapBriefwahlquoteLandtagswahl2023 <- renderBriefwahlquoteMap("Landtagswahl 2023")
-      output$mapBriefwahlquoteEuropawahl2024 <- renderBriefwahlquoteMap("Europawahl 2024")
+      output$mapBriefwahlquoteBundestagswahl2021 <- renderBriefwahlquoteMap("Bundestagswahl", 2021)
+      output$mapBriefwahlquoteLandtagswahl2023 <- renderBriefwahlquoteMap("Landtagswahl", 2023)
+      output$mapBriefwahlquoteEuropawahl2024 <- renderBriefwahlquoteMap("Europawahl", 2024)
 
       observe({
-        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteBundestagswahl2021"), "Bundestagswahl 2021")
-        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteLandtagswahl2023"), "Landtagswahl 2023")
-        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteEuropawahl2024"), "Europawahl 2024")
+        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteBundestagswahl2021"), "Bundestagswahl", 2021)
+        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteLandtagswahl2023"), "Landtagswahl", 2023)
+        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteEuropawahl2024"), "Europawahl", 2024)
       })
 
-      printBriefwahlquoteMap <- function(leafletObject, wahl) {
+      printBriefwahlquoteMap <- function(leafletObject, wahl, wahljahr) {
         ergebnisAllElections <- ergebnisseAllgemeinNachStimmbezirk %>%
+          filter(!st_is_empty(geometry)) %>%
           filter(!is.na(Briefwahlquote))
         ergebnis <- ergebnisAllElections %>%
-          filter(Wahl == wahl)
+          filter(Wahl == wahl) %>%
+          filter(year(Wahltag) == wahljahr)
 
         dataForScale <- if (input$switchBriefwahlquoteIndividualScale) ergebnis else ergebnisAllElections
         pal <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Briefwahlquote), max(dataForScale$Briefwahlquote)))
+        palForLegend <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Briefwahlquote), max(dataForScale$Briefwahlquote)) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>%
@@ -563,10 +782,10 @@ server <- function(id, parentSession) {
           ) %>%
           addLegend("topright",
             data = dataForScale,
-            pal = pal,
-            values = ~Briefwahlquote,
+            pal = palForLegend,
+            values = ~Briefwahlquote * -1,
             title = NULL,
-            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
             opacity = 0.8,
             bins = 5
           )

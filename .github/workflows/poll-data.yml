@@ -11,11 +11,6 @@ concurrency:
 # GENESIS_LFSTAT_PASSWORD - Genesis LfStat Bayern credentials
 # GITHUB_PAT - a personal access token with the repo scope
 
-on:
-  schedule:
-    - cron: '*/20 * * * *' # Every 20 minutes
-  workflow_dispatch:
-
 jobs:
   poll-data:
     environment: vaterstetten-in-zahlen.de

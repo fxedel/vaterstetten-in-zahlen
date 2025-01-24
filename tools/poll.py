@@ -41,6 +41,11 @@ needed_pollers = pollers.all
 if args.pollers:
   needed_pollers = {}
 
+  if args.pollers == ['hourly']:
+    args.pollers = pollers.hourly
+  elif args.pollers == ['daily']:
+    args.pollers = pollers.daily
+
   for name in args.pollers:
     if not name in pollers.all:
       print('Unknown poller %s' % name)

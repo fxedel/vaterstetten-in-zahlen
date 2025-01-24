@@ -33,7 +33,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 |Spalte|Format|Beschreibung
 |-|-|-
 |`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 1` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`ParteiKuerzel`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`ParteiKuerzel`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `Grüne`)
 |`Stimmen`|integer|Anzahl gültiger Stimmen für diese Partei
 
 ### Quellen
@@ -47,7 +47,7 @@ Der Datensatz [landtagswahlDirektkandidaten.csv](./landtagswahlDirektkandidaten.
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`ParteiKuerzel`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`ParteiKuerzel`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `Grüne`)
 |`Direktkandidat`|text|Name der Person
 
 ### Quellen
@@ -64,7 +64,7 @@ Der Datensatz wurde händisch erstellt.
 |Spalte|Format|Beschreibung
 |-|-|-
 |`ParteiNr`|integer|Nummer der Partei (vorgegeben durch Rohformat)
-|`ParteiKuerzel`|text|Kurzname der Partei (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`ParteiKuerzel`|text|Kurzname der Partei (z.&nbsp;B. `CSU` oder `Grüne`)
 |`ParteiName`|text|Offizieller Name der Partei (z.&nbsp;B. `Christlich-Soziale Union in Bayern e.V.` oder `BÜNDNIS 90/DIE GRÜNEN`)
 |`ParteiFarbe`|[hexcolor](https://de.wikipedia.org/wiki/Hexadezimale_Farbdefinition)|(Inoffizielle) Farbe der Partei (z.&nbsp;B. `#ff0000`)
 

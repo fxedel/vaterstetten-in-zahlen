@@ -41,7 +41,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
 |`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
-|`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `Grüne`)
 |`stimmen`|integer|Anzahl gültiger Stimmen für diese Partei
 |`stimmzettelNurListenkreuz`|integer|Anzahl Stimmzettel, auf denen nur diese Partei-Liste angekreuzt wurde (ohne „Häufeln“)
 |`stimmzettelNurEineListe`|integer|Anzahl Stimmzettel, auf denen die Stimmen nur innerhalb dieser Partei verteilt wurden (inkl. reinem Listenkreuz)
@@ -63,7 +63,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |-|-|-
 |`stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 01` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
 |`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
-|`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `Grüne`)
 |`listenNr`|integer|Listen-Nummer der Person, auf die sich die Zeile bezieht (z.&nbsp;B. `1` für den 1. Listenplatz)
 |`stimmen`|integer|Anzahl gültiger Stimmen für diese Person
 
@@ -78,7 +78,7 @@ Der Datensatz [gemeinderatPersonen.csv](./gemeinderatPersonen.csv) umfasst die N
 
 |Spalte|Format|Beschreibung
 |-|-|-
-|`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `Grüne`)
 |`listenNr`|integer|Listen-Nummer der Person, auf die sich die Zeile bezieht (z.&nbsp;B. `1` für den 1. Listenplatz)
 |`name`|text|Name der Person
 
@@ -96,7 +96,7 @@ Der Datensatz wurde händisch erstellt.
 |Spalte|Format|Beschreibung
 |-|-|-
 |`parteiNr`|integer|Nummer der Partei (vorgegeben durch Rohformat)
-|`partei`|text|Kurzname der Partei (z.&nbsp;B. `CSU` oder `GRÜNE`)
+|`partei`|text|Kurzname der Partei (z.&nbsp;B. `CSU` oder `Grüne`)
 |`farbe`|[hexcolor](https://de.wikipedia.org/wiki/Hexadezimale_Farbdefinition)|(Inoffizielle) Farbe der Partei (z.&nbsp;B. `#ff0000`)
 
 ### Quellen

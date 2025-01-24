@@ -231,6 +231,7 @@ server <- function(id) {
         partei <- gemeinderatParteien %>% filter(partei == input$parteistimmenMapPartei) %>% first()
         ergebnisPartei <- gemeinderatErgebnisNachPartei %>% filter(partei == input$parteistimmenMapPartei)
         pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPartei$stimmenAnteil)))
+        palForLegend <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPartei$stimmenAnteil)) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
@@ -252,10 +253,10 @@ server <- function(id) {
           ) %>%
           addLegend("topright",
             data = ergebnisPartei,
-            pal = pal,
-            values = ~stimmenAnteil,
+            pal = palForLegend,
+            values = ~stimmenAnteil * -1,
             title = NULL,
-            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
             opacity = 0.8,
             bins = 5
           )
@@ -285,6 +286,7 @@ server <- function(id) {
         ergebnisPerson <- gemeinderatErgebnisNachPerson %>% filter(partei == personPartei) %>% filter(listenNr == personListenNr)
 
         pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPerson$stimmenAnteilPartei)))
+        palForLegend <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPerson$stimmenAnteilPartei)) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
@@ -306,10 +308,10 @@ server <- function(id) {
           ) %>%
           addLegend("topright",
             data = ergebnisPerson,
-            pal = pal,
-            values = ~stimmenAnteilPartei,
+            pal = palForLegend,
+            values = ~stimmenAnteilPartei * -1,,
             title = NULL,
-            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
             opacity = 0.8,
             bins = 5
           )

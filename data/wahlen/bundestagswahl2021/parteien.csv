@@ -3,15 +3,15 @@ ParteiNr,ParteiKuerzel,ParteiName,ParteiFarbe
 2,"SPD","Sozialdemokratische Partei Deutschlands",#ff0000
 3,"AfD","Alternative für Deutschland",#1e90ff
 4,"FDP","Freie Demokratische Partei",#ffe94c
-5,"GRÜNE","BÜNDNIS 90/DIE GRÜNEN",#00a13f
-6,"DIE LINKE","DIE LINKE",#8b0000
+5,"Grüne","BÜNDNIS 90/DIE GRÜNEN",#00a13f
+6,"Die Linke","Die Linke",#8b0000
 7,"FW","FREIE WÄHLER",#f29204
 8,"ÖDP","Ökologisch-Demokratische Partei",#ffa338
 9,"Tierschutzpartei","PARTEI MENSCH UMWELT TIERSCHUTZ",#228b22
 10,"BP","Bayernpartei",#003399
 11,"Die PARTEI","Partei für Arbeit, Rechtsstaat, Tierschutz, Elitenförderung und basisdemokratische Initiative",#a91d20
-12,"PIRATEN","Piratenpartei Deutschland",#ff8800
-13,"NPD","Nationaldemokratische Partei Deutschlands",#cd0000
+12,"Piraten","Piratenpartei Deutschland",#ff8800
+13,"NPD","Nationaldemokratische Partei Deutschlands",#8b4726
 14,"V-Partei³","V-Partei³ - Partei für Veränderung, Vegetarier und Veganer",#9acd32
 15,"Gesundheitsforschung","Partei für Gesundheitsforschung",#000000
 16,"MLPD","Marxistisch-Leninistische Partei Deutschlands",#ff0000
@@ -21,7 +21,7 @@ ParteiNr,ParteiKuerzel,ParteiName,ParteiFarbe
 20,"III. Weg","DER DRITTE WEG",#264707
 21,"du.","Die Urbane. Eine HipHop Partei",#000000
 22,"LKR","Liberal-Konservative Reformer",#d2691e
-23,"Die Humanisten","Partei der Humanisten",#ee30a7
+23,"PdH","Partei der Humanisten",#ee30a7
 24,"Team Todenhöfer","Team Todenhöfer – Die Gerechtigkeitspartei",#cd2626
 25,"UNABHÄNGIGE","UNABHÄNGIGE für bürgernahe Demokratie",#ff8c00
 26,"Volt","Volt Deutschland",#502379

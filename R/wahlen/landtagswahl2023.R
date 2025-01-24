@@ -378,6 +378,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         {
           data <- erststimmenAllgemeinNachStimmbezirkAggregiert
           pal <- colorNumeric(c("#bbbbbb", "#000000"), c(0.65, 0.95))
+          palForLegend <- colorNumeric(c("#bbbbbb", "#000000"), c(0.65, 0.95) * -1, reverse = TRUE)
 
           leaflet(height = 550, options = leafletOptions(
             zoom = 13,
@@ -406,10 +407,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
             ) %>%
             addLegend("topright",
               data = data,
-              pal = pal,
-              values = ~Wahlbeteiligung,
+              pal = palForLegend,
+              values = ~Wahlbeteiligung * -1,
               title = NULL,
-              labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+              labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
               opacity = 0.8,
               bins = 5
             )
@@ -426,6 +427,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         {
           data <- erststimmenAllgemeinNachStimmbezirkAggregiert
           pal <- colorNumeric(c("#888888", "#000000"), c(min(data$Briefwahlquote), max(data$Briefwahlquote)))
+          palForLegend <- colorNumeric(c("#888888", "#000000"), c(min(data$Briefwahlquote), max(data$Briefwahlquote)) * -1, reverse = TRUE)
 
           leaflet(height = 550, options = leafletOptions(
             zoom = 13,
@@ -454,10 +456,10 @@ ui <- memoise(omit_args = "request", function(request, id) {
             ) %>%
             addLegend("topright",
               data = data,
-              pal = pal,
-              values = ~Briefwahlquote,
+              pal = palForLegend,
+              values = ~Briefwahlquote * -1,
               title = NULL,
-              labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+              labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
               opacity = 0.8,
               bins = 5
             )
@@ -510,6 +512,7 @@ server <- function(id) {
         partei <- parteien %>% filter(ParteiKuerzel == input$erststimmenMapPartei) %>% first()
         ergebnisPartei <- erststimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$erststimmenMapPartei)
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
+        palForLegend <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
@@ -535,10 +538,10 @@ server <- function(id) {
           ) %>%
           addLegend("topright",
             data = ergebnisPartei,
-            pal = pal,
-            values = ~StimmenAnteil,
+            pal = palForLegend,
+            values = ~StimmenAnteil * -1,
             title = NULL,
-            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
             opacity = 0.8,
             bins = 5
           )
@@ -562,6 +565,7 @@ server <- function(id) {
         partei <- parteien %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei) %>% first()
         ergebnisPartei <- zweitstimmenNachParteiNachStimmbezirkAggregiert %>% filter(ParteiKuerzel == input$zweitstimmenMapPartei)
         pal <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)))
+        palForLegend <- colorNumeric(c("#ffffff", partei$ParteiFarbe), c(0, max(ergebnisPartei$StimmenAnteil)) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
@@ -587,10 +591,10 @@ server <- function(id) {
           ) %>%
           addLegend("topright",
             data = ergebnisPartei,
-            pal = pal,
-            values = ~StimmenAnteil,
+            pal = palForLegend,
+            values = ~StimmenAnteil * -1,
             title = NULL,
-            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x),
+            labFormat = labelFormat(suffix = " %", transform = function(x) 100 * x * -1),
             opacity = 0.8,
             bins = 5
           )

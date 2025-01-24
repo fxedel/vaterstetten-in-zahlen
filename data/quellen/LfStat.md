@@ -1,6 +1,6 @@
 # Bayerisches Landesamt für Statistik
 
-Die Veröffentlichungen und Daten des Bayerischen Landesamtes für Statistik stehen unter einer Creative Commons Namensnennung 3.0 Deutschland Lizenz (CC BY 3.0 DE) (siehe [Impressum](https://www.statistikdaten.bayern.de/genesis/online?Menu=Impressum)).
+Die Veröffentlichungen und Daten des Bayerischen Landesamtes für Statistik stehen unter einer Creative Commons Namensnennung 4.0 International Lizenz (CC BY 4.0 DE) (siehe [Impressum](https://www.statistikdaten.bayern.de/genesis/online?Menu=Impressum)).
 
 Die Namensnennung des Bayerischen Landesamtes für Statistik als Rechteinhaber hat in folgender Weise zu erfolgen: „Datenquelle: Bayerisches Landesamt für Statistik - [www.statistik.bayern.de](https://www.statistik.bayern.de)“
 
@@ -14,6 +14,7 @@ Die Vorgänger des Landesamts für Statistik hießen unter anderem „Königlich
 * 2020: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2020/09175132.pdf
 * 2021: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2021/09175132.pdf
 * 2022: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2022/09175132.pdf
+* 2023: https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2022/09175132.pdf
 
 
 ## GENESIS-Tabellen
@@ -79,3 +80,33 @@ Berücksichtigt Bevölkerungsstand 2011-2019, Fertilität, Mortalität, Binnenwa
 * [Alle Tabellen](https://www.statistikdaten.bayern.de/genesis/online?operation=statistic&code=12613)
 * [12613-002](https://www.statistikdaten.bayern.de/genesis/online/table/12613-002): seit 1960 im 10-Jahresabstand, Gestorbene
 * [12613-003z](https://www.statistikdaten.bayern.de/genesis/online/table/12613-003z): seit 1972 jährlich, Gestorbene nach Geschlecht
+
+### Wahlen
+
+#### Bundestagswahlstatistik
+
+* [Alle Tabellen](https://www.statistikdaten.bayern.de/genesis/online?operation=statistic&code=14111)
+* [14111-001z](https://www.statistikdaten.bayern.de/genesis/online/table/14111-001z): seit 1949, Wahlberechtigte, Wähler, Wahlbeteiligung
+* [14111-002z](https://www.statistikdaten.bayern.de/genesis/online/table/14111-002z): seit 1949, Gültige Stimmen, Ungültige Stimmen nach Erst- und Zweitstimme (1949 nur Zweitstimme)
+* [14111-003z](https://www.statistikdaten.bayern.de/genesis/online/table/14111-003z): seit 1949, Erst- oder Zweitstimmen nach Partei (1949 nur Zweitstimmen)
+
+#### Europawahlstatistik
+
+* [Alle Tabellen](https://www.statistikdaten.bayern.de/genesis/online?operation=statistic&code=14211)
+* [14211-001z](https://www.statistikdaten.bayern.de/genesis/online/table/14211-001z): seit 1979, Wahlberechtigte, Wähler, Wahlbeteiligung
+* [14211-002z](https://www.statistikdaten.bayern.de/genesis/online/table/14211-002z): seit 1979, Gültige Stimmen, Ungültige Stimmen
+* [14211-003z](https://www.statistikdaten.bayern.de/genesis/online/table/14211-003z): seit 1979, Stimmen nach Partei
+
+#### Landtagswahlstatistik
+
+* [Alle Tabellen](https://www.statistikdaten.bayern.de/genesis/online?operation=statistic&code=14311)
+* [14311-001z](https://www.statistikdaten.bayern.de/genesis/online/table/14311-001z): seit 1946, Wahlberechtigte, Wähler, Wahlbeteiligung
+* [14311-002z](https://www.statistikdaten.bayern.de/genesis/online/table/14311-002z): seit 1946, Abgegebene Stimmen, Gültige Stimmen, Ungültige Stimmen
+* [14311-003z](https://www.statistikdaten.bayern.de/genesis/online/table/14311-003z): seit 1946, Erst- oder Gesamtstimmen nach Partei (1946 nur Gesamtstimmen)
+
+#### Gemeinderatswahlen
+
+* [Alle Tabellen](https://www.statistikdaten.bayern.de/genesis/online?operation=statistic&code=14431)
+* [14431-001z](https://www.statistikdaten.bayern.de/genesis/online/table/14431-001z): seit 1978, Wahlberechtigte, Wähler, Wahlbeteiligung
+* [14431-002z](https://www.statistikdaten.bayern.de/genesis/online/table/14431-002z): seit 1978, Abgegebene Stimmzettel, Gültige Stimmzettel, Ungültige Stimmzettel
+* [14431-003z](https://www.statistikdaten.bayern.de/genesis/online/table/14431-003z): seit 1978, Gewichtete Stimmen nach Partei

@@ -5,7 +5,7 @@ import requests
 BASE_URL_DESTATIS = 'https://www-genesis.destatis.de/genesisWS/rest/2020' # Statistisches Bundesamt
 BASE_URL_LFSTAT_BAYERN = 'https://www.statistikdaten.bayern.de/genesisWS/rest/2020' # Landesamt für Statistik Bayern
 
-# API documentation: https://www-genesis.destatis.de/genesis/misc/GENESIS-Webservices_Einfuehrung.pdf
+# API documentation: https://www-genesis.destatis.de/datenbank/online/docs/GENESIS-Webservices_Einfuehrung.pdf
 
 class Client:
   base_url: str
