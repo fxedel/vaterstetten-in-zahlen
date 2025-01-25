@@ -261,8 +261,8 @@ ergebnisseNachParteiNachStimmbezirk <- bind_rows(
       "Heimat/NPD", "Die Heimat, ehemals Nationaldemokratische Partei Deutschlands", "Heimat",
       "Heimat/NPD", "Die Heimat, ehemals Nationaldemokratische Partei Deutschlands", "NPD",
 
-      "Verjüngungsforschung/Gesundheitsforschung", "Partei für schulmedizinische Verjüngungsforschung, ehemals Partei für Gesundheitsforschung", "Verjüngungsforschung",
-      "Verjüngungsforschung/Gesundheitsforschung", "Partei für schulmedizinische Verjüngungsforschung, ehemals Partei für Gesundheitsforschung", "Gesundheitsforschung",
+      "Verjüngungs-/Gesundheitsforschung", "Partei für schulmedizinische Verjüngungsforschung, ehemals Partei für Gesundheitsforschung", "Verjüngungsforschung",
+      "Verjüngungs-/Gesundheitsforschung", "Partei für schulmedizinische Verjüngungsforschung, ehemals Partei für Gesundheitsforschung", "Gesundheitsforschung",
     ),
     by = join_by(ParteiKuerzel)
   ) %>%
@@ -276,6 +276,14 @@ ergebnisseNachParteiNachStimmbezirk <- bind_rows(
   fill(ParteiFarbe, .direction = "down") %>%
   mutate(
     ParteiFarbe = coalesce(last(ParteiFarbe), "#666666")
+  ) %>%
+  ungroup(ParteiKuerzel) %>%
+
+  # unify ParteiName
+  group_by(ParteiKuerzel) %>%
+  fill(ParteiName, .direction = "down") %>%
+  mutate(
+    ParteiName = coalesce(ParteiName, last(ParteiName))
   ) %>%
   ungroup(ParteiKuerzel) %>%
 
@@ -319,31 +327,41 @@ ui <- memoise(omit_args = "request", function(request, id) {
       box(
         title = "Wahlergebnisse im zeitlichen Verlauf",
         width = 12,
-        {
-          data <- ergebnisseNachParteiNachStimmbezirk %>%
-            filter(Stimmbezirk == "Gesamt") %>%
-            group_by(ParteiKuerzel) %>%
-            mutate(MaxStimmenAnteil = max(StimmenAnteil)) %>%
-            filter(MaxStimmenAnteil >= 0.02)
+        selectInput(
+          ns("plotParteistimmenSelectPartei"),
+          label = "Partei",
+          selected = "allWith5Percent",
+          choices = {
+            data <- bind_rows(
+              tribble(
+                ~Key, ~Label,
+                "allWith5Percent", "Alle Parteien mit mindestens 5%",
+                "allWith2Percent", "Alle Parteien mit mindestens 2%",
+              ),
+              ergebnisseNachParteiNachStimmbezirk %>%
+                filter(Stimmbezirk == "Gesamt") %>%
+                group_by(ParteiKuerzel, ParteiName) %>%
+                summarise(
+                  MaxStimmenAnteil = max(StimmenAnteil),
+                  MeanStimmenAnteil = mean(StimmenAnteil),
+                  LastStimmenAnteil = last(StimmenAnteil),
+                  Teilnahmen = n(),
+                  ShowLegend = MaxStimmenAnteil >= 0.03,
+                  .groups = "drop"
+                ) %>%
+                filter(Teilnahmen >= 3) %>%
+                arrange(-MaxStimmenAnteil) %>%
+                transmute(
+                  Key = ParteiKuerzel,
+                  Label = ifelse(is.na(ParteiName), ParteiKuerzel, paste0(ParteiKuerzel, " (", ParteiName, ")"))
+                )
+            )
 
-          plot_ly(
-            data,
-            x = ~Wahltag,
-            y = ~StimmenAnteil,
-            name = ~ParteiKuerzel,
-            color = ~I(ParteiFarbe),
-            yhoverformat = ",.2%",
-            meta = ~paste0(ParteiKuerzel, " (", Wahl, " ", year(Wahltag), ")"),
-            hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{meta}</b></extra>"
-          ) %>%
-            add_trace(type = "scatter", mode = "lines+markers") %>%
-            plotly_default_config() %>%
-            layout(yaxis = list(tickformat = ".0%", rangemode = "tozero")) %>%
-            layout(hovermode = "x", hoverdistance = 5) %>%
-            plotly_hide_axis_titles() %>%
-            plotly_build() %>%
-            identity()
-        }
+            choices = setNames(data$Key, data$Label)
+            choices
+          },
+        ),
+        plotlyOutput(ns("plotParteistimmen")),
       ),
       box(
         title = "Wahlbeteiligung im zeitlichen Verlauf",
@@ -426,7 +444,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
           column(
             width = 10,
             selectInput(
-              ns("partei"),
+              ns("mapParteistimmenSelectPartei"),
               label = "Partei",
               choices = {
                 data <- ergebnisseNachParteiNachStimmbezirk %>%
@@ -438,7 +456,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
                     ParteiName = last(ParteiName),
                     .groups = "drop",
                   ) %>%
-                  arrange(-MaxStimmenAnteil) %>% mutate(
+                  arrange(-MaxStimmenAnteil) %>%
+                  mutate(
                     Label = paste0(ParteiKuerzel, " (", ParteiName, ")")
                   )
 
@@ -449,7 +468,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
           ),
           column(
             width = 2,
-            input_switch(ns("switchParteistimmenIndividualScale"), "Individuelle Farbskala pro Wahl"),
+            input_switch(ns("mapParteistimmenSwitchIndividualScale"), "Individuelle Farbskala pro Wahl"),
           ),
         ),
         fluidRow(
@@ -487,7 +506,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         fluidRow(
           column(
             width = 2,
-            input_switch(ns("switchWahlbeteiligungIndividualScale"), "Individuelle Farbskala pro Wahl"),
+            input_switch(ns("mapWahlbeteiligungSwitchIndividualScale"), "Individuelle Farbskala pro Wahl"),
           ),
         ),
         fluidRow(
@@ -517,7 +536,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         fluidRow(
           column(
             width = 2,
-            input_switch(ns("switchBriefwahlquoteIndividualScale"), "Individuelle Farbskala pro Wahl"),
+            input_switch(ns("mapBriefwahlquoteSwitchIndividualScale"), "Individuelle Farbskala pro Wahl"),
           ),
         ),
         fluidRow(
@@ -563,6 +582,50 @@ server <- function(id, parentSession) {
     id,
     function(input, output, session) {
 
+      output$plotParteistimmen <- renderPlotly({
+        data <- ergebnisseNachParteiNachStimmbezirk %>%
+          filter(Stimmbezirk == "Gesamt")
+
+        ytickformat = ".0%"
+
+        if (input$plotParteistimmenSelectPartei == "allWith5Percent") {
+          data <- data %>%
+            group_by(ParteiKuerzel) %>%
+            mutate(MaxStimmenAnteil = max(StimmenAnteil)) %>%
+            filter(MaxStimmenAnteil >= 0.05)
+        } else if (input$plotParteistimmenSelectPartei == "allWith2Percent") {
+          data <- data %>%
+            group_by(ParteiKuerzel) %>%
+            mutate(MaxStimmenAnteil = max(StimmenAnteil)) %>%
+            filter(MaxStimmenAnteil >= 0.02)
+        } else {
+          data <- data %>%
+            filter(ParteiKuerzel == input$plotParteistimmenSelectPartei)
+          ytickformat = ".2%"
+        }
+
+        plot_ly(
+            data,
+            x = ~Wahltag,
+            y = ~StimmenAnteil,
+            name = ~ParteiKuerzel,
+            color = ~I(ParteiFarbe),
+            yhoverformat = ",.2%",
+            meta = ~paste0(ParteiKuerzel, " (", Wahl, " ", year(Wahltag), ")"),
+            hovertemplate = "%{y}<extra><b style='color: rgb(68, 68, 68); font-weight: normal !important'>%{meta}</b></extra>"
+          ) %>%
+            add_trace(type = "scatter", mode = "lines+markers", showlegend = FALSE) %>%
+            plotly_default_config() %>%
+            layout(xaxis = list(range = c("1945-01-01", "2025-01-01"))) %>%
+            layout(yaxis = list(tickformat = ytickformat, rangemode = "tozero")) %>%
+            layout(hovermode = "x", hoverdistance = 5) %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+      })
+
+
+
       ## Parteistimmen
 
       renderParteistimmenMap <- function(wahl, wahljahr) {
@@ -593,7 +656,7 @@ server <- function(id, parentSession) {
       printParteistimmenMap <- function(leafletObject, wahl, wahljahr) {
         ergebnisAllElections <- ergebnisseNachParteiNachStimmbezirk %>%
           filter(!st_is_empty(geometry)) %>%
-          filter(ParteiKuerzel == input$partei)
+          filter(ParteiKuerzel == input$mapParteistimmenSelectPartei)
         ergebnis <- ergebnisAllElections %>%
           filter(Wahl == wahl) %>%
           filter(year(Wahltag) == wahljahr)
@@ -608,11 +671,11 @@ server <- function(id, parentSession) {
         }
 
         parteiFarbe <- (ergebnisseNachParteiNachStimmbezirk %>%
-          filter(ParteiKuerzel == input$partei) %>%
+          filter(ParteiKuerzel == input$mapParteistimmenSelectPartei) %>%
           last()
         )$ParteiFarbe
 
-        dataForScale <- if (input$switchParteistimmenIndividualScale) ergebnis else ergebnisAllElections
+        dataForScale <- if (input$mapParteistimmenSwitchIndividualScale) ergebnis else ergebnisAllElections
         pal <- colorNumeric(c("#ffffff", parteiFarbe), c(0, max(dataForScale$StimmenAnteil)))
         palForLegend <- colorNumeric(c("#ffffff", parteiFarbe), c(0, max(dataForScale$StimmenAnteil)) * -1, reverse = TRUE)
 
@@ -683,7 +746,7 @@ server <- function(id, parentSession) {
           filter(Wahl == wahl) %>%
           filter(year(Wahltag) == wahljahr)
 
-        dataForScale <- if (input$switchWahlbeteiligungIndividualScale) ergebnis else ergebnisAllElections
+        dataForScale <- if (input$mapWahlbeteiligungSwitchIndividualScale) ergebnis else ergebnisAllElections
         pal <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Wahlbeteiligung), max(dataForScale$Wahlbeteiligung)))
         palForLegend <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Wahlbeteiligung), max(dataForScale$Wahlbeteiligung)) * -1, reverse = TRUE)
 
@@ -754,7 +817,7 @@ server <- function(id, parentSession) {
           filter(Wahl == wahl) %>%
           filter(year(Wahltag) == wahljahr)
 
-        dataForScale <- if (input$switchBriefwahlquoteIndividualScale) ergebnis else ergebnisAllElections
+        dataForScale <- if (input$mapBriefwahlquoteSwitchIndividualScale) ergebnis else ergebnisAllElections
         pal <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Briefwahlquote), max(dataForScale$Briefwahlquote)))
         palForLegend <- colorNumeric(c("#bbbbbb", "#000000"), c(min(dataForScale$Briefwahlquote), max(dataForScale$Briefwahlquote)) * -1, reverse = TRUE)
 
