@@ -556,7 +556,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 7778006,SEE904861052164,In Betrieb,2024-03-22,2024-03-08,,,,,85598,Baldham,,,,,true,Lithium,2.5,2.5,5.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 7756011,SEE936415875196,In Betrieb,2024-03-18,2024-03-09,,,,,85591,Vaterstetten,,,,,true,Lithium,8.06,8.06,14.51,Teileinspeisung (einschließlich Eigenverbrauch),false
 7818913,SEE998098707683,In Betrieb,2024-04-01,2024-03-09,,,,,85599,Parsdorf,,,,,true,Lithium,10.0,10.0,10.2,Teileinspeisung (einschließlich Eigenverbrauch),false
-7725486,SEE959098670148,In Betrieb,2024-03-12,2024-03-11,,,,,85591,Vaterstetten,,,,,false,Lithium,8.6,5.0,7.78,Teileinspeisung (einschließlich Eigenverbrauch),false
+7725486,SEE959098670148,In Betrieb,2024-03-12,2024-03-11,,,,,85591,Vaterstetten,,,,,false,Lithium,4.32,4.32,7.78,Teileinspeisung (einschließlich Eigenverbrauch),false
 8148500,SEE977172197534,In Betrieb,2024-05-28,2024-03-12,,,,,85598,Baldham,,,,,true,Lithium,5.0,5.0,7.78,Teileinspeisung (einschließlich Eigenverbrauch),false
 7796765,SEE927604917612,In Betrieb,2024-03-26,2024-03-13,,,,,85622,Weißenfeld,,,,,true,Lithium,1.25,1.25,3.5,Teileinspeisung (einschließlich Eigenverbrauch),false
 7763974,SEE954395604018,In Betrieb,2024-03-20,2024-03-14,,,,,85646,Neufarn,,,,,true,Lithium,4.48,4.48,8.8,Teileinspeisung (einschließlich Eigenverbrauch),true
@@ -620,7 +620,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 8655904,SEE926815738719,In Betrieb,2024-08-17,2024-06-14,,,,,85598,Baldham,,,,,false,Lithium,5.0,5.0,13.8,Teileinspeisung (einschließlich Eigenverbrauch),true
 8353284,SEE936194219594,In Betrieb,2024-06-28,2024-06-17,,,,,85591,Vaterstetten,,,,,false,Lithium,5.0,5.0,5.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 8290053,SEE976245737547,In Betrieb,2024-06-19,2024-06-18,,,,,85591,Vaterstetten,,,,,false,Lithium,6.0,6.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),true
-8324715,SEE984497528004,In Betrieb,2024-06-25,2024-06-19,,,,,85591,Vaterstetten,,,,,false,Nickel-Cadmium / Nickel-Metallhydrid,5.76,5.76,9.6,Teileinspeisung (einschließlich Eigenverbrauch),false
+8324715,SEE984497528004,In Betrieb,2024-06-25,2024-06-19,,,,,85591,Vaterstetten,,,,,true,Nickel-Cadmium / Nickel-Metallhydrid,5.76,5.76,9.6,Teileinspeisung (einschließlich Eigenverbrauch),false
 9345225,SEE950233204112,In Betrieb,2025-01-20,2024-06-21,,,,,85598,Baldham,,,,,false,Lithium,5.6,5.6,11.0,Teileinspeisung (einschließlich Eigenverbrauch),true
 7765998,SEE949787506759,In Betrieb,2024-03-20,2024-06-24,,,,,85591,Vaterstetten,,,,,true,Lithium,3.84,3.84,10.0,Teileinspeisung (einschließlich Eigenverbrauch),true
 8325095,SEE973980186418,In Betrieb,2024-06-25,2024-06-24,,,,,85591,Vaterstetten,,,,,false,Lithium,5.1,5.0,5.1,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -749,6 +749,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 9349659,SEE979848389311,In Betrieb,2025-01-21,2025-01-16,,,,,85598,Baldham,,,,,false,Lithium,11.04,8.0,11.04,Teileinspeisung (einschließlich Eigenverbrauch),true
 9370460,SEE970216352098,In Betrieb,2025-01-27,2025-01-22,,,,,85646,Purfing,,,,,false,Lithium,10.0,10.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 9358996,SEE988468162860,In Betrieb,2025-01-23,2025-01-23,,,,,85598,Baldham,,,,,false,Lithium,0.8,0.8,1.6,Teileinspeisung (einschließlich Eigenverbrauch),false
+9417687,SEE931271974342,In Betrieb,2025-02-05,2025-01-28,,,,,85591,Vaterstetten,,,,,false,Lithium,8.64,8.64,8.64,Teileinspeisung (einschließlich Eigenverbrauch),true
 4503878,SEE947397967991,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,Lithium,10.2,10.2,11.04,Teileinspeisung (einschließlich Eigenverbrauch),false
 5529956,SEE957292841609,In Planung,2022-12-08,,2022-12-15,,,,85591,Vaterstetten,,,,,false,Lithium,4.6,4.6,4.0,Teileinspeisung (einschließlich Eigenverbrauch),true
 7682917,SEE945941755711,In Planung,2024-03-04,,2024-08-01,,,,85598,Baldham,,,,,false,Sonstige,5.76,1.6,5.76,Teileinspeisung (einschließlich Eigenverbrauch),false
