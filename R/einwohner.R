@@ -107,7 +107,6 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_build()
         },
         p("Dargestellt sind sowohl Volkszählungsergebnisse, als auch seit 1956 die jährliche und seit 1971 sogar quartalsweise Bevölkerungsfortschreibung auf Basis der Melderegister. Bei den Volkszählungen 1987, 2011 und 2022 sind deutliche „Knicks“ zu erkennen: Hier wurde durch die Volkszählung die Ungenauigkeit der Melderegister korrigiert."),
-        p(strong("Achtung: Die quartalsweisen Zahlen seit Juni 2022 sind noch nicht an die Volkszählung vom Mai 2022 angepasst, d. h., die Fortschreibung auf Basis der Melderegister wurde noch nicht durch das Volkszählungsergebnis korrigiert. Da die Bevölkerungszahl aus dem Zensus 2022 um etwa 1150 Einwohner:innen unter der vorherigen Fortschreibungszahl liegt, ist davon auszugehen, dass auch die aktuelle Bevölkerungszahl tatsächlich um etwa diese Zahl niedriger liegt.")),
         p("Mit „Bevölkerung“ sind hier lediglich Personen mit Hauptwohnsitz in der Gemeinde Vaterstetten gemeint, wie es in der Bevölkerungsstatistik üblich ist. Nebenwohnsitze werden zum Teil in anderen Statistiken erfasst. Die Staatsangehörigkeit spielt keine Rolle.")
       ),
       box(
@@ -133,7 +132,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             identity()
         },
         p("Dargestellt ist das jährliche Bevölkerungssaldo, also der Zuwachs bzw. die Abnahme der Bevölkerung im Vergleich zum Vorjahr, die sich durch Zu- und Abwanderung, sowie Geburten und Sterbefälle ergibt. Für die Jahre bis 1956, für die keine jährlichen Daten vorliegen, wird das durchschnittliche Saldo über mehrere Jahre hinweg berechnet, zu erkennen an den genau gleich hohen Balken nebeneinander."),
-        p("Das Jahr mit dem größten Bevölkerungszuwachs ist 1973: In diesem Jahr ist die Bevölkerung um 1.629 Einwohner:innen gestiegen. Die rechnerisch starken Rückgänge in den Jahren 1987 und 2011 sind auf Korrekturen im Rahmen der jeweiligen Volkszählungen zurückzuführen und spiegeln keinen tatsächlichen starken Bevölkerungsrückgang in diesen Jahren wider.")
+        p("Das Jahr mit dem größten Bevölkerungszuwachs ist 1973: In diesem Jahr ist die Bevölkerung um 1.629 Einwohner:innen gestiegen. Die rechnerisch starken Rückgänge in den Jahren 1987, 2011 und 2022 sind auf Korrekturen im Rahmen der jeweiligen Volkszählungen zurückzuführen und spiegeln keinen tatsächlichen starken Bevölkerungsrückgang in diesen Jahren wider.")
       )
     ),
 
