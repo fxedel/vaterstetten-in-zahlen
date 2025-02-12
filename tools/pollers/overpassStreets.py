@@ -86,6 +86,10 @@ additional_street_connections = [
     'name': 'Weißdornweg', # Vaterstetten
     'way_ids': [1330430827, 1330430828]
   },
+  {
+    'name': 'Arnikastraße', # Vaterstetten
+    'way_ids': [991411279, 1186453684]
+  },
 ]
 
 class Poller(pollers.poller.Poller):
