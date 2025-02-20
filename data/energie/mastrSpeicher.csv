@@ -718,6 +718,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 9118281,SEE973994665329,In Betrieb,2024-11-20,2024-10-21,,,,,85591,Vaterstetten,,,,,true,Lithium,3.3,3.3,5.1,Teileinspeisung (einschließlich Eigenverbrauch),false
 9070089,SEE910199894482,In Betrieb,2024-11-09,2024-10-24,,,,,85591,Vaterstetten,,,,,false,Lithium,6.6,6.6,10.2,Teileinspeisung (einschließlich Eigenverbrauch),true
 9156745,SEE930526293245,In Betrieb,2024-11-28,2024-10-25,,,,,85646,Neufarn,,,,,false,Lithium,7.0,7.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
+9473971,SEE976262443803,In Betrieb,2025-02-19,2024-10-25,,,,,85646,Neufarn,,,,,false,Lithium,5.0,5.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 9068217,SEE984905736687,In Betrieb,2024-11-08,2024-10-29,,,PV Brunnenstr 3 Eigenversorgung,3E Eigene Erneuerbare Energie eG,85598,Baldham,,,,,false,Lithium,10.5,10.5,20.7,Teileinspeisung (einschließlich Eigenverbrauch),false
 9119488,SEE922416545138,In Betrieb,2024-11-20,2024-10-29,,,,,85598,Baldham,,,,,false,Lithium,9.0,9.0,23.4,Teileinspeisung (einschließlich Eigenverbrauch),true
 9153250,SEE966382696203,In Betrieb,2024-11-27,2024-10-29,,,,,85646,Neufarn,,,,,false,Lithium,4.26,4.26,6.74,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -727,6 +728,9 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 9208636,SEE987584880535,In Betrieb,2024-12-10,2024-11-06,,,,,85598,Baldham,,,,,true,Lithium,7.68,7.68,9.83,Teileinspeisung (einschließlich Eigenverbrauch),false
 9259697,SEE984478488792,In Betrieb,2024-12-20,2024-11-12,,,,,85599,Hergolding,,,,,false,Lithium,12.0,12.0,15.0,Teileinspeisung (einschließlich Eigenverbrauch),true
 8907438,SEE967846346429,In Betrieb,2024-12-11,2024-11-13,,,,,85591,Vaterstetten,,,,,true,Lithium,12.44,8.0,11.2,Teileinspeisung (einschließlich Eigenverbrauch),false
+9472442,SEE909801742624,In Betrieb,2025-02-19,2024-11-15,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,10.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
+9472482,SEE975064674255,In Betrieb,2025-02-19,2024-11-15,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,10.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
+9472529,SEE999750712434,In Betrieb,2025-02-19,2024-11-15,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,10.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 9135882,SEE936134660790,In Betrieb,2024-11-24,2024-11-16,,,,,85591,Vaterstetten,,,,,false,Lithium,1.0,0.8,1.6,Teileinspeisung (einschließlich Eigenverbrauch),false
 9361735,SEE929993816989,In Betrieb,2025-01-24,2024-11-19,,,,,85591,Vaterstetten,,,,,false,Lithium,1.28,1.28,3.5,Teileinspeisung (einschließlich Eigenverbrauch),false
 9124187,SEE913344815462,In Betrieb,2024-11-21,2024-11-21,,,,,85598,Baldham,,,,,false,Lithium,7.0,7.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -743,6 +747,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 9295315,SEE967871913832,In Betrieb,2025-01-06,2024-12-09,,,,,85591,Vaterstetten,,,,,false,Lithium,5.0,5.0,9.2,Teileinspeisung (einschließlich Eigenverbrauch),true
 9310986,SEE970857686842,In Betrieb,2025-01-10,2024-12-09,,,,,85591,Vaterstetten,,,,,true,Lithium,3.55,3.55,6.7,Teileinspeisung (einschließlich Eigenverbrauch),true
 8990809,SEE912270987151,In Betrieb,2025-01-14,2024-12-09,,,,,85598,Baldham,,,,,false,Lithium,15.0,15.0,15.0,Teileinspeisung (einschließlich Eigenverbrauch),false
+9473841,SEE994675633758,In Betrieb,2025-02-19,2024-12-11,,,,,85598,Baldham,,,,,false,Lithium,16.56,16.56,16.56,Teileinspeisung (einschließlich Eigenverbrauch),true
 9215227,SEE955443168261,In Betrieb,2024-12-27,2024-12-12,,,,,85598,Baldham,,,,,false,Lithium,4.255,4.255,6.7,Teileinspeisung (einschließlich Eigenverbrauch),false
 9266057,SEE977856687030,In Betrieb,2024-12-23,2024-12-18,,,,,85646,Purfing,,,,,true,Lithium,4.6,4.6,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 9351847,SEE966122373548,In Betrieb,2025-01-21,2024-12-18,,,,,85598,Baldham,,,,,false,Lithium,5.76,5.76,9.6,Teileinspeisung (einschließlich Eigenverbrauch),false
