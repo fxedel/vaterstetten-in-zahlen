@@ -1,4 +1,4 @@
-# Bundestagswahl 26. September 2021 in der Gemeinde Vaterstetten
+# Bundestagswahl 23. Februar 2025 in der Gemeinde Vaterstetten
 
 ## [`erststimmenAllgemein.csv`](./erststimmenAllgemein.csv) / [`zweitstimmenAllgemein.csv`](./zweitstimmenAllgemein.csv)
 
@@ -21,9 +21,8 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html):
-  * [`Open-Data-Bundestagswahl1573.csv`](raw/Open-Data-Bundestagswahl1573.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/Open-Data-Bundestagswahl1573.csv))
-  * [`Open-Data-Bundestagswahl1576.csv`](raw/Open-Data-Bundestagswahl1576.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/Open-Data-Bundestagswahl1576.csv))
+* [OK.VOTE-Portal zur Bundestagswahl 2025 in Vaterstetten](https://wahlen.osrz-akdb.de/ob-p/175000/212/20250223/bundestagswahl_kwl_1_wk/ergebnisse_gemeinde_09175132.html):
+  * [`wahlbezirksergebnisse.csv`](raw/wahlbezirksergebnisse.csv) ([Weblink](https://wahlen.osrz-akdb.de/ob-p/175000/212/20250223/bundestagswahl_kwl_1_wk/wahlbezirksergebnisse.csv))
 
 
 ## [`erststimmenNachPartei.csv`](./erststimmenNachPartei.csv) / [`zweitstimmenNachPartei.csv`](./zweitstimmenNachPartei.csv)
@@ -40,9 +39,8 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildErgebnisse.R](./build
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html):
-  * [`Open-Data-Bundestagswahl1573.csv`](raw/Open-Data-Bundestagswahl1573.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/Open-Data-Bundestagswahl1573.csv))
-  * [`Open-Data-Bundestagswahl1576.csv`](raw/Open-Data-Bundestagswahl1576.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/Open-Data-Bundestagswahl1576.csv))
+* [OK.VOTE-Portal zur Bundestagswahl 2025 in Vaterstetten](https://wahlen.osrz-akdb.de/ob-p/175000/212/20250223/bundestagswahl_kwl_1_wk/ergebnisse_gemeinde_09175132.html):
+  * [`wahlbezirksergebnisse.csv`](raw/wahlbezirksergebnisse.csv) ([Weblink](https://wahlen.osrz-akdb.de/ob-p/175000/212/20250223/bundestagswahl_kwl_1_wk/wahlbezirksergebnisse.csv))
 
 
 ## [`direktkandidaten.csv`](./direktkandidaten.csv)
@@ -56,7 +54,7 @@ Der Datensatz [direktkandidaten.csv](./direktkandidaten.csv) umfasst die Namen u
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html) (händisch übertragen)
+* [OK.VOTE-Portal zur Bundestagswahl 2025 in Vaterstetten](https://wahlen.osrz-akdb.de/ob-p/175000/212/20250223/bundestagswahl_kwl_1_wk/ergebnisse_gemeinde_09175132.html) (händisch übertragen)
 
 
 ## [`parteien.csv`](./parteien.csv)
@@ -74,35 +72,15 @@ Der Datensatz wurde händisch erstellt.
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html) (händisch übertragen)
+* [OK.VOTE-Portal zur Bundestagswahl 2025 in Vaterstetten](https://wahlen.osrz-akdb.de/ob-p/175000/212/20250223/bundestagswahl_kwl_1_wk/ergebnisse_gemeinde_09175132.html) (händisch übertragen)
 * Eigene Definition (`ParteiFarbe`)
 
 
 ## [`stimmbezirke.csv`](./stimmbezirke.csv)
 
-Der Datensatz [`stimmbezirke.csv`](./stimmbezirke.csv) umfasst alle 27 Stimmbezirke. Die Briefwahlstimmbezirke (31 bis 43) lassen sich jeweils genau einem Wahllokalstimmbezirk (1 bis 14) zuordnen (mit Ausnahme des Briefwahlstimmbezirks 31, der sich den beiden Wahllokalstimmbezirken 1 und 2 zuordnen lässt). Diese Zuordnung wird über die Spalte `StimmbezirkAggregiert` realisiert. Die aggregierten Stimmbezirke lassen sich somit also ebenfalls auf ein geographisches Gebiet zurückführen und umfassen alle Stimmen (sowohl Urnen-, als auch Briefwahl).
-
-Der Datensatz wurde händisch erstellt.
-
-|Spalte|Format|Beschreibung
-|-|-|-
-|`Stimmbezirk`|text|Name des Stimmbezirks, auf den sich die Zeile bezieht (`Stimmbezirk 1` bis `Stimmbezirk 43`) oder `Gesamt` für alle Stimmbezirke
-|`StimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder `NA` für Gesamt
-|`StimmbezirkAggregiert`|text|Name des aggregierten Stimmbezirks (z.&nbsp;B. `Stimmbezirke 1/2/31` für die Stimmbezirke 1, 2 und 31) oder `Gesamt` für alle Stimmbezirke
-
-### Quellen
-
-* Gemeinde Vaterstetten (persönliche Nachfrage)
-* [OK.VOTE-Portal zur Bundestagswahl 2021 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/index.html):
-  * [`opendata-wahllokale.csv`](raw/opendata-wahllokale.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/BTW21/09175132/praesentation/opendata-wahllokale.csv))
+Der Datensatz [`stimmbezirke.csv`](./stimmbezirke.csv) ist identisch zu [`../landtagswahl2023/stimmbezirke.csv`](../landtagswahl2023/stimmbezirke.csv).
 
 
 ## [`stimmbezirke.geojson`](./stimmbezirke.geojson)
 
-Der Geodatensatz [`stimmbezirke.geojson`](./stimmbezirke.geojson) stellt die Gebietszuteilung der Wahllokalstimmbezirke 1 bis 14 dar. Die Daten sind im [GeoJSON-Format](https://de.wikipedia.org/wiki/GeoJSON) gespeichert, jeder Stimmbezirk ist dabei ein Polygon oder MultiPolygon.
-
-Der Geodatensatz wurde mit dem Tool [uMap](https://umap.openstreetmap.fr/de/) händisch erstellt und als GeoJSON exportiert. Die uMap-Karte kann hier abgerufen werden: [https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442](https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442)
-
-### Quellen
-
-* Gemeinde Vaterstetten (Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf dessen Basis die [uMap-Karte](https://umap.openstreetmap.fr/de/map/bundestagswahl-2021-stimmbezirke-vaterstetten_972442) erstellt werden konnte)
+Der Datensatz [`stimmbezirke.geojson`](./stimmbezirke.geojson) ist identisch zu [`../landtagswahl2023/stimmbezirke.geojson`](../landtagswahl2023/stimmbezirke.geojson).

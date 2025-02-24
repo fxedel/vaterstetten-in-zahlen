@@ -1,8 +1,9 @@
 
 kommunalwahl2020 <- loadModule("R/wahlen/kommunalwahl2020.R")
-btw2021 <- loadModule("R/wahlen/btw2021.R")
+bundestagswahl2021 <- loadModule("R/wahlen/bundestagswahl2021.R")
 landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
 europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
+bundestagswahl2025 <- loadModule("R/wahlen/bundestagswahl2025.R")
 
 lfstatWahlergebnisseAllgemein <- read_csv(
   file = "data/wahlen/lfstatWahlergebnisseAllgemein.csv",
@@ -50,7 +51,7 @@ ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
       UngueltigeStimmen = ungueltigeStimmzettel,
       geometry = geometry
     ),
-  btw2021$zweitstimmenAllgemeinNachStimmbezirkAggregiert %>%
+  bundestagswahl2021$zweitstimmenAllgemeinNachStimmbezirkAggregiert %>%
     transmute(
       Wahl = "Bundestagswahl",
       Wahltag = as.Date("2021-09-26"),
@@ -88,6 +89,20 @@ ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
       WaehlerWahllokal = WaehlerWahllokal,
       WaehlerBriefwahl = WaehlerBriefwahl,
       Stimmentyp = NA,
+      GueltigeStimmen = GueltigeStimmen,
+      UngueltigeStimmen = UngueltigeStimmen,
+      geometry = geometry
+    ),
+  bundestagswahl2025$zweitstimmenAllgemeinNachStimmbezirkAggregiert %>%
+    transmute(
+      Wahl = "Bundestagswahl",
+      Wahltag = as.Date("2025-02-23"),
+      Stimmbezirk = StimmbezirkAggregiert,
+      Wahlberechtigte = Wahlberechtigte,
+      Waehler = Waehler,
+      WaehlerWahllokal = WaehlerWahllokal,
+      WaehlerBriefwahl = WaehlerBriefwahl,
+      Stimmentyp = "Zweitstimme",
       GueltigeStimmen = GueltigeStimmen,
       UngueltigeStimmen = UngueltigeStimmen,
       geometry = geometry
@@ -212,7 +227,7 @@ ergebnisseNachParteiNachStimmbezirk <- bind_rows(
       StimmenProWahlberechtigte = NA,
       geometry = geometry
     ),
-  btw2021$zweitstimmenNachParteiNachStimmbezirkAggregiert %>%
+  bundestagswahl2021$zweitstimmenNachParteiNachStimmbezirkAggregiert %>%
     transmute(
       Wahl = "Bundestagswahl",
       Wahltag = as.Date("2021-09-26"),
@@ -247,6 +262,19 @@ ergebnisseNachParteiNachStimmbezirk <- bind_rows(
       ParteiName = ParteiName,
       ParteiFarbe = ParteiFarbe,
       Stimmentyp = NA,
+      StimmenAnteil = Stimmen/GueltigeStimmen,
+      StimmenProWahlberechtigte = NA,
+      geometry = geometry
+    ),
+  bundestagswahl2025$zweitstimmenNachParteiNachStimmbezirkAggregiert %>%
+    transmute(
+      Wahl = "Bundestagswahl",
+      Wahltag = as.Date("2025-02-23"),
+      Stimmbezirk = StimmbezirkAggregiert,
+      ParteiKuerzel = ParteiKuerzel,
+      ParteiName = ParteiName,
+      ParteiFarbe = ParteiFarbe,
+      Stimmentyp = "Zweitstimme",
       StimmenAnteil = Stimmen/GueltigeStimmen,
       StimmenProWahlberechtigte = NA,
       geometry = geometry
@@ -495,6 +523,11 @@ ui <- memoise(omit_args = "request", function(request, id) {
             h4("Europawahl 2024"),
             leafletOutput(ns("mapParteistimmenEuropawahl2024"), height = 550),
           ),
+          column(
+            width = 4,
+            h4("Bundestagswahl 2025 (Zweitstimme)"),
+            leafletOutput(ns("mapParteistimmenBundestagswahl2025"), height = 550),
+          ),
         ),
       )
     ),
@@ -526,6 +559,13 @@ ui <- memoise(omit_args = "request", function(request, id) {
             leafletOutput(ns("mapWahlbeteiligungEuropawahl2024"), height = 550),
           ),
         ),
+        fluidRow(
+          column(
+            width = 4,
+            h4("Bundestagswahl 2025 (Zweitstimme)"),
+            leafletOutput(ns("mapWahlbeteiligungBundestagswahl2025"), height = 550),
+          ),
+        ),
       )
     ),
 
@@ -554,6 +594,13 @@ ui <- memoise(omit_args = "request", function(request, id) {
             width = 4,
             h4("Europawahl 2024"),
             leafletOutput(ns("mapBriefwahlquoteEuropawahl2024"), height = 550),
+          ),
+        ),
+        fluidRow(
+          column(
+            width = 4,
+            h4("Bundestagswahl 2025 (Zweitstimme)"),
+            leafletOutput(ns("mapBriefwahlquoteBundestagswahl2025"), height = 550),
           ),
         ),
       )
@@ -616,7 +663,7 @@ server <- function(id, parentSession) {
           ) %>%
             add_trace(type = "scatter", mode = "lines+markers", showlegend = FALSE) %>%
             plotly_default_config() %>%
-            layout(xaxis = list(range = c("1945-01-01", "2025-01-01"))) %>%
+            layout(xaxis = list(range = c("1945-01-01", "2025-06-01"))) %>%
             layout(yaxis = list(tickformat = ytickformat, rangemode = "tozero")) %>%
             layout(hovermode = "x", hoverdistance = 5) %>%
             plotly_hide_axis_titles() %>%
@@ -645,12 +692,14 @@ server <- function(id, parentSession) {
       output$mapParteistimmenBundestagswahl2021 <- renderParteistimmenMap("Bundestagswahl", 2021)
       output$mapParteistimmenLandtagswahl2023 <- renderParteistimmenMap("Landtagswahl", 2023)
       output$mapParteistimmenEuropawahl2024 <- renderParteistimmenMap("Europawahl", 2024)
+      output$mapParteistimmenBundestagswahl2025 <- renderParteistimmenMap("Bundestagswahl", 2025)
 
       observe({
         printParteistimmenMap(leafletProxy("mapParteistimmenGemeinderatswahl2020"), "Gemeinderatswahl", 2020)
         printParteistimmenMap(leafletProxy("mapParteistimmenBundestagswahl2021"), "Bundestagswahl", 2021)
         printParteistimmenMap(leafletProxy("mapParteistimmenLandtagswahl2023"), "Landtagswahl", 2023)
         printParteistimmenMap(leafletProxy("mapParteistimmenEuropawahl2024"), "Europawahl", 2024)
+        printParteistimmenMap(leafletProxy("mapParteistimmenBundestagswahl2025"), "Bundestagswahl", 2025)
       })
 
       printParteistimmenMap <- function(leafletObject, wahl, wahljahr) {
@@ -731,11 +780,13 @@ server <- function(id, parentSession) {
       output$mapWahlbeteiligungBundestagswahl2021 <- renderWahlbeteiligungMap("Bundestagswahl", 2021)
       output$mapWahlbeteiligungLandtagswahl2023 <- renderWahlbeteiligungMap("Landtagswahl", 2023)
       output$mapWahlbeteiligungEuropawahl2024 <- renderWahlbeteiligungMap("Europawahl", 2024)
+      output$mapWahlbeteiligungBundestagswahl2025 <- renderWahlbeteiligungMap("Bundestagswahl", 2025)
 
       observe({
         printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungBundestagswahl2021"), "Bundestagswahl", 2021)
         printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungLandtagswahl2023"), "Landtagswahl", 2023)
         printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungEuropawahl2024"), "Europawahl", 2024)
+        printWahlbeteiligungMap(leafletProxy("mapWahlbeteiligungBundestagswahl2025"), "Bundestagswahl", 2025)
       })
 
       printWahlbeteiligungMap <- function(leafletObject, wahl, wahljahr) {
@@ -802,11 +853,13 @@ server <- function(id, parentSession) {
       output$mapBriefwahlquoteBundestagswahl2021 <- renderBriefwahlquoteMap("Bundestagswahl", 2021)
       output$mapBriefwahlquoteLandtagswahl2023 <- renderBriefwahlquoteMap("Landtagswahl", 2023)
       output$mapBriefwahlquoteEuropawahl2024 <- renderBriefwahlquoteMap("Europawahl", 2024)
+      output$mapBriefwahlquoteBundestagswahl2025 <- renderBriefwahlquoteMap("Bundestagswahl", 2025)
 
       observe({
         printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteBundestagswahl2021"), "Bundestagswahl", 2021)
         printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteLandtagswahl2023"), "Landtagswahl", 2023)
         printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteEuropawahl2024"), "Europawahl", 2024)
+        printBriefwahlquoteMap(leafletProxy("mapBriefwahlquoteBundestagswahl2025"), "Bundestagswahl", 2025)
       })
 
       printBriefwahlquoteMap <- function(leafletObject, wahl, wahljahr) {

@@ -44,9 +44,10 @@ strassennamen <- loadModule("R/strassennamen.R")
 
 wahlenOverview <- loadModule("R/wahlen/overview.R")
 kommunalwahl2020 <- loadModule("R/wahlen/kommunalwahl2020.R")
-btw2021 <- loadModule("R/wahlen/btw2021.R")
+bundestagswahl2021 <- loadModule("R/wahlen/bundestagswahl2021.R")
 landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
 europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
+bundestagswahl2025 <- loadModule("R/wahlen/bundestagswahl2025.R")
 
 impressum <- loadModule("R/impressum.R")
 
@@ -79,9 +80,10 @@ ui <- function(request) {
         menuItem("Wahlen", icon = icon("vote-yea"), startExpanded = TRUE,
           menuSubItem("Übersicht", tabName = "wahlenOverview", selected = query$tab == "wahlenOverview"),
           menuSubItem("Kommunalwahl 2020", tabName = "kommunalwahl2020", selected = query$tab == "kommunalwahl2020"),
-          menuSubItem("Bundestagswahl 2021", tabName = "btw2021", selected = query$tab == "btw2021"),
+          menuSubItem("Bundestagswahl 2021", tabName = "bundestagswahl2021", selected = query$tab == "bundestagswahl2021"),
           menuSubItem("Landtagswahl 2023", tabName = "landtagswahl2023", selected = query$tab == "landtagswahl2023"),
-          menuSubItem("Europawahl 2024", tabName = "europawahl2024", selected = query$tab == "europawahl2024")
+          menuSubItem("Europawahl 2024", tabName = "europawahl2024", selected = query$tab == "europawahl2024"),
+          menuSubItem("Bundestagswahl 2025", tabName = "bundestagswahl2025", selected = query$tab == "bundestagswahl2025")
         ),
         menuItem("Archiv", icon = icon("box-archive"), startExpanded = TRUE,
           menuItem("Corona-Fallzahlen", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
@@ -136,9 +138,10 @@ ui <- function(request) {
 
         tabItem(tabName = "wahlenOverview", wahlenOverview$ui(request, "wahlenOverview")),
         tabItem(tabName = "kommunalwahl2020", kommunalwahl2020$ui(request, "kommunalwahl2020")),
-        tabItem(tabName = "btw2021", btw2021$ui(request, "btw2021")),
+        tabItem(tabName = "bundestagswahl2021", bundestagswahl2021$ui(request, "bundestagswahl2021")),
         tabItem(tabName = "landtagswahl2023", landtagswahl2023$ui(request, "landtagswahl2023")),
         tabItem(tabName = "europawahl2024", europawahl2024$ui(request, "europawahl2024")),
+        tabItem(tabName = "bundestagswahl2025", bundestagswahl2025$ui(request, "bundestagswahl2025")),
 
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
@@ -185,9 +188,10 @@ server <- function(input, output, session) {
 
   wahlenOverview$server("wahlenOverview")
   kommunalwahl2020$server("kommunalwahl2020")
-  btw2021$server("btw2021")
+  bundestagswahl2021$server("bundestagswahl2021")
   landtagswahl2023$server("landtagswahl2023")
   europawahl2024$server("europawahl2024")
+  bundestagswahl2025$server("bundestagswahl2025")
 
   impressum$server("impressum")
 }
