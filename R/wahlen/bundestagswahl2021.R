@@ -548,7 +548,7 @@ server <- function(id) {
       }
 
       output$zweitstimmenMap <- renderLeaflet({
-        leaflet(stimmbezirkeGeodata, options = leafletOptions(
+        leaflet(options = leafletOptions(
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
