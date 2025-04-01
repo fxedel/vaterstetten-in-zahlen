@@ -567,7 +567,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 8148500,SEE977172197534,In Betrieb,2024-05-28,2024-03-12,,,,,85598,Baldham,,,,,true,Lithium,5.0,5.0,7.78,Teileinspeisung (einschließlich Eigenverbrauch),false
 7796765,SEE927604917612,In Betrieb,2024-03-26,2024-03-13,,,,,85622,Weißenfeld,,,,,true,Lithium,1.25,1.25,3.5,Teileinspeisung (einschließlich Eigenverbrauch),false
 7763974,SEE954395604018,In Betrieb,2024-03-20,2024-03-14,,,,,85646,Neufarn,,,,,true,Lithium,4.48,4.48,8.8,Teileinspeisung (einschließlich Eigenverbrauch),true
-8584229,SEE930886838469,In Betrieb,2024-08-05,2024-03-18,,,,,85598,Baldham,,,,,false,Lithium,6.0,6.0,11.2,Teileinspeisung (einschließlich Eigenverbrauch),false
+8584229,SEE930886838469,In Betrieb,2024-08-05,2024-03-18,,,,,85598,Baldham,,,,,true,Lithium,6.0,6.0,11.2,Teileinspeisung (einschließlich Eigenverbrauch),false
 7766718,SEE903989828101,In Betrieb,2024-03-20,2024-03-19,,,,,85598,Baldham,,,,,true,Lithium,3.84,3.84,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 8559117,SEE922588837642,In Betrieb,2024-07-31,2024-03-20,,,,,85598,Baldham,,,,,false,Sonstige,21.3,21.3,21.3,Teileinspeisung (einschließlich Eigenverbrauch),false
 7776714,SEE944237067385,In Betrieb,2024-03-22,2024-03-22,,,,,85598,Baldham,,,,,true,Lithium,6.57,6.57,9.6,Teileinspeisung (einschließlich Eigenverbrauch),true
@@ -591,7 +591,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 7906603,SEE941597630099,In Betrieb,2024-04-16,2024-04-12,,,,,85598,Baldham,,,,,true,Lithium,4.6,4.6,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
 8016209,SEE902327755512,In Betrieb,2024-05-05,2024-04-16,,,,,85598,Baldham,,,,,true,Lithium,3.84,3.84,10.5,Teileinspeisung (einschließlich Eigenverbrauch),false
 8027488,SEE997095837737,In Betrieb,2024-05-06,2024-04-18,,,,,85598,Baldham,,,,,true,Lithium,8.0,8.0,10.37,Teileinspeisung (einschließlich Eigenverbrauch),true
-8104445,SEE940622937691,In Betrieb,2024-05-21,2024-04-18,,,,,85598,Baldham,,,,,false,Lithium,6.0,6.0,11.2,Teileinspeisung (einschließlich Eigenverbrauch),false
+8104445,SEE940622937691,In Betrieb,2024-05-21,2024-04-18,,,,,85598,Baldham,,,,,true,Lithium,6.0,6.0,11.2,Teileinspeisung (einschließlich Eigenverbrauch),false
 8066515,SEE964401286817,In Betrieb,2024-05-14,2024-04-19,,,,,85591,Vaterstetten,,,,,true,Lithium,10.24,10.24,13.1,Teileinspeisung (einschließlich Eigenverbrauch),false
 8586635,SEE942596263875,In Betrieb,2024-08-05,2024-04-22,,,,,85591,Vaterstetten,,,,,false,Lithium,5.7,5.7,5.18,Teileinspeisung (einschließlich Eigenverbrauch),false
 8041063,SEE992907080561,In Betrieb,2024-05-09,2024-04-23,,,,,85591,Vaterstetten,,,,,false,Lithium,5.0,5.0,5.0,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -663,7 +663,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 8506588,SEE918725636995,In Betrieb,2024-07-23,2024-07-23,,,,,85598,Baldham,,,,,false,Lithium,10.6,6.0,9.8,Teileinspeisung (einschließlich Eigenverbrauch),true
 8552894,SEE988382635761,In Betrieb,2024-07-30,2024-07-30,,,,,85598,Baldham,,,,,true,Lithium,3.2,0.8,0.8,Teileinspeisung (einschließlich Eigenverbrauch),false
 8553203,SEE902570392779,In Betrieb,2024-07-30,2024-07-30,,,,,85598,Baldham,,,,,false,Lithium,10.0,10.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),false
-8559514,SEE932304591512,In Betrieb,2024-07-31,2024-07-31,,,,,85598,Baldham,,,,,false,Lithium,5.76,5.76,9.6,Teileinspeisung (einschließlich Eigenverbrauch),false
+8559514,SEE932304591512,In Betrieb,2024-07-31,2024-07-31,,,,,85598,Baldham,,,,,true,Lithium,5.76,5.76,9.6,Teileinspeisung (einschließlich Eigenverbrauch),false
 8594385,SEE946735242479,In Betrieb,2024-08-06,2024-07-31,,,,,85646,Neufarn,,,,,false,Lithium,10.95,10.95,16.0,Teileinspeisung (einschließlich Eigenverbrauch),true
 8625224,SEE932726880591,In Betrieb,2024-08-12,2024-07-31,,,,,85599,Parsdorf,,,,,false,Lithium,6.0,6.0,8.2,Teileinspeisung (einschließlich Eigenverbrauch),false
 8625851,SEE992521578796,In Betrieb,2024-08-12,2024-07-31,,,,,85599,Parsdorf,,,,,false,Blei,8.0,8.0,11.0,Teileinspeisung (einschließlich Eigenverbrauch),false
