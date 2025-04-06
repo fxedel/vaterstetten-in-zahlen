@@ -123,7 +123,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'betreiber': x['AnlagenbetreiberName'] if self.is_public(x) else None,
       'gebaeudeNutzung':
         self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] if x['NutzungsbereichGebSA'] is not None else
-        self.NUTZUNGSBEREICH_SONSTIGE if not lage == self.LAGE_FREIFLAECHE else None,
+        self.NUTZUNGSBEREICH_SONSTIGE if not photovoltaik_typ == self.PHOTOVOLTAIK_TYP_FREIFLAECHE else None,
       'plz': x['Plz'],
       'ort': x['Ort'],
       'strasse': x['Strasse'],
