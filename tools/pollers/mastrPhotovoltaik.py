@@ -110,6 +110,12 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
         print(f"> Entity with ArtDerSolaranlageId = '{photovoltaik_typ}' has AnzahlSolarModule = {x['AnzahlSolarModule']} > 2 and Nettonennleistung = {x['Nettonennleistung']} > 0.8, setting ArtDerSolaranlageId := '{self.PHOTOVOLTAIK_TYP_GEBAEUDE}': Name '{x['EinheitName']}' ({self.einheit_url(x['Id'])})")
         photovoltaik_typ = self.PHOTOVOLTAIK_TYP_GEBAEUDE
 
+    nutzungsbereich = None
+    if x['NutzungsbereichGebSA'] is not None:
+      nutzungsbereich = self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']]
+    elif photovoltaik_typ == self.PHOTOVOLTAIK_TYP_STECKER:
+      nutzungsbereich = self.NUTZUNGSBEREICH_HAUSHALT
+
     return {
       'MaStRId': x['Id'],
       'MaStRNummer': x['MaStRNummer'],
@@ -121,9 +127,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'stilllegung': self.parse_date(x['EndgueltigeStilllegungDatum']),
       'name': x['EinheitName'] if self.is_public(x) else None,
       'betreiber': x['AnlagenbetreiberName'] if self.is_public(x) else None,
-      'gebaeudeNutzung':
-        self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] if x['NutzungsbereichGebSA'] is not None else
-        self.NUTZUNGSBEREICH_SONSTIGE if not photovoltaik_typ == self.PHOTOVOLTAIK_TYP_FREIFLAECHE else None,
+      'gebaeudeNutzung': nutzungsbereich,
       'plz': x['Plz'],
       'ort': x['Ort'],
       'strasse': x['Strasse'],
