@@ -103,12 +103,12 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     return True
     
   def map_row(self, x: dict) -> dict:
-    lage = self.LAGE_BY_ID[x['LageEinheit']]
+    photovoltaik_typ = self.PHOTOVOLTAIK_TYP_BY_ID[x['ArtDerSolaranlageId']]
 
-    if lage == self.LAGE_STECKER:
+    if photovoltaik_typ == self.PHOTOVOLTAIK_TYP_STECKER:
       if x['AnzahlSolarModule'] > 2 and x['Nettonennleistung'] > 0.8:
-        print(f"> Entity with LageEinheit = '{lage}' has AnzahlSolarModule = {x['AnzahlSolarModule']} > 2 and Nettonennleistung = {x['Nettonennleistung']} > 0.8, setting LageEinheit := '{self.LAGE_GEBAEUDE}': Name '{x['EinheitName']}' ({self.einheit_url(x['Id'])})")
-        lage = self.LAGE_GEBAEUDE
+        print(f"> Entity with ArtDerSolaranlageId = '{photovoltaik_typ}' has AnzahlSolarModule = {x['AnzahlSolarModule']} > 2 and Nettonennleistung = {x['Nettonennleistung']} > 0.8, setting ArtDerSolaranlageId := '{self.PHOTOVOLTAIK_TYP_GEBAEUDE}': Name '{x['EinheitName']}' ({self.einheit_url(x['Id'])})")
+        photovoltaik_typ = self.PHOTOVOLTAIK_TYP_GEBAEUDE
 
     return {
       'MaStRId': x['Id'],
@@ -131,7 +131,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
       'lat': x['Breitengrad'],
       'long': x['Laengengrad'],
       'netzbetreiberPruefung': str(x['IsNBPruefungAbgeschlossen'] == self.NETZBETREIBERPRUEFUNG_GEPRUEFT_ID).lower(),
-      'typ': lage,
+      'typ': photovoltaik_typ,
       'module': x['AnzahlSolarModule'],
       'ausrichtung': x['HauptausrichtungSolarModuleBezeichnung'],
       'bruttoleistung_kW': x['Bruttoleistung'],

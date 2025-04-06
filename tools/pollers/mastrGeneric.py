@@ -63,20 +63,28 @@ class MastrGenericPoller(Poller):
     811: HAUPTNEIGUNGSWINKEL_NACHGEFUEHRT,
   }
   
-  LAGE_FREIFLAECHE = "freiflaeche" # Freifläche 
-  LAGE_GEBAEUDE = "gebaeude" # Bauliche Anlagen (Hausdach, Gebäude und Fassade)
-  LAGE_GEBAEUDE_OTHER = "gebaeude-other" # Bauliche Anlagen (Sonstige)
-  LAGE_STECKER = "stecker" # Steckerfertige Erzeugungsanlage (sog. Plug-In- oder Balkon-PV-Anlage)
-  LAGE_WINDKRAFT_LAND = "windkraft-land" # Windkraft an Land
-  LAGE_WINDKRAFT_SEE = "windkraft-see" # Windkraft auf See
+  PHOTOVOLTAIK_TYP_FREIFLAECHE = "freiflaeche" # Freifläche 
+  PHOTOVOLTAIK_TYP_GEBAEUDE = "gebaeude" # Bauliche Anlagen (Hausdach, Gebäude und Fassade)
+  PHOTOVOLTAIK_TYP_GEBAEUDE_OTHER = "gebaeude-other" # Bauliche Anlagen (Sonstige)
+  PHOTOVOLTAIK_TYP_STECKER = "stecker" # Steckerfertige Erzeugungsanlage (sog. Plug-In- oder Balkon-PV-Anlage)
+  PHOTOVOLTAIK_TYP_GEWAESSER = "gewaesser"
+  PHOTOVOLTAIK_TYP_GROSSPARKPLATZ = "grossparkplatz"
 
-  LAGE_BY_ID = {
-    852: LAGE_FREIFLAECHE,
-    853: LAGE_GEBAEUDE,
-    2484: LAGE_GEBAEUDE_OTHER,
-    2961: LAGE_STECKER,
-    888: LAGE_WINDKRAFT_LAND,
-    889: LAGE_WINDKRAFT_SEE,
+  PHOTOVOLTAIK_TYP_BY_ID = {
+    852: PHOTOVOLTAIK_TYP_FREIFLAECHE,
+    853: PHOTOVOLTAIK_TYP_GEBAEUDE,
+    2484: PHOTOVOLTAIK_TYP_GEBAEUDE_OTHER,
+    2961: PHOTOVOLTAIK_TYP_STECKER,
+    3002: PHOTOVOLTAIK_TYP_GEWAESSER,
+    3058: PHOTOVOLTAIK_TYP_GROSSPARKPLATZ,
+  }
+
+  WINDKRAFT_TYP_LAND = "windkraft-land" # Windkraft an Land
+  WINDKRAFT_TYP_SEE = "windkraft-see" # Windkraft auf See
+
+  WINDKRAF_TYP_BY_ID = {
+    888: WINDKRAFT_TYP_LAND,
+    889: WINDKRAFT_TYP_SEE,
   }
 
   LEISTUNGSBEGRENZUNG_50 = "50%"
