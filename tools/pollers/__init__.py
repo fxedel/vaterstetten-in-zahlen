@@ -11,6 +11,7 @@ import pollers.lraEbeArcgisSchueler
 import pollers.lraEbeArcgisSchuelerNachWohnort
 from pollers.mastrPhotovoltaik import MastrPhotovoltaikPoller
 from pollers.mastrSpeicher import MastrSpeicherPoller
+import pollers.overpassChildcare
 import pollers.overpassStreets
 
 from typing import Dict, List, Type
@@ -28,6 +29,7 @@ all: Dict[str, Type[pollers.poller.Poller]] = {
   'lraEbeArcgisSchuelerNachWohnort': pollers.lraEbeArcgisSchuelerNachWohnort.Poller,
   'mastrPhotovoltaik': MastrPhotovoltaikPoller,
   'mastrSpeicher': MastrSpeicherPoller,
+  'overpassChildcare': pollers.overpassChildcare.Poller,
   'overpassStreets': pollers.overpassStreets.Poller,
 }
 
@@ -45,4 +47,5 @@ daily: List[str] = [
   'lfstatFortschreibungQuartale',
   'lfstatWahlergebnisseAllgemein',
   'lfstatWahlergebnisseNachPartei',
+  'overpassChildcare',
 ]
