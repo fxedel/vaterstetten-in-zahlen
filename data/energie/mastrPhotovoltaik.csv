@@ -1853,7 +1853,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 9074705,SEE957516233463,,In Betrieb,2024-11-24,2024-11-16,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,4,,1.78,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9115520,SEE958402664361,,In Betrieb,2024-11-19,2024-11-19,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,0.81,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9361734,SEE917860536382,,In Betrieb,2025-01-24,2024-11-19,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd,3.4,3.04,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-9574704,SEE986628679579,E21041011000000000000254627900002,In Betrieb,2025-03-13,2024-11-19,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,19,Süd,8.55,7.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+9574704,SEE986628679579,E21041011000000000000254627900002,In Betrieb,2025-03-13,2024-11-19,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,19,Süd,8.455,8.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9124186,SEE903943017909,E2104101S000000000000082665300002,In Betrieb,2024-11-21,2024-11-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,40,Ost-West,14.6,14.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9131156,SEE994202691831,,In Betrieb,2024-11-22,2024-11-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,18,Süd,7.83,7.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9215563,SEE908158307173,,In Betrieb,2024-12-11,2024-11-23,,,,,haushalt,85599,Parsdorf,,,,,false,stecker,2,,0.6,0.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1939,6 +1939,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 9678165,SEE990813855112,,In Betrieb,2025-04-03,2025-04-02,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,18,Süd-Ost,8.1,8.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9686730,SEE964936932029,,In Betrieb,2025-04-05,2025-04-05,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9687592,SEE955342194842,,In Betrieb,2025-04-05,2025-04-05,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+9741342,SEE980255981692,,In Betrieb,2025-04-15,2025-04-10,,,Norma,NORMA Lebensmittelfilialbetrieb Stiftung & Co. KG,GHD,85591,Vaterstetten,Johann-Sebastian-Bach-Straße,44,48.112205,11.779394,false,gebaeude,356,Süd-Ost,156.64,150.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9730110,SEE932140840744,,In Betrieb,2025-04-13,2025-04-13,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,1.196,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9735806,SEE946184294838,,In Betrieb,2025-04-14,2025-04-14,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,4,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
