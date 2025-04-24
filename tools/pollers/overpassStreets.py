@@ -467,7 +467,7 @@ def get_etymology_type(element: dict) -> str:
     # astronomic object
     return 'Himmelskörper'
 
-  if 'http://www.wikidata.org/entity/Q811979' in types:
+  if 'http://www.wikidata.org/entity/Q811979' in types or 'http://www.wikidata.org/entity/Q18247357' in types:
     # architectural structure
     return 'Bauwerke'
 
@@ -529,6 +529,7 @@ WHERE {
       wd:Q15284     # municipality
       wd:Q486972    # human settlement
       wd:Q811979    # architectural structure
+      wd:Q18247357  # group of structures or buildings
       wd:Q6999      # astronomic object
       wd:Q506       # flower (Blüte)
     }
