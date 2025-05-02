@@ -805,13 +805,13 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 9728479,SEE985131198287,In Betrieb,2025-04-13,2025-04-01,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,3.2,Teileinspeisung (einschließlich Eigenverbrauch),none
 9678166,SEE956291819688,In Betrieb,2025-04-03,2025-04-02,,,,,85591,Vaterstetten,,,,,false,Lithium,6.57,6.57,7.46,Teileinspeisung (einschließlich Eigenverbrauch),none
 9735883,SEE996519409932,In Betrieb,2025-04-14,2025-04-14,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,1.6,Teileinspeisung (einschließlich Eigenverbrauch),none
-9792911,SEE936503085254,In Betrieb,2025-04-27,2025-04-15,,,,,85591,Vaterstetten,,,,,false,Lithium,10.0,10.0,11.2,Teileinspeisung (einschließlich Eigenverbrauch),none
+9792911,SEE936503085254,In Betrieb,2025-04-27,2025-04-15,,,,,85591,Vaterstetten,,,,,true,Lithium,10.0,10.0,11.2,Teileinspeisung (einschließlich Eigenverbrauch),none
 9777859,SEE990375375523,In Betrieb,2025-04-24,2025-04-22,,,,,85591,Vaterstetten,,,,,false,Lithium,5.12,5.12,5.12,Teileinspeisung (einschließlich Eigenverbrauch),none
 9787986,SEE918054167658,In Betrieb,2025-04-26,2025-04-23,,,,,85599,Parsdorf,,,,,false,Lithium,5.12,5.12,7.68,Teileinspeisung (einschließlich Eigenverbrauch),none
 9786258,SEE996635136705,In Betrieb,2025-04-25,2025-04-24,,,,,85591,Vaterstetten,,,,,false,Lithium,7.2,7.2,9.6,Teileinspeisung (einschließlich Eigenverbrauch),none
 9798284,SEE940752126736,In Betrieb,2025-04-28,2025-04-25,,,,,85591,Vaterstetten,,,,,false,Lithium,9.0,9.0,30.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 9789601,SEE943711710687,In Betrieb,2025-04-26,2025-04-26,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,1.6,Teileinspeisung (einschließlich Eigenverbrauch),none
-9802573,SEE919553600684,In Betrieb,2025-04-29,2025-04-28,,,,,85598,Baldham,,,,,false,Lithium,3.5,3.5,6.9,Teileinspeisung (einschließlich Eigenverbrauch),none
+9802573,SEE919553600684,In Betrieb,2025-04-29,2025-04-28,,,,,85598,Baldham,,,,,true,Lithium,3.5,3.5,6.9,Teileinspeisung (einschließlich Eigenverbrauch),none
 9801421,SEE924346110073,In Betrieb,2025-04-29,2025-04-29,,,,,85599,Parsdorf,,,,,false,Lithium,10.0,10.0,10.36,Teileinspeisung (einschließlich Eigenverbrauch),none
 9807238,SEE912183553542,In Betrieb,2025-04-30,2025-04-29,,,,,85591,Vaterstetten,,,,,false,Lithium,4.6,4.6,6.9,Teileinspeisung (einschließlich Eigenverbrauch),none
 9811683,SEE995449069803,In Betrieb,2025-05-01,2025-05-01,,,,,85646,Neufarn,,,,,false,Lithium,0.8,0.8,1.96,Teileinspeisung (einschließlich Eigenverbrauch),none
