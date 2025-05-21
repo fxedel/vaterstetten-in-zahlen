@@ -24,7 +24,7 @@ mastr <- read_delim(
     netzbetreiberPruefung = col_logical(),
     typ = readr::col_factor(c("freiflaeche", "gebaeude", "gebaeude-other", "stecker")),
     module = col_integer(),
-    ausrichtung = col_character(),
+    ausrichtung = readr::col_factor(),
     bruttoleistung_kW = col_double(),
     nettonennleistung_kW = col_double(),
     leistungsBegrenzung = readr::col_factor(c("70%", "60%", "50%", "sonstige", "ohne")),
@@ -288,9 +288,11 @@ ui <- memoise(omit_args = "request", function(request, id) {
           label = NULL,
           choices = list(
             "Gruppiert nach Anlagengröße" = "anlagenGroesse",
-            "Gruppiert nach Standort" = "ort",
+            "Gruppiert nach Ort" = "ort",
+            "Gruppiert nach Typ" = "typ",
             "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung",
             "Gruppiert nach Einspeiseart" = "einspeisung",
+            "Gruppiert nach Ausrichtung" = "ausrichtung",
             "Gruppiert nach Leistungsbegrenzung" = "leistungsBegrenzung",
             "Gruppiert nach Netzbetreiberprüfung" = "netzbetreiberPruefung"
           )
@@ -304,9 +306,11 @@ ui <- memoise(omit_args = "request", function(request, id) {
           label = NULL,
           choices = list(
             "Gruppiert nach Anlagengröße" = "anlagenGroesse",
-            "Gruppiert nach Standort" = "ort",
+            "Gruppiert nach Ort" = "ort",
+            "Gruppiert nach Typ" = "typ",
             "Gruppiert nach Gebäudenutzung" = "gebaeudeNutzung",
             "Gruppiert nach Einspeiseart" = "einspeisung",
+            "Gruppiert nach Ausrichtung" = "ausrichtung",
             "Gruppiert nach Leistungsbegrenzung" = "leistungsBegrenzung",
             "Gruppiert nach Netzbetreiberprüfung" = "netzbetreiberPruefung"
           )
