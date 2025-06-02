@@ -33,18 +33,17 @@ class Poller(pollers.poller.Poller):
     if len(df) == 0:
       raise Exception('Queried data is empty')
     
-    df['stichtag'] = df['Zeit'].astype(str) + '-' + df['2_Auspraegung_Code'].map(lambda x: {
+    df['stichtag'] = df['time'].astype(str) + '-' + df['1_variable_attribute_code'].map(lambda x: {
       'SQUART01': '03-31',
       'SQUART02': '06-30',
       'SQUART03': '09-30',
       'SQUART04': '12-31',
     }[x])
-    df['column'] = df['3_Auspraegung_Code'].map(lambda x: {
+    df['column'] = df['3_variable_attribute_code'].map(lambda x: {
       np.nan: 'bevoelkerung',
       'GESM': 'maennlich',
       'GESW': 'weiblich',
     }[x])
-    df['value'] = df['BEVSTD__Bevoelkerung__Anzahl']
 
     # filter out rows with empty data
     df = df[df['value'] != '...']

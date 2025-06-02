@@ -1,6 +1,8 @@
+import io
 import json
 from typing import Optional
 import requests
+import zipfile
 
 BASE_URL_DESTATIS = 'https://www-genesis.destatis.de/genesisWS/rest/2020' # Statistisches Bundesamt
 BASE_URL_LFSTAT_BAYERN = 'https://www.statistikdaten.bayern.de/genesisWS/rest/2020' # Landesamt für Statistik Bayern
@@ -36,10 +38,17 @@ class Client:
     url = f'{self.base_url}/{path}'
 
     params = params.copy()
-    params['username'] = self.username
-    params['password'] = self.password
 
-    response = requests.get(url, params = params, timeout = (5, 20))
+    response = requests.post(
+      url = url,
+      params = params,
+      timeout = (5, 20),
+      headers = {
+        'username': self.username,
+        'password': self.password,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    )
 
     response.encoding = 'UTF-8'
 
@@ -63,7 +72,15 @@ class Client:
   ) -> str:
     params = {'name': name, 'format': 'ffcsv'} | kwargs
     res = self.http_request('data/tablefile', params)
-    return res.text
+
+    zip_file = zipfile.ZipFile(io.BytesIO(res.content))
+
+    if len(zip_file.filelist) != 1:
+      raise Exception(f'Zip does not contain exactly one file: {zip_file.filelist}')
+    
+    unzipped = zip_file.read(zip_file.filelist[0]).decode('utf-8')
+
+    return unzipped
 
 def safe_json_decode(s: str) -> Optional[any]:
   try:

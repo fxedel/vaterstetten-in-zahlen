@@ -82,13 +82,16 @@ class Poller(pollers.poller.Poller):
 
     if len(df) == 0:
       raise Exception('Queried data is empty')
+
+    df = df.pivot(index = 'time', columns = 'value_variable_code', values = 'value')
+    df = df.reset_index()
   
     rows = [{
       'Wahl': wahl,
-      'Wahltag': datetime.strptime(x['Zeit'], '%d.%m.%Y').strftime('%Y-%m-%d'),
+      'Wahltag': x['time'],
       'Stimmbezirk': 'Gesamt',
-      'Wahlberechtigte': x['WSBER1__Wahlberechtigte__Anzahl'],
-      'Waehler': x['WAEHLR__Wahlberechtigte__Anzahl'],
+      'Wahlberechtigte': x['WSBER1'],
+      'Waehler': x['WAEHLR'],
     } for x in df.to_dict('records')]
 
     return rows
@@ -104,41 +107,48 @@ class Poller(pollers.poller.Poller):
     print('> Queried data for table %s (%s) in %.1fs' % (table_name, wahl, time.time() - start))
 
     df = pd.read_csv(io.StringIO(table_data_csv), delimiter = ";")
-    
+
+    index = ['time']
+    if wahl == 'Bundestagswahl' or wahl == 'Landtagswahl':
+      index = ['time', '2_variable_attribute_code']
+
+    df = df.pivot(index = index, columns = 'value_variable_code', values = 'value')
+    df = df.reset_index()
+
     if wahl == 'Bundestagswahl':
-      df = df[df['2_Auspraegung_Code'] == 'ZWEITSTIMME']
-    elif wahl == 'Landtagswahl':
-      df['GUESTI__Gueltige_Stimmen__Anzahl_ERSTSTIMME'] = df.apply(lambda x:
-        int(x['GUESTI__Abgegebene_Stimmen__Anzahl'].replace('-', '0')) if x['2_Auspraegung_Code'] == 'ERSTSTIMME' else 0,
+      df = df[df['2_variable_attribute_code'] == 'ZWEITSTIMME']
+    elif wahl == 'Landtagswahl':  
+      df['GUESTI_ERSTSTIMME'] = df.apply(lambda x:
+        int(x['GUESTI'].replace('-', '0')) if x['2_variable_attribute_code'] == 'ERSTSTIMME' else 0,
       axis = 1)
-      df['GUESTI__Gueltige_Stimmen__Anzahl_GESAMTSTIMME'] = df.apply(lambda x:
-        int(x['GUESTI__Abgegebene_Stimmen__Anzahl'].replace('-', '0')) if x['2_Auspraegung_Code'] == 'GESAMTSTIMME' else 0,
+      df['GUESTI_GESAMTSTIMME'] = df.apply(lambda x:
+        int(x['GUESTI'].replace('-', '0')) if x['2_variable_attribute_code'] == 'GESAMTSTIMME' else 0,
       axis = 1)
-      df['UNGSTI__Gueltige_Stimmen__Anzahl_ERSTSTIMME'] = df.apply(lambda x:
-        int(x['UNGSTI__Gueltige_Stimmen__Anzahl'].replace('-', '0')) if x['2_Auspraegung_Code'] == 'ERSTSTIMME' else 0,
+      df['UNGSTI_ERSTSTIMME'] = df.apply(lambda x:
+        int(x['UNGSTI'].replace('-', '0')) if x['2_variable_attribute_code'] == 'ERSTSTIMME' else 0,
       axis = 1)
-      df['UNGSTI__Gueltige_Stimmen__Anzahl_GESAMTSTIMME'] = df.apply(lambda x:
-        int(x['UNGSTI__Gueltige_Stimmen__Anzahl'].replace('-', '0')) if x['2_Auspraegung_Code'] == 'GESAMTSTIMME' else 0,
+      df['UNGSTI_GESAMTSTIMME'] = df.apply(lambda x:
+        int(x['UNGSTI'].replace('-', '0')) if x['2_variable_attribute_code'] == 'GESAMTSTIMME' else 0,
       axis = 1)
 
-      df = df.groupby('Zeit', as_index = False, sort = False).aggregate('sum')
-      df['2_Auspraegung_Code'] = 'ZWEITSTIMME'
-      df['GUESTI__Gueltige_Stimmen__Anzahl'] = df['GUESTI__Gueltige_Stimmen__Anzahl_GESAMTSTIMME'] - df['GUESTI__Gueltige_Stimmen__Anzahl_ERSTSTIMME']
-      df['UNGSTI__Gueltige_Stimmen__Anzahl'] = df['UNGSTI__Gueltige_Stimmen__Anzahl_GESAMTSTIMME'] - df['UNGSTI__Gueltige_Stimmen__Anzahl_ERSTSTIMME']
+      df = df.groupby('time', as_index = False, sort = False).aggregate('sum')
+      df['2_variable_attribute_code'] = 'ZWEITSTIMME'
+      df['GUESTI'] = df['GUESTI_GESAMTSTIMME'] - df['GUESTI_ERSTSTIMME']
+      df['UNGSTI'] = df['UNGSTI_GESAMTSTIMME'] - df['UNGSTI_ERSTSTIMME']
     elif wahl == 'Gemeinderatswahl':
-      df['GUESTI__Gueltige_Stimmen__Anzahl'] = df['STIZ02__Abgegebene_Stimmzettel__Anzahl']
-      df['UNGSTI__Gueltige_Stimmen__Anzahl'] = df['STIZ03__Gueltige_Stimmzettel__Anzahl']
+      df['GUESTI'] = df['STIZ02']
+      df['UNGSTI'] = df['STIZ03']
 
     if len(df) == 0:
       raise Exception('Queried data is empty')
   
     rows = [{
       'Wahl': wahl,
-      'Wahltag': datetime.strptime(x['Zeit'], '%d.%m.%Y').strftime('%Y-%m-%d'),
+      'Wahltag': x['time'],
       'Stimmbezirk': 'Gesamt',
-      'Stimmentyp': str(x.get('2_Auspraegung_Code', '')).capitalize(),
-      'GueltigeStimmen': x['GUESTI__Gueltige_Stimmen__Anzahl'],
-      'UngueltigeStimmen': x['UNGSTI__Gueltige_Stimmen__Anzahl'],
+      'Stimmentyp': str(x.get('2_variable_attribute_code', '')).capitalize(),
+      'GueltigeStimmen': x['GUESTI'],
+      'UngueltigeStimmen': x['UNGSTI'],
     } for x in df.to_dict('records')]
 
     return rows

@@ -67,21 +67,22 @@ class Poller(pollers.poller.Poller):
     print('> Queried data for table %s (%s) in %.1fs' % (table_name, wahl, time.time() - start))
 
     df = pd.read_csv(io.StringIO(table_data_csv), delimiter = ";")
+    df = df.sort_values(by = ['time', '3_variable_attribute_label'])
 
-    df = df[df['3_Auspraegung_Label'] != 'Insgesamt']
-    df = df[df['GUESTI__Gueltige_Stimmen__Anzahl'] != '-']
+    df = df[df['3_variable_attribute_label'] != 'Insgesamt']
+    df = df[df['value'] != '-']
     
     if len(df) == 0:
       raise Exception('Queried data is empty')
 
     rows = [{
       'Wahl': wahl,
-      'Wahltag': datetime.strptime(x['Zeit'], '%d.%m.%Y').strftime('%Y-%m-%d'),
+      'Wahltag': x['time'],
       'Stimmbezirk': 'Gesamt',
-      'ParteiCode': x['3_Auspraegung_Code'],
-      'ParteiLabel': x['3_Auspraegung_Label'],
-      'Stimmentyp': str(x.get('2_Auspraegung_Code', '')).capitalize(),
-      'Stimmen': x['GUESTI__Gueltige_Stimmen__Anzahl'],
+      'ParteiCode': x['3_variable_attribute_code'],
+      'ParteiLabel': x['3_variable_attribute_label'],
+      'Stimmentyp': str(x.get('2_variable_attribute_code', '')).capitalize(),
+      'Stimmen': x['value'],
     } for x in df.to_dict('records')]
 
     return rows
@@ -100,21 +101,22 @@ class Poller(pollers.poller.Poller):
     print('> Queried data for table %s (%s) in %.1fs' % (table_name, wahl, time.time() - start))
 
     df = pd.read_csv(io.StringIO(table_data_csv), delimiter = ";")
+    df = df.sort_values(by = ['time', '2_variable_attribute_label'])
     
-    df = df[df['2_Auspraegung_Label'] != 'Insgesamt']
-    df = df[df['GUESTI__Gueltige_Stimmen__Anzahl'] != '-']
+    df = df[df['2_variable_attribute_label'] != 'Insgesamt']
+    df = df[df['value'] != '-']
     
     if len(df) == 0:
       raise Exception('Queried data is empty')
 
     rows = [{
       'Wahl': wahl,
-      'Wahltag': datetime.strptime(x['Zeit'], '%d.%m.%Y').strftime('%Y-%m-%d'),
+      'Wahltag': x['time'],
       'Stimmbezirk': 'Gesamt',
-      'ParteiCode': x['2_Auspraegung_Code'],
-      'ParteiLabel': x['2_Auspraegung_Label'],
+      'ParteiCode': x['2_variable_attribute_code'],
+      'ParteiLabel': x['2_variable_attribute_label'],
       'Stimmentyp': '',
-      'Stimmen': x['GUESTI__Gueltige_Stimmen__Anzahl'],
+      'Stimmen': x['value'],
     } for x in df.to_dict('records')]
 
     return rows
@@ -150,32 +152,33 @@ class Poller(pollers.poller.Poller):
     df_erststimmen = pd.read_csv(io.StringIO(table_data_csv_erststimmen), delimiter = ";")
     
     df = pd.concat([df_gesamtstimmen, df_erststimmen], ignore_index = True, sort = False)
+    df = df.sort_values(by = ['time', '3_variable_attribute_label'])
+
+    df = df[df['3_variable_attribute_label'] != 'Insgesamt']
+    df = df[df['value'] != '-']
     
-    df = df[df['3_Auspraegung_Label'] != 'Insgesamt']
-    df = df[df['GUESTI__Gueltige_Stimmen__Anzahl'] != '-']
-    
-    df['GUESTI__Gueltige_Stimmen__Anzahl_ERSTSTIMME'] = df.apply(lambda x:
-      int(x['GUESTI__Gueltige_Stimmen__Anzahl'].replace('-', '0')) if x['2_Auspraegung_Code'] == 'ERSTSTIMME' else 0,
+    df['value_ERSTSTIMME'] = df.apply(lambda x:
+      int(x['value'].replace('-', '0')) if x['2_variable_attribute_code'] == 'ERSTSTIMME' else 0,
     axis = 1)
-    df['GUESTI__Gueltige_Stimmen__Anzahl_GESAMTSTIMME'] = df.apply(lambda x:
-      int(x['GUESTI__Gueltige_Stimmen__Anzahl'].replace('-', '0')) if x['2_Auspraegung_Code'] == 'GESAMTSTIMME' else 0,
+    df['value_GESAMTSTIMME'] = df.apply(lambda x:
+      int(x['value'].replace('-', '0')) if x['2_variable_attribute_code'] == 'GESAMTSTIMME' else 0,
     axis = 1)
 
-    df = df.groupby(['Zeit', '3_Auspraegung_Code', '3_Auspraegung_Label'], as_index = False, sort = False).aggregate('sum')
-    df['2_Auspraegung_Code'] = 'ZWEITSTIMME'
-    df['GUESTI__Gueltige_Stimmen__Anzahl'] = df['GUESTI__Gueltige_Stimmen__Anzahl_GESAMTSTIMME'] - df['GUESTI__Gueltige_Stimmen__Anzahl_ERSTSTIMME']
+    df = df.groupby(['time', '3_variable_attribute_code', '3_variable_attribute_label'], as_index = False, sort = False).aggregate('sum')
+    df['2_variable_attribute_code'] = 'ZWEITSTIMME'
+    df['value'] = df['value_GESAMTSTIMME'] - df['value_ERSTSTIMME']
 
     if len(df) == 0:
       raise Exception('Queried data is empty')
 
     rows = [{
       'Wahl': wahl,
-      'Wahltag': datetime.strptime(x['Zeit'], '%d.%m.%Y').strftime('%Y-%m-%d'),
+      'Wahltag': x['time'],
       'Stimmbezirk': 'Gesamt',
-      'ParteiCode': x['3_Auspraegung_Code'],
-      'ParteiLabel': x['3_Auspraegung_Label'],
-      'Stimmentyp': str(x.get('2_Auspraegung_Code', '')).capitalize(),
-      'Stimmen': x['GUESTI__Gueltige_Stimmen__Anzahl'],
+      'ParteiCode': x['3_variable_attribute_code'],
+      'ParteiLabel': x['3_variable_attribute_label'],
+      'Stimmentyp': str(x.get('2_variable_attribute_code', '')).capitalize(),
+      'Stimmen': x['value'],
     } for x in df.to_dict('records')]
 
     return rows
@@ -194,21 +197,22 @@ class Poller(pollers.poller.Poller):
     print('> Queried data for table %s (%s) in %.1fs' % (table_name, wahl, time.time() - start))
 
     df = pd.read_csv(io.StringIO(table_data_csv), delimiter = ";")
+    df = df.sort_values(by = ['time', '2_variable_attribute_label'])
 
-    df = df[df['2_Auspraegung_Label'] != 'Insgesamt']
-    df = df[df['GEWSTI__Gewichtete_Stimmen__Anzahl'] != '-']
+    df = df[df['2_variable_attribute_label'] != 'Insgesamt']
+    df = df[df['value'] != '-']
 
     if len(df) == 0:
       raise Exception('Queried data is empty')
 
     rows = [{
       'Wahl': wahl,
-      'Wahltag': datetime.strptime(x['Zeit'], '%d.%m.%Y').strftime('%Y-%m-%d'),
+      'Wahltag': x['time'],
       'Stimmbezirk': 'Gesamt',
-      'ParteiCode': x['2_Auspraegung_Code'],
-      'ParteiLabel': x['2_Auspraegung_Label'],
+      'ParteiCode': x['2_variable_attribute_code'],
+      'ParteiLabel': x['2_variable_attribute_label'],
       'Stimmentyp': '',
-      'Stimmen': x['GEWSTI__Gewichtete_Stimmen__Anzahl'],
+      'Stimmen': x['value'],
     } for x in df.to_dict('records')]
 
     return rows
