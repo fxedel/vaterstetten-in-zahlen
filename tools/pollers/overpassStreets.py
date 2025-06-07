@@ -363,8 +363,13 @@ class Poller(pollers.poller.Poller):
       wikidata_data = self.query_wikidata(wikidata_entity_ids[i*chunk_size:(i+1)*chunk_size])
 
       for element in wikidata_data['results']['bindings']:
+        wikidata_entity_id = shorten_wikidata_entity_reference(element['item']['value'])
+
+        if element['itemLabel']['value'] == wikidata_entity_id:
+          raise Exception(f'Wikidata entity {wikidata_entity_id} has no label: {element}')
+
         etymologies.append({
-          'WikidataObjekt': shorten_wikidata_entity_reference(element['item']['value']),
+          'WikidataObjekt': wikidata_entity_id,
           'Bezeichnung': element['itemLabel']['value'],
           'Beschreibung': element.get('itemDescription', {}).get('value'),
           'Typ': get_etymology_type(element),
