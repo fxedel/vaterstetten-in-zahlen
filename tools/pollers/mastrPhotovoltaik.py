@@ -106,7 +106,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
     photovoltaik_typ = self.PHOTOVOLTAIK_TYP_BY_ID[x['ArtDerSolaranlageId']]
 
     if photovoltaik_typ == self.PHOTOVOLTAIK_TYP_STECKER:
-      if x['AnzahlSolarModule'] > 2 and x['Nettonennleistung'] > 0.8:
+      if x.get('AnzahlSolarModule', 0) > 2 and x.get('Nettonennleistung', 0) > 0.8:
         print(f"> Entity with ArtDerSolaranlageId = '{photovoltaik_typ}' has AnzahlSolarModule = {x['AnzahlSolarModule']} > 2 and Nettonennleistung = {x['Nettonennleistung']} > 0.8, setting ArtDerSolaranlageId := '{self.PHOTOVOLTAIK_TYP_GEBAEUDE}': Name '{x['EinheitName']}' ({self.einheit_url(x['Id'])})")
         photovoltaik_typ = self.PHOTOVOLTAIK_TYP_GEBAEUDE
 
