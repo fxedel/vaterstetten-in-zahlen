@@ -805,7 +805,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 9567475,SEE908447622833,In Betrieb,2025-03-12,2025-03-11,,,,,85591,Vaterstetten,,,,,false,Lithium,4.6,4.6,6.9,Teileinspeisung (einschließlich Eigenverbrauch),false
 9684092,SEE913725730353,In Betrieb,2025-04-04,2025-03-13,,,,,85598,Baldham,,,,,false,Lithium,9.6,9.6,9.6,Teileinspeisung (einschließlich Eigenverbrauch),none
 9575941,SEE920932873087,In Betrieb,2025-03-14,2025-03-14,,,,,85591,Vaterstetten,,,,,true,Lithium,0.8,0.8,1.6,Teileinspeisung (einschließlich Eigenverbrauch),false
-9599206,SEE977338166152,In Betrieb,2025-03-19,2025-03-14,,,,,85591,Vaterstetten,,,,,false,Lithium,5.76,5.76,9.6,Teileinspeisung (einschließlich Eigenverbrauch),false
+9599206,SEE977338166152,In Betrieb,2025-03-19,2025-03-14,,,,,85591,Vaterstetten,,,,,true,Lithium,5.76,5.76,9.6,Teileinspeisung (einschließlich Eigenverbrauch),none
 9641712,SEE939832670221,In Betrieb,2025-03-27,2025-03-14,,,,,85591,Vaterstetten,,,,,false,Lithium,6.0,6.0,11.8,Teileinspeisung (einschließlich Eigenverbrauch),none
 9732634,SEE996964663460,In Betrieb,2025-04-14,2025-03-17,,,,,85591,Vaterstetten,,,,,false,Lithium,0.1,0.1,12.9,Teileinspeisung (einschließlich Eigenverbrauch),none
 9726274,SEE909285676446,In Betrieb,2025-04-12,2025-03-21,,,,,85591,Vaterstetten,,,,,false,Lithium,8.64,6.0,7.78,Teileinspeisung (einschließlich Eigenverbrauch),none
@@ -910,7 +910,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 10471973,SEE974307846640,In Betrieb,2025-09-02,2025-09-01,,,,,85598,Baldham,,,,,false,Lithium,10.24,10.0,11.04,Teileinspeisung (einschließlich Eigenverbrauch),none
 10538181,SEE914655050825,In Betrieb,2025-09-16,2025-09-01,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,2.7,Teileinspeisung (einschließlich Eigenverbrauch),none
 10480250,SEE962661575184,In Betrieb,2025-09-04,2025-09-02,,,,,85591,Vaterstetten,,,,,false,Lithium,8.0,8.0,10.0,Teileinspeisung (einschließlich Eigenverbrauch),none
-10621682,SEE970742932801,In Betrieb,2025-10-05,2025-09-02,,,,,85591,Vaterstetten,,,,,false,Lithium,15.0,10.0,10.4,Teileinspeisung (einschließlich Eigenverbrauch),none
+10621682,SEE970742932801,In Betrieb,2025-10-05,2025-09-02,,,,,85591,Vaterstetten,,,,,true,Lithium,15.0,10.0,10.4,Teileinspeisung (einschließlich Eigenverbrauch),none
 10578452,SEE990880112552,In Betrieb,2025-09-24,2025-09-05,,,,,85591,Vaterstetten,,,,,false,Lithium,5.0,5.0,19.2,Teileinspeisung (einschließlich Eigenverbrauch),none
 10518495,SEE932538804631,In Betrieb,2025-09-12,2025-09-09,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,2.7,Teileinspeisung (einschließlich Eigenverbrauch),none
 10562810,SEE981450925931,In Betrieb,2025-09-21,2025-09-09,,,,,85591,Vaterstetten,,,,,false,Lithium,5.2,5.2,10.4,Teileinspeisung (einschließlich Eigenverbrauch),none
@@ -919,6 +919,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 10525632,SEE959127461808,In Betrieb,2025-09-14,2025-09-13,,,,,85591,Vaterstetten,,,,,false,Lithium,3.8,0.8,3.8,Teileinspeisung (einschließlich Eigenverbrauch),none
 10546550,SEE967696578339,In Betrieb,2025-09-17,2025-09-14,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,3.84,Teileinspeisung (einschließlich Eigenverbrauch),none
 10546589,SEE999006793514,In Betrieb,2025-09-17,2025-09-14,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,1.92,Teileinspeisung (einschließlich Eigenverbrauch),none
+10626960,SEE930260481496,In Betrieb,2025-10-06,2025-09-15,,,,,85598,Baldham,,,,,false,Lithium,0.8,0.8,2.1,Teileinspeisung (einschließlich Eigenverbrauch),none
 10538316,SEE971035633610,In Betrieb,2025-09-16,2025-09-16,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,5.4,Teileinspeisung (einschließlich Eigenverbrauch),none
 10545341,SEE997878464655,In Betrieb,2025-09-17,2025-09-17,,,,,85598,Baldham,,,,,false,Lithium,5.0,5.0,14.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 10587145,SEE980931564980,In Betrieb,2025-09-26,2025-09-19,,,,,85591,Vaterstetten,,,,,false,Lithium,5.78,5.78,7.78,Teileinspeisung (einschließlich Eigenverbrauch),none
