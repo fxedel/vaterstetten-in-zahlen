@@ -197,7 +197,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 4079431,SEE922459332733,,In Betrieb,2021-01-07,2010-06-01,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,5.28,5.28,ohne,false,Volleinspeisung,false
 2225234,SEE918094453667,E21041011000000000000388003500000,In Betrieb,2019-07-16,2010-06-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,5.16,4.6,ohne,false,Volleinspeisung,false
 3048469,SEE931726193816,E21041011000000000000387104600000,In Betrieb,2020-05-12,2010-06-10,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Süd-Ost,5.94,5.94,ohne,false,Volleinspeisung,false
-4103073,SEE912322509317,,In Betrieb,2021-01-11,2010-06-14,,,,,landwirtschaft,85646,Neufarn,Münchener Str.,1,48.147717,11.822611,true,gebaeude,,Süd,51.84,51.0,ohne,false,Volleinspeisung,false
+4103073,SEE912322509317,,In Betrieb,2021-01-11,2010-06-14,,,,,landwirtschaft,85646,Neufarn,Münchener Str.,1,48.147717,11.822611,true,gebaeude,207,Süd,51.84,51.0,ohne,false,Volleinspeisung,false
 3079237,SEE936076574322,E21041011000000000000389064700000,In Betrieb,2020-05-24,2010-06-16,,,,,GHD,85622,Weißenfeld,Gut Ammerthal,7,48.143856,11.76177,true,gebaeude,149,Süd-Ost,32.4,32.4,ohne,false,Volleinspeisung,false
 3180302,SEE932123338893,E21041011000000000000388089600000,In Betrieb,2020-06-25,2010-06-16,,,,,landwirtschaft,85591,Vaterstetten,Baldhamer Straße,99,48.112,11.782651,true,gebaeude,2094,Ost-West,360.0,360.0,sonstige,false,Volleinspeisung,false
 3623237,SEE949283138096,E21041011000000000000395757600000,In Betrieb,2020-11-08,2010-06-17,,,Schule,natürliche Person (ABR945820683838),oeffentlich,85599,Parsdorf,,,,,true,gebaeude,119,Süd-Ost,23.13,23.13,70%,false,Volleinspeisung,false
@@ -2155,6 +2155,8 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 10783708,SEE946566895936,,In Betrieb,2025-11-17,2025-11-13,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,12,Süd,5.4,5.4,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10780050,SEE925476431694,,In Betrieb,2025-11-15,2025-11-15,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.25,0.25,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10781863,SEE929768902992,,In Betrieb,2025-11-16,2025-11-16,,,,,haushalt,85599,Parsdorf,,,,,false,stecker,2,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+10833018,SEE913770787524,,In Betrieb,2025-11-28,2025-11-26,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Süd,6.3,6.3,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+10835234,SEE952839908296,,In Betrieb,2025-11-28,2025-11-28,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,36,Süd,16.2,16.2,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5420331,SEE944713209056,,In Planung,2022-10-24,,2022-11-30,,,,,85598,Baldham,,,,,false,gebaeude,38,Süd-West,15.58,15.58,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5513581,SEE919309120596,,In Planung,2022-12-08,,2022-12-15,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,12,Süd-West,4.8,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
