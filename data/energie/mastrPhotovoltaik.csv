@@ -568,9 +568,9 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2294924,SEE981944894521,,In Betrieb,2019-08-18,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,9,Ost-West,2.475,2.2,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2938809,SEE983654072114,E2104101S000000000000099648200001,In Betrieb,2020-03-30,2019-01-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,11,nachgeführt,3.03,3.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 1873861,SEE975018572187,,In Betrieb,2019-02-22,2019-01-24,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,26,Süd,7.8,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-1909864,SEE984837772784,,In Betrieb,2019-03-05,2019-01-25,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,34,Süd-West,10.71,10.71,70%,false,Volleinspeisung,false
-1910165,SEE950398022507,,In Betrieb,2019-03-05,2019-01-25,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,95,West,29.925,29.925,70%,false,Volleinspeisung,false
-1910175,SEE978598652348,,In Betrieb,2019-03-05,2019-01-25,,,,,haushalt,85646,Neufarn,,,,,true,gebaeude,28,Süd,8.82,8.0,70%,false,Volleinspeisung,false
+1909864,SEE984837772784,,In Betrieb,2019-03-05,2019-01-25,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,34,Süd-West,10.71,10.71,70%,false,Volleinspeisung,false
+1910165,SEE950398022507,,In Betrieb,2019-03-05,2019-01-25,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,95,West,29.925,29.925,70%,false,Volleinspeisung,false
+1910175,SEE978598652348,,In Betrieb,2019-03-05,2019-01-25,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,28,Süd,8.82,8.0,70%,false,Volleinspeisung,false
 1807253,SEE970534825205,,In Betrieb,2019-02-02,2019-01-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,20,Süd,6.4,6.4,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2230290,SEE994272009987,,In Betrieb,2019-07-18,2019-01-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,16,Süd,5.12,5.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 1903742,SEE910180673690,,In Betrieb,2019-03-04,2019-02-18,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,12,Süd-Ost,3.42,3.42,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
