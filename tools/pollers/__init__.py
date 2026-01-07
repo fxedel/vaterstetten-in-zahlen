@@ -40,7 +40,7 @@ hourly: List[str] = [
   'overpassStreets',
 ]
 
-daily: List[str] = [
+manually: List[str] = [
   'lfstatFortschreibungJahre',
   'lfstatFortschreibungQuartale',
   'lfstatWahlergebnisseAllgemein',

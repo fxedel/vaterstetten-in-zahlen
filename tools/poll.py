@@ -43,8 +43,8 @@ if args.pollers:
 
   if args.pollers == ['hourly']:
     args.pollers = pollers.hourly
-  elif args.pollers == ['daily']:
-    args.pollers = pollers.daily
+  elif args.pollers == ['manually']:
+    args.pollers = pollers.manually
 
   for name in args.pollers:
     if not name in pollers.all:
