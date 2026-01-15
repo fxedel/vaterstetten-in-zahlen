@@ -2172,8 +2172,9 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 10971960,SEE988322798778,,In Betrieb,2026-01-12,2025-12-15,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,7,Süd-West,2.6,2.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10900363,SEE973145045475,,In Betrieb,2025-12-16,2025-12-16,,,,,haushalt,85646,Purfing,,,,,false,stecker,4,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10909817,SEE982173570071,,In Betrieb,2025-12-17,2025-12-16,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,20,Süd,9.4,8.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+10977318,SEE916868259743,,In Betrieb,2026-01-14,2025-12-17,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,12,Süd,5.52,5.52,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10916023,SEE958151576687,,In Betrieb,2025-12-21,2025-12-19,,,,,haushalt,85598,Baldham,,,,,false,stecker,3,,1.5,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-8636933,SEE935612167875,,In Betrieb,2026-01-05,2025-12-25,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.4,0.4,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+8636933,SEE935612167875,E21041010C0000000D146618305200001,In Betrieb,2026-01-05,2025-12-25,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.4,0.4,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10957582,SEE920143561841,,In Betrieb,2026-01-06,2026-01-06,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,8,West,4.68,1.2,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10963125,SEE910315979048,,In Betrieb,2026-01-08,2026-01-06,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,1.1,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10965322,SEE986538907625,,In Betrieb,2026-01-09,2026-01-07,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,5.04,5.04,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2189,4 +2190,4 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5478018,SEE947397213661,,In Planung,2024-06-04,,2024-06-05,,,,haushalt,85622,Weißenfeld,,,,,false,stecker,2,,0.6,0.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10579548,SEE925140690471,,In Planung,2025-09-24,,2025-11-01,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,31,Süd-West,17.0,14.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10838984,SEE979140738282,,In Planung,2025-11-30,,2025-12-01,,,,haushalt,85599,Parsdorf,,,,,false,stecker,2,,0.9,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-10538307,SEE947658153361,,In Planung,2025-09-16,,2026-01-04,,,,haushalt,85622,Weißenfeld,,,,,false,stecker,6,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+10538307,SEE947658153361,,In Planung,2025-09-16,,2026-03-01,,,,haushalt,85622,Weißenfeld,,,,,false,stecker,6,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
