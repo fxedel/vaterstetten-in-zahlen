@@ -70,6 +70,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `Grüne`)
 |`listenNr`|integer|Listen-Nummer der Person, auf die sich die Zeile bezieht (z.&nbsp;B. `1` für den 1. Listenplatz)
 |`stimmen`|integer|Anzahl gültiger Stimmen für diese Person
+|`erreichterPlatz`|integer|Erreichter Platz der Person auf der Liste, basierend auf der Stimmenanzahl (1 = die Person mit den meisten Stimmen auf der Liste)
 
 ### Quellen
 
@@ -87,10 +88,14 @@ Der Datensatz [gemeinderatPersonen.csv](./gemeinderatPersonen.csv) umfasst die N
 |`partei`|text|Kurzname der Partei, auf die sich die Zeile bezieht (z.&nbsp;B. `CSU` oder `Grüne`)
 |`listenNr`|integer|Listen-Nummer der Person, auf die sich die Zeile bezieht (z.&nbsp;B. `1` für den 1. Listenplatz)
 |`name`|text|Name der Person
+|`alter`|integer|Alter (i.d.R. zum Zeitpunkt der Wahl), falls bekannt
 
 ### Quellen
 
 * [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html) (händisch übertragen)
+* Alter:
+  * CSU: https://www.csu-vaterstetten.de/assets/pdf/aktuelle-meldungen/die-csu-gemeinderatsliste-2020-steht.pdf
+  * Grüne: https://gruene-ebersberg.de/vor-ort/k-z/vaterstetten/kommunalwahl-2020-vaterstetten/wahlvorschlag-der-gruenen-fuer-den-vaterstettener-gemeinderat
 
 
 ## [`parteien.csv`](./parteien.csv)

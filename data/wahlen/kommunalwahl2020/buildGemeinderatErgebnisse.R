@@ -91,12 +91,18 @@ ergebnisNachPerson <- rawCombined %>%
     values_to = "stimmen"
   ) %>%
   left_join(parteien %>% select(parteiNr, partei), by = "parteiNr") %>%
+  group_by(stimmbezirk, partei) %>%
+  mutate(
+    erreichterPlatz = row_number(desc(stimmen))
+  ) %>%
+  ungroup() %>%
   transmute(
     stimmbezirk,
     stimmbezirkNr = `gebiet-nr`,
     partei,
     listenNr,
-    stimmen
+    stimmen,
+    erreichterPlatz
   )
 write_csv(
   ergebnisNachPerson,

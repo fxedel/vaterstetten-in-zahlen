@@ -18,8 +18,10 @@ gemeinderatPersonen <- read_csv(
   col_types = cols(
     partei = readr::col_factor(levels = levels(parteien$partei)),
     listenNr = col_integer(),
-    name = col_character()
-  )
+    name = col_character(),
+    alter = col_integer()
+  ),
+  na = c("", "NA")
 )
 
 gemeinderatErgebnisAllgemein <- read_csv(
@@ -77,7 +79,8 @@ gemeinderatErgebnisNachPerson <- read_csv(
     stimmbezirkNr = readr::col_factor(),
     partei = readr::col_factor(),
     listenNr = col_integer(),
-    stimmen = col_integer()
+    stimmen = col_integer(),
+    erreichterPlatz = col_integer()
   )
 ) %>%
   # add name
@@ -177,18 +180,94 @@ ui <- memoise(omit_args = "request", function(request, id) {
         title = "Gemeinderat: Häufelungen auf einzelne Kandidat:innen",
         width = 12,
         {
-          gemeinderatErgebnisNachPerson %>%
+          data <- gemeinderatErgebnisNachPerson %>%
             filter(stimmbezirk == "Gesamt") %>%
-            group_by(partei) %>%
+            left_join(gemeinderatGiniKoeffizienten, by = "parteiNr") %>%
+            group_by(partei)
+
+          data %>%
             plot_ly(type = "bar") %>%
             config(displayModeBar = FALSE) %>%
-            add_trace(x = ~listenNr, y = ~stimmen, text = ~paste0(name, ", ", partei, ": ", stimmen, " Stimmen"), color = ~ I(farbe), name = ~parteiNr, yaxis = ~paste0("y", parteiNr), width = 1, hoverinfo = "text") %>%
-            layout(dragmode = FALSE, showlegend = FALSE) %>%
-            layout(yaxis = list(title = list(standoff = 0, font = list(size = 1))),
-                margin = list(r = 0, l = 0, t = 0, b = 0, pad = 0)) %>%
+            add_trace(
+              x = ~listenNr,
+              y = ~stimmen,
+              text = ~paste0(name, ", ", partei, ": ", stimmen, " Stimmen"),
+              color = ~I(farbe),
+              name = ~paste0(parteiNr, ": ", as.character(partei), " (Gini: ", round(gini, 3), ")"),
+              legendgroup = ~partei,
+              yaxis = ~paste0("y", parteiNr),
+              width = 1,
+              hoverinfo = "text"
+            ) %>%
+            layout(dragmode = FALSE, showlegend = TRUE) %>%
+            layout(
+              yaxis = list(title = list(standoff = 0, font = list(size = 1))),
+              margin = list(r = 0, l = 0, t = 0, b = 0, pad = 0)
+            ) %>%
             subplot(shareY = TRUE, margin = 0.01) %>%
             plotly_build()
-        }
+        },
+        p(),
+        p("Der Gini-Koeffizient gibt an, wie stark die Stimmen auf einzelne Kandidat:innen konzentriert sind (1 = alle Stimmen für eine Person, 0 = alle Personen erhalten gleich viele Stimmen).")
+      )
+    ),
+
+    fluidRow(
+      box(
+        title = "Liste aller Kandidat:innen mit Listenplatz-Veränderung",
+        width = 8,
+        DT::dataTableOutput(ns("haeufelTabelle")),
+        p(),
+        p("Bei der Kommunalwahl ist es möglich, Stimmen auf einzelne Kandidat:innen zu verteilen. Somit kann die von der Partei festgelegte Listenreihenfolge durch die Wähler:innen verändert werden. In der Tabelle sind alle Kandidat:innen mit ihrem Listenplatz, dem erreichten Platz (nach Stimmenanzahl) und der Differenz (Delta) aufgeführt. Ein positives Delta bedeutet, dass die Person durch die Wähler:innen nach vorne gewählt wurde, ein negatives Delta bedeutet eine Verschlechterung gegenüber dem Listenplatz.")
+      ),
+      box(
+        title = "Alter vs. Listenplatz-Veränderung",
+        width = 4,
+        {
+          scatterData <- gemeinderatErgebnisNachPerson %>%
+            filter(stimmbezirk == "Gesamt") %>%
+            mutate(delta = listenNr - erreichterPlatz) %>%
+            filter(!is.na(alter)) %>%
+            mutate(
+              alter_jitter = alter + runif(n(), -0.5, 0.5),
+              delta_jitter = delta + runif(n(), -0.5, 0.5)
+            )
+          
+          maxAbsDelta <- max(abs(scatterData$delta), na.rm = TRUE)
+          
+          p <- plot_ly() %>%
+            add_trace(
+              data = scatterData,
+              x = ~alter_jitter,
+              y = ~delta_jitter,
+              type = "scatter",
+              mode = "markers",
+              marker = list(size = 8, opacity = 0.7),
+              color = ~I(farbe),
+              text = ~paste0(name, ", ", partei, "<br>Alter: ", alter, "<br>Listenplatz: ", listenNr, "<br>Erreichter Platz: ", erreichterPlatz, "<br>Delta: ", delta),
+              hoverinfo = "text",
+              showlegend = FALSE
+            )
+          
+          p %>%
+            add_segments(
+              x = min(scatterData$alter, na.rm = TRUE),
+              xend = max(scatterData$alter, na.rm = TRUE),
+              y = 0,
+              yend = 0,
+              line = list(color = "gray", width = 1, dash = "dash"),
+              showlegend = FALSE,
+              hoverinfo = "none"
+            ) %>%
+            layout(
+              xaxis = list(title = "Alter"),
+              yaxis = list(title = "Listenplatz-Veränderung (nach vorne = positiv)", range = c(-maxAbsDelta, maxAbsDelta)),
+              dragmode = FALSE
+            ) %>%
+            plotly_default_config()
+        },
+        p(),
+        p("In diesem Diagramm sind alle Kandidat:innen, für die das Alter bekannt ist, nach Alter (X-Achse) und der Veränderung ihres Listenplatzes (Y-Achse) dargestellt, sowie nach Partei eingefärbt. Es ist zu erkennen, ob es einen Zusammenhang zwischen Alter und Listenplatz-Veränderung gibt und ob dieser je nach Partei unterschiedlich ist.")
       )
     ),
 
@@ -200,6 +279,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         width = 12,
         tagList(
           p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
+          p(HTML("Das Alter der Kandidat:innen der CSU wurde aus <a href=\"https://www.csu-vaterstetten.de/assets/pdf/aktuelle-meldungen/die-csu-gemeinderatsliste-2020-steht.pdf\">dieser Quelle</a> entnommen, für die Grünen aus <a href=\"https://gruene-ebersberg.de/vor-ort/k-z/vaterstetten/kommunalwahl-2020-vaterstetten/wahlvorschlag-der-gruenen-fuer-den-vaterstettener-gemeinderat\">dieser Quelle</a>. Für die anderen Parteien war das Alter nicht verfügbar.")),
           p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/kommunalwahl2020", "Zum Daten-Download mit Dokumentation")),
         ),
       ),
@@ -272,6 +352,75 @@ server <- function(id) {
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
       })
 
+      dt_common_opts <- list(
+        paging = TRUE,
+        searching = TRUE,          # Columnfilter braucht Suche aktiv
+        ordering = TRUE,
+        dom = 'ltip',              # kein globales Suchfeld, aber Filterzeile bleibt
+        order = list(list(5, 'desc')), # Veränderung/Delta-Spalte
+        language = list(url = "https://cdn.datatables.net/plug-ins/1.13.1/i18n/de-DE.json"),
+        columnDefs = list(
+          list(
+            targets = 2, # Alter Spalte
+            render = DT::JS(
+              "function(data, type, row, meta){",
+              "  if(type === 'display' && data !== null && data !== ''){",
+              "    return data + ' Jahre';",
+              "  }",
+              "  return data;",
+              "}"
+            )
+          ),
+          list(
+            targets = 5, # Delta Spalte
+            render = DT::JS( # Vorzeichen anzeigen
+              "function(data, type, row, meta){",
+              "  if(type === 'display'){",
+              "    var n = parseFloat(data);",
+              "    if(isNaN(n)) return data;",
+              "    var sign = n > 0 ? '+' : '';",
+              "    return sign + n;",
+              "  }",
+              "  return data;",
+              "}"
+            )
+          ),
+          list(
+            targets = 5, # Delta Spalte
+            createdCell = DT::JS( # Farbe je nach Vorzeichen
+              "function(td, cellData){",
+              "  var n = parseFloat(cellData);",
+              "  var color = n > 0 ? '#2E7D32' : (n < 0 ? '#C62828' : '#555555');",
+              "  $(td).css('color', color);",
+              "}"
+            )
+          )
+        )
+      )
+
+      haeufelData <- gemeinderatErgebnisNachPerson %>%
+        filter(stimmbezirk == "Gesamt") %>%
+        mutate(delta = listenNr - erreichterPlatz) %>%
+        select(name, partei, alter, listenNr, erreichterPlatz, stimmen, delta)
+
+      output$haeufelTabelle <- DT::renderDataTable({
+        DT::datatable(
+          haeufelData %>%
+            transmute(
+              Name = name,
+              Partei = partei,
+              Alter = alter,
+              `Listen-Nr.` = listenNr,
+              `Erreichter Platz` = erreichterPlatz,
+              `Veränderung` = delta,
+              `Stimmenanzahl` = stimmen
+            ),
+          filter = 'top',
+          options = dt_common_opts,
+          selection = 'none',
+          rownames = FALSE
+        )
+      })
       observe({
         printPersonenstimmenMap(leafletProxy("personenstimmenMap"))
       })
@@ -319,6 +468,33 @@ server <- function(id) {
     }
   )
 }
+
+gemeinderatHaeufelkoenige <- gemeinderatErgebnisNachPerson %>%
+  filter(stimmbezirk == "Gesamt") %>%
+  mutate(delta = listenNr - erreichterPlatz) %>%
+  arrange(desc(delta)) %>%
+  head(10) %>%
+  select(name, partei, listenNr, erreichterPlatz, delta)
+
+gemeinderatFlopHaeufler <- gemeinderatErgebnisNachPerson %>%
+  filter(stimmbezirk == "Gesamt") %>%
+  mutate(delta = listenNr - erreichterPlatz) %>%
+  arrange(delta) %>%
+  head(10) %>%
+  select(name, partei, listenNr, erreichterPlatz, delta)
+
+# Berechne Gini-Koeffizient für jede Partei
+gemeinderatGiniKoeffizienten <- gemeinderatErgebnisNachPerson %>%
+  filter(stimmbezirk == "Gesamt") %>%
+  filter(stimmen > 0) %>% # schließe Personen aus, die nicht wählbar waren
+  group_by(parteiNr) %>%
+  summarise(
+    gini = {
+      x <- sort(stimmen)
+      n <- length(x)
+      2 * sum((1:n) * x) / (n * sum(x)) - (n + 1) / n
+    }
+  )
 
 plotly_default_config <- function(p) {
   p %>%
