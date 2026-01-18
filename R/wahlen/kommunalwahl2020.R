@@ -229,8 +229,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             mutate(delta = listenNr - erreichterPlatz) %>%
             filter(!is.na(alter)) %>%
             mutate(
-              alter_jitter = alter + runif(n(), -0.5, 0.5),
-              delta_jitter = delta + runif(n(), -0.5, 0.5)
+              alter_jitter = alter + runif(n(), -0.5, 0.5)
             )
           
           maxAbsDelta <- max(abs(scatterData$delta), na.rm = TRUE)
@@ -239,7 +238,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             add_trace(
               data = scatterData,
               x = ~alter_jitter,
-              y = ~delta_jitter,
+              y = ~delta,
               type = "scatter",
               mode = "markers",
               marker = list(size = 8, opacity = 0.7),
