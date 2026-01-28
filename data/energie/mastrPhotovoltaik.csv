@@ -2168,6 +2168,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 10854312,SEE999553302047,,In Betrieb,2025-12-03,2025-11-27,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,17,Süd,7.65,7.65,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10574121,SEE901820761303,,In Betrieb,2025-12-04,2025-12-01,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,22,Süd-Ost,9.9,9.9,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10852593,SEE933949739697,,In Betrieb,2025-12-03,2025-12-03,,,,,GHD,85598,Baldham,Lohwiesenweg,1,48.119257,11.801962,false,gebaeude,1740,,791.7,600.0,,true,Volleinspeisung,false
+11020274,SEE999321734278,,In Betrieb,2026-01-27,2025-12-03,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,14,Nord-West,6.44,6.44,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10948339,SEE982067287849,,In Betrieb,2026-01-02,2025-12-06,,,,,haushalt,85622,Weißenfeld,,,,,false,gebaeude,12,Süd,3.1,2.6,,false,Volleinspeisung,false
 10945754,SEE920805978178,,In Betrieb,2025-12-31,2025-12-10,,,,,haushalt,85646,Neufarn,,,,,false,stecker,4,,1.82,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10992135,SEE945897186317,,In Betrieb,2026-01-19,2025-12-10,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,28,Süd,12.74,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2183,6 +2184,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 10965322,SEE986538907625,,In Betrieb,2026-01-09,2026-01-07,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Süd,5.04,5.04,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11006255,SEE958281910764,,In Betrieb,2026-01-22,2026-01-13,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,24,Süd-Ost,10.0,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10994307,SEE938667077175,,In Betrieb,2026-01-19,2026-01-19,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,8,,1.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+11019734,SEE920639277591,,In Betrieb,2026-01-27,2026-01-27,,,"260127_PV_VGP_GERMUE_A4A5_662,40kWp",VGP Renewable Energy Deutschland GmbH,industrie,85599,Parsdorf,Am Gewerbepark,2,48.157247,11.783934,false,gebaeude,1472,Ost-West,662.4,525.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5420331,SEE944713209056,,In Planung,2022-10-24,,2022-11-30,,,,,85598,Baldham,,,,,false,gebaeude,38,Süd-West,15.58,15.58,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5513581,SEE919309120596,,In Planung,2022-12-08,,2022-12-15,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,12,Süd-West,4.8,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
