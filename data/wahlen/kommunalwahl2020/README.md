@@ -28,7 +28,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html):
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html):
   * [`Open-Data-Gemeinderatswahl-Bayern1163.csv`](raw/Open-Data-Gemeinderatswahl-Bayern1163.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/Open-Data-Gemeinderatswahl-Bayern1163.csv))
   * [`Open-Data-Gemeinderatswahl-Bayern1166.csv`](raw/Open-Data-Gemeinderatswahl-Bayern1163.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/Open-Data-Gemeinderatswahl-Bayern1166.csv))
 
@@ -52,7 +52,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html):
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html):
   * [`Open-Data-Gemeinderatswahl-Bayern1163.csv`](raw/Open-Data-Gemeinderatswahl-Bayern1163.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/Open-Data-Gemeinderatswahl-Bayern1163.csv))
   * [`Open-Data-Gemeinderatswahl-Bayern1166.csv`](raw/Open-Data-Gemeinderatswahl-Bayern1163.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/Open-Data-Gemeinderatswahl-Bayern1166.csv))
 
@@ -74,7 +74,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 
 ### Quellen
 
-* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html):
+* [OK.VOTE-Portal zur Kommunalwahl 2020 in Vaterstetten](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html):
   * [`Open-Data-Gemeinderatswahl-Bayern1163.csv`](raw/Open-Data-Gemeinderatswahl-Bayern1163.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/Open-Data-Gemeinderatswahl-Bayern1163.csv))
   * [`Open-Data-Gemeinderatswahl-Bayern1166.csv`](raw/Open-Data-Gemeinderatswahl-Bayern1163.csv) ([Weblink](https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/Open-Data-Gemeinderatswahl-Bayern1166.csv))
 

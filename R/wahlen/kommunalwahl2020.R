@@ -96,6 +96,47 @@ gemeinderatErgebnisNachPerson <- read_csv(
 gemeinderatParteien <- parteien %>%
   inner_join(gemeinderatErgebnisNachPartei %>% select(partei) %>% distinct(), by = "partei")
 
+# Stimmzettel-Verteilung für Balkendiagramm
+stimmzettelVerteilung <- bind_rows(
+  # Gesamt
+  gemeinderatErgebnisAllgemein %>%
+    filter(stimmbezirk == "Gesamt") %>%
+    transmute(
+      kategorie = "Gesamt",
+      nurListenkreuz = stimmzettelNurListenkreuz,
+      innerhalb = stimmzettelNurEineListe - stimmzettelNurListenkreuz,
+      parteiuebergreifend = gueltigeStimmzettel - stimmzettelNurEineListe
+    ),
+  # Briefwahl
+  gemeinderatErgebnisAllgemein %>%
+    filter(stimmbezirkArt == "Briefwahl") %>%
+    summarise(
+      kategorie = "Briefwahl",
+      nurListenkreuz = sum(stimmzettelNurListenkreuz),
+      innerhalb = sum(stimmzettelNurEineListe - stimmzettelNurListenkreuz),
+      parteiuebergreifend = sum(gueltigeStimmzettel - stimmzettelNurEineListe)
+    ),
+  # Wahllokal
+  gemeinderatErgebnisAllgemein %>%
+    filter(stimmbezirkArt == "Wahllokal") %>%
+    summarise(
+      kategorie = "Wahllokal",
+      nurListenkreuz = sum(stimmzettelNurListenkreuz),
+      innerhalb = sum(stimmzettelNurEineListe - stimmzettelNurListenkreuz),
+      parteiuebergreifend = sum(gueltigeStimmzettel - stimmzettelNurEineListe)
+    )
+) %>%
+  mutate(kategorie = factor(kategorie, levels = c("Gesamt", "Briefwahl", "Wahllokal"))) %>%
+  # Berechne Prozente
+  rowwise() %>%
+  mutate(
+    summe = nurListenkreuz + innerhalb + parteiuebergreifend,
+    nurListenkreuz_pct = nurListenkreuz / summe * 100,
+    innerhalb_pct = innerhalb / summe * 100,
+    parteiuebergreifend_pct = parteiuebergreifend / summe * 100
+  ) %>%
+  ungroup()
+
 
 
 ui <- memoise(omit_args = "request", function(request, id) {
@@ -141,6 +182,32 @@ ui <- memoise(omit_args = "request", function(request, id) {
         },
         p(),
         p("Anzahl ungültiger bzw. gültiger Stimmzettel in Wahllokal-Stimmbezirken und Briefwahlbezirken.")
+      ),
+      box(
+        title = "Verteilung der Stimmzettel",
+        width = 6,
+        {
+          plot_ly(
+            stimmzettelVerteilung,
+            height = 150,
+            orientation = "h",
+            showlegend = TRUE
+          ) %>%
+            add_bars(y = ~kategorie, x = ~nurListenkreuz_pct, name = "Nur Listenkreuz", marker = list(color = "#FFA726"), hovertemplate = "<b>Nur Listenkreuz</b><br>%{x:.1f}%<extra></extra>") %>%
+            add_bars(y = ~kategorie, x = ~innerhalb_pct, name = "Innerhalb Partei verteilt", marker = list(color = "#66BB6A"), hovertemplate = "<b>Innerhalb Partei verteilt</b><br>%{x:.1f}%<extra></extra>") %>%
+            add_bars(y = ~kategorie, x = ~parteiuebergreifend_pct, name = "Parteiübergreifend verteilt", marker = list(color = "#42A5F5"), hovertemplate = "<b>Parteiübergreifend verteilt</b><br>%{x:.1f}%<extra></extra>") %>%
+            plotly_default_config() %>%
+            layout(yaxis = list(autorange = "reversed")) %>%
+            layout(xaxis = list(ticksuffix = "%")) %>%
+            layout(uniformtext = list(minsize = 14, mode = "show")) %>%
+            layout(barmode = 'stack') %>%
+            layout(hovermode = "y unified") %>%
+            plotly_hide_axis_titles() %>%
+            plotly_build() %>%
+            identity()
+        },
+        p(),
+        p("Prozentuale Verteilung der gültigen Stimmzettel: Stimmzettel mit nur einem Listenkreuz (unverändert), innerhalb einer Partei verteilte Stimmen (Kumulieren innerhalb einer Liste) und parteiübergreifend verteilte Stimmen (Kumulieren und Panaschieren über mehrere Listen).")
       ),
     ),
 
