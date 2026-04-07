@@ -622,7 +622,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2358599,SEE915378763566,,In Betrieb,2019-09-17,2019-09-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd-West,2.2,1.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2411307,SEE946523563908,,In Betrieb,2019-10-08,2019-09-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd-West,2.2,1.6,70%,false,Volleinspeisung,false
 2279691,SEE936166709665,,In Betrieb,2020-01-20,2019-09-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd-West,2.2,1.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-2795346,SEE955105386712,E2104101S000000000000099582800001,In Betrieb,2020-02-14,2019-09-06,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,8,Süd-West,2.2,1.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+2795346,SEE955105386712,E2104101S000000000000099582800001,In Betrieb,2020-02-14,2019-09-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd-West,2.2,1.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2950268,SEE976237495783,,In Betrieb,2020-04-03,2019-09-06,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,8,Süd-West,2.2,1.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2912090,SEE958193888113,E2104101S000000000000106033200001,In Betrieb,2020-03-22,2019-09-10,,,,,,85591,Vaterstetten,,,,,true,gebaeude,9,Süd,2.475,1.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 2273140,SEE906664394144,,In Betrieb,2019-12-11,2019-09-12,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-Ost,6.4,6.4,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2216,6 +2216,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 11254315,SEE967768371486,,In Betrieb,2026-03-27,2026-03-19,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd,9.3,9.3,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11218414,SEE993836285911,,In Betrieb,2026-03-20,2026-03-20,,,,,haushalt,85598,Baldham,,,,,false,stecker,3,,1.5,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11227114,SEE911606957349,,In Betrieb,2026-03-22,2026-03-20,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,36,Süd-Ost,18.36,12.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+11219848,SEE924869863685,,In Betrieb,2026-04-06,2026-03-23,,,,,haushalt,85646,Neufarn,,,,,false,stecker,2,,0.75,0.75,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10538307,SEE947658153361,,In Betrieb,2026-03-24,2026-03-24,,,,,haushalt,85622,Weißenfeld,,,,,false,stecker,6,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11247571,SEE952395808528,E21041010C0000000D146467571200001,In Betrieb,2026-03-26,2026-03-25,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,4,Süd-Ost,1.96,1.96,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11257806,SEE928683728939,,In Betrieb,2026-03-28,2026-03-28,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,3,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2234,6 +2235,5 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 5478018,SEE947397213661,,In Planung,2024-06-04,,2024-06-05,,,,haushalt,85622,Weißenfeld,,,,,false,stecker,2,,0.6,0.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10579548,SEE925140690471,,In Planung,2025-09-24,,2025-11-01,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,31,Süd-West,17.0,14.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10838984,SEE979140738282,,In Planung,2025-11-30,,2025-12-01,,,,haushalt,85599,Parsdorf,,,,,false,stecker,2,,0.9,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-11219848,SEE924869863685,,In Planung,2026-03-21,,2026-03-23,,,,haushalt,85646,Neufarn,,,,,false,stecker,2,,0.75,0.75,,false,,false
 11218240,SEE989943134211,,In Planung,2026-03-20,,2026-04-01,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Ost,9.2,9.2,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11278494,SEE929221723706,,In Planung,2026-04-01,,2026-04-15,,,,GHD,85599,Hergolding,,,,,false,gebaeude,110,West,30.0,30.0,,false,Volleinspeisung,false
