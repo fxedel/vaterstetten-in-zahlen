@@ -759,7 +759,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 3442515,SEE997939386353,,In Betrieb,2020-09-21,2020-09-17,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,27,Süd,9.18,7.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3257105,SEE988166971399,,In Betrieb,2020-10-21,2020-09-17,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,29,Süd,9.715,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4305227,SEE991644598117,,In Betrieb,2021-01-31,2020-09-21,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Ost-West,9.9,3.68,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-4522961,SEE979160506069,,In Betrieb,2021-06-23,2020-09-25,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd,5.94,1.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+4522961,SEE979160506069,E21041011000000000000248897800001,In Betrieb,2021-06-23,2020-09-25,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,18,Süd,5.94,1.5,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3628838,SEE993539818263,,In Betrieb,2020-11-09,2020-09-28,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Süd,9.9,9.9,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4353266,SEE988707289822,,In Betrieb,2021-02-15,2020-09-30,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,29,Süd,9.28,8.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4487696,SEE964811558405,,In Betrieb,2021-05-19,2020-10-01,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd,6.5,5.0,70%,false,Volleinspeisung,false
@@ -2223,11 +2223,13 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 11247571,SEE952395808528,E21041010C0000000D146467571200001,In Betrieb,2026-03-26,2026-03-25,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,4,Süd-Ost,1.96,1.96,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11257806,SEE928683728939,,In Betrieb,2026-03-28,2026-03-28,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,3,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11257981,SEE902962654164,,In Betrieb,2026-03-28,2026-03-28,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,0.45,0.45,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+11316268,SEE993442731925,,In Betrieb,2026-04-09,2026-03-28,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,1.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11259781,SEE997039357529,,In Betrieb,2026-03-29,2026-03-29,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,1.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11299221,SEE962501612024,,In Betrieb,2026-04-07,2026-03-31,,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,12,Süd-West,5.7,5.7,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11304003,SEE978734299321,,In Betrieb,2026-04-07,2026-04-01,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,6,Süd-West,2.4,2.4,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11282122,SEE999478048495,,In Betrieb,2026-04-02,2026-04-02,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,30,Süd,16.0,12.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11303778,SEE995856460439,,In Betrieb,2026-04-07,2026-04-07,,,,,haushalt,85598,Baldham,,,,,false,stecker,4,,0.9,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+11314709,SEE900254948670,,In Betrieb,2026-04-09,2026-04-09,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,0.89,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5420331,SEE944713209056,,In Planung,2022-10-24,,2022-11-30,,,,,85598,Baldham,,,,,false,gebaeude,38,Süd-West,15.58,15.58,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5513581,SEE919309120596,,In Planung,2022-12-08,,2022-12-15,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,12,Süd-West,4.8,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
