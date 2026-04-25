@@ -12,7 +12,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 |`stimmbezirkNr`|integer|Nummer des Stimmbezirks (`1` bis `43`) oder `NA` für Gesamt
 |`stimmbezirkArt`|text|`Wahllokal` oder `Briefwahl` oder `NA` für Gesamt
 |`wahlberechtigte`|integer|Anzahl der Wahlberechtigten (für Briefwahlstimmbezirke immer `0`)
-|`waehler`|integer|Anzahl der Wähler<sup>[1]<sup>
+|`waehler`|integer|Anzahl der Wähler<sup>[1]</sup>
 |`ungueltigeStimmzettel`|integer|Anzahl ungültiger Stimmzettel
 |`gueltigeStimmzettel`|integer|Anzahl gültiger Stimmzettel
 |`gueltigeStimmen`|integer|Anzahl gültiger Stimmen (jeder Stimmzettel kann bis zu 30 Stimmen vergeben)
@@ -24,7 +24,7 @@ Der Datensatz wurde semi-automatisch mit dem RScript [buildGemeinderatErgebnisse
 * `gueltigeStimmzettel` ≤ `gueltigeStimmen` ≤ `gueltigeStimmzettel` * 30
 * `stimmzettelNurListenkreuz` ≤ `stimmzettelNurEineListe` ≤ `gueltigeStimmzettel`
 
-<sup>[1]</sup> Briefwähler werden nicht in ihrem eigentlichen (Wahllokal-)Stimmbezirk als Wähler gezählt, sondern in einem Briefwahlstimmbezirk. Daher ist es nicht möglich, die Wahlbeteiligung nach Stimmbezirk aufgeschlüsselt anzugeben, da nicht bekannt ist, wie viele Briefwähler es in den Stimmbezirken gibt.
+<sup>[1]</sup> Briefwähler werden nicht in ihrem eigentlichen (Wahllokal-)Stimmbezirk als Wähler gezählt, sondern in einem Briefwahlstimmbezirk. Daher ist es nicht möglich, die Wahlbeteiligung nach Stimmbezirk aufgeschlüsselt anzugeben, da nicht bekannt ist, wie viele Briefwähler es in den einzelnen Wahllokal-Stimmbezirken gibt.
 
 ### Quellen
 

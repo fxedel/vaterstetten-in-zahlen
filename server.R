@@ -48,6 +48,7 @@ bundestagswahl2021 <- loadModule("R/wahlen/bundestagswahl2021.R")
 landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
 europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
 bundestagswahl2025 <- loadModule("R/wahlen/bundestagswahl2025.R")
+kommunalwahl2026 <- loadModule("R/wahlen/kommunalwahl2026.R")
 
 impressum <- loadModule("R/impressum.R")
 
@@ -83,7 +84,8 @@ ui <- function(request) {
           menuSubItem("Bundestagswahl 2021", tabName = "bundestagswahl2021", selected = query$tab == "bundestagswahl2021"),
           menuSubItem("Landtagswahl 2023", tabName = "landtagswahl2023", selected = query$tab == "landtagswahl2023"),
           menuSubItem("Europawahl 2024", tabName = "europawahl2024", selected = query$tab == "europawahl2024"),
-          menuSubItem("Bundestagswahl 2025", tabName = "bundestagswahl2025", selected = query$tab == "bundestagswahl2025")
+          menuSubItem("Bundestagswahl 2025", tabName = "bundestagswahl2025", selected = query$tab == "bundestagswahl2025"),
+          menuSubItem("Kommunalwahl 2026", tabName = "kommunalwahl2026", selected = query$tab == "kommunalwahl2026")
         ),
         menuItem("Archiv", icon = icon("box-archive"), startExpanded = TRUE,
           menuItem("Corona-Fallzahlen", tabName = "corona", icon = icon("virus"), selected = query$tab == "corona"),
@@ -142,6 +144,7 @@ ui <- function(request) {
         tabItem(tabName = "landtagswahl2023", landtagswahl2023$ui(request, "landtagswahl2023")),
         tabItem(tabName = "europawahl2024", europawahl2024$ui(request, "europawahl2024")),
         tabItem(tabName = "bundestagswahl2025", bundestagswahl2025$ui(request, "bundestagswahl2025")),
+        tabItem(tabName = "kommunalwahl2026", kommunalwahl2026$ui(request, "kommunalwahl2026")),
 
         tabItem(tabName = "impressum", impressum$ui(request, "impressum"))
       ),
@@ -192,6 +195,7 @@ server <- function(input, output, session) {
   landtagswahl2023$server("landtagswahl2023")
   europawahl2024$server("europawahl2024")
   bundestagswahl2025$server("bundestagswahl2025")
+  kommunalwahl2026$server("kommunalwahl2026")
 
   impressum$server("impressum")
 }

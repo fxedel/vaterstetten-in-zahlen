@@ -1,11 +1,12 @@
-stimmbezirke <- st_read("data/wahlen/kommunalwahl2020/stimmbezirke.geojson", quiet = TRUE) %>%
+# Datengrundlage
+stimmbezirke <- st_read("data/wahlen/kommunalwahl2026/stimmbezirke.geojson", quiet = TRUE) %>%
   transmute(
     stimmbezirk = name,
     geometry
   )
 
 parteien <- read_csv(
-  file = "data/wahlen/kommunalwahl2020/parteien.csv",
+  file = "data/wahlen/kommunalwahl2026/parteien.csv",
   col_types = cols(
     parteiNr = readr::col_factor(),
     partei = readr::col_factor(),
@@ -14,18 +15,105 @@ parteien <- read_csv(
 )
 
 gemeinderatPersonen <- read_csv(
-  file = "data/wahlen/kommunalwahl2020/gemeinderatPersonen.csv",
+  file = "data/wahlen/kommunalwahl2026/gemeinderatPersonen.csv",
   col_types = cols(
-    partei = readr::col_factor(levels = levels(parteien$partei)),
-    listenNr = col_integer(),
-    name = col_character(),
-    alter = col_integer()
+    Partei = readr::col_factor(levels = levels(parteien$partei)),
+    ListenNr = col_integer(),
+    Name = col_character(),
+    Wohnort = col_character(),
+    Geschlecht = col_character(),
+    Geburtsjahr = col_integer()
   ),
   na = c("", "NA")
+) %>%
+  transmute(
+    partei = Partei,
+    listenNr = ListenNr,
+    name = Name,
+    wohnort = coalesce(Wohnort, "n. a."),
+    geschlecht = Geschlecht,
+    geburtsjahr = Geburtsjahr
+  )
+
+# Hilfsvariablen für die Verteilungen
+parteiGruppenLevels <- c(
+  "Gesamt",
+  "",
+  gemeinderatPersonen %>% distinct(partei) %>% pull(partei) %>% as.character()
 )
 
+wohnortLevels <- gemeinderatPersonen %>%
+  pull(wohnort) %>%
+  as.character() %>%
+  unique() %>%
+  sort() %>%
+  {
+    c(setdiff(., "n. a."), if ("n. a." %in% .) "n. a.")
+  }
+
+wohnortVerteilung <- bind_rows(
+  gemeinderatPersonen %>% transmute(parteiGruppe = as.character(partei), wohnort),
+  gemeinderatPersonen %>% transmute(parteiGruppe = "Gesamt", wohnort)
+) %>%
+  count(parteiGruppe, wohnort, name = "anzahl") %>%
+  complete(parteiGruppe = parteiGruppenLevels, wohnort = wohnortLevels, fill = list(anzahl = 0)) %>%
+  group_by(parteiGruppe) %>%
+  mutate(anteil = anzahl / sum(anzahl) * 100) %>%
+  ungroup() %>%
+  mutate(
+    parteiGruppe = factor(parteiGruppe, levels = parteiGruppenLevels),
+    wohnort = factor(wohnort, levels = wohnortLevels)
+  )
+
+dekadenLevels <- paste0(seq(1940, 2000, by = 10), "er")
+
+geburtsjahrVerteilung <- bind_rows(
+  gemeinderatPersonen %>%
+    transmute(
+      parteiGruppe = as.character(partei),
+      dekade = paste0(floor(geburtsjahr / 10) * 10, "er")
+    ),
+  gemeinderatPersonen %>%
+    transmute(
+      parteiGruppe = "Gesamt",
+      dekade = paste0(floor(geburtsjahr / 10) * 10, "er")
+    )
+) %>%
+  filter(dekade %in% dekadenLevels) %>%
+  count(parteiGruppe, dekade, name = "anzahl") %>%
+  complete(parteiGruppe = parteiGruppenLevels, dekade = dekadenLevels, fill = list(anzahl = 0)) %>%
+  group_by(parteiGruppe) %>%
+  mutate(anteil = anzahl / sum(anzahl) * 100) %>%
+  ungroup() %>%
+  mutate(
+    parteiGruppe = factor(parteiGruppe, levels = parteiGruppenLevels),
+    dekade = factor(dekade, levels = dekadenLevels)
+  )
+
+geschlechtLevels <- c("weiblich", "nicht-binär", "maennlich")
+geschlechtFarben <- c(
+  "weiblich" = "#8624f5",
+  "nicht-binär" = "#999999",
+  "maennlich" = "#1fc3aa"
+)
+
+geschlechtVerteilung <- bind_rows(
+  gemeinderatPersonen %>% transmute(parteiGruppe = as.character(partei), geschlecht),
+  gemeinderatPersonen %>% transmute(parteiGruppe = "Gesamt", geschlecht)
+) %>%
+  count(parteiGruppe, geschlecht, name = "anzahl") %>%
+  complete(parteiGruppe = parteiGruppenLevels, geschlecht = geschlechtLevels, fill = list(anzahl = 0)) %>%
+  group_by(parteiGruppe) %>%
+  mutate(anteil = anzahl / sum(anzahl) * 100) %>%
+  ungroup() %>%
+  mutate(
+    parteiGruppe = factor(parteiGruppe, levels = parteiGruppenLevels),
+    geschlecht = factor(geschlecht, levels = geschlechtLevels)
+  )
+
+# Wahlergebnisse
 gemeinderatErgebnisAllgemein <- read_csv(
-  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisAllgemein.csv",
+  file = "data/wahlen/kommunalwahl2026/gemeinderatErgebnisAllgemein.csv",
   col_types = cols(
     stimmbezirk = readr::col_factor(),
     stimmbezirkNr = readr::col_factor(),
@@ -52,7 +140,7 @@ gemeinderatErgebnisNachStimmbezirkArt <- gemeinderatErgebnisAllgemein %>%
   )
 
 gemeinderatErgebnisNachPartei <- read_csv(
-  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisNachPartei.csv",
+  file = "data/wahlen/kommunalwahl2026/gemeinderatErgebnisNachPartei.csv",
   col_types = cols(
     stimmbezirk = readr::col_factor(),
     stimmbezirkNr = readr::col_factor(),
@@ -62,43 +150,31 @@ gemeinderatErgebnisNachPartei <- read_csv(
     stimmzettelNurEineListe = col_integer()
   )
 ) %>%
-  # add farbe, parteiNr
   inner_join(parteien, by = "partei") %>%
-
-  # add stimmenAnteil
   inner_join(gemeinderatErgebnisAllgemein %>% select(stimmbezirk, gueltigeStimmen), by = "stimmbezirk") %>%
-  mutate(stimmenAnteil = stimmen/gueltigeStimmen) %>%
-
-  # add geodata
+  mutate(stimmenAnteil = stimmen / gueltigeStimmen) %>%
   left_join(stimmbezirke, by = join_by(stimmbezirk))
 
 gemeinderatErgebnisNachPerson <- read_csv(
-  file = "data/wahlen/kommunalwahl2020/gemeinderatErgebnisNachPerson.csv",
+  file = "data/wahlen/kommunalwahl2026/gemeinderatErgebnisNachPerson.csv",
   col_types = cols(
     stimmbezirk = readr::col_factor(),
     stimmbezirkNr = readr::col_factor(),
-    partei = readr::col_factor(),
+    partei = readr::col_factor(levels = levels(parteien$partei)),
     listenNr = col_integer(),
     stimmen = col_integer(),
     erreichterPlatz = col_integer()
   )
 ) %>%
-  # add name
   left_join(gemeinderatPersonen, by = c("partei", "listenNr")) %>%
-
-  # add stimmenAnteilPartei, farbe, parteiNr
   left_join(gemeinderatErgebnisNachPartei %>% select(stimmbezirk, partei, parteiStimmen = stimmen, farbe, parteiNr), by = c("partei", "stimmbezirk")) %>%
-  mutate(stimmenAnteilPartei = stimmen/parteiStimmen, parteiStimmen = NULL) %>%
-
-  # add geodata
+  mutate(stimmenAnteilPartei = stimmen / parteiStimmen, parteiStimmen = NULL) %>%
   left_join(stimmbezirke, by = join_by(stimmbezirk))
 
 gemeinderatParteien <- parteien %>%
   inner_join(gemeinderatErgebnisNachPartei %>% select(partei) %>% distinct(), by = "partei")
 
-# Stimmzettel-Verteilung für Balkendiagramm
 stimmzettelVerteilung <- bind_rows(
-  # Gesamt
   gemeinderatErgebnisAllgemein %>%
     filter(stimmbezirk == "Gesamt") %>%
     transmute(
@@ -107,7 +183,6 @@ stimmzettelVerteilung <- bind_rows(
       innerhalb = stimmzettelNurEineListe - stimmzettelNurListenkreuz,
       parteiuebergreifend = gueltigeStimmzettel - stimmzettelNurEineListe
     ),
-  # Briefwahl
   gemeinderatErgebnisAllgemein %>%
     filter(stimmbezirkArt == "Briefwahl") %>%
     summarise(
@@ -116,7 +191,6 @@ stimmzettelVerteilung <- bind_rows(
       innerhalb = sum(stimmzettelNurEineListe - stimmzettelNurListenkreuz),
       parteiuebergreifend = sum(gueltigeStimmzettel - stimmzettelNurEineListe)
     ),
-  # Wahllokal
   gemeinderatErgebnisAllgemein %>%
     filter(stimmbezirkArt == "Wahllokal") %>%
     summarise(
@@ -127,7 +201,6 @@ stimmzettelVerteilung <- bind_rows(
     )
 ) %>%
   mutate(kategorie = factor(kategorie, levels = c("Gesamt", "Briefwahl", "Wahllokal"))) %>%
-  # Berechne Prozente
   rowwise() %>%
   mutate(
     summe = nurListenkreuz + innerhalb + parteiuebergreifend,
@@ -137,14 +210,111 @@ stimmzettelVerteilung <- bind_rows(
   ) %>%
   ungroup()
 
-
-
 ui <- memoise(omit_args = "request", function(request, id) {
   request <- NULL # unused variable, so we set it to NULL to avoid unintended usage
 
   ns <- NS(id)
   tagList(
-    h2("Kommunalwahl März 2020 in der Gemeinde Vaterstetten"),
+    h2("Kommunalwahl März 2026 in der Gemeinde Vaterstetten"),
+
+    fluidRow(
+      box(
+        title = "Kandidat:innen nach Wohnort (pro Partei)",
+        width = 4,
+        {
+          plot_ly(
+            wohnortVerteilung,
+            x = ~anteil,
+            y = ~parteiGruppe,
+            color = ~wohnort,
+            type = "bar",
+            orientation = "h",
+            customdata = ~anzahl,
+            hovertemplate = "<b>%{fullData.name}</b><br>%{y}: %{x:.1f}% (%{customdata} Kandidat:innen)<extra></extra>"
+          ) %>%
+            plotly_default_config() %>%
+            layout(
+              barmode = "stack",
+              yaxis = list(autorange = "reversed"),
+              xaxis = list(ticksuffix = "%", range = c(0, 100)),
+              hovermode = "y unified",
+              legend = list(orientation = "h")
+            ) %>%
+            plotly_hide_axis_titles()
+        },
+        p(),
+        p("Die Balken zeigen den prozentualen Anteil der Wohnorte der Kandidat:innen; \"n. a.\" ist eine eigene Kategorie für alle Kandidat:innen ohne Angabe eines Wohnorts. Die oberste Zeile umfasst alle Kandidat:innen, die folgenden Zeilen jeweils die Kandidat:innen einer Partei.")
+      ),
+      box(
+        title = "Kandidat:innen nach Geburtsjahrzehnt (pro Partei)",
+        width = 4,
+        {
+          dekadenFarben <- colorRampPalette(c("#d94801", "#fd8d3c", "#feedde"))(length(dekadenLevels))
+          names(dekadenFarben) <- dekadenLevels
+
+          plot_ly(
+            geburtsjahrVerteilung,
+            x = ~anteil,
+            y = ~parteiGruppe,
+            color = ~dekade,
+            colors = dekadenFarben,
+            type = "bar",
+            orientation = "h",
+            customdata = ~anzahl,
+            hovertemplate = "<b>%{fullData.name}</b><br>%{y}: %{x:.1f}% (%{customdata} Kandidat:innen)<extra></extra>"
+          ) %>%
+            plotly_default_config() %>%
+            layout(
+              barmode = "stack",
+              yaxis = list(autorange = "reversed"),
+              xaxis = list(ticksuffix = "%", range = c(0, 100)),
+              hovermode = "y unified",
+              legend = list(orientation = "h")
+            ) %>%
+            plotly_hide_axis_titles()
+        },
+        p(),
+        p("Die Balken zeigen den prozentualen Anteil der Kandidat:innen nach Geburtsjahrzehnt. Die oberste Zeile umfasst alle Kandidat:innen, die folgenden Zeilen jeweils die Kandidat:innen einer Partei.")
+      ),
+      box(
+        title = "Kandidat:innen nach Geschlecht (pro Partei)",
+        width = 4,
+        {
+          plot_ly(
+            geschlechtVerteilung,
+            x = ~anteil,
+            y = ~parteiGruppe,
+            color = ~geschlecht,
+            colors = geschlechtFarben,
+            type = "bar",
+            orientation = "h",
+            customdata = ~anzahl,
+            hovertemplate = "<b>%{fullData.name}</b><br>%{y}: %{x:.1f}% (%{customdata} Kandidat:innen)<extra></extra>"
+          ) %>%
+            plotly_default_config() %>%
+            layout(
+              barmode = "stack",
+              yaxis = list(autorange = "reversed"),
+              xaxis = list(ticksuffix = "%", range = c(0, 100)),
+              hovermode = "y unified",
+              legend = list(orientation = "h"),
+              shapes = list(
+                list(
+                  type = "line",
+                  x0 = 50,
+                  x1 = 50,
+                  y0 = -0.5,
+                  y1 = length(parteiGruppenLevels) - 0.5,
+                  line = list(color = "#666666", width = 1, dash = "dash")
+                )
+              )
+            ) %>%
+            plotly_hide_axis_titles()
+        },
+        p(),
+        p("Die Balken zeigen den prozentualen Anteil der Kandidat:innen nach Geschlecht. Die oberste Zeile umfasst alle Kandidat:innen, die folgenden Zeilen jeweils die Kandidat:innen einer Partei.")
+      )
+    ),
 
     fluidRow(
       box(
@@ -153,7 +323,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Eingezeichnet sind die 24 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind der Sonderstimmbezirk 25 in den Altenheimen sowie die Briefwahlbezirke (31-43). Da das Wahlverhalten der Briefwähler:innen (mehr als 50% aller Wähler:innen!) nicht räumlich dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Jeder dargestellte Wahllokal-Stimmbezirk umfasst etwa 150 bis 350 Wähler:innen. Weiter ist zu beachten, dass manche Stimmbezirke teils sehr kleine isolierte Gebiete aufweisen (wie der Spechtweg oder das Gut Ammerthal) – das dortige Ergebnis entspricht dennoch dem Durchschnitt im ganzen Stimmbezirk, es ist also keine punktuelle Interpretation möglich.")),
+          p(HTML("Eingezeichnet sind die 25 Wahllokal-Stimmbezirke, die auch in <a href=\"https://umap.openstreetmap.de/de/map/kommunalwahl-2026-stimmbezirke_124973#14/48.1192/11.7997\">dieser (inoffiziellen) Karte</a> im Detail angesehen werden können. Nicht eingezeichnet sind die Briefwahlbezirke (31-50). Da das Wahlverhalten der Briefwähler:innen (mehr als 60% aller Wähler:innen!) nicht räumlich dargestellt werden kann, führt dies möglicherweise zu Verzerrungen in der Darstellung. Jeder dargestellte Wahllokal-Stimmbezirk umfasst etwa 150 bis 300 Wähler:innen. Weiter ist zu beachten, dass manche Stimmbezirke teils sehr kleine isolierte Gebiete aufweisen (wie der Spechtweg oder das Gut Ammerthal) – das dortige Ergebnis entspricht dennoch dem Durchschnitt im ganzen Stimmbezirk, es ist also keine punktuelle Interpretation möglich.")),
         ),
       ),
     ),
@@ -174,7 +344,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             plotly_default_config() %>%
             layout(yaxis = list(autorange = "reversed")) %>%
             layout(uniformtext = list(minsize = 14, mode = "show")) %>%
-            layout(barmode = 'stack') %>%
+            layout(barmode = "stack") %>%
             layout(hovermode = "y unified") %>%
             plotly_hide_axis_titles() %>%
             plotly_build() %>%
@@ -200,7 +370,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
             layout(yaxis = list(autorange = "reversed")) %>%
             layout(xaxis = list(ticksuffix = "%")) %>%
             layout(uniformtext = list(minsize = 14, mode = "show")) %>%
-            layout(barmode = 'stack') %>%
+            layout(barmode = "stack") %>%
             layout(hovermode = "y unified") %>%
             plotly_hide_axis_titles() %>%
             plotly_build() %>%
@@ -221,7 +391,7 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("parteistimmenMap"), height = 550),
         p(),
-        p("Die 24 Wahllokal-Stimmbezirke sind jeweils nach den Gemeinderatsstimmen der ausgewählten Partei eingefärbt. Briefwahlstimmen können in der Karte nicht berücksichtigt werden.")
+        p("Die 25 Wahllokal-Stimmbezirke sind jeweils nach den Gemeinderatsstimmen der ausgewählten Partei eingefärbt. Briefwahlstimmen können in der Karte nicht berücksichtigt werden.")
       ),
       box(
         title = "Gemeinderat: Personenstimmen nach Stimmbezirk, relativ zu Parteistimmen",
@@ -238,8 +408,8 @@ ui <- memoise(omit_args = "request", function(request, id) {
         ),
         leafletOutput(ns("personenstimmenMap"), height = 550),
         p(),
-        p("Der eingezeichnete Stimmenanteil entspricht immer der Stimmenanzahl der einzelnen Person im Verhältnis zu ihrer Partei-Liste. Das insgesamte Abschneiden der Partei im Vergleich zu den anderen Parteien ist irrelevant. Vielmehr wird dargestellt, wo eine Person unter den Anhängern ihrer Partei besonders beliebt ist.")
-      ),
+        p("Der eingezeichnete Stimmenanteil entspricht immer der Stimmenanzahl der einzelnen Person im Verhältnis zu ihrer Partei. Das Gesamtergebnis der Partei ist dabei nicht entscheidend.")
+      )
     ),
 
     fluidRow(
@@ -288,37 +458,35 @@ ui <- memoise(omit_args = "request", function(request, id) {
         p("Bei der Kommunalwahl ist es möglich, Stimmen auf einzelne Kandidat:innen zu verteilen. Somit kann die von der Partei festgelegte Listenreihenfolge durch die Wähler:innen verändert werden. In der Tabelle sind alle Kandidat:innen mit ihrem Listenplatz, dem erreichten Platz (nach Stimmenanzahl) und der Differenz (Listenplatz-Veränderung) aufgeführt. Eine positive Veränderung bedeutet, dass die Person durch die Wähler:innen nach vorne gewählt wurde, ein negativer Wert bedeutet eine Verschlechterung gegenüber dem Listenplatz.")
       ),
       box(
-        title = "Alter vs. Listenplatz-Veränderung",
+        title = "Geburtsjahr vs. Listenplatz-Veränderung",
         width = 4,
         {
           scatterData <- gemeinderatErgebnisNachPerson %>%
             filter(stimmbezirk == "Gesamt") %>%
             mutate(delta = listenNr - erreichterPlatz) %>%
-            filter(!is.na(alter)) %>%
-            mutate(
-              alter_jitter = alter + runif(n(), -0.5, 0.5)
-            )
-          
+            filter(!is.na(geburtsjahr)) %>%
+            mutate(geburtsjahr_jitter = geburtsjahr + runif(n(), -0.5, 0.5))
+
           maxAbsDelta <- max(abs(scatterData$delta), na.rm = TRUE)
-          
+
           p <- plot_ly() %>%
             add_trace(
               data = scatterData,
-              x = ~alter_jitter,
+              x = ~geburtsjahr_jitter,
               y = ~delta,
               type = "scatter",
               mode = "markers",
               marker = list(size = 8, opacity = 0.7),
               color = ~I(farbe),
-              text = ~paste0(name, ", ", partei, "<br>Alter: ", alter, "<br>Listenplatz: ", listenNr, "<br>Erreichter Platz: ", erreichterPlatz, "<br>Delta: ", delta),
+              text = ~paste0(name, ", ", partei, "<br>Geburtsjahr: ", geburtsjahr, "<br>Listenplatz: ", listenNr, "<br>Erreichter Platz: ", erreichterPlatz, "<br>Delta: ", delta),
               hoverinfo = "text",
               showlegend = FALSE
             )
-          
+
           p %>%
             add_segments(
-              x = min(scatterData$alter, na.rm = TRUE),
-              xend = max(scatterData$alter, na.rm = TRUE),
+              x = min(scatterData$geburtsjahr, na.rm = TRUE),
+              xend = max(scatterData$geburtsjahr, na.rm = TRUE),
               y = 0,
               yend = 0,
               line = list(color = "gray", width = 1, dash = "dash"),
@@ -326,14 +494,14 @@ ui <- memoise(omit_args = "request", function(request, id) {
               hoverinfo = "none"
             ) %>%
             layout(
-              xaxis = list(title = "Alter"),
+              xaxis = list(title = "Geburtsjahr"),
               yaxis = list(title = "Listenplatz-Veränderung (nach vorne = positiv)", range = c(-maxAbsDelta, maxAbsDelta)),
               dragmode = FALSE
             ) %>%
             plotly_default_config()
         },
         p(),
-        p("In diesem Diagramm sind alle Kandidat:innen, für die das Alter bekannt ist, nach Alter (X-Achse) und der Veränderung ihres Listenplatzes (Y-Achse) dargestellt, sowie nach Partei eingefärbt. Es ist zu erkennen, ob es einen Zusammenhang zwischen Alter und Listenplatz-Veränderung gibt und ob dieser je nach Partei unterschiedlich ist.")
+        p("Dieses Diagramm zeigt alle Kandidat:innen als einzelne Punkte, angeordnet nach Geburtsjahr (X-Achse) und Listenplatz-Veränderung (Y-Achse) sowie eingefärbt nach Partei. Es ist zu erkennen, ob es einen Zusammenhang zwischen Alter und Listenplatz-Veränderung gibt und ob dieser je nach Partei unterschiedlich ist.")
       )
     ),
 
@@ -344,21 +512,19 @@ ui <- memoise(omit_args = "request", function(request, id) {
         solidHeader = TRUE,
         width = 12,
         tagList(
-          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/index.html\">OK.VOTE-Portal</a>, dort werden die Daten als <a href=\"https://okvote.osrz-akdb.de/OK.VOTE_OB/Wahl-2020-03-15/09175132/html5/OpenDataInfo.html\">Open-Data-CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Listen von Straßennamen für jeden Stimmbezirk, auf Basis dessen <a href=\"https://umap.openstreetmap.fr/de/map/kommunalwahl-2020-stimmbezirke_598747#14/48.1192/11.7997\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
-          p(HTML("Das Alter der Kandidat:innen der CSU wurde aus <a href=\"https://www.csu-vaterstetten.de/assets/pdf/aktuelle-meldungen/die-csu-gemeinderatsliste-2020-steht.pdf\">dieser Quelle</a> entnommen, für die Grünen aus <a href=\"https://gruene-ebersberg.de/vor-ort/k-z/vaterstetten/kommunalwahl-2020-vaterstetten/wahlvorschlag-der-gruenen-fuer-den-vaterstettener-gemeinderat\">dieser Quelle</a>. Für die anderen Parteien war das Alter nicht verfügbar.")),
-          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/kommunalwahl2020", "Zum Daten-Download mit Dokumentation")),
+          p(HTML("Datengrundlage sind die Ergebnisse auf dem offziellen <a href=\"https://wahlen.osrz-akdb.de/ob-p/175132/2/20260308/gemeinderatswahl_gemeinde/presse.html\">AKDB/OSRZ-Portal</a>, dort werden die Daten als <a href=\"https://wahlen.osrz-akdb.de/ob-p/175132/2/20260308/gemeinderatswahl_gemeinde/gesamtergebnis.csv\">CSV</a> angeboten. Außerdem vielen Dank an die Gemeinde Vaterstetten für die Weitergabe der Gebietszuteilung der Stimmbezirke. Dies erfolgte in Form von Karten- bzw. Geodaten zur Einordnung der Stimmbezirke, auf Basis dessen <a href=\"https://umap.openstreetmap.de/de/map/kommunalwahl-2026-stimmbezirke_124973\">diese (inoffizielle) Karte</a> erstellt werden konnte.")),
+          p("Das Geburtsjahr der Kandidat:innen wurde der offiziellen Bekanntmachung zur Kommunalwahl auf der Website der Gemeinde Vaterstetten entnommen (nicht mehr online verfügbar)."),
+          p(tags$a(class = "btn btn-default", href = "https://github.com/fxedel/vaterstetten-in-zahlen/tree/master/data/wahlen/kommunalwahl2026", "Zum Daten-Download mit Dokumentation"))
         ),
       ),
     ),
   ) %>% renderTags()
 })
 
-# Define the server logic for a module
 server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
-
       output$parteistimmenMap <- renderLeaflet({
         leaflet(options = leafletOptions(
           zoom = 13,
@@ -376,13 +542,18 @@ server <- function(id) {
       printParteistimmenMap <- function(leafletObject) {
         partei <- gemeinderatParteien %>% filter(partei == input$parteistimmenMapPartei) %>% first()
         ergebnisPartei <- gemeinderatErgebnisNachPartei %>% filter(partei == input$parteistimmenMapPartei)
-        pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPartei$stimmenAnteil)))
-        palForLegend <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPartei$stimmenAnteil)) * -1, reverse = TRUE)
+        ergebnisParteiMap <- ergebnisPartei %>% filter(!is.na(geometry))
+        maxAnteil <- max(ergebnisParteiMap$stimmenAnteil, na.rm = TRUE)
+        if (!is.finite(maxAnteil) || maxAnteil <= 0) {
+          maxAnteil <- 1
+        }
+        pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, maxAnteil))
+        palForLegend <- colorNumeric(c("#ffffff", partei$farbe), c(0, maxAnteil) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
           addPolygons(
-            data = st_as_sf(ergebnisPartei),
+            data = st_as_sf(ergebnisParteiMap),
             stroke = TRUE,
             weight = 0.0001, # stroke width
             color = "#000000", # stroke color
@@ -398,7 +569,7 @@ server <- function(id) {
             )
           ) %>%
           addLegend("topright",
-            data = ergebnisPartei,
+            data = ergebnisParteiMap,
             pal = palForLegend,
             values = ~stimmenAnteil * -1,
             title = NULL,
@@ -423,20 +594,9 @@ server <- function(id) {
         searching = TRUE,          # Columnfilter braucht Suche aktiv
         ordering = TRUE,
         dom = 'ltip',              # kein globales Suchfeld, aber Filterzeile bleibt
-        order = list(list(5, 'desc')), # Veränderung/Delta-Spalte
+        order = list(list(5, "desc")),
         language = list(url = "https://cdn.datatables.net/plug-ins/1.13.1/i18n/de-DE.json"),
         columnDefs = list(
-          list(
-            targets = 2, # Alter Spalte
-            render = DT::JS(
-              "function(data, type, row, meta){",
-              "  if(type === 'display' && data !== null && data !== ''){",
-              "    return data + ' Jahre';",
-              "  }",
-              "  return data;",
-              "}"
-            )
-          ),
           list(
             targets = 5, # Delta Spalte
             render = DT::JS( # Vorzeichen anzeigen
@@ -467,7 +627,7 @@ server <- function(id) {
       haeufelData <- gemeinderatErgebnisNachPerson %>%
         filter(stimmbezirk == "Gesamt") %>%
         mutate(delta = listenNr - erreichterPlatz) %>%
-        select(name, partei, alter, listenNr, erreichterPlatz, stimmen, delta)
+        select(name, partei, geburtsjahr, listenNr, erreichterPlatz, stimmen, delta)
 
       output$haeufelTabelle <- DT::renderDataTable({
         DT::datatable(
@@ -475,38 +635,44 @@ server <- function(id) {
             transmute(
               Name = name,
               Partei = partei,
-              Alter = alter,
+              Geburtsjahr = geburtsjahr,
               `Listen-Nr.` = listenNr,
               `Erreichter Platz` = erreichterPlatz,
               `Veränderung` = delta,
-              `Stimmenanzahl` = stimmen
+              Stimmenanzahl = stimmen
             ),
-          filter = 'top',
+          filter = "top",
           options = dt_common_opts,
-          selection = 'none',
+          selection = "none",
           rownames = FALSE
         )
       })
+
       observe({
         printPersonenstimmenMap(leafletProxy("personenstimmenMap"))
       })
 
       printPersonenstimmenMap <- function(leafletObject) {
         parts <- str_split(input$personenstimmenMapPerson, "-", 2, simplify = TRUE)
-        personPartei <- parts[1,1]
-        personListenNr <- parts[1,2]
+        personPartei <- parts[1, 1]
+        personListenNr <- as.integer(parts[1, 2])
 
         partei <- gemeinderatParteien %>% filter(partei == personPartei) %>% first()
-        ergebnisPartei <- gemeinderatErgebnisNachPartei %>% filter(partei == personPartei)
-        ergebnisPerson <- gemeinderatErgebnisNachPerson %>% filter(partei == personPartei) %>% filter(listenNr == personListenNr)
+        ergebnisPerson <- gemeinderatErgebnisNachPerson %>% filter(partei == personPartei, listenNr == personListenNr)
+        ergebnisPersonMap <- ergebnisPerson %>% filter(!is.na(geometry))
 
-        pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPerson$stimmenAnteilPartei)))
-        palForLegend <- colorNumeric(c("#ffffff", partei$farbe), c(0, max(ergebnisPerson$stimmenAnteilPartei)) * -1, reverse = TRUE)
+        maxAnteil <- max(ergebnisPersonMap$stimmenAnteilPartei, na.rm = TRUE)
+        if (!is.finite(maxAnteil) || maxAnteil <= 0) {
+          maxAnteil <- 1
+        }
+
+        pal <- colorNumeric(c("#ffffff", partei$farbe), c(0, maxAnteil))
+        palForLegend <- colorNumeric(c("#ffffff", partei$farbe), c(0, maxAnteil) * -1, reverse = TRUE)
 
         leafletObject %>%
           clearShapes() %>% clearControls() %>%
           addPolygons(
-            data = st_as_sf(ergebnisPerson),
+            data = st_as_sf(ergebnisPersonMap),
             stroke = TRUE,
             weight = 0.0001, # stroke width
             color = "#000000", # stroke color
@@ -522,7 +688,7 @@ server <- function(id) {
             )
           ) %>%
           addLegend("topright",
-            data = ergebnisPerson,
+            data = ergebnisPersonMap,
             pal = palForLegend,
             values = ~stimmenAnteilPartei * -1,
             title = NULL,
@@ -535,7 +701,6 @@ server <- function(id) {
   )
 }
 
-# Berechne Gini-Koeffizient für jede Partei
 gemeinderatGiniKoeffizienten <- gemeinderatErgebnisNachPerson %>%
   filter(stimmbezirk == "Gesamt") %>%
   filter(stimmen > 0) %>% # schließe Personen aus, die nicht wählbar waren
