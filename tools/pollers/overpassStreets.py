@@ -341,7 +341,7 @@ class Poller(pollers.poller.Poller):
       print('> Downloaded OpenStreetMap data in %.1fs' % (time.time() - start))
 
       if res.status_code != 200:
-        raise Exception(f'Overpass API returned unexpected status code: {res.status_code} {res.reason}')
+        raise Exception(f'Overpass API returned unexpected status code: {res.status_code} {res.reason}. Body:\n{res.text}')
 
       data = res.json()
 
@@ -405,7 +405,7 @@ class Poller(pollers.poller.Poller):
       print('> Downloaded Wikidata data in %.1fs' % (time.time() - start))
 
       if res.status_code != 200:
-        raise Exception(f'Wikidata API returned unexpected status code: {res.status_code} {res.reason}')
+        raise Exception(f'Wikidata API returned unexpected status code: {res.status_code} {res.reason}. Body:\n{res.text}')
 
       self.write_cache_file(cache_file_name, res.text)
       return res.json()
