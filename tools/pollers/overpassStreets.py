@@ -80,7 +80,7 @@ additional_street_connections = [
   },
   {
     'name': 'Dreitorspitzstraße', # Vaterstetten
-    'way_ids': [986852148, 157296419]
+    'way_ids': [157296418, 157296419]
   },
   {
     'name': 'Weißdornweg', # Vaterstetten
@@ -334,7 +334,9 @@ class Poller(pollers.poller.Poller):
       res = requests.post(
         overpass_api_url,
         data = {'data': query},
-        headers = {'Accept-Charset': 'utf-8;q=0.7,*;q=0.7'},
+        headers = {
+          'User-Agent': 'vaterstetten-in-zahlen/1.0 (felix@vaterstetten-in-zahlen.de)', # important!
+        },
       ) # takes about 150s
       print('> Downloaded OpenStreetMap data in %.1fs' % (time.time() - start))
 
@@ -395,6 +397,9 @@ class Poller(pollers.poller.Poller):
           'query': query,
           'format': 'json',
           # 'explain': 'details' # uncomment this for query performance investigation
+        },
+        headers = {
+          'User-Agent': 'vaterstetten-in-zahlen/1.0 (felix@vaterstetten-in-zahlen.de)', # important!
         },
       ) # takes about 90s
       print('> Downloaded Wikidata data in %.1fs' % (time.time() - start))
