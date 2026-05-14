@@ -1,11 +1,10 @@
 from datetime import datetime
 import io
-from typing import Optional
 import os
 import pandas as pd
-import telebot
 import time
 
+from notifier import EmailNotifier
 import pollers.poller
 import pollers.genesisClient
 
@@ -14,11 +13,10 @@ class Poller(pollers.poller.Poller):
 
   def __init__(
     self,
-    telegram_bot: Optional[telebot.TeleBot],
-    telegram_public_chat_id: Optional[str],
-    telegram_debug_chat_id: Optional[str],
+    email_notifier: EmailNotifier,
+    poller_name: str,
   ):
-    super().__init__(telegram_bot, telegram_debug_chat_id, telegram_public_chat_id)
+    super().__init__(email_notifier, poller_name)
 
     self.genesis_client = pollers.genesisClient.Client(
       username = os.environ['GENESIS_LFSTAT_USERNAME'],
@@ -48,7 +46,7 @@ class Poller(pollers.poller.Poller):
       raise Exception('Queried data has much more items (%d) than current data (%d)' % (len(rows), len(current_rows)))
 
     csv_diff = self.get_csv_diff(csv_filename, rows)
-    self.send_csv_diff_via_telegram(csv_diff)
+    self.send_csv_diff_via_email(csv_diff)
     self.write_csv_rows(csv_filename, rows)
 
   def get_rows_bundestagswahl(self):

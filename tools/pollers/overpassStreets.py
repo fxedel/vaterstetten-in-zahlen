@@ -147,7 +147,7 @@ class Poller(pollers.poller.Poller):
           '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=strassennamen)',
           '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/verkehr/wikidataNamensherkuenfte.csv)',
         ]))
-        self.send_public_telegram_message(lines)
+        self.send_info_email(lines)
 
     # detect street changes
     street_key_func = lambda x: f"{x['Name']}-{x['Postleitzahl']}"
@@ -188,7 +188,7 @@ class Poller(pollers.poller.Poller):
           '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=strassennamen)',
           '[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/verkehr/osmStrassen.csv)',
         ]))
-        self.send_public_telegram_message(lines)
+        self.send_info_email(lines)
 
   def query_osm_streets(self) -> dict:
     data_administrative = self.query_osm(overpass_query_administrative)

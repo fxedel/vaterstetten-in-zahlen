@@ -72,5 +72,5 @@ class Poller(pollers.poller.Poller):
       raise Exception('Queried data has much more items (%d) than current data (%d)' % (len(rows), len(current_rows)))
 
     csv_diff = self.get_csv_diff(csv_filename, rows)
-    self.send_csv_diff_via_telegram(csv_diff)
+    self.send_csv_diff_via_email(csv_diff)
     self.write_csv_rows(csv_filename, rows)

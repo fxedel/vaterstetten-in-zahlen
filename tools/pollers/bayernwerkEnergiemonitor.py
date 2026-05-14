@@ -85,5 +85,5 @@ class Poller(pollers.poller.Poller):
           # '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=)',
           f'[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/{csv_filename})',
         ]))
-        self.send_public_telegram_message(lines)
+        self.send_error_email(lines, subject = 'Energie-Monitordaten gelöscht')
 

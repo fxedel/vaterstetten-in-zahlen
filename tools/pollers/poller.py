@@ -2,21 +2,21 @@ import csv
 import difflib
 import io
 import os
+import re
 import time
-import telebot
-from typing import Callable, List, Optional
+from typing import Callable, List
+
+from notifier import EmailNotifier
 
 
 class Poller:
   def __init__(
     self,
-    telegram_bot: Optional[telebot.TeleBot],
-    telegram_public_chat_id: Optional[str],
-    telegram_debug_chat_id: Optional[str],
+    email_notifier: EmailNotifier,
+    poller_name: str,
   ):
-    self.telegram_bot = telegram_bot
-    self.telegram_public_chat_id = telegram_public_chat_id
-    self.telegram_debug_chat_id = telegram_debug_chat_id
+    self.email_notifier = email_notifier
+    self.poller_name = poller_name
 
     self.data_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
     self.cache_dir = os.path.join(self.data_dir, '.cache')
@@ -64,40 +64,58 @@ class Poller:
       n = context
     ))
 
-  def send_csv_diff_via_telegram(self, csv_diff: List[str]):
+  def send_csv_diff_via_email(self, csv_diff: List[str]):
     if len(csv_diff) == 0:
       return
 
-    if self.telegram_bot == None:
-      return
-
-    if self.telegram_public_chat_id == None:
-      return
-
     data = ''.join(csv_diff)
-    self.telegram_bot.send_message(
-      self.telegram_public_chat_id,
-      '```\n' + (data[:4080] if len(data) > 4080 else data) + '```',
-      parse_mode = "Markdown"
+    data = data[:12000] if len(data) > 12000 else data
+
+    self.email_notifier.send(
+      level = 'INFO',
+      poller_name = self.poller_name,
+      subject = 'CSV diff',
+      body = data,
     )
 
-  def send_public_telegram_message(self, lines: list[str]):
+  def send_info_email(self, lines: list[str], subject: str = None):
     if len(lines) == 0:
       return
 
-    if self.telegram_bot == None:
-      return
+    chosen_subject = subject if subject else self.infer_subject_from_lines(lines, fallback = 'Update')
 
-    if self.telegram_public_chat_id == None:
-      return
-
-    self.telegram_bot.send_message(
-      self.telegram_public_chat_id,
-      '\n'.join(lines),
-      parse_mode = "Markdown",
-      disable_web_page_preview = True
+    self.email_notifier.send(
+      level = 'INFO',
+      poller_name = self.poller_name,
+      subject = chosen_subject,
+      body = '\n'.join(lines),
     )
 
+  def send_error_email(self, lines: list[str], subject: str = None):
+    if len(lines) == 0:
+      return
+
+    chosen_subject = subject if subject else self.infer_subject_from_lines(lines, fallback = 'Error state')
+
+    self.email_notifier.send(
+      level = 'ERROR',
+      poller_name = self.poller_name,
+      subject = chosen_subject,
+      body = '\n'.join(lines),
+    )
+
+  def infer_subject_from_lines(self, lines: list[str], fallback: str) -> str:
+    if len(lines) == 0:
+      return fallback
+
+    first_line = lines[0]
+    first_line = re.sub(r'\[(.*?)\]\((.*?)\)', r'\1', first_line)
+    first_line = first_line.replace('*', '').replace('`', '').strip()
+
+    if len(first_line) == 0:
+      return fallback
+
+    return first_line[:120]
 
   def list_with_unique_key(self, list: List[dict], key_func: Callable[[dict], str], auto_increment: bool = False) -> dict[str, dict]:
     dicts_by_key: dict[str, List[dict]] = {}

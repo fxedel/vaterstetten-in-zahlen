@@ -4,9 +4,14 @@ concurrency:
   group: poll-data
 
 # Requires these repository secrets:
-# TELEGRAM_TOKEN - a token for the Telegram bot API
-# TELEGRAM_DEBUG_CHAT_ID - the ID of the private Telegram channel
-# TELEGRAM_PUBLIC_CHAT_ID - the ID of the public Telegram channel
+# SMTP_HOST - SMTP host for outgoing mail
+# SMTP_PORT - SMTP port for outgoing mail
+# SMTP_USERNAME - SMTP username (optional)
+# SMTP_PASSWORD - SMTP password (optional)
+# SMTP_USE_STARTTLS - enable STARTTLS (true/false)
+# SMTP_USE_SSL - use implicit SSL (true/false)
+# MAIL_FROM_ADDRESS - sender address
+# MAIL_TO_ADDRESSES - comma-separated recipient addresses
 # GENESIS_LFSTAT_USERNAME - Genesis LfStat Bayern credentials
 # GENESIS_LFSTAT_PASSWORD - Genesis LfStat Bayern credentials
 # GITHUB_PAT - a personal access token with the repo scope
@@ -39,9 +44,14 @@ jobs:
       - name: Run python script
         run: pipenv run python tools/poll.py -p ${{ inputs.pollers }}
         env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_DEBUG_CHAT_ID: ${{ secrets.TELEGRAM_DEBUG_CHAT_ID }}
-          TELEGRAM_PUBLIC_CHAT_ID: ${{ secrets.TELEGRAM_PUBLIC_CHAT_ID }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_USE_STARTTLS: ${{ secrets.SMTP_USE_STARTTLS }}
+          SMTP_USE_SSL: ${{ secrets.SMTP_USE_SSL }}
+          MAIL_FROM_ADDRESS: ${{ secrets.MAIL_FROM_ADDRESS }}
+          MAIL_TO_ADDRESSES: ${{ secrets.MAIL_TO_ADDRESSES }}
           GENESIS_LFSTAT_USERNAME: ${{ secrets.GENESIS_LFSTAT_USERNAME }}
           GENESIS_LFSTAT_PASSWORD: ${{ secrets.GENESIS_LFSTAT_PASSWORD }}
         continue-on-error: true

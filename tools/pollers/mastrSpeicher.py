@@ -77,7 +77,7 @@ class MastrSpeicherPoller(MastrGenericPoller):
           # '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=)',
           f'[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/{csv_filename})',
         ]))
-        self.send_public_telegram_message(lines)
+        self.send_info_email(lines)
 
 
   def filter_plausability(self, x: dict) -> bool:

@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 beautifulsoup4 = "~=4.12.3"
-pytelegrambotapi = "~=4.23.0"
 python-interface = "~=1.6.1"
 requests = "~=2.31.0"
 arcgis = "~=2.4.0"

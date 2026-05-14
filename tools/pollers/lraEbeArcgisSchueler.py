@@ -39,7 +39,7 @@ class Poller(pollers.poller.Poller):
 
     # TODO: replace with proper diff message
     csv_diff = self.get_csv_diff(csv_filename, rows)
-    self.send_csv_diff_via_telegram(csv_diff)
+    self.send_csv_diff_via_email(csv_diff)
     self.write_csv_rows(csv_filename, rows)
 
   def handle_data_prognose(self, features: List[Feature]):
@@ -56,7 +56,7 @@ class Poller(pollers.poller.Poller):
 
     # TODO: replace with proper diff message
     csv_diff = self.get_csv_diff(csv_filename, rows)
-    self.send_csv_diff_via_telegram(csv_diff)
+    self.send_csv_diff_via_email(csv_diff)
     self.write_csv_rows(csv_filename, rows)
 
 

@@ -1,11 +1,11 @@
 import argparse
 import dotenv
 import os
-import telebot
 import time
 import traceback
 
 import pollers
+from notifier import EmailNotifier
 
 dotenv.load_dotenv()
 
@@ -24,17 +24,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-telegram_bot = None
-
-telegram_token = os.environ.get('TELEGRAM_TOKEN')
-telegram_debug_chat_id = os.environ.get('TELEGRAM_DEBUG_CHAT_ID')
-telegram_public_chat_id = os.environ.get('TELEGRAM_PUBLIC_CHAT_ID')
-
-if telegram_token:
-  telegram_bot = telebot.TeleBot(os.environ['TELEGRAM_TOKEN'])
-
-if telegram_debug_chat_id and not telegram_public_chat_id:
-  telegram_public_chat_id = telegram_debug_chat_id
+email_notifier = EmailNotifier()
 
 needed_pollers = pollers.all
 
@@ -60,7 +50,7 @@ for key, pollerClass in needed_pollers.items():
     print('Executing poller %s:' % key)
 
     start = time.time()
-    poller = pollerClass(telegram_bot, telegram_public_chat_id, telegram_debug_chat_id)
+    poller = pollerClass(email_notifier, key)
     poller.run()
 
     end = time.time()
@@ -72,16 +62,24 @@ for key, pollerClass in needed_pollers.items():
     print(traceback.format_exc())
     failed = True
 
-    if telegram_bot != None:
-      lines = []
-      lines.append(f"Exception in poller {key} after {(end - start):.1f}s: `{type(e).__name__}: {e}`")
-      lines.append("[GitHub Actions](https://github.com/fxedel/vaterstetten-in-zahlen/actions) | [GitHub Action Run](https://github.com/fxedel/vaterstetten-in-zahlen/actions/runs/%s)" % os.getenv('GITHUB_RUN_ID'))
-      telegram_bot.send_message(
-        telegram_debug_chat_id,
-        ('\n'.join(lines))[:4096],
-        parse_mode = "Markdown",
-        disable_web_page_preview = True
-      )
+    lines = []
+    lines.append(f'Exception in poller {key} after {(end - start):.1f}s: {type(e).__name__}: {e}')
+
+    run_id = os.getenv('GITHUB_RUN_ID')
+    if run_id:
+      lines.append(f'https://github.com/fxedel/vaterstetten-in-zahlen/actions/runs/{run_id}')
+    else:
+      lines.append('https://github.com/fxedel/vaterstetten-in-zahlen/actions')
+
+    lines.append('')
+    lines.append(traceback.format_exc())
+
+    email_notifier.send(
+      level = 'ERROR',
+      poller_name = key,
+      subject = 'Exception',
+      body = '\n'.join(lines),
+    )
 
 if failed:
   exit(1)

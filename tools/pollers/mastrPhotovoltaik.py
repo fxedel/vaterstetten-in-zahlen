@@ -81,7 +81,7 @@ class MastrPhotovoltaikPoller(MastrGenericPoller):
           '[Vaterstetten in Zahlen](https://vaterstetten-in-zahlen.de/?tab=photovoltaik)',
           f'[Commits](https://github.com/fxedel/vaterstetten-in-zahlen/commits/master/data/{csv_filename})',
         ]))
-        self.send_public_telegram_message(lines)
+        self.send_info_email(lines)
 
   def filter_plausability(self, x: dict) -> bool:
     if x['NutzungsbereichGebSA'] is not None and self.NUTZUNGSBEREICH_BY_ID[x['NutzungsbereichGebSA']] == self.NUTZUNGSBEREICH_HAUSHALT:
