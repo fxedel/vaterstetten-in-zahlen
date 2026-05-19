@@ -4,6 +4,7 @@ bundestagswahl2021 <- loadModule("R/wahlen/bundestagswahl2021.R")
 landtagswahl2023 <- loadModule("R/wahlen/landtagswahl2023.R")
 europawahl2024 <- loadModule("R/wahlen/europawahl2024.R")
 bundestagswahl2025 <- loadModule("R/wahlen/bundestagswahl2025.R")
+kommunalwahl2026 <- loadModule("R/wahlen/kommunalwahl2026.R")
 
 lfstatWahlergebnisseAllgemein <- read_csv(
   file = "data/wahlen/lfstatWahlergebnisseAllgemein.csv",
@@ -105,6 +106,24 @@ ergebnisseAllgemeinNachStimmbezirk <- bind_rows(
       Stimmentyp = "Zweitstimme",
       GueltigeStimmen = GueltigeStimmen,
       UngueltigeStimmen = UngueltigeStimmen,
+      geometry = geometry
+    ),
+  kommunalwahl2026$gemeinderatErgebnisAllgemein %>%
+    mutate(
+      WaehlerWahllokal = ifelse(stimmbezirkArt == "Wahllokal", waehler, 0),
+      WaehlerBriefwahl = ifelse(stimmbezirkArt == "Briefwahl", waehler, 0)
+    ) %>%
+    transmute(
+      Wahl = "Gemeinderatswahl",
+      Wahltag = as.Date("2026-03-15"),
+      Stimmbezirk = stimmbezirk,
+      Wahlberechtigte = ifelse(Stimmbezirk == "Gesamt", wahlberechtigte, NA),
+      Waehler = ifelse(Stimmbezirk == "Gesamt", waehler, NA),
+      WaehlerWahllokal = ifelse(Stimmbezirk == "Gesamt", sum(WaehlerWahllokal, na.rm = TRUE), NA),
+      WaehlerBriefwahl = ifelse(Stimmbezirk == "Gesamt", sum(WaehlerBriefwahl, na.rm = TRUE), NA),
+      Stimmentyp = NA,
+      GueltigeStimmen = gueltigeStimmzettel,
+      UngueltigeStimmen = ungueltigeStimmzettel,
       geometry = geometry
     ),
 ) %>%
@@ -276,6 +295,21 @@ ergebnisseNachParteiNachStimmbezirk <- bind_rows(
       ParteiFarbe = ParteiFarbe,
       Stimmentyp = "Zweitstimme",
       StimmenAnteil = Stimmen/GueltigeStimmen,
+      StimmenProWahlberechtigte = NA,
+      geometry = geometry
+    ),
+  kommunalwahl2026$gemeinderatErgebnisNachPartei %>%
+    transmute(
+      Wahl = "Gemeinderatswahl",
+      Wahltag = as.Date("2026-03-15"),
+      Stimmbezirk = stimmbezirk,
+      ParteiKuerzel = partei,
+      ParteiName = NA,
+      ParteiFarbe = farbe,
+      Stimmentyp = NA,
+      Stimmen = stimmen,
+      GueltigeStimmen = gueltigeStimmen,
+      StimmenAnteil = stimmenAnteil,
       StimmenProWahlberechtigte = NA,
       geometry = geometry
     ),
@@ -663,7 +697,7 @@ server <- function(id, parentSession) {
           ) %>%
             add_trace(type = "scatter", mode = "lines+markers", showlegend = FALSE) %>%
             plotly_default_config() %>%
-            layout(xaxis = list(range = c("1945-01-01", "2025-06-01"))) %>%
+            layout(xaxis = list(range = c("1945-01-01", "2026-06-01"))) %>%
             layout(yaxis = list(tickformat = ytickformat, rangemode = "tozero")) %>%
             layout(hovermode = "x", hoverdistance = 5) %>%
             plotly_hide_axis_titles() %>%
