@@ -4,6 +4,7 @@ import io
 import os
 import re
 import time
+from html import escape as html_escape
 from typing import Callable, List
 
 from notifier import EmailNotifier
@@ -71,11 +72,14 @@ class Poller:
     data = ''.join(csv_diff)
     data = data[:12000] if len(data) > 12000 else data
 
+    html_body = '<html><body><pre>' + html_escape(data) + '</pre></body></html>'
+
     self.email_notifier.send(
       level = 'INFO',
       poller_name = self.poller_name,
       subject = 'CSV diff',
       body = data,
+      body_html = html_body,
     )
 
   def send_info_email(self, lines: list[str], subject: str = None):
@@ -84,11 +88,15 @@ class Poller:
 
     chosen_subject = subject if subject else self.infer_subject_from_lines(lines, fallback = 'Update')
 
+    plain_body = '\n'.join(lines)
+    html_body = self.render_html_lines(lines)
+
     self.email_notifier.send(
       level = 'INFO',
       poller_name = self.poller_name,
       subject = chosen_subject,
-      body = '\n'.join(lines),
+      body = plain_body,
+      body_html = html_body,
     )
 
   def send_error_email(self, lines: list[str], subject: str = None):
@@ -97,12 +105,53 @@ class Poller:
 
     chosen_subject = subject if subject else self.infer_subject_from_lines(lines, fallback = 'Error state')
 
+    plain_body = '\n'.join(lines)
+    html_body = self.render_html_lines(lines)
+
     self.email_notifier.send(
       level = 'ERROR',
       poller_name = self.poller_name,
       subject = chosen_subject,
-      body = '\n'.join(lines),
+      body = plain_body,
+      body_html = html_body,
     )
+
+  def render_html_lines(self, lines: list[str]) -> str:
+    rendered_lines = []
+
+    for line in lines:
+      if line == '':
+        rendered_lines.append('<br>')
+      else:
+        rendered_lines.append(f'<div>{self.render_html_line(line)}</div>')
+
+    return '<html><body>' + '\n'.join(rendered_lines) + '</body></html>'
+
+  def render_html_line(self, line: str) -> str:
+    bold = len(line) >= 2 and line.startswith('*') and line.endswith('*')
+    if bold:
+      line = line[1:-1]
+
+    rendered = []
+    last_index = 0
+
+    for match in re.finditer(r'\[(.*?)\]\((.*?)\)', line):
+      rendered.append(html_escape(line[last_index:match.start()]))
+      rendered.append(
+        '<a href="%s">%s</a>' % (
+          html_escape(match.group(2), quote = True),
+          html_escape(match.group(1)),
+        )
+      )
+      last_index = match.end()
+
+    rendered.append(html_escape(line[last_index:]))
+
+    result = ''.join(rendered)
+    if bold:
+      result = f'<strong>{result}</strong>'
+
+    return result
 
   def infer_subject_from_lines(self, lines: list[str], fallback: str) -> str:
     if len(lines) == 0:

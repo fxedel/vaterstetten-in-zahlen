@@ -1,6 +1,7 @@
 import os
 import smtplib
 from email.message import EmailMessage
+from typing import Optional
 
 
 def env_bool(name: str, default: bool) -> bool:
@@ -37,6 +38,7 @@ class EmailNotifier:
     poller_name: str,
     subject: str,
     body: str,
+    body_html: Optional[str] = None,
   ):
     if not self.is_configured():
       return
@@ -52,6 +54,9 @@ class EmailNotifier:
     message['From'] = self.from_address
     message['To'] = ', '.join(self.to_addresses)
     message.set_content(body)
+
+    if body_html is not None:
+      message.add_alternative(body_html, subtype='html')
 
     if self.smtp_use_ssl:
       with smtplib.SMTP_SSL(self.smtp_host, self.smtp_port) as smtp:

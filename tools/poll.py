@@ -3,6 +3,7 @@ import dotenv
 import os
 import time
 import traceback
+from html import escape as html_escape
 
 import pollers
 from notifier import EmailNotifier
@@ -79,6 +80,7 @@ for key, pollerClass in needed_pollers.items():
       poller_name = key,
       subject = 'Exception',
       body = '\n'.join(lines),
+      body_html = '<html><body><pre>' + html_escape('\n'.join(lines)) + '</pre></body></html>',
     )
 
 if failed:
