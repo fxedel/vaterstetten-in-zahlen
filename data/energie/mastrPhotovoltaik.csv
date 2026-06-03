@@ -1670,6 +1670,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 8227846,SEE969631468552,,In Betrieb,2024-06-10,2024-06-01,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,1,,0.38,0.3,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 8277422,SEE927711580761,,In Betrieb,2024-06-17,2024-06-01,,,,,haushalt,85598,Baldham,,,,,false,stecker,4,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 7542607,SEE988672060020,E21041011000000000000250628400002,In Betrieb,2024-06-18,2024-06-01,,,,,haushalt,85598,Baldham,,,,,false,stecker,4,,1.6,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+11613870,SEE916125535146,,In Betrieb,2026-06-03,2024-06-01,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,17,Süd,11.0,11.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 8210758,SEE968164214216,,Endgültig stillgelegt,2024-06-06,2024-06-03,,2024-10-01,,,haushalt,85591,Vaterstetten,,,,,false,stecker,4,,0.6,0.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 8052554,SEE990880595737,,In Betrieb,2024-06-17,2024-06-03,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,0.96,0.799,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 8693231,SEE945042249003,,In Betrieb,2024-08-24,2024-06-04,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.76,0.37,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2021,6 +2022,8 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 10022740,SEE973820842214,E21041011000000000000356248600002,In Betrieb,2025-06-11,2025-06-07,,,,,haushalt,85598,Baldham,,,,,false,stecker,4,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10008050,SEE903365565071,,In Betrieb,2025-06-08,2025-06-08,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,4,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10140652,SEE967340917200,,In Betrieb,2025-07-03,2025-06-09,,,,,haushalt,85598,Baldham,,,,,false,stecker,2,,0.88,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+9213435,SEE939285214973,,In Betrieb,2025-08-20,2025-06-10,,,PV-Humboldt-Gymnasium-Vaterstetten 2025,Landkreis Ebersberg,oeffentlich,85598,Baldham,Johann-Strauß-Straße,41,48.105854,11.786931,false,gebaeude,243,Süd,99.14,99.14,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+9213543,SEE949347637589,E2104101S000000000000091704900002,In Betrieb,2025-08-20,2025-06-10,,,PV-Staatliche Realschule Vaterstetten Erweiterung 2024,Zweckverband Staatliche Realschule Vaterstetten,oeffentlich,85598,Baldham,Neue Poststraße,6,48.098225,11.789026,false,gebaeude,222,Süd,98.79,98.79,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10020116,SEE980077690031,E21041011000000000000257331400002,In Betrieb,2025-06-11,2025-06-11,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,22,Süd-West,9.68,8.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10020990,SEE978940323520,,In Betrieb,2025-06-11,2025-06-11,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,1,,0.455,0.455,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10046676,SEE930959430705,,In Betrieb,2025-06-16,2025-06-11,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,20,Süd-West,9.0,9.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2087,8 +2090,6 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 10464855,SEE973355281809,,In Betrieb,2025-09-01,2025-08-12,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,30,Ost-West,13.35,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10481655,SEE904760384229,,In Betrieb,2025-09-04,2025-08-13,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.94,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10755313,SEE990435170464,,In Betrieb,2025-11-10,2025-08-15,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,19,Süd,8.455,8.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-9213435,SEE939285214973,,In Betrieb,2025-08-20,2025-08-18,,,PV-Humboldt-Gymnasium-Vaterstetten 2025,Landkreis Ebersberg,oeffentlich,85598,Baldham,Johann-Strauß-Straße,41,48.105854,11.786931,false,gebaeude,243,Süd,99.14,99.14,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-9213543,SEE949347637589,E2104101S000000000000091704900002,In Betrieb,2025-08-20,2025-08-18,,,PV-Staatliche Realschule Vaterstetten Erweiterung 2024,Zweckverband Staatliche Realschule Vaterstetten,oeffentlich,85598,Baldham,Neue Poststraße,6,48.098225,11.789026,false,gebaeude,222,Süd,98.79,98.79,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10603092,SEE950243297685,E2104101S160000000000031710800002,In Betrieb,2025-09-30,2025-08-19,,,,,haushalt,85622,Weißenfeld,,,,,true,gebaeude,26,Süd-West,11.7,11.7,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10782609,SEE992660690328,,In Betrieb,2025-11-16,2025-08-21,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,40,Süd,18.2,12.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 10556666,SEE994128732274,,In Betrieb,2025-09-19,2025-08-23,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,6,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2267,11 +2268,12 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 11564831,SEE922202860391,,In Betrieb,2026-05-25,2026-05-21,,,,,haushalt,85599,Parsdorf,,,,,false,gebaeude,6,Süd,2.76,2.76,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11582866,SEE985205879708,,In Betrieb,2026-05-28,2026-05-21,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,34,Ost-West,15.64,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11556803,SEE924475740073,,In Betrieb,2026-05-23,2026-05-23,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,4,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-11590782,SEE919629828400,,In Betrieb,2026-05-29,2026-05-23,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.9,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+11590782,SEE919629828400,E21041010C0000000D146697208300001,In Betrieb,2026-05-29,2026-05-23,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.9,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11580286,SEE940722522278,,In Betrieb,2026-05-28,2026-05-26,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,38,West,18.3,15.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11564835,SEE936321518590,,In Betrieb,2026-05-29,2026-05-27,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,20,Süd-West,9.3,9.3,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11605712,SEE995130998023,,In Betrieb,2026-06-01,2026-05-27,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,16,Ost,7.68,7.68,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11604173,SEE962242838974,,In Betrieb,2026-06-01,2026-06-01,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+11616974,SEE907543478931,,In Betrieb,2026-06-03,2026-06-03,,,,,haushalt,85598,Baldham,,,,,false,stecker,4,,2.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 4503858,SEE921779616165,,In Planung,2021-05-31,,2021-09-30,,,,haushalt,85646,Neufarn,,,,,false,gebaeude,30,Süd,10.65,10.31,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5420331,SEE944713209056,,In Planung,2022-10-24,,2022-11-30,,,,,85598,Baldham,,,,,false,gebaeude,38,Süd-West,15.58,15.58,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5513581,SEE919309120596,,In Planung,2022-12-08,,2022-12-15,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,12,Süd-West,4.8,4.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
