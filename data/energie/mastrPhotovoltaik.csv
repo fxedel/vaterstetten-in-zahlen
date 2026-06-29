@@ -990,7 +990,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 6016758,SEE984967164725,,In Betrieb,2023-04-18,2022-06-20,,,"PV90,00kWp",Belvista Hotelbetriebs,haushalt,85622,Weißenfeld,Vaterstettener Straße,1,48.131587,11.766982,true,gebaeude,240,Süd-Ost,90.0,76.6,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5132410,SEE964865876142,,In Betrieb,2022-06-22,2022-06-21,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,27,Süd-Ost,10.395,10.395,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5478448,SEE995935156727,,In Betrieb,2022-11-16,2022-06-22,,,,,haushalt,85599,Parsdorf,,,,,false,stecker,3,Süd,0.92,0.6,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-5315016,SEE966599726342,,In Betrieb,2022-09-11,2022-06-23,,,,,,85598,Baldham,,,,,true,gebaeude,25,West,11.06,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+5315016,SEE966599726342,,In Betrieb,2022-09-11,2022-06-23,,,,,,85598,Baldham,,,,,false,gebaeude,25,West,11.06,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5128966,SEE971907822852,,In Betrieb,2022-06-23,2022-06-24,,,,,sonstige,85598,Baldham,,,,,true,gebaeude,30,Süd,9.45,9.45,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5312067,SEE975796764699,E21041011000000000000259283800001,In Betrieb,2022-11-30,2022-06-24,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,37,Ost-West,12.92,10.0,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 5223633,SEE912488646789,E2104101S000000000000130300600001,In Betrieb,2022-08-09,2022-06-27,,,PV Kotterweg 2,Eurytos Energie GmbH& Co. KG,haushalt,85591,Vaterstetten,,,,,true,gebaeude,52,Süd-West,17.16,17.16,70%,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -1910,7 +1910,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 9417983,SEE972511392380,,In Betrieb,2025-02-05,2025-02-01,,,,,haushalt,85599,Parsdorf,,,,,false,stecker,2,,1.0,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9403666,SEE983137116113,,In Betrieb,2025-02-02,2025-02-02,,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,2,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9422764,SEE917805744919,E21041011000000000000377050000002,In Betrieb,2025-02-06,2025-02-03,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,42,West,18.48,12.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-9833802,SEE999449928177,E21041011000000000000250627000002,In Betrieb,2025-05-06,2025-02-03,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,8,Süd,3.6,3.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+9833802,SEE999449928177,E21041011000000000000250627000002,In Betrieb,2025-05-06,2025-02-03,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,8,Süd,3.6,3.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9438922,SEE962188541150,,In Betrieb,2025-02-11,2025-02-10,,,,,haushalt,85646,Purfing,,,,,false,gebaeude,36,Ost-West,16.2,16.2,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9645338,SEE933838142393,E21041011000000000000383227000002,In Betrieb,2025-03-28,2025-02-10,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,25,Süd-West,11.25,11.25,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 9941544,SEE960091444490,E21041011000000000000259233900002,In Betrieb,2025-05-26,2025-02-10,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,22,Süd-West,9.9,9.9,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
