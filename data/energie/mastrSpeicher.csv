@@ -1120,6 +1120,7 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 12095735,SEE941425267947,In Betrieb,2026-08-25,2026-08-24,,,,,85598,Baldham,,,,,false,Lithium,14.4,10.0,26.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 12107574,SEE967234937604,In Betrieb,2026-08-27,2026-08-26,,,,,85598,Baldham,,,,,true,Lithium,10.0,10.0,10.4,Teileinspeisung (einschließlich Eigenverbrauch),none
 12139869,SEE962096291109,In Betrieb,2026-09-02,2026-08-26,,,,,85591,Vaterstetten,,,,,true,Lithium,3.0,3.0,5.0,Teileinspeisung (einschließlich Eigenverbrauch),none
+12324816,SEE948151582634,In Betrieb,2026-10-05,2026-08-31,,,,,85598,Baldham,,,,,false,Lithium,24.96,10.0,24.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 11943560,SEE908838702403,In Betrieb,2026-09-02,2026-09-02,,,,,85591,Vaterstetten,,,,,false,Lithium,10.2,10.0,10.2,Teileinspeisung (einschließlich Eigenverbrauch),none
 12241337,SEE965268299637,In Betrieb,2026-09-21,2026-09-02,,,,,85591,Vaterstetten,,,,,true,Lithium,9.0,9.0,8.7,Teileinspeisung (einschließlich Eigenverbrauch),none
 12228627,SEE905676025282,In Betrieb,2026-09-18,2026-09-03,,,,,85591,Vaterstetten,,,,,false,Lithium,5.5,5.5,5.0,Teileinspeisung (einschließlich Eigenverbrauch),none
@@ -1147,5 +1148,6 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 4503878,SEE947397967991,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,Lithium,10.2,10.2,11.04,Teileinspeisung (einschließlich Eigenverbrauch),none
 5529956,SEE957292841609,In Planung,2022-12-08,,2022-12-15,,,,85591,Vaterstetten,,,,,false,Lithium,4.6,4.6,4.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 7682917,SEE945941755711,In Planung,2024-03-04,,2024-08-01,,,,85598,Baldham,,,,,false,Sonstige,5.76,1.6,5.76,Teileinspeisung (einschließlich Eigenverbrauch),none
+12325406,SEE949422603386,In Planung,2026-10-05,,2026-11-11,,,,85598,Baldham,,,,,false,Lithium,11.0,11.0,20.6,Teileinspeisung (einschließlich Eigenverbrauch),none
 12151170,SEE959097753064,In Planung,2026-09-04,,2026-12-31,,BESS_PAR_Posthalterring 15_188kWh_MS,Hans Segmüller Polstermöbelfabrik GmbH & Co. KG,85599,Parsdorf,Posthalterring,15,48.145067,11.780705,false,Lithium,90.0,90.0,188.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 12151310,SEE919820190344,In Planung,2026-09-04,,2026-12-31,,BESS_PAR_Posthalterring 15_396kWh_NS,Hans Segmüller Polstermöbelfabrik GmbH & Co. KG,85599,Parsdorf,Posthalterring,15,48.145067,11.780705,false,Lithium,90.0,90.0,396.0,Teileinspeisung (einschließlich Eigenverbrauch),none

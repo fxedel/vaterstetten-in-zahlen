@@ -2359,11 +2359,12 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 12095734,SEE903363108348,,In Betrieb,2026-08-25,2026-08-24,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,27,,12.42,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12107573,SEE991538941210,E21041010C0000000D146487257400001,In Betrieb,2026-08-27,2026-08-26,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,12.96,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12139868,SEE996357690295,E21041010C0000000D146868069200001,In Betrieb,2026-09-02,2026-08-26,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,9,West,4.14,4.14,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+12324815,SEE937362384328,,In Betrieb,2026-10-05,2026-08-31,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,25,Nord-Ost,12.25,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11924672,SEE903876851649,E21041010C0000000D146845583900001,In Betrieb,2026-09-02,2026-09-02,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,19,Süd-West,8.93,8.93,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12241336,SEE908729587591,E21041010C0000000D146456949400001,In Betrieb,2026-09-21,2026-09-02,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd-West,11.16,11.16,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12228626,SEE901016459687,,In Betrieb,2026-09-18,2026-09-03,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,12,Ost,5.5,5.5,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11540570,SEE939380486220,,In Betrieb,2026-09-08,2026-09-07,,,,,haushalt,85598,Baldham,,,,,false,stecker,1,,0.4,0.4,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
-12217694,SEE991634712912,,In Betrieb,2026-09-16,2026-09-07,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,14,Ost-West,6.72,6.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+12217694,SEE991634712912,E21041010C0000000D146495907500001,In Betrieb,2026-09-16,2026-09-07,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,14,Ost-West,6.72,6.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12275795,SEE979445316789,E21041010C0000000D146772531600001,In Betrieb,2026-09-27,2026-09-08,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,23,Ost,11.04,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12187151,SEE932467645114,,In Betrieb,2026-09-10,2026-09-09,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,61,Süd,24.5,20.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12246470,SEE939031073762,,In Betrieb,2026-09-22,2026-09-09,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,44,Süd,19.8,12.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
@@ -2399,5 +2400,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 10838984,SEE979140738282,,In Planung,2025-11-30,,2025-12-01,,,,haushalt,85599,Parsdorf,,,,,false,stecker,2,,0.9,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12102840,SEE931898173616,,In Planung,2026-08-26,,2026-10-01,,,,haushalt,85598,Baldham,,,,,false,stecker,4,,0.8,0.8,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12000211,SEE986710593196,,In Planung,2026-08-08,,2026-10-31,,,,haushalt,85591,Vaterstetten,,,,,false,stecker,4,,0.5,0.5,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+12251555,SEE986006356689,,In Planung,2026-10-05,,2026-11-05,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,8,Nord-West,3.78,3.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+12307519,SEE900634409272,,In Planung,2026-10-05,,2026-11-11,,,,haushalt,85598,Baldham,,,,,false,gebaeude,49,Süd,23.765,20.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12151114,SEE970441341720,,In Planung,2026-09-04,,2026-12-31,,PV_PAR_Posthalterring 15_200kWp_MS,Hans Segmüller Polstermöbelfabrik GmbH & Co. KG,GHD,85599,Parsdorf,Posthalterring,15,48.145067,11.780705,false,gebaeude,445,Ost-West,200.0,200.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12151268,SEE933778295319,,In Planung,2026-09-04,,2026-12-31,,PV_PAR_Posthalterring 15_250kWp_NS,Hans Segmüller Polstermöbelfabrik GmbH & Co. KG,GHD,85599,Parsdorf,Posthalterring,15,48.145067,11.780705,false,gebaeude,556,Ost-West,250.0,250.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
