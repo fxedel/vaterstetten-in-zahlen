@@ -27,7 +27,7 @@ Der Datensatz [osmStrassen.csv](./osmStrassen.csv) umfasst diejenigen [Wikidata]
 |Spalte|Format|Beschreibung
 |-|-|-
 |`WikidataObjekt`|`Q[0-9]+`|Wikidata-ObjektID, z.&nbsp;B. [`Q115460896`](https://www.wikidata.org/wiki/Q115460896).
-|`Bezeichnung`|text|Deutschsprachige Bezeichnung aus Wikidata
+|`Bezeichnung`|text|Deutschsprachige Bezeichnung aus Wikidata, ersatzweise internationale Bezeichnung
 |`Beschreibung`|text|Deutschsprachige Beschreibung aus Wikidata
 |`Typ`|text|Kategorisierung der Straßenbenennung. Dieser erfolgt durch Vaterstetten in Zahlen und ist Vaterstetten-spezifisch (z.&nbsp;B. Typ `Komponisten`)
 |`Geschlecht`|text, meist `maennlich` oder `weiblich`|Geschlecht, falls Objekt eine Person ist.

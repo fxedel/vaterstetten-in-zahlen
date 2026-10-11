@@ -358,23 +358,71 @@ class Poller(pollers.poller.Poller):
     etymologies = []
 
     for i in range(math.ceil(len(wikidata_entity_ids)/chunk_size)):
-      wikidata_data = self.query_wikidata(wikidata_entity_ids[i*chunk_size:(i+1)*chunk_size])
+      original_entity_ids = wikidata_entity_ids[i*chunk_size:(i+1)*chunk_size]
+      metadata = self.query_wikidata_metadata(original_entity_ids)
+      canonical_entity_ids = [metadata.get(entity_id, {}).get('id', entity_id) for entity_id in original_entity_ids]
+      canonical_to_original = dict(zip(canonical_entity_ids, original_entity_ids))
+      wikidata_data = self.query_wikidata(canonical_entity_ids)
 
       for element in wikidata_data['results']['bindings']:
-        wikidata_entity_id = shorten_wikidata_entity_reference(element['item']['value'])
-
-        if element['itemLabel']['value'] == wikidata_entity_id:
-          raise Exception(f'Wikidata entity {wikidata_entity_id} has no label: {element}')
+        canonical_entity_id = shorten_wikidata_entity_reference(element['item']['value'])
+        wikidata_entity_id = canonical_to_original.get(canonical_entity_id, canonical_entity_id)
+        label = element['itemLabel']['value']
+        if label == canonical_entity_id:
+          label = metadata.get(wikidata_entity_id, {}).get('label')
+          if label == None:
+            raise Exception(f'Wikidata entity {wikidata_entity_id} has no label: {element}')
 
         etymologies.append({
           'WikidataObjekt': wikidata_entity_id,
-          'Bezeichnung': element['itemLabel']['value'],
+          'Bezeichnung': label,
           'Beschreibung': element.get('itemDescription', {}).get('value'),
           'Typ': get_etymology_type(element),
           'Geschlecht': get_etymology_gender(element),
         })
 
     return etymologies
+
+  def query_wikidata_metadata(self, wikidata_entity_ids: List[str]):
+    metadata = {}
+
+    if len(wikidata_entity_ids) == 0:
+      return metadata
+
+    for i in range(0, len(wikidata_entity_ids), 50):
+      entity_ids = wikidata_entity_ids[i:i+50]
+      res = requests.get(
+        'https://www.wikidata.org/w/api.php',
+        params = {
+          'action': 'wbgetentities',
+          'ids': '|'.join(entity_ids),
+          'props': 'labels',
+          'format': 'json',
+        },
+        headers = {
+          'User-Agent': 'vaterstetten-in-zahlen/1.0 (felix@vaterstetten-in-zahlen.de)',
+        },
+      )
+
+      if res.status_code != 200:
+        raise Exception(f'Wikidata API returned unexpected status code: {res.status_code} {res.reason}. Body:\n{res.text}')
+
+      for entity_id, entity in res.json()['entities'].items():
+        canonical_entity_id = entity['id']
+        entity_labels = entity.get('labels', {})
+        label = entity_labels.get('de')
+        if label == None and len(entity_labels) > 0:
+          label = entity_labels[sorted(entity_labels.keys())[0]]
+        entity_metadata = {'id': canonical_entity_id}
+        if label != None:
+          entity_metadata['label'] = label['value']
+        metadata[entity_id] = entity_metadata
+
+        redirect = entity.get('redirects')
+        if redirect != None:
+          metadata[redirect['from']] = entity_metadata
+
+    return metadata
 
   def query_wikidata(self, wikidata_entity_ids: List[str]):
     query = build_sparql_query(wikidata_entity_ids)
