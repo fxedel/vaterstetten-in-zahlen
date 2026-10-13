@@ -19,7 +19,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 2635003,SEE941782930058,E21875011000000000000340272000000,In Betrieb,2019-12-28,2003-05-16,,,,,GHD,85599,Hergolding,,,,,true,gebaeude,72,Süd,9.36,9.0,ohne,false,Volleinspeisung,false
 2635054,SEE978374005726,E21875011000000000000340271100000,In Betrieb,2019-12-28,2003-05-16,,,,,GHD,85599,Hergolding,,,,,true,gebaeude,24,Süd,3.12,3.0,ohne,false,Volleinspeisung,false
 2636779,SEE982968658960,,In Betrieb,2019-12-29,2003-05-16,,,,,GHD,85599,Hergolding,,,,,false,gebaeude,72,Süd,9.36,9.0,ohne,false,Volleinspeisung,false
-3273159,SEE910081971710,,In Betrieb,2020-08-10,2003-05-19,,,,,landwirtschaft,85599,Hergolding,,,,,false,gebaeude,78,Süd,12.09,10.0,ohne,false,Volleinspeisung,false
+3273159,SEE910081971710,E21875011000000000000339693700000,In Betrieb,2020-08-10,2003-05-19,,,,,landwirtschaft,85599,Hergolding,,,,,false,gebaeude,78,Süd,12.09,10.0,ohne,false,Volleinspeisung,false
 2635306,SEE948182354323,E21875011000000000000340164900000,Endgültig stillgelegt,2019-12-28,2003-07-31,,2026-03-01,Anlage 2,Großmann Erden GmbH,GHD,85599,Hergolding,,,,,false,gebaeude,48,Süd,5.76,5.0,ohne,false,Volleinspeisung,false
 4764930,SEE905809653818,E21875011000000000000264640400001,In Betrieb,2021-11-13,2003-08-01,,,,,,85591,Vaterstetten,,,,,false,gebaeude,10,Süd-Ost,1.32,1.32,ohne,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 3897203,SEE932809243299,E21875011000000000000340295700000,In Betrieb,2020-12-16,2003-08-14,,,,,landwirtschaft,85599,Hergolding,,,,,true,gebaeude,72,Süd,10.08,10.0,ohne,false,Volleinspeisung,false
@@ -2359,6 +2359,7 @@ MaStRId,MaStRNummer,EEGAnlagenschluessel,status,registrierungMaStR,inbetriebnahm
 12095734,SEE903363108348,,In Betrieb,2026-08-25,2026-08-24,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,27,,12.42,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12107573,SEE991538941210,E21041010C0000000D146487257400001,In Betrieb,2026-08-27,2026-08-26,,,,,haushalt,85598,Baldham,,,,,true,gebaeude,24,Süd,12.96,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12139868,SEE996357690295,E21041010C0000000D146868069200001,In Betrieb,2026-09-02,2026-08-26,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,9,West,4.14,4.14,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
+12366832,SEE911342086532,,In Betrieb,2026-10-12,2026-08-26,,,,,haushalt,85591,Vaterstetten,,,,,false,gebaeude,10,Süd,4.6,4.6,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12324815,SEE937362384328,,In Betrieb,2026-10-05,2026-08-31,,,,,haushalt,85598,Baldham,,,,,false,gebaeude,25,Nord-Ost,12.25,10.0,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 11924672,SEE903876851649,E21041010C0000000D146845583900001,In Betrieb,2026-09-02,2026-09-02,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,19,Süd-West,8.93,8.93,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
 12241336,SEE908729587591,E21041010C0000000D146456949400001,In Betrieb,2026-09-21,2026-09-02,,,,,haushalt,85591,Vaterstetten,,,,,true,gebaeude,24,Süd-West,11.16,11.16,,false,Teileinspeisung (einschließlich Eigenverbrauch),false
