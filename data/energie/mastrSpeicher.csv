@@ -929,9 +929,9 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 10546589,SEE999006793514,In Betrieb,2025-09-17,2025-09-14,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,1.92,Teileinspeisung (einschließlich Eigenverbrauch),none
 10626960,SEE930260481496,Vorübergehend stillgelegt,2025-10-06,2025-09-15,,,,,85598,Baldham,,,,,false,Lithium,0.8,0.8,2.1,Teileinspeisung (einschließlich Eigenverbrauch),none
 10538316,SEE971035633610,In Betrieb,2025-09-16,2025-09-16,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,5.4,Teileinspeisung (einschließlich Eigenverbrauch),none
+11058307,SEE919765661985,In Betrieb,2026-02-08,2025-09-16,,,,,85599,Parsdorf,,,,,true,Lithium,6.0,6.0,5.5,Teileinspeisung (einschließlich Eigenverbrauch),none
 10545341,SEE997878464655,In Betrieb,2025-09-17,2025-09-17,,,,,85598,Baldham,,,,,true,Lithium,7.0,7.0,13.8,Teileinspeisung (einschließlich Eigenverbrauch),none
 10587145,SEE980931564980,In Betrieb,2025-09-26,2025-09-19,,,,,85591,Vaterstetten,,,,,false,Lithium,11.54,8.0,15.56,Teileinspeisung (einschließlich Eigenverbrauch),none
-11058307,SEE919765661985,In Betrieb,2026-02-08,2025-09-24,,,,,85599,Parsdorf,,,,,false,Lithium,6.0,6.0,5.5,Teileinspeisung (einschließlich Eigenverbrauch),none
 10472166,SEE936464365877,In Betrieb,2025-10-13,2025-09-25,,,,,85599,Hergolding,,,,,true,Lithium,7.04,7.04,10.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 10595734,SEE999644961672,In Betrieb,2025-09-29,2025-09-26,,,,,85591,Vaterstetten,,,,,false,Lithium,3.4,3.4,5.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 10613376,SEE943840093552,In Betrieb,2025-10-02,2025-09-27,,,,,85598,Baldham,,,,,false,Lithium,0.8,0.8,2.688,Teileinspeisung (einschließlich Eigenverbrauch),none
@@ -1153,9 +1153,13 @@ MaStRId,MaStRNummer,status,registrierungMaStR,inbetriebnahme,inbetriebnahmeGepla
 12381515,SEE944584649159,In Betrieb,2026-10-14,2026-10-01,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,2.68,Teileinspeisung (einschließlich Eigenverbrauch),none
 12379420,SEE911076710338,In Betrieb,2026-10-14,2026-10-07,,,,,85591,Vaterstetten,,,,,false,Lithium,7.5,7.5,6.9,Teileinspeisung (einschließlich Eigenverbrauch),none
 12372875,SEE939068463710,In Betrieb,2026-10-13,2026-10-12,,,,,85598,Baldham,,,,,false,Lithium,8.0,8.0,25.92,Teileinspeisung (einschließlich Eigenverbrauch),none
+12388987,SEE932855059844,In Betrieb,2026-10-16,2026-10-13,,,,,85591,Vaterstetten,,,,,false,Lithium,2.25,2.25,10.0,Teileinspeisung (einschließlich Eigenverbrauch),none
+12389782,SEE933329793097,In Betrieb,2026-10-16,2026-10-15,,,,,85591,Vaterstetten,,,,,false,Lithium,0.8,0.8,2.11,Teileinspeisung (einschließlich Eigenverbrauch),none
+12392919,SEE947942206070,In Betrieb,2026-10-16,2026-10-16,,,,,85598,Baldham,,,,,false,Lithium,6.55,6.55,6.31,Teileinspeisung (einschließlich Eigenverbrauch),none
 4503878,SEE947397967991,In Planung,2021-05-31,,2021-09-30,,,,85646,Neufarn,,,,,false,Lithium,10.2,10.2,11.04,Teileinspeisung (einschließlich Eigenverbrauch),none
 5529956,SEE957292841609,In Planung,2022-12-08,,2022-12-15,,,,85591,Vaterstetten,,,,,false,Lithium,4.6,4.6,4.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 7682917,SEE945941755711,In Planung,2024-03-04,,2024-08-01,,,,85598,Baldham,,,,,false,Sonstige,5.76,1.6,5.76,Teileinspeisung (einschließlich Eigenverbrauch),none
+12385341,SEE991051099085,In Planung,2026-10-15,,2026-11-01,,,,85646,Neufarn,,,,,false,Lithium,14.69,14.69,18.6,Teileinspeisung (einschließlich Eigenverbrauch),none
 12325406,SEE949422603386,In Planung,2026-10-05,,2026-11-11,,,,85598,Baldham,,,,,false,Lithium,11.0,11.0,20.6,Teileinspeisung (einschließlich Eigenverbrauch),none
 12151170,SEE959097753064,In Planung,2026-09-04,,2026-12-31,,BESS_PAR_Posthalterring 15_188kWh_MS,Hans Segmüller Polstermöbelfabrik GmbH & Co. KG,85599,Parsdorf,Posthalterring,15,48.145067,11.780705,false,Lithium,90.0,90.0,188.0,Teileinspeisung (einschließlich Eigenverbrauch),none
 12151310,SEE919820190344,In Planung,2026-09-04,,2026-12-31,,BESS_PAR_Posthalterring 15_396kWh_NS,Hans Segmüller Polstermöbelfabrik GmbH & Co. KG,85599,Parsdorf,Posthalterring,15,48.145067,11.780705,false,Lithium,90.0,90.0,396.0,Teileinspeisung (einschließlich Eigenverbrauch),none
