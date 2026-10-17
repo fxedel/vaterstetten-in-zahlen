@@ -364,7 +364,7 @@ server <- function(id) {
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
-          addProviderTiles(providers$CartoDB.Positron) %>%
+          addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
           printParteistimmenMap() %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
       })
@@ -413,7 +413,7 @@ server <- function(id) {
           zoom = 13,
           center = list(lng = 11.798, lat = 48.12)
         )) %>%
-          addProviderTiles(providers$CartoDB.Positron) %>%
+          addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
           printPersonenstimmenMap() %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
       })

@@ -716,7 +716,7 @@ server <- function(id, parentSession) {
           center = list(lng = 11.798, lat = 48.12),
           scrollWheelZoom = FALSE
         )) %>%
-          addProviderTiles(providers$CartoDB.Positron) %>%
+          addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
           printParteistimmenMap(wahl, wahljahr) %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
         })
@@ -805,7 +805,7 @@ server <- function(id, parentSession) {
           center = list(lng = 11.798, lat = 48.12),
           scrollWheelZoom = FALSE
         )) %>%
-          addProviderTiles(providers$CartoDB.Positron) %>%
+          addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
           printWahlbeteiligungMap(wahl, wahljahr) %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
         })
@@ -878,7 +878,7 @@ server <- function(id, parentSession) {
           center = list(lng = 11.798, lat = 48.12),
           scrollWheelZoom = FALSE
         )) %>%
-          addProviderTiles(providers$CartoDB.Positron) %>%
+          addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
           printBriefwahlquoteMap(wahl, wahljahr) %>%
           isolate() # updates will be done by leafletProxy, no need to re-render whole map
         })
