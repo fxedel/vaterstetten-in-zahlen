@@ -32,7 +32,7 @@ all: Dict[str, Type[pollers.poller.Poller]] = {
 }
 
 hourly: List[str] = [
-  'bayernwerkEnergiemonitor',
+  # 'bayernwerkEnergiemonitor', # disabled due to Cloudflare challenge
   'lraEbeArcgisSchueler',
   'lraEbeArcgisSchuelerNachWohnort',
   'mastrPhotovoltaik',

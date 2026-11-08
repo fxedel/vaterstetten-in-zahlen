@@ -1,3 +1,4 @@
+import json
 import os
 import time
 
@@ -17,8 +18,11 @@ class Poller(pollers.poller.Poller):
     res = requests.get(url)
     print('> Queried data in %.1fs' % (time.time() - start))
 
+    if (res.headers.get('Cf-Mitigated') == 'challenge'):
+      raise Exception('Can\'t access webpage: Cloudflare challenge')
+
     if res.status_code != 200:
-        raise Exception('Can\'t access webpage: Status code ' + str(res.status_code))
+      raise Exception('Can\'t access webpage: Status code ' + str(res.status_code))
 
     data = res.json()
 
